@@ -7,9 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F14FB6019417F10009F2A08 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB5F19417F10009F2A08 /* Runner.swift */; };
+		1F14FB64194180C5009F2A08 /* failures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* failures.swift */; };
+		1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6619418C94009F2A08 /* Protocols.swift */; };
+		1F14FB6919418CA8009F2A08 /* Expect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6819418CA8009F2A08 /* Expect.swift */; };
+		1F14FB6B19418D2A009F2A08 /* PartialMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6A19418D2A009F2A08 /* PartialMatcher.swift */; };
+		1F14FB6D19418D40009F2A08 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6C19418D40009F2A08 /* Equal.swift */; };
+		1F14FB6F19418D50009F2A08 /* BeTruthy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6E19418D50009F2A08 /* BeTruthy.swift */; };
+		1F14FB7119418D5F009F2A08 /* BeFalsy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB7019418D5F009F2A08 /* BeFalsy.swift */; };
+		1F14FB7319418EB6009F2A08 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB7219418EB6009F2A08 /* RaisesException.swift */; };
+		1F14FB75194191E0009F2A08 /* BeCloseTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB74194191E0009F2A08 /* BeCloseTo.swift */; };
+		1F14FB7719419789009F2A08 /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB7619419789009F2A08 /* BeNil.swift */; };
+		1F14FB7919419D6F009F2A08 /* BeGreaterThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB7819419D6F009F2A08 /* BeGreaterThan.swift */; };
+		1F14FB7B1941A017009F2A08 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB7A1941A017009F2A08 /* BeLessThanOrEqual.swift */; };
 		1F1A742F1940169200FFFC47 /* Tailor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Tailor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1A74351940169200FFFC47 /* Tailor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A74291940169200FFFC47 /* Tailor.framework */; };
-		1F1A743C1940169200FFFC47 /* TailorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A743B1940169200FFFC47 /* TailorTests.swift */; };
+		1F1A743C1940169200FFFC47 /* TailorMatchersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A743B1940169200FFFC47 /* TailorMatchersTests.swift */; };
+		1F1A7446194016D000FFFC47 /* Tailor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A7445194016D000FFFC47 /* Tailor.swift */; };
+		1F1A744E1940171400FFFC47 /* Tailor-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A744D1940171400FFFC47 /* Tailor-Bridging-Header.h */; };
+		1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */; };
+		1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACD1941B15B009BC266 /* BeLessThan.swift */; };
+		1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */; };
+		1F50EE791941B69A00178EAA /* TailorRunnerComponentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F50EE781941B69A00178EAA /* TailorRunnerComponentsTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +42,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F14FB5F19417F10009F2A08 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		1F14FB63194180C5009F2A08 /* failures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = failures.swift; sourceTree = "<group>"; };
+		1F14FB6619418C94009F2A08 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		1F14FB6819418CA8009F2A08 /* Expect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expect.swift; sourceTree = "<group>"; };
+		1F14FB6A19418D2A009F2A08 /* PartialMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartialMatcher.swift; sourceTree = "<group>"; };
+		1F14FB6C19418D40009F2A08 /* Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Equal.swift; sourceTree = "<group>"; };
+		1F14FB6E19418D50009F2A08 /* BeTruthy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeTruthy.swift; sourceTree = "<group>"; };
+		1F14FB7019418D5F009F2A08 /* BeFalsy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFalsy.swift; sourceTree = "<group>"; };
+		1F14FB7219418EB6009F2A08 /* RaisesException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesException.swift; sourceTree = "<group>"; };
+		1F14FB74194191E0009F2A08 /* BeCloseTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeCloseTo.swift; sourceTree = "<group>"; };
+		1F14FB7619419789009F2A08 /* BeNil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeNil.swift; sourceTree = "<group>"; };
+		1F14FB7819419D6F009F2A08 /* BeGreaterThan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeGreaterThan.swift; sourceTree = "<group>"; };
+		1F14FB7A1941A017009F2A08 /* BeLessThanOrEqual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThanOrEqual.swift; sourceTree = "<group>"; };
 		1F1A74291940169200FFFC47 /* Tailor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tailor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1A742D1940169200FFFC47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1A742E1940169200FFFC47 /* Tailor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tailor.h; sourceTree = "<group>"; };
 		1F1A74341940169200FFFC47 /* TailorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TailorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1A743A1940169200FFFC47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F1A743B1940169200FFFC47 /* TailorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailorTests.swift; sourceTree = "<group>"; };
+		1F1A743B1940169200FFFC47 /* TailorMatchersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailorMatchersTests.swift; sourceTree = "<group>"; };
+		1F1A7445194016D000FFFC47 /* Tailor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tailor.swift; sourceTree = "<group>"; };
+		1F1A744D1940171400FFFC47 /* Tailor-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tailor-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSExceptionCapture.m; sourceTree = "<group>"; };
+		1F379ACC1941AAD7009BC266 /* TSExceptionCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSExceptionCapture.h; sourceTree = "<group>"; };
+		1F379ACD1941B15B009BC266 /* BeLessThan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThan.swift; sourceTree = "<group>"; };
+		1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeGreaterThanOrEqualTo.swift; sourceTree = "<group>"; };
+		1F50EE781941B69A00178EAA /* TailorRunnerComponentsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailorRunnerComponentsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +89,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F14FB61194180A7009F2A08 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1F14FB63194180C5009F2A08 /* failures.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		1F14FB6519418C7E009F2A08 /* Matchers */ = {
+			isa = PBXGroup;
+			children = (
+				1F14FB6619418C94009F2A08 /* Protocols.swift */,
+				1F14FB6A19418D2A009F2A08 /* PartialMatcher.swift */,
+				1F14FB6C19418D40009F2A08 /* Equal.swift */,
+				1F14FB6E19418D50009F2A08 /* BeTruthy.swift */,
+				1F14FB7019418D5F009F2A08 /* BeFalsy.swift */,
+				1F14FB7219418EB6009F2A08 /* RaisesException.swift */,
+				1F14FB74194191E0009F2A08 /* BeCloseTo.swift */,
+				1F14FB7619419789009F2A08 /* BeNil.swift */,
+				1F14FB7819419D6F009F2A08 /* BeGreaterThan.swift */,
+				1F14FB7A1941A017009F2A08 /* BeLessThanOrEqual.swift */,
+				1F379ACD1941B15B009BC266 /* BeLessThan.swift */,
+				1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */,
+			);
+			path = Matchers;
+			sourceTree = "<group>";
+		};
 		1F1A741F1940169200FFFC47 = {
 			isa = PBXGroup;
 			children = (
@@ -71,7 +137,13 @@
 		1F1A742B1940169200FFFC47 /* Tailor */ = {
 			isa = PBXGroup;
 			children = (
+				1F379AC91941AAA8009BC266 /* objc */,
+				1F14FB6519418C7E009F2A08 /* Matchers */,
+				1F1A7445194016D000FFFC47 /* Tailor.swift */,
 				1F1A742E1940169200FFFC47 /* Tailor.h */,
+				1F1A744D1940171400FFFC47 /* Tailor-Bridging-Header.h */,
+				1F14FB5F19417F10009F2A08 /* Runner.swift */,
+				1F14FB6819418CA8009F2A08 /* Expect.swift */,
 				1F1A742C1940169200FFFC47 /* Supporting Files */,
 			);
 			path = Tailor;
@@ -88,7 +160,9 @@
 		1F1A74381940169200FFFC47 /* TailorTests */ = {
 			isa = PBXGroup;
 			children = (
-				1F1A743B1940169200FFFC47 /* TailorTests.swift */,
+				1F14FB61194180A7009F2A08 /* Helpers */,
+				1F1A743B1940169200FFFC47 /* TailorMatchersTests.swift */,
+				1F50EE781941B69A00178EAA /* TailorRunnerComponentsTest.swift */,
 				1F1A74391940169200FFFC47 /* Supporting Files */,
 			);
 			path = TailorTests;
@@ -102,6 +176,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1F379AC91941AAA8009BC266 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				1F379ACC1941AAD7009BC266 /* TSExceptionCapture.h */,
+				1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -110,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1A742F1940169200FFFC47 /* Tailor.h in Headers */,
+				1F1A744E1940171400FFFC47 /* Tailor-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +294,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F14FB7119418D5F009F2A08 /* BeFalsy.swift in Sources */,
+				1F14FB7919419D6F009F2A08 /* BeGreaterThan.swift in Sources */,
+				1F1A7446194016D000FFFC47 /* Tailor.swift in Sources */,
+				1F14FB7719419789009F2A08 /* BeNil.swift in Sources */,
+				1F14FB6F19418D50009F2A08 /* BeTruthy.swift in Sources */,
+				1F14FB6B19418D2A009F2A08 /* PartialMatcher.swift in Sources */,
+				1F14FB6019417F10009F2A08 /* Runner.swift in Sources */,
+				1F14FB75194191E0009F2A08 /* BeCloseTo.swift in Sources */,
+				1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */,
+				1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */,
+				1F14FB7B1941A017009F2A08 /* BeLessThanOrEqual.swift in Sources */,
+				1F14FB7319418EB6009F2A08 /* RaisesException.swift in Sources */,
+				1F14FB6919418CA8009F2A08 /* Expect.swift in Sources */,
+				1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */,
+				1F14FB6D19418D40009F2A08 /* Equal.swift in Sources */,
+				1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F1A743C1940169200FFFC47 /* TailorTests.swift in Sources */,
+				1F50EE791941B69A00178EAA /* TailorRunnerComponentsTest.swift in Sources */,
+				1F14FB64194180C5009F2A08 /* failures.swift in Sources */,
+				1F1A743C1940169200FFFC47 /* TailorMatchersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +422,7 @@
 		1F1A74401940169200FFFC47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -327,14 +430,18 @@
 				INFOPLIST_FILE = Tailor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tailor/Tailor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1F1A74411940169200FFFC47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -342,8 +449,10 @@
 				INFOPLIST_FILE = Tailor/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tailor/Tailor-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -398,6 +507,7 @@
 				1F1A74411940169200FFFC47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F1A74421940169200FFFC47 /* Build configuration list for PBXNativeTarget "TailorTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +516,7 @@
 				1F1A74441940169200FFFC47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
