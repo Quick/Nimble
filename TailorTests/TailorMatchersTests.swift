@@ -41,6 +41,10 @@ class TailorMatchersTests: XCTestCase {
         expect("foo") == "foo"
         expect("foo") != "bar"
 
+        expect {
+            1
+        }.to(equalTo(1))
+
         failsWithErrorMessage("expected <hello> to equal to <world>") {
             expect("hello").to(equalTo("world"))
         }
