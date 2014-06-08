@@ -86,7 +86,7 @@ struct Stack<T> {
     var items: T[]
     var frozen: Bool
 
-    init(items: T[] = T[]()) {
+    init(items: T[]) {
         self.items = items.copy()
         frozen = false
     }
@@ -124,7 +124,7 @@ struct Stack<T> {
 @objc
 class SpecBehavior {
     var stack: Stack<ExampleNode>
-    var root: ExampleNode { stack.peek(index: 0) }
+    var root: ExampleNode { return stack.peek(index: 0) }
 
     init() {
         stack = Stack(items: [ExampleNode(name: "")])
