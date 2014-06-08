@@ -10,7 +10,6 @@
 		1F02EC13194468810002AA5F /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC10194468810002AA5F /* AssertionRecorder.swift */; };
 		1F02EC14194468810002AA5F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC11194468810002AA5F /* Protocols.swift */; };
 		1F02EC15194468810002AA5F /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC12194468810002AA5F /* XCTestHandler.swift */; };
-		1F02EC17194468880002AA5F /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC16194468880002AA5F /* DSL.swift */; };
 		1F0AEB6019442D1B00DCB3C2 /* TSSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AEB5F19442D1B00DCB3C2 /* TSSpec.m */; };
 		1F14FB64194180C5009F2A08 /* failures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* failures.swift */; };
 		1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6619418C94009F2A08 /* Protocols.swift */; };
@@ -33,7 +32,7 @@
 		1F2752CC19445B0C00052A26 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CB19445B0C00052A26 /* Expression.swift */; };
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
-		1F2752D219445B8400052A26 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752D119445B8400052A26 /* README.md */; };
+		1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
 		1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */; };
 		1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACD1941B15B009BC266 /* BeLessThan.swift */; };
 		1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */; };
@@ -55,7 +54,6 @@
 		1F02EC10194468810002AA5F /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1F02EC11194468810002AA5F /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1F02EC12194468810002AA5F /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
-		1F02EC16194468880002AA5F /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1F0AEB5F19442D1B00DCB3C2 /* TSSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSpec.m; sourceTree = "<group>"; };
 		1F0AEB6119442D2700DCB3C2 /* TSSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSpec.h; sourceTree = "<group>"; };
 		1F14FB63194180C5009F2A08 /* failures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = failures.swift; sourceTree = "<group>"; };
@@ -83,6 +81,7 @@
 		1F2752CD19445B1E00052A26 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1F2752D119445B8400052A26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSExceptionCapture.m; sourceTree = "<group>"; };
 		1F379ACC1941AAD7009BC266 /* TSExceptionCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSExceptionCapture.h; sourceTree = "<group>"; };
 		1F379ACD1941B15B009BC266 /* BeLessThan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThan.swift; sourceTree = "<group>"; };
@@ -160,6 +159,7 @@
 		1F1A742B1940169200FFFC47 /* Tailor */ = {
 			isa = PBXGroup;
 			children = (
+				1F2C568C1944FD30001DF2B4 /* Utils */,
 				1F2752CA19445AFB00052A26 /* Expectation */,
 				1F2752BF19445A8A00052A26 /* Runner */,
 				1F6900991942C7D200E757DF /* Adapters */,
@@ -221,6 +221,14 @@
 			name = Expectation;
 			sourceTree = "<group>";
 		};
+		1F2C568C1944FD30001DF2B4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		1F379AC91941AAA8009BC266 /* objc */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +246,6 @@
 				1F02EC10194468810002AA5F /* AssertionRecorder.swift */,
 				1F02EC11194468810002AA5F /* Protocols.swift */,
 				1F02EC12194468810002AA5F /* XCTestHandler.swift */,
-				1F02EC16194468880002AA5F /* DSL.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -358,20 +365,19 @@
 				1F14FB7719419789009F2A08 /* BeNil.swift in Sources */,
 				1F2752D019445B2F00052A26 /* DSL.swift in Sources */,
 				1F14FB6F19418D50009F2A08 /* BeLogical.swift in Sources */,
+				1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */,
 				1F14FB75194191E0009F2A08 /* BeCloseTo.swift in Sources */,
 				1F2752C319445AB000052A26 /* ExampleNode.swift in Sources */,
 				1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */,
 				1F2752C119445AA000052A26 /* Behavior.swift in Sources */,
 				1F2752CC19445B0C00052A26 /* Expression.swift in Sources */,
 				1F6900A31942EDA000E757DF /* BeAnInstanceOf.swift in Sources */,
-				1F2752D219445B8400052A26 /* README.md in Sources */,
 				1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */,
 				1F14FB7B1941A017009F2A08 /* BeLessThanOrEqual.swift in Sources */,
 				1F02EC14194468810002AA5F /* Protocols.swift in Sources */,
 				1F2752C719445AD600052A26 /* SpecBehavior.swift in Sources */,
 				1F14FB7319418EB6009F2A08 /* RaisesException.swift in Sources */,
 				1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */,
-				1F02EC17194468880002AA5F /* DSL.swift in Sources */,
 				1F0AEB6019442D1B00DCB3C2 /* TSSpec.m in Sources */,
 				1F2752C519445AC000052A26 /* Stack.swift in Sources */,
 				1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */,

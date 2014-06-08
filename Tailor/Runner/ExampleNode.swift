@@ -18,14 +18,15 @@ case Describe, Context, It
     }
 }
 
+// data structure for example groups and examples
 @objc
-class ExampleNode : Sequence, Printable {
+class ExampleNode : Printable {
     let type: ExampleNodeType
     var name = ""
     var children: ExampleNode[]
     var behavior: Behavior
-    var beforeEach: Behavior
-    var afterEach: Behavior
+    var beforeEaches: Behavior[]
+    var afterEaches: Behavior[]
     weak var parent: ExampleNode?
 
     init(type: ExampleNodeType, name: String, parent: ExampleNode? = nil) {
@@ -33,25 +34,13 @@ class ExampleNode : Sequence, Printable {
         self.name = name
         self.parent = parent
         behavior = Behavior()
-        beforeEach = Behavior()
-        afterEach = Behavior()
+        beforeEaches = Behavior[]()
+        afterEaches = Behavior[]()
         children = ExampleNode[]()
     }
 
     var description: String {
-    return "<\(name): \(children)>"
-    }
-
-    subscript(index: Int) -> ExampleNode {
-        return self.children[index]
-    }
-
-    func generate() -> IndexingGenerator<ExampleNode[]> {
-        return self.children.generate()
-    }
-
-    func removeAllChildren() {
-        children.map { self.removeChild($0) }
+        return "<\(name): \(children)>"
     }
 
     func removeFromParentNode() {

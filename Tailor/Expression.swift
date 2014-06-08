@@ -13,19 +13,21 @@ func _memoizedClosure<T>(closure: () -> T) -> () -> T {
 }
 
 struct Expression<T> {
-    let expression: () -> T
-    let memoizedExpression: () -> T
+    let _expression: () -> T
+    let _memoizedExpression: () -> T
+    let location: SourceLocation
 
-    init(closure: () -> T) {
-        self.expression = closure
-        self.memoizedExpression = _memoizedClosure(closure)
+    init(expression: () -> T, location: SourceLocation) {
+        self._expression = expression
+        self._memoizedExpression = _memoizedClosure(expression)
+        self.location = location
     }
 
     func evaluateIfNeeded() -> T {
-        return self.memoizedExpression()
+        return self._memoizedExpression()
     }
 
     func evaluate() -> T {
-        return self.expression()
+        return self._expression()
     }
 }

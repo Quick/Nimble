@@ -4,7 +4,7 @@ struct _BeAnInstanceOf: Matcher {
     let expectedClass: AnyClass
 
     func matches(actualExpression: Expression<NSObject>) -> (pass: Bool, messagePostfix: String)  {
-        let actualValue = actualExpression.evaluateIfNeeded()
+        let actualValue = actualExpression.evaluate()
         let message = "be an instance of \(NSStringFromClass(expectedClass))"
         return (actualValue.isKindOfClass(expectedClass), message)
     }

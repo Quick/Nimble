@@ -1,7 +1,7 @@
 import Foundation
 
 protocol AssertionHandler {
-    func assert(assertion: Bool, message: String, file: String, line: Int)
+    func assert(assertion: Bool, message: String, location: SourceLocation)
 }
 
 var CurrentAssertionHandler: AssertionHandler = XCTestHandler()

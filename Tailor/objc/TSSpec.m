@@ -11,17 +11,15 @@
     return [super testInvocations];
 }
 
-- (SpecBehavior *)spec {
-    return nil;
+- (void)defineBehaviors {
 }
 
 - (void)testBehaviors {
-    SpecBehavior *behavior = [self spec];
-    XCTAssertNotNil(behavior, @"-[%@ spec] must define spec behavior", NSStringFromClass([self class]));
-    if (behavior) {
-        behavior.root.name = NSStringFromClass([self class]);
-        [behavior verifyBehaviors];
-    }
+    TSSpecContext *spec = [TSSpecContext behaviors:^{
+        [self defineBehaviors];
+    } file:@"" line:0];
+    spec.root.name = NSStringFromClass([self class]);
+    [spec verifyBehaviors];
 }
 
 @end

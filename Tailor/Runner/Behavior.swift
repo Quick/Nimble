@@ -1,25 +1,22 @@
 import Foundation
 
-struct Behavior {
+class Behavior {
     let block: () -> Void
-    let file: String
-    let line: Int
+    let location: SourceLocation
     var startDate: NSDate?
     var endDate: NSDate?
 
     init() {
         block = ({})
-        file = "Empty Behavior <NO FILE>"
-        line = 0
+        location = SourceLocation()
     }
 
-    init(block: () -> Void, file: String, line: Int) {
+    init(block: () -> Void, location: SourceLocation) {
         self.block = block
-        self.file = file
-        self.line = line
+        self.location = location
     }
 
-    mutating func run() {
+    func run() {
         startDate = NSDate()
         block()
         endDate = NSDate()

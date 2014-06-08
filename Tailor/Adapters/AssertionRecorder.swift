@@ -3,20 +3,18 @@ import Foundation
 struct AssertionRecord {
     let success: Bool
     let message: String
-    let file: String
-    let line: Int
+    let location: SourceLocation
 }
 
 class AssertionRecorder : AssertionHandler {
     var assertions = AssertionRecord[]()
 
-    func assert(assertion: Bool, message: String, file: String, line: Int) {
+    func assert(assertion: Bool, message: String, location: SourceLocation) {
         assertions.append(
             AssertionRecord(
                 success: assertion,
                 message: message,
-                file: file,
-                line: line))
+                location: location))
     }
 }
 

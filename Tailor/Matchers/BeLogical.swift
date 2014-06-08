@@ -5,7 +5,7 @@ struct _BeLogically : Matcher {
     let stringValue: String
 
     func matches(actualExpression: Expression<LogicValue>) -> (pass: Bool, messagePostfix: String)  {
-        let actualValue = actualExpression.evaluateIfNeeded()
+        let actualValue = actualExpression.evaluate()
         return (actualValue.getLogicValue() == expectedValue.getLogicValue(), "be \(stringValue)")
     }
 }

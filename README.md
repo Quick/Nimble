@@ -29,7 +29,8 @@ Since Swift doesn't directly allow initializers, you'll need to subclass ``TSSpe
     }
 
 
-Of course, feel free to inherit from ``XCTestCase`` if you just want to use matchers.
+Of course, feel free to inherit from ``XCTestCase`` directly if you just want to use
+matchers.
 
 
 Matchers
