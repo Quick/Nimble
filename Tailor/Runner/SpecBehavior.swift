@@ -41,19 +41,6 @@ class SpecBehavior {
         CurrentAssertionHandler.assert(action.getLogicValue(), message: message, file: file, line: line)
     }
 
-    func _pushNodeOnStack(node: ExampleNode, file: String, line: Int) {
-        _verify(stack.push(node), message: "This isn't not allowed in the current location", file: file, line: line)
-    }
-
-    func _popNodeOnStack(file: String, line: Int) -> ExampleNode {
-        if let node = stack.pop() {
-            return node
-        } else {
-            _verify(false, message: "This isn't not allowed in the current location", file: file, line: line)
-            return ExampleNode(name: "Bad State", parent: nil)
-        }
-    }
-
     func describe(name: String, closure: () -> Void, file: String = __FILE__, line: Int = __LINE__) -> ExampleNode {
         let parentNode = stack.peek()
         var node = ExampleNode(name: name, parent: parentNode)

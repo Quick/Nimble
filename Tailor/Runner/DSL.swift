@@ -4,11 +4,7 @@ import Foundation
 var _SpecContext: SpecBehavior?
 
 func behaviors(closure: () -> Void, file: String = __FILE__, line: Int = __LINE__) -> SpecBehavior {
-    var spec = SpecBehavior()
-    _SpecContext = spec
-    closure()
-    _SpecContext = nil
-    return spec
+    return SpecBehavior.behaviors(closure, file: file, line: line)
 }
 
 func beforeEach(closure: () -> Void, file: String = __FILE__, line: Int = __LINE__) {
