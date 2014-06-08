@@ -12,58 +12,89 @@ func _memoizedClosure<T>(closure: () -> T) -> () -> T {
     })
 }
 
+struct Expression<T> {
+    let expression: () -> T
+    let memoizedExpression: () -> T
+
+    init(closure: () -> T) {
+        self.expression = closure
+        self.memoizedExpression = _memoizedClosure(closure)
+    }
+
+    func evaluateIfNeeded() -> T {
+        return self.memoizedExpression()
+    }
+
+    func evaluate() -> T {
+        return self.expression()
+    }
+}
+
 // Protected. Use one of the helper functions to create this instead.
-struct _Expectation<T> {
+struct Expectation<T> {
     let file: String
     let line: Int
-    let expression: () -> T
-    let assertion: AssertionRecorder = _assertionRecorder!
+    let expression: Expression<T>
+    let assertion: AssertionHandler = CurrentAssertionHandler
 
     init(closure: () -> T, file: String, line: Int) {
-        self.expression = _memoizedClosure(closure)
+        self.expression = Expression(closure: closure)
         self.file = file
         self.line = line
     }
 
+    func verify(pass: Bool, message: String) {
+        assertion.assert(pass, message: message, file: file, line: line)
+    }
+
     func to<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U) {
         let (pass, message) = matcher.matches(expression)
-        assertion(assertion: pass, message: message, file: file, line: line)
+        verify(pass, message: message)
     }
 
     func toNot<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U) {
         let (pass, message) = matcher.doesNotMatch(expression)
-        assertion(assertion: pass, message: message, file: file, line: line)
+        verify(pass, message: message)
     }
 
-    // to have more useful error messages
-    func to(matcher: Matcher) {
-        assertion(assertion: false, message: "Matcher doesn't conform to MatcherWithFullMessage", file: file, line: line)
+    func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
+        let actualValue = expression.evaluateIfNeeded()
+        let (pass, messagePostfix) = matcher.matches(expression)
+        verify(pass, message: "expected <\(actualValue)> to \(messagePostfix)")
     }
-    func toNot(matcher: Matcher) {
-        to(matcher)
+
+    func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
+        let actualValue = expression.evaluateIfNeeded()
+        let (pass, messagePostfix) = matcher.matches(expression)
+        verify(!pass, message: "expected <\(actualValue)> to not \(messagePostfix)")
     }
 }
 
 // Begins an assertion on a given value.
 // file: and line: can be omitted to default to the current line this function is called on.
-func expect<T>(expression: @auto_closure () -> T, file: String = __FILE__, line: Int = __LINE__) -> _Expectation<T> {
-    return _Expectation(closure: expression, file: file, line: line)
+func expect<T>(expression: @auto_closure () -> T, file: String = __FILE__, line: Int = __LINE__) -> Expectation<T> {
+    return Expectation(closure: expression, file: file, line: line)
 }
 
 // Begins an assertion on a given value.
 // file: and line: can be omitted to default to the current line this function is called on.
-func expect<T>(expression: @auto_closure () -> Void, file: String = __FILE__, line: Int = __LINE__) -> _Expectation<Bool> {
-    return _Expectation(closure: ({ expression(); return false }), file: file, line: line)
+func expect<T>(expression: @auto_closure () -> Void, file: String = __FILE__, line: Int = __LINE__) -> Expectation<Bool> {
+    return Expectation(closure: ({ expression(); return false }), file: file, line: line)
 }
 
 // Begins an assertion on a given value.
 // file: and line: can be omitted to default to the current line this function is called on.
-func expect<T>(file: String = __FILE__, line: Int = __LINE__, expression: () -> T) -> _Expectation<T> {
-    return _Expectation(closure: expression, file: file, line: line)
+func expect<T>(file: String = __FILE__, line: Int = __LINE__, expression: () -> T) -> Expectation<T> {
+    return Expectation(closure: expression, file: file, line: line)
 }
 
 // Begins an assertion on a given value.
 // file: and line: can be omitted to default to the current line this function is called on.
-func expect<T>(file: String = __FILE__, line: Int = __LINE__, expression: () -> Void) -> _Expectation<Bool> {
-    return _Expectation(closure: ({ expression(); return false }), file: file, line: line)
+func expect<T>(file: String = __FILE__, line: Int = __LINE__, expression: () -> Void) -> Expectation<Bool> {
+    return Expectation(closure: ({ expression(); return false }), file: file, line: line)
 }
+
+func fail(message: String = "exampled failed", file: String = __FILE__, line: Int = __LINE__) {
+    CurrentAssertionHandler.assert(false, message: message, file: file, line: line)
+}
+

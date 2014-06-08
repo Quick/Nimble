@@ -18,27 +18,27 @@ struct _RaiseException<T>: MatcherWithFullMessage {
         }
     }
 
-    func matches(actualExpression: () -> T) -> (pass: Bool, message: String)  {
+    func matches(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
         var exception: NSException?
         var capture = TSExceptionCapture(handler: ({ e in
             exception = e
         }), finally: nil)
 
         capture.tryBlock {
-            actualExpression()
+            actualExpression.evaluate()
             return
         }
         return (validException(exception), messageForException(exception, to: "to"))
     }
 
-    func doesNotMatch(actualExpression: () -> T) -> (pass: Bool, message: String)  {
+    func doesNotMatch(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
         var exception: NSException?
         var capture = TSExceptionCapture(handler: ({ e in
             exception = e
             }), finally: nil)
 
         capture.tryBlock {
-            actualExpression()
+            actualExpression.evaluate()
             return
         }
         return (!validException(exception), messageForException(exception, to: "to not"))

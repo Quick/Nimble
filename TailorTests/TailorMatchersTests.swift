@@ -1,12 +1,10 @@
 import XCTest
 import Tailor
 
+
 class TailorMatchersTests: XCTestCase {
     override func setUp() {
         super.setUp()
-        setAssertionRecorder { assertion, message, file, line in
-            XCTAssert(assertion, message, file: file, line: line)
-        }
     }
 
     func testCapturingOfException() {
@@ -14,7 +12,7 @@ class TailorMatchersTests: XCTestCase {
         expect(exception.raise()).to(raiseException(named: "laugh"))
         expect {
             exception.raise()
-        }.to(raiseException(named :"laugh"))
+        }.to(raiseException(named: "laugh"))
 
         expect(exception.raise()).to(raiseException(named: "laugh", reason: "Lulz"))
 
@@ -33,6 +31,7 @@ class TailorMatchersTests: XCTestCase {
     }
 
     func testEquality() {
+        expect(1 as Int).to(equalTo(1 as Int))
         expect(1).to(equalTo(1))
         expect("hello").to(equalTo("hello"))
         expect("hello").toNot(equalTo("world"))
@@ -65,10 +64,10 @@ class TailorMatchersTests: XCTestCase {
         expect(1.2).to(beCloseTo(1.2001))
         expect(1.2).to(beCloseTo(9.300, within: 10))
 
-        failsWithErrorMessage("expected <1.20000004768372> to not be close to <1.20009994506836> (within 0.00999999977648258)") {
+        failsWithErrorMessage("expected <1.2000> to not be close to <1.2001> (within 0.0001)") {
             expect(1.2).toNot(beCloseTo(1.2001))
         }
-        failsWithErrorMessage("expected <1.20000004768372> to not be close to <1.20009994506836> (within 1.0)") {
+        failsWithErrorMessage("expected <1.2000> to not be close to <1.2001> (within 1.0000)") {
             expect(1.2).toNot(beCloseTo(1.2001, within: 1.0))
         }
     }
@@ -163,6 +162,32 @@ class TailorMatchersTests: XCTestCase {
         failsWithErrorMessage("expected <1> to not be greater than or equal to <1>") {
             expect(1).toNot(beGreaterThanOrEqualTo(1))
             return
+        }
+    }
+
+    func testBeLogicalValue() {
+        expect(false).to(beFalsy())
+        expect(nil as Bool?).to(beFalsy())
+        expect(true).to(beTruthy())
+        expect(true as Bool?).to(beTruthy())
+
+        failsWithErrorMessage("expected <false> to be truthy") {
+            expect(false).to(beTruthy())
+        }
+        failsWithErrorMessage("expected <true> to be falsy") {
+            expect(true).to(beFalsy())
+        }
+    }
+
+    func testBeAnInstanceOf() {
+        expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSNumber))
+        expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSString))
+
+        failsWithErrorMessage("expected <1> to be an instance of NSString") {
+            expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSString))
+        }
+        failsWithErrorMessage("expected <1> to not be an instance of NSNumber") {
+            expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSNumber))
         }
     }
 }
