@@ -1,7 +1,26 @@
 import Foundation
 
+enum ExampleNodeType : Printable {
+case Spec
+case Describe, Context, It
+
+    var description: String {
+        switch self {
+        case .Spec:
+            return "spec"
+        case .Describe:
+            return "describe"
+        case .Context:
+            return "context"
+        case .It:
+            return "it"
+        }
+    }
+}
+
 @objc
 class ExampleNode : Sequence, Printable {
+    let type: ExampleNodeType
     var name = ""
     var children: ExampleNode[]
     var behavior: Behavior
@@ -9,7 +28,8 @@ class ExampleNode : Sequence, Printable {
     var afterEach: Behavior
     weak var parent: ExampleNode?
 
-    init(name: String, parent: ExampleNode? = nil) {
+    init(type: ExampleNodeType, name: String, parent: ExampleNode? = nil) {
+        self.type = type
         self.name = name
         self.parent = parent
         behavior = Behavior()

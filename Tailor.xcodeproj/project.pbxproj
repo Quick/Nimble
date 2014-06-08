@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F0AEB5D1943FC9D00DCB3C2 /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AEB5C1943FC9D00DCB3C2 /* XCTestHandler.swift */; };
+		1F02EC13194468810002AA5F /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC10194468810002AA5F /* AssertionRecorder.swift */; };
+		1F02EC14194468810002AA5F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC11194468810002AA5F /* Protocols.swift */; };
+		1F02EC15194468810002AA5F /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC12194468810002AA5F /* XCTestHandler.swift */; };
+		1F02EC17194468880002AA5F /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02EC16194468880002AA5F /* DSL.swift */; };
 		1F0AEB6019442D1B00DCB3C2 /* TSSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0AEB5F19442D1B00DCB3C2 /* TSSpec.m */; };
 		1F14FB64194180C5009F2A08 /* failures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* failures.swift */; };
 		1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB6619418C94009F2A08 /* Protocols.swift */; };
@@ -35,8 +38,6 @@
 		1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACD1941B15B009BC266 /* BeLessThan.swift */; };
 		1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */; };
 		1F50EE791941B69A00178EAA /* TailorRunnerComponentsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F50EE781941B69A00178EAA /* TailorRunnerComponentsTest.swift */; };
-		1F69009B1942C7E400E757DF /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F69009A1942C7E400E757DF /* Protocols.swift */; };
-		1F69009D1942C8F100E757DF /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F69009C1942C8F100E757DF /* AssertionRecorder.swift */; };
 		1F6900A31942EDA000E757DF /* BeAnInstanceOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6900A21942EDA000E757DF /* BeAnInstanceOf.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1F0AEB5C1943FC9D00DCB3C2 /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
+		1F02EC10194468810002AA5F /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
+		1F02EC11194468810002AA5F /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		1F02EC12194468810002AA5F /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
+		1F02EC16194468880002AA5F /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1F0AEB5F19442D1B00DCB3C2 /* TSSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSSpec.m; sourceTree = "<group>"; };
 		1F0AEB6119442D2700DCB3C2 /* TSSpec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSSpec.h; sourceTree = "<group>"; };
 		1F14FB63194180C5009F2A08 /* failures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = failures.swift; sourceTree = "<group>"; };
@@ -85,8 +89,6 @@
 		1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeGreaterThanOrEqualTo.swift; sourceTree = "<group>"; };
 		1F50EE781941B69A00178EAA /* TailorRunnerComponentsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailorRunnerComponentsTest.swift; sourceTree = "<group>"; };
 		1F6900981942C5CD00E757DF /* Tailor.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tailor.playground; sourceTree = "<group>"; };
-		1F69009A1942C7E400E757DF /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		1F69009C1942C8F100E757DF /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1F6900A21942EDA000E757DF /* BeAnInstanceOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeAnInstanceOf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,11 +235,12 @@
 		1F6900991942C7D200E757DF /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				1F69009A1942C7E400E757DF /* Protocols.swift */,
-				1F69009C1942C8F100E757DF /* AssertionRecorder.swift */,
-				1F0AEB5C1943FC9D00DCB3C2 /* XCTestHandler.swift */,
+				1F02EC10194468810002AA5F /* AssertionRecorder.swift */,
+				1F02EC11194468810002AA5F /* Protocols.swift */,
+				1F02EC12194468810002AA5F /* XCTestHandler.swift */,
+				1F02EC16194468880002AA5F /* DSL.swift */,
 			);
-			name = Adapters;
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,8 +353,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F14FB7919419D6F009F2A08 /* BeGreaterThan.swift in Sources */,
-				1F69009D1942C8F100E757DF /* AssertionRecorder.swift in Sources */,
 				1F2752C919445AE000052A26 /* DSL.swift in Sources */,
+				1F02EC13194468810002AA5F /* AssertionRecorder.swift in Sources */,
 				1F14FB7719419789009F2A08 /* BeNil.swift in Sources */,
 				1F2752D019445B2F00052A26 /* DSL.swift in Sources */,
 				1F14FB6F19418D50009F2A08 /* BeLogical.swift in Sources */,
@@ -364,15 +367,16 @@
 				1F2752D219445B8400052A26 /* README.md in Sources */,
 				1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */,
 				1F14FB7B1941A017009F2A08 /* BeLessThanOrEqual.swift in Sources */,
+				1F02EC14194468810002AA5F /* Protocols.swift in Sources */,
 				1F2752C719445AD600052A26 /* SpecBehavior.swift in Sources */,
 				1F14FB7319418EB6009F2A08 /* RaisesException.swift in Sources */,
 				1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */,
-				1F0AEB5D1943FC9D00DCB3C2 /* XCTestHandler.swift in Sources */,
+				1F02EC17194468880002AA5F /* DSL.swift in Sources */,
 				1F0AEB6019442D1B00DCB3C2 /* TSSpec.m in Sources */,
 				1F2752C519445AC000052A26 /* Stack.swift in Sources */,
 				1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */,
 				1F14FB6D19418D40009F2A08 /* EqualTo.swift in Sources */,
-				1F69009B1942C7E400E757DF /* Protocols.swift in Sources */,
+				1F02EC15194468810002AA5F /* XCTestHandler.swift in Sources */,
 				1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

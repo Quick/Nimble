@@ -24,7 +24,3 @@ func expect<T>(file: String = __FILE__, line: Int = __LINE__, expression: () -> 
     return Expectation(closure: ({ expression(); return false }), file: file, line: line)
 }
 
-func fail(message: String = "exampled failed", file: String = __FILE__, line: Int = __LINE__) {
-    CurrentAssertionHandler.assert(false, message: message, file: file, line: line)
-}
-

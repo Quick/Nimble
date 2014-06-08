@@ -18,8 +18,15 @@ class AssertionRecorder : AssertionHandler {
                 file: file,
                 line: line))
     }
+}
 
-    func fail(message: String, file: String, line: Int)  {
-        assert(false, message: message, file: file, line: line)
+func withAssertionHandler(recorder: AssertionHandler, closure: () -> Void) {
+    let oldRecorder = CurrentAssertionHandler
+    let capturer = TSExceptionCapture(handler: nil, finally: ({
+        CurrentAssertionHandler = oldRecorder
+    }))
+    CurrentAssertionHandler = recorder
+    capturer.tryBlock {
+        closure()
     }
 }
