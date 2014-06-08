@@ -30,6 +30,7 @@
 		1F2752CC19445B0C00052A26 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CB19445B0C00052A26 /* Expression.swift */; };
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
+		1F2752D219445B8400052A26 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752D119445B8400052A26 /* README.md */; };
 		1F379ACB1941AACE009BC266 /* TSExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */; };
 		1F379ACE1941B15B009BC266 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACD1941B15B009BC266 /* BeLessThan.swift */; };
 		1F379AD01941B41C009BC266 /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F379ACF1941B41C009BC266 /* BeGreaterThanOrEqualTo.swift */; };
@@ -77,6 +78,7 @@
 		1F2752CB19445B0C00052A26 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		1F2752CD19445B1E00052A26 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
+		1F2752D119445B8400052A26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1F379ACA1941AACE009BC266 /* TSExceptionCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSExceptionCapture.m; sourceTree = "<group>"; };
 		1F379ACC1941AAD7009BC266 /* TSExceptionCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSExceptionCapture.h; sourceTree = "<group>"; };
 		1F379ACD1941B15B009BC266 /* BeLessThan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThan.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		1F1A741F1940169200FFFC47 = {
 			isa = PBXGroup;
 			children = (
+				1F2752D119445B8400052A26 /* README.md */,
 				1F6900981942C5CD00E757DF /* Tailor.playground */,
 				1F1A742B1940169200FFFC47 /* Tailor */,
 				1F1A74381940169200FFFC47 /* TailorTests */,
@@ -358,6 +361,7 @@
 				1F2752C119445AA000052A26 /* Behavior.swift in Sources */,
 				1F2752CC19445B0C00052A26 /* Expression.swift in Sources */,
 				1F6900A31942EDA000E757DF /* BeAnInstanceOf.swift in Sources */,
+				1F2752D219445B8400052A26 /* README.md in Sources */,
 				1F14FB6719418C94009F2A08 /* Protocols.swift in Sources */,
 				1F14FB7B1941A017009F2A08 /* BeLessThanOrEqual.swift in Sources */,
 				1F2752C719445AD600052A26 /* SpecBehavior.swift in Sources */,

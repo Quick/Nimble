@@ -8,15 +8,28 @@ Yeah, things are likely going to change. There are a lot of missing features rig
 Setup
 -----
 
-Currently, Tailor requires an underlying testing framework. For XCTest, you'll need to set
-the assertion handler:
+Currently, Tailor requires an underlying testing framework. Currently it uses XCTest.
 
-    override func setUp() {
-        super.setUp()
-        setAssertionRecorder { assertion, message, file, line in
-            XCTAssert(assertion, message, file: file, line: line)
+
+Writing Tests
+-------------
+
+Since Swift doesn't directly allow initializers, you'll need to subclass ``TSSpec``:
+
+    class TailorBootstrap : TSSpec {
+        override func spec() -> SpecBehavior! {
+            return behaviors {
+                describe("cheese") {
+                    it("should be brown") {
+                        expect(1).to(equalTo(1))
+                    }
+                }
+            }
         }
     }
+
+
+Of course, feel free to inherit from ``XCTestCase`` if you just want to use matchers.
 
 
 Matchers
@@ -30,6 +43,7 @@ Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're gene
 Certain comparable operators work as expected too:
 
     expect("foo") != "foo"
+    expect(10) > 2
 
 The ``expect`` function autocompletes to include ``file:`` and ``line:``, but these are optional.
 The defaults will populate the current file and line.
@@ -56,8 +70,8 @@ The following matchers are currently implemented:
 - beGreaterThanOrEqualTo (also >= operator)
 - raiseException
 - beNil
-- beTrue
-- beFalse
+- beTruthy: Non-nil optional values will match
+- beFalsy: Note that nil / optionals will match too
 
 
 
