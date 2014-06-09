@@ -3,6 +3,6 @@
 
 @interface TSSpec : XCTestCase
 
-- (void)defineBehaviors;
++ (void)defineBehaviors;
 
 @end

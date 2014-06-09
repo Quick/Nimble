@@ -2,12 +2,12 @@ import XCTest
 import Tailor
 
 class TailorBootstrap : TSSpec {
-    override func defineBehaviors() {
+    override class func defineBehaviors() {
         describe("closure execution") {
-            it("should call beforeEachs, then then the it, followed by afterEachs") {
+            it("should call beforeEachs, then then the it, followed by afterEaches") {
                 var callHistory = String[]()
 
-                var spec = TSSpecContext.behaviors {
+                TSSpecContext.behaviors {
                     beforeEach { callHistory.append("beforeEach1") }
                     afterEach { callHistory.append("afterEach1") }
                     beforeEach { callHistory.append("beforeEach2") }
@@ -20,8 +20,7 @@ class TailorBootstrap : TSSpec {
                             callHistory.append("it")
                         }
                     }
-                }
-                spec.verifyBehaviors()
+                }.verifyBehaviors()
 
                 let expectedCallOrder = [
                     "beforeEach1",
@@ -80,7 +79,9 @@ class TailorBootstrap : TSSpec {
 
         context("when inside a beforeEach") {
             it("should throw errors") {
-                let spec = TSSpecContext.behaviors {
+                var beforeEachWasCalled = false
+                var afterEachWasCalled = false
+                TSSpecContext.behaviors {
                     beforeEach {
                         failsWithErrorMessage("describe() is not allowed here") {
                             describe("") {}
@@ -91,6 +92,8 @@ class TailorBootstrap : TSSpec {
                         failsWithErrorMessage("it() is not allowed here") {
                             it("") {}
                         }
+
+                        beforeEachWasCalled = true
                     }
                     afterEach {
                         failsWithErrorMessage("describe() is not allowed here") {
@@ -102,10 +105,13 @@ class TailorBootstrap : TSSpec {
                         failsWithErrorMessage("it() is not allowed here") {
                             it("") {}
                         }
-                    }
-                }
 
-                spec.verifyBehaviors()
+                        afterEachWasCalled = true
+                    }
+                }.verifyBehaviors()
+
+                expect(beforeEachWasCalled).to(beTruthy())
+                expect(afterEachWasCalled).to(beTruthy())
             }
         }
     }

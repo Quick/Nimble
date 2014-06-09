@@ -47,6 +47,16 @@ class TSSpecContext : BehaviorContext {
         return spec
     }
 
+    func eachLeafExample(rootNode node: ExampleNode, closure: (leafNode: ExampleNode) -> Void) {
+        for child in node.children {
+            self.eachLeafExample(rootNode: child, closure: closure)
+        }
+
+        if node.isLeaf {
+            closure(leafNode: node)
+        }
+    }
+
     func verifyBehaviors() {
         stack.whileFrozen {
             self.verifyNode(self.root)

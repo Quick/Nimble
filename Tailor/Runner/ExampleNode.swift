@@ -29,6 +29,18 @@ class ExampleNode : Printable {
     var afterEaches: Behavior[]
     weak var parent: ExampleNode?
 
+    var parents: Array<ExampleNode> {
+        var ancestor = parent
+        var parents = Array<ExampleNode>()
+        while (ancestor) {
+            parents.append(ancestor!)
+            ancestor = ancestor!.parent
+        }
+        return parents
+    }
+
+    var isLeaf: Bool { return children.count == 0 }
+
     init(type: ExampleNodeType, name: String, parent: ExampleNode? = nil) {
         self.type = type
         self.name = name
