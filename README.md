@@ -17,12 +17,10 @@ Writing Tests
 Since Swift doesn't directly allow initializers, you'll need to subclass ``TSSpec``:
 
     class TailorBootstrap : TSSpec {
-        override func spec() -> SpecBehavior! {
-            return behaviors {
-                describe("cheese") {
-                    it("should be brown") {
-                        expect(1).to(equalTo(1))
-                    }
+        override class func defineBehaviors() {
+            describe("cheese") {
+                it("should be brown") {
+                    expect(1).to(equalTo(1))
                 }
             }
         }
