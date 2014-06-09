@@ -17,7 +17,11 @@ class TailorBootstrap : TSSpec {
                         beforeEach { callHistory.append("beforeEach3") }
                         afterEach { callHistory.append("afterEach3") }
                         it("is yummy") {
-                            callHistory.append("it")
+                            callHistory.append("it1")
+                        }
+
+                        it("is tasty") {
+                            callHistory.append("it2")
                         }
                     }
                 }.verifyBehaviors()
@@ -26,7 +30,15 @@ class TailorBootstrap : TSSpec {
                     "beforeEach1",
                     "beforeEach2",
                     "beforeEach3",
-                    "it",
+                    "it1",
+                    "afterEach3",
+                    "afterEach2",
+                    "afterEach1",
+
+                    "beforeEach1",
+                    "beforeEach2",
+                    "beforeEach3",
+                    "it2",
                     "afterEach3",
                     "afterEach2",
                     "afterEach1",

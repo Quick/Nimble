@@ -1,7 +1,6 @@
 #import "TSSpec.h"
 #import <Tailor/Tailor-Swift.h>
 #import <objc/runtime.h>
-#import <objc/message.h>
 
 @implementation TSSpec
 
@@ -33,8 +32,6 @@
 
         SEL selector = NSSelectorFromString(selectorString);
         class_addMethod(self, selector, testMethod, types);
-
-        (*(id(*)(id, SEL))objc_msgSend)([self new], selector);
 
         NSMethodSignature *signature = [self instanceMethodSignatureForSelector:selector];
         NSInvocation *testInvocation = [NSInvocation invocationWithMethodSignature:signature];
