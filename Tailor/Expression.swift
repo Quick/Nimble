@@ -2,32 +2,42 @@ import Foundation
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-func _memoizedClosure<T>(closure: () -> T) -> () -> T {
+func _memoizedClosure<T>(closure: () -> T) -> (invalidateCache: Bool) -> T {
     var cache: T?
-    return ({
-        if (!cache) {
+    return ({ invalidateCache in
+        if (invalidateCache || !cache) {
             cache = closure()
         }
         return cache!
-        })
+    })
 }
 
 struct Expression<T> {
-    let _expression: () -> T
-    let _memoizedExpression: () -> T
+    let _expression: (invalidateCache: Bool) -> T
+    let expression: () -> T
     let location: SourceLocation
+    let allowCaching: Bool
+    var cache: T?
 
     init(expression: () -> T, location: SourceLocation) {
-        self._expression = expression
-        self._memoizedExpression = _memoizedClosure(expression)
+        self.expression = expression
+        self._expression = _memoizedClosure(expression)
         self.location = location
+        self.allowCaching = false
     }
 
-    func evaluateIfNeeded() -> T {
-        return self._memoizedExpression()
+    init(expression: () -> T, location: SourceLocation, allowCaching: Bool) {
+        self.expression = expression
+        self._expression = ({ allowCaching in expression() })
+        self.location = location
+        self.allowCaching = allowCaching
     }
 
-    func evaluate() -> T {
-        return self._expression()
+    func evaluate(invalidateCache: Bool = false) -> T {
+        return self._expression(invalidateCache: invalidateCache && allowCaching)
+    }
+
+    func withoutCaching() -> Expression<T> {
+        return Expression(expression: self.expression, location: location, allowCaching: false)
     }
 }

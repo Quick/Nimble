@@ -7,7 +7,22 @@ class TailorMatchersTests: XCTestCase {
         super.setUp()
     }
 
-    func testCapturingOfException() {
+    func testAsyncTesting() {
+        var value = 0
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            NSThread.sleepForTimeInterval(0.1)
+            value = 1
+        }
+        expect(value).toEventually(equalTo(1))
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            NSThread.sleepForTimeInterval(0.1)
+            value = 0
+        }
+        expect(value).toEventuallyNot(equalTo(1))
+    }
+
+    func estCapturingOfException() {
         var exception = NSException(name: "laugh", reason: "Lulz", userInfo: nil)
         expect(exception.raise()).to(raiseException(named: "laugh"))
         expect {

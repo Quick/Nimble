@@ -1,7 +1,6 @@
 import Foundation
 
 protocol BehaviorContext {
-    func verifyBehaviors()
     func exampleNode(type: ExampleNodeType, name: String, closure: () -> Void, location: SourceLocation) -> ExampleNode
     func beforeEach(closure: () -> Void, location: SourceLocation)
     func afterEach(closure: () -> Void, location: SourceLocation)
@@ -10,10 +9,6 @@ protocol BehaviorContext {
 @objc
 class TSEmptyContext : BehaviorContext {
     init() {}
-
-    func verifyBehaviors() {
-        fail("Not allowed", file: __FILE__, line: __LINE__)
-    }
 
     func exampleNode(type: ExampleNodeType, name: String, closure: () -> Void, location: SourceLocation) -> ExampleNode {
         fail("\(type)() is not allowed here", file: location.file, line: location.line)
@@ -47,6 +42,12 @@ class TSSpecContext : BehaviorContext {
         return spec
     }
 
+    func verifyBehaviors() {
+        eachLeafExample(rootNode: root) { node in
+            self.verifyLeafNode(node)
+        }
+    }
+
     func eachLeafExample(rootNode node: ExampleNode, closure: (leafNode: ExampleNode) -> Void) {
         for child in node.children {
             self.eachLeafExample(rootNode: child, closure: closure)
@@ -57,22 +58,14 @@ class TSSpecContext : BehaviorContext {
         }
     }
 
-    func verifyBehaviors() {
+    func verifyLeafNode(node: ExampleNode) {
+        let parents = node.parents
         stack.whileFrozen {
-            self.verifyNode(self.root)
-        }
-    }
-
-    func verifyNode(node: ExampleNode) {
-        for beforeEach in node.beforeEaches {
-            beforeEach.run()
-        }
-        node.behavior.run()
-        for child in node.children {
-            self.verifyNode(child)
-        }
-        for afterEach in node.afterEaches {
-            afterEach.run()
+            for parent in parents.reverse() { parent.runBeforeEaches() }
+            node.runBeforeEaches()
+            node.behavior.run()
+            node.runAfterEaches()
+            for parent in parents { parent.runAfterEaches() }
         }
     }
 

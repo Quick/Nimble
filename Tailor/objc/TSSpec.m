@@ -1,13 +1,14 @@
 #import "TSSpec.h"
 #import <Tailor/Tailor-Swift.h>
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation TSSpec
 
 + (void)defineBehaviors {
 }
 
-+ (NSArray *)behaviorInvocationsWithMethodsIfNeeded {
++ (NSArray *)behaviorInvocationsWithMethods {
     TSSpecContext *spec = [TSSpecContext behaviors:^{
         [self defineBehaviors];
     } file:@"" line:0];
@@ -23,15 +24,17 @@
             [fullName insertObject:[self santizeString:parent.name]
                            atIndex:0];
         }
-
-        IMP testMethod = imp_implementationWithBlock(^(id receiver){
-
-        });
-
         [fullName removeObjectAtIndex:0];
         NSString *selectorString = [fullName componentsJoinedByString:@"_"];
+
+        IMP testMethod = imp_implementationWithBlock(^(id receiver){
+            [spec verifyLeafNode:node];
+        });
+
         SEL selector = NSSelectorFromString(selectorString);
         class_addMethod(self, selector, testMethod, types);
+
+        (*(id(*)(id, SEL))objc_msgSend)([self new], selector);
 
         NSMethodSignature *signature = [self instanceMethodSignatureForSelector:selector];
         NSInvocation *testInvocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -46,7 +49,7 @@
         return @[];
     }
 
-    NSArray *behaviorTests = [self behaviorInvocationsWithMethodsIfNeeded];
+    NSArray *behaviorTests = [self behaviorInvocationsWithMethods];
     return [[super testInvocations] arrayByAddingObjectsFromArray:behaviorTests];
 }
 

@@ -40,6 +40,9 @@ class ExampleNode : Printable {
     }
 
     var isLeaf: Bool { return children.count == 0 }
+    var description: String {
+        return "<\(name): \(children)>"
+    }
 
     init(type: ExampleNodeType, name: String, parent: ExampleNode? = nil) {
         self.type = type
@@ -51,8 +54,16 @@ class ExampleNode : Printable {
         children = ExampleNode[]()
     }
 
-    var description: String {
-        return "<\(name): \(children)>"
+    func runBeforeEaches() {
+        for beforeEach in beforeEaches {
+            beforeEach.run()
+        }
+    }
+
+    func runAfterEaches() {
+        for afterEach in afterEaches {
+            afterEach.run()
+        }
     }
 
     func removeFromParentNode() {
