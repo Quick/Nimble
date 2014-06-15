@@ -85,7 +85,6 @@ class TailorBootstrap : TSSpec {
                 expect(contextWasCalled).to(beTruthy())
                 expect(nestedWasCalled).to(beTruthy())
                 expect(leafWasCalled).to(beFalsy())
-
             }
         }
 
