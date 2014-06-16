@@ -56,6 +56,7 @@ class TailorMatchersTests: XCTestCase {
 
         expect(nil).toNot(equalTo(1))
         expect(1).toNot(equalTo(nil))
+        expect(nil).to(equalTo(nil))
 
         expect {
             1
