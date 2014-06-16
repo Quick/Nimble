@@ -18,7 +18,7 @@ class TailorMatchersTests: XCTestCase {
         expect(value).toEventuallyNot(equalTo(1))
     }
 
-    func estCapturingOfException() {
+    func testCapturingOfException() {
         var exception = NSException(name: "laugh", reason: "Lulz", userInfo: nil)
         expect(exception.raise()).to(raiseException(named: "laugh"))
         expect {
@@ -50,6 +50,12 @@ class TailorMatchersTests: XCTestCase {
         expect([1, 2, 3]).to(equalTo([1, 2, 3]))
         expect("foo") == "foo"
         expect("foo") != "bar"
+
+        expect(1 as CInt?).to(equalTo(1))
+        expect(1 as CInt?).to(equalTo(1 as CInt?))
+
+        expect(nil).toNot(equalTo(1))
+        expect(1).toNot(equalTo(nil))
 
         expect {
             1
