@@ -3,7 +3,7 @@ import Tailor
 
 
 class TailorMatchersTests: XCTestCase {
-    func testAsyncTesting() {
+    func testAsyncPolling() {
         var value = 0
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             NSThread.sleepForTimeInterval(0.1)
@@ -16,6 +16,22 @@ class TailorMatchersTests: XCTestCase {
             value = 0
         }
         expect(value).toEventuallyNot(equalTo(1))
+    }
+
+    func testAsyncCallback() {
+        waitUntil { done in
+            done()
+        }
+        waitUntil { done in
+            NSThread.sleepForTimeInterval(0.5)
+            done()
+        }
+        failsWithErrorMessage("Waited more than 1.0 second") {
+            waitUntil(timeout: 1) { done in return }
+        }
+        failsWithErrorMessage("Waited more than 2.0 seconds") {
+            waitUntil(timeout: 2) { done in return }
+        }
     }
 
     func testCapturingOfException() {
@@ -56,7 +72,10 @@ class TailorMatchersTests: XCTestCase {
 
         expect(nil).toNot(equalTo(1))
         expect(1).toNot(equalTo(nil))
-        expect(nil).to(equalTo(nil))
+
+        let array1: Array<Int> = [1, 2, 3]
+        let array2: Array<Int> = [1, 2, 3]
+        expect(array1).to(equalTo(array2))
 
         expect {
             1
@@ -206,6 +225,63 @@ class TailorMatchersTests: XCTestCase {
         }
         failsWithErrorMessage("expected <1> to not be an instance of NSNumber") {
             expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSNumber))
+        }
+    }
+
+    func testContains() {
+        expect([1, 2, 3]).to(contain(1))
+        expect([1, 2, 3] as CInt[]).to(contain(1))
+        expect("foo").to(contain("o"))
+        expect(["foo", "bar", "baz"]).to(contain("baz"))
+        expect([1, 2, 3]).toNot(contain(4))
+        expect("foo").toNot(contain("z"))
+        expect(["foo", "bar", "baz"]).toNot(contain("ba"))
+
+        failsWithErrorMessage("expected <[a, b, c]> to contain <bar>") {
+            expect(["a", "b", "c"]).to(contain("bar"))
+        }
+        failsWithErrorMessage("expected <[a, b, c]> to not contain <b>") {
+            expect(["a", "b", "c"]).toNot(contain("b"))
+        }
+    }
+
+    func testBeginWith() {
+        expect([1, 2, 3]).to(beginWith(1))
+        expect([1, 2, 3]).toNot(beginWith(2))
+        expect("foobar").to(beginWith("foo"))
+        expect("foobar").toNot(beginWith("oo"))
+
+        failsWithErrorMessage("expected <[1, 2, 3]> to begin with <2>") {
+            expect([1, 2, 3]).to(beginWith(2))
+        }
+        failsWithErrorMessage("expected <[1, 2, 3]> to not begin with <1>") {
+            expect([1, 2, 3]).toNot(beginWith(1))
+        }
+        failsWithErrorMessage("expected <batman> to begin with <atm>") {
+            expect("batman").to(beginWith("atm"))
+        }
+        failsWithErrorMessage("expected <batman> to not begin with <bat>") {
+            expect("batman").toNot(beginWith("bat"))
+        }
+    }
+
+    func testEndWith() {
+        expect([1, 2, 3]).to(endWith(3))
+        expect([1, 2, 3]).toNot(endWith(2))
+        expect("foobar").to(endWith("bar"))
+        expect("foobar").toNot(endWith("oo"))
+
+        failsWithErrorMessage("expected <[1, 2, 3]> to end with <2>") {
+            expect([1, 2, 3]).to(endWith(2))
+        }
+        failsWithErrorMessage("expected <[1, 2, 3]> to not end with <3>") {
+            expect([1, 2, 3]).toNot(endWith(3))
+        }
+        failsWithErrorMessage("expected <batman> to end with <atm>") {
+            expect("batman").to(endWith("atm"))
+        }
+        failsWithErrorMessage("expected <batman> to not end with <man>") {
+            expect("batman").toNot(endWith("man"))
         }
     }
 }
