@@ -27,10 +27,3 @@ func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-
-// Q: should we really support expect(nil).to(equalTo(nil))?
-extension NilType : Equatable { }
-
-func ==(lhs: NilType, rhs: NilType) -> Bool {
-    return true
-}
