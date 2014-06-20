@@ -48,6 +48,25 @@ class TSSpecContext : BehaviorContext {
         }
     }
 
+    func eachRandomLeafExample(rootNode node: ExampleNode, seed: UInt, closure: (leafNode: ExampleNode) -> Void) {
+        var nodes = ExampleNode[]()
+        eachLeafExample(rootNode: node) { nodes.append($0) }
+
+        srand(CUnsignedInt(seed))
+
+        let maxIndex = nodes.count - 1
+        for index in 0...maxIndex {
+            let swapIndex = Int(rand() % CInt(nodes.count))
+            let temp = nodes[index]
+            nodes[index] = nodes[swapIndex]
+            nodes[swapIndex] = temp
+        }
+
+        for node in nodes {
+            closure(leafNode: node)
+        }
+    }
+
     func eachLeafExample(rootNode node: ExampleNode, closure: (leafNode: ExampleNode) -> Void) {
         for child in node.children {
             self.eachLeafExample(rootNode: child, closure: closure)
