@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeAnInstanceOf: Matcher {
+struct _BeAnInstanceOfMatcher: Matcher {
     let expectedClass: AnyClass
 
     func matches(actualExpression: Expression<NSObject>) -> (pass: Bool, postfix: String)  {
@@ -10,6 +10,6 @@ struct _BeAnInstanceOf: Matcher {
     }
 }
 
-func beAnInstanceOf(expectedClass: AnyClass) -> _BeAnInstanceOf {
-    return _BeAnInstanceOf(expectedClass: expectedClass)
+func beAnInstanceOf(expectedClass: AnyClass) -> _BeAnInstanceOfMatcher {
+    return _BeAnInstanceOfMatcher(expectedClass: expectedClass)
 }

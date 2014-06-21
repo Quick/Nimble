@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeCloseTo: MatcherWithFullMessage {
+struct _BeCloseToMatcher: MatcherWithFullMessage {
     let expectedValue: Double
     let delta: Double
 
@@ -25,8 +25,8 @@ struct _BeCloseTo: MatcherWithFullMessage {
     }
 }
 
-func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> _BeCloseTo {
-    return _BeCloseTo(expectedValue: expectedValue, delta: delta)
+func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> _BeCloseToMatcher {
+    return _BeCloseToMatcher(expectedValue: expectedValue, delta: delta)
 }
 
 func ==(lhs: Expectation<Double>, rhs: Double) -> Bool {

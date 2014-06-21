@@ -1,6 +1,6 @@
 import Foundation
 
-struct _RaiseException<T>: MatcherWithFullMessage {
+struct _RaiseExceptionMatcher<T>: MatcherWithFullMessage {
     let name: String?
     let reason: String?
     let hasReason: Bool
@@ -45,10 +45,10 @@ struct _RaiseException<T>: MatcherWithFullMessage {
     }
 }
 
-func raiseException(#named: String, #reason: String?) -> _RaiseException<Void> {
-    return _RaiseException(name: named, reason: reason, hasReason: true)
+func raiseException(#named: String, #reason: String?) -> _RaiseExceptionMatcher<Void> {
+    return _RaiseExceptionMatcher(name: named, reason: reason, hasReason: true)
 }
 
-func raiseException(#named: String) -> _RaiseException<Void> {
-    return _RaiseException(name: named, reason: nil, hasReason: false)
+func raiseException(#named: String) -> _RaiseExceptionMatcher<Void> {
+    return _RaiseExceptionMatcher(name: named, reason: nil, hasReason: false)
 }

@@ -272,6 +272,8 @@ class TailorMatchersTests: XCTestCase {
         expect([1, 2, 3]).toNot(contain(4))
         expect("foo").toNot(contain("z"))
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))
+        expect(NSArray(array: ["a"])).to(contain("a"))
+        expect(NSArray(array: ["a"])).toNot(contain("b"))
 
         failsWithErrorMessage("expected <[a, b, c]> to contain <bar>") {
             expect(["a", "b", "c"]).to(contain("bar"))
@@ -286,6 +288,8 @@ class TailorMatchersTests: XCTestCase {
         expect([1, 2, 3]).toNot(beginWith(2))
         expect("foobar").to(beginWith("foo"))
         expect("foobar").toNot(beginWith("oo"))
+        expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
+        expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
 
         failsWithErrorMessage("expected <[1, 2, 3]> to begin with <2>") {
             expect([1, 2, 3]).to(beginWith(2))
@@ -306,6 +310,8 @@ class TailorMatchersTests: XCTestCase {
         expect([1, 2, 3]).toNot(endWith(2))
         expect("foobar").to(endWith("bar"))
         expect("foobar").toNot(endWith("oo"))
+        expect(NSArray(array: ["a", "b"])).to(endWith("b"))
+        expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
 
         failsWithErrorMessage("expected <[1, 2, 3]> to end with <2>") {
             expect([1, 2, 3]).to(endWith(2))

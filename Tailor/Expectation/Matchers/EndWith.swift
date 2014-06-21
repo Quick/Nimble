@@ -1,6 +1,6 @@
 import Foundation
 
-struct _EndWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
+struct _EndWithMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
     let endingElement: S.GeneratorType.Element
 
     func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
@@ -17,7 +17,7 @@ struct _EndWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matche
     }
 }
 
-struct _EndWithString: Matcher {
+struct _EndWithStringMatcher: Matcher {
     let endingSubstring: String
 
     func matches(actualExpression: Expression<String>) -> (pass: Bool, postfix: String)  {
@@ -27,10 +27,23 @@ struct _EndWithString: Matcher {
     }
 }
 
-func endWith<T: Equatable>(item: T) -> _EndWith<T[]> {
-    return _EndWith(endingElement: item)
+struct _EndWithOrderedCollectionMatcher: Matcher {
+    let endingElement: AnyObject
+
+    func matches(actualExpression: Expression<TSOrderedCollection>) -> (pass: Bool, postfix: String) {
+        let actual = actualExpression.evaluate()
+        return (actual.indexOfObject(endingElement) == actual.count - 1, "end with <\(endingElement)>")
+    }
 }
 
-func endWith(substring: String) -> _EndWithString {
-    return _EndWithString(endingSubstring: substring)
+func endWith<T: Equatable>(item: T) -> _EndWithMatcher<T[]> {
+    return _EndWithMatcher(endingElement: item)
+}
+
+func endWith(item: AnyObject) -> _EndWithOrderedCollectionMatcher {
+    return _EndWithOrderedCollectionMatcher(endingElement: item)
+}
+
+func endWith(substring: String) -> _EndWithStringMatcher {
+    return _EndWithStringMatcher(endingSubstring: substring)
 }

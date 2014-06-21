@@ -18,3 +18,18 @@ protocol Matcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, postfix: String)
 }
+
+// Protocol for objective-c objects that should support contain() matcher
+@objc protocol TSContainer {
+    func containsObject(object: AnyObject!) -> Bool
+}
+extension NSArray: TSContainer {}
+extension NSSet: TSContainer {}
+extension NSHashTable: TSContainer {}
+
+// Protocol for objective-c objects that should support beginWith() and endWith() matcher
+@objc protocol TSOrderedCollection {
+    func indexOfObject(object: AnyObject!) -> Int
+    var count: Int { get }
+}
+extension NSArray: TSOrderedCollection {}

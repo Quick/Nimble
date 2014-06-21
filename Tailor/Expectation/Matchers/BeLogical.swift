@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeLogically : Matcher {
+struct _BeLogicalMatcher : Matcher {
     let expectedValue: LogicValue
     let stringValue: String
 
@@ -10,10 +10,10 @@ struct _BeLogically : Matcher {
     }
 }
 
-func beTruthy() -> _BeLogically {
-    return _BeLogically(expectedValue: true, stringValue: "truthy")
+func beTruthy() -> _BeLogicalMatcher {
+    return _BeLogicalMatcher(expectedValue: true, stringValue: "truthy")
 }
 
-func beFalsy() -> _BeLogically {
-    return _BeLogically(expectedValue: false, stringValue: "falsy")
+func beFalsy() -> _BeLogicalMatcher {
+    return _BeLogicalMatcher(expectedValue: false, stringValue: "falsy")
 }

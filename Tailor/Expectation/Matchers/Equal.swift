@@ -1,6 +1,6 @@
 import Foundation
 
-struct _Equal<T: Equatable>: Matcher {
+struct _EqualMatcher<T: Equatable>: Matcher {
     let expectedValue: T?
 
     func matches(actualExpression: Expression<T?>) -> (pass: Bool, postfix: String)  {
@@ -9,12 +9,12 @@ struct _Equal<T: Equatable>: Matcher {
     }
 }
 
-func equal<T>(expectedValue: T?) -> _Equal<T> {
-    return _Equal(expectedValue: expectedValue)
+func equal<T>(expectedValue: T?) -> _EqualMatcher<T> {
+    return _EqualMatcher(expectedValue: expectedValue)
 }
 
-func equal(expectedValue: NSObject) -> _Equal<NSObject> {
-    return _Equal(expectedValue: expectedValue)
+func equal(expectedValue: NSObject) -> _EqualMatcher<NSObject> {
+    return _EqualMatcher(expectedValue: expectedValue)
 }
 
 func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {

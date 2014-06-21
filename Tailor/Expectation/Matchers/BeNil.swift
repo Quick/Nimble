@@ -1,12 +1,12 @@
 import Foundation
 
-struct _BeNil: Matcher {
+struct _BeNilMatcher: Matcher {
     func matches(actualExpression: Expression<Any?>) -> (pass: Bool, postfix: String)  {
         let actualValue = actualExpression.evaluate()
         return (!actualValue.getLogicValue(), "be nil")
     }
 }
 
-func beNil() -> _BeNil {
-    return _BeNil()
+func beNil() -> _BeNilMatcher {
+    return _BeNilMatcher()
 }
