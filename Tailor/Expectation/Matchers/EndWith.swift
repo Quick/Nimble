@@ -3,7 +3,7 @@ import Foundation
 struct _EndWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
     let endingElement: S.GeneratorType.Element
 
-    func matches(actualExpression: Expression<S>) -> (pass: Bool, messagePostfix: String)  {
+    func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
         let actualSequence = actualExpression.evaluate()
         var actualGenerator = actualSequence.generate()
         var lastItem: S.GeneratorType.Element?
@@ -20,7 +20,7 @@ struct _EndWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matche
 struct _EndWithString: Matcher {
     let endingSubstring: String
 
-    func matches(actualExpression: Expression<String>) -> (pass: Bool, messagePostfix: String)  {
+    func matches(actualExpression: Expression<String>) -> (pass: Bool, postfix: String)  {
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(endingSubstring)
         return (range.endIndex == actual.endIndex, "end with <\(endingSubstring)>")

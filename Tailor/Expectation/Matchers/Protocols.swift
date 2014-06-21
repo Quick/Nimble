@@ -12,9 +12,9 @@ protocol MatcherWithFullMessage {
 // Implement this protocol if you just want a simplier matcher. The negation
 // is provided for you automatically.
 //
-// Messages are in the form: "expected (actual) to (messagePostfix)"
+// Messages are in the form: "expected (actual) to (postfix)"
 // Messages should always be returned incase the negation case is being performed.
 protocol Matcher {
     typealias ValueType
-    func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, messagePostfix: String)
+    func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, postfix: String)
 }

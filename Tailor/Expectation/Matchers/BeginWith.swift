@@ -3,7 +3,7 @@ import Foundation
 struct _BeginWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
     let startingElement: S.GeneratorType.Element
 
-    func matches(actualExpression: Expression<S>) -> (pass: Bool, messagePostfix: String)  {
+    func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
         let actualSequence = actualExpression.evaluate()
         var actualGenerator = actualSequence.generate()
         let actual = actualGenerator.next()
@@ -14,7 +14,7 @@ struct _BeginWith<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matc
 struct _BeginWithString: Matcher {
     let startingSubstring: String
 
-    func matches(actualExpression: Expression<String>) -> (pass: Bool, messagePostfix: String)  {
+    func matches(actualExpression: Expression<String>) -> (pass: Bool, postfix: String)  {
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(startingSubstring)
         return (range.startIndex == actual.startIndex, "begin with <\(startingSubstring)>")

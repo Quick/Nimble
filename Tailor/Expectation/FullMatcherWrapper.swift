@@ -6,13 +6,13 @@ struct FullMatcherWrapper<M, T where M: Matcher, M.ValueType == T> : MatcherWith
     let toNot: String
 
     func matches(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
-        let (pass, messagePostfix) = matcher.matches(actualExpression)
-        return (pass, "expected <\(actualExpression.evaluate())> \(to) \(messagePostfix)")
+        let (pass, postfix) = matcher.matches(actualExpression)
+        return (pass, "expected <\(actualExpression.evaluate())> \(to) \(postfix)")
     }
 
     func doesNotMatch(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
-        let (pass, messagePostfix) = matcher.matches(actualExpression)
-        return (!pass, "expected <\(actualExpression.evaluate())> \(toNot) \(messagePostfix)")
+        let (pass, postfix) = matcher.matches(actualExpression)
+        return (!pass, "expected <\(actualExpression.evaluate())> \(toNot) \(postfix)")
     }
 }
 

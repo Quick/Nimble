@@ -30,7 +30,10 @@ class TailorMatchersTests: XCTestCase {
             waitUntil(timeout: 1) { done in return }
         }
         failsWithErrorMessage("Waited more than 2.0 seconds") {
-            waitUntil(timeout: 2) { done in return }
+            waitUntil(timeout: 2) { done in
+                NSThread.sleepForTimeInterval(3.0)
+                done()
+            }
         }
     }
 
@@ -56,6 +59,26 @@ class TailorMatchersTests: XCTestCase {
             expect(exception.raise()).toNot(raiseException(named: "laugh", reason: "Lulz"))
         }
     }
+
+//    func testEqualityExtension() {
+//        expect(1 as Int).toEqual(1 as Int)
+//        expect(1).toEqual(1)
+//        expect("hello").toEqual("hello")
+//        expect("hello").toNotEqual("world")
+//        expect(NSNumber.numberWithInteger(1)).toEqual(NSNumber.numberWithInteger(1))
+//        expect([1, 2, 3]).toEqual([1, 2, 3])
+//        expect([1, 2, 3]).toNotEqual([1, 2, 3, 4])
+//
+//        expect(1 as CInt?).toNotEqual(1)
+//        expect(1 as CInt?).toEqual(1)
+//
+//        expect(nil).toEqual(1)
+//        expect(1).toNotEqual(nil)
+//
+//        let array1: Array<Int> = [1, 2, 3]
+//        let array2: Array<Int> = [1, 2, 3]
+//        expect(array1).toEqual(array2)
+//    }
 
     func testEquality() {
         expect(1 as Int).to(equalTo(1 as Int))
@@ -181,7 +204,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func testGreaterThanOrEqualTo() {
+    func estGreaterThanOrEqualTo() {
         expect(0) >= 0
         expect(1) >= 0
         expect(10).to(beGreaterThanOrEqualTo(10))
@@ -202,11 +225,15 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func testBeLogicalValue() {
+    func estBeLogicalValue() {
         expect(false).to(beFalsy())
         expect(nil as Bool?).to(beFalsy())
         expect(true).to(beTruthy())
         expect(true as Bool?).to(beTruthy())
+
+        expect(true).toNot(beFalsy())
+        expect(false).toNot(beTruthy())
+
 
         failsWithErrorMessage("expected <false> to be truthy") {
             expect(false).to(beTruthy())
@@ -216,7 +243,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func testBeAnInstanceOf() {
+    func estBeAnInstanceOf() {
         expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSNumber))
         expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSString))
 
@@ -228,9 +255,10 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func testContains() {
+    func estContain() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3] as CInt[]).to(contain(1))
+        expect([1, 2, 3] as Array<CInt>).to(contain(1))
         expect("foo").to(contain("o"))
         expect(["foo", "bar", "baz"]).to(contain("baz"))
         expect([1, 2, 3]).toNot(contain(4))
