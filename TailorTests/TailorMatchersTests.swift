@@ -35,6 +35,14 @@ class TailorMatchersTests: XCTestCase {
                 done()
             }
         }
+
+        failsWithErrorMessage("expected <1> to equal <2>") {
+            waitUntil { done in
+                NSThread.sleepForTimeInterval(0.1)
+                expect(1).to(equal(2))
+                done()
+            }
+        }
     }
 
     func testCapturingOfException() {
