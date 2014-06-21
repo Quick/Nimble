@@ -15,13 +15,11 @@ struct _BeCloseToMatcher: MatcherWithFullMessage {
     }
 
     func matches(actualExpression: Expression<Double>) -> (pass: Bool, message: String)  {
-        let actualValue = actualExpression.evaluate()
-        return isCloseTo(actualValue, negate: false)
+        return isCloseTo(actualExpression.evaluate(), negate: false)
     }
 
     func doesNotMatch(actualExpression: Expression<Double>) -> (pass: Bool, message: String)  {
-        let actualValue = actualExpression.evaluate()
-        return isCloseTo(actualValue, negate: true)
+        return isCloseTo(actualExpression.evaluate(), negate: true)
     }
 }
 
