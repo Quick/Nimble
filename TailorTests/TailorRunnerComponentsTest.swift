@@ -2,8 +2,7 @@ import XCTest
 import Tailor
 
 class TailorBootstrap : TSSpec {
-//    override class func defineBehaviors() {
-    class func lol() {
+    override class func defineBehaviors() {
         describe("closure execution") {
             it("should call beforeEachs, then then the it, followed by afterEaches") {
                 var callHistory = String[]()
