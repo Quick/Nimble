@@ -1,6 +1,6 @@
 import Foundation
 
-struct _EndWithMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
+struct _EndWithSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
     let endingElement: S.GeneratorType.Element
 
     func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
@@ -36,8 +36,8 @@ struct _EndWithOrderedCollectionMatcher: Matcher {
     }
 }
 
-func endWith<T: Equatable>(item: T) -> _EndWithMatcher<T[]> {
-    return _EndWithMatcher(endingElement: item)
+func endWith<T: Equatable>(item: T) -> _EndWithSequenceMatcher<T[]> {
+    return _EndWithSequenceMatcher(endingElement: item)
 }
 
 func endWith(item: AnyObject) -> _EndWithOrderedCollectionMatcher {
