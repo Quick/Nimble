@@ -5,24 +5,24 @@ struct _Equal<T: Equatable>: Matcher {
 
     func matches(actualExpression: Expression<T?>) -> (pass: Bool, postfix: String)  {
         let actualValue = actualExpression.evaluate()
-        return (actualValue == expectedValue, "equal to <\(expectedValue)>")
+        return (actualValue == expectedValue, "equal <\(expectedValue)>")
     }
 }
 
-func equalTo<T>(expectedValue: T?) -> _Equal<T> {
+func equal<T>(expectedValue: T?) -> _Equal<T> {
     return _Equal(expectedValue: expectedValue)
 }
 
-func equalTo(expectedValue: NSObject) -> _Equal<NSObject> {
+func equal(expectedValue: NSObject) -> _Equal<NSObject> {
     return _Equal(expectedValue: expectedValue)
 }
 
 func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
-    lhs.to(equalTo(rhs))
+    lhs.to(equal(rhs))
     return true
 }
 
 func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
-    lhs.toNot(equalTo(rhs))
+    lhs.toNot(equal(rhs))
     return true
 }

@@ -44,7 +44,7 @@ class TailorBootstrap : TSSpec {
                     "afterEach2",
                     "afterEach1",
                 ]
-                expect(callHistory).to(equalTo(expectedCallOrder))
+                expect(callHistory).to(equal(expectedCallOrder))
             }
 
             it("call nested blocks immediately") {

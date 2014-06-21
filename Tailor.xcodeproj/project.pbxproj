@@ -36,7 +36,7 @@
 		1F70E710194D66DF00951D6E /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6FD194D66DF00951D6E /* BeLessThanOrEqual.swift */; };
 		1F70E711194D66DF00951D6E /* BeLogical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6FE194D66DF00951D6E /* BeLogical.swift */; };
 		1F70E712194D66DF00951D6E /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6FF194D66DF00951D6E /* BeNil.swift */; };
-		1F70E713194D66DF00951D6E /* EqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E700194D66DF00951D6E /* EqualTo.swift */; };
+		1F70E713194D66DF00951D6E /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E700194D66DF00951D6E /* Equal.swift */; };
 		1F70E714194D66DF00951D6E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E701194D66DF00951D6E /* Protocols.swift */; };
 		1F70E715194D66DF00951D6E /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E702194D66DF00951D6E /* RaisesException.swift */; };
 		1F70E716194D66DF00951D6E /* TSExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* TSExceptionCapture.h */; };
@@ -92,7 +92,7 @@
 		1F70E6FD194D66DF00951D6E /* BeLessThanOrEqual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThanOrEqual.swift; sourceTree = "<group>"; };
 		1F70E6FE194D66DF00951D6E /* BeLogical.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLogical.swift; sourceTree = "<group>"; };
 		1F70E6FF194D66DF00951D6E /* BeNil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeNil.swift; sourceTree = "<group>"; };
-		1F70E700194D66DF00951D6E /* EqualTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EqualTo.swift; sourceTree = "<group>"; };
+		1F70E700194D66DF00951D6E /* Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Equal.swift; sourceTree = "<group>"; };
 		1F70E701194D66DF00951D6E /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1F70E702194D66DF00951D6E /* RaisesException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesException.swift; sourceTree = "<group>"; };
 		1F70E704194D66DF00951D6E /* TSExceptionCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSExceptionCapture.h; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 				1F70E6FD194D66DF00951D6E /* BeLessThanOrEqual.swift */,
 				1F70E6FE194D66DF00951D6E /* BeLogical.swift */,
 				1F70E6FF194D66DF00951D6E /* BeNil.swift */,
-				1F70E700194D66DF00951D6E /* EqualTo.swift */,
+				1F70E700194D66DF00951D6E /* Equal.swift */,
 				1F70E701194D66DF00951D6E /* Protocols.swift */,
 				1F70E702194D66DF00951D6E /* RaisesException.swift */,
 				1F98FA3F1953F34E0055F8EB /* Contain.swift */,
@@ -413,7 +413,7 @@
 				1F70E710194D66DF00951D6E /* BeLessThanOrEqual.swift in Sources */,
 				1F98FA441953FFAE0055F8EB /* EndWith.swift in Sources */,
 				1F70E707194D66DF00951D6E /* Protocols.swift in Sources */,
-				1F70E713194D66DF00951D6E /* EqualTo.swift in Sources */,
+				1F70E713194D66DF00951D6E /* Equal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,13 +9,13 @@ class TailorMatchersTests: XCTestCase {
             NSThread.sleepForTimeInterval(0.1)
             value = 1
         }
-        expect(value).toEventually(equalTo(1))
+        expect(value).toEventually(equal(1))
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             NSThread.sleepForTimeInterval(0.1)
             value = 0
         }
-        expect(value).toEventuallyNot(equalTo(1))
+        expect(value).toEventuallyNot(equal(1))
     }
 
     func testAsyncCallback() {
@@ -81,40 +81,40 @@ class TailorMatchersTests: XCTestCase {
 //    }
 
     func testEquality() {
-        expect(1 as Int).to(equalTo(1 as Int))
-        expect(1).to(equalTo(1))
-        expect("hello").to(equalTo("hello"))
-        expect("hello").toNot(equalTo("world"))
-        expect(NSNumber.numberWithInteger(1)).to(equalTo(NSNumber.numberWithInteger(1)))
-        expect([1, 2, 3]).to(equalTo([1, 2, 3]))
+        expect(1 as Int).to(equal(1 as Int))
+        expect(1).to(equal(1))
+        expect("hello").to(equal("hello"))
+        expect("hello").toNot(equal("world"))
+        expect(NSNumber.numberWithInteger(1)).to(equal(NSNumber.numberWithInteger(1)))
+        expect([1, 2, 3]).to(equal([1, 2, 3]))
         expect("foo") == "foo"
         expect("foo") != "bar"
 
-        expect(1 as CInt?).to(equalTo(1))
-        expect(1 as CInt?).to(equalTo(1 as CInt?))
+        expect(1 as CInt?).to(equal(1))
+        expect(1 as CInt?).to(equal(1 as CInt?))
 
-        expect(nil).toNot(equalTo(1))
-        expect(1).toNot(equalTo(nil))
+        expect(nil).toNot(equal(1))
+        expect(1).toNot(equal(nil))
 
         let array1: Array<Int> = [1, 2, 3]
         let array2: Array<Int> = [1, 2, 3]
-        expect(array1).to(equalTo(array2))
+        expect(array1).to(equal(array2))
 
         expect {
             1
-        }.to(equalTo(1))
+        }.to(equal(1))
 
-        failsWithErrorMessage("expected <hello> to equal to <world>") {
-            expect("hello").to(equalTo("world"))
+        failsWithErrorMessage("expected <hello> to equal <world>") {
+            expect("hello").to(equal("world"))
         }
-        failsWithErrorMessage("expected <hello> to not equal to <hello>") {
-            expect("hello").toNot(equalTo("hello"))
+        failsWithErrorMessage("expected <hello> to not equal <hello>") {
+            expect("hello").toNot(equal("hello"))
         }
-        failsWithErrorMessage("expected <hello> to equal to <world>") {
+        failsWithErrorMessage("expected <hello> to equal <world>") {
             expect("hello") == "world"
             return
         }
-        failsWithErrorMessage("expected <hello> to not equal to <hello>") {
+        failsWithErrorMessage("expected <hello> to not equal <hello>") {
             expect("hello") != "hello"
             return
         }
@@ -204,7 +204,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func estGreaterThanOrEqualTo() {
+    func testGreaterThanOrEqualTo() {
         expect(0) >= 0
         expect(1) >= 0
         expect(10).to(beGreaterThanOrEqualTo(10))
@@ -225,7 +225,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func estBeLogicalValue() {
+    func testBeLogicalValue() {
         expect(false).to(beFalsy())
         expect(nil as Bool?).to(beFalsy())
         expect(true).to(beTruthy())
@@ -243,7 +243,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func estBeAnInstanceOf() {
+    func testBeAnInstanceOf() {
         expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSNumber))
         expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSString))
 
@@ -255,7 +255,7 @@ class TailorMatchersTests: XCTestCase {
         }
     }
 
-    func estContain() {
+    func testContain() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3] as CInt[]).to(contain(1))
         expect([1, 2, 3] as Array<CInt>).to(contain(1))
