@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeCloseToMatcher: MatcherWithFullMessage {
+struct _BeCloseToMatcher: Matcher {
     let expectedValue: Double
     let delta: Double
 
@@ -14,11 +14,11 @@ struct _BeCloseToMatcher: MatcherWithFullMessage {
         return ((abs(actualValue - expectedValue) < delta) == !negate, message)
     }
 
-    func matches(actualExpression: Expression<Double>) -> (pass: Bool, message: String)  {
+    func matches(actualExpression: Expression<Double>) -> (Bool, String)  {
         return isCloseTo(actualExpression.evaluate(), negate: false)
     }
 
-    func doesNotMatch(actualExpression: Expression<Double>) -> (pass: Bool, message: String)  {
+    func doesNotMatch(actualExpression: Expression<Double>) -> (Bool, String)  {
         return isCloseTo(actualExpression.evaluate(), negate: true)
     }
 }

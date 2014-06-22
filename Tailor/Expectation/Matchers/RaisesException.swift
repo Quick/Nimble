@@ -1,6 +1,6 @@
 import Foundation
 
-struct _RaiseExceptionMatcher<T>: MatcherWithFullMessage {
+struct _RaiseExceptionMatcher<T>: Matcher {
     let name: String?
     let reason: String?
     let hasReason: Bool
@@ -18,7 +18,7 @@ struct _RaiseExceptionMatcher<T>: MatcherWithFullMessage {
         }
     }
 
-    func matches(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
+    func matches(actualExpression: Expression<T>) -> (Bool, String)  {
         var exception: NSException?
         var capture = TSExceptionCapture(handler: ({ e in
             exception = e
@@ -31,7 +31,7 @@ struct _RaiseExceptionMatcher<T>: MatcherWithFullMessage {
         return (validException(exception), messageForException(exception, to: "to"))
     }
 
-    func doesNotMatch(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
+    func doesNotMatch(actualExpression: Expression<T>) -> (Bool, String)  {
         var exception: NSException?
         var capture = TSExceptionCapture(handler: ({ e in
             exception = e

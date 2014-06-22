@@ -13,5 +13,5 @@ func failsWithErrorMessage(message: String, closure: () -> Void, file: String = 
             return
         }
     }
-    fail("Expected failure with message '\(message)', but got message: '\(lastFailureMessage)'", file: file, line: line)
+    fail("Expected failure message '\(message)', but got message: '\(lastFailureMessage)'", file: file, line: line)
 }

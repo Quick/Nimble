@@ -12,12 +12,12 @@ struct Expectation<T> {
         assertion.assert(pass, message: message, location: expression.location)
     }
 
-    func to<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U) {
+    func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, message) = matcher.matches(expression)
         verify(pass, message: message)
     }
 
-    func toNot<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U) {
+    func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, message) = matcher.doesNotMatch(expression)
         verify(pass, message: message)
     }

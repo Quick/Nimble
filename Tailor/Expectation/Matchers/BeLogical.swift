@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeLogicalMatcher : Matcher {
+struct _BeLogicalMatcher : BasicMatcher {
     let expectedValue: LogicValue
     let stringValue: String
 

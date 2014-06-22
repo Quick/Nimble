@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeNilMatcher: Matcher {
+struct _BeNilMatcher: BasicMatcher {
     func matches(actualExpression: Expression<Any?>) -> (pass: Bool, postfix: String)  {
         let actualValue = actualExpression.evaluate()
         return (!actualValue.getLogicValue(), "be nil")

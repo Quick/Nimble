@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeLessThanMatcher<T: Comparable>: Matcher {
+struct _BeLessThanMatcher<T: Comparable>: BasicMatcher {
     let expectedValue: T
 
     func matches(actualExpression: Expression<T>) -> (pass: Bool, postfix: String)  {

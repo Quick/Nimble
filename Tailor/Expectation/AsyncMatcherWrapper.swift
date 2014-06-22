@@ -1,6 +1,6 @@
 import Foundation
 
-struct AsyncMatcherWrapper<T, U where U: MatcherWithFullMessage, U.ValueType == T> : MatcherWithFullMessage {
+struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T> : Matcher {
     let fullMatcher: U
     let timeoutInterval: NSTimeInterval = 1
     let pollInterval: NSTimeInterval = 0.01
@@ -17,30 +17,30 @@ struct AsyncMatcherWrapper<T, U where U: MatcherWithFullMessage, U.ValueType == 
         return (pass, message)
     }
 
-    func matches(actualExpression: Expression<T>) -> (pass: Bool, message: String) {
+    func matches(actualExpression: Expression<T>) -> (Bool, String) {
         let uncachedExpression = actualExpression.withoutCaching()
         return pollExpression { self.fullMatcher.matches(uncachedExpression) }
     }
 
-    func doesNotMatch(actualExpression: Expression<T>) -> (pass: Bool, message: String)  {
+    func doesNotMatch(actualExpression: Expression<T>) -> (Bool, String)  {
         let uncachedExpression = actualExpression.withoutCaching()
         return pollExpression {
-            let (success, message) = self.fullMatcher.matches(uncachedExpression)
-            return (!success, message)
+            let (success, message) = self.fullMatcher.doesNotMatch(uncachedExpression)
+            return (success, message)
         }
     }
 }
 
 extension Expectation {
-    func toEventually<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+    func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
         to(AsyncMatcherWrapper(fullMatcher: matcher, timeoutInterval: timeout, pollInterval: pollInterval))
     }
 
-    func toEventuallyNot<U where U: MatcherWithFullMessage, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+    func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
         toNot(AsyncMatcherWrapper(fullMatcher: matcher, timeoutInterval: timeout, pollInterval: pollInterval))
     }
 
-    func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+    func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
         to(AsyncMatcherWrapper(
             fullMatcher: FullMatcherWrapper(
                 matcher: matcher,
@@ -50,7 +50,7 @@ extension Expectation {
             pollInterval: pollInterval))
     }
 
-    func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+    func toEventuallyNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
         toNot(AsyncMatcherWrapper(
             fullMatcher: FullMatcherWrapper(
                 matcher: matcher,

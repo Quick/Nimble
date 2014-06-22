@@ -14,30 +14,27 @@ func _memoizedClosure<T>(closure: () -> T) -> (invalidateCache: Bool) -> T {
 
 struct Expression<T> {
     let _expression: (invalidateCache: Bool) -> T
-    let expression: () -> T
     let location: SourceLocation
     let allowCaching: Bool
     var cache: T?
 
     init(expression: () -> T, location: SourceLocation) {
-        self.expression = expression
         self._expression = _memoizedClosure(expression)
         self.location = location
         self.allowCaching = false
     }
 
-    init(expression: () -> T, location: SourceLocation, allowCaching: Bool) {
-        self.expression = expression
-        self._expression = ({ allowCaching in expression() })
+    init(memoizedExpression: (invalidateCache: Bool) -> T, location: SourceLocation, allowCaching: Bool) {
+        self._expression = memoizedExpression
         self.location = location
         self.allowCaching = allowCaching
     }
 
-    func evaluate(invalidateCache: Bool = false) -> T {
-        return self._expression(invalidateCache: invalidateCache && allowCaching)
+    func evaluate() -> T {
+        return self._expression(invalidateCache: !allowCaching)
     }
 
     func withoutCaching() -> Expression<T> {
-        return Expression(expression: self.expression, location: location, allowCaching: false)
+        return Expression(memoizedExpression: self._expression, location: location, allowCaching: false)
     }
 }

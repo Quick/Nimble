@@ -16,6 +16,13 @@ class TailorMatchersTests: XCTestCase {
             value = 0
         }
         expect(value).toEventuallyNot(equal(1))
+
+        failsWithErrorMessage("expected <0> to eventually not equal <0>") {
+            expect(value).toEventuallyNot(equal(0))
+        }
+        failsWithErrorMessage("expected <0> to eventually equal <1>") {
+            expect(value).toEventually(equal(1))
+        }
     }
 
     func testAsyncCallback() {
@@ -69,20 +76,20 @@ class TailorMatchersTests: XCTestCase {
     }
 
 //    func testEqualityExtension() {
-//        expect(1 as Int).toEqual(1 as Int)
+//        expect(1 as CInt).toEqual(1 as CInt)
 //        expect(1).toEqual(1)
 //        expect("hello").toEqual("hello")
 //        expect("hello").toNotEqual("world")
 //        expect(NSNumber.numberWithInteger(1)).toEqual(NSNumber.numberWithInteger(1))
 //        expect([1, 2, 3]).toEqual([1, 2, 3])
 //        expect([1, 2, 3]).toNotEqual([1, 2, 3, 4])
-//
+
 //        expect(1 as CInt?).toNotEqual(1)
 //        expect(1 as CInt?).toEqual(1)
-//
+
 //        expect(nil).toEqual(1)
 //        expect(1).toNotEqual(nil)
-//
+
 //        let array1: Array<Int> = [1, 2, 3]
 //        let array2: Array<Int> = [1, 2, 3]
 //        expect(array1).toEqual(array2)

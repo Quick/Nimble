@@ -1,6 +1,6 @@
 import Foundation
 
-struct _EqualMatcher<T: Equatable>: Matcher {
+struct _EqualMatcher<T: Equatable>: BasicMatcher {
     let expectedValue: T?
 
     func matches(actualExpression: Expression<T?>) -> (pass: Bool, postfix: String)  {

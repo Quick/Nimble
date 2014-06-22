@@ -1,6 +1,6 @@
 import Foundation
 
-struct _ContainSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: Matcher {
+struct _ContainSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: BasicMatcher {
     let expectedItem: S.GeneratorType.Element
 
     func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
@@ -10,7 +10,7 @@ struct _ContainSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equ
     }
 }
 
-struct _ContainSubstringMatcher: Matcher {
+struct _ContainSubstringMatcher: BasicMatcher {
     let substring: String
 
     func matches(actualExpression: Expression<String>) -> (pass: Bool, postfix: String) {
@@ -20,7 +20,7 @@ struct _ContainSubstringMatcher: Matcher {
     }
 }
 
-struct _ContainerMatcher: Matcher {
+struct _ContainerMatcher: BasicMatcher {
     let item: AnyObject?
 
     func matches(actualExpression: Expression<TSContainer>) -> (pass: Bool, postfix: String) {

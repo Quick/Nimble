@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeAnInstanceOfMatcher: Matcher {
+struct _BeAnInstanceOfMatcher: BasicMatcher {
     let expectedClass: AnyClass
 
     func matches(actualExpression: Expression<NSObject>) -> (pass: Bool, postfix: String)  {

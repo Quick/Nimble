@@ -3,10 +3,10 @@ import Foundation
 
 // Implement this protocol if you want full control over to() and toNot() behaviors
 // and completely emit the "expected (actual) to ..." message
-protocol MatcherWithFullMessage {
+protocol Matcher {
     typealias ValueType
-    func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, message: String)
-    func doesNotMatch(actualExpression: Expression<ValueType>) -> (pass: Bool, message: String)
+    func matches(actualExpression: Expression<ValueType>) -> (Bool, String)
+    func doesNotMatch(actualExpression: Expression<ValueType>) -> (Bool, String)
 }
 
 // Implement this protocol if you just want a simplier matcher. The negation
@@ -14,7 +14,7 @@ protocol MatcherWithFullMessage {
 //
 // Messages are in the form: "expected (actual) to (postfix)"
 // Messages should always be returned incase the negation case is being performed.
-protocol Matcher {
+protocol BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, postfix: String)
 }
