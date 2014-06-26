@@ -1,4 +1,4 @@
-Tailor
+Kick
 ======
 
 BDD in Swift
@@ -6,7 +6,7 @@ BDD in Swift
 Setup
 -----
 
-Currently, Tailor requires an underlying testing framework. Currently it uses XCTest.
+Currently, Kick requires an underlying testing framework. Currently it uses XCTest.
 
 
 Writing Tests
