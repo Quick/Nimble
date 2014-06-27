@@ -1,19 +1,26 @@
 import Foundation
 
-struct _BeLessThanMatcher<T: Comparable>: BasicMatcher {
-    let expectedValue: T
-
-    func matches(actualExpression: Expression<T>) -> (pass: Bool, postfix: String)  {
+func beLessThan<T: Comparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+    return DefineMatcher { actualExpression in
         let actualValue = actualExpression.evaluate()
         return (actualValue < expectedValue, "be less than <\(expectedValue)>")
     }
 }
 
-func beLessThan<T>(expectedValue: T) -> _BeLessThanMatcher<T> {
-    return _BeLessThanMatcher(expectedValue: expectedValue)
+func beLessThan<T: KICComparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+    return DefineMatcher { actualExpression in
+        let actualValue = actualExpression.evaluate()
+        let matches = actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedAscending
+        return (matches, "be less than <\(expectedValue)>")
+    }
 }
 
-func <<T: Comparable>(lhs: Expectation<T>, rhs: T) -> Bool {
+func <<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+    lhs.to(beLessThan(rhs))
+    return true
+}
+
+func <<T: KICComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     lhs.to(beLessThan(rhs))
     return true
 }

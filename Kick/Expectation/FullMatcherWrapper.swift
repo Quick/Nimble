@@ -25,3 +25,15 @@ extension Expectation {
         toNot(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
     }
 }
+
+struct FuncMatcherWrapper<T> : BasicMatcher {
+    let matcher: (Expression<T>) -> (Bool, String)
+
+    func matches(actualExpression: Expression<T>) -> (pass: Bool, postfix: String) {
+        return matcher(actualExpression)
+    }
+}
+
+func DefineMatcher<T>(fn: (Expression<T>) -> (Bool, String)) -> FuncMatcherWrapper<T> {
+    return FuncMatcherWrapper(matcher: fn)
+}

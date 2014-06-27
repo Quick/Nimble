@@ -45,7 +45,9 @@ class EqualTest: XCTestCase {
 
         expect {
             1
-            }.to(equal(1))
+        }.to(equal(1))
+
+        expect { NSNumber.numberWithInteger(1) }.to(equal(1))
 
         failsWithErrorMessage("expected <hello> to equal <world>") {
             expect("hello").to(equal("world"))

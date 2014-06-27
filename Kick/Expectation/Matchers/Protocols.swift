@@ -19,24 +19,42 @@ protocol BasicMatcher {
     func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, postfix: String)
 }
 
-// Protocol for objective-c objects that support contain() matcher
+// Protocol for types that support contain() matcher
 @objc protocol KICContainer {
     func containsObject(object: AnyObject!) -> Bool
 }
-extension NSArray: KICContainer {}
-extension NSSet: KICContainer {}
-extension NSHashTable: KICContainer {}
+extension NSArray : KICContainer {}
+extension NSSet : KICContainer {}
+extension NSHashTable : KICContainer {}
 
-// Protocol for objective-c objects that support beginWith() and endWith() matcher
+// Protocol for types that support beginWith() and endWith() matcher
 @objc protocol KICOrderedCollection {
     func indexOfObject(object: AnyObject!) -> Int
     var count: Int { get }
 }
-extension NSArray: KICOrderedCollection {}
+extension NSArray : KICOrderedCollection {}
 
-// Protocol for objective-c objects to support beCloseTo() matcher
+// Protocol for types to support beCloseTo() matcher
 @objc protocol KICDoubleConvertible {
     var doubleValue: CDouble { get }
 }
-
 extension NSNumber : KICDoubleConvertible { }
+extension NSDecimalNumber : KICDoubleConvertible { } // TODO: not the best to downsize
+
+// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
+//  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
+//
+// Types that conform to Swift's Comparable protocol will also work
+protocol KICComparable {
+    func KIC_compare(otherObject: Self!) -> NSComparisonResult
+}
+extension NSNumber : KICComparable {
+    func KIC_compare(otherObject: NSNumber!) -> NSComparisonResult {
+        return compare(otherObject)
+    }
+}
+extension NSString : KICComparable {
+    func KIC_compare(otherObject: NSString!) -> NSComparisonResult {
+        return compare(otherObject)
+    }
+}

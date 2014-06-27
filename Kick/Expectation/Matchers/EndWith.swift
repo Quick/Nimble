@@ -1,13 +1,11 @@
 import Foundation
 
-struct _EndWithSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equatable>: BasicMatcher {
-    let endingElement: S.GeneratorType.Element
-
-    func matches(actualExpression: Expression<S>) -> (pass: Bool, postfix: String)  {
+func endWith<T: Equatable>(endingElement: T) -> FuncMatcherWrapper<T[]> {
+    return DefineMatcher { actualExpression in
         let actualSequence = actualExpression.evaluate()
         var actualGenerator = actualSequence.generate()
-        var lastItem: S.GeneratorType.Element?
-        var item: S.GeneratorType.Element?
+        var lastItem: T?
+        var item: T?
         do {
             lastItem = item
             item = actualGenerator.next()
@@ -17,33 +15,17 @@ struct _EndWithSequenceMatcher<S where S: Sequence, S.GeneratorType.Element: Equ
     }
 }
 
-struct _EndWithStringMatcher: BasicMatcher {
-    let endingSubstring: String
-
-    func matches(actualExpression: Expression<String>) -> (pass: Bool, postfix: String)  {
-        let actual = actualExpression.evaluate()
-        let range = actual.rangeOfString(endingSubstring)
-        return (range.endIndex == actual.endIndex, "end with <\(endingSubstring)>")
-    }
-}
-
-struct _EndWithOrderedCollectionMatcher: BasicMatcher {
-    let endingElement: AnyObject
-
-    func matches(actualExpression: Expression<KICOrderedCollection>) -> (pass: Bool, postfix: String) {
+func endWith(endingElement: AnyObject) -> FuncMatcherWrapper<KICOrderedCollection> {
+    return DefineMatcher { actualExpression in
         let actual = actualExpression.evaluate()
         return (actual.indexOfObject(endingElement) == actual.count - 1, "end with <\(endingElement)>")
     }
 }
 
-func endWith<T: Equatable>(item: T) -> _EndWithSequenceMatcher<T[]> {
-    return _EndWithSequenceMatcher(endingElement: item)
-}
-
-func endWith(item: AnyObject) -> _EndWithOrderedCollectionMatcher {
-    return _EndWithOrderedCollectionMatcher(endingElement: item)
-}
-
-func endWith(substring: String) -> _EndWithStringMatcher {
-    return _EndWithStringMatcher(endingSubstring: substring)
+func endWith(endingSubstring: String) -> FuncMatcherWrapper<String> {
+    return DefineMatcher { actualExpression in
+        let actual = actualExpression.evaluate()
+        let range = actual.rangeOfString(endingSubstring)
+        return (range.endIndex == actual.endIndex, "end with <\(endingSubstring)>")
+    }
 }

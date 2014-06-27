@@ -3,16 +3,15 @@ import Kick
 
 class BeLessThanOrEqualToTest: XCTestCase {
     func testLessThanOrEqualTo() {
-        expect(0) <= 1
-        expect(1) <= 1
         expect(10).to(beLessThanOrEqualTo(10))
         expect(2).to(beLessThanOrEqualTo(10))
         expect(2).toNot(beLessThanOrEqualTo(1))
 
-        failsWithErrorMessage("expected <2> to be less than or equal to <1>") {
-            expect(2) <= 1
-            return
-        }
+        expect(NSNumber.numberWithInt(2)).to(beLessThanOrEqualTo(10))
+        expect(NSNumber.numberWithInt(2)).toNot(beLessThanOrEqualTo(1))
+        expect(2).to(beLessThanOrEqualTo(NSNumber.numberWithInt(10)))
+        expect(2).toNot(beLessThanOrEqualTo(NSNumber.numberWithInt(1)))
+
         failsWithErrorMessage("expected <2> to be less than or equal to <0>") {
             expect(2).to(beLessThanOrEqualTo(0))
             return
@@ -23,4 +22,13 @@ class BeLessThanOrEqualToTest: XCTestCase {
         }
     }
 
+    func testLessThanOrEqualToOperator() {
+        expect(0) <= 1
+        expect(1) <= 1
+
+        failsWithErrorMessage("expected <2> to be less than or equal to <1>") {
+            expect(2) <= 1
+            return
+        }
+    }
 }
