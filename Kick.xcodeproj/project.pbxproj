@@ -287,9 +287,9 @@
 		1F1A74381940169200FFFC47 /* KickTests */ = {
 			isa = PBXGroup;
 			children = (
-				1F925EE3195C11B000ED456B /* Matchers */,
-				1F14FB61194180A7009F2A08 /* Helpers */,
 				1F925EE5195C121200ED456B /* AsyncTest.swift */,
+				1F14FB61194180A7009F2A08 /* Helpers */,
+				1F925EE3195C11B000ED456B /* Matchers */,
 				1F1A74391940169200FFFC47 /* Supporting Files */,
 			);
 			path = KickTests;
@@ -344,19 +344,19 @@
 			children = (
 				1F70E6F8194D66DF00951D6E /* BeAnInstanceOf.swift */,
 				1F70E6F9194D66DF00951D6E /* BeCloseTo.swift */,
+				1F98FA411953FA430055F8EB /* BeginWith.swift */,
 				1F70E6FA194D66DF00951D6E /* BeGreaterThan.swift */,
 				1F70E6FB194D66DF00951D6E /* BeGreaterThanOrEqualTo.swift */,
+				1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */,
 				1F70E6FC194D66DF00951D6E /* BeLessThan.swift */,
 				1F70E6FD194D66DF00951D6E /* BeLessThanOrEqual.swift */,
 				1F70E6FE194D66DF00951D6E /* BeLogical.swift */,
 				1F70E6FF194D66DF00951D6E /* BeNil.swift */,
+				1F98FA3F1953F34E0055F8EB /* Contain.swift */,
+				1F98FA431953FFAE0055F8EB /* EndWith.swift */,
 				1F70E700194D66DF00951D6E /* Equal.swift */,
 				1F70E701194D66DF00951D6E /* Protocols.swift */,
 				1F70E702194D66DF00951D6E /* RaisesException.swift */,
-				1F98FA3F1953F34E0055F8EB /* Contain.swift */,
-				1F98FA411953FA430055F8EB /* BeginWith.swift */,
-				1F98FA431953FFAE0055F8EB /* EndWith.swift */,
-				1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
