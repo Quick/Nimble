@@ -1,25 +1,38 @@
 import Foundation
 
-func contain(item: AnyObject?) -> FuncMatcherWrapper<KICContainer> {
-    return DefineMatcher { actualExpression in
-        let actual = actualExpression.evaluate()
-        let pass = actual.containsObject(item)
-        return (pass, "contain <\(item)>")
+func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
+    return items.reduce("") { accum, item in
+        let prefix = (accum.isEmpty ? "" : joiner)
+        return accum + prefix + "\(item)"
     }
 }
 
-func contain<T: Equatable>(item: T) -> FuncMatcherWrapper<T[]> {
-    return DefineMatcher { actualExpression in
+func contain<T: Equatable>(items: T...) -> FuncMatcherWrapper<T[]> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
-        let pass = contains(actual, item)
-        return (pass, "contain <\(item)>")
+        return _all(items) {
+            return contains(actual, $0)
+        }
     }
 }
 
-func contain(substring: String) -> FuncMatcherWrapper<String> {
-    return DefineMatcher { actualExpression in
+func contain(items: AnyObject?...) -> FuncMatcherWrapper<KICContainer> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
-        let pass = actual.rangeOfString(substring).getLogicValue()
-        return (pass, "contain <\(substring)>")
+        return _all(items) {
+            return actual.containsObject($0)
+        }
+    }
+}
+
+func contain(substrings: String...) -> FuncMatcherWrapper<String> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
+        let actual = actualExpression.evaluate()
+        return _all(substrings) {
+            return actual.rangeOfString($0).getLogicValue()
+        }
     }
 }

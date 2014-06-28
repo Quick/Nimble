@@ -1,18 +1,21 @@
 import Foundation
 
+
 struct FullMatcherWrapper<M, T where M: BasicMatcher, M.ValueType == T> : Matcher {
     let matcher: M
     let to: String
     let toNot: String
 
-    func matches(actualExpression: Expression<T>) -> (Bool, String)  {
-        let (pass, postfix) = matcher.matches(actualExpression)
-        return (pass, "expected <\(actualExpression.evaluate())> \(to) \(postfix)")
+    func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
+        failureMessage.to = to
+        let pass = matcher.matches(actualExpression, failureMessage: failureMessage)
+        return pass
     }
 
-    func doesNotMatch(actualExpression: Expression<T>) -> (Bool, String)  {
-        let (pass, postfix) = matcher.matches(actualExpression)
-        return (!pass, "expected <\(actualExpression.evaluate())> \(toNot) \(postfix)")
+    func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
+        failureMessage.to = toNot
+        let pass = matcher.matches(actualExpression, failureMessage: failureMessage)
+        return !pass
     }
 }
 
@@ -24,16 +27,4 @@ extension Expectation {
     func toNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
         toNot(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
     }
-}
-
-struct FuncMatcherWrapper<T> : BasicMatcher {
-    let matcher: (Expression<T>) -> (Bool, String)
-
-    func matches(actualExpression: Expression<T>) -> (pass: Bool, postfix: String) {
-        return matcher(actualExpression)
-    }
-}
-
-func DefineMatcher<T>(fn: (Expression<T>) -> (Bool, String)) -> FuncMatcherWrapper<T> {
-    return FuncMatcherWrapper(matcher: fn)
 }

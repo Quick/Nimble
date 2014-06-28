@@ -4,9 +4,9 @@ struct _BeLogicalMatcher : BasicMatcher {
     let expectedValue: LogicValue
     let stringValue: String
 
-    func matches(actualExpression: Expression<LogicValue>) -> (pass: Bool, postfix: String)  {
-        let actualValue = actualExpression.evaluate()
-        return (actualValue.getLogicValue() == expectedValue.getLogicValue(), "be \(stringValue)")
+    func matches(actualExpression: Expression<LogicValue>, failureMessage: FailureMessage) -> Bool {
+        failureMessage.postfixMessage = "be \(stringValue)"
+        return actualExpression.evaluate().getLogicValue() == expectedValue.getLogicValue()
     }
 }
 

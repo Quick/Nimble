@@ -1,9 +1,10 @@
 import Foundation
 
 func endWith<T: Equatable>(endingElement: T) -> FuncMatcherWrapper<T[]> {
-    return DefineMatcher { actualExpression in
-        let actualSequence = actualExpression.evaluate()
-        var actualGenerator = actualSequence.generate()
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "end with <\(endingElement)>"
+
+        var actualGenerator = actualExpression.evaluate().generate()
         var lastItem: T?
         var item: T?
         do {
@@ -11,21 +12,23 @@ func endWith<T: Equatable>(endingElement: T) -> FuncMatcherWrapper<T[]> {
             item = actualGenerator.next()
         } while(item)
 
-        return (lastItem == endingElement, "end with <\(endingElement)>")
+        return lastItem == endingElement
     }
 }
 
 func endWith(endingElement: AnyObject) -> FuncMatcherWrapper<KICOrderedCollection> {
-    return DefineMatcher { actualExpression in
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "end with <\(endingElement)>"
         let actual = actualExpression.evaluate()
-        return (actual.indexOfObject(endingElement) == actual.count - 1, "end with <\(endingElement)>")
+        return actual.indexOfObject(endingElement) == actual.count - 1
     }
 }
 
 func endWith(endingSubstring: String) -> FuncMatcherWrapper<String> {
-    return DefineMatcher { actualExpression in
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(endingSubstring)
-        return (range.endIndex == actual.endIndex, "end with <\(endingSubstring)>")
+        return range.endIndex == actual.endIndex
     }
 }

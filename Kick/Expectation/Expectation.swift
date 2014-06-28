@@ -2,24 +2,27 @@ import Foundation
 
 struct Expectation<T> {
     let expression: Expression<T>
-    let assertion: AssertionHandler = CurrentAssertionHandler
 
-    init(expression: Expression<T>) {
-        self.expression = expression
-    }
-
-    func verify(pass: Bool, message: String) {
-        assertion.assert(pass, message: message, location: expression.location)
+    func verify(pass: Bool, _ message: String) {
+        CurrentAssertionHandler.assert(pass, message: message, location: expression.location)
     }
 
     func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
-        let (pass, message) = matcher.matches(expression)
-        verify(pass, message: message)
+        var msg = FailureMessage()
+        let pass = matcher.matches(expression, failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(expression.evaluate())>"
+        }
+        verify(pass, msg.build())
     }
 
     func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
-        let (pass, message) = matcher.doesNotMatch(expression)
-        verify(pass, message: message)
+        var msg = FailureMessage()
+        let pass = matcher.doesNotMatch(expression, failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(expression.evaluate())>"
+        }
+        verify(pass, msg.build())
     }
 
     // see FullMatcherWrapper and AsyncMatcherWrapper for extensions

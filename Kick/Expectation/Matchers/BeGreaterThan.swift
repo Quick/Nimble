@@ -1,17 +1,18 @@
 import Foundation
 
 func beGreaterThan<T: Comparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
-    return DefineMatcher { actualExpression in
-        let actualValue = actualExpression.evaluate()
-        return (actualValue > expectedValue, "be greater than <\(expectedValue)>")
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be greater than <\(expectedValue)>"
+        return actualExpression.evaluate() > expectedValue
     }
 }
 
 func beGreaterThan<T: KICComparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
-    return DefineMatcher { actualExpression in
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be greater than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
         let matches = actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedDescending
-        return (matches, "be greater than <\(expectedValue)>")
+        return matches
     }
 }
 

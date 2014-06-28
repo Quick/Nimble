@@ -11,6 +11,8 @@
 		1F1A742F1940169200FFFC47 /* Kick.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Kick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1A74351940169200FFFC47 /* Kick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A74291940169200FFFC47 /* Kick.framework */; };
 		1F1A744E1940171400FFFC47 /* Kick-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A744D1940171400FFFC47 /* Kick-Bridging-Header.h */; };
+		1F22D9E5195ED11400CA1480 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22D9E4195ED11400CA1480 /* Functional.swift */; };
+		1F22D9E6195ED11400CA1480 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22D9E4195ED11400CA1480 /* Functional.swift */; };
 		1F2752CC19445B0C00052A26 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CB19445B0C00052A26 /* Expression.swift */; };
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
@@ -33,6 +35,10 @@
 		1F70E715194D66DF00951D6E /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E702194D66DF00951D6E /* RaisesException.swift */; };
 		1F70E716194D66DF00951D6E /* KICExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* KICExceptionCapture.h */; };
 		1F70E717194D66DF00951D6E /* KICExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E705194D66DF00951D6E /* KICExceptionCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc-exceptions"; }; };
+		1F83CC60195E784100B7F821 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83CC5F195E784100B7F821 /* FailureMessage.swift */; };
+		1F83CC61195E784100B7F821 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83CC5F195E784100B7F821 /* FailureMessage.swift */; };
+		1F8CC859195EC0BB006A185F /* FuncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CC858195EC0BB006A185F /* FuncMatcherWrapper.swift */; };
+		1F8CC85A195EC0BE006A185F /* FuncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CC858195EC0BB006A185F /* FuncMatcherWrapper.swift */; };
 		1F925EB2195C0D6300ED456B /* Kick-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F925EB1195C0D6300ED456B /* Kick-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F925EB8195C0D6300ED456B /* Kick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F925EAD195C0D6300ED456B /* Kick.framework */; };
 		1F925EC7195C0DD100ED456B /* Kick.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Kick.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +100,10 @@
 		1F98FA401953F34E0055F8EB /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98FA3F1953F34E0055F8EB /* Contain.swift */; };
 		1F98FA421953FA430055F8EB /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98FA411953FA430055F8EB /* BeginWith.swift */; };
 		1F98FA441953FFAE0055F8EB /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98FA431953FFAE0055F8EB /* EndWith.swift */; };
+		1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
+		1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
+		1FB9009B195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */; };
+		1FB9009C195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +145,7 @@
 		1F1A74341940169200FFFC47 /* KickTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KickTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1A743A1940169200FFFC47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F1A744D1940171400FFFC47 /* Kick-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Kick-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F22D9E4195ED11400CA1480 /* Functional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
 		1F2752CB19445B0C00052A26 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		1F2752CD19445B1E00052A26 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
@@ -159,6 +170,8 @@
 		1F70E702194D66DF00951D6E /* RaisesException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesException.swift; sourceTree = "<group>"; };
 		1F70E704194D66DF00951D6E /* KICExceptionCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KICExceptionCapture.h; sourceTree = "<group>"; };
 		1F70E705194D66DF00951D6E /* KICExceptionCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KICExceptionCapture.m; sourceTree = "<group>"; };
+		1F83CC5F195E784100B7F821 /* FailureMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailureMessage.swift; sourceTree = "<group>"; };
+		1F8CC858195EC0BB006A185F /* FuncMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuncMatcherWrapper.swift; sourceTree = "<group>"; };
 		1F925EAD195C0D6300ED456B /* Kick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F925EB0195C0D6300ED456B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F925EB1195C0D6300ED456B /* Kick-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kick-OSX.h"; sourceTree = "<group>"; };
@@ -181,6 +194,8 @@
 		1F98FA3F1953F34E0055F8EB /* Contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contain.swift; sourceTree = "<group>"; };
 		1F98FA411953FA430055F8EB /* BeginWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginWith.swift; sourceTree = "<group>"; };
 		1F98FA431953FFAE0055F8EB /* EndWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWith.swift; sourceTree = "<group>"; };
+		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
+		1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalTo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,7 +311,9 @@
 				1F2752CF19445B2F00052A26 /* DSL.swift */,
 				1F2752CD19445B1E00052A26 /* Expectation.swift */,
 				1F2752CB19445B0C00052A26 /* Expression.swift */,
+				1F83CC5F195E784100B7F821 /* FailureMessage.swift */,
 				1F70E6F6194D66DF00951D6E /* FullMatcherWrapper.swift */,
+				1F8CC858195EC0BB006A185F /* FuncMatcherWrapper.swift */,
 				1F70E6F7194D66DF00951D6E /* Matchers */,
 				1F70E703194D66DF00951D6E /* objc */,
 			);
@@ -307,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */,
+				1F22D9E4195ED11400CA1480 /* Functional.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -338,6 +356,7 @@
 				1F98FA3F1953F34E0055F8EB /* Contain.swift */,
 				1F98FA411953FA430055F8EB /* BeginWith.swift */,
 				1F98FA431953FFAE0055F8EB /* EndWith.swift */,
+				1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -400,6 +419,7 @@
 				1F925F0A195C18E100ED456B /* BeLessThanTest.swift */,
 				1F925F0D195C18F500ED456B /* BeLessThanOrEqualToTest.swift */,
 				1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */,
+				1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -596,11 +616,15 @@
 				1F70E70E194D66DF00951D6E /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F70E70A194D66DF00951D6E /* FullMatcherWrapper.swift in Sources */,
 				1F70E717194D66DF00951D6E /* KICExceptionCapture.m in Sources */,
+				1F8CC859195EC0BB006A185F /* FuncMatcherWrapper.swift in Sources */,
 				1F98FA401953F34E0055F8EB /* Contain.swift in Sources */,
 				1F70E712194D66DF00951D6E /* BeNil.swift in Sources */,
 				1F70E70D194D66DF00951D6E /* BeGreaterThan.swift in Sources */,
+				1FB9009B195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */,
 				1F2752CC19445B0C00052A26 /* Expression.swift in Sources */,
 				1F70E711194D66DF00951D6E /* BeLogical.swift in Sources */,
+				1F83CC60195E784100B7F821 /* FailureMessage.swift in Sources */,
+				1F22D9E5195ED11400CA1480 /* Functional.swift in Sources */,
 				1F70E70F194D66DF00951D6E /* BeLessThan.swift in Sources */,
 				1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */,
 				1F70E715194D66DF00951D6E /* RaisesException.swift in Sources */,
@@ -626,6 +650,7 @@
 				1F925F11195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F925EEF195C136500ED456B /* BeLogicalTest.swift in Sources */,
 				1F925F0B195C18E100ED456B /* BeLessThanTest.swift in Sources */,
+				1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
 				1F925EF9195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F925EF6195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F925EE6195C121200ED456B /* AsyncTest.swift in Sources */,
@@ -649,11 +674,15 @@
 				1F925EDB195C0DE600ED456B /* RaisesException.swift in Sources */,
 				1F925EDE195C0DE600ED456B /* EndWith.swift in Sources */,
 				1F925ECF195C0DE000ED456B /* Expression.swift in Sources */,
+				1F8CC85A195EC0BE006A185F /* FuncMatcherWrapper.swift in Sources */,
 				1F925ED3195C0DE600ED456B /* BeGreaterThan.swift in Sources */,
 				1F925ED1195C0DE600ED456B /* BeAnInstanceOf.swift in Sources */,
 				1F925EDA195C0DE600ED456B /* Protocols.swift in Sources */,
+				1FB9009C195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */,
 				1F925ED4195C0DE600ED456B /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F925EDC195C0DE600ED456B /* Contain.swift in Sources */,
+				1F83CC61195E784100B7F821 /* FailureMessage.swift in Sources */,
+				1F22D9E6195ED11400CA1480 /* Functional.swift in Sources */,
 				1F925ED9195C0DE600ED456B /* Equal.swift in Sources */,
 				1F925ED6195C0DE600ED456B /* BeLessThanOrEqual.swift in Sources */,
 				1F925ECD195C0DE000ED456B /* DSL.swift in Sources */,
@@ -679,6 +708,7 @@
 				1F925F12195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F925EF0195C136500ED456B /* BeLogicalTest.swift in Sources */,
 				1F925F0C195C18E100ED456B /* BeLessThanTest.swift in Sources */,
+				1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F925EF7195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F925EE7195C121200ED456B /* AsyncTest.swift in Sources */,
@@ -1027,6 +1057,7 @@
 				1F925EC2195C0D6300ED456B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Kick-OSXTests" */ = {
 			isa = XCConfigurationList;
@@ -1035,6 +1066,7 @@
 				1F925EC5195C0D6300ED456B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

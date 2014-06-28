@@ -51,5 +51,4 @@ class AsyncTest: XCTestCase {
             }
         }
     }
-
 }

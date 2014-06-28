@@ -5,28 +5,28 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T> : Matcher {
     let timeoutInterval: NSTimeInterval = 1
     let pollInterval: NSTimeInterval = 0.01
 
-    func pollExpression(expression: () -> (Bool, String)) -> (Bool, String) {
+    func pollExpression(expression: () -> Bool) -> Bool {
         let startDate = NSDate()
         var pass: Bool
-        var message: String
         do {
-            (pass, message) = expression()
+            pass = expression()
             let runDate = NSDate().addTimeInterval(pollInterval) as NSDate
             NSRunLoop.mainRunLoop().runUntilDate(runDate)
         } while(!pass && NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
-        return (pass, message)
+        return pass
     }
 
-    func matches(actualExpression: Expression<T>) -> (Bool, String) {
-        let uncachedExpression = actualExpression.withoutCaching()
-        return pollExpression { self.fullMatcher.matches(uncachedExpression) }
-    }
-
-    func doesNotMatch(actualExpression: Expression<T>) -> (Bool, String)  {
+    func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
         return pollExpression {
-            let (success, message) = self.fullMatcher.doesNotMatch(uncachedExpression)
-            return (success, message)
+            self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
+        }
+    }
+
+    func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
+        let uncachedExpression = actualExpression.withoutCaching()
+        return pollExpression {
+            self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
     }
 }

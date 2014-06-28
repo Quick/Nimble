@@ -21,4 +21,17 @@ class ContainTest: XCTestCase {
             expect(["a", "b", "c"]).toNot(contain("b"))
         }
     }
+
+    func testVariadicArguments() {
+        expect([1, 2, 3]).to(contain(1, 2))
+        expect([1, 2, 3]).toNot(contain(1, 4))
+
+        failsWithErrorMessage("expected <[a, b, c]> to contain <a, bar>") {
+            expect(["a", "b", "c"]).to(contain("a", "bar"))
+        }
+
+        failsWithErrorMessage("expected <[a, b, c]> to not contain <bar, b>") {
+            expect(["a", "b", "c"]).toNot(contain("bar", "b"))
+        }
+    }
 }

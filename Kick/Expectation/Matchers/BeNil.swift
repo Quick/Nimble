@@ -1,14 +1,16 @@
 import Foundation
 
 func beNil() -> FuncMatcherWrapper<Any?> {
-    return DefineMatcher { actualExpression in
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be nil"
         let actualValue = actualExpression.evaluate()
-        return (!actualValue.getLogicValue(), "be nil")
+        return !actualValue.getLogicValue()
     }
 }
 
 func beNil() -> FuncMatcherWrapper<NilType> {
-    return DefineMatcher { actualExpression in
-        return (true, "be nil")
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be nil"
+        return true
     }
 }

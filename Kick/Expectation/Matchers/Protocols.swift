@@ -5,8 +5,8 @@ import Foundation
 // and completely emit the "expected (actual) to ..." message
 protocol Matcher {
     typealias ValueType
-    func matches(actualExpression: Expression<ValueType>) -> (Bool, String)
-    func doesNotMatch(actualExpression: Expression<ValueType>) -> (Bool, String)
+    func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
+    func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
 }
 
 // Implement this protocol if you just want a simplier matcher. The negation
@@ -16,7 +16,7 @@ protocol Matcher {
 // Messages should always be returned incase the negation case is being performed.
 protocol BasicMatcher {
     typealias ValueType
-    func matches(actualExpression: Expression<ValueType>) -> (pass: Bool, postfix: String)
+    func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
 }
 
 // Protocol for types that support contain() matcher
