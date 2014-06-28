@@ -2,7 +2,6 @@ import Foundation
 
 
 // Implement this protocol if you want full control over to() and toNot() behaviors
-// and completely emit the "expected (actual) to ..." message
 protocol Matcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
@@ -11,9 +10,6 @@ protocol Matcher {
 
 // Implement this protocol if you just want a simplier matcher. The negation
 // is provided for you automatically.
-//
-// Messages are in the form: "expected (actual) to (postfix)"
-// Messages should always be returned incase the negation case is being performed.
 protocol BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
