@@ -10,12 +10,6 @@ class BeLogicalTest: XCTestCase {
             expect(false).to(beTruthy())
         }
     }
-
-    func testBeTruthyOnOptionals() {
-        expect(true as Bool?).to(beTruthy())
-        expect(nil as Bool?).toNot(beTruthy())
-    }
-
     func testBeFalsy() {
         expect(false).to(beFalsy())
         expect(true).toNot(beFalsy())
@@ -25,8 +19,17 @@ class BeLogicalTest: XCTestCase {
         }
     }
 
-    func testBeFalsyOnOptionals() {
+    func testOptionals() {
         expect(nil as Bool?).to(beFalsy())
+        expect(false as Bool?).to(beFalsy())
         expect(true as Bool?).toNot(beFalsy())
+        expect(1 as Int?).toNot(beFalsy())
+        expect(nil as Int?).to(beFalsy())
+
+        expect(nil as Bool?).toNot(beTruthy())
+        expect(false as Bool?).toNot(beTruthy())
+        expect(true as Bool?).to(beTruthy())
+        expect(1 as Int?).to(beTruthy())
+        expect(nil as Int?).toNot(beTruthy())
     }
 }

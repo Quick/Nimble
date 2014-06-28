@@ -76,12 +76,13 @@ The following matchers are currently included with Kick:
 - ``raiseException(#named: String)`` Matches if the given closure raises an exception with the given name.
 - ``raiseException(#named: String, #reason: String)`` Matches if the given closure raises an exception with the given name and reason.
 - ``beNil()`` Matches if the given value is ``nil``.
-- ``beTruthy()``: Matches if the given value is not ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``).
-- ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``).
+- ``beTruthy()``: Matches if the given value is not ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
+- ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
 - ``contain(items: T...)`` Matches if all of ``items`` are in the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays`` and ``NSSets``; and ``Strings`` - which use substring matching.
 - ``beginWith(starting: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``endWith(ending: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works on Objective-C compatible objects.
+- ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass``. Only works for Objective-C classes.
 
 Writing Your Own Matchers
 =========================

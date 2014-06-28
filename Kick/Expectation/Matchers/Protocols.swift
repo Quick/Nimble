@@ -10,6 +10,9 @@ protocol Matcher {
 
 // Implement this protocol if you just want a simplier matcher. The negation
 // is provided for you automatically.
+//
+// If you just want a very simplified usage of BasicMatcher,
+// @see MatcherFunc.
 protocol BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
