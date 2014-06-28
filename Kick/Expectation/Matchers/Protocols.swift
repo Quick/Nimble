@@ -44,7 +44,7 @@ extension NSDecimalNumber : KICDoubleConvertible { } // TODO: not the best to do
 // Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
 //  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 //
-// Types that conform to Swift's Comparable protocol will also work
+// Types that conform to Swift's Comparable protocol will work implicitly too
 protocol KICComparable {
     func KIC_compare(otherObject: Self!) -> NSComparisonResult
 }

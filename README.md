@@ -1,7 +1,7 @@
 Kick
 ======
 
-Behavior Driven Development styled matchers in Swift.
+A Matchers Framework for Swift.
 
 Setup
 -----
