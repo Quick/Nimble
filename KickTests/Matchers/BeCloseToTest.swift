@@ -4,6 +4,9 @@ import Kick
 class BeCloseToTest: XCTestCase {
     func testBeCloseTo() {
         expect(1.2).to(beCloseTo(1.2001))
+        expect(1.2 as CDouble).to(beCloseTo(1.2001))
+        expect(1.2 as Float).to(beCloseTo(1.2001))
+
         failsWithErrorMessage("expected <1.2000> to not be close to <1.2001> (within 0.0001)") {
             expect(1.2).toNot(beCloseTo(1.2001))
         }

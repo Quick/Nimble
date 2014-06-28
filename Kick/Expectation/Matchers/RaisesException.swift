@@ -32,3 +32,15 @@ func raiseException(#named: String) -> FuncMatcherWrapper<Void> {
         return exception?.name == named
     }
 }
+
+func raiseException() -> FuncMatcherWrapper<Void> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.actualValue = nil
+        failureMessage.postfixMessage = "raise exception"
+
+        if _raisedExceptionForExpression(actualExpression) {
+            return true
+        }
+        return false
+    }
+}

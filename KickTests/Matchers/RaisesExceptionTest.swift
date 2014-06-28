@@ -16,6 +16,10 @@ class RaisesExceptionTest: XCTestCase {
         expect {
             self.exception.raise()
         }.to(raiseException(named: "laugh"))
+
+        expect {
+            self.exception.raise()
+        }.to(raiseException())
     }
 
     func testCapturingWithReason() {

@@ -47,38 +47,41 @@ In fact, type inference is used to remove redudant type specifying:
     expect(1 as CInt).to(equal(1))
     expect(1).to(equal(1 as CInt))
 
-The following matchers are currently implemented:
-
-- equal (also == and != operators)
-- beCloseTo
-- beLessThan (also < operator)
-- beLessThanOrEqualTo (also <= operator)
-- beGreaterThan (also > operator)
-- beGreaterThanOrEqualTo (also >= operator)
-- raiseException
-- beNil
-- beTruthy: Non-nil optional values will match
-- beFalsy: nil and false will match
-- contain
-- beginWith
-- endWith
-- beIdenticalTo (also === and !== operators)
-
 Asynchronous Expectations
 -------------------------
 
 Simply exchange ``to`` and ``toNot`` with ``toEventually`` and ``toEventuallyNot``:
 
-    var value = 0
-    dispatch_async(dispatch_get_main_queue()) {
-        value = 1
-    }
-    expect(value).toEventually(equal(1))
+var value = 0
+dispatch_async(dispatch_get_main_queue()) {
+value = 1
+}
+expect(value).toEventually(equal(1))
 
 This polls the expression inside ``expect(...)`` until the given expectation succeeds by
 advancing the run loop.
 
+List of Builtin Matchers
+-------------------------
 
+The following matchers are currently included with Kick:
+
+- ``equal(expectedValue)`` (also ``==`` and ``!=`` operators). Values must be ``Equatable``, ``Comparable``, or ``NSObjects``.
+- ``beCloseTo(expectedValue, within: Double = 0.0001)``. Values must be coercable into a ``Double``.
+- ``beLessThan(upperLimit)`` (also ``<`` operator). Values must be ``Comparable``.
+- ``beLessThanOrEqualTo(upperLimit)`` (also ``<=`` operator). Values must be ``Comparable``.
+- ``beGreaterThan(lowerLimit)`` (also ``>`` operator). Values must be ``Comparable``.
+- ``beGreaterThanOrEqualTo(lowerLimit)`` (also ``>=`` operator). Values must be ``Comparable``,
+- ``raiseException()`` Matches if the given closure raises an exception.
+- ``raiseException(#named: String)`` Matches if the given closure raises an exception with the given name.
+- ``raiseException(#named: String, #reason: String)`` Matches if the given closure raises an exception with the given name and reason.
+- ``beNil()`` Matches if the given value is ``nil``.
+- ``beTruthy()``: Matches if the given value is not ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``).
+- ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``).
+- ``contain(items: T...)`` Matches if all of ``items`` are in the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays`` and ``NSSets``; and ``Strings`` - which use substring matching.
+- ``beginWith(starting: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
+- ``endWith(ending: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
+- ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works on Objective-C compatible objects.
 
 
 
