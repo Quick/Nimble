@@ -2,16 +2,16 @@ import XCTest
 import Kick
 
 class BeIdenticalToTest: XCTestCase {
-    func testBeAnInstanceOfPositive() {
+    func testBeIdenticalToPositive() {
         expect(NSNumber.numberWithInteger(1)).to(beIdenticalTo(NSNumber.numberWithInteger(1)))
     }
 
-    func testBeAnInstanceOfNegative() {
+    func testBeIdenticalToNegative() {
         expect(NSNumber.numberWithInteger(1)).toNot(beIdenticalTo("yo"))
         expect([1]).toNot(beIdenticalTo([1]))
     }
 
-    func testBeAnInstanceOfPositiveMessage() {
+    func testBeIdenticalToPositiveMessage() {
         let num1 = NSNumber.numberWithInteger(1)
         let num2 = NSNumber.numberWithInteger(2)
         let args = VaListBuilder()
@@ -23,7 +23,7 @@ class BeIdenticalToTest: XCTestCase {
         }
     }
 
-    func testBeAnInstanceOfNegativeMessage() {
+    func testBeIdenticalToNegativeMessage() {
         let value1 = NSArray(array: [])
         let value2 = NSArray(array: [])
         let args = VaListBuilder()
@@ -35,5 +35,10 @@ class BeIdenticalToTest: XCTestCase {
         failsWithErrorMessage(message) {
             expect(value1).toNot(beIdenticalTo(value2))
         }
+    }
+
+    func testOperators() {
+        expect(NSNumber.numberWithInteger(1)) === NSNumber.numberWithInteger(1)
+        expect(NSNumber.numberWithInteger(1)) !== NSNumber.numberWithInteger(2)
     }
 }

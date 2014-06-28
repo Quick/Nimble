@@ -20,3 +20,13 @@ func beIdenticalTo<T: NSObject>(expected: T?) -> FuncMatcherWrapper<T?> {
         return actual === expected
     }
 }
+
+func ===<T: NSObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+    lhs.to(beIdenticalTo(rhs))
+    return true
+}
+func !==<T: NSObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+    lhs.toNot(beIdenticalTo(rhs))
+    return true
+}
+
