@@ -83,5 +83,45 @@ The following matchers are currently included with Kick:
 - ``endWith(ending: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works on Objective-C compatible objects.
 
+Writing Your Own Matchers
+=========================
+
+Most matchers can be defined using the ``MatcherFunc`` helper:
+
+    func equal<T: Equatable>(expectedValue: T?) -> FuncMatcherWrapper<T> {
+        return MatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "equal <\(expectedValue)>"
+            return actualExpression.evaluate() == expectedValue
+        }
+    }
+
+The return value inside ``MatcherFunc`` is a ``Bool`` that indicates success or failure
+to match.
+
+``actualExpression`` is a lazy, memoized closure around the value provided to
+``expect(...)``.
+
+Using Swift's generics, matchers can constrain the type of the actual value received
+from ``expect(<actualValue>)`` by modifying the return type:
+
+    protocol FuzzyThing { }
+    // Only expect(fuzzyObject).to(beFuzzy()) is allowed by the compiler,
+    // where fuzzyObject supports the FuzzyThing protocol.
+    func beFuzzy() -> FuncMatcherWrapper<FuzzyThing> {
+        return MatcherFunc { actualExpression, failureMessage in
+            // ...
+        }
+    }
+
+Customizing Failure Messages
+----------------------------
+
+``failureMessage`` is a structure of the final expectation message to emit. If you
+want to suppress emitting the actual value, you can nil out ``actualValue`` in your
+matcher:
+
+    failureMessage.actualValue = nil
+    failureMessage.postfixMessage = "yo"
+    // resulting error: expected to yo
 
 
