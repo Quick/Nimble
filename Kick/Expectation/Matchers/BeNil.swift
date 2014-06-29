@@ -1,6 +1,6 @@
 import Foundation
 
-func beNil() -> FuncMatcherWrapper<Any?> {
+func beNil<T>() -> FuncMatcherWrapper<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be nil"
         let actualValue = actualExpression.evaluate()

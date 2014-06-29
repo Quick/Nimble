@@ -17,9 +17,9 @@ Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're gene
     expect(1).to(equal(1))
     expect(1.2).to(beCloseTo(1.1, within: 1))
     
-Certain comparable operators work as expected too:
+Certain operators work as expected too:
 
-    expect("foo") != "foo"
+    expect("foo") != "bar"
     expect(10) > 2
 
 The ``expect`` function autocompletes to include ``file:`` and ``line:``, but these are optional.
@@ -39,7 +39,9 @@ Or you can use trailing-closure style as needed:
 
 Kick uses generics, so C primitives are allowed without any wrapping:
 
-    expect(1 as CInt).to(equal(1 as CInt))
+    let actual: CInt = 1
+    let expectedValue: CInt = 1
+    expect(actual).to(equal(expectedValue))
 
 In fact, type inference is used to remove redudant type specifying:
 
@@ -52,11 +54,11 @@ Asynchronous Expectations
 
 Simply exchange ``to`` and ``toNot`` with ``toEventually`` and ``toEventuallyNot``:
 
-var value = 0
-dispatch_async(dispatch_get_main_queue()) {
-value = 1
-}
-expect(value).toEventually(equal(1))
+    var value = 0
+    dispatch_async(dispatch_get_main_queue()) {
+        value = 1
+    }
+    expect(value).toEventually(equal(1))
 
 This polls the expression inside ``expect(...)`` until the given expectation succeeds by
 advancing the run loop.
