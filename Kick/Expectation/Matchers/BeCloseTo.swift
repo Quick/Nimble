@@ -1,11 +1,5 @@
 import Foundation
 
-func _doubleAsString(value: Double) -> String {
-    var args = VaListBuilder()
-    args.append(value)
-    return NSString(format: "%.4f", arguments: args.va_list())
-}
-
 func _isCloseTo(actualValue: Double, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.actualValue = "<\(_doubleAsString(actualValue))>"
     failureMessage.postfixMessage = "be close to <\(_doubleAsString(expectedValue))> (within \(_doubleAsString(delta)))"

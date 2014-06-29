@@ -18,3 +18,9 @@ func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
         return accum + prefix + "\(item)"
     }
 }
+
+func _doubleAsString(value: Double) -> String {
+    var args = VaListBuilder()
+    args.append(value)
+    return NSString(format: "%.4f", arguments: args.va_list())
+}
