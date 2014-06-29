@@ -17,8 +17,3 @@ func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.000
         return _isCloseTo(actualExpression.evaluate().doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
-
-func ==(lhs: Expectation<Double>, rhs: Double) -> Bool {
-    lhs.to(beCloseTo(rhs))
-    return true
-}
