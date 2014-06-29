@@ -1,46 +1,29 @@
 import Foundation
 
-func _captureExceptionInExpression<T>(expr: Expression<T>) -> NSException? {
-    var exception: NSException?
-    var capture = KICExceptionCapture(handler: ({ e in
-        exception = e
-        }), finally: nil)
-
-    capture.tryBlock {
-        expr.evaluate()
-        return
-    }
-    return exception
-}
-
-func raiseException(#named: String, #reason: String?) -> MatcherFunc<Void> {
+func _raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
-        failureMessage.postfixMessage = "raise exception named <\(named)> and reason <\(reason)>"
+        failureMessage.postfixMessage = message
 
-        let exception = _captureExceptionInExpression(actualExpression)
-        return exception?.name == named && exception?.reason == reason
+        let (_, exception) = actualExpression.evaluateAndCaptureException()
+        return matches(exception)
     }
 }
 
-func raiseException(#named: String) -> MatcherFunc<Void> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.actualValue = nil
-        failureMessage.postfixMessage = "raise exception named <\(named)>"
-
-        let exception = _captureExceptionInExpression(actualExpression)
-        return exception?.name == named
+func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any> {
+    return _raiseExceptionMatcher("raise exception named <\(named)> and reason <\(reason)>") {
+        exception in return exception?.name == named && exception?.reason == reason
     }
 }
 
-func raiseException() -> MatcherFunc<Void> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.actualValue = nil
-        failureMessage.postfixMessage = "raise exception"
+func raiseException(#named: String) -> MatcherFunc<Any> {
+    return _raiseExceptionMatcher("raise exception named <\(named)>") {
+        exception in return exception?.name == named
+    }
+}
 
-        if _captureExceptionInExpression(actualExpression) {
-            return true
-        }
-        return false
+func raiseException() -> MatcherFunc<Any> {
+    return _raiseExceptionMatcher("raise any exception") {
+        exception in return exception != nil
     }
 }

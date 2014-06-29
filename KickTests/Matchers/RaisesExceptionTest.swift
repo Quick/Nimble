@@ -6,6 +6,7 @@ class RaisesExceptionTest: XCTestCase {
 
     func testCapturingInAutoClosure() {
         expect(exception.raise()).to(raiseException(named: "laugh"))
+        expect(exception.raise()).to(raiseException())
 
         failsWithErrorMessage("expected to raise exception named <foo>") {
             expect(self.exception.raise()).to(raiseException(named: "foo"))
@@ -24,6 +25,16 @@ class RaisesExceptionTest: XCTestCase {
 
     func testCapturingWithReason() {
         expect(exception.raise()).to(raiseException(named: "laugh", reason: "Lulz"))
+
+        failsWithErrorMessage("expected to raise any exception") {
+            expect(self.exception).to(raiseException())
+        }
+        failsWithErrorMessage("expected to not raise any exception") {
+            expect(self.exception.raise()).toNot(raiseException())
+        }
+        failsWithErrorMessage("expected to raise exception named <laugh> and reason <Lulz>") {
+            expect(self.exception).to(raiseException(named: "laugh", reason: "Lulz"))
+        }
 
         failsWithErrorMessage("expected to raise exception named <bar> and reason <Lulz>") {
             expect(self.exception.raise()).to(raiseException(named: "bar", reason: "Lulz"))
