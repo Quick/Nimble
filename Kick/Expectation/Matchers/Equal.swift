@@ -13,16 +13,16 @@ func equal<T>(expectedValue: T?) -> _EqualMatcher<T> {
     return _EqualMatcher(expectedValue: expectedValue)
 }
 
+func equal(expectedValue: NSObject) -> _EqualMatcher<NSObject> {
+    return _EqualMatcher(expectedValue: expectedValue)
+}
+
 func equal<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
         return actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedSame
     }
-}
-
-func equal(expectedValue: NSObject) -> _EqualMatcher<NSObject> {
-    return _EqualMatcher(expectedValue: expectedValue)
 }
 
 func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
