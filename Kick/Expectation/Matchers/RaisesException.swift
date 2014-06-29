@@ -1,6 +1,6 @@
 import Foundation
 
-func _raisedExceptionForExpression<T>(expr: Expression<T>) -> NSException? {
+func _captureExceptionInExpression<T>(expr: Expression<T>) -> NSException? {
     var exception: NSException?
     var capture = KICExceptionCapture(handler: ({ e in
         exception = e
@@ -18,7 +18,7 @@ func raiseException(#named: String, #reason: String?) -> MatcherFunc<Void> {
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception named <\(named)> and reason <\(reason)>"
 
-        let exception = _raisedExceptionForExpression(actualExpression)
+        let exception = _captureExceptionInExpression(actualExpression)
         return exception?.name == named && exception?.reason == reason
     }
 }
@@ -28,7 +28,7 @@ func raiseException(#named: String) -> MatcherFunc<Void> {
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception named <\(named)>"
 
-        let exception = _raisedExceptionForExpression(actualExpression)
+        let exception = _captureExceptionInExpression(actualExpression)
         return exception?.name == named
     }
 }
@@ -38,7 +38,7 @@ func raiseException() -> MatcherFunc<Void> {
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception"
 
-        if _raisedExceptionForExpression(actualExpression) {
+        if _captureExceptionInExpression(actualExpression) {
             return true
         }
         return false

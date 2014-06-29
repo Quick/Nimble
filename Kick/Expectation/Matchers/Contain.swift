@@ -1,12 +1,5 @@
 import Foundation
 
-func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
-    return items.reduce("") { accum, item in
-        let prefix = (accum.isEmpty ? "" : joiner)
-        return accum + prefix + "\(item)"
-    }
-}
-
 func contain<T: Equatable>(items: T...) -> MatcherFunc<T[]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"

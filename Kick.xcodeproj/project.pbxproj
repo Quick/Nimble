@@ -23,6 +23,8 @@
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
 		1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
+		1F3A03DE1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
+		1F3A03DF1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
 		1F70E706194D66DF00951D6E /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6F2194D66DF00951D6E /* AssertionRecorder.swift */; };
 		1F70E707194D66DF00951D6E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6F3194D66DF00951D6E /* Protocols.swift */; };
 		1F70E708194D66DF00951D6E /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E6F4194D66DF00951D6E /* XCTestHandler.swift */; };
@@ -154,6 +156,7 @@
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1F2752D119445B8400052A26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
+		1F3A03DD1960D9A4001E6134 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1F6900981942C5CD00E757DF /* Kick.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Kick.playground; sourceTree = "<group>"; };
 		1F70E6F2194D66DF00951D6E /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1F70E6F3194D66DF00951D6E /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -333,6 +336,7 @@
 			children = (
 				1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */,
 				1F22D9E4195ED11400CA1480 /* Functional.swift */,
+				1F3A03DD1960D9A4001E6134 /* Stringers.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -623,6 +627,7 @@
 				1F70E70E194D66DF00951D6E /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F70E717194D66DF00951D6E /* KICExceptionCapture.m in Sources */,
 				1F98FA401953F34E0055F8EB /* Contain.swift in Sources */,
+				1F3A03DE1960D9A4001E6134 /* Stringers.swift in Sources */,
 				1F70E712194D66DF00951D6E /* BeNil.swift in Sources */,
 				1F70E70D194D66DF00951D6E /* BeGreaterThan.swift in Sources */,
 				1F25430B195F696600684FC4 /* AsyncMatcherWrapper.swift in Sources */,
@@ -681,6 +686,7 @@
 				1F925EDE195C0DE600ED456B /* EndWith.swift in Sources */,
 				1F925ECF195C0DE000ED456B /* Expression.swift in Sources */,
 				1F925ED3195C0DE600ED456B /* BeGreaterThan.swift in Sources */,
+				1F3A03DF1960D9A4001E6134 /* Stringers.swift in Sources */,
 				1F925ED1195C0DE600ED456B /* BeAnInstanceOf.swift in Sources */,
 				1F925EDA195C0DE600ED456B /* Protocols.swift in Sources */,
 				1F25430C195F696600684FC4 /* AsyncMatcherWrapper.swift in Sources */,
