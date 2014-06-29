@@ -82,14 +82,14 @@ The following matchers are currently included with Kick:
 - ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
 - ``contain(items: T...)`` Matches if all of ``items`` are in the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays`` and ``NSSets``; and ``Strings`` - which use substring matching.
 - ``beginWith(starting: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
-- ``endWith(ending: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
+- ``endWith(ending: T)`` Matches if ``ending`` is at the end of the given container. Valid containers are ``Sequences`` that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works on Objective-C compatible objects.
 - ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass``. Only works for Objective-C classes.
 
 Writing Your Own Matchers
 =========================
 
-Most matchers can be defined using the ``MatcherFunc`` helper:
+Most matchers can be defined using ``MatcherFunc``:
 
     func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T> {
         return MatcherFunc { actualExpression, failureMessage in
@@ -98,8 +98,8 @@ Most matchers can be defined using the ``MatcherFunc`` helper:
         }
     }
 
-The return value inside ``MatcherFunc`` is a ``Bool`` that indicates success or failure
-to match.
+The return value inside ``MatcherFunc`` closure is a ``Bool`` that indicates success
+or failure to match.
 
 ``actualExpression`` is a lazy, memoized closure around the value provided to
 ``expect(...)``.
