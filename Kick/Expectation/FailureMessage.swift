@@ -9,7 +9,7 @@ class FailureMessage {
     init() {
     }
 
-    func build() -> String {
+    func stringValue() -> String {
         if actualValue {
             return "\(expected) \(actualValue) \(to) \(postfixMessage)"
         } else {

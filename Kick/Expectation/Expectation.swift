@@ -13,7 +13,7 @@ struct Expectation<T> {
         if msg.actualValue == "" {
             msg.actualValue = "<\(expression.evaluate())>"
         }
-        verify(pass, msg.build())
+        verify(pass, msg.stringValue())
     }
 
     func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
@@ -22,7 +22,7 @@ struct Expectation<T> {
         if msg.actualValue == "" {
             msg.actualValue = "<\(expression.evaluate())>"
         }
-        verify(pass, msg.build())
+        verify(pass, msg.stringValue())
     }
 
     // see FullMatcherWrapper and AsyncMatcherWrapper for extensions
