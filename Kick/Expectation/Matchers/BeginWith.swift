@@ -1,6 +1,6 @@
 import Foundation
 
-func beginWith<T: Equatable>(startingElement: T) -> FuncMatcherWrapper<T[]> {
+func beginWith<T: Equatable>(startingElement: T) -> MatcherFunc<T[]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         var actualGenerator = actualExpression.evaluate().generate()
@@ -8,14 +8,14 @@ func beginWith<T: Equatable>(startingElement: T) -> FuncMatcherWrapper<T[]> {
     }
 }
 
-func beginWith(startingElement: AnyObject) -> FuncMatcherWrapper<KICOrderedCollection> {
+func beginWith(startingElement: AnyObject) -> MatcherFunc<KICOrderedCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         return actualExpression.evaluate().indexOfObject(startingElement) == 0
     }
 }
 
-func beginWith(startingSubstring: String) -> FuncMatcherWrapper<String> {
+func beginWith(startingSubstring: String) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         let actual = actualExpression.evaluate()

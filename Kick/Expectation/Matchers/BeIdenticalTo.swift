@@ -12,7 +12,7 @@ func _identityAsString(value: NSObject?) -> String {
     return str
 }
 
-func beIdenticalTo<T: NSObject>(expected: T?) -> FuncMatcherWrapper<T?> {
+func beIdenticalTo<T: NSObject>(expected: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         let actual = actualExpression.evaluate()
         failureMessage.actualValue = "\(_identityAsString(actual))"

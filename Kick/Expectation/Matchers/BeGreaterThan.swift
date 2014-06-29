@@ -1,13 +1,13 @@
 import Foundation
 
-func beGreaterThan<T: Comparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+func beGreaterThan<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than <\(expectedValue)>"
         return actualExpression.evaluate() > expectedValue
     }
 }
 
-func beGreaterThan<T: KICComparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+func beGreaterThan<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()

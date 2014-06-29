@@ -1,6 +1,6 @@
 import Foundation
 
-func endWith<T: Equatable>(endingElement: T) -> FuncMatcherWrapper<T[]> {
+func endWith<T: Equatable>(endingElement: T) -> MatcherFunc<T[]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
@@ -16,7 +16,7 @@ func endWith<T: Equatable>(endingElement: T) -> FuncMatcherWrapper<T[]> {
     }
 }
 
-func endWith(endingElement: AnyObject) -> FuncMatcherWrapper<KICOrderedCollection> {
+func endWith(endingElement: AnyObject) -> MatcherFunc<KICOrderedCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let actual = actualExpression.evaluate()
@@ -24,7 +24,7 @@ func endWith(endingElement: AnyObject) -> FuncMatcherWrapper<KICOrderedCollectio
     }
 }
 
-func endWith(endingSubstring: String) -> FuncMatcherWrapper<String> {
+func endWith(endingSubstring: String) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let actual = actualExpression.evaluate()

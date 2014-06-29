@@ -13,7 +13,7 @@ func _raisedExceptionForExpression<T>(expr: Expression<T>) -> NSException? {
     return exception
 }
 
-func raiseException(#named: String, #reason: String?) -> FuncMatcherWrapper<Void> {
+func raiseException(#named: String, #reason: String?) -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception named <\(named)> and reason <\(reason)>"
@@ -23,7 +23,7 @@ func raiseException(#named: String, #reason: String?) -> FuncMatcherWrapper<Void
     }
 }
 
-func raiseException(#named: String) -> FuncMatcherWrapper<Void> {
+func raiseException(#named: String) -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception named <\(named)>"
@@ -33,7 +33,7 @@ func raiseException(#named: String) -> FuncMatcherWrapper<Void> {
     }
 }
 
-func raiseException() -> FuncMatcherWrapper<Void> {
+func raiseException() -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = "raise exception"

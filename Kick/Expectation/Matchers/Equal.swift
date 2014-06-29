@@ -13,7 +13,7 @@ func equal<T>(expectedValue: T?) -> _EqualMatcher<T> {
     return _EqualMatcher(expectedValue: expectedValue)
 }
 
-func equal<T: KICComparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+func equal<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()

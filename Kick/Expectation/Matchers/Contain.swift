@@ -7,7 +7,7 @@ func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
     }
 }
 
-func contain<T: Equatable>(items: T...) -> FuncMatcherWrapper<T[]> {
+func contain<T: Equatable>(items: T...) -> MatcherFunc<T[]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
@@ -17,7 +17,7 @@ func contain<T: Equatable>(items: T...) -> FuncMatcherWrapper<T[]> {
     }
 }
 
-func contain(items: AnyObject?...) -> FuncMatcherWrapper<KICContainer> {
+func contain(items: AnyObject?...) -> MatcherFunc<KICContainer> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
@@ -27,7 +27,7 @@ func contain(items: AnyObject?...) -> FuncMatcherWrapper<KICContainer> {
     }
 }
 
-func contain(substrings: String...) -> FuncMatcherWrapper<String> {
+func contain(substrings: String...) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
         let actual = actualExpression.evaluate()

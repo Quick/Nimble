@@ -1,13 +1,13 @@
 import Foundation
 
-func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(expectedValue)>"
         return actualExpression.evaluate() <= expectedValue
     }
 }
 
-func beLessThanOrEqualTo<T: KICComparable>(expectedValue: T?) -> FuncMatcherWrapper<T?> {
+func beLessThanOrEqualTo<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()

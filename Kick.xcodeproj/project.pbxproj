@@ -17,8 +17,8 @@
 		1F25430C195F696600684FC4 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F254308195F696600684FC4 /* AsyncMatcherWrapper.swift */; };
 		1F25430D195F696600684FC4 /* FullMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F254309195F696600684FC4 /* FullMatcherWrapper.swift */; };
 		1F25430E195F696600684FC4 /* FullMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F254309195F696600684FC4 /* FullMatcherWrapper.swift */; };
-		1F25430F195F696600684FC4 /* FuncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F25430A195F696600684FC4 /* FuncMatcherWrapper.swift */; };
-		1F254310195F696600684FC4 /* FuncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F25430A195F696600684FC4 /* FuncMatcherWrapper.swift */; };
+		1F25430F195F696600684FC4 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F25430A195F696600684FC4 /* MatcherFunc.swift */; };
+		1F254310195F696600684FC4 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F25430A195F696600684FC4 /* MatcherFunc.swift */; };
 		1F2752CC19445B0C00052A26 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CB19445B0C00052A26 /* Expression.swift */; };
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
@@ -148,7 +148,7 @@
 		1F22D9E4195ED11400CA1480 /* Functional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
 		1F254308195F696600684FC4 /* AsyncMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncMatcherWrapper.swift; sourceTree = "<group>"; };
 		1F254309195F696600684FC4 /* FullMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullMatcherWrapper.swift; sourceTree = "<group>"; };
-		1F25430A195F696600684FC4 /* FuncMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuncMatcherWrapper.swift; sourceTree = "<group>"; };
+		1F25430A195F696600684FC4 /* MatcherFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherFunc.swift; sourceTree = "<group>"; };
 		1F2752CB19445B0C00052A26 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		1F2752CD19445B1E00052A26 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
@@ -308,7 +308,7 @@
 			children = (
 				1F254308195F696600684FC4 /* AsyncMatcherWrapper.swift */,
 				1F254309195F696600684FC4 /* FullMatcherWrapper.swift */,
-				1F25430A195F696600684FC4 /* FuncMatcherWrapper.swift */,
+				1F25430A195F696600684FC4 /* MatcherFunc.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 				1F70E708194D66DF00951D6E /* XCTestHandler.swift in Sources */,
 				1F98FA421953FA430055F8EB /* BeginWith.swift in Sources */,
 				1F70E710194D66DF00951D6E /* BeLessThanOrEqual.swift in Sources */,
-				1F25430F195F696600684FC4 /* FuncMatcherWrapper.swift in Sources */,
+				1F25430F195F696600684FC4 /* MatcherFunc.swift in Sources */,
 				1F98FA441953FFAE0055F8EB /* EndWith.swift in Sources */,
 				1F70E707194D66DF00951D6E /* Protocols.swift in Sources */,
 				1F70E713194D66DF00951D6E /* Equal.swift in Sources */,
@@ -696,7 +696,7 @@
 				1F925ED7195C0DE600ED456B /* BeLogical.swift in Sources */,
 				1F925ED8195C0DE600ED456B /* BeNil.swift in Sources */,
 				1F925EC8195C0DDA00ED456B /* SourceLocation.swift in Sources */,
-				1F254310195F696600684FC4 /* FuncMatcherWrapper.swift in Sources */,
+				1F254310195F696600684FC4 /* MatcherFunc.swift in Sources */,
 				1F925ECB195C0DE000ED456B /* XCTestHandler.swift in Sources */,
 				1F925ECE195C0DE000ED456B /* Expectation.swift in Sources */,
 				1F925EDD195C0DE600ED456B /* BeginWith.swift in Sources */,

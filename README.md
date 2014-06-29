@@ -91,7 +91,7 @@ Writing Your Own Matchers
 
 Most matchers can be defined using the ``MatcherFunc`` helper:
 
-    func equal<T: Equatable>(expectedValue: T?) -> FuncMatcherWrapper<T> {
+    func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T> {
         return MatcherFunc { actualExpression, failureMessage in
             failureMessage.postfixMessage = "equal <\(expectedValue)>"
             return actualExpression.evaluate() == expectedValue
@@ -110,7 +110,7 @@ from ``expect(<actualValue>)`` by modifying the return type:
     protocol FuzzyThing { }
     // Only expect(fuzzyObject).to(beFuzzy()) is allowed by the compiler,
     // where fuzzyObject supports the FuzzyThing protocol.
-    func beFuzzy() -> FuncMatcherWrapper<FuzzyThing> {
+    func beFuzzy() -> MatcherFunc<FuzzyThing> {
         return MatcherFunc { actualExpression, failureMessage in
             // ...
         }
