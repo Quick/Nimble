@@ -1,6 +1,6 @@
 import Foundation
 
-struct MatcherFunc<T> : BasicMatcher {
+struct MatcherFunc<T>: BasicMatcher {
     let matcher: (Expression<T>, FailureMessage) -> Bool
 
     init(_ matcher: (Expression<T>, FailureMessage) -> Bool) {

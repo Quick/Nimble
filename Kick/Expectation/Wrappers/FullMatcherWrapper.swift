@@ -1,7 +1,7 @@
 import Foundation
 
 
-struct FullMatcherWrapper<M, T where M: BasicMatcher, M.ValueType == T> : Matcher {
+struct FullMatcherWrapper<M, T where M: BasicMatcher, M.ValueType == T>: Matcher {
     let matcher: M
     let to: String
     let toNot: String

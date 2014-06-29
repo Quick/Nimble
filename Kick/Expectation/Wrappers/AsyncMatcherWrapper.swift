@@ -1,6 +1,6 @@
 import Foundation
 
-struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T> : Matcher {
+struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
     let timeoutInterval: NSTimeInterval = 1
     let pollInterval: NSTimeInterval = 0.01

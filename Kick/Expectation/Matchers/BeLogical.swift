@@ -1,6 +1,6 @@
 import Foundation
 
-struct _BeLogicalMatcher : BasicMatcher {
+struct _BeLogicalMatcher: BasicMatcher {
     let expectedValue: LogicValue
     let stringValue: String
 
@@ -10,7 +10,7 @@ struct _BeLogicalMatcher : BasicMatcher {
     }
 }
 
-struct _BeOptionalBoolMatcher : BasicMatcher {
+struct _BeOptionalBoolMatcher: BasicMatcher {
     let expectedValue: LogicValue
     let stringValue: String
 
