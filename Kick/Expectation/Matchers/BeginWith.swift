@@ -8,10 +8,11 @@ func beginWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(sta
     }
 }
 
-func beginWith(startingElement: AnyObject) -> MatcherFunc<KICOrderedCollection> {
+func beginWith(startingElement: AnyObject) -> MatcherFunc<KICOrderedCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
-        return actualExpression.evaluate().indexOfObject(startingElement) == 0
+        let collection = actualExpression.evaluate()
+        return collection && collection!.indexOfObject(startingElement) == 0
     }
 }
 

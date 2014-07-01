@@ -10,12 +10,12 @@ func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items
     }
 }
 
-func contain(items: AnyObject?...) -> MatcherFunc<KICContainer> {
+func contain(items: AnyObject?...) -> MatcherFunc<KICContainer?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
-        return _all(items) {
-            return actual.containsObject($0)
+        return _all(items) { item in
+            return actual && actual!.containsObject(item)
         }
     }
 }

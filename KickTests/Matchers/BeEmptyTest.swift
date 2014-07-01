@@ -3,6 +3,9 @@ import Kick
 
 class BeEmptyTest: XCTestCase {
     func testBeEmptyPositive() {
+        expect(nil).to(beEmpty())
+        expect(nil as CInt[]?).to(beEmpty())
+
         expect([]).to(beEmpty())
         expect([1]).toNot(beEmpty())
 
@@ -14,6 +17,9 @@ class BeEmptyTest: XCTestCase {
 
         expect(NSSet()).to(beEmpty())
         expect(NSSet(array: [1])).toNot(beEmpty())
+
+        expect(NSString()).to(beEmpty())
+        expect(NSString(string: "hello")).toNot(beEmpty())
 
         expect("").to(beEmpty())
         expect("foo").toNot(beEmpty())
