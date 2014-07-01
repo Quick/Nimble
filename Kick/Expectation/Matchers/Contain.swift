@@ -1,6 +1,6 @@
 import Foundation
 
-func contain<T: Equatable>(items: T...) -> MatcherFunc<T[]> {
+func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items: T...) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
@@ -16,16 +16,6 @@ func contain(items: AnyObject?...) -> MatcherFunc<KICContainer> {
         let actual = actualExpression.evaluate()
         return _all(items) {
             return actual.containsObject($0)
-        }
-    }
-}
-
-func contain(substrings: String...) -> MatcherFunc<String> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
-        let actual = actualExpression.evaluate()
-        return _all(substrings) {
-            return actual.rangeOfString($0).getLogicValue()
         }
     }
 }

@@ -75,8 +75,8 @@ The following matchers are currently included with Kick:
 - ``beGreaterThan(lowerLimit)`` (also ``>`` operator). Values must be ``Comparable``.
 - ``beGreaterThanOrEqualTo(lowerLimit)`` (also ``>=`` operator). Values must be ``Comparable``,
 - ``raiseException()`` Matches if the given closure raises an exception.
-- ``raiseException(#named: String)`` Matches if the given closure raises an exception with the given name.
-- ``raiseException(#named: String, #reason: String)`` Matches if the given closure raises an exception with the given name and reason.
+- ``raiseException(#named: String?)`` Matches if the given closure raises an exception with the given name.
+- ``raiseException(#named: String?, #reason: String?)`` Matches if the given closure raises an exception with the given name and reason.
 - ``beNil()`` Matches if the given value is ``nil``.
 - ``beTruthy()``: Matches if the given value is not ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
 - ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.

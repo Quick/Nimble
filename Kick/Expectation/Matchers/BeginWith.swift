@@ -1,6 +1,6 @@
 import Foundation
 
-func beginWith<T: Equatable>(startingElement: T) -> MatcherFunc<T[]> {
+func beginWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(startingElement: T) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         var actualGenerator = actualExpression.evaluate().generate()

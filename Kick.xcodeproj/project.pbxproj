@@ -22,6 +22,10 @@
 		1F2752CC19445B0C00052A26 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CB19445B0C00052A26 /* Expression.swift */; };
 		1F2752CE19445B1E00052A26 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CD19445B1E00052A26 /* Expectation.swift */; };
 		1F2752D019445B2F00052A26 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2752CF19445B2F00052A26 /* DSL.swift */; };
+		1F299EAB19627B2D002641AF /* BeEmptyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EAA19627B2D002641AF /* BeEmptyTest.swift */; };
+		1F299EAC19627B2D002641AF /* BeEmptyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EAA19627B2D002641AF /* BeEmptyTest.swift */; };
+		1F299EAE19627B8C002641AF /* BeEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EAD19627B8C002641AF /* BeEmpty.swift */; };
+		1F299EAF19627B8C002641AF /* BeEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EAD19627B8C002641AF /* BeEmpty.swift */; };
 		1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
 		1F3A03DE1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
 		1F3A03DF1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
@@ -155,6 +159,8 @@
 		1F2752CD19445B1E00052A26 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1F2752CF19445B2F00052A26 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1F2752D119445B8400052A26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1F299EAA19627B2D002641AF /* BeEmptyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeEmptyTest.swift; sourceTree = "<group>"; };
+		1F299EAD19627B8C002641AF /* BeEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeEmpty.swift; sourceTree = "<group>"; };
 		1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		1F3A03DD1960D9A4001E6134 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1F6900981942C5CD00E757DF /* Kick.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Kick.playground; sourceTree = "<group>"; };
@@ -369,6 +375,7 @@
 				1F70E700194D66DF00951D6E /* Equal.swift */,
 				1F70E701194D66DF00951D6E /* Protocols.swift */,
 				1F70E702194D66DF00951D6E /* RaisesException.swift */,
+				1F299EAD19627B8C002641AF /* BeEmpty.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -432,6 +439,7 @@
 				1F925F0D195C18F500ED456B /* BeLessThanOrEqualToTest.swift */,
 				1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */,
 				1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */,
+				1F299EAA19627B2D002641AF /* BeEmptyTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -644,6 +652,7 @@
 				1F98FA421953FA430055F8EB /* BeginWith.swift in Sources */,
 				1F70E710194D66DF00951D6E /* BeLessThanOrEqual.swift in Sources */,
 				1F25430F195F696600684FC4 /* MatcherFunc.swift in Sources */,
+				1F299EAE19627B8C002641AF /* BeEmpty.swift in Sources */,
 				1F98FA441953FFAE0055F8EB /* EndWith.swift in Sources */,
 				1F70E707194D66DF00951D6E /* Protocols.swift in Sources */,
 				1F70E713194D66DF00951D6E /* Equal.swift in Sources */,
@@ -665,6 +674,7 @@
 				1F925F0B195C18E100ED456B /* BeLessThanTest.swift in Sources */,
 				1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
 				1F925EF9195C175000ED456B /* BeNilTest.swift in Sources */,
+				1F299EAB19627B2D002641AF /* BeEmptyTest.swift in Sources */,
 				1F925EF6195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F925EE6195C121200ED456B /* AsyncTest.swift in Sources */,
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
@@ -703,6 +713,7 @@
 				1F925ED8195C0DE600ED456B /* BeNil.swift in Sources */,
 				1F925EC8195C0DDA00ED456B /* SourceLocation.swift in Sources */,
 				1F254310195F696600684FC4 /* MatcherFunc.swift in Sources */,
+				1F299EAF19627B8C002641AF /* BeEmpty.swift in Sources */,
 				1F925ECB195C0DE000ED456B /* XCTestHandler.swift in Sources */,
 				1F925ECE195C0DE000ED456B /* Expectation.swift in Sources */,
 				1F925EDD195C0DE600ED456B /* BeginWith.swift in Sources */,
@@ -724,6 +735,7 @@
 				1F925F0C195C18E100ED456B /* BeLessThanTest.swift in Sources */,
 				1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
+				1F299EAC19627B2D002641AF /* BeEmptyTest.swift in Sources */,
 				1F925EF7195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F925EE7195C121200ED456B /* AsyncTest.swift in Sources */,
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,

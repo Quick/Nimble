@@ -1,6 +1,6 @@
 import Foundation
 
-func endWith<T: Equatable>(endingElement: T) -> MatcherFunc<T[]> {
+func endWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(endingElement: T) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
