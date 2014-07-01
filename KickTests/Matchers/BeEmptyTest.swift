@@ -12,6 +12,12 @@ class BeEmptyTest: XCTestCase {
         expect([] as CInt[]).to(beEmpty())
         expect([1] as CInt[]).toNot(beEmpty())
 
+        expect(NSDictionary()).to(beEmpty())
+        expect(NSDictionary(object: 1, forKey: 1)).toNot(beEmpty())
+
+        expect(Dictionary<Int, Int>()).to(beEmpty())
+        expect(["hi": 1]).toNot(beEmpty())
+
         expect(NSArray()).to(beEmpty())
         expect(NSArray(array: [1])).toNot(beEmpty())
 
