@@ -5,27 +5,16 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let timeoutInterval: NSTimeInterval = 1
     let pollInterval: NSTimeInterval = 0.01
 
-    func pollExpression(expression: () -> Bool) -> Bool {
-        let startDate = NSDate()
-        var pass: Bool
-        do {
-            pass = expression()
-            let runDate = NSDate().addTimeInterval(pollInterval) as NSDate
-            NSRunLoop.mainRunLoop().runUntilDate(runDate)
-        } while(!pass && NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
-        return pass
-    }
-
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
-        return pollExpression {
+        return pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
             self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
     }
 
     func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
-        return pollExpression {
+        return pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
             self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
     }
