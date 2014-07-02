@@ -34,8 +34,8 @@
 		1F299EAF19627B8C002641AF /* BeEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EAD19627B8C002641AF /* BeEmpty.swift */; };
 		1F299EB11962880F002641AF /* beOneOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB01962880F002641AF /* beOneOfTest.swift */; };
 		1F299EB21962880F002641AF /* beOneOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB01962880F002641AF /* beOneOfTest.swift */; };
-		1F299EB419628891002641AF /* beOneOfMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB319628891002641AF /* beOneOfMatcher.swift */; };
-		1F299EB519628891002641AF /* beOneOfMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB319628891002641AF /* beOneOfMatcher.swift */; };
+		1F299EB419628891002641AF /* BeOneOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB319628891002641AF /* BeOneOf.swift */; };
+		1F299EB519628891002641AF /* BeOneOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F299EB319628891002641AF /* BeOneOf.swift */; };
 		1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
 		1F3A03DE1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
 		1F3A03DF1960D9A4001E6134 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A03DD1960D9A4001E6134 /* Stringers.swift */; };
@@ -175,7 +175,7 @@
 		1F299EAA19627B2D002641AF /* BeEmptyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeEmptyTest.swift; sourceTree = "<group>"; };
 		1F299EAD19627B8C002641AF /* BeEmpty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeEmpty.swift; sourceTree = "<group>"; };
 		1F299EB01962880F002641AF /* beOneOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = beOneOfTest.swift; sourceTree = "<group>"; };
-		1F299EB319628891002641AF /* beOneOfMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = beOneOfMatcher.swift; sourceTree = "<group>"; };
+		1F299EB319628891002641AF /* BeOneOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeOneOf.swift; sourceTree = "<group>"; };
 		1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		1F3A03DD1960D9A4001E6134 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1F6900981942C5CD00E757DF /* Kick.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Kick.playground; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				1F70E701194D66DF00951D6E /* Protocols.swift */,
 				1F70E702194D66DF00951D6E /* RaisesException.swift */,
 				1F299EAD19627B8C002641AF /* BeEmpty.swift */,
-				1F299EB319628891002641AF /* beOneOfMatcher.swift */,
+				1F299EB319628891002641AF /* BeOneOf.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -661,7 +661,7 @@
 				1F70E70D194D66DF00951D6E /* BeGreaterThan.swift in Sources */,
 				1F25430B195F696600684FC4 /* AsyncMatcherWrapper.swift in Sources */,
 				1FB9009B195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */,
-				1F299EB419628891002641AF /* beOneOfMatcher.swift in Sources */,
+				1F299EB419628891002641AF /* BeOneOf.swift in Sources */,
 				1F2752CC19445B0C00052A26 /* Expression.swift in Sources */,
 				1F70E711194D66DF00951D6E /* BeLogical.swift in Sources */,
 				1F83CC60195E784100B7F821 /* FailureMessage.swift in Sources */,
@@ -727,7 +727,7 @@
 				1F925EDA195C0DE600ED456B /* Protocols.swift in Sources */,
 				1F25430C195F696600684FC4 /* AsyncMatcherWrapper.swift in Sources */,
 				1FB9009C195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */,
-				1F299EB519628891002641AF /* beOneOfMatcher.swift in Sources */,
+				1F299EB519628891002641AF /* BeOneOf.swift in Sources */,
 				1F925ED4195C0DE600ED456B /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F925EDC195C0DE600ED456B /* Contain.swift in Sources */,
 				1F83CC61195E784100B7F821 /* FailureMessage.swift in Sources */,
