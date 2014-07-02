@@ -60,8 +60,27 @@ Simply exchange ``to`` and ``toNot`` with ``toEventually`` and ``toEventuallyNot
     }
     expect(value).toEventually(equal(1))
 
-This polls the expression inside ``expect(...)`` until the given expectation succeeds by
-advancing the run loop.
+This polls the expression inside ``expect(...)`` until the given expectation succeeds
+within a 1 second. You can explicitly pass the ``timeout`` parameter:
+
+    expect(value).toEventually(equal(1), timeout: 1)
+
+If you prefer the callback-style that some testing frameworks do, use ``waitUntil``:
+
+    waitUntil { done in 
+        // do some stuff that takes a while... 
+        NSThread.sleepForTimeInterval(0.5)
+        done()
+    }
+
+And like the other asynchronous expectation, an optional timeout period can be provided:
+
+    waitUntil(timeout: 10) { done in 
+        // do some stuff that takes a while... 
+        NSThread.sleepForTimeInterval(1)
+        done()
+    }
+
 
 List of Builtin Matchers
 -------------------------
@@ -83,8 +102,9 @@ The following matchers are currently included with Kick:
 - ``contain(items: T...)`` Matches if all of ``items`` are in the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays`` and ``NSSets``; and ``Strings`` - which use substring matching.
 - ``beginWith(starting: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``endWith(ending: T)`` Matches if ``ending`` is at the end of the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
-- ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works on Objective-C compatible objects.
-- ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass``. Only works for Objective-C classes.
+- ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works with Objective-C compatible objects.
+- ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isMemberOfClass:``. Only works with Objective-C compatible objects.
+- ``beASubclassOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isKindOfClass:``. Only works with Objective-C compatible objects.
 - ``beEmpty()`` Matches if the given type contains nothing. Works with Strings and Collections from both Swift and Objective-C
 
 
