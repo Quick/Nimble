@@ -11,7 +11,7 @@ struct Expectation<T> {
         var msg = FailureMessage()
         let pass = matcher.matches(expression, failureMessage: msg)
         if msg.actualValue == "" {
-            msg.actualValue = "<\(expression.evaluate())>"
+            msg.actualValue = "<\(stringify(expression.evaluate()))>"
         }
         verify(pass, msg.stringValue())
     }
@@ -20,9 +20,13 @@ struct Expectation<T> {
         var msg = FailureMessage()
         let pass = matcher.doesNotMatch(expression, failureMessage: msg)
         if msg.actualValue == "" {
-            msg.actualValue = "<\(expression.evaluate())>"
+            msg.actualValue = "<\(stringify(expression.evaluate()))>"
         }
         verify(pass, msg.stringValue())
+    }
+
+    func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
+        toNot(matcher)
     }
 
     // see FullMatcherWrapper and AsyncMatcherWrapper for extensions

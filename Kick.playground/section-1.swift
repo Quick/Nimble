@@ -1,5 +1,40 @@
 import Foundation
 
+
+func stringify<S: Sequence>(value: S) -> String {
+    var generator = value.generate()
+    var strings = String[]()
+    var value: S.GeneratorType.Element?
+    do {
+        value = generator.next()
+        if value {
+            strings.append(stringify(value))
+        }
+    } while value
+    let str = ", ".join(strings)
+    return "[\(str)]"
+}
+
+func stringify<T>(value: T?) -> String {
+    if value is NSArray? {
+        return (value as NSArray).componentsJoinedByString(", ")
+    }
+    return "\(value)"
+}
+
+struct box<T> {
+    let value: T
+    init(_ val: T) { value = val }
+    func str() -> String {
+        return stringify(value)
+    }
+}
+box(1).str()
+box("hello").str()
+box([1, 2, 3]).str()
+box(NSArray(array: [1, 2, 3])).str()
+
+
 class expect {
     let expression: () -> Any?
     init(_ expression: @auto_closure () -> Any?) {

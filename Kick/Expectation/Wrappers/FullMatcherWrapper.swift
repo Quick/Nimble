@@ -27,4 +27,8 @@ extension Expectation {
     func toNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
         toNot(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
     }
+
+    func notTo<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
+        toNot(matcher)
+    }
 }

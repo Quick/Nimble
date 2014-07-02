@@ -1,8 +1,8 @@
 import Foundation
 
 func _isCloseTo(actualValue: Double, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
-    failureMessage.actualValue = "<\(_doubleAsString(actualValue))>"
-    failureMessage.postfixMessage = "be close to <\(_doubleAsString(expectedValue))> (within \(_doubleAsString(delta)))"
+    failureMessage.actualValue = "<\(stringify(actualValue))>"
+    failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     return abs(actualValue - expectedValue) < delta
 }
 

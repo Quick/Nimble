@@ -1,5 +1,6 @@
 import Foundation
 
+
 func _identityAsString(value: NSObject?) -> String {
     if !value {
         return "nil"
@@ -19,8 +20,36 @@ func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
     }
 }
 
-func _doubleAsString(value: Double) -> String {
-    var args = VaListBuilder()
-    args.append(value)
-    return NSString(format: "%.4f", arguments: args.va_list())
+@objc protocol KICStringer {
+    func KIC_stringify() -> String
+}
+
+func stringify<S: Sequence>(value: S) -> String {
+    var generator = value.generate()
+    var strings = String[]()
+    var value: S.GeneratorType.Element?
+    do {
+        value = generator.next()
+        if value {
+            strings.append(stringify(value))
+        }
+    } while value
+    let str = ", ".join(strings)
+    return "[\(str)]"
+}
+
+extension NSArray : KICStringer {
+    func KIC_stringify() -> String {
+        let str = valueForKey("description").componentsJoinedByString(", ")
+        return "[\(str)]"
+    }
+}
+
+func stringify<T>(value: T?) -> String {
+    if value is Double {
+        var args = VaListBuilder()
+        args.append(value as Double)
+        return NSString(format: "%.4f", arguments: args.va_list())
+    }
+    return toString(value)
 }
