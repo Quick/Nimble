@@ -25,7 +25,7 @@ func waitUntil(#timeout: NSTimeInterval, action: (() -> Void) -> Void, file: Str
     dispatch_async(dispatch_get_main_queue()) {
         action() { completed = true }
     }
-    let passed = pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
+    let passed = _pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
         return completed
     }
     if !passed {

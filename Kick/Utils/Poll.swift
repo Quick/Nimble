@@ -1,6 +1,6 @@
 import Foundation
 
-func pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval, expression: () -> Bool) -> Bool {
+func _pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval, expression: () -> Bool) -> Bool {
     let startDate = NSDate()
     var pass: Bool
     do {
