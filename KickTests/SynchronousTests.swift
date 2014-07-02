@@ -2,6 +2,12 @@ import XCTest
 import Kick
 
 class SynchronousTest: XCTestCase {
+    func testFailAlwaysFails() {
+        failsWithErrorMessage("My error message") {
+            fail("My error message")
+        }
+    }
+
     func testToMatchesIfMatcherReturnsTrue() {
         expect(1).to(MatcherFunc { expr, failure in true })
         expect{1}.to(MatcherFunc { expr, failure in true })

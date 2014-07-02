@@ -40,16 +40,8 @@ func waitUntil(action: (() -> Void) -> Void, file: String = __FILE__, line: Int 
     waitUntil(timeout: 1, action, file: file, line: line)
 }
 
-func must(assertion: Bool, message: String, #location: SourceLocation) {
-    CurrentAssertionHandler.assert(false, message: message, location: location)
-}
-
-func must(assertion: Bool, message: String, file: String = __FILE__, line: Int = __LINE__) {
-    must(assertion, message, location: SourceLocation(file: file, line: line))
-}
-
 func fail(message: String, #location: SourceLocation) {
-    must(false, message, location: location)
+    CurrentAssertionHandler.assert(false, message: message, location: location)
 }
 
 func fail(message: String, file: String = __FILE__, line: Int = __LINE__) {
