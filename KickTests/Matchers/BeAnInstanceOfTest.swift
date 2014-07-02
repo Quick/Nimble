@@ -2,23 +2,21 @@ import XCTest
 import Kick
 
 class BeAnInstanceOfTest: XCTestCase {
+    func testPositiveMatch() {
+        expect(nil as NSNull?).toNot(beAnInstanceOf(NSNull))
 
-    func testBeAnInstanceOfPositive() {
-        expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSNumber))
+        expect(NSNull()).to(beAnInstanceOf(NSNull))
+        expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSDate))
     }
 
-    func testBeAnInstanceOfNegative() {
-        expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSString))
-    }
-
-    func testBeAnInstanceOfPositiveMessage() {
-        failsWithErrorMessage("expected <1> to be an instance of NSString") {
+    func testFailureMessages() {
+        failsWithErrorMessage("expected <nil> to be an instance of NSString") {
+            expect(nil as NSString?).to(beAnInstanceOf(NSString))
+        }
+        failsWithErrorMessage("expected <__NSCFNumber instance> to be an instance of NSString") {
             expect(NSNumber.numberWithInteger(1)).to(beAnInstanceOf(NSString))
         }
-    }
-
-    func testBeAnInstanceOfNegativeMessage() {
-        failsWithErrorMessage("expected <1> to not be an instance of NSNumber") {
+        failsWithErrorMessage("expected <__NSCFNumber instance> to not be an instance of NSNumber") {
             expect(NSNumber.numberWithInteger(1)).toNot(beAnInstanceOf(NSNumber))
         }
     }

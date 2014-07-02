@@ -1,6 +1,6 @@
 import Foundation
 
-func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
+func beASubclassOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
     return MatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
@@ -8,7 +8,7 @@ func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be an instance of \(NSStringFromClass(expectedClass))"
-        return instance && instance!.isMemberOfClass(expectedClass)
+        failureMessage.postfixMessage = "be a subclass of \(NSStringFromClass(expectedClass))"
+        return instance && instance!.isKindOfClass(expectedClass)
     }
 }
