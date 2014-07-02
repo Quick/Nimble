@@ -6,6 +6,9 @@ class SynchronousTest: XCTestCase {
         failsWithErrorMessage("My error message") {
             fail("My error message")
         }
+        failsWithErrorMessage("fail() always fails") {
+            fail()
+        }
     }
 
     func testToMatchesIfMatcherReturnsTrue() {

@@ -49,5 +49,5 @@ func fail(message: String, file: String = __FILE__, line: Int = __LINE__) {
 }
 
 func fail(file: String = __FILE__, line: Int = __LINE__) {
-    fail("Failed")
+    fail("fail() always fails")
 }
