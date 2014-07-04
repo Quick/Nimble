@@ -7,12 +7,11 @@
 
 #define KICK_EXPORT FOUNDATION_EXPORT
 
-#ifdef KICK_DISABLE_SHORTHAND
+#ifdef KICK_DISABLE_SHORT_SYNTAX
 #define KICK_SHORT(PROTO, ORIGINAL)
 #else
 #define KICK_SHORT(PROTO, ORIGINAL) FOUNDATION_STATIC_INLINE PROTO { return (ORIGINAL); }
 #endif
-
 
 KICK_EXPORT KICExpectation *KIC_expect(id(^actualBlock)(), const char *file, int line);
 
@@ -76,6 +75,6 @@ KICK_EXPORT id<KICMatcher> KIC_endWith(id itemElementOrSubstring);
 KICK_SHORT(id<KICMatcher> endWith(id itemElementOrSubstring),
            KIC_endWith(itemElementOrSubstring));
 
-#ifndef KICK_DISABLE_SHORTHAND
+#ifndef KICK_DISABLE_SHORT_SYNTAX
 #define expect(...) KIC_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
 #endif
