@@ -14,6 +14,8 @@ Usage
 
 Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're generic-based:
 
+    import Kick
+    // ...
     expect(1).to(equal(1))
     expect(1.2).to(beCloseTo(1.1, within: 1))
     
@@ -81,6 +83,20 @@ And like the other asynchronous expectation, an optional timeout period can be p
         done()
     }
 
+Objective-C
+===========
+
+**Experimental Support**
+
+Want to use this for Objective-C? The same syntax applies except you **must use Objective-C objects**:
+
+
+    #import <Kick/Kick.h>
+    // ...
+    expect(@1).to(equal(@1));
+    expect(@1.2).to(beCloseTo(@1.3).within(@0.5));
+    expect(@[@1, @2]).to(contain(@1));
+
 
 List of Builtin Matchers
 -------------------------
@@ -129,10 +145,10 @@ or failure to match.
 Using Swift's generics, matchers can constrain the type of the actual value received
 from ``expect(<actualValue>)`` by modifying the return type:
 
-    protocol FuzzyThing { }
+    @objc protocol FuzzyThing { } // objc for objc support (see Objective-C section below)
     // Only expect(fuzzyObject).to(beFuzzy()) is allowed by the compiler,
-    // where fuzzyObject supports the FuzzyThing protocol.
-    func beFuzzy() -> MatcherFunc<FuzzyThing> {
+    // where fuzzyObject supports the FuzzyThing protocol or is nil.
+    func beFuzzy() -> MatcherFunc<FuzzyThing?> {
         return MatcherFunc { actualExpression, failureMessage in
             // ...
         }
@@ -149,4 +165,36 @@ matcher:
     failureMessage.postfixMessage = "yo"
     // resulting error: expected to yo
 
+Supporting Objective-C
+----------------------
+
+Since Swift generics cannot interop with Objective-C, you need to wrap your matchers
+and expose them as regular C-functions. The common location is to place them in
+``KICObjCMatcher``:
+
+    // Swift
+    extension KICObjCMatcher {
+        class func beFuzzyMatcher() -> KICObjCMatcher {
+            return KICObjCMatcher { actualBlock, failureMessage, location in
+                let expr = Expression(expression: ({ actualBlock() as FuzzyThing? }), location: location)
+                return beFuzzy().matches(expr, failureMessage: failureMessage)
+            }
+        }
+    }
+
+Afterwards, you'll probably want a nice interface for usage:
+
+    // Objective-C
+    FOUNDATION_EXPORT id<KICMatcher> beFuzzy() {
+        return [KICObjCMatcher beFuzzyMatcher];
+    }
+
+When supporting Objective-C, make sure you handle ``nil`` appropriately. Like [Cedar](https://github.com/pivotal/cedar/issues/100),
+**most matchers do not match with nil**. This is to prevent accidental nil-fallthroughs:
+
+    expect(nil).to(equal(nil)); // fails
+
+Which ``beNil()`` allows for explicit resolution:
+
+    expect(nil).to(beNil()); // passes
 
