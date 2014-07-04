@@ -44,3 +44,12 @@ func !=<T: KICComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.toNot(equal(rhs))
     return true
 }
+
+extension KICDSLMatcher {
+    class func equalMatcher(expected: NSObject) -> KICMatcher {
+        return KICDSLMatcher { actualExpression, failureMessage, location in
+            let expr = Expression(expression: actualExpression, location: location)
+            return equal(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}

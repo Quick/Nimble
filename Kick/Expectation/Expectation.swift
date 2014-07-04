@@ -29,5 +29,7 @@ struct Expectation<T> {
         toNot(matcher)
     }
 
-    // see  FullMatcherWrapper and AsyncMatcherWrapper for extensions
+    // see FullMatcherWrapper and AsyncMatcherWrapper for extensions
+    // see KICExpectation for Objective-C interface
 }
+

@@ -8,6 +8,11 @@ protocol Matcher {
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
 }
 
+// Objective-C interface to a similar interface
+@objc protocol KICMatcher {
+    func matches(actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+}
+
 // Implement this protocol if you just want a simplier matcher. The negation
 // is provided for you automatically.
 //

@@ -11,8 +11,6 @@
 		1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */; };
 		1F0648D51963AAB2001F9C46 /* SynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */; };
-		1F0648D71963B957001F9C46 /* KICExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D61963B957001F9C46 /* KICExpect.m */; };
-		1F0648D81963B957001F9C46 /* KICExpect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D61963B957001F9C46 /* KICExpect.m */; };
 		1F14FB64194180C5009F2A08 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F1A742F1940169200FFFC47 /* Kick.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Kick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1A74351940169200FFFC47 /* Kick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A74291940169200FFFC47 /* Kick.framework */; };
@@ -57,11 +55,10 @@
 		1F70E713194D66DF00951D6E /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E700194D66DF00951D6E /* Equal.swift */; };
 		1F70E714194D66DF00951D6E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E701194D66DF00951D6E /* Protocols.swift */; };
 		1F70E715194D66DF00951D6E /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E702194D66DF00951D6E /* RaisesException.swift */; };
-		1F70E716194D66DF00951D6E /* KICExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* KICExceptionCapture.h */; };
+		1F70E716194D66DF00951D6E /* KICExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* KICExceptionCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F70E717194D66DF00951D6E /* KICExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E705194D66DF00951D6E /* KICExceptionCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc-exceptions"; }; };
 		1F83CC60195E784100B7F821 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83CC5F195E784100B7F821 /* FailureMessage.swift */; };
 		1F83CC61195E784100B7F821 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83CC5F195E784100B7F821 /* FailureMessage.swift */; };
-		1F925EB2195C0D6300ED456B /* Kick-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F925EB1195C0D6300ED456B /* Kick-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F925EB8195C0D6300ED456B /* Kick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F925EAD195C0D6300ED456B /* Kick.framework */; };
 		1F925EC7195C0DD100ED456B /* Kick.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Kick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F925EC8195C0DDA00ED456B /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
@@ -86,7 +83,7 @@
 		1F925EDD195C0DE600ED456B /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98FA411953FA430055F8EB /* BeginWith.swift */; };
 		1F925EDE195C0DE600ED456B /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98FA431953FFAE0055F8EB /* EndWith.swift */; };
 		1F925EDF195C0DEB00ED456B /* KICExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F70E705194D66DF00951D6E /* KICExceptionCapture.m */; };
-		1F925EE0195C0DEF00ED456B /* KICExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* KICExceptionCapture.h */; };
+		1F925EE0195C0DEF00ED456B /* KICExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F70E704194D66DF00951D6E /* KICExceptionCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F925EE1195C0DF600ED456B /* Kick-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A744D1940171400FFFC47 /* Kick-Bridging-Header.h */; };
 		1F925EE2195C0DFD00ED456B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F925EE6195C121200ED456B /* AsynchronousTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925EE5195C121200ED456B /* AsynchronousTest.swift */; };
@@ -126,6 +123,10 @@
 		1FB9009C195EC4FA001D7FAE /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */; };
 		1FCE5DCC1963F24900BCA160 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE5DCB1963F24900BCA160 /* Poll.swift */; };
 		1FCE5DCD1963F24900BCA160 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE5DCB1963F24900BCA160 /* Poll.swift */; };
+		1FFD729E1963FCAC00CD29A2 /* CompatibilityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD729D1963FCAC00CD29A2 /* CompatibilityTest.m */; };
+		1FFD729F1963FCAC00CD29A2 /* CompatibilityTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD729D1963FCAC00CD29A2 /* CompatibilityTest.m */; };
+		1FFD72AB1965230E00CD29A2 /* ObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD72AA1965230E00CD29A2 /* ObjCMatcher.swift */; };
+		1FFD72AC1965230E00CD29A2 /* ObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD72AA1965230E00CD29A2 /* ObjCMatcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,7 +163,6 @@
 /* Begin PBXFileReference section */
 		1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectWithLazyProperty.swift; sourceTree = "<group>"; };
 		1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronousTests.swift; sourceTree = "<group>"; };
-		1F0648D61963B957001F9C46 /* KICExpect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KICExpect.m; sourceTree = "<group>"; };
 		1F14FB63194180C5009F2A08 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		1F1A74291940169200FFFC47 /* Kick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1A742D1940169200FFFC47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -206,7 +206,6 @@
 		1F83CC5F195E784100B7F821 /* FailureMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailureMessage.swift; sourceTree = "<group>"; };
 		1F925EAD195C0D6300ED456B /* Kick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F925EB0195C0D6300ED456B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F925EB1195C0D6300ED456B /* Kick-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kick-OSX.h"; sourceTree = "<group>"; };
 		1F925EB7195C0D6300ED456B /* Kick-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Kick-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F925EBD195C0D6300ED456B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F925EE5195C121200ED456B /* AsynchronousTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousTest.swift; sourceTree = "<group>"; };
@@ -229,6 +228,10 @@
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FB9009A195EC4FA001D7FAE /* BeIdenticalTo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalTo.swift; sourceTree = "<group>"; };
 		1FCE5DCB1963F24900BCA160 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		1FFD729B1963FCAB00CD29A2 /* KickTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KickTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		1FFD729C1963FCAB00CD29A2 /* Kick-OSXTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kick-OSXTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		1FFD729D1963FCAC00CD29A2 /* CompatibilityTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompatibilityTest.m; sourceTree = "<group>"; };
+		1FFD72AA1965230E00CD29A2 /* ObjCMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCMatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +326,7 @@
 			children = (
 				1F925EE5195C121200ED456B /* AsynchronousTest.swift */,
 				1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */,
+				1FFD729A1963FC8200CD29A2 /* objc */,
 				1F14FB61194180A7009F2A08 /* Helpers */,
 				1F925EE3195C11B000ED456B /* Matchers */,
 				1F1A74391940169200FFFC47 /* Supporting Files */,
@@ -344,6 +348,7 @@
 				1F254308195F696600684FC4 /* AsyncMatcherWrapper.swift */,
 				1F254309195F696600684FC4 /* FullMatcherWrapper.swift */,
 				1F25430A195F696600684FC4 /* MatcherFunc.swift */,
+				1FFD72AA1965230E00CD29A2 /* ObjCMatcher.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -414,7 +419,6 @@
 			children = (
 				1F70E704194D66DF00951D6E /* KICExceptionCapture.h */,
 				1F70E705194D66DF00951D6E /* KICExceptionCapture.m */,
-				1F0648D61963B957001F9C46 /* KICExpect.m */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -422,7 +426,6 @@
 		1F925EAE195C0D6300ED456B /* Kick-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				1F925EB1195C0D6300ED456B /* Kick-OSX.h */,
 				1F925EAF195C0D6300ED456B /* Supporting Files */,
 			);
 			path = "Kick-OSX";
@@ -476,6 +479,16 @@
 			path = Matchers;
 			sourceTree = "<group>";
 		};
+		1FFD729A1963FC8200CD29A2 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				1FFD729D1963FCAC00CD29A2 /* CompatibilityTest.m */,
+				1FFD729B1963FCAB00CD29A2 /* KickTests-Bridging-Header.h */,
+				1FFD729C1963FCAB00CD29A2 /* Kick-OSXTests-Bridging-Header.h */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -495,7 +508,6 @@
 			files = (
 				1F925EE0195C0DEF00ED456B /* KICExceptionCapture.h in Headers */,
 				1F925EC7195C0DD100ED456B /* Kick.h in Headers */,
-				1F925EB2195C0D6300ED456B /* Kick-OSX.h in Headers */,
 				1F925EE1195C0DF600ED456B /* Kick-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,8 +676,8 @@
 				1F70E714194D66DF00951D6E /* Protocols.swift in Sources */,
 				1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */,
 				1F70E70B194D66DF00951D6E /* BeAnInstanceOf.swift in Sources */,
+				1FFD72AB1965230E00CD29A2 /* ObjCMatcher.swift in Sources */,
 				1F1B5ACE1963E10700CA8BF9 /* BeASubclassOf.swift in Sources */,
-				1F0648D71963B957001F9C46 /* KICExpect.m in Sources */,
 				1F70E70E194D66DF00951D6E /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F70E717194D66DF00951D6E /* KICExceptionCapture.m in Sources */,
 				1F98FA401953F34E0055F8EB /* Contain.swift in Sources */,
@@ -705,6 +717,7 @@
 				1F925F0E195C18F500ED456B /* BeLessThanOrEqualToTest.swift in Sources */,
 				1F925EFC195C186800ED456B /* BeginWithTest.swift in Sources */,
 				1F14FB64194180C5009F2A08 /* utils.swift in Sources */,
+				1FFD729E1963FCAC00CD29A2 /* CompatibilityTest.m in Sources */,
 				1F925F02195C189500ED456B /* ContainTest.swift in Sources */,
 				1F299EB11962880F002641AF /* beOneOfTest.swift in Sources */,
 				1F925F11195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
@@ -733,8 +746,8 @@
 				1F925EC9195C0DE000ED456B /* AssertionRecorder.swift in Sources */,
 				1F925ED2195C0DE600ED456B /* BeCloseTo.swift in Sources */,
 				1F925EDB195C0DE600ED456B /* RaisesException.swift in Sources */,
+				1FFD72AC1965230E00CD29A2 /* ObjCMatcher.swift in Sources */,
 				1F1B5ACF1963E10700CA8BF9 /* BeASubclassOf.swift in Sources */,
-				1F0648D81963B957001F9C46 /* KICExpect.m in Sources */,
 				1F925EDE195C0DE600ED456B /* EndWith.swift in Sources */,
 				1F925ECF195C0DE000ED456B /* Expression.swift in Sources */,
 				1F925ED3195C0DE600ED456B /* BeGreaterThan.swift in Sources */,
@@ -774,6 +787,7 @@
 				1F925F0F195C18F500ED456B /* BeLessThanOrEqualToTest.swift in Sources */,
 				1F925EFD195C186800ED456B /* BeginWithTest.swift in Sources */,
 				1F925EE2195C0DFD00ED456B /* utils.swift in Sources */,
+				1FFD729F1963FCAC00CD29A2 /* CompatibilityTest.m in Sources */,
 				1F925F03195C189500ED456B /* ContainTest.swift in Sources */,
 				1F299EB21962880F002641AF /* beOneOfTest.swift in Sources */,
 				1F925F12195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
@@ -916,6 +930,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Kick/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -944,6 +959,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Kick/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -961,6 +977,7 @@
 		1F1A74431940169200FFFC47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -973,12 +990,15 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KickTests/objc/KickTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1F1A74441940169200FFFC47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -987,6 +1007,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "KickTests/objc/KickTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1007,6 +1028,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Kick-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1038,6 +1060,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				FRAMEWORK_VERSION = A;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Kick-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1058,6 +1081,7 @@
 		1F925EC4195C0D6300ED456B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1073,12 +1097,15 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "KickTests/objc/Kick-OSXTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		1F925EC5195C0D6300ED456B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1091,6 +1118,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "KickTests/objc/Kick-OSXTests-Bridging-Header.h";
 			};
 			name = Release;
 		};

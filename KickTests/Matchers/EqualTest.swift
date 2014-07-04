@@ -61,6 +61,7 @@ class EqualTest: XCTestCase {
     func testOptionalEquality() {
         expect(1 as CInt?).to(equal(1))
         expect(1 as CInt?).to(equal(1 as CInt?))
+        expect(nil as NSObject?).toNot(equal(1))
 
         expect(nil).toNot(equal(1))
         expect(1).toNot(equal(nil))
