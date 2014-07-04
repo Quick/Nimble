@@ -5,12 +5,9 @@ func _identityAsString(value: NSObject?) -> String {
     if !value {
         return "nil"
     }
-    var str: String
     let args = VaListBuilder()
-    args.append(value!.description)
     args.append(value!)
-    str = NSString(format: "<%@> (0x%p)", arguments: args.va_list())
-    return str
+    return NSString(format: "<%p>", arguments: args.va_list())
 }
 
 func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {

@@ -7,7 +7,7 @@ func beLessThan<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     }
 }
 
-func beLessThan<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
+func beLessThan(expectedValue: KICComparable?) -> MatcherFunc<KICComparable?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
@@ -21,7 +21,17 @@ func <<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     return true
 }
 
-func <<T: KICComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+func <(lhs: Expectation<KICComparable?>, rhs: KICComparable?) -> Bool {
     lhs.to(beLessThan(rhs))
     return true
+}
+
+extension KICObjCMatcher {
+    class func beLessThanMatcher(expected: KICComparable?) -> KICObjCMatcher {
+        return KICObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ actualBlock() as KICComparable? })
+            let expr = Expression(expression: block, location: location)
+            return beLessThan(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
 }

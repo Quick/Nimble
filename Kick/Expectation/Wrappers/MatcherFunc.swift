@@ -12,8 +12,8 @@ struct MatcherFunc<T>: BasicMatcher {
     }
 }
 
-func _objc(matcher: MatcherFunc<NSObject?>) -> KICDSLMatcher {
-    return KICDSLMatcher { actualExpression, failureMessage, location in
+func _objc(matcher: MatcherFunc<NSObject?>) -> KICObjCMatcher {
+    return KICObjCMatcher { actualExpression, failureMessage, location in
         let expr = Expression(expression: actualExpression, location: location)
         return matcher.matches(expr, failureMessage: failureMessage)
     }

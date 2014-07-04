@@ -32,3 +32,18 @@ func endWith(endingSubstring: String) -> MatcherFunc<String> {
         return range.endIndex == collection.endIndex
     }
 }
+
+extension KICObjCMatcher {
+    class func endWithMatcher(expected: AnyObject) -> KICObjCMatcher {
+        return KICObjCMatcher { actualBlock, failureMessage, location in
+            let actual = actualBlock()
+            if let actualString = actual as? String {
+                let expr = Expression(expression: ({ actualString }), location: location)
+                return endWith(expected as NSString).matches(expr, failureMessage: failureMessage)
+            } else {
+                let expr = Expression(expression: ({ actual as? KICOrderedCollection }), location: location)
+                return endWith(expected).matches(expr, failureMessage: failureMessage)
+            }
+        }
+    }
+}

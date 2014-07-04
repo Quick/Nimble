@@ -45,9 +45,9 @@ func !=<T: KICComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-extension KICDSLMatcher {
+extension KICObjCMatcher {
     class func equalMatcher(expected: NSObject) -> KICMatcher {
-        return KICDSLMatcher { actualExpression, failureMessage, location in
+        return KICObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return equal(expected).matches(expr, failureMessage: failureMessage)
         }

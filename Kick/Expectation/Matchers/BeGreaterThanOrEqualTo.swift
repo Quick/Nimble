@@ -26,3 +26,13 @@ func >=<T: KICComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     lhs.to(beGreaterThanOrEqualTo(rhs))
     return true
 }
+
+extension KICObjCMatcher {
+    class func beGreaterThanOrEqualToMatcher(expected: KICComparable?) -> KICObjCMatcher {
+        return KICObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ actualBlock() as KICComparable? })
+            let expr = Expression(expression: block, location: location)
+            return beGreaterThanOrEqualTo(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}

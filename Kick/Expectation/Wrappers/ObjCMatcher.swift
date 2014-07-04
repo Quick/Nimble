@@ -5,13 +5,13 @@ struct ObjCMatcherWrapper : Matcher {
     let to: String
     let toNot: String
 
-    func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
+    func matches(actualExpression: Expression<NSObject?>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = to
         let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
         return pass
     }
 
-    func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
+    func doesNotMatch(actualExpression: Expression<NSObject?>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = toNot
         let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
         return !pass
@@ -34,7 +34,7 @@ class KICExpectation : NSObject {
 
     var to: (matcher: KICMatcher) -> Void {
         return ({(matcher: KICMatcher) -> Void in
-            expect(file: self._file, line: self._line) { self._actualBlock() }.to(
+            expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.to(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
             )
         })
@@ -42,14 +42,16 @@ class KICExpectation : NSObject {
 
     var toNot: (matcher: KICMatcher) -> Void {
         return ({(matcher: KICMatcher) -> Void in
-            expect(file: self._file, line: self._line){ self._actualBlock() }.toNot(
+            expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toNot(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
             )
         })
     }
+
+    var notTo: (matcher: KICMatcher) -> Void { return toNot }
 }
 
-@objc class KICDSLMatcher : KICMatcher {
+@objc class KICObjCMatcher : KICMatcher {
     let _matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
     init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool) {
         self._matcher = matcher

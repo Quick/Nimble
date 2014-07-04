@@ -12,3 +12,12 @@ func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
         return instance && instance!.isMemberOfClass(expectedClass)
     }
 }
+
+extension KICObjCMatcher {
+    class func beAnInstanceOfMatcher(expected: AnyClass) -> KICMatcher {
+        return KICObjCMatcher { actualExpression, failureMessage, location in
+            let expr = Expression(expression: actualExpression, location: location)
+            return beAnInstanceOf(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}

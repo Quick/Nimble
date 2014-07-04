@@ -19,3 +19,18 @@ func contain(items: AnyObject?...) -> MatcherFunc<KICContainer?> {
         }
     }
 }
+
+extension KICObjCMatcher {
+    class func containMatcher(expected: NSObject?) -> KICObjCMatcher {
+        return KICObjCMatcher { actualBlock, failureMessage, location in
+            let block: () -> KICContainer? = ({
+                if let value = actualBlock() as? KICContainer {
+                    return value
+                }
+                return nil
+            })
+            let expr = Expression(expression: block, location: location)
+            return contain(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}

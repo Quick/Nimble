@@ -11,10 +11,13 @@ class FailureMessage {
     }
 
     func stringValue() -> String {
+        var value = "\(expected) \(to) \(postfixMessage)"
         if actualValue {
-            return "\(expected) \(actualValue) \(to) \(postfixMessage)"
-        } else {
-            return "\(expected) \(to) \(postfixMessage)"
+            value = "\(expected) \(actualValue) \(to) \(postfixMessage)"
         }
+        var lines: String[] = (value as NSString).componentsSeparatedByString("\n") as String[]
+        let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        lines = lines.map { line in line.stringByTrimmingCharactersInSet(whitespace) }
+        return "".join(lines)
     }
 }

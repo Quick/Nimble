@@ -17,7 +17,7 @@ class BeIdenticalToTest: XCTestCase {
         let args = VaListBuilder()
         args.append(num1)
         args.append(num2)
-        let message = NSString(format: "expected <1> (0x%p) to be identical to <2> (0x%p)", arguments: args.va_list())
+        let message = NSString(format: "expected <%p> to be identical to <%p>", arguments: args.va_list())
         failsWithErrorMessage(message) {
             expect(num1).to(beIdenticalTo(num2))
         }
@@ -28,10 +28,8 @@ class BeIdenticalToTest: XCTestCase {
         let value2 = NSArray(array: [])
         let args = VaListBuilder()
         args.append(value1)
-        args.append(value1)
         args.append(value2)
-        args.append(value2)
-        let message = NSString(format: "expected <%@> (0x%p) to not be identical to <%@> (0x%p)", arguments: args.va_list())
+        let message = NSString(format: "expected <%p> to not be identical to <%p>", arguments: args.va_list())
         failsWithErrorMessage(message) {
             expect(value1).toNot(beIdenticalTo(value2))
         }

@@ -14,3 +14,13 @@ func beNil() -> MatcherFunc<NilType> {
         return true
     }
 }
+
+extension KICObjCMatcher {
+    class func beNilMatcher() -> KICObjCMatcher {
+        return KICObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ actualBlock() as NSObject? })
+            let expr = Expression(expression: block, location: location)
+            return beNil().matches(expr, failureMessage: failureMessage)
+        }
+    }
+}
