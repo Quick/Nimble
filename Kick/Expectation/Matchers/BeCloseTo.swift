@@ -1,9 +1,13 @@
 import Foundation
 
-func _isCloseTo(actualValue: Double, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
-    failureMessage.actualValue = "<\(stringify(actualValue))>"
+func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
-    return abs(actualValue - expectedValue) < delta
+    if actualValue {
+        failureMessage.actualValue = "<\(stringify(actualValue!))>"
+    } else {
+        failureMessage.actualValue = "<nil>"
+    }
+    return actualValue && abs(actualValue! - expectedValue) < delta
 }
 
 func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
@@ -12,9 +16,9 @@ func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherF
     }
 }
 
-func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<KICDoubleConvertible> {
+func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<KICDoubleConvertible?> {
     return MatcherFunc { actualExpression, failureMessage in
-        return _isCloseTo(actualExpression.evaluate().doubleValue, expectedValue.doubleValue, delta, failureMessage)
+        return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
 
@@ -23,7 +27,9 @@ class KICObjCBeCloseToMatcher : KICObjCMatcher {
     init(expected: NSNumber, within: CDouble) {
         self._expected = expected
         super.init(matcher: { actualExpression, failureMessage, location in
-            let actualBlock = ({ actualExpression() as KICDoubleConvertible })
+            let actualBlock: () -> KICDoubleConvertible? = ({
+                return actualExpression() as? KICDoubleConvertible
+            })
             let expr = Expression(expression: actualBlock, location: location)
             return beCloseTo(expected, within: within).matches(expr, failureMessage: failureMessage)
         })

@@ -6,7 +6,11 @@ func beIdenticalTo<T: NSObject>(expected: T?) -> MatcherFunc<T?> {
         let actual = actualExpression.evaluate()
         failureMessage.actualValue = "\(_identityAsString(actual))"
         failureMessage.postfixMessage = "be identical to \(_identityAsString(expected))"
-        return actual === expected
+        let matches = actual === expected && actual !== nil
+        if !matches && actual === nil {
+            failureMessage.postfixMessage += " (will not compare nils, use beNil() instead)"
+        }
+        return matches
     }
 }
 

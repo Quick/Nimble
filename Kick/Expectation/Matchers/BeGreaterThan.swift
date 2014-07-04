@@ -11,7 +11,6 @@ func beGreaterThan(expectedValue: KICComparable?) -> MatcherFunc<KICComparable?>
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
-        actualValue!.KIC_compare(expectedValue)
         let matches = actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedDescending
         return matches
     }

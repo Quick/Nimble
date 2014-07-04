@@ -5,7 +5,11 @@ struct _EqualMatcher<T: Equatable>: BasicMatcher {
 
     func matches(actualExpression: Expression<T?>, failureMessage: FailureMessage) -> Bool  {
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
-        return actualExpression.evaluate() == expectedValue
+        let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
+        if !matches && expectedValue == nil {
+            failureMessage.postfixMessage = " (will not match nils, use beNil() instead)"
+        }
+        return matches
     }
 }
 

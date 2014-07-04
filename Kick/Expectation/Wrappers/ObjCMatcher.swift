@@ -24,12 +24,19 @@ class KICExpectation : NSObject {
     var _negative: Bool
     let _file: String
     let _line: Int
+    var _timeout: NSTimeInterval = 1.0
 
     init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: Int) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
         self._line = line
+    }
+
+    var withTimeout: (NSTimeInterval) -> KICExpectation {
+        return ({ timeout in self._timeout = timeout
+            return self
+        })
     }
 
     var to: (matcher: KICMatcher) -> Void {
@@ -49,6 +56,24 @@ class KICExpectation : NSObject {
     }
 
     var notTo: (matcher: KICMatcher) -> Void { return toNot }
+
+    var toEventually: (matcher: KICMatcher) -> Void {
+        return ({(matcher: KICMatcher) -> Void in
+            expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventually(
+                ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),
+                timeout: self._timeout
+            )
+        })
+    }
+
+    var toEventuallyNot: (matcher: KICMatcher) -> Void {
+        return ({(matcher: KICMatcher) -> Void in
+            expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventuallyNot(
+                ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),
+                timeout: self._timeout
+            )
+        })
+    }
 }
 
 @objc class KICObjCMatcher : KICMatcher {
@@ -64,3 +89,4 @@ class KICExpectation : NSObject {
             location: location)
     }
 }
+

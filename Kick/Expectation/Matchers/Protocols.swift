@@ -31,7 +31,7 @@ extension NSArray : KICContainer {}
 extension NSSet : KICContainer {}
 extension NSHashTable : KICContainer {}
 
-// Protocol for types that support beEmpty()
+// Protocol for types that support only beEmpty()
 @objc protocol KICCollection {
     var count: Int { get }
 }
@@ -39,7 +39,7 @@ extension NSSet : KICCollection {}
 extension NSDictionary : KICCollection {}
 extension NSHashTable : KICCollection {}
 
-// Protocol for types that support beginWith() and endWith() matcher
+// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 @objc protocol KICOrderedCollection : KICCollection {
     func indexOfObject(object: AnyObject!) -> Int
 }
