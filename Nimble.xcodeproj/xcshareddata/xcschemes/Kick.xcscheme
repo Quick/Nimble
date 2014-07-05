@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F1A74281940169200FFFC47"
-               BuildableName = "Kick.framework"
-               BlueprintName = "Kick"
-               ReferencedContainer = "container:Kick.xcodeproj">
+               BuildableName = "Nimble.framework"
+               BlueprintName = "Nimble"
+               ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F1A74331940169200FFFC47"
-               BuildableName = "KickTests.xctest"
-               BlueprintName = "KickTests"
-               ReferencedContainer = "container:Kick.xcodeproj">
+               BuildableName = "NimbleTests.xctest"
+               BlueprintName = "NimbleTests"
+               ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

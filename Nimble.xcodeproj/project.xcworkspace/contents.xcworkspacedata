@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Kick.xcodeproj">
+      location = "self:Nimble.xcodeproj">
    </FileRef>
 </Workspace>

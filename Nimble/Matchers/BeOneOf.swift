@@ -1,5 +1,5 @@
 import Foundation
-import Kick
+import Nimble
 
 func beOneOf<T: Equatable>(allowedValues: T[]) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in

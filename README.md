@@ -1,4 +1,4 @@
-Kick
+Nimble
 ======
 
 A Matchers Framework for Swift.
@@ -6,7 +6,7 @@ A Matchers Framework for Swift.
 Setup
 -----
 
-Currently, you must add this project as a subproject and link against the Kick.framework.
+Currently, you must add this project as a subproject and link against the Nimble.framework.
 
 
 Usage
@@ -14,7 +14,7 @@ Usage
 
 Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're generic-based:
 
-    import Kick
+    import Nimble
     // ...
     expect(1).to(equal(1))
     expect(1.2).to(beCloseTo(1.1, within: 1))
@@ -39,7 +39,7 @@ Or you can use trailing-closure style as needed:
         "hello"
     }.to(equalTo("hello"))
 
-Kick uses generics, so C primitives are allowed without any wrapping:
+Nimble uses generics, so C primitives are allowed without any wrapping:
 
     let actual: CInt = 1
     let expectedValue: CInt = 1
@@ -91,7 +91,7 @@ Objective-C
 Want to use this for Objective-C? The same syntax applies except you **must use Objective-C objects**:
 
 
-    #import <Kick/Kick.h>
+    #import <Nimble/Nimble.h>
     // ...
     expect(@1).to(equal(@1));
     expect(@1.2).to(beCloseTo(@1.3).within(@0.5));
@@ -101,7 +101,7 @@ Want to use this for Objective-C? The same syntax applies except you **must use 
 List of Builtin Matchers
 -------------------------
 
-The following matchers are currently included with Kick:
+The following matchers are currently included with Nimble:
 
 - ``equal(expectedValue)`` (also ``==`` and ``!=`` operators). Values must be ``Equatable``, ``Comparable``, or ``NSObjects``.
 - ``beCloseTo(expectedValue, within: Double = 0.0001)``. Values must be coercable into a ``Double``.
