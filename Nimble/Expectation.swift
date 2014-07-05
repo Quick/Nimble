@@ -30,6 +30,6 @@ struct Expectation<T> {
     }
 
     // see FullMatcherWrapper and AsyncMatcherWrapper for extensions
-    // see KICExpectation for Objective-C interface
+    // see NMBExpectation for Objective-C interface
 }
 

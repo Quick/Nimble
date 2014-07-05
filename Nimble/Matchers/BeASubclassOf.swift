@@ -13,9 +13,9 @@ func beASubclassOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
     }
 }
 
-extension KICObjCMatcher {
-    class func beASubclassOfMatcher(expected: AnyClass) -> KICMatcher {
-        return KICObjCMatcher { actualExpression, failureMessage, location in
+extension NMBObjCMatcher {
+    class func beASubclassOfMatcher(expected: AnyClass) -> NMBMatcher {
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return beASubclassOf(expected).matches(expr, failureMessage: failureMessage)
         }

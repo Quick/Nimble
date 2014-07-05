@@ -37,7 +37,7 @@ struct Expression<T> {
     func evaluateAndCaptureException() -> (T?, NSException?) {
         var exception: NSException?
         var result: T?
-        var capture = KICExceptionCapture(handler: ({ e in
+        var capture = NMBExceptionCapture(handler: ({ e in
             exception = e
         }), finally: nil)
 

@@ -23,9 +23,9 @@ func !==<T: NSObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-extension KICObjCMatcher {
-    class func beIdenticalToMatcher(expected: NSObject?) -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+extension NMBObjCMatcher {
+    class func beIdenticalToMatcher(expected: NSObject?) -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ actualBlock() as NSObject? })
             let expr = Expression(expression: block, location: location)
             return beIdenticalTo(expected).matches(expr, failureMessage: failureMessage)

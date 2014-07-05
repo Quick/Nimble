@@ -1,11 +1,11 @@
-#import "KICExceptionCapture.h"
+#import "NMBExceptionCapture.h"
 
-@interface KICExceptionCapture ()
+@interface NMBExceptionCapture ()
 @property (nonatomic, copy) void(^handler)(NSException *exception);
 @property (nonatomic, copy) void(^finally)();
 @end
 
-@implementation KICExceptionCapture
+@implementation NMBExceptionCapture
 
 - (id)initWithHandler:(void(^)(NSException *))handler finally:(void(^)())finally {
     self = [super init];

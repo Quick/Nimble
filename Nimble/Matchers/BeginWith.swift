@@ -8,7 +8,7 @@ func beginWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(sta
     }
 }
 
-func beginWith(startingElement: AnyObject) -> MatcherFunc<KICOrderedCollection?> {
+func beginWith(startingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = actualExpression.evaluate()
@@ -25,15 +25,15 @@ func beginWith(startingSubstring: String) -> MatcherFunc<String> {
     }
 }
 
-extension KICObjCMatcher {
-    class func beginWithMatcher(expected: AnyObject) -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+extension NMBObjCMatcher {
+    class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let actual = actualBlock()
             if let actualString = actual as? String {
                 let expr = Expression(expression: ({ actualString }), location: location)
                 return beginWith(expected as NSString).matches(expr, failureMessage: failureMessage)
             } else {
-                let expr = Expression(expression: ({ actual as? KICOrderedCollection }), location: location)
+                let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
                 return beginWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }

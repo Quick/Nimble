@@ -37,16 +37,16 @@ func beFalsy() -> _BeOptionalBoolMatcher {
     return _BeOptionalBoolMatcher(expectedValue: false, stringValue: "falsy")
 }
 
-extension KICObjCMatcher {
-    class func beTruthyMatcher() -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+extension NMBObjCMatcher {
+    class func beTruthyMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ (actualBlock() as? NSNumber)?.boolValue })
             let expr = Expression(expression: block, location: location)
             return beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
-    class func beFalsyMatcher() -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+    class func beFalsyMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ (actualBlock() as? NSNumber)?.boolValue })
             let expr = Expression(expression: block, location: location)
             return beFalsy().matches(expr, failureMessage: failureMessage)

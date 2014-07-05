@@ -7,11 +7,11 @@ func beLessThan<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     }
 }
 
-func beLessThan(expectedValue: KICComparable?) -> MatcherFunc<KICComparable?> {
+func beLessThan(expectedValue: NMBComparable?) -> MatcherFunc<NMBComparable?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
-        let matches = actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedAscending
+        let matches = actualValue && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedAscending
         return matches
     }
 }
@@ -21,15 +21,15 @@ func <<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     return true
 }
 
-func <(lhs: Expectation<KICComparable?>, rhs: KICComparable?) -> Bool {
+func <(lhs: Expectation<NMBComparable?>, rhs: NMBComparable?) -> Bool {
     lhs.to(beLessThan(rhs))
     return true
 }
 
-extension KICObjCMatcher {
-    class func beLessThanMatcher(expected: KICComparable?) -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as KICComparable? })
+extension NMBObjCMatcher {
+    class func beLessThanMatcher(expected: NMBComparable?) -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ actualBlock() as NMBComparable? })
             let expr = Expression(expression: block, location: location)
             return beLessThan(expected).matches(expr, failureMessage: failureMessage)
         }

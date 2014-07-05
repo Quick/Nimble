@@ -28,7 +28,7 @@ func raiseException() -> MatcherFunc<Any?> {
     }
 }
 
-@objc class KICObjCRaiseExceptionMatcher : KICMatcher {
+@objc class NMBObjCRaiseExceptionMatcher : NMBMatcher {
     var _name: String?
     var _reason: String?
     init(name: String?, reason: String?) {
@@ -48,21 +48,21 @@ func raiseException() -> MatcherFunc<Any?> {
         }
     }
 
-    var named: (name: String) -> KICObjCRaiseExceptionMatcher {
+    var named: (name: String) -> NMBObjCRaiseExceptionMatcher {
         return ({ name in
-            return KICObjCRaiseExceptionMatcher(name: name, reason: self._reason)
+            return NMBObjCRaiseExceptionMatcher(name: name, reason: self._reason)
         })
     }
 
-    var reason: (reason: String?) -> KICObjCRaiseExceptionMatcher {
+    var reason: (reason: String?) -> NMBObjCRaiseExceptionMatcher {
         return ({ reason in
-            return KICObjCRaiseExceptionMatcher(name: self._name, reason: reason)
+            return NMBObjCRaiseExceptionMatcher(name: self._name, reason: reason)
         })
     }
 }
 
-extension KICObjCMatcher {
-    class func raiseExceptionMatcher() -> KICObjCRaiseExceptionMatcher {
-        return KICObjCRaiseExceptionMatcher(name: nil, reason: nil)
+extension NMBObjCMatcher {
+    class func raiseExceptionMatcher() -> NMBObjCRaiseExceptionMatcher {
+        return NMBObjCRaiseExceptionMatcher(name: nil, reason: nil)
     }
 }

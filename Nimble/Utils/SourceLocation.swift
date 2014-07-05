@@ -1,8 +1,7 @@
 import Foundation
 
 
-@objc
-class SourceLocation : Printable {
+@objc class SourceLocation : Printable {
     let file: String
     let line: Int
 

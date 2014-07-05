@@ -10,7 +10,7 @@ func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items
     }
 }
 
-func contain(items: AnyObject?...) -> MatcherFunc<KICContainer?> {
+func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
@@ -20,11 +20,11 @@ func contain(items: AnyObject?...) -> MatcherFunc<KICContainer?> {
     }
 }
 
-extension KICObjCMatcher {
-    class func containMatcher(expected: NSObject?) -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
-            let block: () -> KICContainer? = ({
-                if let value = actualBlock() as? KICContainer {
+extension NMBObjCMatcher {
+    class func containMatcher(expected: NSObject?) -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
+            let block: () -> NMBContainer? = ({
+                if let value = actualBlock() as? NMBContainer {
                     return value
                 }
                 return nil

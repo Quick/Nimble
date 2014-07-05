@@ -1,74 +1,74 @@
 #import <Nimble/DSL.h>
 #import <Nimble/Nimble-Swift.h>
 
-Nimble_EXPORT KICExpectation *KIC_expect(id(^actualBlock)(), const char *file, int line) {
-    return [[KICExpectation alloc] initWithActualBlock:actualBlock
+NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), const char *file, int line) {
+    return [[NMBExpectation alloc] initWithActualBlock:actualBlock
                                               negative:NO
                                                   file:[[NSString alloc] initWithFormat:@"%s", file]
                                                   line:line];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beAnInstanceOf(Class expectedClass) {
-    return [KICObjCMatcher beAnInstanceOfMatcher:expectedClass];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass) {
+    return [NMBObjCMatcher beAnInstanceOfMatcher:expectedClass];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beASubclassOf(Class expectedClass) {
-    return [KICObjCMatcher beASubclassOfMatcher:expectedClass];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beASubclassOf(Class expectedClass) {
+    return [NMBObjCMatcher beASubclassOfMatcher:expectedClass];
 }
 
-Nimble_EXPORT KICObjCBeCloseToMatcher *KIC_beCloseTo(NSNumber *expectedValue) {
-    return [KICObjCMatcher beCloseToMatcher:expectedValue within:0.001];
+NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue) {
+    return [NMBObjCMatcher beCloseToMatcher:expectedValue within:0.001];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beginWith(id itemElementOrSubstring) {
-    return [KICObjCMatcher beginWithMatcher:itemElementOrSubstring];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring) {
+    return [NMBObjCMatcher beginWithMatcher:itemElementOrSubstring];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beGreaterThan(NSNumber *expectedValue) {
-    return [KICObjCMatcher beGreaterThanMatcher:expectedValue];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThan(NSNumber *expectedValue) {
+    return [NMBObjCMatcher beGreaterThanMatcher:expectedValue];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
-    return [KICObjCMatcher beGreaterThanOrEqualToMatcher:expectedValue];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
+    return [NMBObjCMatcher beGreaterThanOrEqualToMatcher:expectedValue];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beIdenticalTo(id expectedInstance) {
-    return [KICObjCMatcher beIdenticalToMatcher:expectedInstance];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance) {
+    return [NMBObjCMatcher beIdenticalToMatcher:expectedInstance];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beLessThan(NSNumber *expectedValue) {
-    return [KICObjCMatcher beLessThanMatcher:expectedValue];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue) {
+    return [NMBObjCMatcher beLessThanMatcher:expectedValue];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beLessThanOrEqualTo(NSNumber *expectedValue) {
-    return [KICObjCMatcher beLessThanOrEqualToMatcher:expectedValue];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue) {
+    return [NMBObjCMatcher beLessThanOrEqualToMatcher:expectedValue];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beTruthy() {
-    return [KICObjCMatcher beTruthyMatcher];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTruthy() {
+    return [NMBObjCMatcher beTruthyMatcher];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beFalsy() {
-    return [KICObjCMatcher beFalsyMatcher];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy() {
+    return [NMBObjCMatcher beFalsyMatcher];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_beNil() {
-    return [KICObjCMatcher beNilMatcher];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beNil() {
+    return [NMBObjCMatcher beNilMatcher];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_contain(id itemOrSubstring) {
-    return [KICObjCMatcher containMatcher:itemOrSubstring];
+NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring) {
+    return [NMBObjCMatcher containMatcher:itemOrSubstring];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_endWith(id itemElementOrSubstring) {
-    return [KICObjCMatcher endWithMatcher:itemElementOrSubstring];
+NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
+    return [NMBObjCMatcher endWithMatcher:itemElementOrSubstring];
 }
 
-Nimble_EXPORT id<KICMatcher> KIC_equal(id expectedValue) {
-    return [KICObjCMatcher equalMatcher:expectedValue];
+NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue) {
+    return [NMBObjCMatcher equalMatcher:expectedValue];
 }
 
-Nimble_EXPORT KICObjCRaiseExceptionMatcher *KIC_raiseException() {
-    return [KICObjCMatcher raiseExceptionMatcher];
+NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {
+    return [NMBObjCMatcher raiseExceptionMatcher];
 }
 

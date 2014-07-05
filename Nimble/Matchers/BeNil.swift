@@ -15,9 +15,9 @@ func beNil() -> MatcherFunc<NilType> {
     }
 }
 
-extension KICObjCMatcher {
-    class func beNilMatcher() -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+extension NMBObjCMatcher {
+    class func beNilMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ actualBlock() as NSObject? })
             let expr = Expression(expression: block, location: location)
             return beNil().matches(expr, failureMessage: failureMessage)

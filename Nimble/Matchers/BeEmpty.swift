@@ -20,7 +20,7 @@ func beEmpty() -> MatcherFunc<NSString?> {
     }
 }
 
-func beEmpty() -> MatcherFunc<KICCollection> {
+func beEmpty() -> MatcherFunc<NMBCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()
@@ -28,10 +28,10 @@ func beEmpty() -> MatcherFunc<KICCollection> {
     }
 }
 
-extension KICObjCMatcher {
-    class func beEmptyMatcher() -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as KICCollection })
+extension NMBObjCMatcher {
+    class func beEmptyMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ actualBlock() as NMBCollection })
             let expr = Expression(expression: block, location: location)
             return beEmpty().matches(expr, failureMessage: failureMessage)
         }

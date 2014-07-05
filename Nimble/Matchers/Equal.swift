@@ -21,11 +21,11 @@ func equal(expectedValue: NSObject) -> _EqualMatcher<NSObject> {
     return _EqualMatcher(expectedValue: expectedValue)
 }
 
-func equal<T: KICComparable>(expectedValue: T?) -> MatcherFunc<T?> {
+func equal<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
-        return actualValue && actualValue!.KIC_compare(expectedValue) == NSComparisonResult.OrderedSame
+        return actualValue && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedSame
     }
 }
 
@@ -34,7 +34,7 @@ func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-func ==<T: KICComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+func ==<T: NMBComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.to(equal(rhs))
     return true
 }
@@ -44,14 +44,14 @@ func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-func !=<T: KICComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+func !=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.toNot(equal(rhs))
     return true
 }
 
-extension KICObjCMatcher {
-    class func equalMatcher(expected: NSObject) -> KICMatcher {
-        return KICObjCMatcher { actualExpression, failureMessage, location in
+extension NMBObjCMatcher {
+    class func equalMatcher(expected: NSObject) -> NMBMatcher {
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return equal(expected).matches(expr, failureMessage: failureMessage)
         }

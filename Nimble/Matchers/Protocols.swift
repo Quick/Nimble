@@ -9,7 +9,7 @@ protocol Matcher {
 }
 
 // Objective-C interface to a similar interface
-@objc protocol KICMatcher {
+@objc protocol NMBMatcher {
     func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
@@ -24,48 +24,48 @@ protocol BasicMatcher {
 }
 
 // Protocol for types that support contain() matcher
-@objc protocol KICContainer {
+@objc protocol NMBContainer {
     func containsObject(object: AnyObject!) -> Bool
 }
-extension NSArray : KICContainer {}
-extension NSSet : KICContainer {}
-extension NSHashTable : KICContainer {}
+extension NSArray : NMBContainer {}
+extension NSSet : NMBContainer {}
+extension NSHashTable : NMBContainer {}
 
 // Protocol for types that support only beEmpty()
-@objc protocol KICCollection {
+@objc protocol NMBCollection {
     var count: Int { get }
 }
-extension NSSet : KICCollection {}
-extension NSDictionary : KICCollection {}
-extension NSHashTable : KICCollection {}
+extension NSSet : NMBCollection {}
+extension NSDictionary : NMBCollection {}
+extension NSHashTable : NMBCollection {}
 
 // Protocol for types that support beginWith(), endWith(), beEmpty() matchers
-@objc protocol KICOrderedCollection : KICCollection {
+@objc protocol NMBOrderedCollection : NMBCollection {
     func indexOfObject(object: AnyObject!) -> Int
 }
-extension NSArray : KICOrderedCollection {}
+extension NSArray : NMBOrderedCollection {}
 
 // Protocol for types to support beCloseTo() matcher
-@objc protocol KICDoubleConvertible {
+@objc protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
 }
-extension NSNumber : KICDoubleConvertible { }
-extension NSDecimalNumber : KICDoubleConvertible { } // TODO: not the best to downsize
+extension NSNumber : NMBDoubleConvertible { }
+extension NSDecimalNumber : NMBDoubleConvertible { } // TODO: not the best to downsize
 
 // Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
 //  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 //
 // Types that conform to Swift's Comparable protocol will work implicitly too
-@objc protocol KICComparable {
-    func KIC_compare(otherObject: KICComparable!) -> NSComparisonResult
+@objc protocol NMBComparable {
+    func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult
 }
-extension NSNumber : KICComparable {
-    func KIC_compare(otherObject: KICComparable!) -> NSComparisonResult {
+extension NSNumber : NMBComparable {
+    func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
         return compare(otherObject as NSNumber)
     }
 }
-extension NSString : KICComparable {
-    func KIC_compare(otherObject: KICComparable!) -> NSComparisonResult {
+extension NSString : NMBComparable {
+    func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
         return compare(otherObject as NSString)
     }
 }

@@ -16,13 +16,13 @@ func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherF
     }
 }
 
-func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<KICDoubleConvertible?> {
+func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible?> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
 
-@objc class KICObjCBeCloseToMatcher : KICMatcher {
+@objc class NMBObjCBeCloseToMatcher : NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {
@@ -31,22 +31,22 @@ func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.000
     }
 
     func matches(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let actualBlock: () -> KICDoubleConvertible? = ({
-            return actualExpression() as? KICDoubleConvertible
+        let actualBlock: () -> NMBDoubleConvertible? = ({
+            return actualExpression() as? NMBDoubleConvertible
         })
         let expr = Expression(expression: actualBlock, location: location)
         return beCloseTo(self._expected, within: self._delta).matches(expr, failureMessage: failureMessage)
     }
 
-    var within: (CDouble) -> KICObjCBeCloseToMatcher {
+    var within: (CDouble) -> NMBObjCBeCloseToMatcher {
         return ({ delta in
-            return KICObjCBeCloseToMatcher(expected: self._expected, within: delta)
+            return NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
         })
     }
 }
 
-extension KICObjCMatcher {
-    class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> KICObjCBeCloseToMatcher {
-        return KICObjCBeCloseToMatcher(expected: expected, within: within)
+extension NMBObjCMatcher {
+    class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
+        return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
 }

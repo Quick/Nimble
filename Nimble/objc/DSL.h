@@ -1,86 +1,86 @@
 #import <Foundation/Foundation.h>
 
-@class KICExpectation;
-@class KICObjCBeCloseToMatcher;
-@class KICObjCRaiseExceptionMatcher;
-@protocol KICMatcher;
+@class NMBExpectation;
+@class NMBObjCBeCloseToMatcher;
+@class NMBObjCRaiseExceptionMatcher;
+@protocol NMBMatcher;
 
 
-#define Nimble_EXPORT FOUNDATION_EXPORT
+#define NIMBLE_EXPORT FOUNDATION_EXPORT
 
-#ifdef Nimble_DISABLE_SHORT_SYNTAX
-#define Nimble_SHORT(PROTO, ORIGINAL)
+#ifdef NIMBLE_DISABLE_SHORT_SYNTAX
+#define NIMBLE_SHORT(PROTO, ORIGINAL)
 #else
-#define Nimble_SHORT(PROTO, ORIGINAL) FOUNDATION_STATIC_INLINE PROTO { return (ORIGINAL); }
+#define NIMBLE_SHORT(PROTO, ORIGINAL) FOUNDATION_STATIC_INLINE PROTO { return (ORIGINAL); }
 #endif
 
-Nimble_EXPORT KICExpectation *KIC_expect(id(^actualBlock)(), const char *file, int line);
+NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), const char *file, int line);
 
-Nimble_EXPORT id<KICMatcher> KIC_equal(id expectedValue);
-Nimble_SHORT(id<KICMatcher> equal(id expectedValue),
-           KIC_equal(expectedValue));
+NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> equal(id expectedValue),
+             NMB_equal(expectedValue));
 
-Nimble_EXPORT KICObjCBeCloseToMatcher *KIC_beCloseTo(NSNumber *expectedValue);
-Nimble_SHORT(KICObjCBeCloseToMatcher *beCloseTo(id expectedValue),
-           KIC_beCloseTo(expectedValue));
+NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue);
+NIMBLE_SHORT(NMBObjCBeCloseToMatcher *beCloseTo(id expectedValue),
+             NMB_beCloseTo(expectedValue));
 
-Nimble_EXPORT id<KICMatcher> KIC_beAnInstanceOf(Class expectedClass);
-Nimble_SHORT(id<KICMatcher> beAnInstanceOf(Class expectedClass),
-           KIC_beAnInstanceOf(expectedClass));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass);
+NIMBLE_SHORT(id<NMBMatcher> beAnInstanceOf(Class expectedClass),
+             NMB_beAnInstanceOf(expectedClass));
 
-Nimble_EXPORT id<KICMatcher> KIC_beASubclassOf(Class expectedClass);
-Nimble_SHORT(id<KICMatcher> beASubclassOf(Class expectedClass),
-           KIC_beASubclassOf(expectedClass));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beASubclassOf(Class expectedClass);
+NIMBLE_SHORT(id<NMBMatcher> beASubclassOf(Class expectedClass),
+             NMB_beASubclassOf(expectedClass));
 
-Nimble_EXPORT id<KICMatcher> KIC_beginWith(id itemElementOrSubstring);
-Nimble_SHORT(id<KICMatcher> beginWith(id itemElementOrSubstring),
-           KIC_beginWith(itemElementOrSubstring));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring);
+NIMBLE_SHORT(id<NMBMatcher> beginWith(id itemElementOrSubstring),
+             NMB_beginWith(itemElementOrSubstring));
 
-Nimble_EXPORT id<KICMatcher> KIC_beGreaterThan(NSNumber *expectedValue);
-Nimble_SHORT(id<KICMatcher> beGreaterThan(NSNumber *expectedValue),
-           KIC_beGreaterThan(expectedValue));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThan(NSNumber *expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> beGreaterThan(NSNumber *expectedValue),
+             NMB_beGreaterThan(expectedValue));
 
-Nimble_EXPORT id<KICMatcher> KIC_beGreaterThanOrEqualTo(NSNumber *expectedValue);
-Nimble_SHORT(id<KICMatcher> beGreaterThanOrEqualTo(NSNumber *expectedValue),
-           KIC_beGreaterThanOrEqualTo(expectedValue));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> beGreaterThanOrEqualTo(NSNumber *expectedValue),
+             NMB_beGreaterThanOrEqualTo(expectedValue));
 
-Nimble_EXPORT id<KICMatcher> KIC_beIdenticalTo(id expectedInstance);
-Nimble_SHORT(id<KICMatcher> beIdenticalTo(id expectedInstance),
-           KIC_beIdenticalTo(expectedInstance));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance);
+NIMBLE_SHORT(id<NMBMatcher> beIdenticalTo(id expectedInstance),
+             NMB_beIdenticalTo(expectedInstance));
 
-Nimble_EXPORT id<KICMatcher> KIC_beLessThan(NSNumber *expectedValue);
-Nimble_SHORT(id<KICMatcher> beLessThan(NSNumber *expectedValue),
-           KIC_beLessThan(expectedValue));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> beLessThan(NSNumber *expectedValue),
+             NMB_beLessThan(expectedValue));
 
-Nimble_EXPORT id<KICMatcher> KIC_beLessThanOrEqualTo(NSNumber *expectedValue);
-Nimble_SHORT(id<KICMatcher> beLessThanOrEqualTo(NSNumber *expectedValue),
-           KIC_beLessThanOrEqualTo(expectedValue));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> beLessThanOrEqualTo(NSNumber *expectedValue),
+             NMB_beLessThanOrEqualTo(expectedValue));
 
-Nimble_EXPORT id<KICMatcher> KIC_beTruthy();
-Nimble_SHORT(id<KICMatcher> beTruthy(),
-           KIC_beTruthy());
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTruthy();
+NIMBLE_SHORT(id<NMBMatcher> beTruthy(),
+             NMB_beTruthy());
 
-Nimble_EXPORT id<KICMatcher> KIC_beFalsy();
-Nimble_SHORT(id<KICMatcher> beFalsy(),
-           KIC_beFalsy());
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy();
+NIMBLE_SHORT(id<NMBMatcher> beFalsy(),
+             NMB_beFalsy());
 
-Nimble_EXPORT id<KICMatcher> KIC_beNil();
-Nimble_SHORT(id<KICMatcher> beNil(),
-           KIC_beNil());
+NIMBLE_EXPORT id<NMBMatcher> NMB_beNil();
+NIMBLE_SHORT(id<NMBMatcher> beNil(),
+             NMB_beNil());
 
-Nimble_EXPORT id<KICMatcher> KIC_contain(id itemOrSubstring);
-Nimble_SHORT(id<KICMatcher> contain(id itemOrSubstring),
-           KIC_contain(itemOrSubstring));
+NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring);
+NIMBLE_SHORT(id<NMBMatcher> contain(id itemOrSubstring),
+             NMB_contain(itemOrSubstring));
 
-Nimble_EXPORT id<KICMatcher> KIC_endWith(id itemElementOrSubstring);
-Nimble_SHORT(id<KICMatcher> endWith(id itemElementOrSubstring),
-           KIC_endWith(itemElementOrSubstring));
+NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring);
+NIMBLE_SHORT(id<NMBMatcher> endWith(id itemElementOrSubstring),
+             NMB_endWith(itemElementOrSubstring));
 
-Nimble_EXPORT KICObjCRaiseExceptionMatcher *KIC_raiseException();
-Nimble_SHORT(KICObjCRaiseExceptionMatcher *raiseException(),
-           KIC_raiseException());
+NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException();
+NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(),
+             NMB_raiseException());
 
-#ifndef Nimble_DISABLE_SHORT_SYNTAX
-#define expect(EXPR) KIC_expect(^id{ return (EXPR); }, __FILE__, __LINE__)
-#define expectBlock(EXPR) KIC_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)
+#ifndef NIMBLE_DISABLE_SHORT_SYNTAX
+#define expect(EXPR) NMB_expect(^id{ return (EXPR); }, __FILE__, __LINE__)
+#define expectBlock(EXPR) NMB_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)
 #endif

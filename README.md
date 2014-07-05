@@ -1,7 +1,7 @@
 Nimble
 ======
 
-A Matchers Framework for Swift.
+A Matchers Framework for Swift. Rewritten from the ground up.
 
 Setup
 -----
@@ -27,7 +27,7 @@ Certain operators work as expected too:
 The ``expect`` function autocompletes to include ``file:`` and ``line:``, but these are optional.
 The defaults will populate the current file and line.
 
-Also, ``expect`` takes a lazily computed value (thanks to ``@auto_closure``). This makes it possible
+Also, ``expect`` takes a lazily computed value. This makes it possible
 to handle exceptions in-line (even though Swift doesn't support exceptions):
 
     var exception = NSException(name: "laugh", reason: "Lulz", userInfo: nil)
@@ -170,12 +170,12 @@ Supporting Objective-C
 
 Since Swift generics cannot interop with Objective-C, you need to wrap your matchers
 and expose them as regular C-functions. The common location is to place them in
-``KICObjCMatcher``:
+``NMBObjCMatcher``:
 
     // Swift
-    extension KICObjCMatcher {
-        class func beFuzzyMatcher() -> KICObjCMatcher {
-            return KICObjCMatcher { actualBlock, failureMessage, location in
+    extension NMBObjCMatcher {
+        class func beFuzzyMatcher() -> NMBObjCMatcher {
+            return NMBObjCMatcher { actualBlock, failureMessage, location in
                 let expr = Expression(expression: ({ actualBlock() as FuzzyThing? }), location: location)
                 return beFuzzy().matches(expr, failureMessage: failureMessage)
             }
@@ -185,8 +185,8 @@ and expose them as regular C-functions. The common location is to place them in
 Afterwards, you'll probably want a nice interface for usage:
 
     // Objective-C
-    FOUNDATION_EXPORT id<KICMatcher> beFuzzy() {
-        return [KICObjCMatcher beFuzzyMatcher];
+    FOUNDATION_EXPORT id<NMBMatcher> beFuzzy() {
+        return [NMBObjCMatcher beFuzzyMatcher];
     }
 
 When supporting Objective-C, make sure you handle ``nil`` appropriately. Like [Cedar](https://github.com/pivotal/cedar/issues/100),

@@ -20,7 +20,7 @@ class AssertionRecorder : AssertionHandler {
 
 func withAssertionHandler(recorder: AssertionHandler, closure: () -> Void) {
     let oldRecorder = CurrentAssertionHandler
-    let capturer = KICExceptionCapture(handler: nil, finally: ({
+    let capturer = NMBExceptionCapture(handler: nil, finally: ({
         CurrentAssertionHandler = oldRecorder
     }))
     CurrentAssertionHandler = recorder

@@ -17,8 +17,8 @@ func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
     }
 }
 
-@objc protocol KICStringer {
-    func KIC_stringify() -> String
+@objc protocol NMBStringer {
+    func NMB_stringify() -> String
 }
 
 func stringify<S: Sequence>(value: S) -> String {
@@ -35,8 +35,8 @@ func stringify<S: Sequence>(value: S) -> String {
     return "[\(str)]"
 }
 
-extension NSArray : KICStringer {
-    func KIC_stringify() -> String {
+extension NSArray : NMBStringer {
+    func NMB_stringify() -> String {
         let str = valueForKey("description").componentsJoinedByString(", ")
         return "[\(str)]"
     }

@@ -1,7 +1,7 @@
 import Foundation
 
 struct ObjCMatcherWrapper : Matcher {
-    let matcher: KICMatcher
+    let matcher: NMBMatcher
     let to: String
     let toNot: String
 
@@ -19,7 +19,7 @@ struct ObjCMatcherWrapper : Matcher {
 }
 
 // Equivalent to Expectation, but simplified for ObjC objects only
-class KICExpectation : NSObject {
+class NMBExpectation : NSObject {
     let _actualBlock: () -> NSObject!
     var _negative: Bool
     let _file: String
@@ -33,32 +33,32 @@ class KICExpectation : NSObject {
         self._line = line
     }
 
-    var withTimeout: (NSTimeInterval) -> KICExpectation {
+    var withTimeout: (NSTimeInterval) -> NMBExpectation {
         return ({ timeout in self._timeout = timeout
             return self
         })
     }
 
-    var to: (matcher: KICMatcher) -> Void {
-        return ({(matcher: KICMatcher) -> Void in
+    var to: (matcher: NMBMatcher) -> Void {
+        return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.to(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
             )
         })
     }
 
-    var toNot: (matcher: KICMatcher) -> Void {
-        return ({(matcher: KICMatcher) -> Void in
+    var toNot: (matcher: NMBMatcher) -> Void {
+        return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toNot(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
             )
         })
     }
 
-    var notTo: (matcher: KICMatcher) -> Void { return toNot }
+    var notTo: (matcher: NMBMatcher) -> Void { return toNot }
 
-    var toEventually: (matcher: KICMatcher) -> Void {
-        return ({(matcher: KICMatcher) -> Void in
+    var toEventually: (matcher: NMBMatcher) -> Void {
+        return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventually(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),
                 timeout: self._timeout
@@ -66,8 +66,8 @@ class KICExpectation : NSObject {
         })
     }
 
-    var toEventuallyNot: (matcher: KICMatcher) -> Void {
-        return ({(matcher: KICMatcher) -> Void in
+    var toEventuallyNot: (matcher: NMBMatcher) -> Void {
+        return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),
                 timeout: self._timeout
@@ -76,7 +76,7 @@ class KICExpectation : NSObject {
     }
 }
 
-@objc class KICObjCMatcher : KICMatcher {
+@objc class NMBObjCMatcher : NMBMatcher {
     let _matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
     init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool) {
         self._matcher = matcher

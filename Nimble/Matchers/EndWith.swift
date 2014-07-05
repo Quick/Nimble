@@ -16,7 +16,7 @@ func endWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(endin
     }
 }
 
-func endWith(endingElement: AnyObject) -> MatcherFunc<KICOrderedCollection?> {
+func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = actualExpression.evaluate()
@@ -33,15 +33,15 @@ func endWith(endingSubstring: String) -> MatcherFunc<String> {
     }
 }
 
-extension KICObjCMatcher {
-    class func endWithMatcher(expected: AnyObject) -> KICObjCMatcher {
-        return KICObjCMatcher { actualBlock, failureMessage, location in
+extension NMBObjCMatcher {
+    class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
             let actual = actualBlock()
             if let actualString = actual as? String {
                 let expr = Expression(expression: ({ actualString }), location: location)
                 return endWith(expected as NSString).matches(expr, failureMessage: failureMessage)
             } else {
-                let expr = Expression(expression: ({ actual as? KICOrderedCollection }), location: location)
+                let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
                 return endWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }
