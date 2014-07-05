@@ -1,7 +1,7 @@
 Nimble
 ======
 
-A Matchers Framework for Swift. Rewritten from the ground up.
+A Matcher Framework for Swift. Rewritten from the ground up.
 
 Setup
 -----
