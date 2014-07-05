@@ -112,8 +112,8 @@
 
 - (void)testRaiseException {
     __block NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"No food" userInfo:nil];
-    expectBlock([exception raise]).to(raiseException());
-    expectBlock(exception).toNot(raiseException());
+    expectAction([exception raise]).to(raiseException());
+    expectAction(exception).toNot(raiseException());
 }
 
 //- (void)testOneOf {

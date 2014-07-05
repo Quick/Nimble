@@ -39,7 +39,7 @@ Or you can use trailing-closure style as needed:
         "hello"
     }.to(equalTo("hello"))
 
-Nimble uses generics, so C primitives are allowed without any wrapping:
+C primitives are allowed without any wrapping:
 
     let actual: CInt = 1
     let expectedValue: CInt = 1
@@ -83,21 +83,6 @@ And like the other asynchronous expectation, an optional timeout period can be p
         done()
     }
 
-Objective-C
-===========
-
-**Experimental Support**
-
-Want to use this for Objective-C? The same syntax applies except you **must use Objective-C objects**:
-
-
-    #import <Nimble/Nimble.h>
-    // ...
-    expect(@1).to(equal(@1));
-    expect(@1.2).to(beCloseTo(@1.3).within(@0.5));
-    expect(@[@1, @2]).to(contain(@1));
-
-
 List of Builtin Matchers
 -------------------------
 
@@ -122,6 +107,25 @@ The following matchers are currently included with Nimble:
 - ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isMemberOfClass:``. Only works with Objective-C compatible objects.
 - ``beASubclassOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isKindOfClass:``. Only works with Objective-C compatible objects.
 - ``beEmpty()`` Matches if the given type contains nothing. Works with Strings and Collections from both Swift and Objective-C
+
+
+Objective-C
+===========
+
+**Experimental Support**
+
+Want to use this for Objective-C? The same syntax applies except you **must use Objective-C objects**:
+
+
+    #import <Nimble/Nimble.h>
+    // ...
+    expect(@1).to(equal(@1));
+    expect(@1.2).to(beCloseTo(@1.3).within(@0.5));
+    expect(@[@1, @2]).to(contain(@1));
+
+For exceptions, use ``expectAction``, which ignores the expression returned:
+
+    expectAction([exception raise]).to(raiseException());
 
 
 Writing Your Own Matchers

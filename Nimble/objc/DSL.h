@@ -82,5 +82,5 @@ NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(),
 
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define expect(EXPR) NMB_expect(^id{ return (EXPR); }, __FILE__, __LINE__)
-#define expectBlock(EXPR) NMB_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)
+#define expectAction(EXPR) NMB_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)
 #endif
