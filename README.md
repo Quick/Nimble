@@ -18,7 +18,7 @@ Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're gene
     // ...
     expect(1).to(equal(1))
     expect(1.2).to(beCloseTo(1.1, within: 1))
-    
+
 Certain operators work as expected too:
 
     expect("foo") != "bar"
@@ -69,16 +69,16 @@ within a 1 second. You can explicitly pass the ``timeout`` parameter:
 
 If you prefer the callback-style that some testing frameworks do, use ``waitUntil``:
 
-    waitUntil { done in 
-        // do some stuff that takes a while... 
+    waitUntil { done in
+        // do some stuff that takes a while...
         NSThread.sleepForTimeInterval(0.5)
         done()
     }
 
 And like the other asynchronous expectation, an optional timeout period can be provided:
 
-    waitUntil(timeout: 10) { done in 
-        // do some stuff that takes a while... 
+    waitUntil(timeout: 10) { done in
+        // do some stuff that takes a while...
         NSThread.sleepForTimeInterval(1)
         done()
     }
