@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F1A74281940169200FFFC47"
                BuildableName = "Nimble.framework"
-               BlueprintName = "Nimble"
+               BlueprintName = "Nimble-iOS"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F1A74331940169200FFFC47"
                BuildableName = "NimbleTests.xctest"
-               BlueprintName = "NimbleTests"
+               BlueprintName = "Nimble-iOSTests"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -141,6 +141,13 @@
 			remoteGlobalIDString = 1F1A74281940169200FFFC47;
 			remoteInfo = Tailor;
 		};
+		1F6BB82A1968BFF9009F1DBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F1A74281940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
+		};
 		1F925EA4195C0C8500ED456B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
@@ -518,9 +525,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1F1A74281940169200FFFC47 /* Nimble */ = {
+		1F1A74281940169200FFFC47 /* Nimble-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F1A743F1940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble" */;
+			buildConfigurationList = 1F1A743F1940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble-iOS" */;
 			buildPhases = (
 				1F1A74241940169200FFFC47 /* Sources */,
 				1F1A74251940169200FFFC47 /* Frameworks */,
@@ -531,14 +538,14 @@
 			);
 			dependencies = (
 			);
-			name = Nimble;
+			name = "Nimble-iOS";
 			productName = Tailor;
 			productReference = 1F1A74291940169200FFFC47 /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1F1A74331940169200FFFC47 /* NimbleTests */ = {
+		1F1A74331940169200FFFC47 /* Nimble-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F1A74421940169200FFFC47 /* Build configuration list for PBXNativeTarget "NimbleTests" */;
+			buildConfigurationList = 1F1A74421940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble-iOSTests" */;
 			buildPhases = (
 				1F1A74301940169200FFFC47 /* Sources */,
 				1F1A74311940169200FFFC47 /* Frameworks */,
@@ -550,8 +557,9 @@
 				1F1A74371940169200FFFC47 /* PBXTargetDependency */,
 				1F925EA5195C0C8500ED456B /* PBXTargetDependency */,
 				1F925EA7195C0C8500ED456B /* PBXTargetDependency */,
+				1F6BB82B1968BFF9009F1DBB /* PBXTargetDependency */,
 			);
-			name = NimbleTests;
+			name = "Nimble-iOSTests";
 			productName = TailorTests;
 			productReference = 1F1A74341940169200FFFC47 /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -632,8 +640,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1F1A74281940169200FFFC47 /* Nimble */,
-				1F1A74331940169200FFFC47 /* NimbleTests */,
+				1F1A74281940169200FFFC47 /* Nimble-iOS */,
+				1F1A74331940169200FFFC47 /* Nimble-iOSTests */,
 				1F925EAC195C0D6300ED456B /* Nimble-OSX */,
 				1F925EB6195C0D6300ED456B /* Nimble-OSXTests */,
 			);
@@ -819,17 +827,22 @@
 /* Begin PBXTargetDependency section */
 		1F1A74371940169200FFFC47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F1A74281940169200FFFC47 /* Nimble */;
+			target = 1F1A74281940169200FFFC47 /* Nimble-iOS */;
 			targetProxy = 1F1A74361940169200FFFC47 /* PBXContainerItemProxy */;
+		};
+		1F6BB82B1968BFF9009F1DBB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F1A74281940169200FFFC47 /* Nimble-iOS */;
+			targetProxy = 1F6BB82A1968BFF9009F1DBB /* PBXContainerItemProxy */;
 		};
 		1F925EA5195C0C8500ED456B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F1A74281940169200FFFC47 /* Nimble */;
+			target = 1F1A74281940169200FFFC47 /* Nimble-iOS */;
 			targetProxy = 1F925EA4195C0C8500ED456B /* PBXContainerItemProxy */;
 		};
 		1F925EA7195C0C8500ED456B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F1A74281940169200FFFC47 /* Nimble */;
+			target = 1F1A74281940169200FFFC47 /* Nimble-iOS */;
 			targetProxy = 1F925EA6195C0C8500ED456B /* PBXContainerItemProxy */;
 		};
 		1F925EBA195C0D6300ED456B /* PBXTargetDependency */ = {
@@ -961,7 +974,7 @@
 					"-framework",
 					XCTest,
 				);
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
@@ -990,7 +1003,7 @@
 					"-framework",
 					XCTest,
 				);
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
@@ -1157,7 +1170,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F1A743F1940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble" */ = {
+		1F1A743F1940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F1A74401940169200FFFC47 /* Debug */,
@@ -1166,7 +1179,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F1A74421940169200FFFC47 /* Build configuration list for PBXNativeTarget "NimbleTests" */ = {
+		1F1A74421940169200FFFC47 /* Build configuration list for PBXNativeTarget "Nimble-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F1A74431940169200FFFC47 /* Debug */,
