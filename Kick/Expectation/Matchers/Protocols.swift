@@ -10,7 +10,7 @@ protocol Matcher {
 
 // Objective-C interface to a similar interface
 @objc protocol KICMatcher {
-    func matches(actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
 // Implement this protocol if you just want a simplier matcher. The negation

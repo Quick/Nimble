@@ -22,20 +22,23 @@ func beCloseTo(expectedValue: KICDoubleConvertible, within delta: Double = 0.000
     }
 }
 
-class KICObjCBeCloseToMatcher : KICObjCMatcher {
+@objc class KICObjCBeCloseToMatcher : KICMatcher {
     var _expected: NSNumber
+    var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {
-        self._expected = expected
-        super.init(matcher: { actualExpression, failureMessage, location in
-            let actualBlock: () -> KICDoubleConvertible? = ({
-                return actualExpression() as? KICDoubleConvertible
-            })
-            let expr = Expression(expression: actualBlock, location: location)
-            return beCloseTo(expected, within: within).matches(expr, failureMessage: failureMessage)
-        })
+        _expected = expected
+        _delta = within
     }
 
-    var within: (CDouble) -> KICObjCMatcher {
+    func matches(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        let actualBlock: () -> KICDoubleConvertible? = ({
+            return actualExpression() as? KICDoubleConvertible
+        })
+        let expr = Expression(expression: actualBlock, location: location)
+        return beCloseTo(self._expected, within: self._delta).matches(expr, failureMessage: failureMessage)
+    }
+
+    var within: (CDouble) -> KICObjCBeCloseToMatcher {
         return ({ delta in
             return KICObjCBeCloseToMatcher(expected: self._expected, within: delta)
         })

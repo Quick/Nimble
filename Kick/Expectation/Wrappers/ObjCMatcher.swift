@@ -82,9 +82,9 @@ class KICExpectation : NSObject {
         self._matcher = matcher
     }
 
-    func matches(actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         return _matcher(
-            actualExpression: actualExpression,
+            actualExpression: ({ actualBlock() as NSObject? }),
             failureMessage: failureMessage,
             location: location)
     }

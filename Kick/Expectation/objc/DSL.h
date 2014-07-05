@@ -2,6 +2,7 @@
 
 @class KICExpectation;
 @class KICObjCBeCloseToMatcher;
+@class KICObjCRaiseExceptionMatcher;
 @protocol KICMatcher;
 
 
@@ -75,6 +76,11 @@ KICK_EXPORT id<KICMatcher> KIC_endWith(id itemElementOrSubstring);
 KICK_SHORT(id<KICMatcher> endWith(id itemElementOrSubstring),
            KIC_endWith(itemElementOrSubstring));
 
+KICK_EXPORT KICObjCRaiseExceptionMatcher *KIC_raiseException();
+KICK_SHORT(KICObjCRaiseExceptionMatcher *raiseException(),
+           KIC_raiseException());
+
 #ifndef KICK_DISABLE_SHORT_SYNTAX
-#define expect(...) KIC_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
+#define expect(EXPR) KIC_expect(^id{ return (EXPR); }, __FILE__, __LINE__)
+#define expectBlock(EXPR) KIC_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)
 #endif

@@ -9,12 +9,14 @@
 @implementation CompatibilityTest
 
 - (void)testBeAnInstanceOf {
-    expect([NSNull null]).to(beAnInstanceOf([NSNull class]));
+    NSNull *obj = [NSNull null];
+    expect(obj).to(beAnInstanceOf([NSNull class]));
     expect(@1).toNot(beAnInstanceOf([NSNull class]));
     expect(nil).toNot(beAnInstanceOf([NSNull class]));
 }
 - (void)testBeASubclassOf {
-    expect([NSMutableArray array]).to(beASubclassOf([NSArray class]));
+    NSMutableArray *array = [NSMutableArray array];
+    expect(array).to(beASubclassOf([NSArray class]));
     expect(@1).toNot(beASubclassOf([NSNull class]));
     expect(nil).toNot(beASubclassOf([NSNull class]));
 }
@@ -28,8 +30,10 @@
 - (void)testBeginWith {
     expect(@"hello world!").to(beginWith(@"hello"));
     expect(@"hello world!").toNot(beginWith(@"world"));
-    expect(@[@1, @2]).to(beginWith(@1));
-    expect(@[@1, @2]).toNot(beginWith(@2));
+
+    NSArray *array = @[@1, @2];
+    expect(array).to(beginWith(@1));
+    expect(array).toNot(beginWith(@2));
     expect(nil).toNot(beginWith(@1));
 }
 
@@ -46,7 +50,8 @@
 }
 
 - (void)testBeIdenticalTo {
-    expect([NSNull null]).to(beIdenticalTo([NSNull null]));
+    NSNull *obj = [NSNull null];
+    expect(obj).to(beIdenticalTo([NSNull null]));
     expect(@2).toNot(beIdenticalTo(@3));
     expect(nil).toNot(beIdenticalTo(nil));
     expect(nil).toNot(beIdenticalTo(@1));
@@ -82,16 +87,18 @@
 }
 
 - (void)testContain {
-    expect(@[@1, @2]).to(contain(@1));
-    expect(@[@1, @2]).toNot(contain(@"HI"));
+    NSArray *array = @[@1, @2];
+    expect(array).to(contain(@1));
+    expect(array).toNot(contain(@"HI"));
     expect(nil).toNot(contain(@"hi"));
 }
 
 - (void)testEndWith {
+    NSArray *array = @[@1, @2];
     expect(@"hello world!").to(endWith(@"world!"));
     expect(@"hello world!").toNot(endWith(@"hello"));
-    expect(@[@1, @2]).to(endWith(@2));
-    expect(@[@1, @2]).toNot(endWith(@1));
+    expect(array).to(endWith(@2));
+    expect(array).toNot(endWith(@1));
     expect(nil).toNot(endWith(@1));
 }
 
@@ -101,6 +108,12 @@
     expect(@1).notTo(equal(@2));
     expect(@"hello").to(equal(@"hello"));
     expect(nil).toNot(equal(nil));
+}
+
+- (void)testRaiseException {
+    __block NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"No food" userInfo:nil];
+    expectBlock([exception raise]).to(raiseException());
+    expectBlock(exception).toNot(raiseException());
 }
 
 //- (void)testOneOf {

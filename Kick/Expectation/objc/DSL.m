@@ -68,3 +68,7 @@ KICK_EXPORT id<KICMatcher> KIC_equal(id expectedValue) {
     return [KICObjCMatcher equalMatcher:expectedValue];
 }
 
+KICK_EXPORT KICObjCRaiseExceptionMatcher *KIC_raiseException() {
+    return [KICObjCMatcher raiseExceptionMatcher];
+}
+
