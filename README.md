@@ -1,7 +1,9 @@
 Nimble
 ======
 
-A Matcher Framework for Swift. Rewritten from the ground up.
+A Matcher Framework for Swift. Rewritten from scratch.
+
+Currently, this **is not** part of the [Quick](https://github.com/quick-bdd/Quick) project.
 
 Setup
 -----
