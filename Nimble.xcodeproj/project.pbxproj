@@ -204,9 +204,7 @@
 		1F3A03DD1960D9A4001E6134 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1F6900981942C5CD00E757DF /* Nimble.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Nimble.playground; sourceTree = "<group>"; };
 		1F925EAD195C0D6300ED456B /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F925EB0195C0D6300ED456B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F925EB7195C0D6300ED456B /* Nimble-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nimble-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F925EBD195C0D6300ED456B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F925EE5195C121200ED456B /* AsynchronousTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousTest.swift; sourceTree = "<group>"; };
 		1F925EE8195C124400ED456B /* BeAnInstanceOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeAnInstanceOfTest.swift; sourceTree = "<group>"; };
 		1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesExceptionTest.swift; sourceTree = "<group>"; };
@@ -315,8 +313,6 @@
 				1F6900981942C5CD00E757DF /* Nimble.playground */,
 				1F1A742B1940169200FFFC47 /* Nimble */,
 				1F1A74381940169200FFFC47 /* NimbleTests */,
-				1F925EAE195C0D6300ED456B /* Nimble-OSX */,
-				1F925EBB195C0D6300ED456B /* Nimble-OSXTests */,
 				1F1A742A1940169200FFFC47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -390,38 +386,6 @@
 				1FCE5DCB1963F24900BCA160 /* Poll.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		1F925EAE195C0D6300ED456B /* Nimble-OSX */ = {
-			isa = PBXGroup;
-			children = (
-				1F925EAF195C0D6300ED456B /* Supporting Files */,
-			);
-			path = "Nimble-OSX";
-			sourceTree = "<group>";
-		};
-		1F925EAF195C0D6300ED456B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F925EB0195C0D6300ED456B /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1F925EBB195C0D6300ED456B /* Nimble-OSXTests */ = {
-			isa = PBXGroup;
-			children = (
-				1F925EBC195C0D6300ED456B /* Supporting Files */,
-			);
-			path = "Nimble-OSXTests";
-			sourceTree = "<group>";
-		};
-		1F925EBC195C0D6300ED456B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1F925EBD195C0D6300ED456B /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		1F925EE3195C11B000ED456B /* Matchers */ = {
@@ -1088,7 +1052,7 @@
 					"$(inherited)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "Nimble-OSX/Info.plist";
+				INFOPLIST_FILE = Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1120,7 +1084,7 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "Nimble-OSX/Info.plist";
+				INFOPLIST_FILE = Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1150,7 +1114,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Nimble-OSXTests/Info.plist";
+				INFOPLIST_FILE = NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = YES;
@@ -1171,7 +1135,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Nimble-OSXTests/Info.plist";
+				INFOPLIST_FILE = NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = NO;
