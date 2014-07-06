@@ -1,2 +1,2 @@
 #import <Foundation/Foundation.h>
-#import "NMBExceptionCapture.h"
+#import <Nimble/NMBExceptionCapture.h>
