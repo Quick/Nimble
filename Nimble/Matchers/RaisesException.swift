@@ -5,7 +5,18 @@ func _raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool)
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = message
 
-        let (_, exception) = actualExpression.evaluateAndCaptureException()
+        // It would be better if this was part of Expression, but
+        // Swift compiler crashes when expect() is inside a closure.
+        var exception: NSException?
+        var result: T?
+        var capture = NMBExceptionCapture(handler: ({ e in
+            exception = e
+            }), finally: nil)
+
+        capture.tryBlock {
+            actualExpression.evaluate()
+            return
+        }
         return matches(exception)
     }
 }

@@ -34,20 +34,6 @@ struct Expression<T> {
         return self._expression(_withoutCaching)
     }
 
-    func evaluateAndCaptureException() -> (T?, NSException?) {
-        var exception: NSException?
-        var result: T?
-        var capture = NMBExceptionCapture(handler: ({ e in
-            exception = e
-        }), finally: nil)
-
-        capture.tryBlock {
-            result = self.evaluate()
-            return
-        }
-        return (result, exception)
-    }
-
     func withoutCaching() -> Expression<T> {
         return Expression(memoizedExpression: self._expression, location: location, withoutCaching: true)
     }
