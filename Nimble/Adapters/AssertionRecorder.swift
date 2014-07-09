@@ -7,7 +7,7 @@ struct AssertionRecord {
 }
 
 class AssertionRecorder : AssertionHandler {
-    var assertions = AssertionRecord[]()
+    var assertions = [AssertionRecord]()
 
     func assert(assertion: Bool, message: String, location: SourceLocation) {
         assertions.append(

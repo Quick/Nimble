@@ -13,20 +13,8 @@ struct _EqualMatcher<T: Equatable>: BasicMatcher {
     }
 }
 
-func equal<T>(expectedValue: T?) -> _EqualMatcher<T> {
+func equal<T: Equatable>(expectedValue: T?) -> _EqualMatcher<T> {
     return _EqualMatcher(expectedValue: expectedValue)
-}
-
-func equal(expectedValue: NSObject) -> _EqualMatcher<NSObject> {
-    return _EqualMatcher(expectedValue: expectedValue)
-}
-
-func equal<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(expectedValue)>"
-        let actualValue = actualExpression.evaluate()
-        return actualValue && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedSame
-    }
 }
 
 func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
@@ -34,17 +22,7 @@ func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     return true
 }
 
-func ==<T: NMBComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
-    lhs.to(equal(rhs))
-    return true
-}
-
 func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
-    lhs.toNot(equal(rhs))
-    return true
-}
-
-func !=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.toNot(equal(rhs))
     return true
 }

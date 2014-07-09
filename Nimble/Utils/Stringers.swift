@@ -10,7 +10,7 @@ func _identityAsString(value: NSObject?) -> String {
     return NSString(format: "<%p>", arguments: args.va_list())
 }
 
-func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
+func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
         return accum + prefix + "\(item)"
@@ -23,7 +23,7 @@ func _arrayAsString<T>(items: T[], joiner: String = ", ") -> String {
 
 func stringify<S: Sequence>(value: S) -> String {
     var generator = value.generate()
-    var strings = String[]()
+    var strings = [String]()
     var value: S.GeneratorType.Element?
     do {
         value = generator.next()

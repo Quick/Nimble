@@ -19,12 +19,4 @@ class BeNilTest: XCTestCase {
             expect(1 as Int?).to(beNil())
         }
     }
-
-    func testBeNilExplicitNilType() {
-        expect(nil).to(beNil())
-
-        failsWithErrorMessage("expected <nil> to not be nil") {
-            expect(nil).toNot(beNil())
-        }
-    }
 }

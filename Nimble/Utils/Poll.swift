@@ -5,7 +5,7 @@ func _pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval,
     var pass: Bool
     do {
         pass = expression()
-        let runDate = NSDate().addTimeInterval(pollInterval) as NSDate
+        let runDate = NSDate().dateByAddingTimeInterval(pollInterval) as NSDate
         NSRunLoop.mainRunLoop().runUntilDate(runDate)
     } while(!pass && NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
     return pass

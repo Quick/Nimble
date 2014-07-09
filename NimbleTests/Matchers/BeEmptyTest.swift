@@ -3,14 +3,14 @@ import Nimble
 
 class BeEmptyTest: XCTestCase {
     func testBeEmptyPositive() {
-        expect(nil).to(beEmpty())
-        expect(nil as CInt[]?).to(beEmpty())
+        expect(nil as NSString?).to(beEmpty())
+        expect(nil as [CInt]?).to(beEmpty())
 
         expect([]).to(beEmpty())
         expect([1]).toNot(beEmpty())
 
-        expect([] as CInt[]).to(beEmpty())
-        expect([1] as CInt[]).toNot(beEmpty())
+        expect([] as [CInt]).to(beEmpty())
+        expect([1] as [CInt]).toNot(beEmpty())
 
         expect(NSDictionary()).to(beEmpty())
         expect(NSDictionary(object: 1, forKey: 1)).toNot(beEmpty())

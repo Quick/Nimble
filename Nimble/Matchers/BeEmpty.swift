@@ -20,18 +20,18 @@ func beEmpty() -> MatcherFunc<NSString?> {
     }
 }
 
-func beEmpty() -> MatcherFunc<NMBCollection> {
+func beEmpty() -> MatcherFunc<NMBCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()
-        return actual.count == 0
+        return !actual || actual!.count == 0
     }
 }
 
 extension NMBObjCMatcher {
     class func beEmptyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as NMBCollection })
+            let block = ({ actualBlock() as? NMBCollection })
             let expr = Expression(expression: block, location: location)
             return beEmpty().matches(expr, failureMessage: failureMessage)
         }

@@ -69,3 +69,9 @@ extension NSString : NMBComparable {
         return compare(otherObject as NSString)
     }
 }
+
+@objc class KICNilLiteral : NilLiteralConvertible {
+    class func convertFromNilLiteral() -> KICNilLiteral {
+        return KICNilLiteral()
+    }
+}

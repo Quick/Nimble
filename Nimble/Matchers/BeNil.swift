@@ -8,13 +8,6 @@ func beNil<T>() -> MatcherFunc<T?> {
     }
 }
 
-func beNil() -> MatcherFunc<NilType> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be nil"
-        return true
-    }
-}
-
 extension NMBObjCMatcher {
     class func beNilMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
