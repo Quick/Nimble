@@ -9,10 +9,11 @@ function run_tests { # scheme, sdk, destination, Debug/Release
     echo "======="
     echo xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test
     echo "======="
+    osascript -e 'tell app "iOS Simulator" to quit'
     if [ -z "$XCPRETTY" ]; then
         xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test
     else
-        xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test | $XCPRETTY
+        set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test | $XCPRETTY -c
     fi
 }
 
