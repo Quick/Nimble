@@ -107,7 +107,7 @@ The following matchers are currently included with Nimble:
 - ``endWith(ending: T)`` Matches if ``ending`` is at the end of the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``beIdenticalTo(expectedInstance: T)`` (also ``===`` and ``!==`` operators) Matches if ``expectedInstance`` has the same pointer address (identity equality) with the given value. Only works with Objective-C compatible objects.
 - ``beAnInstanceOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isMemberOfClass:``. Only works with Objective-C compatible objects.
-- ``beASubclassOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isKindOfClass:``. Only works with Objective-C compatible objects.
+- ``beAKindOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isKindOfClass:``. Only works with Objective-C compatible objects.
 - ``beEmpty()`` Matches if the given type contains nothing. Works with Strings and Collections from both Swift and Objective-C
 
 
