@@ -12,8 +12,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass) {
     return [NMBObjCMatcher beAnInstanceOfMatcher:expectedClass];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beASubclassOf(Class expectedClass) {
-    return [NMBObjCMatcher beASubclassOfMatcher:expectedClass];
+NIMBLE_EXPORT id<NMBMatcher> NMB_beAKindOf(Class expectedClass) {
+    return [NMBObjCMatcher beAKindOfMatcher:expectedClass];
 }
 
 NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue) {

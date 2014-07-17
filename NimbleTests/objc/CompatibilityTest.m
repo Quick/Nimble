@@ -14,11 +14,11 @@
     expect(@1).toNot(beAnInstanceOf([NSNull class]));
     expect(nil).toNot(beAnInstanceOf([NSNull class]));
 }
-- (void)testBeASubclassOf {
+- (void)testBeAKindOf {
     NSMutableArray *array = [NSMutableArray array];
-    expect(array).to(beASubclassOf([NSArray class]));
-    expect(@1).toNot(beASubclassOf([NSNull class]));
-    expect(nil).toNot(beASubclassOf([NSNull class]));
+    expect(array).to(beAKindOf([NSArray class]));
+    expect(@1).toNot(beAKindOf([NSNull class]));
+    expect(nil).toNot(beAKindOf([NSNull class]));
 }
 
 - (void)testBeCloseTo {

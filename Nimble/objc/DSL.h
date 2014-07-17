@@ -28,9 +28,9 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass);
 NIMBLE_SHORT(id<NMBMatcher> beAnInstanceOf(Class expectedClass),
              NMB_beAnInstanceOf(expectedClass));
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beASubclassOf(Class expectedClass);
-NIMBLE_SHORT(id<NMBMatcher> beASubclassOf(Class expectedClass),
-             NMB_beASubclassOf(expectedClass));
+NIMBLE_EXPORT id<NMBMatcher> NMB_beAKindOf(Class expectedClass);
+NIMBLE_SHORT(id<NMBMatcher> beAKindOf(Class expectedClass),
+             NMB_beAKindOf(expectedClass));
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring);
 NIMBLE_SHORT(id<NMBMatcher> beginWith(id itemElementOrSubstring),

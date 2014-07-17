@@ -1,6 +1,6 @@
 import Foundation
 
-func beASubclassOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
+func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
     return MatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
@@ -8,16 +8,16 @@ func beASubclassOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be a subclass of \(NSStringFromClass(expectedClass))"
+        failureMessage.postfixMessage = "be a kind of \(NSStringFromClass(expectedClass))"
         return instance && instance!.isKindOfClass(expectedClass)
     }
 }
 
 extension NMBObjCMatcher {
-    class func beASubclassOfMatcher(expected: AnyClass) -> NMBMatcher {
+    class func beAKindOfMatcher(expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
-            return beASubclassOf(expected).matches(expr, failureMessage: failureMessage)
+            return beAKindOf(expected).matches(expr, failureMessage: failureMessage)
         }
     }
 }
