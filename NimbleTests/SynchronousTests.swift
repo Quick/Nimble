@@ -42,6 +42,12 @@ class SynchronousTest: XCTestCase {
         expect(callCount).to(equal(1))
     }
 
+    func testToMatchAgainstLazyProperties() {
+        expect(ObjectWithLazyProperty().value).to(equal("hello"))
+        expect(ObjectWithLazyProperty().value).toNot(equal("world"))
+        expect(ObjectWithLazyProperty().anotherValue).to(equal("world"))
+        expect(ObjectWithLazyProperty().anotherValue).toNot(equal("hello"))
+    }
 
     // repeated tests from to() for toNot()
     func testToNotMatchesIfMatcherReturnsTrue() {

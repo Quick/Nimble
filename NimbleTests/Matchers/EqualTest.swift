@@ -14,8 +14,6 @@ class EqualTest: XCTestCase {
             1
         }.to(equal(1))
 
-        expect(ObjectWithLazyProperty().value).to(equal("hello"))
-
         failsWithErrorMessage("expected <hello> to equal <world>") {
             expect("hello").to(equal("world"))
         }
