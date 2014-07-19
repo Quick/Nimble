@@ -10,6 +10,18 @@ func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items
     }
 }
 
+func contain(substrings: String...) -> MatcherFunc<String> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
+        let actual = actualExpression.evaluate()
+        return _all(substrings) {
+            let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
+            let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
+            return !range.isEmpty
+        }
+    }
+}
+
 func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
