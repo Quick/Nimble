@@ -2,7 +2,7 @@ import Foundation
 
 
 // Implement this protocol if you want full control over to() and toNot() behaviors
-protocol Matcher {
+public protocol Matcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
@@ -18,13 +18,13 @@ protocol Matcher {
 //
 // If you just want a very simplified usage of BasicMatcher,
 // @see MatcherFunc.
-protocol BasicMatcher {
+public protocol BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
 }
 
 // Protocol for types that support contain() matcher
-@objc protocol NMBContainer {
+@objc public protocol NMBContainer {
     func containsObject(object: AnyObject!) -> Bool
 }
 extension NSArray : NMBContainer {}
@@ -32,7 +32,7 @@ extension NSSet : NMBContainer {}
 extension NSHashTable : NMBContainer {}
 
 // Protocol for types that support only beEmpty()
-@objc protocol NMBCollection {
+@objc public protocol NMBCollection {
     var count: Int { get }
 }
 extension NSSet : NMBCollection {}
@@ -40,7 +40,7 @@ extension NSDictionary : NMBCollection {}
 extension NSHashTable : NMBCollection {}
 
 // Protocol for types that support beginWith(), endWith(), beEmpty() matchers
-@objc protocol NMBOrderedCollection : NMBCollection {
+@objc public protocol NMBOrderedCollection : NMBCollection {
     func indexOfObject(object: AnyObject!) -> Int
 }
 extension NSArray : NMBOrderedCollection {}

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol AssertionHandler {
+public protocol AssertionHandler {
     func assert(assertion: Bool, message: String, location: SourceLocation)
 }
 

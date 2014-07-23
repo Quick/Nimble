@@ -12,7 +12,7 @@ func _memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
     })
 }
 
-struct Expression<T> {
+public struct Expression<T> {
     let _expression: (Bool) -> T
     let location: SourceLocation
     let _withoutCaching: Bool

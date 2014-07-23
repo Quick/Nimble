@@ -1,6 +1,6 @@
 import Foundation
 
-func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items: T...) -> MatcherFunc<S> {
+public func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items: T...) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
@@ -10,7 +10,7 @@ func contain<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(items
     }
 }
 
-func contain(substrings: String...) -> MatcherFunc<String> {
+public func contain(substrings: String...) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
         let actual = actualExpression.evaluate()
@@ -22,7 +22,7 @@ func contain(substrings: String...) -> MatcherFunc<String> {
     }
 }
 
-func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
+public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()

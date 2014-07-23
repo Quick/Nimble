@@ -1,6 +1,6 @@
 import Foundation
 
-func endWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(endingElement: T) -> MatcherFunc<S> {
+public func endWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(endingElement: T) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
@@ -16,7 +16,7 @@ func endWith<S: Sequence, T: Equatable where S.GeneratorType.Element == T>(endin
     }
 }
 
-func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
+public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = actualExpression.evaluate()
@@ -24,7 +24,7 @@ func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
     }
 }
 
-func endWith(endingSubstring: String) -> MatcherFunc<String> {
+public func endWith(endingSubstring: String) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let collection = actualExpression.evaluate()

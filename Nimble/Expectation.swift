@@ -1,13 +1,13 @@
 import Foundation
 
-struct Expectation<T> {
+public struct Expectation<T> {
     let expression: Expression<T>
 
-    func verify(pass: Bool, _ message: String) {
+    public func verify(pass: Bool, _ message: String) {
         CurrentAssertionHandler.assert(pass, message: message, location: expression.location)
     }
 
-    func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
+    public func to<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
         var msg = FailureMessage()
         let pass = matcher.matches(expression, failureMessage: msg)
         if msg.actualValue == "" {
@@ -25,7 +25,7 @@ struct Expectation<T> {
         verify(pass, msg.stringValue())
     }
 
-    func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
+    public func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
         toNot(matcher)
     }
 

@@ -21,25 +21,25 @@ func _raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool)
     }
 }
 
-func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any?> {
+public func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any?> {
     return _raiseExceptionMatcher("raise exception named <\(named)> and reason <\(reason)>") {
         exception in return exception?.name == named && exception?.reason == reason
     }
 }
 
-func raiseException(#named: String) -> MatcherFunc<Any?> {
+public func raiseException(#named: String) -> MatcherFunc<Any?> {
     return _raiseExceptionMatcher("raise exception named <\(named)>") {
         exception in return exception?.name == named
     }
 }
 
-func raiseException() -> MatcherFunc<Any?> {
+public func raiseException() -> MatcherFunc<Any?> {
     return _raiseExceptionMatcher("raise any exception") {
         exception in return exception != nil
     }
 }
 
-@objc public class NMBObjCRaiseExceptionMatcher : NMBMatcher {
+@objc class NMBObjCRaiseExceptionMatcher : NMBMatcher {
     var _name: String?
     var _reason: String?
     init(name: String?, reason: String?) {

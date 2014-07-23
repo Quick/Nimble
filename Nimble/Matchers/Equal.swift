@@ -1,9 +1,9 @@
 import Foundation
 
-struct _EqualMatcher<T: Equatable>: BasicMatcher {
+public struct _EqualMatcher<T: Equatable>: BasicMatcher {
     let expectedValue: T?
 
-    func matches(actualExpression: Expression<T?>, failureMessage: FailureMessage) -> Bool  {
+    public func matches(actualExpression: Expression<T?>, failureMessage: FailureMessage) -> Bool  {
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
         if !matches && expectedValue == nil {
@@ -13,16 +13,16 @@ struct _EqualMatcher<T: Equatable>: BasicMatcher {
     }
 }
 
-func equal<T: Equatable>(expectedValue: T?) -> _EqualMatcher<T> {
+public func equal<T: Equatable>(expectedValue: T?) -> _EqualMatcher<T> {
     return _EqualMatcher(expectedValue: expectedValue)
 }
 
-func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.to(equal(rhs))
     return true
 }
 
-func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.toNot(equal(rhs))
     return true
 }

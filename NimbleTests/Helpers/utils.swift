@@ -15,9 +15,9 @@ func failsWithErrorMessage(message: String, closure: () -> Void, file: String = 
     }
     if lastFailureMessage {
         let msg = "Got failure message: '\(lastFailureMessage!)', but expected '\(message)'"
-        XCTFail(msg, file: file, line: line)
+        XCTFail(msg, file: file, line: UInt(line))
     } else {
-        XCTFail("expected failure message, but got none", file: file, line: line)
+        XCTFail("expected failure message, but got none", file: file, line: UInt(line))
     }
 }
 

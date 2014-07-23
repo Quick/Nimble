@@ -1,15 +1,17 @@
 import Foundation
 
-struct AssertionRecord {
-    let success: Bool
-    let message: String
-    let location: SourceLocation
+public struct AssertionRecord {
+    public let success: Bool
+    public let message: String
+    public let location: SourceLocation
 }
 
-class AssertionRecorder : AssertionHandler {
-    var assertions = [AssertionRecord]()
+public class AssertionRecorder : AssertionHandler {
+    public var assertions = [AssertionRecord]()
 
-    func assert(assertion: Bool, message: String, location: SourceLocation) {
+    public init() {}
+
+    public func assert(assertion: Bool, message: String, location: SourceLocation) {
         assertions.append(
             AssertionRecord(
                 success: assertion,
@@ -18,7 +20,7 @@ class AssertionRecorder : AssertionHandler {
     }
 }
 
-func withAssertionHandler(recorder: AssertionHandler, closure: () -> Void) {
+public func withAssertionHandler(recorder: AssertionHandler, closure: () -> Void) {
     let oldRecorder = CurrentAssertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({
         CurrentAssertionHandler = oldRecorder
