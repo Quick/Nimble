@@ -29,7 +29,7 @@ func endWith(endingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let collection = actualExpression.evaluate()
         let range = collection.rangeOfString(endingSubstring)
-        return range?.endIndex == collection.endIndex
+        return range && range!.endIndex == collection.endIndex
     }
 }
 

@@ -17,7 +17,7 @@ func contain(substrings: String...) -> MatcherFunc<String> {
         return _all(substrings) {
             let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
             let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
-            return !range?.isEmpty
+            return range && range!.isEmpty
         }
     }
 }
