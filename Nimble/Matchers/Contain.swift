@@ -17,7 +17,7 @@ func contain(substrings: String...) -> MatcherFunc<String> {
         return _all(substrings) {
             let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
             let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
-            return !range.isEmpty
+            return !range?.isEmpty
         }
     }
 }
@@ -33,7 +33,7 @@ func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
 }
 
 extension NMBObjCMatcher {
-    class func containMatcher(expected: NSObject?) -> NMBObjCMatcher {
+    public class func containMatcher(expected: NSObject?) -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block: () -> NMBContainer? = ({
                 if let value = actualBlock() as? NMBContainer {

@@ -29,12 +29,12 @@ func endWith(endingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let collection = actualExpression.evaluate()
         let range = collection.rangeOfString(endingSubstring)
-        return range.endIndex == collection.endIndex
+        return range?.endIndex == collection.endIndex
     }
 }
 
 extension NMBObjCMatcher {
-    class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+    public class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let actual = actualBlock()
             if let actualString = actual as? String {

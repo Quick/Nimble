@@ -1,9 +1,9 @@
 import Foundation
 
 
-@objc class SourceLocation : Printable {
+@objc public class SourceLocation : Printable {
     let file: String
-    let line: Int
+    let line: UInt
 
     init() {
         file = "Unknown File"
@@ -12,10 +12,10 @@ import Foundation
 
     init(file: String, line: Int) {
         self.file = file
-        self.line = line
+        self.line = UInt(line)
     }
 
-    var description: String {
+    public var description: String {
         return "\(file):\(line)"
     }
 }

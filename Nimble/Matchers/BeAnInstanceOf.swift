@@ -14,7 +14,7 @@ func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
 }
 
 extension NMBObjCMatcher {
-    class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
+    public class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return beAnInstanceOf(expected).matches(expr, failureMessage: failureMessage)

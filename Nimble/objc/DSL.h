@@ -1,6 +1,11 @@
 #import <Foundation/Foundation.h>
 
 @class NMBExpectation;
+
+@interface NMBExpectation : NSObject
+- (id)initWithActualBlock:(NSObject *(^)())actualBlock negative:(BOOL)negative file:(NSString *)file line:(int)line;
+@end
+
 @class NMBObjCBeCloseToMatcher;
 @class NMBObjCRaiseExceptionMatcher;
 @protocol NMBMatcher;

@@ -22,7 +22,7 @@ func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.000
     }
 }
 
-@objc class NMBObjCBeCloseToMatcher : NMBMatcher {
+@objc public class NMBObjCBeCloseToMatcher : NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {
@@ -30,7 +30,7 @@ func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.000
         _delta = within
     }
 
-    func matches(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func matches(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let actualBlock: () -> NMBDoubleConvertible? = ({
             return actualExpression() as? NMBDoubleConvertible
         })
@@ -46,7 +46,7 @@ func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.000
 }
 
 extension NMBObjCMatcher {
-    class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
+    public class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
         return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
 }

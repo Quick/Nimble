@@ -9,7 +9,7 @@ protocol Matcher {
 }
 
 // Objective-C interface to a similar interface
-@objc protocol NMBMatcher {
+@objc public protocol NMBMatcher {
     func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
@@ -56,16 +56,16 @@ extension NSDecimalNumber : NMBDoubleConvertible { } // TODO: not the best to do
 //  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 //
 // Types that conform to Swift's Comparable protocol will work implicitly too
-@objc protocol NMBComparable {
+@objc public protocol NMBComparable {
     func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult
 }
 extension NSNumber : NMBComparable {
-    func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
+    public func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
         return compare(otherObject as NSNumber)
     }
 }
 extension NSString : NMBComparable {
-    func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
+    public func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
         return compare(otherObject as NSString)
     }
 }

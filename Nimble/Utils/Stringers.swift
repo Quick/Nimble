@@ -5,9 +5,7 @@ func _identityAsString(value: NSObject?) -> String {
     if !value {
         return "nil"
     }
-    let args = VaListBuilder()
-    args.append(value!)
-    return NSString(format: "<%p>", arguments: args.va_list())
+    return NSString(format: "<%p>", [value!])
 }
 
 func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
@@ -44,9 +42,7 @@ extension NSArray : NMBStringer {
 
 func stringify<T>(value: T?) -> String {
     if value is Double {
-        var args = VaListBuilder()
-        args.append(value as Double)
-        return NSString(format: "%.4f", arguments: args.va_list())
+        return NSString(format: "%.4f", (value as Double))
     }
     return toString(value)
 }

@@ -9,7 +9,7 @@ func beNil<T>() -> MatcherFunc<T?> {
 }
 
 extension NMBObjCMatcher {
-    class func beNilMatcher() -> NMBObjCMatcher {
+    public class func beNilMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ actualBlock() as NSObject? })
             let expr = Expression(expression: block, location: location)

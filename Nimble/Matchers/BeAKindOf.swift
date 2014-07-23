@@ -14,7 +14,7 @@ func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
 }
 
 extension NMBObjCMatcher {
-    class func beAKindOfMatcher(expected: AnyClass) -> NMBMatcher {
+    public class func beAKindOfMatcher(expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return beAKindOf(expected).matches(expr, failureMessage: failureMessage)

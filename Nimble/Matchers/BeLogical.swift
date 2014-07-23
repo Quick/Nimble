@@ -38,14 +38,14 @@ func beFalsy() -> _BeOptionalBoolMatcher {
 }
 
 extension NMBObjCMatcher {
-    class func beTruthyMatcher() -> NMBObjCMatcher {
+    public class func beTruthyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ (actualBlock() as? NSNumber)?.boolValue })
             let expr = Expression(expression: block, location: location)
             return beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
-    class func beFalsyMatcher() -> NMBObjCMatcher {
+    public class func beFalsyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ (actualBlock() as? NSNumber)?.boolValue })
             let expr = Expression(expression: block, location: location)

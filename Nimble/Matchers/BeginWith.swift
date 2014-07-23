@@ -21,12 +21,12 @@ func beginWith(startingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(startingSubstring)
-        return range.startIndex == actual.startIndex
+        return range?.startIndex == actual.startIndex
     }
 }
 
 extension NMBObjCMatcher {
-    class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+    public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let actual = actualBlock()
             if let actualString = actual as? String {

@@ -26,7 +26,7 @@ func <=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
 }
 
 extension NMBObjCMatcher {
-    class func beLessThanOrEqualToMatcher(expected: NMBComparable?) -> NMBObjCMatcher {
+    public class func beLessThanOrEqualToMatcher(expected: NMBComparable?) -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ actualBlock() as NMBComparable? })
             let expr = Expression(expression: block, location: location)

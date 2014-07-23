@@ -14,7 +14,6 @@
 		1F14FB64194180C5009F2A08 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F1A742F1940169200FFFC47 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1A74351940169200FFFC47 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A74291940169200FFFC47 /* Nimble.framework */; };
-		1F1A744E1940171400FFFC47 /* Nimble-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A744D1940171400FFFC47 /* Nimble-Bridging-Header.h */; };
 		1F1B5AD41963E13900CA8BF9 /* BeAKindOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B5AD31963E13900CA8BF9 /* BeAKindOfTest.swift */; };
 		1F1B5AD51963E13900CA8BF9 /* BeAKindOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B5AD31963E13900CA8BF9 /* BeAKindOfTest.swift */; };
 		1F22D9E5195ED11400CA1480 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22D9E4195ED11400CA1480 /* Functional.swift */; };
@@ -29,7 +28,6 @@
 		1F925EB8195C0D6300ED456B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F925EAD195C0D6300ED456B /* Nimble.framework */; };
 		1F925EC7195C0DD100ED456B /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F925EC8195C0DDA00ED456B /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */; };
-		1F925EE1195C0DF600ED456B /* Nimble-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A744D1940171400FFFC47 /* Nimble-Bridging-Header.h */; };
 		1F925EE2195C0DFD00ED456B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F925EE6195C121200ED456B /* AsynchronousTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925EE5195C121200ED456B /* AsynchronousTest.swift */; };
 		1F925EE7195C121200ED456B /* AsynchronousTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925EE5195C121200ED456B /* AsynchronousTest.swift */; };
@@ -201,7 +199,6 @@
 		1F1A742E1940169200FFFC47 /* Nimble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Nimble.h; sourceTree = "<group>"; };
 		1F1A74341940169200FFFC47 /* NimbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1A743A1940169200FFFC47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F1A744D1940171400FFFC47 /* Nimble-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Nimble-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F1B5AD31963E13900CA8BF9 /* BeAKindOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeAKindOfTest.swift; sourceTree = "<group>"; };
 		1F22D9E4195ED11400CA1480 /* Functional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
 		1F2752D119445B8400052A26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -349,7 +346,6 @@
 				1FD8CD291968AB07008ED995 /* Wrappers */,
 				1F2C568C1944FD30001DF2B4 /* Utils */,
 				1F1A742E1940169200FFFC47 /* Nimble.h */,
-				1F1A744D1940171400FFFC47 /* Nimble-Bridging-Header.h */,
 				1F1A742C1940169200FFFC47 /* Supporting Files */,
 			);
 			path = Nimble;
@@ -507,7 +503,6 @@
 				1FD8CD601968AB07008ED995 /* DSL.h in Headers */,
 				1FD8CD641968AB07008ED995 /* NMBExceptionCapture.h in Headers */,
 				1F1A742F1940169200FFFC47 /* Nimble.h in Headers */,
-				1F1A744E1940171400FFFC47 /* Nimble-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +513,6 @@
 				1FD8CD611968AB07008ED995 /* DSL.h in Headers */,
 				1FD8CD651968AB07008ED995 /* NMBExceptionCapture.h in Headers */,
 				1F925EC7195C0DD100ED456B /* Nimble.h in Headers */,
-				1F925EE1195C0DF600ED456B /* Nimble-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,7 +971,7 @@
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1006,7 +1000,7 @@
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -1078,7 +1072,7 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -1110,7 +1104,7 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Nimble/Nimble-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

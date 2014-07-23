@@ -39,7 +39,7 @@ func raiseException() -> MatcherFunc<Any?> {
     }
 }
 
-@objc class NMBObjCRaiseExceptionMatcher : NMBMatcher {
+@objc public class NMBObjCRaiseExceptionMatcher : NMBMatcher {
     var _name: String?
     var _reason: String?
     init(name: String?, reason: String?) {
@@ -47,7 +47,7 @@ func raiseException() -> MatcherFunc<Any?> {
         _reason = reason
     }
 
-    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let block: () -> Any? = ({ actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
         if _name && _reason {
@@ -73,7 +73,7 @@ func raiseException() -> MatcherFunc<Any?> {
 }
 
 extension NMBObjCMatcher {
-    class func raiseExceptionMatcher() -> NMBObjCRaiseExceptionMatcher {
+    public class func raiseExceptionMatcher() -> NMBObjCRaiseExceptionMatcher {
         return NMBObjCRaiseExceptionMatcher(name: nil, reason: nil)
     }
 }

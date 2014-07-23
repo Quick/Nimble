@@ -28,7 +28,7 @@ func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
 }
 
 extension NMBObjCMatcher {
-    class func equalMatcher(expected: NSObject) -> NMBMatcher {
+    public class func equalMatcher(expected: NSObject) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
             return equal(expected).matches(expr, failureMessage: failureMessage)

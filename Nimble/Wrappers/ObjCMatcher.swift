@@ -76,13 +76,13 @@ class NMBExpectation : NSObject {
     }
 }
 
-@objc class NMBObjCMatcher : NMBMatcher {
+@objc public class NMBObjCMatcher : NMBMatcher {
     let _matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
     init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool) {
         self._matcher = matcher
     }
 
-    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         return _matcher(
             actualExpression: ({ actualBlock() as NSObject? }),
             failureMessage: failureMessage,
