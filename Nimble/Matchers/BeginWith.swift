@@ -21,7 +21,7 @@ public func beginWith(startingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(startingSubstring)
-        return !range && range!.startIndex == actual.startIndex
+        return range && range!.startIndex == actual.startIndex
     }
 }
 
