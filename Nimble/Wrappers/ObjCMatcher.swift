@@ -19,14 +19,14 @@ struct ObjCMatcherWrapper : Matcher {
 }
 
 // Equivalent to Expectation, but simplified for ObjC objects only
-class NMBExpectation : NSObject {
+public class NMBExpectation : NSObject {
     let _actualBlock: () -> NSObject!
     var _negative: Bool
     let _file: String
     let _line: Int
     var _timeout: NSTimeInterval = 1.0
 
-    init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: Int) {
+    public init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: Int) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
