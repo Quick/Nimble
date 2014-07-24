@@ -39,7 +39,7 @@ public func raiseException() -> MatcherFunc<Any?> {
     }
 }
 
-@objc class NMBObjCRaiseExceptionMatcher : NMBMatcher {
+@objc public class NMBObjCRaiseExceptionMatcher : NMBMatcher {
     var _name: String?
     var _reason: String?
     init(name: String?, reason: String?) {

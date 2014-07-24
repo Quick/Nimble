@@ -33,13 +33,13 @@ public class NMBExpectation : NSObject {
         self._line = line
     }
 
-    var withTimeout: (NSTimeInterval) -> NMBExpectation {
+    public var withTimeout: (NSTimeInterval) -> NMBExpectation {
         return ({ timeout in self._timeout = timeout
             return self
         })
     }
 
-    var to: (matcher: NMBMatcher) -> Void {
+    public var to: (matcher: NMBMatcher) -> Void {
         return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.to(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
@@ -47,7 +47,7 @@ public class NMBExpectation : NSObject {
         })
     }
 
-    var toNot: (matcher: NMBMatcher) -> Void {
+    public var toNot: (matcher: NMBMatcher) -> Void {
         return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toNot(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not")
@@ -55,9 +55,9 @@ public class NMBExpectation : NSObject {
         })
     }
 
-    var notTo: (matcher: NMBMatcher) -> Void { return toNot }
+    public var notTo: (matcher: NMBMatcher) -> Void { return toNot }
 
-    var toEventually: (matcher: NMBMatcher) -> Void {
+    public var toEventually: (matcher: NMBMatcher) -> Void {
         return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventually(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),
@@ -66,7 +66,7 @@ public class NMBExpectation : NSObject {
         })
     }
 
-    var toEventuallyNot: (matcher: NMBMatcher) -> Void {
+    public var toEventuallyNot: (matcher: NMBMatcher) -> Void {
         return ({(matcher: NMBMatcher) -> Void in
             expect(file: self._file, line: self._line){ self._actualBlock() as NSObject? }.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"),

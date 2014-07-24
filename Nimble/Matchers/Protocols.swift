@@ -2,7 +2,7 @@ import Foundation
 
 
 // Implement this protocol if you want full control over to() and toNot() behaviors
-public protocol Matcher {
+public protocol Matcher: BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
@@ -46,7 +46,7 @@ extension NSHashTable : NMBCollection {}
 extension NSArray : NMBOrderedCollection {}
 
 // Protocol for types to support beCloseTo() matcher
-@objc protocol NMBDoubleConvertible {
+@objc public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
 }
 extension NSNumber : NMBDoubleConvertible { }

@@ -14,10 +14,7 @@ class BeIdenticalToTest: XCTestCase {
     func testBeIdenticalToPositiveMessage() {
         let num1 = NSNumber.numberWithInteger(1)
         let num2 = NSNumber.numberWithInteger(2)
-        let args = VaListBuilder()
-        args.append(num1)
-        args.append(num2)
-        let message = NSString(format: "expected <%p> to be identical to <%p>", arguments: args.va_list())
+        let message = NSString(format: "expected <%p> to be identical to <%p>", [num1, num2])
         failsWithErrorMessage(message) {
             expect(num1).to(beIdenticalTo(num2))
         }
@@ -26,10 +23,7 @@ class BeIdenticalToTest: XCTestCase {
     func testBeIdenticalToNegativeMessage() {
         let value1 = NSArray(array: [])
         let value2 = NSArray(array: [])
-        let args = VaListBuilder()
-        args.append(value1)
-        args.append(value2)
-        let message = NSString(format: "expected <%p> to not be identical to <%p>", arguments: args.va_list())
+        let message = NSString(format: "expected <%p> to not be identical to <%p>", [value1, value2])
         failsWithErrorMessage(message) {
             expect(value1).toNot(beIdenticalTo(value2))
         }

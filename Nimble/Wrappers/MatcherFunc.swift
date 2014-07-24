@@ -3,7 +3,7 @@ import Foundation
 public struct MatcherFunc<T>: BasicMatcher {
     public let matcher: (Expression<T>, FailureMessage) -> Bool
 
-    init(_ matcher: (Expression<T>, FailureMessage) -> Bool) {
+    public init(_ matcher: (Expression<T>, FailureMessage) -> Bool) {
         self.matcher = matcher
     }
 

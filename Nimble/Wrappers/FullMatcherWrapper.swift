@@ -20,15 +20,15 @@ struct FullMatcherWrapper<M, T where M: BasicMatcher, M.ValueType == T>: Matcher
 }
 
 extension Expectation {
-    func to<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
-        to(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
+    public func to<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
+        toImpl(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
     }
 
-    func toNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
-        toNot(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
+    public func toNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
+        toNotImpl(FullMatcherWrapper(matcher: matcher, to: "to", toNot: "to not"))
     }
 
-    func notTo<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
+    public func notTo<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
         toNot(matcher)
     }
 }

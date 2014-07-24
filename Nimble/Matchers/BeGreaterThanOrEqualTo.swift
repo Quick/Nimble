@@ -1,6 +1,6 @@
 import Foundation
 
-func beGreaterThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
+public func beGreaterThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than or equal to <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
@@ -8,7 +8,7 @@ func beGreaterThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?>
     }
 }
 
-func beGreaterThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T?> {
+public func beGreaterThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than or equal to <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
@@ -17,12 +17,12 @@ func beGreaterThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<
     }
 }
 
-func >=<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+public func >=<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     lhs.to(beGreaterThanOrEqualTo(rhs))
     return true
 }
 
-func >=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+public func >=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
     lhs.to(beGreaterThanOrEqualTo(rhs))
     return true
 }

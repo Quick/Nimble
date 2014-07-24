@@ -10,13 +10,13 @@ func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, fail
     return actualValue && abs(actualValue! - expectedValue) < delta
 }
 
-func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
+public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
-func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible?> {
+public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible?> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
@@ -38,7 +38,7 @@ func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.000
         return beCloseTo(self._expected, within: self._delta).matches(expr, failureMessage: failureMessage)
     }
 
-    var within: (CDouble) -> NMBObjCBeCloseToMatcher {
+    public var within: (CDouble) -> NMBObjCBeCloseToMatcher {
         return ({ delta in
             return NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
         })

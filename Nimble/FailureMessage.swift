@@ -2,15 +2,15 @@ import Foundation
 
 @objc
 public class FailureMessage {
-    var expected: String = "expected"
-    var actualValue: String? = "" // empty string -> use default; nil -> exclude
-    var to: String = "to"
-    var postfixMessage: String = "match"
+    public var expected: String = "expected"
+    public var actualValue: String? = "" // empty string -> use default; nil -> exclude
+    public var to: String = "to"
+    public var postfixMessage: String = "match"
 
-    init() {
+    public init() {
     }
 
-    func stringValue() -> String {
+    public func stringValue() -> String {
         var value = "\(expected) \(to) \(postfixMessage)"
         if actualValue {
             value = "\(expected) \(actualValue) \(to) \(postfixMessage)"
