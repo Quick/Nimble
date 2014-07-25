@@ -22,7 +22,7 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher, Ba
 
 extension Expectation {
     public func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        to(AsyncMatcherWrapper(
+        toImpl(AsyncMatcherWrapper(
             fullMatcher: FullMatcherWrapper(
                 matcher: matcher,
                 to: "to eventually",
@@ -32,7 +32,7 @@ extension Expectation {
     }
 
     public func toEventuallyNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        toNot(AsyncMatcherWrapper(
+        toNotImpl(AsyncMatcherWrapper(
             fullMatcher: FullMatcherWrapper(
                 matcher: matcher,
                 to: "to eventually",

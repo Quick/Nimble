@@ -5,7 +5,7 @@ func _identityAsString(value: NSObject?) -> String {
     if !value {
         return "nil"
     }
-    return NSString(format: "<%p>", [value!])
+    return NSString(format: "<%p>", value!)
 }
 
 func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
@@ -45,4 +45,14 @@ func stringify<T>(value: T?) -> String {
         return NSString(format: "%.4f", (value as Double))
     }
     return toString(value)
+}
+
+extension Optional: Printable {
+    public var description: String {
+        switch self {
+        case let .Some(value):
+            return toString(value)
+        default: return "nil"
+        }
+    }
 }
