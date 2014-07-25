@@ -37,7 +37,7 @@ class BeEmptyTest: XCTestCase {
         }
         // TODO: figure out how to not dispatch to NMBCollection
 //        failsWithErrorMessage("expected <[1]> to be empty") {
-        failsWithErrorMessage("expected <(1)> to be empty") {
+        failsWithErrorMessage("expected <[1]> to be empty") {
             expect([1]).to(beEmpty())
         }
 
