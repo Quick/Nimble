@@ -10,9 +10,9 @@ import Foundation
         line = 0
     }
 
-    init(file: String, line: Int) {
+    init(file: String, line: UInt) {
         self.file = file
-        self.line = UInt(line)
+        self.line = line
     }
 
     public var description: String {

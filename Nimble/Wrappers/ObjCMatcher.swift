@@ -23,10 +23,10 @@ public class NMBExpectation : NSObject {
     let _actualBlock: () -> NSObject!
     var _negative: Bool
     let _file: String
-    let _line: Int
+    let _line: UInt
     var _timeout: NSTimeInterval = 1.0
 
-    public init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: Int) {
+    public init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
