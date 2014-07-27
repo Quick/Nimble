@@ -1,38 +1,36 @@
-#!/bin/bash
+#!/bin/sh
 
-XCPRETTY=`which xcpretty`
+XCPRETTY= #`which xcpretty`
 BUILD_DIR=`pwd`/build
 
 set -e
 
-function run_tests { # scheme, sdk, destination, Debug/Release
+function run_tests { # scheme, sdk, Debug/Release, destination
     echo "======="
-    echo xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test
+    echo xcodebuild -project Nimble.xcodeproj -scheme $1 -destination "$4" -configuration $3 -sdk $2 clean build test -destination-timeout 5
     echo "======="
     osascript -e 'tell app "iOS Simulator" to quit'
     if [ -z "$XCPRETTY" ]; then
-        xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test
+        xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator8.0" -destination "name=iPhone 5s,OS=8.0" -destination-timeout 5 clean build test
     else
-        set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme $1 -destination="$3" -configuration $4 -sdk $2 clean build test | $XCPRETTY -c
+        set -o pipefail && xcodebuild $args | $XCPRETTY -c
     fi
 }
 
-function test_latest {
-    echo "Running LATEST iOS and OSX"
-    run_tests 'Nimble-iOS' 'iphonesimulator8.0' "name=iPhone Retina (4-inch),OS=8.0", 'Debug'
-    run_tests 'Nimble-OSX' 'macosx' "build", 'Debug'
-}
-
-function test_full {
+function test {
     echo "Running ALL iOS and OSX"
 
-    run_tests 'Nimble-iOS' 'iphonesimulator8.0' "name=iPhone Retina (4-inch),OS=8.0", 'Debug'
-    run_tests 'Nimble-OSX' 'macosx' "build", 'Debug'
+    set -x
+    osascript -e 'tell app "iOS Simulator" to quit'
+    xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator8.0" -destination "name=iPhone 5s,OS=8.0" -destination-timeout 5 build test
 
-    run_tests 'Nimble-iOS' 'iphonesimulator8.0' "name=iPhone Retina (4-inch),OS=7.1", 'Debug'
-    run_tests 'Nimble-iOS' 'iphonesimulator8.0' "name=iPhone Retina (4-inch),OS=8.0", 'Release'
-    run_tests 'Nimble-iOS' 'iphonesimulator8.0' "name=iPhone Retina (4-inch),OS=7.1", 'Release'
-    run_tests 'Nimble-OSX' 'macosx' "build", 'Release'
+    osascript -e 'tell app "iOS Simulator" to quit'
+    xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx" -destination-timeout 5 build test
+    set +x
+}
+
+function clean {
+    rm -rf ~/Library/Developer/Xcode/DerivedData
 }
 
 function main {
@@ -41,12 +39,8 @@ function main {
     fi
 
     case "$1" in
-        full)
-            test_full
-            ;;
-        *)
-            test_latest
-            ;;
+        clean) clean ;;
+        *) test ;;
     esac
 }
 
