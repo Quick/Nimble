@@ -81,6 +81,7 @@ within a 1 second. You can explicitly pass the ``timeout`` parameter:
 
 ```swift
 expect(value).toEventually(equal(1), timeout: 1)
+```
 
 If you prefer the callback-style that some testing frameworks do, use ``waitUntil``:
 
