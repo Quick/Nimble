@@ -35,10 +35,3 @@ extension NMBObjCMatcher {
         }
     }
 }
-
-extension Array: Equatable {
-}
-
-public func ==<T>(lhs: Array<T>, rhs: Array<T>) -> Bool {
-    return lhs.bridgeToObjectiveC() == rhs.bridgeToObjectiveC()
-}

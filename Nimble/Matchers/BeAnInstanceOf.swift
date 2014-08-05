@@ -9,7 +9,7 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
             failureMessage.actualValue = "<nil>"
         }
         failureMessage.postfixMessage = "be an instance of \(NSStringFromClass(expectedClass))"
-        return instance && instance!.isMemberOfClass(expectedClass)
+        return instance != nil && instance!.isMemberOfClass(expectedClass)
     }
 }
 

@@ -1,14 +1,14 @@
 import Foundation
 
-public func beEmpty<S: Sequence>() -> MatcherFunc<S?> {
+public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = actualExpression.evaluate()
-        if !actualSeq {
+        if actualSeq == nil {
             return true
         }
         var generator = actualSeq!.generate()
-        return !generator.next()
+        return generator.next() == nil
     }
 }
 
@@ -24,7 +24,7 @@ public func beEmpty() -> MatcherFunc<NMBCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()
-        return !actual || actual!.count == 0
+        return actual == nil || actual!.count == 0
     }
 }
 

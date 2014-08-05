@@ -2,7 +2,7 @@ import Foundation
 
 
 func _identityAsString(value: NSObject?) -> String {
-    if !value {
+    if value == nil {
         return "nil"
     }
     return NSString(format: "<%p>", value!)
@@ -19,16 +19,16 @@ func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     func NMB_stringify() -> String
 }
 
-func stringify<S: Sequence>(value: S) -> String {
+func stringify<S: SequenceType>(value: S) -> String {
     var generator = value.generate()
     var strings = [String]()
-    var value: S.GeneratorType.Element?
+    var value: S.Generator.Element?
     do {
         value = generator.next()
-        if value {
+        if value != nil {
             strings.append(stringify(value))
         }
-    } while value
+    } while value != nil
     let str = ", ".join(strings)
     return "[\(str)]"
 }
