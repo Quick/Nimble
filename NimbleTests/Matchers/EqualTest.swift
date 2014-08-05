@@ -26,8 +26,8 @@ class EqualTest: XCTestCase {
         expect([1, 2, 3]).to(equal([1, 2, 3]))
         expect([1, 2, 3]).toNot(equal([1, 2]))
 
-        let array1: NSArray = [1, 2, 3]
-        let array2: NSArray = [1, 2, 3]
+        let array1: Array = [1, 2, 3]
+        let array2: Array = [1, 2, 3]
         expect(array1).to(equal(array2))
         expect(array1).to(equal([1, 2, 3]))
         expect(array1).toNot(equal([1, 2] as Array<Int>))
