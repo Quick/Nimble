@@ -2,12 +2,12 @@ import Foundation
 
 func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
-    if actualValue != nil {
+    if actualValue.hasValue {
         failureMessage.actualValue = "<\(stringify(actualValue!))>"
     } else {
         failureMessage.actualValue = "<nil>"
     }
-    return actualValue != nil && abs(actualValue! - expectedValue) < delta
+    return actualValue.hasValue && abs(actualValue! - expectedValue) < delta
 }
 
 public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {

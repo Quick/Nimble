@@ -11,7 +11,7 @@ public func beLessThan(expectedValue: NMBComparable?) -> MatcherFunc<NMBComparab
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
-        let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedAscending
+        let matches = actualValue.hasValue && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedAscending
         return matches
     }
 }

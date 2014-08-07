@@ -9,7 +9,7 @@ public func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
             failureMessage.actualValue = "<nil>"
         }
         failureMessage.postfixMessage = "be a kind of \(NSStringFromClass(expectedClass))"
-        return instance != nil && instance!.isKindOfClass(expectedClass)
+        return instance.hasValue && instance!.isKindOfClass(expectedClass)
     }
 }
 
