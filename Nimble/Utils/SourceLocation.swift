@@ -2,8 +2,8 @@ import Foundation
 
 
 @objc public class SourceLocation : Printable {
-    let file: String
-    let line: UInt
+    public let file: String
+    public let line: UInt
 
     init() {
         file = "Unknown File"
