@@ -18,16 +18,4 @@ class BeLogicalTest: XCTestCase {
             expect(true).to(beFalsy())
         }
     }
-
-    /*
-    func testOptionals() {
-        expect(nil as Bool?).to(beFalsy())
-        expect(false as Bool?).to(beFalsy())
-        expect(true as Bool?).toNot(beFalsy())
-
-        expect(nil as Bool?).toNot(beTruthy())
-        expect(false as Bool?).toNot(beTruthy())
-        expect(true as Bool?).to(beTruthy())
-    }
-*/
 }

@@ -2,7 +2,7 @@ import Foundation
 
 
 func _identityAsString(value: NSObject?) -> String {
-    if value == nil {
+    if !value.hasValue {
         return "nil"
     }
     return NSString(format: "<%p>", value!)
@@ -25,10 +25,10 @@ func stringify<S: SequenceType>(value: S) -> String {
     var value: S.Generator.Element?
     do {
         value = generator.next()
-        if value != nil {
+        if value.hasValue {
             strings.append(stringify(value))
         }
-    } while value != nil
+    } while value.hasValue
     let str = ", ".join(strings)
     return "[\(str)]"
 }

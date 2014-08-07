@@ -4,11 +4,11 @@ public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = actualExpression.evaluate()
-        if actualSeq == nil {
+        if !actualSeq.hasValue {
             return true
         }
         var generator = actualSeq!.generate()
-        return generator.next() == nil
+        return !generator.next().hasValue
     }
 }
 
@@ -24,7 +24,7 @@ public func beEmpty() -> MatcherFunc<NMBCollection?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()
-        return actual == nil || actual!.count == 0
+        return !actual.hasValue || actual!.count == 0
     }
 }
 
