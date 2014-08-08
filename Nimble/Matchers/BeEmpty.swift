@@ -16,7 +16,7 @@ public func beEmpty() -> MatcherFunc<NSString?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = actualExpression.evaluate()
-        return actualString == nil || actualString!.length == 0
+        return !actualString.hasValue || actualString!.length == 0
     }
 }
 
