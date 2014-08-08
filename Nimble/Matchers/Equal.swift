@@ -5,8 +5,8 @@ public struct _EqualMatcher<T: Equatable>: BasicMatcher {
 
     public func matches(actualExpression: Expression<T?>, failureMessage: FailureMessage) -> Bool  {
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
-        let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
-        if !matches && expectedValue == nil {
+        let matches = actualExpression.evaluate() == expectedValue && expectedValue.hasValue
+        if !matches && !expectedValue.hasValue {
             failureMessage.postfixMessage = " (will not match nils, use beNil() instead)"
         }
         return matches
@@ -40,5 +40,5 @@ extension Array: Equatable {
 }
 
 public func ==<T>(lhs: Array<T>, rhs: Array<T>) -> Bool {
-    return lhs.bridgeToObjectiveC() == rhs.bridgeToObjectiveC()
+    return lhs._bridgeToObjectiveC() == rhs._bridgeToObjectiveC()
 }

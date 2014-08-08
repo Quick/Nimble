@@ -72,13 +72,11 @@
 - (void)testBeTruthy {
     expect(@YES).to(beTruthy());
     expect(@NO).toNot(beTruthy());
-    expect(nil).toNot(beTruthy());
 }
 
 - (void)testBeFalsy {
     expect(@NO).to(beFalsy());
     expect(@YES).toNot(beFalsy());
-    expect(nil).to(beFalsy());
 }
 
 - (void)testBeNil {

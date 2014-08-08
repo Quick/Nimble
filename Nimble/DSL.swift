@@ -2,7 +2,7 @@ import Foundation
 
 // Begins an assertion on a given value.
 // file: and line: can be omitted to default to the current line this function is called on.
-public func expect<T>(expression: @auto_closure () -> T, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
+public func expect<T>(expression: @autoclosure () -> T, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,

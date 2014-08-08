@@ -5,7 +5,7 @@ import Foundation
 func _memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
     var cache: T?
     return ({ withoutCaching in
-        if (withoutCaching || !cache) {
+        if (withoutCaching || !cache.hasValue) {
             cache = closure()
         }
         return cache!
