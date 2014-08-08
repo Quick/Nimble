@@ -129,6 +129,27 @@ The following matchers are currently included with Nimble:
 - ``beEmpty()`` Matches if the given type contains nothing. Works with Strings and Collections from both Swift and Objective-C
 
 
+Custom Matchers
+----------------
+
+Custom matchers are not difficult to write. An example matcher would look like the following. 
+
+```swift
+import Nimble
+
+func matcherName(matcherParameters: AnyObject) -> MatcherFunc<ExpectedType> {
+    return MatcherFunc { actualExpression, failureMessage in
+        let instance = actualExpression.evaluate() // instance is of type ExpectedType
+        let result = /* boolean expression comparing instance to what you were expecting */
+
+        /* configure failureMessage here, depending on result */
+
+        return result
+    }
+}
+```
+
+
 Objective-C
 ===========
 
