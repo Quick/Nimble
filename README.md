@@ -1,7 +1,7 @@
 Nimble
 ======
 
-A Matcher Framework for Swift.
+A Matcher Framework for Swift and Objective-C.
 
 Setup
 -----
@@ -77,7 +77,7 @@ expect(value).toEventually(equal(1))
 ```
 
 This polls the expression inside ``expect(...)`` until the given expectation succeeds
-within a 1 second. You can explicitly pass the ``timeout`` parameter:
+within a second. You can explicitly pass the ``timeout`` parameter:
 
 ```swift
 expect(value).toEventually(equal(1), timeout: 1)
@@ -118,8 +118,8 @@ The following matchers are currently included with Nimble:
 - ``raiseException(#named: String?)`` Matches if the given closure raises an exception with the given name.
 - ``raiseException(#named: String?, #reason: String?)`` Matches if the given closure raises an exception with the given name and reason.
 - ``beNil()`` Matches if the given value is ``nil``.
-- ``beTruthy()``: Matches if the given value is not ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
-- ``beFalsy()``: Matches if the given value is ``nil`` (for optionals) or ``false`` (for ``LogicValue`` supported types like ``bool``). Optional Bools are automatically unwrapped first.
+- ``beTruthy()``: Matches if the given value is ``true`` (for ``BooleanType`` supported types like ``bool``).
+- ``beFalsy()``: Matches if the given value is ``false`` (for ``BooleanType`` supported types like ``bool``).
 - ``contain(items: T...)`` Matches if all of ``items`` are in the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays`` and ``NSSets``; and ``Strings`` - which use substring matching.
 - ``beginWith(starting: T)`` Matches if ``starting`` is in beginning the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
 - ``endWith(ending: T)`` Matches if ``ending`` is at the end of the given container. Valid containers are Swift collections that have ``Equatable`` elements; ``NSArrays``; and ``Strings`` - which use substring matching.
