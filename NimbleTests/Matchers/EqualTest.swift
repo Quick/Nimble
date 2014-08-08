@@ -33,6 +33,32 @@ class EqualTest: XCTestCase {
         expect(array1).toNot(equal([1, 2] as Array<Int>))
 
         expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
+
+        failsWithErrorMessage("expected <[1, 2, 3]> to equal <[1, 2]>") {
+            expect([1, 2, 3]).to(equal([1, 2]))
+        }
+    }
+
+    func testDoesNotMatchNils() {
+        failsWithErrorMessage("expected <nil> to equal <nil> (will not match nils, use beNil() instead)") {
+            expect(nil as String?).to(equal(nil as String?))
+        }
+        failsWithErrorMessage("expected <foo> to not equal <nil> (will not match nils, use beNil() instead)") {
+            expect("foo").toNot(equal(nil as String?))
+        }
+        failsWithErrorMessage("expected <nil> to not equal <bar> (will not match nils, use beNil() instead)") {
+            expect(nil as String?).toNot(equal("bar"))
+        }
+
+        failsWithErrorMessage("expected <nil> to equal <nil> (will not match nils, use beNil() instead)") {
+            expect(nil as [Int]?).to(equal(nil as [Int]?))
+        }
+        failsWithErrorMessage("expected <nil> to not equal <[1]> (will not match nils, use beNil() instead)") {
+            expect(nil as [Int]?).toNot(equal([1]))
+        }
+        failsWithErrorMessage("expected <[1]> to not equal <nil> (will not match nils, use beNil() instead)") {
+            expect([1]).toNot(equal(nil as [Int]?))
+        }
     }
 
     func testNSObjectEquality() {

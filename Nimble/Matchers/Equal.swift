@@ -1,20 +1,37 @@
 import Foundation
 
-public struct _EqualMatcher<T: Equatable>: BasicMatcher {
-    let expectedValue: T?
-
-    public func matches(actualExpression: Expression<T?>, failureMessage: FailureMessage) -> Bool  {
+public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
+    return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let matches = actualExpression.evaluate() == expectedValue && expectedValue.hasValue
-        if !matches && !expectedValue.hasValue {
-            failureMessage.postfixMessage = " (will not match nils, use beNil() instead)"
+        if !expectedValue.hasValue || !actualExpression.evaluate().hasValue {
+            failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
+            return false
         }
         return matches
     }
 }
 
-public func equal<T: Equatable>(expectedValue: T?) -> _EqualMatcher<T> {
-    return _EqualMatcher(expectedValue: expectedValue)
+// perhaps try to extend to SequenceOf or Sequence types instead of arrays
+public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "equal <\(expectedValue)>"
+        if !expectedValue.hasValue || !actualExpression.evaluate().hasValue {
+            failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
+            return false
+        }
+        var expectedGen = expectedValue!.generate()
+        var actualGen = actualExpression.evaluate()!.generate()
+        var expectedItem = expectedGen.next()
+        var actualItem = actualGen.next()
+        var matches = actualItem == expectedItem
+        while (matches && (actualItem.hasValue || expectedItem.hasValue)) {
+            actualItem = actualGen.next()
+            expectedItem = expectedGen.next()
+            matches = actualItem == expectedItem
+        }
+        return matches
+    }
 }
 
 public func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
@@ -34,11 +51,4 @@ extension NMBObjCMatcher {
             return equal(expected).matches(expr, failureMessage: failureMessage)
         }
     }
-}
-
-extension Array: Equatable {
-}
-
-public func ==<T>(lhs: Array<T>, rhs: Array<T>) -> Bool {
-    return lhs._bridgeToObjectiveC() == rhs._bridgeToObjectiveC()
 }
