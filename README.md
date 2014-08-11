@@ -3,14 +3,23 @@ Nimble
 
 A Matcher Framework for Swift and Objective-C.
 
-Setup
------
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-Currently, you must add this project as a subproject and link against the Nimble.framework.
+- [Usage](#usage)
+  - [Asynchronous Expectations](#asynchronous-expectations)
+  - [List of Builtin Matchers](#list-of-builtin-matchers)
+  - [Using Nimble in Objective-C](#using-nimble-in-objective-c)
+- [Writing Your Own Matchers](#writing-your-own-matchers)
+  - [Customizing Failure Messages](#customizing-failure-messages)
+  - [Supporting Objective-C](#supporting-objective-c)
+- [Installing Nimble](#installing-nimble)
 
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 Usage
------
+=====
 
 Matchers follow [Cedar's](https://github.com/pivotal/cedar) design. They're generic-based:
 
@@ -128,9 +137,8 @@ The following matchers are currently included with Nimble:
 - ``beAKindOf(expectedClass: Class)`` Matches if the given object is the ``expectedClass`` using ``isKindOfClass:``. Only works with Objective-C compatible objects.
 - ``beEmpty()`` Matches if the given type contains nothing. Works with Strings and Collections from both Swift and Objective-C
 
-
-Objective-C
-===========
+Using Nimble in Objective-C
+---------------------------
 
 Want to use this for Objective-C? The same syntax applies except you **must use Objective-C objects**:
 
@@ -236,4 +244,13 @@ Which ``beNil()`` allows for explicit resolution:
 ```objc
 expect(nil).to(beNil()); // passes
 ```
+
+Installing Nimble
+=================
+
+Currently, you must add this project as a subproject and link against the Nimble.framework.
+
+See [How to Install Quick](https://github.com/Quick/Quick#how-to-install-quick)
+which walks through how to set up Quick and Nimble. Simply ignoring the Quick setup and just
+follow the Nimble setup.
 
