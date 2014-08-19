@@ -3,8 +3,8 @@ import Foundation
 public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
-        let matches = actualExpression.evaluate() == expectedValue && expectedValue.hasValue
-        if !expectedValue.hasValue || !actualExpression.evaluate().hasValue {
+        let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
+        if expectedValue == nil || actualExpression.evaluate() == nil {
             failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
             return false
         }
@@ -16,7 +16,7 @@ public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
 public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
-        if !expectedValue.hasValue || !actualExpression.evaluate().hasValue {
+        if expectedValue == nil || actualExpression.evaluate() == nil {
             failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
             return false
         }
@@ -25,7 +25,7 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
         var expectedItem = expectedGen.next()
         var actualItem = actualGen.next()
         var matches = actualItem == expectedItem
-        while (matches && (actualItem.hasValue || expectedItem.hasValue)) {
+        while (matches && (actualItem != nil || expectedItem != nil)) {
             actualItem = actualGen.next()
             expectedItem = expectedGen.next()
             matches = actualItem == expectedItem

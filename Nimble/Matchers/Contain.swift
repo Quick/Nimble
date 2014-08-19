@@ -17,7 +17,7 @@ public func contain(substrings: String...) -> MatcherFunc<String> {
         return _all(substrings) {
             let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
             let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
-            return range.hasValue && !range!.isEmpty
+            return range != nil && !range!.isEmpty
         }
     }
 }
@@ -27,7 +27,7 @@ public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
         return _all(items) { item in
-            return actual.hasValue && actual!.containsObject(item)
+            return actual != nil && actual!.containsObject(item)
         }
     }
 }

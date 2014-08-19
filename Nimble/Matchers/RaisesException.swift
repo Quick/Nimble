@@ -50,9 +50,9 @@ public func raiseException() -> MatcherFunc<Any?> {
     public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let block: () -> Any? = ({ actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
-        if _name.hasValue && _reason.hasValue {
+        if _name != nil && _reason != nil {
             return raiseException(named: _name!, reason: _reason).matches(expr, failureMessage: failureMessage)
-        } else if _name.hasValue {
+        } else if _name != nil {
             return raiseException(named: _name!).matches(expr, failureMessage: failureMessage)
         } else {
             return raiseException().matches(expr, failureMessage: failureMessage)

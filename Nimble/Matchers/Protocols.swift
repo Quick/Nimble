@@ -70,7 +70,7 @@ extension NSString : NMBComparable {
     }
 }
 
-@objc class KICNilLiteral : NilLiteralConvertible {
+@objc final class KICNilLiteral: NilLiteralConvertible {
     class func convertFromNilLiteral() -> KICNilLiteral {
         return KICNilLiteral()
     }
