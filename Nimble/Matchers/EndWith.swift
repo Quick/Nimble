@@ -10,7 +10,7 @@ public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T
         do {
             lastItem = item
             item = actualGenerator.next()
-        } while(item.hasValue)
+        } while(item != nil)
 
         return lastItem == endingElement
     }
@@ -20,7 +20,7 @@ public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollectio
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = actualExpression.evaluate()
-        return collection.hasValue && collection!.indexOfObject(endingElement) == collection!.count - 1
+        return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
     }
 }
 
@@ -29,7 +29,7 @@ public func endWith(endingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         let collection = actualExpression.evaluate()
         let range = collection.rangeOfString(endingSubstring)
-        return range.hasValue && range!.endIndex == collection.endIndex
+        return range != nil && range!.endIndex == collection.endIndex
     }
 }
 
