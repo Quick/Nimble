@@ -12,7 +12,7 @@ public class FailureMessage {
 
     public func stringValue() -> String {
         var value = "\(expected) \(to) \(postfixMessage)"
-        if actualValue.hasValue {
+        if actualValue != nil {
             value = "\(expected) \(actualValue) \(to) \(postfixMessage)"
         }
         var lines: [String] = (value as NSString).componentsSeparatedByString("\n") as [String]
