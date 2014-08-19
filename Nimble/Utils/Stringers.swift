@@ -35,7 +35,7 @@ func stringify<S: SequenceType>(value: S) -> String {
 
 extension NSArray : NMBStringer {
     func NMB_stringify() -> String {
-        let str = valueForKey("description").componentsJoinedByString(", ")
+        let str = self.componentsJoinedByString(", ")
         return "[\(str)]"
     }
 }
