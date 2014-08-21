@@ -12,7 +12,7 @@ public func beGreaterThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> Match
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than or equal to <\(expectedValue)>"
         let actualValue = actualExpression.evaluate()
-        let matches = actualValue.hasValue && actualValue!.NMB_compare(expectedValue) != NSComparisonResult.OrderedAscending
+        let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) != NSComparisonResult.OrderedAscending
         return matches
     }
 }

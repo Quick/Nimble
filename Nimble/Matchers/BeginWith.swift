@@ -12,7 +12,7 @@ public func beginWith(startingElement: AnyObject) -> MatcherFunc<NMBOrderedColle
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = actualExpression.evaluate()
-        return collection.hasValue && collection!.indexOfObject(startingElement) == 0
+        return collection != nil && collection!.indexOfObject(startingElement) == 0
     }
 }
 
@@ -21,7 +21,7 @@ public func beginWith(startingSubstring: String) -> MatcherFunc<String> {
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         let actual = actualExpression.evaluate()
         let range = actual.rangeOfString(startingSubstring)
-        return range.hasValue && range!.startIndex == actual.startIndex
+        return range != nil && range!.startIndex == actual.startIndex
     }
 }
 
