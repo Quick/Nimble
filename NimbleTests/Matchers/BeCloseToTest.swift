@@ -21,12 +21,12 @@ class BeCloseToTest: XCTestCase {
     }
 
     func testBeCloseToWithNSNumber() {
-        expect(NSNumber.numberWithDouble(1.2)).to(beCloseTo(9.300, within: 10))
-        expect(NSNumber.numberWithDouble(1.2)).to(beCloseTo(NSNumber.numberWithDouble(9.300), within: 10))
-        expect(1.2).to(beCloseTo(NSNumber.numberWithDouble(9.300), within: 10))
+        expect(NSNumber(double:1.2)).to(beCloseTo(9.300, within: 10))
+        expect(NSNumber(double:1.2)).to(beCloseTo(NSNumber(double:9.300), within: 10))
+        expect(1.2).to(beCloseTo(NSNumber(double:9.300), within: 10))
 
         failsWithErrorMessage("expected <1.2000> to not be close to <1.2001> (within 1.0000)") {
-            expect(NSNumber.numberWithDouble(1.2)).toNot(beCloseTo(1.2001, within: 1.0))
+            expect(NSNumber(double:1.2)).toNot(beCloseTo(1.2001, within: 1.0))
         }
     }
 }
