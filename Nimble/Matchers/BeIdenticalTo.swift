@@ -1,7 +1,7 @@
 import Foundation
 
 
-public func beIdenticalTo<T: NSObject>(expected: T?) -> MatcherFunc<T?> {
+public func beIdenticalTo<T: AnyObject>(expected: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         let actual = actualExpression.evaluate()
         failureMessage.actualValue = "\(_identityAsString(actual))"
@@ -14,11 +14,11 @@ public func beIdenticalTo<T: NSObject>(expected: T?) -> MatcherFunc<T?> {
     }
 }
 
-public func ===<T: NSObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func ===<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.to(beIdenticalTo(rhs))
     return true
 }
-public func !==<T: NSObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func !==<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
     lhs.toNot(beIdenticalTo(rhs))
     return true
 }

@@ -1,11 +1,11 @@
 import Foundation
 
 
-func _identityAsString(value: NSObject?) -> String {
+func _identityAsString(value: AnyObject?) -> String {
     if value == nil {
         return "nil"
     }
-    return NSString(format: "<%p>", value!)
+    return NSString(format: "<%p>", unsafeBitCast(value!, Int.self))
 }
 
 func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
