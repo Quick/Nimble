@@ -46,13 +46,3 @@ func stringify<T>(value: T?) -> String {
     }
     return toString(value)
 }
-
-extension Optional: Printable {
-    public var description: String {
-        switch self {
-        case let .Some(value):
-            return toString(value)
-        default: return "nil"
-        }
-    }
-}
