@@ -29,12 +29,6 @@ class BeIdenticalToTest: XCTestCase {
         }
     }
     
-    func testBeIdenticalToObject() {
-        class IdenticalObjectTester {}
-        let tester = IdenticalObjectTester()
-        expect(tester).to(beIdenticalTo(tester))
-    }
-
     func testOperators() {
         expect(NSNumber.numberWithInteger(1)) === NSNumber.numberWithInteger(1)
         expect(NSNumber.numberWithInteger(1)) !== NSNumber.numberWithInteger(2)
