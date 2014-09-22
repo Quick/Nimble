@@ -16,14 +16,12 @@ public func beGreaterThan(expectedValue: NMBComparable?) -> MatcherFunc<NMBCompa
     }
 }
 
-public func ><T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+public func ><T: Comparable>(lhs: Expectation<T?>, rhs: T) {
     lhs.to(beGreaterThan(rhs))
-    return true
 }
 
-public func >(lhs: Expectation<NMBComparable?>, rhs: NMBComparable?) -> Bool {
+public func >(lhs: Expectation<NMBComparable?>, rhs: NMBComparable?) {
     lhs.to(beGreaterThan(rhs))
-    return true
 }
 
 extension NMBObjCMatcher {

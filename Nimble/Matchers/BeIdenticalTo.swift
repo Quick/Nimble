@@ -14,13 +14,11 @@ public func beIdenticalTo<T: AnyObject>(expected: T?) -> MatcherFunc<T?> {
     }
 }
 
-public func ===<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func ===<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) {
     lhs.to(beIdenticalTo(rhs))
-    return true
 }
-public func !==<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func !==<T: AnyObject>(lhs: Expectation<T?>, rhs: T?) {
     lhs.toNot(beIdenticalTo(rhs))
-    return true
 }
 
 extension NMBObjCMatcher {
