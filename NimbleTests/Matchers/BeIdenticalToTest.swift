@@ -28,7 +28,7 @@ class BeIdenticalToTest: XCTestCase {
             expect(value1).toNot(beIdenticalTo(value2))
         }
     }
-
+    
     func testOperators() {
         expect(NSNumber.numberWithInteger(1)) === NSNumber.numberWithInteger(1)
         expect(NSNumber.numberWithInteger(1)) !== NSNumber.numberWithInteger(2)
