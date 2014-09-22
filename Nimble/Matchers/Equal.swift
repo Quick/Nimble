@@ -58,34 +58,28 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
     }
 }
 
-public func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) {
     lhs.to(equal(rhs))
-    return true
 }
 
-public func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) -> Bool {
+public func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) {
     lhs.toNot(equal(rhs))
-    return true
 }
 
-public func ==<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) -> Bool {
+public func ==<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) {
     lhs.to(equal(rhs))
-    return true
 }
 
-public func !=<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) -> Bool {
+public func !=<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) {
     lhs.toNot(equal(rhs))
-    return true
 }
 
-public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) -> Bool {
+public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) {
     lhs.to(equal(rhs))
-    return true
 }
 
-public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) -> Bool {
+public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
-    return true
 }
 
 extension NMBObjCMatcher {

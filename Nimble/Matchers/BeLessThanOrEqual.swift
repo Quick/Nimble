@@ -15,14 +15,12 @@ public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherF
     }
 }
 
-public func <=<T: Comparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+public func <=<T: Comparable>(lhs: Expectation<T?>, rhs: T) {
     lhs.to(beLessThanOrEqualTo(rhs))
-    return true
 }
 
-public func <=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) -> Bool {
+public func <=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) {
     lhs.to(beLessThanOrEqualTo(rhs))
-    return true
 }
 
 extension NMBObjCMatcher {
