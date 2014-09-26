@@ -87,10 +87,10 @@ class EqualTest: XCTestCase {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber.numberWithInteger(1)).to(equal(NSNumber.numberWithInteger(1)))
-        expect(NSNumber.numberWithInteger(1)) == NSNumber.numberWithInteger(1)
-        expect(NSNumber.numberWithInteger(1)) != NSNumber.numberWithInteger(2)
-        expect { NSNumber.numberWithInteger(1) }.to(equal(1))
+        expect(NSNumber(integer:1)).to(equal(NSNumber(integer:1)))
+        expect(NSNumber(integer:1)) == NSNumber(integer:1)
+        expect(NSNumber(integer:1)) != NSNumber(integer:2)
+        expect { NSNumber(integer:1) }.to(equal(1))
     }
 
     func testOperatorEquality() {

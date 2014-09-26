@@ -61,8 +61,8 @@
 		1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
 		1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
-		1FD8CD301968AB07008ED995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* Protocols.swift */; };
-		1FD8CD311968AB07008ED995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* Protocols.swift */; };
+		1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
+		1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
 		1FD8CD321968AB07008ED995 /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* XCTestHandler.swift */; };
 		1FD8CD331968AB07008ED995 /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* XCTestHandler.swift */; };
 		1FD8CD341968AB07008ED995 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD081968AB07008ED995 /* DSL.swift */; };
@@ -105,8 +105,8 @@
 		1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1B1968AB07008ED995 /* EndWith.swift */; };
 		1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1C1968AB07008ED995 /* Equal.swift */; };
 		1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1C1968AB07008ED995 /* Equal.swift */; };
-		1FD8CD5C1968AB07008ED995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* Protocols.swift */; };
-		1FD8CD5D1968AB07008ED995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* Protocols.swift */; };
+		1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
+		1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1FD8CD601968AB07008ED995 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD8CD201968AB07008ED995 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -228,7 +228,7 @@
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FCE5DCB1963F24900BCA160 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
 		1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
-		1FD8CD061968AB07008ED995 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
 		1FD8CD071968AB07008ED995 /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
 		1FD8CD081968AB07008ED995 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1FD8CD091968AB07008ED995 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		1FD8CD1A1968AB07008ED995 /* Contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contain.swift; sourceTree = "<group>"; };
 		1FD8CD1B1968AB07008ED995 /* EndWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndWith.swift; sourceTree = "<group>"; };
 		1FD8CD1C1968AB07008ED995 /* Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Equal.swift; sourceTree = "<group>"; };
-		1FD8CD1D1968AB07008ED995 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherProtocols.swift; sourceTree = "<group>"; };
 		1FD8CD1E1968AB07008ED995 /* RaisesException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesException.swift; sourceTree = "<group>"; };
 		1FD8CD201968AB07008ED995 /* DSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSL.h; sourceTree = "<group>"; };
 		1FD8CD211968AB07008ED995 /* DSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSL.m; sourceTree = "<group>"; };
@@ -423,7 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */,
-				1FD8CD061968AB07008ED995 /* Protocols.swift */,
+				1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */,
 				1FD8CD071968AB07008ED995 /* XCTestHandler.swift */,
 			);
 			path = Adapters;
@@ -448,7 +448,7 @@
 				1FD8CD1A1968AB07008ED995 /* Contain.swift */,
 				1FD8CD1B1968AB07008ED995 /* EndWith.swift */,
 				1FD8CD1C1968AB07008ED995 /* Equal.swift */,
-				1FD8CD1D1968AB07008ED995 /* Protocols.swift */,
+				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
 			);
 			path = Matchers;
@@ -697,7 +697,7 @@
 				1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */,
 				1FD8CD4C1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1FD8CD461968AB07008ED995 /* BeGreaterThan.swift in Sources */,
-				1FD8CD301968AB07008ED995 /* Protocols.swift in Sources */,
+				1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1FD8CD561968AB07008ED995 /* Contain.swift in Sources */,
 				1FD8CD481968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
@@ -711,7 +711,7 @@
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6A1968AB07008ED995 /* Poll.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
-				1FD8CD5C1968AB07008ED995 /* Protocols.swift in Sources */,
+				1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD761968AB07008ED995 /* ObjCMatcher.swift in Sources */,
 				1FD8CD341968AB07008ED995 /* DSL.swift in Sources */,
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
@@ -768,7 +768,7 @@
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
 				1FD8CD4D1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1FD8CD471968AB07008ED995 /* BeGreaterThan.swift in Sources */,
-				1FD8CD311968AB07008ED995 /* Protocols.swift in Sources */,
+				1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1F22D9E6195ED11400CA1480 /* Functional.swift in Sources */,
 				1FD8CD571968AB07008ED995 /* Contain.swift in Sources */,
@@ -783,7 +783,7 @@
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6B1968AB07008ED995 /* Poll.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
-				1FD8CD5D1968AB07008ED995 /* Protocols.swift in Sources */,
+				1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD771968AB07008ED995 /* ObjCMatcher.swift in Sources */,
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,

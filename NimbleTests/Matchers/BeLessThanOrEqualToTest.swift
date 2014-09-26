@@ -7,10 +7,10 @@ class BeLessThanOrEqualToTest: XCTestCase {
         expect(2).to(beLessThanOrEqualTo(10))
         expect(2).toNot(beLessThanOrEqualTo(1))
 
-        expect(NSNumber.numberWithInt(2)).to(beLessThanOrEqualTo(10))
-        expect(NSNumber.numberWithInt(2)).toNot(beLessThanOrEqualTo(1))
-        expect(2).to(beLessThanOrEqualTo(NSNumber.numberWithInt(10)))
-        expect(2).toNot(beLessThanOrEqualTo(NSNumber.numberWithInt(1)))
+        expect(NSNumber(int:2)).to(beLessThanOrEqualTo(10))
+        expect(NSNumber(int:2)).toNot(beLessThanOrEqualTo(1))
+        expect(2).to(beLessThanOrEqualTo(NSNumber(int:10)))
+        expect(2).toNot(beLessThanOrEqualTo(NSNumber(int:1)))
 
         failsWithErrorMessage("expected <2> to be less than or equal to <0>") {
             expect(2).to(beLessThanOrEqualTo(0))

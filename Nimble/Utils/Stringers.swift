@@ -40,19 +40,17 @@ extension NSArray : NMBStringer {
     }
 }
 
-func stringify<T>(value: T?) -> String {
+func stringify<T>(value: T) -> String {
     if value is Double {
         return NSString(format: "%.4f", (value as Double))
     }
     return toString(value)
 }
 
-extension Optional: Printable {
-    public var description: String {
-        switch self {
-        case let .Some(value):
-            return toString(value)
-        default: return "nil"
-        }
+func stringify<T>(value: T?) -> String {
+    switch value {
+    case let .Some(realValue):
+        return stringify(realValue)
+    default: return "nil"
     }
 }
