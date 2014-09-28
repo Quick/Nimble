@@ -26,7 +26,7 @@ class BeLessThanTest: XCTestCase {
         expect(0) < 1
         expect(NSNumber(int:0)) < 1
 
-        failsWithErrorMessage("expected <2> to be less than <1>") {
+        failsWithErrorMessage("expected <2> to be less than <1.0000>") {
             expect(2) < 1
             return
         }

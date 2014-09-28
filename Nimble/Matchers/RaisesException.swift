@@ -22,7 +22,11 @@ func _raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool)
 }
 
 public func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any?> {
-    return _raiseExceptionMatcher("raise exception named <\(named)> and reason <\(reason)>") {
+    var theReason = ""
+    if let reason = reason {
+        theReason = reason
+    }
+    return _raiseExceptionMatcher("raise exception named <\(named)> and reason <\(theReason)>") {
         exception in return exception?.name == named && exception?.reason == reason
     }
 }

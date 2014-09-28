@@ -40,17 +40,33 @@ extension NSArray : NMBStringer {
     }
 }
 
+private let optionalWithStringRegExp = NSRegularExpression.regularExpressionWithPattern(
+    "^Optional\\(\"(.*)\"\\)$", options: nil, error: nil)!
+private let optionalRegExp = NSRegularExpression.regularExpressionWithPattern("^Optional\\((.*)\\)$", options: nil, error: nil)!
+
+func stripOptionalBox(description:String) -> String {
+    if !description.isEmpty {
+        var stripped = optionalWithStringRegExp.stringByReplacingMatchesInString(description, options: nil,
+            range: NSRange(location: 0, length: description.utf16Count), withTemplate: "$1")
+        stripped = optionalRegExp.stringByReplacingMatchesInString(stripped, options: nil,
+            range: NSRange(location: 0, length: stripped.utf16Count), withTemplate: "$1")
+        
+        return stripped
+    }
+    return description
+}
+
+
 func stringify<T>(value: T) -> String {
     if value is Double {
         return NSString(format: "%.4f", (value as Double))
     }
-    return toString(value)
+    return stripOptionalBox(toString(value))
 }
 
 func stringify<T>(value: T?) -> String {
-    switch value {
-    case let .Some(realValue):
-        return stringify(realValue)
-    default: return "nil"
+    if let unboxed = value {
+       return stringify(unboxed)
     }
+    return "nil"
 }

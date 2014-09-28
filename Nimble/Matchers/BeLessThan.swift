@@ -2,14 +2,14 @@ import Foundation
 
 public func beLessThan<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be less than <\(expectedValue)>"
+        failureMessage.postfixMessage = "be less than <\(stringify(expectedValue))>"
         return actualExpression.evaluate() < expectedValue
     }
 }
 
 public func beLessThan(expectedValue: NMBComparable?) -> MatcherFunc<NMBComparable?> {
     return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be less than <\(expectedValue)>"
+        failureMessage.postfixMessage = "be less than <\(stringify(expectedValue))>"
         let actualValue = actualExpression.evaluate()
         let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedAscending
         return matches
