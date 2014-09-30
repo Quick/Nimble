@@ -1,6 +1,6 @@
 import Foundation
 
-public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
+public func beEmpty<S: SequenceType>() -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = actualExpression.evaluate()
@@ -12,7 +12,7 @@ public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
     }
 }
 
-public func beEmpty() -> MatcherFunc<NSString?> {
+public func beEmpty() -> MatcherFunc<NSString> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = actualExpression.evaluate()
@@ -20,7 +20,7 @@ public func beEmpty() -> MatcherFunc<NSString?> {
     }
 }
 
-public func beEmpty() -> MatcherFunc<NMBCollection?> {
+public func beEmpty() -> MatcherFunc<NMBCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()

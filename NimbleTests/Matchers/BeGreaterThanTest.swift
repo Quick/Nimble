@@ -23,7 +23,7 @@ class BeGreaterThanTest: XCTestCase {
         expect(NSNumber(int:1)) > NSNumber(int:0)
         expect(NSNumber(int:1)) > 0
 
-        failsWithErrorMessage("expected <1> to be greater than <2.0000>") {
+        failsWithErrorMessage("expected <1.0000> to be greater than <2.0000>") {
             expect(1) > 2
             return
         }

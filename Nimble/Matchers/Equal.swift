@@ -1,7 +1,7 @@
 import Foundation
 
 
-public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
+public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
@@ -14,7 +14,7 @@ public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
 }
 
 // perhaps try to extend to SequenceOf or Sequence types instead of dictionaries
-public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> MatcherFunc<[T: C]?> {
+public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> MatcherFunc<[T: C]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         if expectedValue == nil || actualExpression.evaluate() == nil {
@@ -37,7 +37,7 @@ public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> Matcher
 }
 
 // perhaps try to extend to SequenceOf or Sequence types instead of arrays
-public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
+public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         if expectedValue == nil || actualExpression.evaluate() == nil {
@@ -58,27 +58,27 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]?> {
     }
 }
 
-public func ==<T: Equatable>(lhs: Expectation<T?>, rhs: T?) {
+public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: Expectation<T?>, rhs: T?) {
+public func !=<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) {
+public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: Expectation<[T]?>, rhs: [T]?) {
+public func !=<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) {
+public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]?>, rhs: [T: C]?) {
+public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
 }
 

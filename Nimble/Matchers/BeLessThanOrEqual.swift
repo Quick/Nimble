@@ -1,13 +1,13 @@
 import Foundation
 
-public func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T?> {
+public func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(stringify(expectedValue))>"
         return actualExpression.evaluate() <= expectedValue
     }
 }
 
-public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T?> {
+public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(stringify(expectedValue))>"
         let actualValue = actualExpression.evaluate()
@@ -15,11 +15,11 @@ public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> MatcherF
     }
 }
 
-public func <=<T: Comparable>(lhs: Expectation<T?>, rhs: T) {
+public func <=<T: Comparable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(beLessThanOrEqualTo(rhs))
 }
 
-public func <=<T: NMBComparable>(lhs: Expectation<T?>, rhs: T) {
+public func <=<T: NMBComparable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(beLessThanOrEqualTo(rhs))
 }
 
