@@ -5,7 +5,6 @@ class EqualTest: XCTestCase {
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))
-        expect(1).to(equal(1 as CInt))
         expect(1).to(equal(1))
         expect("hello").to(equal("hello"))
         expect("hello").toNot(equal("world"))
