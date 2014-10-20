@@ -223,9 +223,7 @@ without explicitly specifying both types:
 ```swift
 // Swift
 
-// Both of these work:
 expect(1 as CInt).to(equal(1))
-expect(1).to(equal(1 as CInt))
 ```
 
 > In Objective-C, Nimble only supports Objective-C objects. To
