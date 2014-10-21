@@ -13,10 +13,10 @@ class EqualTest: XCTestCase {
             1
         }.to(equal(1))
 
-        failsWithErrorMessage("expected <hello> to equal <world>") {
+        failsWithErrorMessage("expected to equal <world>, got <hello>") {
             expect("hello").to(equal("world"))
         }
-        failsWithErrorMessage("expected <hello> to not equal <hello>") {
+        failsWithErrorMessage("expected to not equal <hello>, got <hello>") {
             expect("hello").toNot(equal("hello"))
         }
     }
@@ -34,39 +34,39 @@ class EqualTest: XCTestCase {
 
         expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
 
-        failsWithErrorMessage("expected <[1, 2, 3]> to equal <[1, 2]>") {
+        failsWithErrorMessage("expected to equal <[1, 2]>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(equal([1, 2]))
         }
     }
 
     func testDoesNotMatchNils() {
-        failsWithErrorMessage("expected <nil> to equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as String?).to(equal(nil as String?))
         }
-        failsWithErrorMessage("expected <foo> to not equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <foo>") {
             expect("foo").toNot(equal(nil as String?))
         }
-        failsWithErrorMessage("expected <nil> to not equal <bar> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <bar> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as String?).toNot(equal("bar"))
         }
 
-        failsWithErrorMessage("expected <nil> to equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as [Int]?).to(equal(nil as [Int]?))
         }
-        failsWithErrorMessage("expected <nil> to not equal <[1]> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <[1]> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as [Int]?).toNot(equal([1]))
         }
-        failsWithErrorMessage("expected <[1]> to not equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <[1]>") {
             expect([1]).toNot(equal(nil as [Int]?))
         }
 
-        failsWithErrorMessage("expected <nil> to equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as [Int: Int]?).to(equal(nil as [Int: Int]?))
         }
-        failsWithErrorMessage("expected <nil> to not equal <[1: 1]> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <[1: 1]> (will not match nils, use beNil() instead), got <nil>") {
             expect(nil as [Int: Int]?).toNot(equal([1: 1]))
         }
-        failsWithErrorMessage("expected <[1: 1]> to not equal <nil> (will not match nils, use beNil() instead)") {
+        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <[1: 1]>") {
             expect([1: 1]).toNot(equal(nil as [Int: Int]?))
         }
     }
@@ -96,11 +96,11 @@ class EqualTest: XCTestCase {
         expect("foo") == "foo"
         expect("foo") != "bar"
 
-        failsWithErrorMessage("expected <hello> to equal <world>") {
+        failsWithErrorMessage("expected to equal <world>, got <hello>") {
             expect("hello") == "world"
             return
         }
-        failsWithErrorMessage("expected <hello> to not equal <hello>") {
+        failsWithErrorMessage("expected to not equal <hello>, got <hello>") {
             expect("hello") != "hello"
             return
         }

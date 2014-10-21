@@ -10,10 +10,21 @@ public class FailureMessage {
     public init() {
     }
 
-    public func stringValue() -> String {
+    var description : String {
         var value = "\(expected) \(to) \(postfixMessage)"
         if let actualValue = actualValue {
             value = "\(expected) \(actualValue) \(to) \(postfixMessage)"
+        }
+        var lines: [String] = (value as NSString).componentsSeparatedByString("\n") as [String]
+        let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
+        lines = lines.map { line in line.stringByTrimmingCharactersInSet(whitespace) }
+        return "".join(lines)
+    }
+
+    public func stringValue() -> String {
+        var value = "\(expected) \(to) \(postfixMessage)"
+        if let actualValue = actualValue {
+            value = "\(expected) \(to) \(postfixMessage), got \(actualValue)"
         }
         var lines: [String] = (value as NSString).componentsSeparatedByString("\n") as [String]
         let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()

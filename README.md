@@ -775,7 +775,7 @@ By default, Nimble outputs the following failure message when an
 expectation fails:
 
 ```
-expected <\(actual)> to match
+expected to match, got <\(actual)>
 ```
 
 You can customize this message by modifying the `failureMessage` struct
@@ -785,7 +785,7 @@ something else, update the `postfixMessage` property:
 ```swift
 // Swift
 
-// Outputs: expected <\(actual)> to be under the sea
+// Outputs: expected to be under the sea, got <\(actual)>
 failureMessage.postfixMessage = "be under the sea"
 ```
 

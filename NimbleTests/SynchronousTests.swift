@@ -82,7 +82,7 @@ class SynchronousTest: XCTestCase {
     }
 
     func testToNotNegativeMatches() {
-        failsWithErrorMessage("expected <1> to not match") {
+        failsWithErrorMessage("expected to not match, got <1>") {
             expect(1).toNot(MatcherFunc { expr, failure in true })
         }
     }
