@@ -1,11 +1,12 @@
 #!/bin/sh
 
-XCPRETTY= #`which xcpretty`
+XCPRETTY=`which xcpretty`
 BUILD_DIR=`pwd`/build
-BUILD_SDK_VERSION=8.1
-RUNTIME_SDK_VERSION=8.1
+BUILD_SDK_VERSION=${NIMBLE_BUILD_SDK_VERSION:-8.1}
+RUNTIME_SDK_VERSION=${NIMBLE_RUNTIME_SDK_VERSION:-8.1}
 
 set -e
+set -x
 
 function test_ios {
     osascript -e 'tell app "iOS Simulator" to quit'
@@ -16,9 +17,7 @@ function test_ios {
 }
 
 function test_osx {
-    set -x
     xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx" -destination-timeout 5 build test
-    set +x
 }
 
 function test() {
