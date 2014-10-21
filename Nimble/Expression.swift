@@ -13,24 +13,24 @@ func _memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
 }
 
 public struct Expression<T> {
-    public let _expression: (Bool) -> T
+    public let _expression: (Bool) -> T?
     public let location: SourceLocation
     public let _withoutCaching: Bool
     public var cache: T?
 
-    public init(expression: () -> T, location: SourceLocation) {
+    public init(expression: () -> T?, location: SourceLocation) {
         self._expression = _memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
     }
 
-    public init(memoizedExpression: (Bool) -> T, location: SourceLocation, withoutCaching: Bool) {
+    public init(memoizedExpression: (Bool) -> T?, location: SourceLocation, withoutCaching: Bool) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
     }
 
-    public func evaluate() -> T {
+    public func evaluate() -> T? {
         return self._expression(_withoutCaching)
     }
 

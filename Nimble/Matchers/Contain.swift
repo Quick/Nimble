@@ -3,26 +3,30 @@ import Foundation
 public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
-        let actual = actualExpression.evaluate()
-        return _all(items) {
-            return contains(actual, $0)
+        if let actual = actualExpression.evaluate() {
+            return _all(items) {
+                return contains(actual, $0)
+            }
         }
+        return false
     }
 }
 
 public func contain(substrings: String...) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
-        let actual = actualExpression.evaluate()
-        return _all(substrings) {
-            let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
-            let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
-            return range != nil && !range!.isEmpty
+        if let actual = actualExpression.evaluate() {
+            return _all(substrings) {
+                let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
+                let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
+                return range != nil && !range!.isEmpty
+            }
         }
+        return false
     }
 }
 
-public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer?> {
+public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()

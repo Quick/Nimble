@@ -3,12 +3,15 @@ import Foundation
 public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
-        var actualGenerator = actualExpression.evaluate().generate()
-        return actualGenerator.next() == startingElement
+        if let actualValue = actualExpression.evaluate() {
+            var actualGenerator = actualValue.generate()
+            return actualGenerator.next() == startingElement
+        }
+        return false
     }
 }
 
-public func beginWith(startingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
+public func beginWith(startingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = actualExpression.evaluate()
@@ -19,9 +22,11 @@ public func beginWith(startingElement: AnyObject) -> MatcherFunc<NMBOrderedColle
 public func beginWith(startingSubstring: String) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
-        let actual = actualExpression.evaluate()
-        let range = actual.rangeOfString(startingSubstring)
-        return range != nil && range!.startIndex == actual.startIndex
+        if let actual = actualExpression.evaluate() {
+            let range = actual.rangeOfString(startingSubstring)
+            return range != nil && range!.startIndex == actual.startIndex
+        }
+        return false
     }
 }
 

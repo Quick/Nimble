@@ -5,13 +5,13 @@ struct ObjCMatcherWrapper : Matcher {
     let to: String
     let toNot: String
 
-    func matches(actualExpression: Expression<NSObject?>, failureMessage: FailureMessage) -> Bool {
+    func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = to
         let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
         return pass
     }
 
-    func doesNotMatch(actualExpression: Expression<NSObject?>, failureMessage: FailureMessage) -> Bool {
+    func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = toNot
         let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
         return !pass

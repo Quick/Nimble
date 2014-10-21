@@ -48,9 +48,8 @@ func stringify<T>(value: T) -> String {
 }
 
 func stringify<T>(value: T?) -> String {
-    switch value {
-    case let .Some(realValue):
-        return stringify(realValue)
-    default: return "nil"
+    if let unboxed = value {
+       return stringify(unboxed)
     }
+    return "nil"
 }

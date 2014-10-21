@@ -1,5 +1,7 @@
 # Nimble
 
+[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=master)](https://travis-ci.org/Quick/Nimble)
+
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
 [Cedar](https://github.com/pivotal/cedar).
@@ -223,9 +225,7 @@ without explicitly specifying both types:
 ```swift
 // Swift
 
-// Both of these work:
 expect(1 as CInt).to(equal(1))
-expect(1).to(equal(1 as CInt))
 ```
 
 > In Objective-C, Nimble only supports Objective-C objects. To
