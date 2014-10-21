@@ -1,53 +1,54 @@
 import Foundation
 
-public struct _BeBooleanTypeMatcher: BasicMatcher {
-    public let expectedValue: BooleanType
-    public let stringValue: String
-
-    public func matches(actualExpression: Expression<BooleanType>, failureMessage: FailureMessage) -> Bool {
-        failureMessage.postfixMessage = "be \(stringValue)"
-        return actualExpression.evaluate()?.boolValue == expectedValue.boolValue
-    }
-}
-
-public struct _BeBoolMatcher: BasicMatcher {
-    public let expectedValue: BooleanType
-    public let stringValue: String
-
-    public func matches(actualExpression: Expression<Bool>, failureMessage: FailureMessage) -> Bool {
+func _beBool(#expectedValue: BooleanType, #stringValue: String, #falseMatchesNil: Bool) -> MatcherFunc<BooleanType> {
+    return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be \(stringValue)"
         let actual = actualExpression.evaluate()
-        return (actual?.boolValue) == expectedValue.boolValue
+        if expectedValue {
+            return actual?.boolValue == expectedValue.boolValue
+        } else if !falseMatchesNil {
+            return actual != nil && actual!.boolValue != !expectedValue.boolValue
+        } else {
+            return actual?.boolValue != !expectedValue.boolValue
+        }
     }
 }
 
-public func beTruthy() -> _BeBooleanTypeMatcher {
-    return _BeBooleanTypeMatcher(expectedValue: true, stringValue: "truthy")
+// mark: beTrue() / beFalse()
+
+public func beTrue() -> MatcherFunc<Bool> {
+    return equal(true).withFailureMessage { failureMessage in
+        failureMessage.postfixMessage = "be true"
+    }
 }
 
-public func beFalsy() -> _BeBooleanTypeMatcher {
-    return _BeBooleanTypeMatcher(expectedValue: false, stringValue: "falsy")
+public func beFalse() -> MatcherFunc<Bool> {
+    return equal(false).withFailureMessage { failureMessage in
+        failureMessage.postfixMessage = "be false"
+    }
 }
 
-public func beTruthy() -> _BeBoolMatcher {
-    return _BeBoolMatcher(expectedValue: true, stringValue: "truthy")
+// mark: beTruthy() / beFalsy()
+
+public func beTruthy() -> MatcherFunc<BooleanType> {
+    return _beBool(expectedValue: true, stringValue: "truthy", falseMatchesNil: true)
 }
 
-public func beFalsy() -> _BeBoolMatcher {
-    return _BeBoolMatcher(expectedValue: false, stringValue: "falsy")
+public func beFalsy() -> MatcherFunc<BooleanType> {
+    return _beBool(expectedValue: false, stringValue: "falsy", falseMatchesNil: true)
 }
 
 extension NMBObjCMatcher {
     public class func beTruthyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false })
+            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false as BooleanType? })
             let expr = Expression(expression: block, location: location)
             return beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
     public class func beFalsyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false })
+            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false as BooleanType? })
             let expr = Expression(expression: block, location: location)
             return beFalsy().matches(expr, failureMessage: failureMessage)
         }
