@@ -4,19 +4,22 @@ public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
-        var actualGenerator = actualExpression.evaluate().generate()
-        var lastItem: T?
-        var item: T?
-        do {
-            lastItem = item
-            item = actualGenerator.next()
-        } while(item != nil)
-
-        return lastItem == endingElement
+        if let actualValue = actualExpression.evaluate() {
+            var actualGenerator = actualValue.generate()
+            var lastItem: T?
+            var item: T?
+            do {
+                lastItem = item
+                item = actualGenerator.next()
+            } while(item != nil)
+            
+            return lastItem == endingElement
+        }
+        return false
     }
 }
 
-public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection?> {
+public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = actualExpression.evaluate()
@@ -27,9 +30,11 @@ public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollectio
 public func endWith(endingSubstring: String) -> MatcherFunc<String> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
-        let collection = actualExpression.evaluate()
-        let range = collection.rangeOfString(endingSubstring)
-        return range != nil && range!.endIndex == collection.endIndex
+        if let collection = actualExpression.evaluate() {
+            let range = collection.rangeOfString(endingSubstring)
+            return range != nil && range!.endIndex == collection.endIndex
+        }
+        return false
     }
 }
 

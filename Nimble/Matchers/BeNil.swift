@@ -1,6 +1,6 @@
 import Foundation
 
-public func beNil<T>() -> MatcherFunc<T?> {
+public func beNil<T>() -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be nil"
         let actualValue = actualExpression.evaluate()

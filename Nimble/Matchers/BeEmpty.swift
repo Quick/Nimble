@@ -1,6 +1,6 @@
 import Foundation
 
-public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
+public func beEmpty<S: SequenceType>() -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = actualExpression.evaluate()
@@ -12,7 +12,7 @@ public func beEmpty<S: SequenceType>() -> MatcherFunc<S?> {
     }
 }
 
-public func beEmpty() -> MatcherFunc<NSString?> {
+public func beEmpty() -> MatcherFunc<NSString> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = actualExpression.evaluate()
@@ -22,7 +22,7 @@ public func beEmpty() -> MatcherFunc<NSString?> {
 
 // Without specific overrides, beEmpty() is ambiguous for NSDictionary, NSArray,
 // etc, since they conform to SequenceType as well as NMBCollection.
-public func beEmpty() -> MatcherFunc<NSDictionary?> {
+public func beEmpty() -> MatcherFunc<NSDictionary> {
 	return MatcherFunc { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
 		let actualDictionary = actualExpression.evaluate()
@@ -30,7 +30,7 @@ public func beEmpty() -> MatcherFunc<NSDictionary?> {
 	}
 }
 
-public func beEmpty() -> MatcherFunc<NSArray?> {
+public func beEmpty() -> MatcherFunc<NSArray> {
 	return MatcherFunc { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
 		let actualArray = actualExpression.evaluate()
@@ -38,7 +38,7 @@ public func beEmpty() -> MatcherFunc<NSArray?> {
 	}
 }
 
-public func beEmpty() -> MatcherFunc<NMBCollection?> {
+public func beEmpty() -> MatcherFunc<NMBCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = actualExpression.evaluate()

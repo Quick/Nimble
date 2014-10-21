@@ -6,7 +6,7 @@ public struct _BeBooleanTypeMatcher: BasicMatcher {
 
     public func matches(actualExpression: Expression<BooleanType>, failureMessage: FailureMessage) -> Bool {
         failureMessage.postfixMessage = "be \(stringValue)"
-        return actualExpression.evaluate().boolValue == expectedValue.boolValue
+        return actualExpression.evaluate()?.boolValue == expectedValue.boolValue
     }
 }
 
@@ -17,7 +17,7 @@ public struct _BeBoolMatcher: BasicMatcher {
     public func matches(actualExpression: Expression<Bool>, failureMessage: FailureMessage) -> Bool {
         failureMessage.postfixMessage = "be \(stringValue)"
         let actual = actualExpression.evaluate()
-        return (actual.boolValue) == expectedValue.boolValue
+        return (actual?.boolValue) == expectedValue.boolValue
     }
 }
 

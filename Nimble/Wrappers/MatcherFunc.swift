@@ -12,7 +12,7 @@ public struct MatcherFunc<T>: BasicMatcher {
     }
 }
 
-func _objc(matcher: MatcherFunc<NSObject?>) -> NMBObjCMatcher {
+func _objc(matcher: MatcherFunc<NSObject>) -> NMBObjCMatcher {
     return NMBObjCMatcher { actualExpression, failureMessage, location in
         let expr = Expression(expression: actualExpression, location: location)
         return matcher.matches(expr, failureMessage: failureMessage)

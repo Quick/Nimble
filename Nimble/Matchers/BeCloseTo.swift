@@ -16,7 +16,7 @@ public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> M
     }
 }
 
-public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible?> {
+public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }

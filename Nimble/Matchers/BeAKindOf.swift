@@ -1,6 +1,6 @@
 import Foundation
 
-public func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject?> {
+public func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
     return MatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
