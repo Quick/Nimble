@@ -1078,6 +1078,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -1110,6 +1111,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};
