@@ -80,6 +80,11 @@ NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException();
 NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(),
              NMB_raiseException());
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> match(id expectedValue),
+             NMB_match(expectedValue));
+
+
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define expect(EXPR) NMB_expect(^id{ return (EXPR); }, __FILE__, __LINE__)
 #define expectAction(EXPR) NMB_expect(^id{ (EXPR); return nil; }, __FILE__, __LINE__)

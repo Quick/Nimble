@@ -655,6 +655,9 @@ expect(actual).to(endWith(expected))
 
 // Passes if actual is an empty string, "":
 expect(actual).to(beEmpty())
+
+// Passes if actual matches the regular expression defined in expected:
+expect(actual).to(match(expected))
 ```
 
 ```objc
@@ -671,6 +674,9 @@ expect(actual).to(endWith(expected));
 
 // Passes if actual is an empty string, "":
 expect(actual).to(beEmpty());
+
+// Passes if actual matches the regular expression defined in expected:
+expect(actual).to(match(expected))
 ```
 
 # Writing Your Own Matchers

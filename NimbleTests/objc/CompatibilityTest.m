@@ -110,6 +110,11 @@
     expect(nil).toNot(equal(nil));
 }
 
+- (void)testMatch {
+    expect(@"11:14").to(match(@"\\d{2}:\\d{2}"));
+    expect(@"hello").toNot(match(@"\\d{2}:\\d{2}"));
+}
+
 - (void)testRaiseException {
     __block NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"No food" userInfo:nil];
     expectAction([exception raise]).to(raiseException());
