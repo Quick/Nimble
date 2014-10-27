@@ -139,7 +139,7 @@
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F1A74281940169200FFFC47;
-			remoteInfo = Tailor;
+			remoteInfo = Nimble-iOS;
 		};
 		1F6BB82A1968BFF9009F1DBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -535,7 +535,7 @@
 			dependencies = (
 			);
 			name = "Nimble-iOS";
-			productName = Tailor;
+			productName = Nimble-iOS;
 			productReference = 1F1A74291940169200FFFC47 /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -556,7 +556,7 @@
 				1F6BB82B1968BFF9009F1DBB /* PBXTargetDependency */,
 			);
 			name = "Nimble-iOSTests";
-			productName = TailorTests;
+			productName = Nimble-iOSTests;
 			productReference = 1F1A74341940169200FFFC47 /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
