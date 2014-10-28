@@ -46,11 +46,28 @@ extension NMBObjCMatcher {
             return beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
+
     public class func beFalsyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false as BooleanType? })
             let expr = Expression(expression: block, location: location)
             return beFalsy().matches(expr, failureMessage: failureMessage)
+        }
+    }
+
+    public class func beTrueMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ (actualBlock() as? NSNumber)?.boolValue as Bool? })
+            let expr = Expression(expression: block, location: location)
+            return beTrue().matches(expr, failureMessage: failureMessage)
+        }
+    }
+
+    public class func beFalseMatcher() -> NMBObjCMatcher {
+        return NMBObjCMatcher { actualBlock, failureMessage, location in
+            let block = ({ (actualBlock() as? NSNumber)?.boolValue as Bool? })
+            let expr = Expression(expression: block, location: location)
+            return beFalse().matches(expr, failureMessage: failureMessage)
         }
     }
 }

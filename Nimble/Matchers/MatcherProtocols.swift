@@ -2,15 +2,10 @@ import Foundation
 
 
 // Implement this protocol if you want full control over to() and toNot() behaviors
-public protocol Matcher: BasicMatcher {
+public protocol Matcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
-}
-
-// Objective-C interface to a similar interface
-@objc public protocol NMBMatcher {
-    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
 // Implement this protocol if you just want a simplier matcher. The negation
@@ -21,6 +16,11 @@ public protocol Matcher: BasicMatcher {
 public protocol BasicMatcher {
     typealias ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
+}
+
+// Objective-C interface to a similar interface
+@objc public protocol NMBMatcher {
+    func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
 // Protocol for types that support contain() matcher

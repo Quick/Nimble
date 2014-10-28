@@ -81,6 +81,18 @@
     expect(nil).to(beFalsy());
 }
 
+- (void)testBeTrue {
+    expect(@YES).to(beTrue());
+    expect(@NO).toNot(beTrue());
+    expect(nil).toNot(beTrue());
+}
+
+- (void)testBeFalse {
+    expect(@NO).to(beFalse());
+    expect(@YES).toNot(beFalse());
+    expect(nil).toNot(beFalse());
+}
+
 - (void)testBeNil {
     expect(nil).to(beNil());
     expect(@NO).toNot(beNil());
@@ -120,12 +132,5 @@
     expectAction([exception raise]).to(raiseException());
     expectAction(exception).toNot(raiseException());
 }
-
-//- (void)testOneOf {
-//    expect(@1).to(beOneOf(@1));
-//    expect(@1).toNot(equal(@2));
-//    expect(@1).notTo(equal(@2));
-//    expect(@"hello").to(equal(@"hello"));
-//}
 
 @end
