@@ -520,8 +520,14 @@ expect(dolphin).to(beAKindOf([Mammal class]));
 // Passes if actual is not nil, false, or an object with a boolean value of false:
 expect(actual).to(beTruthy())
 
+// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+expect(actual).to(beTrue())
+
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy())
+
+// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+expect(actual).to(beFalse())
 
 // Passes if actual is nil:
 expect(actual).to(beNil())
@@ -533,8 +539,14 @@ expect(actual).to(beNil())
 // Passes if actual is not nil, false, or an object with a boolean value of false:
 expect(actual).to(beTruthy());
 
+// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+expect(actual).to(beTrue());
+
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy());
+
+// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+expect(actual).to(beFalse());
 
 // Passes if actual is nil:
 expect(actual).to(beNil());

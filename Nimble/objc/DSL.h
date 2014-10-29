@@ -64,6 +64,14 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy();
 NIMBLE_SHORT(id<NMBMatcher> beFalsy(),
              NMB_beFalsy());
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTrue();
+NIMBLE_SHORT(id<NMBMatcher> beTrue(),
+             NMB_beTrue());
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalse();
+NIMBLE_SHORT(id<NMBMatcher> beFalse(),
+             NMB_beFalse());
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beNil();
 NIMBLE_SHORT(id<NMBMatcher> beNil(),
              NMB_beNil());

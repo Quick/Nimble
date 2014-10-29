@@ -1,6 +1,6 @@
 import Foundation
 
-struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher, BasicMatcher {
+struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
     let timeoutInterval: NSTimeInterval = 1
     let pollInterval: NSTimeInterval = 0.01
@@ -21,23 +21,37 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher, Ba
 }
 
 extension Expectation {
-    public func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        toImpl(AsyncMatcherWrapper(
-            fullMatcher: FullMatcherWrapper(
-                matcher: matcher,
-                to: "to eventually",
-                toNot: "to eventually not"),
+    public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+        to(AsyncMatcherWrapper(
+            fullMatcher: matcher,
             timeoutInterval: timeout,
             pollInterval: pollInterval))
     }
 
-    public func toEventuallyNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        toNotImpl(AsyncMatcherWrapper(
-            fullMatcher: FullMatcherWrapper(
+    public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+        toNot(AsyncMatcherWrapper(
+            fullMatcher: matcher,
+            timeoutInterval: timeout,
+            pollInterval: pollInterval))
+    }
+
+    public func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+        toEventually(
+            FullMatcherWrapper(
                 matcher: matcher,
                 to: "to eventually",
                 toNot: "to eventually not"),
-            timeoutInterval: timeout,
-            pollInterval: pollInterval))
+            timeout: timeout,
+            pollInterval: pollInterval)
+    }
+
+    public func toEventuallyNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
+        toEventuallyNot(
+            FullMatcherWrapper(
+                matcher: matcher,
+                to: "to eventually",
+                toNot: "to eventually not"),
+            timeout: timeout,
+            pollInterval: pollInterval)
     }
 }

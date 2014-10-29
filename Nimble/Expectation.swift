@@ -7,7 +7,7 @@ public struct Expectation<T> {
         CurrentAssertionHandler.assert(pass, message: message, location: expression.location)
     }
 
-    func toImpl<U where U: BasicMatcher, U.ValueType == T>(matcher: U) {
+    public func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
         var msg = FailureMessage()
         let pass = matcher.matches(expression, failureMessage: msg)
         if msg.actualValue == "" {
@@ -16,7 +16,7 @@ public struct Expectation<T> {
         verify(pass, msg.stringValue())
     }
 
-    func toNotImpl<U where U: Matcher, U.ValueType == T>(matcher: U) {
+    public func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
         var msg = FailureMessage()
         let pass = matcher.doesNotMatch(expression, failureMessage: msg)
         if msg.actualValue == "" {
@@ -25,8 +25,8 @@ public struct Expectation<T> {
         verify(pass, msg.stringValue())
     }
 
-    func notToImpl<U where U: Matcher, U.ValueType == T>(matcher: U) {
-        toNotImpl(matcher)
+    public func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
+        toNot(matcher)
     }
 
     // see FullMatcherWrapper and AsyncMatcherWrapper for extensions
