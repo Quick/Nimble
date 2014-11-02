@@ -11,10 +11,10 @@ class AsyncTest: XCTestCase {
         deferToMainQueue { value = 0 }
         expect(value).toEventuallyNot(equal(1))
 
-        failsWithErrorMessage("expected <0> to eventually not equal <0>") {
+        failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {
             expect(value).toEventuallyNot(equal(0))
         }
-        failsWithErrorMessage("expected <0> to eventually equal <1>") {
+        failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             expect(value).toEventually(equal(1))
         }
     }
@@ -31,14 +31,14 @@ class AsyncTest: XCTestCase {
         failsWithErrorMessage("Waited more than 1.0 second") {
             waitUntil(timeout: 1) { done in return }
         }
-        failsWithErrorMessage("Waited more than 0.1 seconds") {
-            waitUntil(timeout: 0.1) { done in
-                NSThread.sleepForTimeInterval(3.0)
+        failsWithErrorMessage("Waited more than 0.01 seconds") {
+            waitUntil(timeout: 0.01) { done in
+                NSThread.sleepForTimeInterval(0.1)
                 done()
             }
         }
 
-        failsWithErrorMessage("expected <1> to equal <2>") {
+        failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
                 NSThread.sleepForTimeInterval(0.1)
                 expect(1).to(equal(2))

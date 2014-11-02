@@ -15,15 +15,15 @@ class BeIdenticalToObjectTest:XCTestCase {
     }
     
     func testBeIdenticalToPositiveMessage() {
-        let message = NSString(format: "expected <%p> to be identical to <%p>",
-            unsafeBitCast(testObjectA, Int.self), unsafeBitCast(testObjectB, Int.self))
+        let message = NSString(format: "expected to be identical to <%p>, got <%p>",
+            unsafeBitCast(testObjectB, Int.self), unsafeBitCast(testObjectA, Int.self))
         failsWithErrorMessage(message) {
             expect(self.testObjectA).to(beIdenticalTo(self.testObjectB))
         }
     }
     
     func testBeIdenticalToNegativeMessage() {
-        let message = NSString(format: "expected <%p> to not be identical to <%p>",
+        let message = NSString(format: "expected to not be identical to <%p>, got <%p>",
             unsafeBitCast(testObjectA, Int.self), unsafeBitCast(testObjectA, Int.self))
         failsWithErrorMessage(message) {
             expect(self.testObjectA).toNot(beIdenticalTo(self.testObjectA))

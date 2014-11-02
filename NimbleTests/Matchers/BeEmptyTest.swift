@@ -32,19 +32,17 @@ class BeEmptyTest: XCTestCase {
     }
 
     func testBeEmptyNegative() {
-        failsWithErrorMessage("expected <()> to not be empty") {
+        failsWithErrorMessage("expected to not be empty, got <()>") {
             expect([]).toNot(beEmpty())
         }
-        // TODO: figure out how to not dispatch to NMBCollection
-//        failsWithErrorMessage("expected <[1]> to be empty") {
-        failsWithErrorMessage("expected <[1]> to be empty") {
+        failsWithErrorMessage("expected to be empty, got <[1]>") {
             expect([1]).to(beEmpty())
         }
 
-        failsWithErrorMessage("expected <> to not be empty") {
+        failsWithErrorMessage("expected to not be empty, got <>") {
             expect("").toNot(beEmpty())
         }
-        failsWithErrorMessage("expected <foo> to be empty") {
+        failsWithErrorMessage("expected to be empty, got <foo>") {
             expect("foo").to(beEmpty())
         }
     }

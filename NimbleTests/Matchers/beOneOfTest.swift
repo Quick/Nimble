@@ -14,10 +14,10 @@ class beOneOfTest: XCTestCase {
     }
 
     func testNegativeMatches() {
-        failsWithErrorMessage("expected <1> to not be one of: [1, 2, 3]") {
+        failsWithErrorMessage("expected to not be one of: [1, 2, 3], got <1>") {
             expect(1).toNot(beOneOf([1, 2, 3]))
         }
-        failsWithErrorMessage("expected <4> to be one of: [1, 2, 3]") {
+        failsWithErrorMessage("expected to be one of: [1, 2, 3], got <4>") {
             expect(4).to(beOneOf([1, 2, 3]))
         }
     }

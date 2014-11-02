@@ -23,7 +23,7 @@ class BeTruthyTest : XCTestCase {
     func testShouldMatchTrue() {
         expect(true).to(beTruthy())
 
-        failsWithErrorMessage("expected <true> to not be truthy") {
+        failsWithErrorMessage("expected to not be truthy, got <true>") {
             expect(true).toNot(beTruthy())
         }
     }
@@ -31,7 +31,7 @@ class BeTruthyTest : XCTestCase {
     func testShouldNotMatchFalse() {
         expect(false).toNot(beTruthy())
 
-        failsWithErrorMessage("expected <false> to be truthy") {
+        failsWithErrorMessage("expected to be truthy, got <false>") {
             expect(false).to(beTruthy())
         }
     }
@@ -39,7 +39,7 @@ class BeTruthyTest : XCTestCase {
     func testShouldNotMatchNilBools() {
         expect(nil as Bool?).toNot(beTruthy())
 
-        failsWithErrorMessage("expected <nil> to be truthy") {
+        failsWithErrorMessage("expected to be truthy, got <nil>") {
             expect(nil as Bool?).to(beTruthy())
         }
     }
@@ -47,7 +47,7 @@ class BeTruthyTest : XCTestCase {
     func testShouldMatchBoolConvertibleTypesThatConvertToTrue() {
         expect(ConvertsToBool.TrueLike).to(beTruthy())
 
-        failsWithErrorMessage("expected <TrueLike> to not be truthy") {
+        failsWithErrorMessage("expected to not be truthy, got <TrueLike>") {
             expect(ConvertsToBool.TrueLike).toNot(beTruthy())
         }
     }
@@ -55,7 +55,7 @@ class BeTruthyTest : XCTestCase {
     func testShouldNotMatchBoolConvertibleTypesThatConvertToFalse() {
         expect(ConvertsToBool.FalseLike).toNot(beTruthy())
 
-        failsWithErrorMessage("expected <FalseLike> to be truthy") {
+        failsWithErrorMessage("expected to be truthy, got <FalseLike>") {
             expect(ConvertsToBool.FalseLike).to(beTruthy())
         }
     }
@@ -65,7 +65,7 @@ class BeTrueTest : XCTestCase {
     func testShouldMatchTrue() {
         expect(true).to(beTrue())
 
-        failsWithErrorMessage("expected <true> to not be true") {
+        failsWithErrorMessage("expected to not be true, got <true>") {
             expect(true).toNot(beTrue())
         }
     }
@@ -73,7 +73,7 @@ class BeTrueTest : XCTestCase {
     func testShouldNotMatchFalse() {
         expect(false).toNot(beTrue())
 
-        failsWithErrorMessage("expected <false> to be true") {
+        failsWithErrorMessage("expected to be true, got <false>") {
             expect(false).to(beTrue())
         }
     }
@@ -81,7 +81,7 @@ class BeTrueTest : XCTestCase {
     func testShouldNotMatchNilBools() {
         expect(nil as Bool?).toNot(beTrue())
 
-        failsWithErrorMessage("expected <nil> to be true") {
+        failsWithErrorMessage("expected to be true, got <nil>") {
             expect(nil as Bool?).to(beTrue())
         }
     }
@@ -91,7 +91,7 @@ class BeFalsyTest : XCTestCase {
     func testShouldNotMatchTrue() {
         expect(true).toNot(beFalsy())
 
-        failsWithErrorMessage("expected <true> to be falsy") {
+        failsWithErrorMessage("expected to be falsy, got <true>") {
             expect(true).to(beFalsy())
         }
     }
@@ -99,7 +99,7 @@ class BeFalsyTest : XCTestCase {
     func testShouldMatchFalse() {
         expect(false).to(beFalsy())
 
-        failsWithErrorMessage("expected <false> to not be falsy") {
+        failsWithErrorMessage("expected to not be falsy, got <false>") {
             expect(false).toNot(beFalsy())
         }
     }
@@ -107,7 +107,7 @@ class BeFalsyTest : XCTestCase {
     func testShouldMatchNilBools() {
         expect(nil as Bool?).to(beFalsy())
 
-        failsWithErrorMessage("expected <nil> to not be falsy") {
+        failsWithErrorMessage("expected to not be falsy, got <nil>") {
             expect(nil as Bool?).toNot(beFalsy())
         }
     }
@@ -117,7 +117,7 @@ class BeFalseTest : XCTestCase {
     func testShouldNotMatchTrue() {
         expect(true).toNot(beFalse())
 
-        failsWithErrorMessage("expected <true> to be false") {
+        failsWithErrorMessage("expected to be false, got <true>") {
             expect(true).to(beFalse())
         }
     }
@@ -125,17 +125,17 @@ class BeFalseTest : XCTestCase {
     func testShouldMatchFalse() {
         expect(false).to(beFalse())
 
-        failsWithErrorMessage("expected <false> to not be false") {
+        failsWithErrorMessage("expected to not be false, got <false>") {
             expect(false).toNot(beFalse())
         }
     }
 
     func testShouldNotMatchNilBools() {
-        failsWithErrorMessage("expected <nil> to be false") {
+        failsWithErrorMessage("expected to be false, got <nil>") {
             expect(nil as Bool?).to(beFalse())
         }
 
-        failsWithErrorMessage("expected <nil> to not be false") {
+        failsWithErrorMessage("expected to not be false, got <nil>") {
             expect(nil as Bool?).toNot(beFalse())
         }
     }

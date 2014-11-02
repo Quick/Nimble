@@ -19,16 +19,16 @@ class EndWithTest: XCTestCase {
     }
 
     func testEndWithNegatives() {
-        failsWithErrorMessage("expected <[1, 2, 3]> to end with <2>") {
+        failsWithErrorMessage("expected to end with <2>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(endWith(2))
         }
-        failsWithErrorMessage("expected <[1, 2, 3]> to not end with <3>") {
+        failsWithErrorMessage("expected to not end with <3>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).toNot(endWith(3))
         }
-        failsWithErrorMessage("expected <batman> to end with <atm>") {
+        failsWithErrorMessage("expected to end with <atm>, got <batman>") {
             expect("batman").to(endWith("atm"))
         }
-        failsWithErrorMessage("expected <batman> to not end with <man>") {
+        failsWithErrorMessage("expected to not end with <man>, got <batman>") {
             expect("batman").toNot(endWith("man"))
         }
     }
