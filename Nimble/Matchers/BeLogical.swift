@@ -1,6 +1,6 @@
 import Foundation
 
-func _beBool(#expectedValue: BooleanType, #stringValue: String, #falseMatchesNil: Bool) -> MatcherFunc<BooleanType> {
+internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMatchesNil: Bool) -> MatcherFunc<BooleanType> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be \(stringValue)"
         let actual = actualExpression.evaluate()
@@ -31,11 +31,11 @@ public func beFalse() -> MatcherFunc<Bool> {
 // mark: beTruthy() / beFalsy()
 
 public func beTruthy() -> MatcherFunc<BooleanType> {
-    return _beBool(expectedValue: true, stringValue: "truthy", falseMatchesNil: true)
+    return beBool(expectedValue: true, stringValue: "truthy", falseMatchesNil: true)
 }
 
 public func beFalsy() -> MatcherFunc<BooleanType> {
-    return _beBool(expectedValue: false, stringValue: "falsy", falseMatchesNil: true)
+    return beBool(expectedValue: false, stringValue: "falsy", falseMatchesNil: true)
 }
 
 extension NMBObjCMatcher {

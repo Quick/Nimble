@@ -23,7 +23,7 @@ public func expect<T>(file: String = __FILE__, line: UInt = __LINE__, expression
 public func waitUntil(#timeout: NSTimeInterval, action: (() -> Void) -> Void, file: String = __FILE__, line: UInt = __LINE__) -> Void {
     var completed = false
     var token: dispatch_once_t = 0
-    let result = _pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
+    let result = pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
         dispatch_once(&token) {
             dispatch_async(dispatch_get_main_queue()) {
                 action() { completed = true }

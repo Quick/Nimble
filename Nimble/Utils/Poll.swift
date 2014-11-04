@@ -1,6 +1,6 @@
 import Foundation
 
-enum PollResult : BooleanType {
+internal enum PollResult : BooleanType {
     case Success, Failure, Timeout
 
     var boolValue : Bool {
@@ -8,7 +8,7 @@ enum PollResult : BooleanType {
     }
 }
 
-class RunPromise {
+internal class RunPromise {
     var token: dispatch_once_t = 0
     var didFinish = false
     var didFail = false
@@ -29,7 +29,7 @@ class RunPromise {
     }
 }
 
-func _stopRunLoop(runLoop: NSRunLoop, delay: NSTimeInterval) -> RunPromise {
+internal func stopRunLoop(runLoop: NSRunLoop, delay: NSTimeInterval) -> RunPromise {
     var promise = RunPromise()
     var killQueue = dispatch_queue_create("nimble.waitUntil.queue", DISPATCH_QUEUE_SERIAL)
     let killTimeOffset = Int64(CDouble(delay) * CDouble(NSEC_PER_SEC))
@@ -42,10 +42,10 @@ func _stopRunLoop(runLoop: NSRunLoop, delay: NSTimeInterval) -> RunPromise {
     return promise
 }
 
-func _pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval, expression: () -> Bool) -> PollResult {
+internal func pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval, expression: () -> Bool) -> PollResult {
     let runLoop = NSRunLoop.mainRunLoop()
 
-    var promise = _stopRunLoop(runLoop, min(timeoutInterval, 0.2))
+    var promise = stopRunLoop(runLoop, min(timeoutInterval, 0.2))
 
     let startDate = NSDate()
 

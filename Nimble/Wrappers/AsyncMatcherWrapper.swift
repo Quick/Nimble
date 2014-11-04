@@ -7,7 +7,7 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
 
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
-        let result = _pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
+        let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
             self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
@@ -21,7 +21,7 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
 
     func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
-        let result = _pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
+        let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
             self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {

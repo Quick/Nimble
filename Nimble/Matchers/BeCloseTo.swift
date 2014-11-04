@@ -1,6 +1,6 @@
 import Foundation
 
-func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
+internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     if actualValue != nil {
         failureMessage.actualValue = "<\(stringify(actualValue!))>"
@@ -12,13 +12,13 @@ func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, fail
 
 public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
     return MatcherFunc { actualExpression, failureMessage in
-        return _isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
+        return isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
 public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible> {
     return MatcherFunc { actualExpression, failureMessage in
-        return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
+        return isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
 

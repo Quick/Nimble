@@ -2,7 +2,7 @@ import Foundation
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-func _memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
+internal func memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
     var cache: T?
     return ({ withoutCaching in
         if (withoutCaching || cache == nil) {
@@ -13,13 +13,13 @@ func _memoizedClosure<T>(closure: () -> T) -> (Bool) -> T {
 }
 
 public struct Expression<T> {
-    public let _expression: (Bool) -> T?
+    internal let _expression: (Bool) -> T?
+    internal let _withoutCaching: Bool
     public let location: SourceLocation
-    public let _withoutCaching: Bool
     public var cache: T?
 
     public init(expression: () -> T?, location: SourceLocation) {
-        self._expression = _memoizedClosure(expression)
+        self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
     }

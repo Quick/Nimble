@@ -1,6 +1,6 @@
 import Foundation
 
-func _raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool) -> MatcherFunc<T> {
+internal func raiseExceptionMatcher<T>(message: String, matches: (NSException?) -> Bool) -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
         failureMessage.postfixMessage = message
@@ -26,19 +26,19 @@ public func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any>
     if let reason = reason {
         theReason = reason
     }
-    return _raiseExceptionMatcher("raise exception named <\(named)> and reason <\(theReason)>") {
+    return raiseExceptionMatcher("raise exception named <\(named)> and reason <\(theReason)>") {
         exception in return exception?.name == named && exception?.reason == reason
     }
 }
 
 public func raiseException(#named: String) -> MatcherFunc<Any> {
-    return _raiseExceptionMatcher("raise exception named <\(named)>") {
+    return raiseExceptionMatcher("raise exception named <\(named)>") {
         exception in return exception?.name == named
     }
 }
 
 public func raiseException() -> MatcherFunc<Any> {
-    return _raiseExceptionMatcher("raise any exception") {
+    return raiseExceptionMatcher("raise any exception") {
         exception in return exception != nil
     }
 }
