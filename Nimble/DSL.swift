@@ -31,10 +31,10 @@ public func waitUntil(#timeout: NSTimeInterval, action: (() -> Void) -> Void, fi
         }
         return completed
     }
-    if result == .Failure {
+    if result == PollResult.Failure {
         let pluralize = (timeout == 1 ? "" : "s")
         fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
-    } else if result == .Timeout {
+    } else if result == PollResult.Timeout {
         fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
     }
 }
