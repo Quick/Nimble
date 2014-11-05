@@ -1,26 +1,57 @@
 #!/bin/sh
 
 BUILD_DIR=`pwd`/build
-BUILD_SDK_VERSION=${NIMBLE_BUILD_SDK_VERSION:-8.1}
-RUNTIME_SDK_VERSION=${NIMBLE_RUNTIME_SDK_VERSION:-8.1}
+LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
 
 set -e
 
+GREEN="\x1B[01;92m"
+CLEAR="\x1B[0m"
+
+function color_if_overridden {
+    local actual=$1
+    local env_var=$2
+    if [ -z "$env_var" ]; then
+        printf "$actual"
+    else
+        printf "$GREEN$actual$CLEAR"
+    fi
+}
+
+function print_env {
+    echo "=== Environment ==="
+    echo " iOS:"
+    echo "   Latest iOS SDK: $LATEST_IOS_SDK_VERSION"
+    echo "   Building with iOS SDK: `color_if_overridden $BUILD_IOS_SDK_VERSION $NIMBLE_BUILD_IOS_SDK_VERSION`"
+    echo "   Running with iOS SDK: `color_if_overridden $RUNTIME_IOS_SDK_VERSION $NIMBLE_RUNTIME_IOS_SDK_VERSION`"
+    echo
+    echo " Mac OS X:"
+    echo "   Latest OS X SDK: $LATEST_OSX_SDK_VERSION"
+    echo "   Building with OS X SDK: `color_if_overridden $BUILD_OSX_SDK_VERSION $NIMBLE_BUILD_OSX_SDK_VERSION`"
+    echo
+    echo "======= END ======="
+    echo
+}
+
 function run {
-    echo "\x1B[01;92m==>\x1B[0m $@"
+    echo "$GREEN==>$CLEAR $@"
     "$@"
 }
 
 function test_ios {
     run osascript -e 'tell app "iOS Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_SDK_VERSION" -destination "name=iPad Air,OS=$RUNTIME_SDK_VERSION" -destination-timeout 5 build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Air,OS=$RUNTIME_IOS_SDK_VERSION" build test
 
     run osascript -e 'tell app "iOS Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_SDK_VERSION" -destination "name=iPhone 5s,OS=$RUNTIME_SDK_VERSION" -destination-timeout 5 build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 5s,OS=$RUNTIME_IOS_SDK_VERSION" build test
 }
 
 function test_osx {
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx" -destination-timeout 5 build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx$BUILD_OSX_SDK_VERSION" build test
 }
 
 function test() {
@@ -45,6 +76,7 @@ function help {
 }
 
 function main {
+    print_env
     for arg in $@
     do
         case "$arg" in
