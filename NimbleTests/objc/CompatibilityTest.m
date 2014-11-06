@@ -7,6 +7,23 @@
 
 @implementation CompatibilityTest
 
+- (void)testAsync {
+    __block id obj = @1;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        obj = nil;
+    });
+    expect(obj).toEventually(beNil());
+}
+
+
+- (void)testAsyncWithCustomTimeout {
+    __block id obj = nil;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        obj = @1;
+    });
+    expect(obj).withTimeout(2).toEventuallyNot(beNil());
+}
+
 - (void)testBeAnInstanceOf {
     NSNull *obj = [NSNull null];
     expect(obj).to(beAnInstanceOf([NSNull class]));
