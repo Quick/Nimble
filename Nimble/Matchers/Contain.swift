@@ -1,7 +1,7 @@
 import Foundation
 
-public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> MatcherFunc<S> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         if let actual = actualExpression.evaluate() {
             return _all(items) {
@@ -12,8 +12,8 @@ public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T
     }
 }
 
-public func contain(substrings: String...) -> MatcherFunc<String> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
         if let actual = actualExpression.evaluate() {
             return _all(substrings) {
@@ -26,8 +26,8 @@ public func contain(substrings: String...) -> MatcherFunc<String> {
     }
 }
 
-public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
         let actual = actualExpression.evaluate()
         return _all(items) { item in

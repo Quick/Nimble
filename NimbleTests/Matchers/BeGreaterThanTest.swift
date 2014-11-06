@@ -10,11 +10,15 @@ class BeGreaterThanTest: XCTestCase {
 
         failsWithErrorMessage("expected to be greater than <2>, got <0>") {
             expect(0).to(beGreaterThan(2))
-            return
         }
         failsWithErrorMessage("expected to not be greater than <0>, got <1>") {
             expect(1).toNot(beGreaterThan(0))
-            return
+        }
+        failsWithErrorMessageForNil("expected to be greater than <-2>, got <nil>") {
+            expect(nil as Int?).to(beGreaterThan(-2))
+        }
+        failsWithErrorMessageForNil("expected to not be greater than <0>, got <nil>") {
+            expect(nil as Int?).toNot(beGreaterThan(0))
         }
     }
 

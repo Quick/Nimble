@@ -16,14 +16,14 @@ internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMa
 
 // mark: beTrue() / beFalse()
 
-public func beTrue() -> MatcherFunc<Bool> {
-    return equal(true).withFailureMessage { failureMessage in
+public func beTrue() -> NonNilMatcherFunc<Bool> {
+    return basicMatcherWithFailureMessage(equal(true)) { failureMessage in
         failureMessage.postfixMessage = "be true"
     }
 }
 
-public func beFalse() -> MatcherFunc<Bool> {
-    return equal(false).withFailureMessage { failureMessage in
+public func beFalse() -> NonNilMatcherFunc<Bool> {
+    return basicMatcherWithFailureMessage(equal(false)) { failureMessage in
         failureMessage.postfixMessage = "be false"
     }
 }

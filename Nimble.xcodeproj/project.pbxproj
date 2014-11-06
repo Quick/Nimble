@@ -59,6 +59,10 @@
 		1F925F12195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */; };
 		1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
 		1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
+		1FD48C361A0B4B2800268394 /* BasicMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD48C351A0B4B2800268394 /* BasicMatcherWrapper.swift */; };
+		1FD48C371A0B4B2800268394 /* BasicMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD48C351A0B4B2800268394 /* BasicMatcherWrapper.swift */; };
+		1FD48C391A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD48C381A0B4B9300268394 /* NonNilMatcherWrapper.swift */; };
+		1FD48C3A1A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD48C381A0B4B9300268394 /* NonNilMatcherWrapper.swift */; };
 		1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
@@ -143,7 +147,7 @@
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F1A74281940169200FFFC47;
-			remoteInfo = Nimble-iOS;
+			remoteInfo = "Nimble-iOS";
 		};
 		1F6BB82A1968BFF9009F1DBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -213,7 +217,7 @@
 		1F2C568D1944FD4F001DF2B4 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		1F3A03DD1960D9A4001E6134 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1F925EAD195C0D6300ED456B /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F925EB7195C0D6300ED456B /* Nimble-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nimble-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F925EB7195C0D6300ED456B /* NimbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F925EE5195C121200ED456B /* AsynchronousTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousTest.swift; sourceTree = "<group>"; };
 		1F925EE8195C124400ED456B /* BeAnInstanceOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeAnInstanceOfTest.swift; sourceTree = "<group>"; };
 		1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaisesExceptionTest.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 		1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeGreaterThanOrEqualToTest.swift; sourceTree = "<group>"; };
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FCE5DCB1963F24900BCA160 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		1FD48C351A0B4B2800268394 /* BasicMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicMatcherWrapper.swift; sourceTree = "<group>"; };
+		1FD48C381A0B4B9300268394 /* NonNilMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonNilMatcherWrapper.swift; sourceTree = "<group>"; };
 		1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
 		1FD8CD071968AB07008ED995 /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
@@ -334,7 +340,7 @@
 				1F1A74291940169200FFFC47 /* Nimble.framework */,
 				1F1A74341940169200FFFC47 /* NimbleTests.xctest */,
 				1F925EAD195C0D6300ED456B /* Nimble.framework */,
-				1F925EB7195C0D6300ED456B /* Nimble-OSXTests.xctest */,
+				1F925EB7195C0D6300ED456B /* NimbleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -486,7 +492,9 @@
 			isa = PBXGroup;
 			children = (
 				1FD8CD2A1968AB07008ED995 /* AsyncMatcherWrapper.swift */,
+				1FD48C351A0B4B2800268394 /* BasicMatcherWrapper.swift */,
 				1FD8CD2B1968AB07008ED995 /* FullMatcherWrapper.swift */,
+				1FD48C381A0B4B9300268394 /* NonNilMatcherWrapper.swift */,
 				1FD8CD2C1968AB07008ED995 /* MatcherFunc.swift */,
 				1FD8CD2D1968AB07008ED995 /* ObjCMatcher.swift */,
 			);
@@ -543,7 +551,7 @@
 			dependencies = (
 			);
 			name = "Nimble-iOS";
-			productName = Nimble-iOS;
+			productName = "Nimble-iOS";
 			productReference = 1F1A74291940169200FFFC47 /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -564,7 +572,7 @@
 				1F6BB82B1968BFF9009F1DBB /* PBXTargetDependency */,
 			);
 			name = "Nimble-iOSTests";
-			productName = Nimble-iOSTests;
+			productName = "Nimble-iOSTests";
 			productReference = 1F1A74341940169200FFFC47 /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -604,7 +612,7 @@
 			);
 			name = "Nimble-OSXTests";
 			productName = "Nimble-OSXTests";
-			productReference = 1F925EB7195C0D6300ED456B /* Nimble-OSXTests.xctest */;
+			productReference = 1F925EB7195C0D6300ED456B /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -691,6 +699,7 @@
 				1FD8CD401968AB07008ED995 /* BeCloseTo.swift in Sources */,
 				1F2C568E1944FD4F001DF2B4 /* SourceLocation.swift in Sources */,
 				1FD8CD741968AB07008ED995 /* MatcherFunc.swift in Sources */,
+				1FD48C391A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */,
 				1FD8CD361968AB07008ED995 /* Expectation.swift in Sources */,
 				1FD8CD321968AB07008ED995 /* XCTestHandler.swift in Sources */,
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
@@ -715,6 +724,7 @@
 				1FD8CD621968AB07008ED995 /* DSL.m in Sources */,
 				1FD8CD721968AB07008ED995 /* FullMatcherWrapper.swift in Sources */,
 				1FD8CD421968AB07008ED995 /* BeEmpty.swift in Sources */,
+				1FD48C361A0B4B2800268394 /* BasicMatcherWrapper.swift in Sources */,
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6A1968AB07008ED995 /* Poll.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
@@ -765,6 +775,7 @@
 				1FD8CD411968AB07008ED995 /* BeCloseTo.swift in Sources */,
 				1F3A03DF1960D9A4001E6134 /* Stringers.swift in Sources */,
 				1FD8CD751968AB07008ED995 /* MatcherFunc.swift in Sources */,
+				1FD48C3A1A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */,
 				1FD8CD371968AB07008ED995 /* Expectation.swift in Sources */,
 				1FD8CD331968AB07008ED995 /* XCTestHandler.swift in Sources */,
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
@@ -789,6 +800,7 @@
 				1FD8CD631968AB07008ED995 /* DSL.m in Sources */,
 				1FD8CD731968AB07008ED995 /* FullMatcherWrapper.swift in Sources */,
 				1FD8CD431968AB07008ED995 /* BeEmpty.swift in Sources */,
+				1FD48C371A0B4B2800268394 /* BasicMatcherWrapper.swift in Sources */,
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6B1968AB07008ED995 /* Poll.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
@@ -1144,7 +1156,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "Nimble-OSXTests";
+				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1165,7 +1177,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "Nimble-OSXTests";
+				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
 			};

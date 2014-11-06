@@ -1,12 +1,14 @@
 import Foundation
 
 
-public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func equal<T: Equatable>(expectedValue: T?) -> NonNilMatcherFunc<T> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         let matches = actualExpression.evaluate() == expectedValue && expectedValue != nil
         if expectedValue == nil || actualExpression.evaluate() == nil {
-            failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
+            if expectedValue == nil {
+                failureMessage.postfixActual = " (use beNil() to match nils)"
+            }
             return false
         }
         return matches
@@ -14,11 +16,13 @@ public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T> {
 }
 
 // perhaps try to extend to SequenceOf or Sequence types instead of dictionaries
-public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> MatcherFunc<[T: C]> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> NonNilMatcherFunc<[T: C]> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         if expectedValue == nil || actualExpression.evaluate() == nil {
-            failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
+            if expectedValue == nil {
+                failureMessage.postfixActual = " (use beNil() to match nils)"
+            }
             return false
         }
         var expectedGen = expectedValue!.generate()
@@ -37,11 +41,13 @@ public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> Matcher
 }
 
 // perhaps try to extend to SequenceOf or Sequence types instead of arrays
-public func equal<T: Equatable>(expectedValue: [T]?) -> MatcherFunc<[T]> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         if expectedValue == nil || actualExpression.evaluate() == nil {
-            failureMessage.postfixMessage += " (will not match nils, use beNil() instead)"
+            if expectedValue == nil {
+                failureMessage.postfixActual = " (use beNil() to match nils)"
+            }
             return false
         }
         var expectedGen = expectedValue!.generate()
@@ -86,7 +92,8 @@ extension NMBObjCMatcher {
     public class func equalMatcher(expected: NSObject) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
-            return equal(expected).matches(expr, failureMessage: failureMessage)
+            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(equal(expected)))
+            return matcher.matches(expr, failureMessage: failureMessage)
         }
     }
 }

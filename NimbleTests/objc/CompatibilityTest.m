@@ -1,9 +1,8 @@
 #import <XCTest/XCTest.h>
 #import <Nimble/Nimble.h>
-
+#import "NimbleTests-Swift.h"
 
 @interface CompatibilityTest : XCTestCase
-
 @end
 
 @implementation CompatibilityTest
@@ -12,8 +11,12 @@
     NSNull *obj = [NSNull null];
     expect(obj).to(beAnInstanceOf([NSNull class]));
     expect(@1).toNot(beAnInstanceOf([NSNull class]));
-    expect(nil).toNot(beAnInstanceOf([NSNull class]));
+
+    [self expectFailureMessageForNil:@"expected to not be an instance of NSNull, got <nil>" inBlock:^{
+        expect(nil).toNot(beAnInstanceOf([NSNull class]));
+    }];
 }
+
 - (void)testBeAKindOf {
     NSMutableArray *array = [NSMutableArray array];
     expect(array).to(beAKindOf([NSArray class]));
@@ -24,7 +27,9 @@
 - (void)testBeCloseTo {
     expect(@1.2).to(beCloseTo(@1.2001));
     expect(@1.2).to(beCloseTo(@2).within(10));
-    expect(nil).toNot(beCloseTo(@0));
+    [self expectFailureMessageForNil:@"expected to not be close to <0.0000> (within 0.0010), got <nil>" inBlock:^{
+        expect(nil).toNot(beCloseTo(@0));
+    }];
 }
 
 - (void)testBeginWith {
@@ -123,6 +128,10 @@
     expect(@1).notTo(equal(@2));
     expect(@"hello").to(equal(@"hello"));
     expect(nil).toNot(equal(nil));
+
+    [self expectFailureMessageForNil:@"expected to equal <nil>, got <nil>" inBlock:^{
+        expect(nil).to(equal(nil));
+    }];
 }
 
 - (void)testMatch {
@@ -135,5 +144,16 @@
     expectAction([exception raise]).to(raiseException());
     expectAction(exception).toNot(raiseException());
 }
+
+#pragma mark - Private
+
+- (void)expectFailureMessage:(NSString *)message inBlock:(void(^)())block {
+    [NimbleHelper expectFailureMessage:message block:block];
+}
+
+- (void)expectFailureMessageForNil:(NSString *)message inBlock:(void(^)())block {
+    [NimbleHelper expectFailureMessageForNil:message block:block];
+}
+
 
 @end

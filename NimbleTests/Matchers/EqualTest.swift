@@ -40,33 +40,33 @@ class EqualTest: XCTestCase {
     }
 
     func testDoesNotMatchNils() {
-        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
             expect(nil as String?).to(equal(nil as String?))
         }
-        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <foo>") {
+        failsWithErrorMessageForNil("expected to not equal <nil>, got <foo>") {
             expect("foo").toNot(equal(nil as String?))
         }
-        failsWithErrorMessage("expected to not equal <bar> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to not equal <bar>, got <nil>") {
             expect(nil as String?).toNot(equal("bar"))
         }
 
-        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
             expect(nil as [Int]?).to(equal(nil as [Int]?))
         }
-        failsWithErrorMessage("expected to not equal <[1]> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to not equal <[1]>, got <nil>") {
             expect(nil as [Int]?).toNot(equal([1]))
         }
-        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <[1]>") {
+        failsWithErrorMessageForNil("expected to not equal <nil>, got <[1]>") {
             expect([1]).toNot(equal(nil as [Int]?))
         }
 
-        failsWithErrorMessage("expected to equal <nil> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
             expect(nil as [Int: Int]?).to(equal(nil as [Int: Int]?))
         }
-        failsWithErrorMessage("expected to not equal <[1: 1]> (will not match nils, use beNil() instead), got <nil>") {
+        failsWithErrorMessageForNil("expected to not equal <[1: 1]>, got <nil>") {
             expect(nil as [Int: Int]?).toNot(equal([1: 1]))
         }
-        failsWithErrorMessage("expected to not equal <nil> (will not match nils, use beNil() instead), got <[1: 1]>") {
+        failsWithErrorMessageForNil("expected to not equal <nil>, got <[1: 1]>") {
             expect([1: 1]).toNot(equal(nil as [Int: Int]?))
         }
     }
@@ -125,7 +125,6 @@ class EqualTest: XCTestCase {
     func testOptionalEquality() {
         expect(1 as CInt?).to(equal(1))
         expect(1 as CInt?).to(equal(1 as CInt?))
-        expect(nil as NSObject?).toNot(equal(1))
 
         expect(1).toNot(equal(nil))
     }

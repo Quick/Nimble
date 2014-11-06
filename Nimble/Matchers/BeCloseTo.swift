@@ -10,14 +10,14 @@ internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Doub
     return actualValue != nil && abs(actualValue! - expectedValue) < delta
 }
 
-public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> NonNilMatcherFunc<Double> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         return isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
-public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> NonNilMatcherFunc<NMBDoubleConvertible> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         return isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
@@ -35,7 +35,17 @@ public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double 
             return actualExpression() as? NMBDoubleConvertible
         })
         let expr = Expression(expression: actualBlock, location: location)
-        return beCloseTo(self._expected, within: self._delta).matches(expr, failureMessage: failureMessage)
+        let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beCloseTo(self._expected, within: self._delta)))
+        return matcher.matches(expr, failureMessage: failureMessage)
+    }
+
+    public func doesNotMatch(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        let actualBlock: () -> NMBDoubleConvertible? = ({
+            return actualExpression() as? NMBDoubleConvertible
+        })
+        let expr = Expression(expression: actualBlock, location: location)
+        let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beCloseTo(self._expected, within: self._delta)))
+        return matcher.doesNotMatch(expr, failureMessage: failureMessage)
     }
 
     public var within: (CDouble) -> NMBObjCBeCloseToMatcher {

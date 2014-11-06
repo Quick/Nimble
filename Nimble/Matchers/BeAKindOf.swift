@@ -1,7 +1,7 @@
 import Foundation
 
-public func beAKindOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beAKindOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
             failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
@@ -17,7 +17,8 @@ extension NMBObjCMatcher {
     public class func beAKindOfMatcher(expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage, location in
             let expr = Expression(expression: actualExpression, location: location)
-            return beAKindOf(expected).matches(expr, failureMessage: failureMessage)
+            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beAKindOf(expected)))
+            return matcher.matches(expr, failureMessage: failureMessage)
         }
     }
 }

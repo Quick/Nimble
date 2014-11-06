@@ -1,16 +1,12 @@
 import Foundation
 
 
-public func beIdenticalTo<T: AnyObject>(expected: T?) -> MatcherFunc<T> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beIdenticalTo<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         let actual = actualExpression.evaluate()
         failureMessage.actualValue = "\(_identityAsString(actual))"
         failureMessage.postfixMessage = "be identical to \(_identityAsString(expected))"
-        let matches = actual === expected && actual !== nil
-        if !matches && actual === nil {
-            failureMessage.postfixMessage += " (will not compare nils, use beNil() instead)"
-        }
-        return matches
+        return actual === expected && actual !== nil
     }
 }
 
@@ -26,7 +22,8 @@ extension NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
             let block = ({ actualBlock() as NSObject? })
             let expr = Expression(expression: block, location: location)
-            return beIdenticalTo(expected).matches(expr, failureMessage: failureMessage)
+            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beIdenticalTo(expected)))
+            return matcher.matches(expr, failureMessage: failureMessage)
         }
     }
 }

@@ -18,9 +18,15 @@ public protocol BasicMatcher {
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
 }
 
+public protocol NonNilBasicMatcher {
+    typealias ValueType
+    func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
+}
+
 // Objective-C interface to a similar interface
 @objc public protocol NMBMatcher {
     func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 
 // Protocol for types that support contain() matcher

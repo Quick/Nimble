@@ -7,14 +7,12 @@ struct ObjCMatcherWrapper : Matcher {
 
     func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = to
-        let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
-        return pass
+        return matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
     }
 
     func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         failureMessage.to = toNot
-        let pass = matcher.matches(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
-        return !pass
+        return matcher.doesNotMatch(({ actualExpression.evaluate() }), failureMessage: failureMessage, location: actualExpression.location)
     }
 }
 
@@ -77,16 +75,44 @@ public class NMBExpectation : NSObject {
 }
 
 @objc public class NMBObjCMatcher : NMBMatcher {
-    let _matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    let _match: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    let _doesNotMatch: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+
     init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool) {
-        self._matcher = matcher
+        self._match = matcher
+        self._doesNotMatch = ({ actualExpression, failureMessage, location in
+            return !matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location)
+        })
+    }
+
+    init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation, shouldNotMatch: Bool) -> Bool) {
+        self._match = ({ actualExpression, failureMessage, location in
+            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location, shouldNotMatch: false)
+        })
+        self._doesNotMatch = ({ actualExpression, failureMessage, location in
+            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location, shouldNotMatch: true)
+        })
+    }
+
+    init(matcher: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool,
+        doesNotMatch: (actualExpression: () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool) {
+        self._match = matcher
+        self._doesNotMatch = doesNotMatch
     }
 
     public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        return _matcher(
+        return _match(
             actualExpression: ({ actualBlock() as NSObject? }),
             failureMessage: failureMessage,
             location: location)
+    }
+
+    public func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        return _doesNotMatch(
+            actualExpression: ({ actualBlock() as NSObject? }),
+            failureMessage: failureMessage,
+            location: location)
+
     }
 }
 

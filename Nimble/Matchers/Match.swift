@@ -1,7 +1,7 @@
 import Foundation
 
-public func match(expectedValue:String?) -> MatcherFunc<String> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func match(expectedValue:String?) -> NonNilMatcherFunc<String> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "match <\(stringify(expectedValue))>"
         
         if let actual = actualExpression.evaluate() {
@@ -20,7 +20,8 @@ extension NMBObjCMatcher {
             let actual = actualBlock()
             if let actualString = actual as? String {
                 let expr = Expression(expression: ({ actualString }), location: location)
-                return match(expected).matches(expr, failureMessage: failureMessage)
+                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(match(expected)))
+                return matcher.matches(expr, failureMessage: failureMessage)
             }
             return false
         }

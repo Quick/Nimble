@@ -1,7 +1,7 @@
 import Foundation
 
-public func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
             failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
@@ -15,9 +15,14 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
 
 extension NMBObjCMatcher {
     public class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage, location in
+        return NMBObjCMatcher { actualExpression, failureMessage, location, shouldNotMatch in
             let expr = Expression(expression: actualExpression, location: location)
-            return beAnInstanceOf(expected).matches(expr, failureMessage: failureMessage)
+            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beAnInstanceOf(expected)))
+            if shouldNotMatch {
+                return matcher.doesNotMatch(expr, failureMessage: failureMessage)
+            } else {
+                return matcher.matches(expr, failureMessage: failureMessage)
+            }
         }
     }
 }

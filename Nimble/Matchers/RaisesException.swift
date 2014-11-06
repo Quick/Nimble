@@ -63,6 +63,10 @@ public func raiseException() -> MatcherFunc<Any> {
         }
     }
 
+    public func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        return !matches(actualBlock, failureMessage: failureMessage, location: location)
+    }
+
     var named: (name: String) -> NMBObjCRaiseExceptionMatcher {
         return ({ name in
             return NMBObjCRaiseExceptionMatcher(name: name, reason: self._reason)
