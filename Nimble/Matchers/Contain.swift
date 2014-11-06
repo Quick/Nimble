@@ -39,14 +39,17 @@ public func contain(items: AnyObject?...) -> MatcherFunc<NMBContainer> {
 extension NMBObjCMatcher {
     public class func containMatcher(expected: NSObject?) -> NMBObjCMatcher {
         return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block: () -> NMBContainer? = ({
-                if let value = actualBlock() as? NMBContainer {
-                    return value
-                }
-                return nil
-            })
-            let expr = Expression(expression: block, location: location)
-            return contain(expected).matches(expr, failureMessage: failureMessage)
+            let actualValue = actualBlock()
+            if let value = actualValue as? NMBContainer {
+                let expr = Expression(expression: ({ value as NMBContainer }), location: location)
+                return contain(expected).matches(expr, failureMessage: failureMessage)
+            } else if let value = actualValue as? NSString {
+                let expr = Expression(expression: ({ value as String }), location: location)
+                return contain(expected as String).matches(expr, failureMessage: failureMessage)
+            } else { // autofail
+                let expr = Expression(expression: ({ nil as NMBContainer? }), location: location)
+                return contain(expected).matches(expr, failureMessage: failureMessage)
+            }
         }
     }
 }
