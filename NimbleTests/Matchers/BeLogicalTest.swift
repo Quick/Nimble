@@ -79,11 +79,11 @@ class BeTrueTest : XCTestCase {
     }
 
     func testShouldNotMatchNilBools() {
-        failsWithErrorMessage("expected to not be true, got <nil> (use beNil() to match nils)") {
+        failsWithErrorMessageForNil("expected to not be true, got <nil>") {
             expect(nil as Bool?).toNot(beTrue())
         }
 
-        failsWithErrorMessage("expected to be true, got <nil> (use beNil() to match nils)") {
+        failsWithErrorMessageForNil("expected to be true, got <nil>") {
             expect(nil as Bool?).to(beTrue())
         }
     }
