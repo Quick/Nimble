@@ -22,15 +22,20 @@ public func expect<T>(file: String = __FILE__, line: UInt = __LINE__, expression
 // file: and line: can be omitted to default to the current line this function is called on.
 public func waitUntil(#timeout: NSTimeInterval, action: (() -> Void) -> Void, file: String = __FILE__, line: UInt = __LINE__) -> Void {
     var completed = false
-    dispatch_async(dispatch_get_main_queue()) {
-        action() { completed = true }
-    }
-    let passed = _pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
+    var token: dispatch_once_t = 0
+    let result = _pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
+        dispatch_once(&token) {
+            dispatch_async(dispatch_get_main_queue()) {
+                action() { completed = true }
+            }
+        }
         return completed
     }
-    if !passed {
+    if result == PollResult.Failure {
         let pluralize = (timeout == 1 ? "" : "s")
         fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
+    } else if result == PollResult.Timeout {
+        fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
     }
 }
 
