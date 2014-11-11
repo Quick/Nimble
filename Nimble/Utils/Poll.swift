@@ -61,9 +61,13 @@ func _pollBlock(#pollInterval: NSTimeInterval, #timeoutInterval: NSTimeInterval,
     var pass: Bool = false
     do {
         pass = expression()
+        if pass {
+            break
+        }
+
         let runDate = NSDate().dateByAddingTimeInterval(pollInterval) as NSDate
         runLoop.runUntilDate(runDate)
-    } while(!pass && NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
+    } while(NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
 
     return pass ? .Success : .Failure
 }
