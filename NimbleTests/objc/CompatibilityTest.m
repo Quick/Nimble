@@ -103,6 +103,8 @@
     expect(array).to(contain(@1));
     expect(array).toNot(contain(@"HI"));
     expect(nil).toNot(contain(@"hi"));
+    expect(@"String").to(contain(@"Str"));
+    expect(@"Other").toNot(contain(@"Str"));
 }
 
 - (void)testEndWith {
@@ -112,6 +114,7 @@
     expect(array).to(endWith(@2));
     expect(array).toNot(endWith(@1));
     expect(nil).toNot(endWith(@1));
+    expect(@1).toNot(contain(@"foo"));
 }
 
 - (void)testEqual {
