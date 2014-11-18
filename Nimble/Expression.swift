@@ -30,6 +30,10 @@ public struct Expression<T> {
         self._withoutCaching = withoutCaching
     }
 
+    public func cast<U>(block: (T?) -> U?) -> Expression<U> {
+        return Expression<U>(expression: ({ block(self.evaluate()) }), location: self.location)
+    }
+
     public func evaluate() -> T? {
         return self._expression(_withoutCaching)
     }

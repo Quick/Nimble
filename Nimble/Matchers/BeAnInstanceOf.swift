@@ -15,14 +15,8 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObjec
 
 extension NMBObjCMatcher {
     public class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage, location, shouldNotMatch in
-            let expr = Expression(expression: actualExpression, location: location)
-            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beAnInstanceOf(expected)))
-            if shouldNotMatch {
-                return matcher.doesNotMatch(expr, failureMessage: failureMessage)
-            } else {
-                return matcher.matches(expr, failureMessage: failureMessage)
-            }
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            return beAnInstanceOf(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }

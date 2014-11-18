@@ -90,10 +90,8 @@ public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]
 
 extension NMBObjCMatcher {
     public class func equalMatcher(expected: NSObject) -> NMBMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage, location in
-            let expr = Expression(expression: actualExpression, location: location)
-            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(equal(expected)))
-            return matcher.matches(expr, failureMessage: failureMessage)
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            return equal(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }

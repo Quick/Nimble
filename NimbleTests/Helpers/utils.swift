@@ -44,11 +44,11 @@ func deferToMainQueue(action: () -> Void) {
 }
 
 public class NimbleHelper : NSObject {
-    class func expectFailureMessage(message: NSString, block: () -> Void) {
-        failsWithErrorMessage(message as String, block, preferOriginalSourceLocation: true)
+    class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
+        failsWithErrorMessage(message as String, block, file: file, line: line, preferOriginalSourceLocation: true)
     }
 
-    class func expectFailureMessageForNil(message: NSString, block: () -> Void) {
-        failsWithErrorMessageForNil(message as String, block, preferOriginalSourceLocation: true)
+    class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
+        failsWithErrorMessageForNil(message as String, block, file: file, line: line, preferOriginalSourceLocation: true)
     }
 }

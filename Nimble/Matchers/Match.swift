@@ -16,14 +16,9 @@ public func match(expectedValue:String?) -> NonNilMatcherFunc<String> {
 
 extension NMBObjCMatcher {
     public class func matchMatcher(expected: NSString) -> NMBMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let actual = actualBlock()
-            if let actualString = actual as? String {
-                let expr = Expression(expression: ({ actualString }), location: location)
-                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(match(expected)))
-                return matcher.matches(expr, failureMessage: failureMessage)
-            }
-            return false
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.cast { $0 as? String }
+            return match(expected).matches(actual, failureMessage: failureMessage)
         }
     }
 }

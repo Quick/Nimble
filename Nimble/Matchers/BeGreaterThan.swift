@@ -26,11 +26,9 @@ public func >(lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
 
 extension NMBObjCMatcher {
     public class func beGreaterThanMatcher(expected: NMBComparable?) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as NMBComparable? })
-            let expr = Expression(expression: block, location: location)
-            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beGreaterThan(expected)))
-            return matcher.matches(expr, failureMessage: failureMessage)
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { $0 as NMBComparable? }
+            return beGreaterThan(expected).matches(expr, failureMessage: failureMessage)
         }
     }
 }

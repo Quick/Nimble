@@ -20,5 +20,11 @@ class beOneOfTest: XCTestCase {
         failsWithErrorMessage("expected to be one of: [1, 2, 3], got <4>") {
             expect(4).to(beOneOf([1, 2, 3]))
         }
+        failsWithErrorMessageForNil("expected to be one of: [1, 2, 3], got <nil>") {
+            expect(nil as Int?).to(beOneOf([1, 2, 3]))
+        }
+        failsWithErrorMessageForNil("expected to not be one of: [1, 2, 3], got <nil>") {
+            expect(nil as Int?).toNot(beOneOf([1, 2, 3]))
+        }
     }
 }

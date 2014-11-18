@@ -10,10 +10,8 @@ public func beNil<T>() -> MatcherFunc<T> {
 
 extension NMBObjCMatcher {
     public class func beNilMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as NSObject? })
-            let expr = Expression(expression: block, location: location)
-            return beNil().matches(expr, failureMessage: failureMessage)
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
+            return beNil().matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }

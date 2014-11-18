@@ -32,16 +32,14 @@ public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
 
 extension NMBObjCMatcher {
     public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let actual = actualBlock()
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.evaluate()
             if let actualString = actual as? String {
-                let expr = Expression(expression: ({ actualString }), location: location)
-                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beginWith(expected as String)))
-                return matcher.matches(expr, failureMessage: failureMessage)
+                let expr = actualExpression.cast { $0 as? String }
+                return beginWith(expected as String).matches(expr, failureMessage: failureMessage)
             } else {
-                let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
-                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beginWith(expected)))
-                return matcher.matches(expr, failureMessage: failureMessage)
+                let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
+                return beginWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }
     }

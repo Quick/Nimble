@@ -19,11 +19,8 @@ public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
 
 extension NMBObjCMatcher {
     public class func beIdenticalToMatcher(expected: NSObject?) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as NSObject? })
-            let expr = Expression(expression: block, location: location)
-            let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beIdenticalTo(expected)))
-            return matcher.matches(expr, failureMessage: failureMessage)
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            return beIdenticalTo(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }

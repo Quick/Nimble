@@ -40,16 +40,14 @@ public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
 
 extension NMBObjCMatcher {
     public class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let actual = actualBlock()
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.evaluate()
             if let actualString = actual as? String {
                 let expr = Expression(expression: ({ actualString }), location: location)
-                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(endWith(expected as String)))
-                return matcher.matches(expr, failureMessage: failureMessage)
+                return endWith(expected as String).matches(expr, failureMessage: failureMessage)
             } else {
                 let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
-                let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(endWith(expected)))
-                return matcher.matches(expr, failureMessage: failureMessage)
+                return endWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }
     }

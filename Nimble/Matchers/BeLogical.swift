@@ -40,33 +40,29 @@ public func beFalsy() -> MatcherFunc<BooleanType> {
 
 extension NMBObjCMatcher {
     public class func beTruthyMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false as BooleanType? })
-            let expr = Expression(expression: block, location: location)
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as BooleanType? }
             return beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beFalsyMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue ?? false as BooleanType? })
-            let expr = Expression(expression: block, location: location)
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as BooleanType? }
             return beFalsy().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beTrueMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue as Bool? })
-            let expr = Expression(expression: block, location: location)
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
             return beTrue().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beFalseMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ (actualBlock() as? NSNumber)?.boolValue as Bool? })
-            let expr = Expression(expression: block, location: location)
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
             return beFalse().matches(expr, failureMessage: failureMessage)
         }
     }

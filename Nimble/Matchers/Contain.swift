@@ -38,18 +38,20 @@ public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
 
 extension NMBObjCMatcher {
     public class func containMatcher(expected: NSObject?) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let actualValue = actualBlock()
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actualValue = actualExpression.evaluate()
             if let value = actualValue as? NMBContainer {
                 let expr = Expression(expression: ({ value as NMBContainer }), location: location)
                 return contain(expected).matches(expr, failureMessage: failureMessage)
             } else if let value = actualValue as? NSString {
                 let expr = Expression(expression: ({ value as String }), location: location)
                 return contain(expected as String).matches(expr, failureMessage: failureMessage)
+            } else if actualValue != nil {
+                failureMessage.postfixMessage = "contain <\(stringify(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
             } else {
-                failureMessage.postfixMessage = "contain \(expected) (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
-                return false
+                failureMessage.postfixMessage = "contain <\(stringify(expected))>"
             }
+            return false
         }
     }
 }
