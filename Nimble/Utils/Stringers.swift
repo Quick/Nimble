@@ -1,14 +1,14 @@
 import Foundation
 
 
-func _identityAsString(value: AnyObject?) -> String {
+internal func identityAsString(value: AnyObject?) -> String {
     if value == nil {
         return "nil"
     }
     return NSString(format: "<%p>", unsafeBitCast(value!, Int.self))
 }
 
-func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
+internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
         return accum + prefix + "\(item)"
@@ -19,7 +19,7 @@ func _arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     func NMB_stringify() -> String
 }
 
-func stringify<S: SequenceType>(value: S) -> String {
+internal func stringify<S: SequenceType>(value: S) -> String {
     var generator = value.generate()
     var strings = [String]()
     var value: S.Generator.Element?
@@ -40,14 +40,14 @@ extension NSArray : NMBStringer {
     }
 }
 
-func stringify<T>(value: T) -> String {
+internal func stringify<T>(value: T) -> String {
     if value is Double {
         return NSString(format: "%.4f", (value as Double))
     }
     return toString(value)
 }
 
-func stringify<T>(value: T?) -> String {
+internal func stringify<T>(value: T?) -> String {
     if let unboxed = value {
        return stringify(unboxed)
     }

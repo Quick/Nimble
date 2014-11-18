@@ -4,8 +4,8 @@ import Foundation
 public func beIdenticalTo<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let actual = actualExpression.evaluate()
-        failureMessage.actualValue = "\(_identityAsString(actual))"
-        failureMessage.postfixMessage = "be identical to \(_identityAsString(expected))"
+        failureMessage.actualValue = "\(identityAsString(actual))"
+        failureMessage.postfixMessage = "be identical to \(identityAsString(expected))"
         return actual === expected && actual !== nil
     }
 }

@@ -2,9 +2,9 @@ import Foundation
 
 public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
+        failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = actualExpression.evaluate() {
-            return _all(items) {
+            return all(items) {
                 return contains(actual, $0)
             }
         }
@@ -14,9 +14,9 @@ public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T
 
 public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(_arrayAsString(substrings))>"
+        failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = actualExpression.evaluate() {
-            return _all(substrings) {
+            return all(substrings) {
                 let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
                 let range = actual.rangeOfString($0, options: nil, range: scanRange, locale: nil)
                 return range != nil && !range!.isEmpty
@@ -28,9 +28,9 @@ public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
 
 public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(_arrayAsString(items))>"
+        failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         let actual = actualExpression.evaluate()
-        return _all(items) { item in
+        return all(items) { item in
             return actual != nil && actual!.containsObject(item)
         }
     }
