@@ -912,4 +912,4 @@ target 'YOUR_APP_NAME_HERE_Tests' do
 end
 ```
 
-Tinally run `bundle exec pod install`. 
+Finally run `bundle exec pod install`. 
