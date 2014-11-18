@@ -866,8 +866,11 @@ expect(nil).to(beNil());    // passes
   Quick and Nimble, follow [the installation instructions in the Quick
   README](https://github.com/Quick/Quick#how-to-install-quick).
 
-To use Nimble to test your iOS or OS X applications, follow these 4 easy
-steps:
+Nimble can currently be installed in one of two ways: using a pre-release 
+version of CocoaPods, or with git submodules. 
+
+To use Nimble as a submodule to test your iOS or OS X applications, follow these
+4 easy steps:
 
 1. Clone the Nimble repository
 2. Add Nimble.xcodeproj to your test target
@@ -879,3 +882,34 @@ read [How to Install Quick](https://github.com/Quick/Quick#how-to-install-quick)
 Ignore the steps involving adding Quick to your project in order to
 install just Nimble.
 
+TO use Nimble in CocoaPods form to test your iOS or OS X applications, we'll
+need a *Gemfile* that will specify unreleased versions of CocoaPods. Create an
+empty file called "Gemfile" in your project's directory and add the following
+lines. 
+
+```ruby
+gem 'cocoapods', :git => 'https://github.com/CocoaPods/CocoaPods.git', :branch => 'swift'
+gem 'cocoapods-core', :git => 'https://github.com/CocoaPods/Core.git', :branch => 'swift'
+gem 'xcodeproj',  :git => "https://github.com/CocoaPods/Xcodeproj.git", :branch => 'ext_build_settings'
+```
+
+Now that you have these specified, run `bundle install` from the command line in
+that directory. This will install the prerelease version of CocoaPods. To run
+this version, you'll need to type `bundle exec` in front of your pod commands. 
+
+In that directory, run `bundle exec pod init` to create a blank podfile. iIt 
+will look something like the following (add the line for Nimble).
+
+```ruby
+platform :ios, '8.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Whatever pods you need for your app go here
+
+target 'YOUR_APP_NAME_HERE_Tests' do
+  pod 'Nimble', :git => "https://github.com/ashfurrow/Nimble", :branch => "podspec"
+end
+```
+
+Tinally run `bundle exec pod install`. 
