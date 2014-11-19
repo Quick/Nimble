@@ -1,5 +1,4 @@
 import Foundation
-import Nimble
 
 public func beOneOf<T: Equatable>(allowedValues: [T]) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
