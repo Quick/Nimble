@@ -859,6 +859,34 @@ expect(nil).to(equal(nil)); // fails
 expect(nil).to(beNil());    // passes
 ```
 
+If your matcher does not want to match with nil, you use `NonNilMatcherFunc`
+and the `canMatchNil` constructor on `NMBObjCMatcher`. Using both types will
+automatically generate expected value failure messages when they're nil.
+
+```swift
+
+public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "begin with <\(startingElement)>"
+        if let actualValue = actualExpression.evaluate() {
+            var actualGenerator = actualValue.generate()
+            return actualGenerator.next() == startingElement
+        }
+        return false
+    }
+}
+
+extension NMBObjCMatcher {
+    public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.evaluate()
+            let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
+            return beginWith(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}
+```
+
 # Installing Nimble
 
 > Nimble can be used on its own, or in conjunction with its sister
