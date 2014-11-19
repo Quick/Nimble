@@ -11,7 +11,7 @@ internal func identityAsString(value: AnyObject?) -> String {
 internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
-        return accum + prefix + "\(item)"
+        return accum + prefix + "\(stringify(item))"
     }
 }
 
