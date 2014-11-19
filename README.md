@@ -882,12 +882,13 @@ read [How to Install Quick](https://github.com/Quick/Quick#how-to-install-quick)
 Ignore the steps involving adding Quick to your project in order to
 install just Nimble.
 
-TO use Nimble in CocoaPods form to test your iOS or OS X applications, we'll
-need a *Gemfile* that will specify unreleased versions of CocoaPods. Create an
-empty file called "Gemfile" in your project's directory and add the following
-lines. 
+To use Nimble in CocoaPods to test your iOS or OS X applications, we'll need a 
+*Gemfile* that will specify unreleased versions of CocoaPods. Create an empty 
+file called "Gemfile" in your project's directory and add the following lines. 
 
 ```ruby
+source 'https://rubygems.org'
+
 gem 'cocoapods', :git => 'https://github.com/CocoaPods/CocoaPods.git', :branch => 'swift'
 gem 'cocoapods-core', :git => 'https://github.com/CocoaPods/Core.git', :branch => 'swift'
 gem 'xcodeproj',  :git => "https://github.com/CocoaPods/Xcodeproj.git", :branch => 'ext_build_settings'
@@ -908,7 +909,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 # Whatever pods you need for your app go here
 
 target 'YOUR_APP_NAME_HERE_Tests' do
-  pod 'Nimble', :git => "https://github.com/ashfurrow/Nimble", :branch => "podspec"
+  pod 'Nimble', :git => "https://github.com/Quick/Nimble"
 end
 ```
 

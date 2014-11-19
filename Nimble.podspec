@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/Quick/Nimble"
   s.license      = { :type => "Apache 2.0", :file => "LICENSE.md" }
   s.author             = "Quick Contributors"
-  s.social_media_url   = "http://twitter.com/modocache"
   s.ios.deployment_target = "7.0"
   s.osx.deployment_target = "10.7"
   s.source       = { :git => "https://github.com/Quick/Nimble.git", :commit => "81a2d8a63083ae6512d40f7a02d5e075e57be317" }
