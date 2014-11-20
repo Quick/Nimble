@@ -245,7 +245,7 @@ asynchronously. Just use `toEventually` or `toEventuallyNot`:
 // Swift
 
 dispatch_async(dispatch_get_main_queue()) {
-  ocean.add("dolphins"")
+  ocean.add("dolphins")
   ocean.add("whales")
 }
 expect(ocean).toEventually(contain("dolphins", "whales"))
