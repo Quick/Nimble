@@ -1,5 +1,8 @@
 import Foundation
 
+
+/// A Nimble matcher that succeeds when the actual sequence's last element
+/// is equal to the expected value.
 public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
@@ -19,6 +22,8 @@ public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T
     }
 }
 
+/// A Nimble matcher that succeeds when the actual collection's last element
+/// is equal to the expected object.
 public func endWith(endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
@@ -27,6 +32,10 @@ public func endWith(endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCol
     }
 }
 
+
+/// A Nimble matcher that succeeds when the actual string contains the expected substring
+/// where the expected substring's location is the actual string's length minus the
+/// expected substring's length.
 public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"

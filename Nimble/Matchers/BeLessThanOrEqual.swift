@@ -1,5 +1,7 @@
 import Foundation
 
+/// A Nimble matcher that succeeds when the actual value is less than
+/// or equal to the expected value.
 public func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(stringify(expectedValue))>"
@@ -7,6 +9,8 @@ public func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> NonNilMatch
     }
 }
 
+/// A Nimble matcher that succeeds when the actual value is less than
+/// or equal to the expected value.
 public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(stringify(expectedValue))>"

@@ -1,6 +1,8 @@
 import Foundation
 
-public func match(expectedValue:String?) -> NonNilMatcherFunc<String> {
+/// A Nimble matcher that succeeds when the actual string satisfies the regular expression
+/// described by the expected string.
+public func match(expectedValue: String?) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "match <\(stringify(expectedValue))>"
         

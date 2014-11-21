@@ -1,5 +1,8 @@
 import Foundation
 
+
+/// A Nimble matcher that succeeds when the actual sequence's first element
+/// is equal to the expected value.
 public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
@@ -11,6 +14,8 @@ public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element ==
     }
 }
 
+/// A Nimble matcher that succeeds when the actual collection's first element
+/// is equal to the expected object.
 public func beginWith(startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
@@ -19,6 +24,8 @@ public func beginWith(startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrdere
     }
 }
 
+/// A Nimble matcher that succeeds when the actual string contains expected substring
+/// where the expected substring's location is zero.
 public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"

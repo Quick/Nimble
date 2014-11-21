@@ -10,12 +10,20 @@ internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Doub
     return actualValue != nil && abs(actualValue! - expectedValue) < delta
 }
 
+/// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+/// point values which can have imprecise results when doing arithmetic on them.
+///
+/// @see equal
 public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> NonNilMatcherFunc<Double> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         return isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
+/// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+/// point values which can have imprecise results when doing arithmetic on them.
+///
+/// @see equal
 public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> NonNilMatcherFunc<NMBDoubleConvertible> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         return isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)

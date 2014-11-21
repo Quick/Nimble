@@ -21,6 +21,9 @@ internal func raiseExceptionMatcher<T>(message: String, matches: (NSException?) 
     }
 }
 
+
+/// A Nimble matcher that succeeds when the actual expression raises an exception with
+/// the specified name and reason.
 public func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any> {
     var theReason = ""
     if let reason = reason {
@@ -31,12 +34,17 @@ public func raiseException(#named: String, #reason: String?) -> MatcherFunc<Any>
     }
 }
 
+
+/// A Nimble matcher that succeeds when the actual expression raises an exception with
+/// the specified name.
 public func raiseException(#named: String) -> MatcherFunc<Any> {
     return raiseExceptionMatcher("raise exception named <\(named)>") {
         exception in return exception?.name == named
     }
 }
 
+/// A Nimble matcher that succeeds when the actual expression raises any exception.
+/// Please use a more specific raiseException() matcher when possible.
 public func raiseException() -> MatcherFunc<Any> {
     return raiseExceptionMatcher("raise any exception") {
         exception in return exception != nil

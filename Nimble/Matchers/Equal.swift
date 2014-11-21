@@ -1,6 +1,9 @@
 import Foundation
 
-
+/// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+/// Values can support equal by supporting the Equatable protocol.
+///
+/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable>(expectedValue: T?) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
@@ -15,7 +18,10 @@ public func equal<T: Equatable>(expectedValue: T?) -> NonNilMatcherFunc<T> {
     }
 }
 
-// perhaps try to extend to SequenceOf or Sequence types instead of dictionaries
+/// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+/// Values can support equal by supporting the Equatable protocol.
+///
+/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> NonNilMatcherFunc<[T: C]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
@@ -40,7 +46,8 @@ public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> NonNilM
     }
 }
 
-// perhaps try to extend to SequenceOf or Sequence types instead of arrays
+/// A Nimble matcher that succeeds when the actual collection is equal to the expected collection.
+/// Items must implement the Equatable protocol.
 public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"

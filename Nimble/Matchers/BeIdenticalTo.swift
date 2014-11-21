@@ -1,6 +1,8 @@
 import Foundation
 
 
+/// A Nimble matcher that succeeds when the actual value is the same instance
+/// as the expected instance.
 public func beIdenticalTo<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let actual = actualExpression.evaluate()

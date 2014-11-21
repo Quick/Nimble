@@ -1,5 +1,6 @@
 import Foundation
 
+/// A Nimble matcher that succeeds when the actual sequence contains the expected value.
 public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
@@ -12,6 +13,7 @@ public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T
     }
 }
 
+/// A Nimble matcher that succeeds when the actual string contains the expected substring.
 public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
@@ -26,6 +28,7 @@ public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
     }
 }
 
+/// A Nimble matcher that succeeds when the actual collection contains the expected object.
 public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"

@@ -1,5 +1,7 @@
 import Foundation
 
+/// A Nimble matcher that succeeds when the actual value is an instance of the given class.
+/// @see beAKindOf if you want to match against subclasses
 public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()

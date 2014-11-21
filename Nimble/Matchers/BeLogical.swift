@@ -14,26 +14,33 @@ internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMa
     }
 }
 
-// mark: beTrue() / beFalse()
+// MARK: beTrue() / beFalse()
 
+/// A Nimble matcher that succeeds when the actual value is exactly true.
+/// This matcher will not match against nils.
 public func beTrue() -> NonNilMatcherFunc<Bool> {
     return basicMatcherWithFailureMessage(equal(true)) { failureMessage in
         failureMessage.postfixMessage = "be true"
     }
 }
 
+/// A Nimble matcher that succeeds when the actual value is exactly false.
+/// This matcher will not match against nils.
 public func beFalse() -> NonNilMatcherFunc<Bool> {
     return basicMatcherWithFailureMessage(equal(false)) { failureMessage in
         failureMessage.postfixMessage = "be false"
     }
 }
 
-// mark: beTruthy() / beFalsy()
+// MARK: beTruthy() / beFalsy()
 
+/// A Nimble matcher that succeeds when the actual value is not logically false.
 public func beTruthy() -> MatcherFunc<BooleanType> {
     return beBool(expectedValue: true, stringValue: "truthy", falseMatchesNil: true)
 }
 
+/// A Nimble matcher that succeeds when the actual value is logically false.
+/// This matcher will match against nils.
 public func beFalsy() -> MatcherFunc<BooleanType> {
     return beBool(expectedValue: false, stringValue: "falsy", falseMatchesNil: true)
 }
