@@ -5,13 +5,11 @@ struct BasicMatcherWrapper<M, T where M: BasicMatcher, M.ValueType == T>: Matche
     let matcher: M
 
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
-        let pass = matcher.matches(actualExpression, failureMessage: failureMessage)
-        return pass
+        return matcher.matches(actualExpression, failureMessage: failureMessage)
     }
 
     func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
-        let pass = matcher.matches(actualExpression, failureMessage: failureMessage)
-        return !pass
+        return !matcher.matches(actualExpression, failureMessage: failureMessage)
     }
 }
 

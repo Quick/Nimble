@@ -1,5 +1,3 @@
-import Foundation
-
 struct NonNilMatcherWrapper<M: Matcher, T where M.ValueType == T>: Matcher {
     let matcher: M
     let nilMessage = " (use beNil() to match nils)"
