@@ -20,6 +20,14 @@ class BeLessThanOrEqualToTest: XCTestCase {
             expect(0).toNot(beLessThanOrEqualTo(0))
             return
         }
+        failsWithErrorMessageForNil("expected to be less than or equal to <2>, got <nil>") {
+            expect(nil as Int?).to(beLessThanOrEqualTo(2))
+            return
+        }
+        failsWithErrorMessageForNil("expected to not be less than or equal to <-2>, got <nil>") {
+            expect(nil as Int?).toNot(beLessThanOrEqualTo(-2))
+            return
+        }
     }
 
     func testLessThanOrEqualToOperator() {

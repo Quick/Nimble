@@ -1,5 +1,8 @@
 import Foundation
 
+
+/// A Nimble matcher that succeeds when a value is "empty". For collections, this
+/// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: SequenceType>() -> MatcherFunc<S> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
@@ -12,6 +15,8 @@ public func beEmpty<S: SequenceType>() -> MatcherFunc<S> {
     }
 }
 
+/// A Nimble matcher that succeeds when a value is "empty". For collections, this
+/// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> MatcherFunc<NSString> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
@@ -22,6 +27,9 @@ public func beEmpty() -> MatcherFunc<NSString> {
 
 // Without specific overrides, beEmpty() is ambiguous for NSDictionary, NSArray,
 // etc, since they conform to SequenceType as well as NMBCollection.
+
+/// A Nimble matcher that succeeds when a value is "empty". For collections, this
+/// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> MatcherFunc<NSDictionary> {
 	return MatcherFunc { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
@@ -30,6 +38,8 @@ public func beEmpty() -> MatcherFunc<NSDictionary> {
 	}
 }
 
+/// A Nimble matcher that succeeds when a value is "empty". For collections, this
+/// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> MatcherFunc<NSArray> {
 	return MatcherFunc { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
@@ -38,6 +48,8 @@ public func beEmpty() -> MatcherFunc<NSArray> {
 	}
 }
 
+/// A Nimble matcher that succeeds when a value is "empty". For collections, this
+/// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> MatcherFunc<NMBCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
@@ -48,9 +60,8 @@ public func beEmpty() -> MatcherFunc<NMBCollection> {
 
 extension NMBObjCMatcher {
     class func beEmptyMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as? NMBCollection })
-            let expr = Expression(expression: block, location: location)
+        return NMBObjCMatcher { actualExpression, failureMessage, location in
+            let expr = actualExpression.cast { $0 as? NMBCollection }
             return beEmpty().matches(expr, failureMessage: failureMessage)
         }
     }

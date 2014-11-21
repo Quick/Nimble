@@ -23,5 +23,14 @@ class MatchTest:XCTestCase {
             expect("11:14").toNot(match("\\d{2}:\\d{2}"))
         }
     }
- 
+
+    func testMatchNils() {
+        failsWithErrorMessageForNil("expected to match <\\d{2}:\\d{2}>, got <nil>") {
+            expect(nil as String?).to(match("\\d{2}:\\d{2}"))
+        }
+
+        failsWithErrorMessageForNil("expected to not match <\\d{2}:\\d{2}>, got <nil>") {
+            expect(nil as String?).toNot(match("\\d{2}:\\d{2}"))
+        }
+    }
 }

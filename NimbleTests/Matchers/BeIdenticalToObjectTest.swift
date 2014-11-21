@@ -29,6 +29,20 @@ class BeIdenticalToObjectTest:XCTestCase {
             expect(self.testObjectA).toNot(beIdenticalTo(self.testObjectA))
         }
     }
+
+    func testFailsOnNils() {
+        let message1 = NSString(format: "expected to be identical to <%p>, got nil",
+            unsafeBitCast(testObjectA, Int.self))
+        failsWithErrorMessageForNil(message1) {
+            expect(nil as BeIdenticalToObjectTester?).to(beIdenticalTo(self.testObjectA))
+        }
+
+        let message2 = NSString(format: "expected to not be identical to <%p>, got nil",
+            unsafeBitCast(testObjectA, Int.self))
+        failsWithErrorMessageForNil(message2) {
+            expect(nil as BeIdenticalToObjectTester?).toNot(beIdenticalTo(self.testObjectA))
+        }
+    }
     
     func testOperators() {
         expect(testObjectA) === testObjectA

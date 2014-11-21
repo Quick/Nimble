@@ -29,7 +29,11 @@ public struct Expectation<T> {
         toNot(matcher)
     }
 
-    // see FullMatcherWrapper and AsyncMatcherWrapper for extensions
-    // see NMBExpectation for Objective-C interface
+    // see:
+    // - BasicMatcherWrapper for extension
+    // - AsyncMatcherWrapper for extension
+    // - NonNilMatcherWrapper for extension
+    //
+    // - NMBExpectation for Objective-C interface
 }
 

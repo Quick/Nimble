@@ -19,6 +19,12 @@ class BeGreaterThanOrEqualToTest: XCTestCase {
             expect(1).toNot(beGreaterThanOrEqualTo(1))
             return
         }
+        failsWithErrorMessageForNil("expected to be greater than or equal to <-2>, got <nil>") {
+            expect(nil as Int?).to(beGreaterThanOrEqualTo(-2))
+        }
+        failsWithErrorMessageForNil("expected to not be greater than or equal to <1>, got <nil>") {
+            expect(nil as Int?).toNot(beGreaterThanOrEqualTo(1))
+        }
     }
 
     func testGreaterThanOrEqualToOperator() {

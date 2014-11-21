@@ -60,7 +60,7 @@ function test() {
 }
 
 function clean {
-    run rm -rf ~/Library/Developer/Xcode/DerivedData
+    run rm -rf ~/Library/Developer/Xcode/DerivedData\; true
 }
 
 function help {

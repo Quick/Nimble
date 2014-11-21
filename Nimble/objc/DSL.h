@@ -56,24 +56,24 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> beLessThanOrEqualTo(NSNumber *expectedValue),
              NMB_beLessThanOrEqualTo(expectedValue));
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beTruthy();
-NIMBLE_SHORT(id<NMBMatcher> beTruthy(),
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTruthy(void);
+NIMBLE_SHORT(id<NMBMatcher> beTruthy(void),
              NMB_beTruthy());
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy();
-NIMBLE_SHORT(id<NMBMatcher> beFalsy(),
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy(void);
+NIMBLE_SHORT(id<NMBMatcher> beFalsy(void),
              NMB_beFalsy());
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beTrue();
-NIMBLE_SHORT(id<NMBMatcher> beTrue(),
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTrue(void);
+NIMBLE_SHORT(id<NMBMatcher> beTrue(void),
              NMB_beTrue());
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beFalse();
-NIMBLE_SHORT(id<NMBMatcher> beFalse(),
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalse(void);
+NIMBLE_SHORT(id<NMBMatcher> beFalse(void),
              NMB_beFalse());
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beNil();
-NIMBLE_SHORT(id<NMBMatcher> beNil(),
+NIMBLE_EXPORT id<NMBMatcher> NMB_beNil(void);
+NIMBLE_SHORT(id<NMBMatcher> beNil(void),
              NMB_beNil());
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring);
@@ -84,8 +84,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring);
 NIMBLE_SHORT(id<NMBMatcher> endWith(id itemElementOrSubstring),
              NMB_endWith(itemElementOrSubstring));
 
-NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException();
-NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(),
+NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException(void);
+NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(void),
              NMB_raiseException());
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue);

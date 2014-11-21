@@ -14,11 +14,16 @@ class BeLessThanTest: XCTestCase {
 
         failsWithErrorMessage("expected to be less than <0>, got <2>") {
             expect(2).to(beLessThan(0))
-            return
         }
         failsWithErrorMessage("expected to not be less than <1>, got <0>") {
             expect(0).toNot(beLessThan(1))
-            return
+        }
+
+        failsWithErrorMessageForNil("expected to be less than <2>, got <nil>") {
+            expect(nil as Int?).to(beLessThan(2))
+        }
+        failsWithErrorMessageForNil("expected to not be less than <-1>, got <nil>") {
+            expect(nil as Int?).toNot(beLessThan(-1))
         }
     }
 

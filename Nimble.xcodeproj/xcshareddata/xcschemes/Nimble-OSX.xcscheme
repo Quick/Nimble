@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F925EB6195C0D6300ED456B"
-               BuildableName = "Nimble-OSXTests.xctest"
+               BuildableName = "NimbleTests.xctest"
                BlueprintName = "Nimble-OSXTests"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
