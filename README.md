@@ -276,7 +276,12 @@ cases, use the `timeout` parameter:
 expect(ocean).toEventually(contain("starfish"), timeout: 3)
 ```
 
-> Sorry, [Nimble doesn't support specifying custom timeouts in Objective-C yet](https://github.com/Quick/Nimble/issues/25).
+```objc
+// Objective-C
+
+// Waits three seconds for ocean to contain "starfish":
+expect(ocean).withTimeout(3).toEventually(contain(@"starfish"));
+```
 
 You can also provide a callback by using the `waitUntil` function:
 
@@ -301,6 +306,8 @@ waitUntil(timeout: 10) { done in
   done()
 }
 ```
+
+> Sorry, [Nimble doesn't support specifying custom timeouts for waitUntil in Objective-C yet](https://github.com/Quick/Nimble/issues/25).
 
 ## Objective-C Support
 
