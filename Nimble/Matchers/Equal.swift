@@ -31,18 +31,7 @@ public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]?) -> NonNilM
             }
             return false
         }
-        var expectedGen = expectedValue!.generate()
-        var actualGen = actualExpression.evaluate()!.generate()
-
-        var expectedItem = expectedGen.next()
-        var actualItem = actualGen.next()
-        var matches = elementsAreEqual(expectedItem, actualItem)
-        while (matches && (actualItem != nil || expectedItem != nil)) {
-            actualItem = actualGen.next()
-            expectedItem = expectedGen.next()
-            matches = elementsAreEqual(expectedItem, actualItem)
-        }
-        return matches
+        return expectedValue! == actualExpression.evaluate()!
     }
 }
 
@@ -57,17 +46,7 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
             }
             return false
         }
-        var expectedGen = expectedValue!.generate()
-        var actualGen = actualExpression.evaluate()!.generate()
-        var expectedItem = expectedGen.next()
-        var actualItem = actualGen.next()
-        var matches = actualItem == expectedItem
-        while (matches && (actualItem != nil || expectedItem != nil)) {
-            actualItem = actualGen.next()
-            expectedItem = expectedGen.next()
-            matches = actualItem == expectedItem
-        }
-        return matches
+        return expectedValue! == actualExpression.evaluate()!
     }
 }
 
@@ -102,15 +81,3 @@ extension NMBObjCMatcher {
         }
     }
 }
-
-
-internal func elementsAreEqual<T: Equatable, C: Equatable>(a: (T, C)?, b: (T, C)?) -> Bool {
-    if a == nil || b == nil {
-        return a == nil && b == nil
-    } else {
-        let (aKey, aValue) = a!
-        let (bKey, bValue) = b!
-        return (aKey == bKey && aValue == bValue)
-    }
-}
-
