@@ -904,6 +904,8 @@ extension NMBObjCMatcher {
 Nimble can currently be installed in one of two ways: using a pre-release 
 version of CocoaPods, or with git submodules. 
 
+## Installing Nimble as a Submodule
+
 To use Nimble as a submodule to test your iOS or OS X applications, follow these
 4 easy steps:
 
@@ -916,6 +918,8 @@ For more detailed instructions on each of these steps,
 read [How to Install Quick](https://github.com/Quick/Quick#how-to-install-quick).
 Ignore the steps involving adding Quick to your project in order to
 install just Nimble.
+
+## Installing Nimble via CocoaPods
 
 To use Nimble in CocoaPods to test your iOS or OS X applications, we'll need a 
 *Gemfile* that will specify unreleased versions of CocoaPods. Create an empty 
