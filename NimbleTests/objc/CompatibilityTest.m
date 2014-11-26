@@ -31,7 +31,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         obj = @1;
     });
-    expect(obj).withTimeout(2).toEventuallyNot(beNil());
+    expect(obj).withTimeout(5).toEventuallyNot(beNil());
 }
 
 - (void)testBeAnInstanceOf {
@@ -275,6 +275,13 @@
     expect(array).toNot(contain(@"HI"));
     expect(@"String").to(contain(@"Str"));
     expect(@"Other").toNot(contain(@"Str"));
+
+    expectNilFailureMessage(@"expected to contain <3.0000>, got <nil>", ^{
+        expect(nil).to(contain(@3));
+    });
+    expectNilFailureMessage(@"expected to not contain <3.0000>, got <nil>", ^{
+        expect(nil).toNot(contain(@3));
+    });
 
     expectFailureMessage(@"expected to contain <Optional(3)>, got <(1,2)>", ^{
         expect((@[@1, @2])).to(contain(@3));

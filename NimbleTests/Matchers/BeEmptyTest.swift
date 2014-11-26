@@ -3,9 +3,6 @@ import Nimble
 
 class BeEmptyTest: XCTestCase {
     func testBeEmptyPositive() {
-        expect(nil as NSString?).to(beEmpty())
-        expect(nil as [CInt]?).to(beEmpty())
-
         expect([]).to(beEmpty())
         expect([1]).toNot(beEmpty())
 
@@ -32,6 +29,13 @@ class BeEmptyTest: XCTestCase {
     }
 
     func testBeEmptyNegative() {
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as NSString?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as [CInt]?).toNot(beEmpty())
+        }
+
         failsWithErrorMessage("expected to not be empty, got <()>") {
             expect([]).toNot(beEmpty())
         }
