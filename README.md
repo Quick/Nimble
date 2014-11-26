@@ -47,6 +47,8 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Supporting Objective-C](#supporting-objective-c)
     - [Properly Handling `nil` in Objective-C Matchers](#properly-handling-nil-in-objective-c-matchers)
 - [Installing Nimble](#installing-nimble)
+  - [Installing Nimble as a Submodule](#installing-nimble-as-a-submodule)
+  - [Installing Nimble via CocoaPods](#installing-nimble-via-cocoapods)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
