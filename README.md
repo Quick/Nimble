@@ -309,7 +309,7 @@ waitUntil(timeout: 10) { done in
 }
 ```
 
-> Sorry, [Nimble doesn't support specifying custom timeouts for waitUntil in Objective-C yet](https://github.com/Quick/Nimble/issues/25).
+> Sorry, Nimble doesn't support waitUntil in Objective-C.
 
 ## Objective-C Support
 
