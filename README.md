@@ -300,6 +300,16 @@ waitUntil { done in
 }
 ```
 
+```objc
+// Objective-C
+
+waitUntil(^(void (^done)(void)){
+  // do some stuff that takes a while...
+  [NSThread sleepForTimeInterval:0.5];
+  done();
+});
+```
+
 `waitUntil` also optionally takes a timeout parameter:
 
 ```swift
@@ -312,7 +322,15 @@ waitUntil(timeout: 10) { done in
 }
 ```
 
-> Sorry, Nimble doesn't support waitUntil in Objective-C.
+```objc
+// Objective-C
+
+waitUntilTimeout(10, ^(void (^done)(void)){
+  // do some stuff that takes a while...
+  [NSThread sleepForTimeInterval:1];
+  done();
+});
+```
 
 ## Objective-C Support
 

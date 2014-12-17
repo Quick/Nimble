@@ -25,4 +25,29 @@
     expect(obj).withTimeout(5).toEventuallyNot(beNil());
 }
 
+- (void)testAsyncCallback {
+    waitUntil(^(void (^done)(void)){
+        done();
+    });
+
+    expectFailureMessage(@"Waited more than 1.0 second", ^{
+        waitUntil(^(void (^done)(void)){ /* ... */ });
+    });
+
+    expectFailureMessage(@"Waited more than 0.01 seconds", ^{
+        waitUntilTimeout(0.01, ^(void (^done)(void)){
+            [NSThread sleepForTimeInterval:0.1];
+            done();
+        });
+    });
+
+    expectFailureMessage(@"expected to equal <goodbye>, got <hello>", ^{
+        waitUntil(^(void (^done)(void)){
+            [NSThread sleepForTimeInterval:0.1];
+            expect(@"hello").to(equal(@"goodbye"));
+            done();
+        });
+    });
+}
+
 @end
