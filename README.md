@@ -72,23 +72,15 @@ Or, in Objective-C:
 XCTAssertEqual(1 + 1, 2, @"expected one plus one to equal two");
 ```
 
-XCTest assertions have several drawbacks:
+XCTest assertions have a couple of drawbacks:
 
 1. **Not enough macros.** There's no easy way to assert that a string
    contains a particular substring, or that a number is less than or
    equal to another.
-2. **No type checking.** It doesn't make sense to comapre a number to
-   a string, but XCTest assertions allow it. Assertions are implemented
-   using macros, so there's no type checking.
-
-   `XCTAssertEqual(1 + 1, "2")` compiles and runs--you won't
-   find out that you've made an impossible comparison until the test
-   runs and fails. That could take seconds, or even minutes in larger test
-   suites.
-3. **It's hard to write asynchronous tests.** XCTest forces you to write
+2. **It's hard to write asynchronous tests.** XCTest forces you to write
    a lot of boilerplate code.
 
-Nimble addresses all three of these concerns.
+Nimble addresses these concerns.
 
 # Nimble: Expectations Using `expect(...).to`
 
