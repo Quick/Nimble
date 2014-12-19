@@ -41,10 +41,26 @@ class BeCloseToTest: XCTestCase {
 
     func testBeCloseToWithinOperator() {
         expect(1.2) ~= (9.300, 10)
+        expect(1.2) == (9.300, 10)
         
         failsWithErrorMessage("expected to be close to <1.0000> (within 0.1000), got <1.2000>") {
             expect(1.2) ~= (1.0, 0.1)
         }
+        failsWithErrorMessage("expected to be close to <1.0000> (within 0.1000), got <1.2000>") {
+            expect(1.2) == (1.0, 0.1)
+        }
     }
     
+    func testPlusMinusOperator() {
+        expect(1.2) ~= 9.300 ± 10
+        expect(1.2) == 9.300 ± 10
+        
+        failsWithErrorMessage("expected to be close to <1.0000> (within 0.1000), got <1.2000>") {
+            expect(1.2) ~= 1.0 ± 0.1
+        }
+        failsWithErrorMessage("expected to be close to <1.0000> (within 0.1000), got <1.2000>") {
+            expect(1.2) == 1.0 ± 0.1
+        }
+    }
+
 }

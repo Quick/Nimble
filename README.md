@@ -479,7 +479,16 @@ expect(actual) ~= (expected, delta)
 
 ```
 
-The former version uses the default delta of 0.0001.
+The former version uses the default delta of 0.0001. Here is yet another way to do this:
+
+```swift
+// Swift
+
+expect(actual) ~= expected ± delta
+expect(actual) == expected ± delta
+
+```
+(Type Option-Shift-= to get ±)
 
 > Values given to the `beCloseTo` matcher must be coercable into a
   `Double`.
