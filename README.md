@@ -490,6 +490,16 @@ expect(actual) == expected ± delta
 ```
 (Type Option-Shift-= to get ±)
 
+If you are comparing arrays of floating point numbers, you'll find the following useful:
+
+```swift
+// Swift
+
+expect([0.0, 2.0]) ~= [0.0001, 2.0001]
+expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
+
+```
+
 > Values given to the `beCloseTo` matcher must be coercable into a
   `Double`.
 

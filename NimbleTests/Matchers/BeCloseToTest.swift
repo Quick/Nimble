@@ -63,4 +63,15 @@ class BeCloseToTest: XCTestCase {
         }
     }
 
+    func testBeCloseToArray() {
+        expect([0.0, 1.1, 2.2]) ~= [0.0001, 1.1001, 2.2001]
+        expect([0.0, 1.1, 2.2]).to(beCloseTo([0.1, 1.2, 2.3], within: 0.1))
+        
+        failsWithErrorMessage("expected to be close to <[0.0000, 1.0000]> (each within 0.0001), got <[0.0, 1.1]>") {
+            expect([0.0, 1.1]) ~= [0.0, 1.0]
+        }
+        failsWithErrorMessage("expected to be close to <[0.2000, 1.2000]> (each within 0.1000), got <[0.0, 1.1]>") {
+            expect([0.0, 1.1]).to(beCloseTo([0.2, 1.2], within: 0.1))
+        }
+    }
 }

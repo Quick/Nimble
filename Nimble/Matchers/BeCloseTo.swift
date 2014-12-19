@@ -53,15 +53,15 @@ extension NMBObjCMatcher {
     }
 }
 
-public func beCloseTo(items: [Double], within delta: Double = DefaultDelta) -> MatcherFunc<[Double]> {
+public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta) -> MatcherFunc<[Double]> {
     return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(items)>"
+        failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = actualExpression.evaluate() {
-            if actual.count != items.count {
+            if actual.count != expectedValues.count {
                 return false
             } else {
                 for (index, actualItem) in enumerate(actual) {
-                    if fabs(actualItem - items[index]) > delta {
+                    if fabs(actualItem - expectedValues[index]) > delta {
                         return false
                     }
                 }
