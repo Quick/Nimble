@@ -469,6 +469,18 @@ expect(10.01).to(beCloseTo(10, within: 0.1))
 expect(@(10.01)).to(beCloseTo(@10).within(0.1));
 ```
 
+There is also an operator shortcut available in Swift:
+
+```swift
+// Swift
+
+expect(actual) ~= expected
+expect(actual) ~= (expected, delta)
+
+```
+
+The former version uses the default delta of 0.0001.
+
 > Values given to the `beCloseTo` matcher must be coercable into a
   `Double`.
 

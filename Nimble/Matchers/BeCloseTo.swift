@@ -1,5 +1,7 @@
 import Foundation
 
+let DefaultDelta = 0.0001
+
 func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     if actualValue != nil {
@@ -10,13 +12,13 @@ func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, fail
     return actualValue != nil && abs(actualValue! - expectedValue) < delta
 }
 
-public func beCloseTo(expectedValue: Double, within delta: Double = 0.0001) -> MatcherFunc<Double> {
+public func beCloseTo(expectedValue: Double, within delta: Double = DefaultDelta) -> MatcherFunc<Double> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
-public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = 0.0001) -> MatcherFunc<NMBDoubleConvertible> {
+public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> MatcherFunc<NMBDoubleConvertible> {
     return MatcherFunc { actualExpression, failureMessage in
         return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
@@ -49,4 +51,35 @@ extension NMBObjCMatcher {
     public class func beCloseToMatcher(expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
         return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
+}
+
+public func beCloseTo(items: [Double], within delta: Double = DefaultDelta) -> MatcherFunc<[Double]> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "equal <\(items)>"
+        if let actual = actualExpression.evaluate() {
+            if actual.count != items.count {
+                return false
+            } else {
+                for (index, actualItem) in enumerate(actual) {
+                    if fabs(actualItem - items[index]) > delta {
+                        return false
+                    }
+                }
+                return true
+            }
+        }
+        return false
+    }
+}
+
+public func ~=(lhs: Expectation<[Double]>, rhs: [Double]) {
+    lhs.to(beCloseTo(rhs))
+}
+
+public func ~=(lhs: Expectation<Double>, rhs: Double) {
+    lhs.to(beCloseTo(rhs))
+}
+
+public func ~=(lhs: Expectation<Double>, rhs: (expected: Double, delta: Double)) {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
