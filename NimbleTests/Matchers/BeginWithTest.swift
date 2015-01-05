@@ -15,10 +15,16 @@ class BeginWithTest: XCTestCase {
 
         expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
         expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
-        expect(nil as NSArray?).toNot(beginWith("b"))
     }
 
     func testNegativeMatches() {
+        failsWithErrorMessageForNil("expected to begin with <b>, got <nil>") {
+            expect(nil as NSArray?).to(beginWith("b"))
+        }
+        failsWithErrorMessageForNil("expected to not begin with <b>, got <nil>") {
+            expect(nil as NSArray?).toNot(beginWith("b"))
+        }
+
         failsWithErrorMessage("expected to begin with <2>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(beginWith(2))
         }

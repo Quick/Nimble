@@ -1,7 +1,9 @@
 import Foundation
 
-public func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
-    return MatcherFunc { actualExpression, failureMessage in
+/// A Nimble matcher that succeeds when the actual value is an instance of the given class.
+/// @see beAKindOf if you want to match against subclasses
+public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = actualExpression.evaluate()
         if let validInstance = instance {
             failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
@@ -15,9 +17,8 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> MatcherFunc<NSObject> {
 
 extension NMBObjCMatcher {
     public class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage, location in
-            let expr = Expression(expression: actualExpression, location: location)
-            return beAnInstanceOf(expected).matches(expr, failureMessage: failureMessage)
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            return beAnInstanceOf(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }

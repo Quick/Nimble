@@ -1,7 +1,10 @@
 import Foundation
 
-public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> MatcherFunc<S> {
-    return MatcherFunc { actualExpression, failureMessage in
+
+/// A Nimble matcher that succeeds when the actual sequence's last element
+/// is equal to the expected value.
+public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
         if let actualValue = actualExpression.evaluate() {
@@ -19,16 +22,22 @@ public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T
     }
 }
 
-public func endWith(endingElement: AnyObject) -> MatcherFunc<NMBOrderedCollection> {
-    return MatcherFunc { actualExpression, failureMessage in
+/// A Nimble matcher that succeeds when the actual collection's last element
+/// is equal to the expected object.
+public func endWith(endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = actualExpression.evaluate()
         return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
     }
 }
 
-public func endWith(endingSubstring: String) -> MatcherFunc<String> {
-    return MatcherFunc { actualExpression, failureMessage in
+
+/// A Nimble matcher that succeeds when the actual string contains the expected substring
+/// where the expected substring's location is the actual string's length minus the
+/// expected substring's length.
+public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = actualExpression.evaluate() {
             let range = collection.rangeOfString(endingSubstring)
@@ -40,11 +49,11 @@ public func endWith(endingSubstring: String) -> MatcherFunc<String> {
 
 extension NMBObjCMatcher {
     public class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let actual = actualBlock()
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.evaluate()
             if let actualString = actual as? String {
                 let expr = Expression(expression: ({ actualString }), location: location)
-                return endWith(expected as NSString).matches(expr, failureMessage: failureMessage)
+                return endWith(expected as String).matches(expr, failureMessage: failureMessage)
             } else {
                 let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
                 return endWith(expected).matches(expr, failureMessage: failureMessage)

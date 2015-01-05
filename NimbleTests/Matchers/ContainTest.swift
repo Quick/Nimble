@@ -12,13 +12,19 @@ class ContainTest: XCTestCase {
         expect(NSArray(array: ["a"])).to(contain("a"))
         expect(NSArray(array: ["a"])).toNot(contain("b"))
         expect(NSArray(object: 1) as NSArray?).to(contain(1))
-        expect(nil as NSArray?).toNot(contain(1))
 
         failsWithErrorMessage("expected to contain <bar>, got <[a, b, c]>") {
             expect(["a", "b", "c"]).to(contain("bar"))
         }
         failsWithErrorMessage("expected to not contain <b>, got <[a, b, c]>") {
             expect(["a", "b", "c"]).toNot(contain("b"))
+        }
+
+        failsWithErrorMessageForNil("expected to contain <bar>, got <nil>") {
+            expect(nil as [String]?).to(contain("bar"))
+        }
+        failsWithErrorMessageForNil("expected to not contain <b>, got <nil>") {
+            expect(nil as [String]?).toNot(contain("b"))
         }
     }
 

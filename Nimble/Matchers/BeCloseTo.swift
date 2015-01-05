@@ -2,7 +2,7 @@ import Foundation
 
 let DefaultDelta = 0.0001
 
-func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
+internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     if actualValue != nil {
         failureMessage.actualValue = "<\(stringify(actualValue!))>"
@@ -12,15 +12,23 @@ func _isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, fail
     return actualValue != nil && abs(actualValue! - expectedValue) < delta
 }
 
-public func beCloseTo(expectedValue: Double, within delta: Double = DefaultDelta) -> MatcherFunc<Double> {
-    return MatcherFunc { actualExpression, failureMessage in
-        return _isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
+/// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+/// point values which can have imprecise results when doing arithmetic on them.
+///
+/// @see equal
+public func beCloseTo(expectedValue: Double, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<Double> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        return isCloseTo(actualExpression.evaluate(), expectedValue, delta, failureMessage)
     }
 }
 
-public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> MatcherFunc<NMBDoubleConvertible> {
-    return MatcherFunc { actualExpression, failureMessage in
-        return _isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
+/// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+/// point values which can have imprecise results when doing arithmetic on them.
+///
+/// @see equal
+public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<NMBDoubleConvertible> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        return isCloseTo(actualExpression.evaluate()?.doubleValue, expectedValue.doubleValue, delta, failureMessage)
     }
 }
 
@@ -37,7 +45,17 @@ public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double 
             return actualExpression() as? NMBDoubleConvertible
         })
         let expr = Expression(expression: actualBlock, location: location)
-        return beCloseTo(self._expected, within: self._delta).matches(expr, failureMessage: failureMessage)
+        let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beCloseTo(self._expected, within: self._delta)))
+        return matcher.matches(expr, failureMessage: failureMessage)
+    }
+
+    public func doesNotMatch(actualExpression: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        let actualBlock: () -> NMBDoubleConvertible? = ({
+            return actualExpression() as? NMBDoubleConvertible
+        })
+        let expr = Expression(expression: actualBlock, location: location)
+        let matcher = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(beCloseTo(self._expected, within: self._delta)))
+        return matcher.doesNotMatch(expr, failureMessage: failureMessage)
     }
 
     public var within: (CDouble) -> NMBObjCBeCloseToMatcher {
@@ -53,8 +71,8 @@ extension NMBObjCMatcher {
     }
 }
 
-public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta) -> MatcherFunc<[Double]> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta) -> NonNilMatcherFunc <[Double]> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = actualExpression.evaluate() {
             if actual.count != expectedValues.count {

@@ -15,10 +15,16 @@ class EndWithTest: XCTestCase {
 
         expect(NSArray(array: ["a", "b"])).to(endWith("b"))
         expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
-        expect(nil as NSArray?).toNot(endWith("a"))
     }
 
     func testEndWithNegatives() {
+        failsWithErrorMessageForNil("expected to end with <2>, got <nil>") {
+            expect(nil as [Int]?).to(endWith(2))
+        }
+        failsWithErrorMessageForNil("expected to not end with <2>, got <nil>") {
+            expect(nil as [Int]?).toNot(endWith(2))
+        }
+
         failsWithErrorMessage("expected to end with <2>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(endWith(2))
         }
