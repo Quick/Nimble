@@ -90,15 +90,19 @@ public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDe
     }
 }
 
-public func ~=(lhs: Expectation<[Double]>, rhs: [Double]) {
+// MARK: - Operators
+
+infix operator ≈ {}
+
+public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ~=(lhs: Expectation<Double>, rhs: Double) {
+public func ≈(lhs: Expectation<Double>, rhs: Double) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ~=(lhs: Expectation<Double>, rhs: (expected: Double, delta: Double)) {
+public func ≈(lhs: Expectation<Double>, rhs: (expected: Double, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 

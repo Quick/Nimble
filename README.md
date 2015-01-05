@@ -496,28 +496,29 @@ There is also an operator shortcut available in Swift:
 ```swift
 // Swift
 
-expect(actual) ~= expected
-expect(actual) ~= (expected, delta)
+expect(actual) ≈ expected
+expect(actual) ≈ (expected, delta)
 
 ```
+(Type Option-x to get ≈ on a U.S. keyboard)
 
 The former version uses the default delta of 0.0001. Here is yet another way to do this:
 
 ```swift
 // Swift
 
-expect(actual) ~= expected ± delta
+expect(actual) ≈ expected ± delta
 expect(actual) == expected ± delta
 
 ```
-(Type Option-Shift-= to get ±)
+(Type Option-Shift-= to get ± on a U.S. keyboard)
 
 If you are comparing arrays of floating point numbers, you'll find the following useful:
 
 ```swift
 // Swift
 
-expect([0.0, 2.0]) ~= [0.0001, 2.0001]
+expect([0.0, 2.0]) ≈ [0.0001, 2.0001]
 expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 
 ```
