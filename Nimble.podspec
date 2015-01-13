@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "Nimble"
+  s.name         = "NimbleMatcher"
   s.version      = "0.2.0"
   s.summary      = "A Matcher Framework for Swift and Objective-C"
   s.description  = <<-DESC
