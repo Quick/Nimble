@@ -7,11 +7,12 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/Quick/Nimble"
   s.license      = { :type => "Apache 2.0", :file => "LICENSE.md" }
-  s.author             = "Quick Contributors"
+  s.author       = "Quick Contributors"
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.10"
   s.source       = { :git => "https://github.com/Quick/Nimble.git", :tag => "v#{s.version}" }
 
-  s.source_files  = "Nimble", "Nimble/**/*.{swift,h,m}"
-  s.framework = "XCTest"
+  s.source_files = "Nimble", "Nimble/**/*.{swift,h,m}"
+  s.framework    = "XCTest"
+  s.requires_arc = true
 end
