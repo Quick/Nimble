@@ -64,6 +64,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beNil() {
     return [NMBObjCMatcher beNilMatcher];
 }
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_beEmpty() {
+    return [NMBObjCMatcher beEmptyMatcher];
+}
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring) {
     return [NMBObjCMatcher containMatcher:itemOrSubstring];
 }
