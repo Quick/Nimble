@@ -172,7 +172,7 @@ exception once evaluated:
 
 // Note: Swift currently doesn't have exceptions.
 //       Only Objective-C code can raise exceptions
-/        that Nimble will catch.
+//       that Nimble will catch.
 let exception = NSException(
   name: NSInternalInconsistencyException,
   reason: "Not enough fish in the sea.",
