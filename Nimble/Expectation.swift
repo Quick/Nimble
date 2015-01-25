@@ -4,7 +4,7 @@ public struct Expectation<T> {
     let expression: Expression<T>
 
     public func verify(pass: Bool, _ message: String) {
-        CurrentAssertionHandler.assert(pass, message: message, location: expression.location)
+        NimbleAssertionHandler.assert(pass, message: message, location: expression.location)
     }
 
     public func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
