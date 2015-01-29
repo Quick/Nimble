@@ -59,10 +59,21 @@ public func beEmpty() -> NonNilMatcherFunc<NMBCollection> {
 }
 
 extension NMBObjCMatcher {
-    class func beEmptyMatcher() -> NMBObjCMatcher {
+    public class func beEmptyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
-            let expr = actualExpression.cast { $0 as? NMBCollection }
-            return beEmpty().matches(expr, failureMessage: failureMessage)
+            let actualValue = actualExpression.evaluate()
+            failureMessage.postfixMessage = "be empty"
+            if let value = actualValue as? NMBCollection {
+                let expr = Expression(expression: ({ value as NMBCollection }), location: location)
+                return beEmpty().matches(expr, failureMessage: failureMessage)
+            } else if let value = actualValue as? NSString {
+                let expr = Expression(expression: ({ value as String }), location: location)
+                return beEmpty().matches(expr, failureMessage: failureMessage)
+            } else if let actualValue = actualValue {
+                failureMessage.postfixMessage = "be empty (only works for NSArrays, NSSets, NSDictionaries, NSHashTables, and NSStrings)"
+                failureMessage.actualValue = "\(NSStringFromClass(actualValue.dynamicType)) type"
+            }
+            return false
         }
     }
 }
