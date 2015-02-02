@@ -16,7 +16,6 @@ public struct Expression<T> {
     internal let _expression: (Bool) -> T?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
-    public var cache: T?
 
     public init(expression: () -> T?, location: SourceLocation) {
         self._expression = memoizedClosure(expression)
