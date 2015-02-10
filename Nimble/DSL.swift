@@ -3,7 +3,8 @@ public func expect<T>(expression:  () -> T?, file: String = __FILE__, line: UInt
     return Expectation(
         expression: Expression(
             expression: expression,
-            location: SourceLocation(file: file, line: line)))
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
 }
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
@@ -11,7 +12,8 @@ public func expect<T>(value: T?, file: String = __FILE__, line: UInt = __LINE__)
     return Expectation(
         expression: Expression(
             expression: { value },
-            location: SourceLocation(file: file, line: line)))
+            location: SourceLocation(file: file, line: line),
+            isClosure: false))
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
@@ -19,7 +21,8 @@ public func expect<T>(file: String = __FILE__, line: UInt = __LINE__, expression
     return Expectation(
         expression: Expression(
             expression: expression,
-            location: SourceLocation(file: file, line: line)))
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
 }
 
 /// Always fails the test with a message and a specified location.

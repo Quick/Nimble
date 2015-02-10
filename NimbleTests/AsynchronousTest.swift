@@ -2,20 +2,25 @@ import XCTest
 import Nimble
 
 class AsyncTest: XCTestCase {
+    func testAsyncWithValue() {
+        failsWithErrorMessage("expect(...).toEventually(...) requires an explicit closure (eg - expect { ... }.toEventually(...) )\nSwift 1.2 @autoclosure behavior has changed in an incompatible way for Nimble to function") {
+            expect(0).toEventually(equal(1))
+        }
+    }
 
     func testAsyncPolling() {
         var value = 0
         deferToMainQueue { value = 1 }
-        expect{value}.toEventually(equal(1))
+        expect { value }.toEventually(equal(1))
 
         deferToMainQueue { value = 0 }
-        expect{value}.toEventuallyNot(equal(1))
+        expect { value }.toEventuallyNot(equal(1))
 
         failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {
-            expect(value).toEventuallyNot(equal(0))
+            expect { value }.toEventuallyNot(equal(0))
         }
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
-            expect(value).toEventually(equal(1))
+            expect { value }.toEventually(equal(1))
         }
     }
 

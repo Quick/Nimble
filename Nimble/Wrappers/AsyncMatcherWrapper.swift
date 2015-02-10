@@ -34,25 +34,36 @@ struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     }
 }
 
+private let toEventuallyRequiresClosureError = "expect(...).toEventually(...) requires an explicit closure (eg - expect { ... }.toEventually(...) )\nSwift 1.2 @autoclosure behavior has changed in an incompatible way for Nimble to function"
+
+
 extension Expectation {
     public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
-        to(AsyncMatcherWrapper(
-            fullMatcher: FullMatcherWrapper(
-                matcher: matcher,
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeoutInterval: timeout,
-            pollInterval: pollInterval))
+        if expression.isClosure {
+            to(AsyncMatcherWrapper(
+                fullMatcher: FullMatcherWrapper(
+                    matcher: matcher,
+                    to: "to eventually",
+                    toNot: "to eventually not"),
+                timeoutInterval: timeout,
+                pollInterval: pollInterval))
+        } else {
+            verify(false, toEventuallyRequiresClosureError)
+        }
     }
 
     public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
-        toNot(AsyncMatcherWrapper(
-            fullMatcher: FullMatcherWrapper(
-                matcher: matcher,
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeoutInterval: timeout,
-            pollInterval: pollInterval))
+        if expression.isClosure {
+            toNot(AsyncMatcherWrapper(
+                fullMatcher: FullMatcherWrapper(
+                    matcher: matcher,
+                    to: "to eventually",
+                    toNot: "to eventually not"),
+                timeoutInterval: timeout,
+                pollInterval: pollInterval))
+        } else {
+            verify(false, toEventuallyRequiresClosureError)
+        }
     }
 
     public func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
