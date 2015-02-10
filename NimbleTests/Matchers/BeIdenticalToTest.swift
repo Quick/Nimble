@@ -15,7 +15,7 @@ class BeIdenticalToTest: XCTestCase {
         let num1 = NSNumber(integer:1)
         let num2 = NSNumber(integer:2)
         let message = NSString(format: "expected to be identical to <%p>, got <%p>", num2, num1)
-        failsWithErrorMessage(message) {
+        failsWithErrorMessage(message.description) {
             expect(num1).to(beIdenticalTo(num2))
         }
     }
@@ -24,7 +24,7 @@ class BeIdenticalToTest: XCTestCase {
         let value1 = NSArray(array: [])
         let value2 = NSArray(array: [])
         let message = NSString(format: "expected to not be identical to <%p>, got <%p>", value2, value1)
-        failsWithErrorMessage(message) {
+        failsWithErrorMessage(message.description) {
             expect(value1).toNot(beIdenticalTo(value2))
         }
     }

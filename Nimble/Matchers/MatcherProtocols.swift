@@ -82,11 +82,11 @@ extension NSDecimalNumber : NMBDoubleConvertible { } // TODO: not the best to do
 }
 extension NSNumber : NMBComparable {
     public func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
-        return compare(otherObject as NSNumber)
+        return compare(otherObject as! NSNumber)
     }
 }
 extension NSString : NMBComparable {
     public func NMB_compare(otherObject: NMBComparable!) -> NSComparisonResult {
-        return compare(otherObject as NSString)
+        return compare(otherObject as! String)
     }
 }
