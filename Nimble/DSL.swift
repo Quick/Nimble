@@ -1,5 +1,5 @@
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-public func expect<T>(expression:  () -> T?, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
+public func expect<T>(expression: () -> T?, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -7,7 +7,6 @@ public func expect<T>(expression:  () -> T?, file: String = __FILE__, line: UInt
             isClosure: true))
 }
 
-/// Make an expectation on a given actual value. The value given is lazily evaluated.
 public func expect<T>(value: T?, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
         expression: Expression(
