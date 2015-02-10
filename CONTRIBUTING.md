@@ -13,7 +13,7 @@
 
 # Welcome to Nimble!
 
-We're building a BDD framework for a new generation of Swift and
+We're building a testing framework for a new generation of Swift and
 Objective-C developers.
 
 Nimble should be easy to use and easy to maintain. Let's keep things
@@ -52,6 +52,10 @@ it.
   the latest of OS X and iOS.
 - If you've added a file to the project, make sure it's included in both
   the OS X and iOS targets.
+- To make minor updates to old versions of Nimble that support Swift
+  1.1, issue a pull request against the `swift-1.1` branch. The master
+  branch supports Swift 1.2. Travis CI will only pass for pull requests
+  issued against the `swift-1.1` branch.
 
 ### Style Conventions
 

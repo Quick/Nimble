@@ -90,12 +90,12 @@ NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {
 
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock nmb_wait_until_timeout_builder(NSString *file, NSUInteger line) {
     return ^(NSTimeInterval timeout, void (^action)(void (^)(void))) {
-        [NMBWait untilTimeout:timeout action:action file:file line:line];
+        [NMBWait untilTimeout:timeout file:file line:line action:action];
     };
 }
 
 NIMBLE_EXPORT NMBWaitUntilBlock nmb_wait_until_builder(NSString *file, NSUInteger line) {
   return ^(void (^action)(void (^)(void))) {
-    [NMBWait until:action file:file line:line];
+    [NMBWait untilFile:file line:line action:action];
   };
 }
