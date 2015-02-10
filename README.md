@@ -1,6 +1,6 @@
 # Nimble
 
-[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=master)](https://travis-ci.org/Quick/Nimble)
+[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=swift-1.1)](https://travis-ci.org/Quick/Nimble)
 
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
@@ -972,7 +972,9 @@ extension NMBObjCMatcher {
   README](https://github.com/Quick/Quick#how-to-install-quick).
 
 Nimble can currently be installed in one of two ways: using a pre-release 
-version of CocoaPods, or with git submodules. 
+version of CocoaPods, or with git submodules. The master branch of
+Nimble supports Swift 1.2. For Swift 1.1 support, use the `swift-1.1`
+branch.
 
 ## Installing Nimble as a Submodule
 
@@ -980,7 +982,7 @@ To use Nimble as a submodule to test your iOS or OS X applications, follow these
 4 easy steps:
 
 1. Clone the Nimble repository
-2. Add Nimble.xcodeproj to your test target
+2. Add Nimble.xcodeproj to the Xcode workspace for your project
 3. Link Nimble.framework to your test target
 4. Start writing expectations!
 
