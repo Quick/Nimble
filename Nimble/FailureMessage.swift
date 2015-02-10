@@ -16,7 +16,7 @@ public class FailureMessage {
         if let actualValue = actualValue {
             value = "\(expected) \(to) \(postfixMessage), got \(actualValue)\(postfixActual)"
         }
-        var lines: [String] = (value as NSString).componentsSeparatedByString("\n") as [String]
+        var lines: [String] = (value as NSString).componentsSeparatedByString("\n") as! [String]
         let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
         lines = lines.map { line in line.stringByTrimmingCharactersInSet(whitespace) }
         return "".join(lines)

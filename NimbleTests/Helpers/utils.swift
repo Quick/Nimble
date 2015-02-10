@@ -2,7 +2,7 @@ import Foundation
 import Nimble
 import XCTest
 
-func failsWithErrorMessage(message: String, closure: () -> Void, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false) {
+func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     var filePath = file
     var lineNumber = line
 
@@ -32,8 +32,8 @@ func failsWithErrorMessage(message: String, closure: () -> Void, file: String = 
     }
 }
 
-func failsWithErrorMessageForNil(message: String, closure: () -> Void, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false) {
-    failsWithErrorMessage("\(message) (use beNil() to match nils)", closure, file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation)
+func failsWithErrorMessageForNil(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+    failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure)
 }
 
 func deferToMainQueue(action: () -> Void) {
@@ -45,10 +45,10 @@ func deferToMainQueue(action: () -> Void) {
 
 public class NimbleHelper : NSObject {
     class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(message as String, block, file: file, line: line, preferOriginalSourceLocation: true)
+        failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, block)
     }
 
     class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessageForNil(message as String, block, file: file, line: line, preferOriginalSourceLocation: true)
+        failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, block)
     }
 }

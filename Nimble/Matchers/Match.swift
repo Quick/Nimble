@@ -20,7 +20,7 @@ extension NMBObjCMatcher {
     public class func matchMatcher(expected: NSString) -> NMBMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
             let actual = actualExpression.cast { $0 as? String }
-            return match(expected).matches(actual, failureMessage: failureMessage)
+            return match(expected.description).matches(actual, failureMessage: failureMessage)
         }
     }
 }
