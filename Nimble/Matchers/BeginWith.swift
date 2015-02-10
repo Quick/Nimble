@@ -43,7 +43,7 @@ extension NMBObjCMatcher {
             let actual = actualExpression.evaluate()
             if let actualString = actual as? String {
                 let expr = actualExpression.cast { $0 as? String }
-                return beginWith(expected as String).matches(expr, failureMessage: failureMessage)
+                return beginWith(expected as! String).matches(expr, failureMessage: failureMessage)
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
                 return beginWith(expected).matches(expr, failureMessage: failureMessage)

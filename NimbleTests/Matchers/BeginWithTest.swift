@@ -10,8 +10,8 @@ class BeginWithTest: XCTestCase {
         expect("foobar").to(beginWith("foo"))
         expect("foobar").toNot(beginWith("oo"))
 
-        expect(NSString(string: "foobar")).to(beginWith("foo"))
-        expect(NSString(string: "foobar")).toNot(beginWith("oo"))
+        expect(NSString(string: "foobar").description).to(beginWith("foo"))
+        expect(NSString(string: "foobar").description).toNot(beginWith("oo"))
 
         expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
         expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
