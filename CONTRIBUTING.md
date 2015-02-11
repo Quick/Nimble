@@ -90,3 +90,14 @@ some "ground rules":
   issues or pull requests submitted to the project. Please provide kind,
   constructive feedback. Please don't be sarcastic or snarky.
 
+### Creating a Release
+
+The process is relatively straight forward, but here's is a useful checklist for tagging:
+
+- Bump the version in `Nimble.podspec` (update, commit, push to github)
+- Look a changes from the previously tagged release and write release notes: `git log v0.4.0....HEAD`
+- Tag the version: `git tag -s vA.B.C -F release-notes-file`
+- Push the tag: `git push origin master --tags`
+- Push the podspec file to trunk: `pod trunk push Nimble.podspec`
+- Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
+- Announce!
