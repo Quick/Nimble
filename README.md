@@ -177,14 +177,14 @@ let exception = NSException(
   name: NSInternalInconsistencyException,
   reason: "Not enough fish in the sea.",
   userInfo: ["something": "is fishy"])
-expect(exception.raise()).to(raiseException())
+expect { exception.raise() }.to(raiseException())
 
 // Also, you can customize raiseException to be more specific
-expect{ exception.raise() }.to(raiseException(named: NSInternalInconsistencyException))
-expect{ exception.raise() }.to(raiseException(
+expect { exception.raise() }.to(raiseException(named: NSInternalInconsistencyException))
+expect { exception.raise() }.to(raiseException(
     named: NSInternalInconsistencyException,
     reason: "Not enough fish in the sea"))
-expect{ exception.raise() }.to(raiseException(
+expect { exception.raise() }.to(raiseException(
     named: NSInternalInconsistencyException,
     reason: "Not enough fish in the sea",
     userInfo: ["something": "is fishy"]))
@@ -211,16 +211,6 @@ expectAction([exception raise]).to(raiseException().
     named(NSInternalInconsistencyException).
     reason("Not enough fish in the sea").
     userInfo(@{@"something": @"is fishy"}));
-```
-
-In Swift, the `expect` function can also take a trailing closure:
-
-```swift
-// Swift
-
-expect {
-  exception.raise()
-}.to(raiseException(named: NSInternalInconsistencyException))
 ```
 
 ## C Primitives
