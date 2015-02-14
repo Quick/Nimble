@@ -50,6 +50,35 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
     }
 }
 
+/// A Nimble matcher that succeeds when the actual set is equal to the expected set.
+public func equal<T>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+
+        if let expectedValue = expectedValue {
+            if let actualValue = actualExpression.evaluate() {
+                if expectedValue == actualValue {
+                    return true
+                }
+
+                let missing = expectedValue.subtract(actualValue)
+                if missing.count > 0 {
+                    failureMessage.postfixActual += ", missing <\(stringify(missing))>"
+                }
+
+                let extra = actualValue.subtract(expectedValue)
+                if extra.count > 0 {
+                    failureMessage.postfixActual += ", extra <\(stringify(extra))>"
+                }
+            }
+        } else {
+            failureMessage.postfixActual = " (use beNil() to match nils)"
+        }
+
+        return false
+    }
+}
+
 public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.to(equal(rhs))
 }
