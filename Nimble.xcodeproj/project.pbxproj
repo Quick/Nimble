@@ -107,8 +107,8 @@
 		1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
 		1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
-		1FD8CD321968AB07008ED995 /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* XCTestHandler.swift */; };
-		1FD8CD331968AB07008ED995 /* XCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* XCTestHandler.swift */; };
+		1FD8CD321968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */; };
+		1FD8CD331968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */; };
 		1FD8CD341968AB07008ED995 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD081968AB07008ED995 /* DSL.swift */; };
 		1FD8CD351968AB07008ED995 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD081968AB07008ED995 /* DSL.swift */; };
 		1FD8CD361968AB07008ED995 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD091968AB07008ED995 /* Expectation.swift */; };
@@ -293,7 +293,7 @@
 		1FD48C381A0B4B9300268394 /* NonNilMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonNilMatcherWrapper.swift; sourceTree = "<group>"; };
 		1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
-		1FD8CD071968AB07008ED995 /* XCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestHandler.swift; sourceTree = "<group>"; };
+		1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleXCTestHandler.swift; sourceTree = "<group>"; };
 		1FD8CD081968AB07008ED995 /* DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		1FD8CD091968AB07008ED995 /* Expectation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		1FD8CD0A1968AB07008ED995 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
@@ -477,7 +477,7 @@
 			children = (
 				1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */,
 				1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */,
-				1FD8CD071968AB07008ED995 /* XCTestHandler.swift */,
+				1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -762,7 +762,7 @@
 				1FD8CD741968AB07008ED995 /* MatcherFunc.swift in Sources */,
 				1FD48C391A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */,
 				1FD8CD361968AB07008ED995 /* Expectation.swift in Sources */,
-				1FD8CD321968AB07008ED995 /* XCTestHandler.swift in Sources */,
+				1FD8CD321968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */,
 				1F43728F1A1B344000EB80F8 /* Stringers.swift in Sources */,
 				1F43728D1A1B343D00EB80F8 /* SourceLocation.swift in Sources */,
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
@@ -857,7 +857,7 @@
 				1FD8CD751968AB07008ED995 /* MatcherFunc.swift in Sources */,
 				1FD48C3A1A0B4B9300268394 /* NonNilMatcherWrapper.swift in Sources */,
 				1FD8CD371968AB07008ED995 /* Expectation.swift in Sources */,
-				1FD8CD331968AB07008ED995 /* XCTestHandler.swift in Sources */,
+				1FD8CD331968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */,
 				1F43728E1A1B343F00EB80F8 /* Stringers.swift in Sources */,
 				1F43728C1A1B343C00EB80F8 /* SourceLocation.swift in Sources */,
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,

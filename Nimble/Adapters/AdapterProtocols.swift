@@ -9,5 +9,4 @@ public protocol AssertionHandler {
 /// Defaults to a private test handler that passes through to XCTest.
 ///
 /// @see AssertionHandler
-var CurrentAssertionHandler: AssertionHandler = XCTestHandler()
-
+public var NimbleAssertionHandler: AssertionHandler = NimbleXCTestHandler()

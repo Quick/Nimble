@@ -40,11 +40,11 @@ public class AssertionRecorder : AssertionHandler {
 ///
 /// @see AssertionHandler
 public func withAssertionHandler(tempAssertionHandler: AssertionHandler, closure: () -> Void) {
-    let oldRecorder = CurrentAssertionHandler
+    let oldRecorder = NimbleAssertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({
-        CurrentAssertionHandler = oldRecorder
+        NimbleAssertionHandler = oldRecorder
     }))
-    CurrentAssertionHandler = tempAssertionHandler
+    NimbleAssertionHandler = tempAssertionHandler
     capturer.tryBlock {
         closure()
     }
