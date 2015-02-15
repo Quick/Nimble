@@ -51,6 +51,14 @@ class EqualTest: XCTestCase {
         failsWithErrorMessage("expected to equal <[1, 2, 3]>, got <[2, 3, 4]>, missing <[1]>, extra <[4]>") {
             expect(Set([2, 3, 4])).to(equal(Set([1, 2, 3])))
         }
+
+        failsWithErrorMessage("expected to equal <[1, 2, 3]>, got <[2, 3, 4]>, missing <[1]>, extra <[4]>") {
+            expect(Set([2, 3, 4])) == Set([1, 2, 3])
+        }
+
+        failsWithErrorMessage("expected to not equal <[1, 2, 3]>, got <[1, 2, 3]>") {
+            expect(Set([1, 2, 3])) != Set([1, 2, 3])
+        }
     }
 
     func testDoesNotMatchNils() {
