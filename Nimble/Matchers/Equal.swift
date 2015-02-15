@@ -50,6 +50,52 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
     }
 }
 
+/// A Nimble matcher that succeeds when the actual set is equal to the expected set.
+public func equal<T>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
+    return equal(expectedValue, stringify: stringify)
+}
+
+/// A Nimble matcher that succeeds when the actual set is equal to the expected set.
+public func equal<T: Comparable>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
+    return equal(expectedValue, stringify: {
+        if let set = $0 {
+            return stringify(Array(set).sorted { $0 < $1 })
+        } else {
+            return "nil"
+        }
+    })
+}
+
+private func equal<T>(expectedValue: Set<T>?, #stringify: Set<T>? -> String) -> NonNilMatcherFunc<Set<T>> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+
+        if let expectedValue = expectedValue {
+            if let actualValue = actualExpression.evaluate() {
+                failureMessage.actualValue = "<\(stringify(actualValue))>"
+
+                if expectedValue == actualValue {
+                    return true
+                }
+
+                let missing = expectedValue.subtract(actualValue)
+                if missing.count > 0 {
+                    failureMessage.postfixActual += ", missing <\(stringify(missing))>"
+                }
+
+                let extra = actualValue.subtract(expectedValue)
+                if extra.count > 0 {
+                    failureMessage.postfixActual += ", extra <\(stringify(extra))>"
+                }
+            }
+        } else {
+            failureMessage.postfixActual = " (use beNil() to match nils)"
+        }
+
+        return false
+    }
+}
+
 public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.to(equal(rhs))
 }
@@ -63,6 +109,22 @@ public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
 }
 
 public func !=<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
+    lhs.toNot(equal(rhs))
+}
+
+public func ==<T>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+    lhs.to(equal(rhs))
+}
+
+public func !=<T>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+    lhs.toNot(equal(rhs))
+}
+
+public func ==<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+    lhs.to(equal(rhs))
+}
+
+public func !=<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
     lhs.toNot(equal(rhs))
 }
 
