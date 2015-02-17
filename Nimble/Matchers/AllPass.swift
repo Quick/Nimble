@@ -49,25 +49,16 @@ extension NMBObjCMatcher {
             var nsObjects = [NSObject]()
             failureMessage.postfixMessage =
               "allPass can only works with NSArrays and NSSets of NSObjects"
-
-            if let value = actualValue as? NSArray {
-                for obj in value {
+            
+            if let value = actualValue as? NSFastEnumeration {
+                let generator = NSFastGenerator(value)
+                while let obj:AnyObject = generator.next() {
                     if let nsObject = obj as? NSObject {
                         nsObjects.append(nsObject)
                     } else {
                         return false
                     }
                 }
-            } else if let value = actualValue as? NSSet {
-                for obj in value {
-                    if let nsObject = obj as? NSObject {
-                        nsObjects.append(nsObject)
-                    } else {
-                        return false
-                    }
-                }
-            } else {
-                return false
             }
             
             let expr = Expression(expression: ({ nsObjects }), location: location)
