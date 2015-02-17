@@ -96,6 +96,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> match(id expectedValue),
              NMB_match(expectedValue));
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id matcher);
+NIMBLE_SHORT(id<NMBMatcher> allPass(id matcher),
+             NMB_allPass(matcher));
+
 // In order to preserve breakpoint behavior despite using macros to fill in __FILE__ and __LINE__,
 // define a builder that populates __FILE__ and __LINE__, and returns a block that takes timeout
 // and action arguments. See https://github.com/Quick/Quick/pull/185 for details.

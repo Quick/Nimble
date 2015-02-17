@@ -758,6 +758,29 @@ expect(actual).to(beEmpty());
 expect(actual).to(match(expected))
 ```
 
+## Checking if all elements of a collection pass a condition
+
+```swift
+// Swift
+
+// with a custom function:
+expect([1,2,3,4]).to(allPass({$0 < 5}))
+
+// with another matcher:
+expect([1,2,3,4]).to(allPass(beLessThan(5)))
+```
+
+```objc
+// Objective-C
+
+expect(@[@1, @2, @3,@4]).to(allPass(beLessThan(@5)));
+```
+
+For Swift the actual value has to be a SequenceType, e.g. an array, a set or a custom seqence type.
+
+For Objective-C the actual value has to be a NSArray or NSSet of NSObjects and only the variant which
+uses another matcher is available here.
+
 # Writing Your Own Matchers
 
 In Nimble, matchers are Swift functions that take an expected
