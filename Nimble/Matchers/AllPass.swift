@@ -47,19 +47,27 @@ extension NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
             let actualValue = actualExpression.evaluate()
             var nsObjects = [NSObject]()
-            failureMessage.postfixMessage =
-              "allPass only works with NSArrays and NSSets of NSObjects"
             
+            var collectionIsUsable = true
             if let value = actualValue as? NSFastEnumeration {
                 let generator = NSFastGenerator(value)
                 while let obj:AnyObject = generator.next() {
                     if let nsObject = obj as? NSObject {
                         nsObjects.append(nsObject)
                     } else {
-                        return false
+                        collectionIsUsable = false
+                        break
                     }
                 }
             } else {
+                collectionIsUsable = false
+            }
+            
+            if !collectionIsUsable {
+                failureMessage.postfixMessage =
+                  "allPass only works with NSFastEnumeration (NSArray, NSSet, ...) of NSObjects"
+                failureMessage.expected = ""
+                failureMessage.to = ""
                 return false
             }
             
