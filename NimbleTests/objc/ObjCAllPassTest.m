@@ -26,5 +26,8 @@
     expectFailureMessage(@"expected to not all be less than <5.0000>", ^{
         expect([NSSet setWithArray:@[@1, @2, @3,@4]]).toNot(allPass(beLessThan(@5)));
     });
+    expectFailureMessage(@"expected to allPass only works with NSArrays and NSSets of NSObjects, got <3.0000>", ^{
+        expect(@3).to(allPass(beLessThan(@5)));
+    });
 }
 @end
