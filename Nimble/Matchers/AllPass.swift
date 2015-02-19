@@ -35,8 +35,11 @@ private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element
                         return false
                     }
                 }
+                failureMessage.postfixMessage = "all \(failureMessage.postfixMessage)"
+            } else {
+                failureMessage.postfixMessage = "all pass (use beNil() to match nils)"
+                return false
             }
-            failureMessage.postfixMessage = "all \(failureMessage.postfixMessage)"
             
             return true
         }

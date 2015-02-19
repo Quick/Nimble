@@ -46,4 +46,10 @@ class AllPassTest: XCTestCase {
             expect(Set([1,2,3,4])).toNot(allPass("be something", {$0 < 5}))
         }
     }
+    
+    func testAllPassWithNilAsExpectedValue() {
+        failsWithErrorMessageForNil("expected to all pass") {
+            expect(nil as [Int]?).to(allPass(beLessThan(5)))
+        }
+    }
 }
