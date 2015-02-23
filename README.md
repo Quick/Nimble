@@ -629,6 +629,16 @@ expect(actual).to(raiseException(named: name))
 
 // Passes if actual raises an exception with the given name and reason:
 expect(actual).to(raiseException(named: name, reason: reason))
+
+// Passes if actual raises an exception with a name equal "a name"
+expect(actual).to(raiseException(named: equal("a name")))
+
+// Passes if actual raises an exception with a reason that begins with "a r"
+expect(actual).to(raiseException(reason: beginWith("a r")))
+
+// Passes if actual raises an exception with a name equal "a name"
+// and a reason that begins with "a r"
+expect(actual).to(raiseException(named: equal("a name"), reason: beginWith("a r")))
 ```
 
 ```objc
@@ -636,12 +646,26 @@ expect(actual).to(raiseException(named: name, reason: reason))
 
 // Passes if actual, when evaluated, raises an exception:
 expect(actual).to(raiseException())
+
+// Passes if actual raises an exception with the given name
+expect(actual).to(raiseException().named(name))
+
+// Passes if actual raises an exception with the given name and reason:
+expect(actual).to(raiseException().named(name).reason(reason))
+
+// Passes if actual raises an exception with a name equal "a name"
+expect(actual).to(raiseException().withName(equal("a name")))
+
+// Passes if actual raises an exception with a reason that begins with "a r"
+expect(actual).to(raiseException().withName(withReason(beginWith(@"a r")))
+
+// Passes if actual raises an exception with a name equal "a name"
+// and a reason that begins with "a r"
+expect(actual).to(raiseException().withName(equal("a name")).withReason(beginWith(@"a r")))
 ```
 
 Note: Swift currently doesn't have exceptions. Only Objective-C code can raise
 exceptions that Nimble will catch.
-
-> Sorry, [Nimble doesn't support matching on exception `name`, `reason`, or `userInfo` yet](https://github.com/Quick/Nimble/issues/26).
 
 ## Collection Membership
 
