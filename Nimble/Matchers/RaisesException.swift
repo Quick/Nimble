@@ -98,7 +98,7 @@ public func raiseException(
 /// A Nimble matcher that succeeds when the actual expression raises an exception with
 /// the specified name, reason, and userInfo.
 public func raiseException(#named: String, #reason: String, #userInfo: NSDictionary) -> MatcherFunc<Any> {
-    return raiseException(named: equal(named), reason: equal(reason), userInfo:equal(userInfo))
+    return raiseException(named: equal(named), reason: equal(reason), userInfo: equal(userInfo))
 }
 
 /// A Nimble matcher that succeeds when the actual expression raises an exception with
