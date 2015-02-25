@@ -35,6 +35,25 @@ class AllPassTest: XCTestCase {
         }
     }
     
+    func testAllPassCollectionsWithOptionalsDontWork() {
+        failsWithErrorMessage("expected to all be nil, but failed first at element <nil> in <[nil, nil, nil]>") {
+            expect([nil, nil, nil] as [Int?]).to(allPass(beNil()))
+        }
+        failsWithErrorMessage("expected to all pass a condition, but failed first at element <nil> in <[nil, nil, nil]>") {
+            expect([nil, nil, nil] as [Int?]).to(allPass({$0 == nil}))
+        }
+    }
+    
+    func testAllPassCollectionsWithOptionalsUnwrappingOneOptionalLayer() {
+        expect([nil, nil, nil] as [Int?]).to(allPass({$0! == nil}))
+        expect([nil, 1, nil] as [Int?]).toNot(allPass({$0! == nil}))
+        expect([1, 1, 1] as [Int?]).to(allPass({$0! == 1}))
+        expect([1, 1, nil] as [Int?]).toNot(allPass({$0! == 1}))
+        expect([1, 2, 3] as [Int?]).to(allPass({$0! < 4}))
+        expect([1, 2, 3] as [Int?]).toNot(allPass({$0! < 3}))
+        expect([1, 2, nil] as [Int?]).to(allPass({$0! < 3}))
+    }
+    
     func testAllPassSet() {
         expect(Set([1,2,3,4])).to(allPass({$0 < 5}))
         expect(Set([1,2,3,4])).toNot(allPass({$0 > 5}))

@@ -20,6 +20,17 @@ public func allPass<U,V where U: SequenceType, V: NonNilBasicMatcher, U.Generato
         return createAllPassMatcher() {wrapper.matches($0, failureMessage: $1)}
 }
 
+public func allPass<U,V where U: SequenceType, V: BasicMatcher, U.Generator.Element == V.ValueType>
+    (matcher: V) -> NonNilMatcherFunc<U> {
+        let wrapper = BasicMatcherWrapper(matcher: matcher)
+        return createAllPassMatcher() {wrapper.matches($0, failureMessage: $1)}
+}
+
+public func allPass<U,V where U: SequenceType, V: Matcher, U.Generator.Element == V.ValueType>
+    (matcher: V) -> NonNilMatcherFunc<U> {
+        return createAllPassMatcher() {matcher.matches($0, failureMessage: $1)}
+}
+
 private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element == T>
     (elementEvaluator:(Expression<T>, FailureMessage) -> Bool) -> NonNilMatcherFunc<U> {
         return NonNilMatcherFunc { actualExpression, failureMessage in
