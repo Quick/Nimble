@@ -9,7 +9,7 @@ class BeNilTest: XCTestCase {
     func testBeNil() {
         expect(nil as Int?).to(beNil())
         expect(1 as Int?).toNot(beNil())
-        expect(producesNil()).to(beNil())
+        expect(self.producesNil()).to(beNil())
 
         failsWithErrorMessage("expected to not be nil, got <nil>") {
             expect(nil as Int?).toNot(beNil())
