@@ -1,17 +1,17 @@
 import XCTest
 import Nimble
 
-class BeIdenticalToObjectTest:XCTestCase {
+class BeIdenticalToObjectTest: XCTestCase {
     private class BeIdenticalToObjectTester {}
     private let testObjectA = BeIdenticalToObjectTester()
     private let testObjectB = BeIdenticalToObjectTester()
 
     func testBeIdenticalToPositive() {
-        expect(testObjectA).to(beIdenticalTo(testObjectA))
+        expect(self.testObjectA).to(beIdenticalTo(testObjectA))
     }
     
     func testBeIdenticalToNegative() {
-        expect(testObjectA).toNot(beIdenticalTo(testObjectB))
+        expect(self.testObjectA).toNot(beIdenticalTo(testObjectB))
     }
     
     func testBeIdenticalToPositiveMessage() {
@@ -45,8 +45,8 @@ class BeIdenticalToObjectTest:XCTestCase {
     }
     
     func testOperators() {
-        expect(testObjectA) === testObjectA
-        expect(testObjectA) !== testObjectB
+        expect(self.testObjectA) === testObjectA
+        expect(self.testObjectA) !== testObjectB
     }
 
 }
