@@ -2,8 +2,8 @@ import Foundation
 
 struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
-    let timeoutInterval: NSTimeInterval = 1
-    let pollInterval: NSTimeInterval = 0.01
+    let timeoutInterval: NSTimeInterval
+    let pollInterval: NSTimeInterval
 
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
