@@ -40,6 +40,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
   - [Strings](#strings)
+  - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -781,6 +782,29 @@ expect(actual).to(beEmpty());
 // Passes if actual matches the regular expression defined in expected:
 expect(actual).to(match(expected))
 ```
+
+## Checking if all elements of a collection pass a condition
+
+```swift
+// Swift
+
+// with a custom function:
+expect([1,2,3,4]).to(allPass({$0 < 5}))
+
+// with another matcher:
+expect([1,2,3,4]).to(allPass(beLessThan(5)))
+```
+
+```objc
+// Objective-C
+
+expect(@[@1, @2, @3,@4]).to(allPass(beLessThan(@5)));
+```
+
+For Swift the actual value has to be a SequenceType, e.g. an array, a set or a custom seqence type.
+
+For Objective-C the actual value has to be a NSFastEnumeration, e.g. NSArray and NSSet, of NSObjects and only the variant which
+uses another matcher is available here.
 
 # Writing Your Own Matchers
 

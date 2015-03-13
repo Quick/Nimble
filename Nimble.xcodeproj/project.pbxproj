@@ -171,12 +171,18 @@
 		1FD8CD771968AB07008ED995 /* ObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD2D1968AB07008ED995 /* ObjCMatcher.swift */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
+		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
+		DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
 		DD9A9A8F19CF439B00706F49 /* BeIdenticalToObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */; };
 		DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */; };
+		DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB1BC781A92235600F743C3 /* AllPass.swift */; };
+		DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB1BC781A92235600F743C3 /* AllPass.swift */; };
 		DDB4D5ED19FE43C200E9D9FE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EC19FE43C200E9D9FE /* Match.swift */; };
 		DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EC19FE43C200E9D9FE /* Match.swift */; };
 		DDB4D5F019FE442800E9D9FE /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
 		DDB4D5F119FE442800E9D9FE /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
+		DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
+		DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -330,9 +336,12 @@
 		1FFD729B1963FCAB00CD29A2 /* NimbleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		1FFD729C1963FCAB00CD29A2 /* Nimble-OSXTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Nimble-OSXTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
+		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
+		DDB1BC781A92235600F743C3 /* AllPass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPass.swift; sourceTree = "<group>"; };
 		DDB4D5EC19FE43C200E9D9FE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
+		DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCAllPassTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +477,7 @@
 				1F299EAA19627B2D002641AF /* BeEmptyTest.swift */,
 				1F1B5AD31963E13900CA8BF9 /* BeAKindOfTest.swift */,
 				DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */,
+				DD72EC631A93874A002F7651 /* AllPassTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -503,6 +513,7 @@
 				DDB4D5EC19FE43C200E9D9FE /* Match.swift */,
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
+				DDB1BC781A92235600F743C3 /* AllPass.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -569,6 +580,7 @@
 				1F4A56991A3B3539009E1637 /* ObjCEqualTest.m */,
 				1F4A569C1A3B3565009E1637 /* ObjCMatchTest.m */,
 				1F4A569F1A3B359E009E1637 /* ObjCRaiseExceptionTest.m */,
+				DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -771,6 +783,7 @@
 				1FD8CD501968AB07008ED995 /* BeLogical.swift in Sources */,
 				1FD8CD661968AB07008ED995 /* NMBExceptionCapture.m in Sources */,
 				DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */,
+				DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3E1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				DDB4D5ED19FE43C200E9D9FE /* Match.swift in Sources */,
 				1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
@@ -834,6 +847,7 @@
 				1F925EF6195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F4A56791A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568B1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
+				DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
 				1F4A567F1A3B333F009E1637 /* ObjCBeLessThanTest.m in Sources */,
 				1F925EE6195C121200ED456B /* AsynchronousTest.swift in Sources */,
 				1F0648CC19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */,
@@ -843,6 +857,7 @@
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				1F925F05195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566D1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
+				DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */,
 				1F4A569D1A3B3565009E1637 /* ObjCMatchTest.m in Sources */,
 				1F925EE9195C124400ED456B /* BeAnInstanceOfTest.swift in Sources */,
 				1F4A566A1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */,
@@ -866,6 +881,7 @@
 				1FD8CD511968AB07008ED995 /* BeLogical.swift in Sources */,
 				1FD8CD671968AB07008ED995 /* NMBExceptionCapture.m in Sources */,
 				DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */,
+				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3F1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
@@ -929,6 +945,7 @@
 				1F925EF7195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F4A567A1A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568C1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
+				DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
 				1F4A56801A3B333F009E1637 /* ObjCBeLessThanTest.m in Sources */,
 				1F925EE7195C121200ED456B /* AsynchronousTest.swift in Sources */,
 				1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */,
@@ -938,6 +955,7 @@
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				1F925F06195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566E1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
+				DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */,
 				1F4A569E1A3B3565009E1637 /* ObjCMatchTest.m in Sources */,
 				1F925EEA195C124400ED456B /* BeAnInstanceOfTest.swift in Sources */,
 				1F4A566B1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */,
