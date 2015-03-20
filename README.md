@@ -290,7 +290,7 @@ expect(ocean).toEventually(contain("starfish"), timeout: 3)
 // Waits three seconds for ocean to contain "starfish":
 expect(ocean).withTimeout(3).toEventually(contain(@"starfish"));
 ```
-c
+
 You can also provide a callback by using the `waitUntil` function:
 
 ```swift
