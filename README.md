@@ -1050,7 +1050,7 @@ target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
 end
 ```
 
-To use Nimble with Swift 1.2, you'll currently need to use Version 0.4.0 of Nimble. To do so, change extend the line in your Podfile:
+To use Nimble with Swift 1.2, you'll currently need to use Version 0.4.0 of Nimble. To do so, extend the line in your Podfile:
 
 ```ruby
   pod 'Nimble', :git => 'git@github.com:Quick/Nimble.git', :tag => 'v0.4.0'
