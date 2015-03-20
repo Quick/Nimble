@@ -1057,4 +1057,4 @@ To use Nimble with Swift 1.2, you'll currently need to use Version 0.4.0 of Nimb
 ```
 
 
-Finally run `bundle exec pod install`. 
+Finally run `pod install`. 
