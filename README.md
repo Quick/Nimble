@@ -1035,7 +1035,7 @@ install just Nimble.
 ## Installing Nimble via CocoaPods
 
 To use Nimble in CocoaPods to test your iOS or OS X applications, update CocoaPods to Version 0.36.0.
-Then just add Nimble to your podfile and add the ```use_frameworks!``` line to enable Switf support for Cocoapods.
+Then add Nimble to your podfile and add the ```use_frameworks!``` line to enable Swift support for Cocoapods.
 
 ```ruby
 platform :ios, '8.0'
@@ -1046,15 +1046,11 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
   use_frameworks!
-  pod 'Nimble'
+  # If you're using Swift 1.2 (Xcode 6.3 beta), use this:
+  pod 'Nimble', '~> 0.4.0'
+  # Otherwise, use this commented out line for Swift 1.1 (Xcode 6.2):
+  # pod 'Nimble', '~> 0.3.0'
 end
 ```
-
-To use Nimble with Swift 1.2, you'll currently need to use Version 0.4.0 of Nimble. To do so, extend the line in your Podfile:
-
-```ruby
-  pod 'Nimble', :git => 'git@github.com:Quick/Nimble.git', :tag => 'v0.4.0'
-```
-
 
 Finally run `pod install`. 
