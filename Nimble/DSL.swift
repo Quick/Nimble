@@ -28,5 +28,5 @@ public func fail(message: String, file: String = __FILE__, line: UInt = __LINE__
 
 /// Always fails the test.
 public func fail(file: String = __FILE__, line: UInt = __LINE__) {
-    fail("fail() always fails")
+    fail("fail() always fails", file: file, line: line)
 }
