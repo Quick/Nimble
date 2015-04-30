@@ -14,20 +14,33 @@ internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMa
     }
 }
 
+func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
+    return FullMatcherFunc { actualExpression, failureMessage, isNegation in
+        let pass: Bool
+        if isNegation {
+            pass = matcher.doesNotMatch(actualExpression, failureMessage: failureMessage)
+        } else {
+            pass = matcher.matches(actualExpression, failureMessage: failureMessage)
+        }
+        postprocessor(failureMessage)
+        return pass
+    }
+}
+
 // MARK: beTrue() / beFalse()
 
 /// A Nimble matcher that succeeds when the actual value is exactly true.
 /// This matcher will not match against nils.
-public func beTrue() -> NonNilMatcherFunc<Bool> {
-    return basicMatcherWithFailureMessage(equal(true)) { failureMessage in
+public func beTrue() -> FullMatcherFunc<Bool> {
+    return matcherWithFailureMessage(equal(true)) { failureMessage in
         failureMessage.postfixMessage = "be true"
     }
 }
 
 /// A Nimble matcher that succeeds when the actual value is exactly false.
 /// This matcher will not match against nils.
-public func beFalse() -> NonNilMatcherFunc<Bool> {
-    return basicMatcherWithFailureMessage(equal(false)) { failureMessage in
+public func beFalse() -> FullMatcherFunc<Bool> {
+    return matcherWithFailureMessage(equal(false)) { failureMessage in
         failureMessage.postfixMessage = "be false"
     }
 }

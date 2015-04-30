@@ -56,9 +56,8 @@ public func raiseException(
 
             var nameFailureMessage: FailureMessage?
             if let nameMatcher = named {
-                let wrapper = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(nameMatcher))
                 nameFailureMessage = FailureMessage()
-                matches = wrapper.matches(
+                matches = nameMatcher.matches(
                     Expression(expression: { exception?.name },
                         location: location,
                         isClosure: false),
@@ -67,9 +66,8 @@ public func raiseException(
 
             var reasonFailureMessage: FailureMessage?
             if let reasonMatcher = reason {
-                let wrapper = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(reasonMatcher))
                 reasonFailureMessage = FailureMessage()
-                matches = wrapper.matches(
+                matches = reasonMatcher.matches(
                     Expression(expression: { exception?.reason },
                         location: location,
                         isClosure: false),
@@ -78,9 +76,8 @@ public func raiseException(
 
             var userInfoFailureMessage: FailureMessage?
             if let userInfoMatcher = userInfo {
-                let wrapper = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(userInfoMatcher))
                 userInfoFailureMessage = FailureMessage()
-                matches = wrapper.matches(
+                matches = userInfoMatcher.matches(
                     Expression(expression: { exception?.userInfo },
                         location: location,
                         isClosure: false),

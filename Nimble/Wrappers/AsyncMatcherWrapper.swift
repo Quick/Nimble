@@ -46,13 +46,15 @@ private let toEventuallyRequiresClosureError = "expect(...).toEventually(...) re
 extension Expectation {
     public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
         if expression.isClosure {
-            to(AsyncMatcherWrapper(
-                fullMatcher: FullMatcherWrapper(
-                    matcher: matcher,
-                    to: "to eventually",
-                    toNot: "to eventually not"),
-                timeoutInterval: timeout,
-                pollInterval: pollInterval))
+            let (pass, msg) = expectTo(
+                expression,
+                AsyncMatcherWrapper(
+                    fullMatcher: matcher,
+                    timeoutInterval: timeout,
+                    pollInterval: pollInterval),
+                "to eventually"
+            )
+            verify(pass, msg.stringValue())
         } else {
             verify(false, toEventuallyRequiresClosureError)
         }
@@ -60,55 +62,21 @@ extension Expectation {
 
     public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
         if expression.isClosure {
-            toNot(AsyncMatcherWrapper(
-                fullMatcher: FullMatcherWrapper(
-                    matcher: matcher,
-                    to: "to eventually",
-                    toNot: "to eventually not"),
-                timeoutInterval: timeout,
-                pollInterval: pollInterval))
+            let (pass, msg) = expectToNot(
+                expression,
+                AsyncMatcherWrapper(
+                    fullMatcher: matcher,
+                    timeoutInterval: timeout,
+                    pollInterval: pollInterval),
+                "to eventually not"
+            )
+            verify(pass, msg.stringValue())
         } else {
             verify(false, toEventuallyRequiresClosureError)
         }
     }
 
-    public func toEventually<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
-        toEventually(
-            FullMatcherWrapper(
-                matcher: BasicMatcherWrapper(matcher: matcher),
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeout: timeout,
-            pollInterval: pollInterval)
-    }
-
-    public func toEventuallyNot<U where U: BasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
-        toEventuallyNot(
-            FullMatcherWrapper(
-                matcher: BasicMatcherWrapper(matcher: matcher),
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeout: timeout,
-            pollInterval: pollInterval)
-    }
-
-    public func toEventually<U where U: NonNilBasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        toEventually(
-            FullMatcherWrapper(
-                matcher: NonNilMatcherWrapper(NonNilBasicMatcherWrapper(matcher)),
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeout: timeout,
-            pollInterval: pollInterval)
-    }
-
-    public func toEventuallyNot<U where U: NonNilBasicMatcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.1) {
-        toEventuallyNot(
-            FullMatcherWrapper(
-                matcher: NonNilMatcherWrapper(NonNilBasicMatcherWrapper(matcher)),
-                to: "to eventually",
-                toNot: "to eventually not"),
-            timeout: timeout,
-            pollInterval: pollInterval)
+    public func toNotEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
+        return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval)
     }
 }

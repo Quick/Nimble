@@ -14,18 +14,6 @@ public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
         }
 }
 
-public func allPass<U,V where U: SequenceType, V: NonNilBasicMatcher, U.Generator.Element == V.ValueType>
-    (matcher: V) -> NonNilMatcherFunc<U> {
-        let wrapper = NonNilMatcherWrapper(NonNilBasicMatcherWrapper(matcher))
-        return createAllPassMatcher() {wrapper.matches($0, failureMessage: $1)}
-}
-
-public func allPass<U,V where U: SequenceType, V: BasicMatcher, U.Generator.Element == V.ValueType>
-    (matcher: V) -> NonNilMatcherFunc<U> {
-        let wrapper = BasicMatcherWrapper(matcher: matcher)
-        return createAllPassMatcher() {wrapper.matches($0, failureMessage: $1)}
-}
-
 public func allPass<U,V where U: SequenceType, V: Matcher, U.Generator.Element == V.ValueType>
     (matcher: V) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {matcher.matches($0, failureMessage: $1)}
