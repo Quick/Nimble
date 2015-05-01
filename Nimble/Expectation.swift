@@ -1,6 +1,6 @@
 import Foundation
 
-func expectTo<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String) -> (Bool, FailureMessage) {
+internal func expectTo<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String) -> (Bool, FailureMessage) {
     var msg = FailureMessage()
     msg.to = to
     let pass = matcher.matches(expression, failureMessage: msg)
@@ -10,7 +10,7 @@ func expectTo<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>
     return (pass, msg)
 }
 
-func expectToNot<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, toNot: String) -> (Bool, FailureMessage) {
+internal func expectToNot<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, toNot: String) -> (Bool, FailureMessage) {
     var msg = FailureMessage()
     msg.to = toNot
     let pass = matcher.doesNotMatch(expression, failureMessage: msg)

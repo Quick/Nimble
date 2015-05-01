@@ -1,6 +1,6 @@
 import Foundation
 
-let DefaultDelta = 0.0001
+internal let DefaultDelta = 0.0001
 
 internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
