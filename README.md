@@ -1,4 +1,4 @@
-# Nimble
+t d# Nimble
 
 [![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=swift-1.1)](https://travis-ci.org/Quick/Nimble)
 
@@ -997,7 +997,7 @@ public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element ==
 
 extension NMBObjCMatcher {
     public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = actualExpression.evaluate()
             let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
             return beginWith(expected).matches(expr, failureMessage: failureMessage)

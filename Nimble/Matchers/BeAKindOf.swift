@@ -17,7 +17,7 @@ public func beAKindOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
 
 extension NMBObjCMatcher {
     public class func beAKindOfMatcher(expected: AnyClass) -> NMBMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             return beAKindOf(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }

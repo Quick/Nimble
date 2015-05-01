@@ -47,7 +47,8 @@ private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element
 
 extension NMBObjCMatcher {
     public class func allPassMatcher(matcher: NMBObjCMatcher) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+            let location = actualExpression.location
             let actualValue = actualExpression.evaluate()
             var nsObjects = [NSObject]()
             

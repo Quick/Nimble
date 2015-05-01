@@ -1,7 +1,7 @@
 import Foundation
 
-typealias MatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage, location: SourceLocation) -> Bool
-typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage, location: SourceLocation, shouldNotMatch: Bool) -> Bool
+typealias MatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool
+typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage, shouldNotMatch: Bool) -> Bool
 @objc public class NMBObjCMatcher : NMBMatcher {
     let _match: MatcherBlock
     let _doesNotMatch: MatcherBlock
@@ -18,8 +18,8 @@ typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMes
     }
 
     convenience init(canMatchNil: Bool, matcher: MatcherBlock) {
-        self.init(canMatchNil: canMatchNil, matcher: matcher, notMatcher: ({ actualExpression, failureMessage, location in
-            return !matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location)
+        self.init(canMatchNil: canMatchNil, matcher: matcher, notMatcher: ({ actualExpression, failureMessage in
+            return !matcher(actualExpression: actualExpression, failureMessage: failureMessage)
         }))
     }
 
@@ -28,10 +28,10 @@ typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMes
     }
 
     convenience init(canMatchNil: Bool, matcher: FullMatcherBlock) {
-        self.init(canMatchNil: canMatchNil, matcher: ({ actualExpression, failureMessage, location in
-            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location, shouldNotMatch: false)
-        }), notMatcher: ({ actualExpression, failureMessage, location in
-            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, location: location, shouldNotMatch: true)
+        self.init(canMatchNil: canMatchNil, matcher: ({ actualExpression, failureMessage in
+            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, shouldNotMatch: false)
+        }), notMatcher: ({ actualExpression, failureMessage in
+            return matcher(actualExpression: actualExpression, failureMessage: failureMessage, shouldNotMatch: true)
         }))
     }
 
@@ -47,8 +47,7 @@ typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMes
         let expr = Expression(expression: actualBlock, location: location)
         let result = _match(
             actualExpression: expr,
-            failureMessage: failureMessage,
-            location: location)
+            failureMessage: failureMessage)
         if self.canMatch(Expression(expression: actualBlock, location: location), failureMessage: failureMessage) {
             return result
         } else {
@@ -60,8 +59,7 @@ typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMes
         let expr = Expression(expression: actualBlock, location: location)
         let result = _doesNotMatch(
             actualExpression: expr,
-            failureMessage: failureMessage,
-            location: location)
+            failureMessage: failureMessage)
         if self.canMatch(Expression(expression: actualBlock, location: location), failureMessage: failureMessage) {
             return result
         } else {
