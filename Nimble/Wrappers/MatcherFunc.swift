@@ -1,5 +1,3 @@
-import Foundation
-
 /// A convenience API to build matchers that allow full control over
 /// to() and toNot() match cases.
 ///
@@ -7,7 +5,9 @@ import Foundation
 ///
 /// You may use this when implementing your own custom matchers.
 ///
-/// But if you want to receive matchers, use the Matcher protocol instead.
+/// Use the Matcher protocol instead of this type to accept custom matchers as
+/// input parameters.
+/// @see allPass for an example that uses accepts other matchers as input.
 public struct FullMatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage, Bool) -> Bool
 
@@ -27,12 +27,14 @@ public struct FullMatcherFunc<T>: Matcher {
 /// A convenience API to build matchers that don't need special negation
 /// behavior. The toNot() behavior is the negation of to().
 ///
-/// If you prefer to have this matcher reject nil values it receives from
-/// expectations, use NonNilMatcherFunc instead.
+/// @see NonNilMatcherFunc if you prefer to have this matcher fail when nil
+///                        values are recieved in an expectation.
 ///
 /// You may use this when implementing your own custom matchers.
 ///
-/// But if you want to receive matchers, use the Matcher protocol instead.
+/// Use the Matcher protocol instead of this type to accept custom matchers as
+/// input parameters.
+/// @see allPass for an example that uses accepts other matchers as input.
 public struct MatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) -> Bool
 
@@ -53,11 +55,13 @@ public struct MatcherFunc<T>: Matcher {
 /// behavior. The toNot() behavior is the negation of to().
 ///
 /// Unlike MatcherFunc, this will always fail if an expectation contains nil.
-/// This is regardless of using to() or toNot().
+/// This applies regardless of using to() or toNot().
 ///
 /// You may use this when implementing your own custom matchers.
 ///
-/// But if you want to receive matchers, use the Matcher protocol instead.
+/// Use the Matcher protocol instead of this type to accept custom matchers as
+/// input parameters.
+/// @see allPass for an example that uses accepts other matchers as input.
 public struct NonNilMatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) -> Bool
 
