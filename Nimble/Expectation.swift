@@ -1,6 +1,6 @@
 import Foundation
 
-internal func expectTo<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String) -> (Bool, FailureMessage) {
+internal func expressionMatches<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, #to: String) -> (Bool, FailureMessage) {
     var msg = FailureMessage()
     msg.to = to
     let pass = matcher.matches(expression, failureMessage: msg)
@@ -10,7 +10,7 @@ internal func expectTo<T, U where U: Matcher, U.ValueType == T>(expression: Expr
     return (pass, msg)
 }
 
-internal func expectToNot<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, toNot: String) -> (Bool, FailureMessage) {
+internal func expressionDoesNotMatch<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, #toNot: String) -> (Bool, FailureMessage) {
     var msg = FailureMessage()
     msg.to = toNot
     let pass = matcher.doesNotMatch(expression, failureMessage: msg)
@@ -28,12 +28,12 @@ public struct Expectation<T> {
     }
 
     public func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
-        let (pass, msg) = expectTo(expression, matcher, "to")
+        let (pass, msg) = expressionMatches(expression, matcher, to: "to")
         verify(pass, msg.stringValue())
     }
 
     public func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
-        let (pass, msg) = expectToNot(expression, matcher, "to not")
+        let (pass, msg) = expressionDoesNotMatch(expression, matcher, toNot: "to not")
         verify(pass, msg.stringValue())
     }
 

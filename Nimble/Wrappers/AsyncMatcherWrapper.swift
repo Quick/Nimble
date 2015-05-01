@@ -46,13 +46,13 @@ private let toEventuallyRequiresClosureError = "expect(...).toEventually(...) re
 extension Expectation {
     public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
         if expression.isClosure {
-            let (pass, msg) = expectTo(
+            let (pass, msg) = expressionMatches(
                 expression,
                 AsyncMatcherWrapper(
                     fullMatcher: matcher,
                     timeoutInterval: timeout,
                     pollInterval: pollInterval),
-                "to eventually"
+                to: "to eventually"
             )
             verify(pass, msg.stringValue())
         } else {
@@ -62,13 +62,13 @@ extension Expectation {
 
     public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01) {
         if expression.isClosure {
-            let (pass, msg) = expectToNot(
+            let (pass, msg) = expressionDoesNotMatch(
                 expression,
                 AsyncMatcherWrapper(
                     fullMatcher: matcher,
                     timeoutInterval: timeout,
                     pollInterval: pollInterval),
-                "to eventually not"
+                toNot: "to eventually not"
             )
             verify(pass, msg.stringValue())
         } else {
