@@ -54,7 +54,7 @@ extension Expectation {
                     pollInterval: pollInterval),
                 to: "to eventually"
             )
-            verify(pass, msg.stringValue())
+            verify(pass, msg.stringValue)
         } else {
             verify(false, toEventuallyRequiresClosureError)
         }
@@ -70,7 +70,7 @@ extension Expectation {
                     pollInterval: pollInterval),
                 toNot: "to eventually not"
             )
-            verify(pass, msg.stringValue())
+            verify(pass, msg.stringValue)
         } else {
             verify(false, toEventuallyRequiresClosureError)
         }

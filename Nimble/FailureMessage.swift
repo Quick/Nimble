@@ -8,10 +8,12 @@ public class FailureMessage {
     public var postfixMessage: String = "match"
     public var postfixActual: String = ""
 
+    internal var _stringValueOverride: String?
+
     public init() {
     }
 
-    public func stringValue() -> String {
+    internal func computeStringValue() -> String {
         var value = "\(expected) \(to) \(postfixMessage)"
         if let actualValue = actualValue {
             value = "\(expected) \(to) \(postfixMessage), got \(actualValue)\(postfixActual)"
@@ -20,5 +22,18 @@ public class FailureMessage {
         let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
         lines = lines.map { line in line.stringByTrimmingCharactersInSet(whitespace) }
         return "".join(lines)
+    }
+
+    public var stringValue: String {
+        get {
+            if let value = _stringValueOverride {
+                return value
+            } else {
+                return computeStringValue()
+            }
+        }
+        set {
+            _stringValueOverride = newValue
+        }
     }
 }

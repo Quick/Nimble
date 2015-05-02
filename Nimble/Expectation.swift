@@ -29,12 +29,12 @@ public struct Expectation<T> {
 
     public func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, msg) = expressionMatches(expression, matcher, to: "to")
-        verify(pass, msg.stringValue())
+        verify(pass, msg.stringValue)
     }
 
     public func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, msg) = expressionDoesNotMatch(expression, matcher, toNot: "to not")
-        verify(pass, msg.stringValue())
+        verify(pass, msg.stringValue)
     }
 
     public func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
