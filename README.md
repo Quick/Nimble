@@ -1,6 +1,6 @@
 t d# Nimble
 
-[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=swift-1.1)](https://travis-ci.org/Quick/Nimble)
+[![Circle CI](https://circleci.com/gh/Quick/Nimble/tree/master.svg?style=svg&circle-token=6115c5d83f74a6c59a484dd8921b97096404a5f3)](https://circleci.com/gh/Quick/Nimble/tree/master)
 
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
