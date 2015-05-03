@@ -1,6 +1,6 @@
-# Nimble
+t d# Nimble
 
-[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=swift-1.1)](https://travis-ci.org/Quick/Nimble)
+[![Circle CI](https://circleci.com/gh/Quick/Nimble/tree/master.svg?style=svg&circle-token=6115c5d83f74a6c59a484dd8921b97096404a5f3)](https://circleci.com/gh/Quick/Nimble/tree/master)
 
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
@@ -997,7 +997,7 @@ public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element ==
 
 extension NMBObjCMatcher {
     public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = actualExpression.evaluate()
             let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
             return beginWith(expected).matches(expr, failureMessage: failureMessage)

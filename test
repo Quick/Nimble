@@ -67,11 +67,11 @@ function help {
     echo "Usage: $0 COMMANDS"
     echo
     echo "COMMANDS:"
-    echo " clean - Cleans the derived data directory of Xcode. Assumes default location"
-    echo " ios   - Runs the tests as an iOS device"
-    echo " osx   - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
-    echo " all   - Runs both ios and osx tests"
-    echo " help  - Displays this help"
+    echo " clean        - Cleans the derived data directory of Xcode. Assumes default location"
+    echo " ios          - Runs the tests as an iOS device"
+    echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
+    echo " all          - Runs both ios and osx tests"
+    echo " help         - Displays this help"
     echo
     exit 1
 }
