@@ -14,7 +14,7 @@ internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMa
     }
 }
 
-func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
+internal func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
     return FullMatcherFunc { actualExpression, failureMessage, isNegation in
         let pass: Bool
         if isNegation {

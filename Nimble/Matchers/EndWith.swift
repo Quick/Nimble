@@ -53,10 +53,10 @@ extension NMBObjCMatcher {
             let location = actualExpression.location
             let actual = actualExpression.evaluate()
             if let actualString = actual as? String {
-                let expr = Expression(expression: ({ actualString }), location: location)
+                let expr = actualExpression.cast { $0 as? String }
                 return endWith(expected as! String).matches(expr, failureMessage: failureMessage)
             } else {
-                let expr = Expression(expression: ({ actual as? NMBOrderedCollection }), location: location)
+                let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
                 return endWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }
