@@ -12,7 +12,7 @@ func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt 
     var lastFailure: AssertionRecord?
     if recorder.assertions.count > 0 {
         lastFailure = recorder.assertions[recorder.assertions.endIndex - 1]
-        if lastFailure!.message == message {
+        if lastFailure!.message.stringValue == message {
             return
         }
     }

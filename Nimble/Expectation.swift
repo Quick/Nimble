@@ -23,20 +23,25 @@ internal func expressionDoesNotMatch<T, U where U: Matcher, U.ValueType == T>(ex
 public struct Expectation<T> {
     let expression: Expression<T>
 
-    public func verify(pass: Bool, _ message: String) {
+    public func verify(pass: Bool, _ message: FailureMessage) {
         NimbleAssertionHandler.assert(pass, message: message, location: expression.location)
     }
 
+    /// Tests the actual value using a matcher to match.
     public func to<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, msg) = expressionMatches(expression, matcher, to: "to")
-        verify(pass, msg.stringValue)
+        verify(pass, msg)
     }
 
+    /// Tests the actual value using a matcher to not match.
     public func toNot<U where U: Matcher, U.ValueType == T>(matcher: U) {
         let (pass, msg) = expressionDoesNotMatch(expression, matcher, toNot: "to not")
-        verify(pass, msg.stringValue)
+        verify(pass, msg)
     }
 
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
     public func notTo<U where U: Matcher, U.ValueType == T>(matcher: U) {
         toNot(matcher)
     }
