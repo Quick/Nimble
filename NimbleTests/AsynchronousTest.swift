@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 class AsyncTest: XCTestCase {
-    func testAsyncTestnigViaEventually() {
+    func testAsyncTestingViaEventually() {
         var value = 0
         deferToMainQueue { value = 1 }
         expect { value }.toEventually(equal(1))
