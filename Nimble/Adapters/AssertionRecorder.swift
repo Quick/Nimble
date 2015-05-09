@@ -5,13 +5,17 @@ import Foundation
 ///
 /// @see AssertionRecorder
 /// @see AssertionHandler
-public struct AssertionRecord {
+public struct AssertionRecord: Printable {
     /// Whether the assertion succeeded or failed
     public let success: Bool
     /// The failure message the assertion would display on failure.
-    public let message: String
+    public let message: FailureMessage
     /// The source location the expectation occurred on.
     public let location: SourceLocation
+
+    public var description: String {
+        return "AssertionRecord { success=\(success), message='\(message.stringValue)', location=\(location) }"
+    }
 }
 
 /// An AssertionHandler that silently records assertions that Nimble makes.
@@ -24,7 +28,7 @@ public class AssertionRecorder : AssertionHandler {
 
     public init() {}
 
-    public func assert(assertion: Bool, message: String, location: SourceLocation) {
+    public func assert(assertion: Bool, message: FailureMessage, location: SourceLocation) {
         assertions.append(
             AssertionRecord(
                 success: assertion,
