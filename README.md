@@ -212,6 +212,11 @@ expectAction([exception raise]).to(raiseException().
     named(NSInternalInconsistencyException).
     reason("Not enough fish in the sea").
     userInfo(@{@"something": @"is fishy"}));
+
+// You can also pass a block for custom matching of the raised exception
+expectAction(exception.raise()).to(raiseException().satisfyingBlock(^(NSException *exception) {
+    expect(exception.name).to(beginWith(NSInternalInconsistencyException));
+}));
 ```
 
 ## C Primitives
@@ -631,15 +636,11 @@ expect(actual).to(raiseException(named: name))
 // Passes if actual raises an exception with the given name and reason:
 expect(actual).to(raiseException(named: name, reason: reason))
 
-// Passes if actual raises an exception with a name equal "a name"
-expect(actual).to(raiseException(named: equal("a name")))
-
-// Passes if actual raises an exception with a reason that begins with "a r"
-expect(actual).to(raiseException(reason: beginWith("a r")))
-
-// Passes if actual raises an exception with a name equal "a name"
-// and a reason that begins with "a r"
-expect(actual).to(raiseException(named: equal("a name"), reason: beginWith("a r")))
+// Passes if actual raises an exception and it passes expectations in the block
+// (in this case, if name begins with 'a r')
+expect { exception.raise() }.to(raiseException { exception in
+    expect(exception.name).to(beginWith("a r"))
+})
 ```
 
 ```objc
@@ -654,15 +655,11 @@ expect(actual).to(raiseException().named(name))
 // Passes if actual raises an exception with the given name and reason:
 expect(actual).to(raiseException().named(name).reason(reason))
 
-// Passes if actual raises an exception with a name equal "a name"
-expect(actual).to(raiseException().withName(equal("a name")))
-
-// Passes if actual raises an exception with a reason that begins with "a r"
-expect(actual).to(raiseException().withName(withReason(beginWith(@"a r")))
-
-// Passes if actual raises an exception with a name equal "a name"
-// and a reason that begins with "a r"
-expect(actual).to(raiseException().withName(equal("a name")).withReason(beginWith(@"a r")))
+// Passes if actual raises an exception and it passes expectations in the block
+// (in this case, if name begins with 'a r')
+expect(actual).to(raiseException().satisfyingBlock(^(NSException *exception) {
+    expect(exception.name).to(beginWith(@"a r"));
+}));
 ```
 
 Note: Swift currently doesn't have exceptions. Only Objective-C code can raise

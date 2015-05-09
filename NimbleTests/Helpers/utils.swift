@@ -2,34 +2,53 @@ import Foundation
 import Nimble
 import XCTest
 
-func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     var filePath = file
     var lineNumber = line
 
     let recorder = AssertionRecorder()
     withAssertionHandler(recorder, closure)
 
-    var lastFailure: AssertionRecord?
-    if recorder.assertions.count > 0 {
-        lastFailure = recorder.assertions[recorder.assertions.endIndex - 1]
-        if lastFailure!.message.stringValue == message {
-            return
+    for msg in messages {
+        var lastFailure: AssertionRecord?
+        var foundFailureMessage = false
+
+        for assertion in recorder.assertions {
+            lastFailure = assertion
+            if assertion.message.stringValue == msg {
+                foundFailureMessage = true
+                break
+            }
+        }
+
+        if foundFailureMessage {
+            continue
+        }
+
+        if preferOriginalSourceLocation {
+            if let failure = lastFailure {
+                filePath = failure.location.file
+                lineNumber = failure.location.line
+            }
+        }
+
+        if let lastFailure = lastFailure {
+            let msg = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(msg)\""
+            XCTFail(msg, file: filePath, line: lineNumber)
+        } else {
+            XCTFail("expected failure message, but got none", file: filePath, line: lineNumber)
         }
     }
+}
 
-    if preferOriginalSourceLocation {
-        if let failure = lastFailure {
-            filePath = failure.location.file
-            lineNumber = failure.location.line
-        }
-    }
-
-    if lastFailure != nil {
-        let msg = "Got failure message: \"\(lastFailure!.message)\", but expected \"\(message)\""
-        XCTFail(msg, file: filePath, line: lineNumber)
-    } else {
-        XCTFail("expected failure message, but got none", file: filePath, line: lineNumber)
-    }
+func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+    return failsWithErrorMessage(
+        [message],
+        file: file,
+        line: line,
+        preferOriginalSourceLocation: preferOriginalSourceLocation,
+        closure
+    )
 }
 
 func failsWithErrorMessageForNil(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
@@ -46,6 +65,10 @@ func deferToMainQueue(action: () -> Void) {
 public class NimbleHelper : NSObject {
     class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
         failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, block)
+    }
+
+    class func expectFailureMessages(messages: [NSString], block: () -> Void, file: String, line: UInt) {
+        failsWithErrorMessage(messages as! [String], file: file, line: line, preferOriginalSourceLocation: true, block)
     }
 
     class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
