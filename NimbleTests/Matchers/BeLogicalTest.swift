@@ -20,12 +20,23 @@ enum ConvertsToBool : BooleanType, Printable {
 }
 
 class BeTruthyTest : XCTestCase {
+    func testShouldMatchNonNilTypes() {
+        expect(true as Bool?).to(beTruthy())
+        expect(1 as Int?).to(beTruthy())
+    }
+
     func testShouldMatchTrue() {
         expect(true).to(beTruthy())
 
         failsWithErrorMessage("expected to not be truthy, got <true>") {
             expect(true).toNot(beTruthy())
         }
+    }
+
+    func testShouldNotMatchNilTypes() {
+        expect(false as Bool?).toNot(beTruthy())
+        expect(nil as Bool?).toNot(beTruthy())
+        expect(nil as Int?).toNot(beTruthy())
     }
 
     func testShouldNotMatchFalse() {
@@ -90,12 +101,23 @@ class BeTrueTest : XCTestCase {
 }
 
 class BeFalsyTest : XCTestCase {
+    func testShouldMatchNilTypes() {
+        expect(false as Bool?).to(beFalsy())
+        expect(nil as Bool?).to(beFalsy())
+        expect(nil as Int?).to(beFalsy())
+    }
+
     func testShouldNotMatchTrue() {
         expect(true).toNot(beFalsy())
 
         failsWithErrorMessage("expected to be falsy, got <true>") {
             expect(true).to(beFalsy())
         }
+    }
+
+    func testShouldNotMatchNonNilTypes() {
+        expect(true as Bool?).toNot(beFalsy())
+        expect(1 as Int?).toNot(beFalsy())
     }
 
     func testShouldMatchFalse() {

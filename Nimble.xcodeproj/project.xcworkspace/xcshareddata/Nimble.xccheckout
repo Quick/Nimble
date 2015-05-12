@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3C7A95C5-450E-4971-8DC4-2613B2BA4376</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Nimble</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>
 		<string>github.com:Quick/Nimble</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Nimble.xcodeproj/project.xcworkspace</string>
+	<string>Nimble.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>95438028B10BBB846574013D29F154A00556A9D1</key>

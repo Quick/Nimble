@@ -1,19 +1,5 @@
 import Foundation
 
-internal func beBool(#expectedValue: BooleanType, #stringValue: String, #falseMatchesNil: Bool) -> MatcherFunc<BooleanType> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be \(stringValue)"
-        let actual = actualExpression.evaluate()
-        if expectedValue {
-            return actual?.boolValue == expectedValue.boolValue
-        } else if !falseMatchesNil {
-            return actual != nil && actual!.boolValue != !expectedValue.boolValue
-        } else {
-            return actual?.boolValue != !expectedValue.boolValue
-        }
-    }
-}
-
 internal func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
     return FullMatcherFunc { actualExpression, failureMessage, isNegation in
         let pass: Bool
@@ -48,14 +34,32 @@ public func beFalse() -> FullMatcherFunc<Bool> {
 // MARK: beTruthy() / beFalsy()
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
-public func beTruthy() -> MatcherFunc<BooleanType> {
-    return beBool(expectedValue: true, stringValue: "truthy", falseMatchesNil: true)
+public func beTruthy<T>() -> MatcherFunc<T> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be truthy"
+        let actualValue = actualExpression.evaluate()
+        if let actualValue = actualValue {
+            if let actualValue = actualValue as? BooleanType {
+                return actualValue.boolValue == true
+            }
+        }
+        return actualValue != nil
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
-public func beFalsy() -> MatcherFunc<BooleanType> {
-    return beBool(expectedValue: false, stringValue: "falsy", falseMatchesNil: true)
+public func beFalsy<T>() -> MatcherFunc<T> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be falsy"
+        let actualValue = actualExpression.evaluate()
+        if let actualValue = actualValue {
+            if let actualValue = actualValue as? BooleanType {
+                return actualValue.boolValue != true
+            }
+        }
+        return actualValue == nil
+    }
 }
 
 extension NMBObjCMatcher {
