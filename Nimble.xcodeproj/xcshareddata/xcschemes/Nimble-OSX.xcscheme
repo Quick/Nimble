@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0700"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -39,6 +39,8 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = ""
@@ -49,6 +51,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugXPCServices = "NO"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <MacroExpansion>
          <BuildableReference
