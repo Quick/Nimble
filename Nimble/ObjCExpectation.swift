@@ -32,7 +32,7 @@ public class NMBExpectation : NSObject {
     }
 
     private var expectValue: Expectation<NSObject> {
-        return expect(file: _file, line: _line){
+        return expect(_file, line: _line){
             self._actualBlock() as NSObject?
         }
     }
