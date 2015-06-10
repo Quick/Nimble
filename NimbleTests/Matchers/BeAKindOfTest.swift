@@ -24,4 +24,22 @@ class BeAKindOfTest: XCTestCase {
             expect(NSNumber(integer:1)).toNot(beAKindOf(NSNumber))
         }
     }
+    
+    func testSwiftTypesFailureMessages() {
+        enum TestEnum {
+            case One, Two
+        }
+        failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect(1).to(beAKindOf(Int))
+        }
+        failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect("test").to(beAKindOf(String))
+        }
+        failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect(TestEnum.One).to(beAKindOf(TestEnum))
+        }
+    }
 }
