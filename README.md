@@ -100,6 +100,7 @@ expect(seagull.squawk).to(equal("Squee!"))
 // Objective-C
 
 #import <Nimble/Nimble.h>
+#import <Nimble/Nimble-Swift.h>
 
 expect(seagull.squawk).to(equal(@"Squee!"));
 ```
@@ -124,6 +125,7 @@ expect(seagull.squawk).notTo(equal("Oh, hello there!"))
 // Objective-C
 
 #import <Nimble/Nimble.h>
+#import <Nimble/Nimble-Swift.h>
 
 expect(seagull.squawk).toNot(equal(@"Oh, hello there!"));
 expect(seagull.squawk).notTo(equal(@"Oh, hello there!"));
@@ -352,6 +354,7 @@ to keep in mind when using Nimble in Objective-C:
    // Objective-C
 
    #import <Nimble/Nimble.h>
+   #import <Nimble/Nimble-Swift.h>
 
    expect(@(1 + 1)).to(equal(@2));
    expect(@"Hello world").to(contain(@"world"));
@@ -367,6 +370,9 @@ to keep in mind when using Nimble in Objective-C:
    expectAction([exception raise]).to(raiseException());
    ```
 
+Remember to include `#import <Nimble/Nimble-Swift.h>` when importing Nimble
+from Objective-C. See [issue #129](https://github.com/Quick/Nimble/issues/129).
+
 ## Disabling Objective-C Shorthand
 
 Nimble provides a shorthand for expressing expectations using the
@@ -378,6 +384,7 @@ importing Nimble:
 #define NIMBLE_DISABLE_SHORT_SYNTAX 1
 
 #import <Nimble/Nimble.h>
+#import <Nimble/Nimble-Swift.h>
 
 NMB_expect(^{ return seagull.squawk; }, __FILE__, __LINE__).to(NMB_equal(@"Squee!"));
 ```
