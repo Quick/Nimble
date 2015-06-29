@@ -43,14 +43,14 @@ public class AssertionRecorder : AssertionHandler {
 /// Once the closure finishes, then the original Nimble assertion handler is restored.
 ///
 /// @see AssertionHandler
-public func withAssertionHandler(tempAssertionHandler: AssertionHandler, closure: () -> Void) {
+public func withAssertionHandler(tempAssertionHandler: AssertionHandler, closure: () throws -> Void) {
     let oldRecorder = NimbleAssertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({
         NimbleAssertionHandler = oldRecorder
     }))
     NimbleAssertionHandler = tempAssertionHandler
     capturer.tryBlock {
-        closure()
+        try! closure()
     }
 }
 
