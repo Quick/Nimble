@@ -98,5 +98,9 @@ The process is relatively straight forward, but here's is a useful checklist for
 - Tag the version: `git tag -s vA.B.C -F release-notes-file`
 - Push the tag: `git push origin master --tags`
 - Push the podspec file to trunk: `pod trunk push Nimble.podspec`
+- Build the carthage pre-built binary:
+  - `carthage build --no-skip-current`
+  - `carthage archive Nimble`
 - Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
+- Attach the carthage release `Nimble.framework.zip` to the release.
 - Announce!
