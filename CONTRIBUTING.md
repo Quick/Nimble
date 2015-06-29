@@ -102,5 +102,6 @@ The process is relatively straight forward, but here's is a useful checklist for
   - `carthage build --no-skip-current`
   - `carthage archive Nimble`
 - Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
-- Attach the carthage release `Nimble.framework.zip` to the release.
+  - Use the same release notes you created for the tag, but tweak up formatting for github.
+  - Attach the carthage release `Nimble.framework.zip` to the release.
 - Announce!
