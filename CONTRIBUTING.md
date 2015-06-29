@@ -47,9 +47,8 @@ it.
 - Make sure your pull request includes any necessary updates to the
   README or other documentation.
 - Be sure the unit tests for both the OS X and iOS targets of Nimble
-  before submitting your pull request. You can run all the OS X unit tests
-  using `./test.sh full`. Use `./test.sh` without `full` to run against only
-  the latest of OS X and iOS.
+  before submitting your pull request. You can run all the OS X & iOS unit
+  tests using `./test`.
 - If you've added a file to the project, make sure it's included in both
   the OS X and iOS targets.
 - To make minor updates to old versions of Nimble that support Swift
