@@ -37,13 +37,16 @@ class ThrowErrorTest: XCTestCase {
         expect { throw Error.Laugh }.to(throwError())
         expect { throw Error.Laugh }.to(throwError(Error.Laugh))
         expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 1)))
-        expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
     }
 
     func testPositiveMatchesWithClosures() {
         expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { error in
             guard case EquatableError.Parameterized(let x) = error else { fail(); return }
-            expect(x).to(equal(42))
+            expect(x) >= 1
+        })
+        expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { (error: EquatableError) in
+            guard case .Parameterized(let x) = error else { fail(); return }
+            expect(x) >= 1
         })
         expect { throw Error.Laugh }.to(throwError(Error.Laugh) { error in
             expect(error._domain).to(beginWith("Nim"))
@@ -54,6 +57,14 @@ class ThrowErrorTest: XCTestCase {
     }
 
     func testNegativeMatches() {
+        // Same case, different arguments
+        failsWithErrorMessage("expected to throw error <NimbleTests.EquatableError.Parameterized(2)>, got <NimbleTests.EquatableError.Parameterized(1)>") {
+            expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
+        }
+        // Same case, different arguments
+        failsWithErrorMessage("expected to throw error <NimbleTests.EquatableError.Parameterized(2)>, got <NimbleTests.EquatableError.Parameterized(1)>") {
+            expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
+        }
         // Different case
         failsWithErrorMessage("expected to throw error <NimbleTests.Error.Cry>, got <NimbleTests.Error.Laugh>") {
             expect { throw Error.Laugh }.to(throwError(Error.Cry))
@@ -98,7 +109,7 @@ class ThrowErrorTest: XCTestCase {
 
     func testNegativeMatchesWithClosure() {
         let innerFailureMessage = "expected to equal <foo>, got <NimbleTests.Error>"
-        let closure = { (error: ErrorType) in
+        let closure = { (error: Error) in
             expect(error._domain).to(equal("foo"))
         }
 

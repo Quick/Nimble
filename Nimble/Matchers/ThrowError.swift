@@ -3,16 +3,17 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual expression throws an
 /// error from the specified case.
 ///
-/// Errors are compared by their _domain and _code.
+/// Errors are tried to be compared by their implementation of Equatable,
+/// otherwise they fallback to comparision by _domain and _code.
 ///
 /// Alternatively, you can pass a closure to do any arbitrary custom matching
 /// to the thrown error. The closure only gets called when an error was thrown.
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError(
-    error: ErrorType? = nil,
-    closure: ((ErrorType) -> Void)? = nil) -> MatcherFunc<Any> {
+public func throwError<T: ErrorType>(
+    error: T? = nil,
+    closure: ((T) -> Void)? = nil) -> MatcherFunc<Any> {
         return MatcherFunc { actualExpression, failureMessage in
 
             var actualError: ErrorType?
@@ -27,11 +28,11 @@ public func throwError(
         }
 }
 
-internal func setFailureMessageForError(
+internal func setFailureMessageForError<T: ErrorType>(
     failureMessage: FailureMessage,
     actualError: ErrorType?,
-    error: ErrorType?,
-    closure: ((ErrorType) -> Void)?) {
+    error: T?,
+    closure: ((T) -> Void)?) {
         failureMessage.postfixMessage = "throw error"
 
         if let error = error {
@@ -55,18 +56,26 @@ internal func setFailureMessageForError(
         }
 }
 
-internal func errorMatchesExpectedError(
+internal func errorMatchesExpectedError<T: ErrorType>(
     actualError: ErrorType,
-    expectedError: ErrorType) -> Bool {
-        //return "\(actualError)" == "\(expectedError)"
+    expectedError: T) -> Bool {
         return actualError._domain == expectedError._domain
             && actualError._code   == expectedError._code
 }
 
-internal func errorMatchesNonNilFieldsOrClosure(
+internal func errorMatchesExpectedError<T: ErrorType where T: Equatable>(
+    actualError: ErrorType,
+    expectedError: T) -> Bool {
+        if let actualError = actualError as? T {
+            return actualError == expectedError
+        }
+        return false
+}
+
+internal func errorMatchesNonNilFieldsOrClosure<T: ErrorType>(
     actualError: ErrorType?,
-    error: ErrorType?,
-    closure: ((ErrorType) -> Void)?) -> Bool {
+    error: T?,
+    closure: ((T) -> Void)?) -> Bool {
         var matches = false
 
         if let actualError = actualError {
@@ -77,6 +86,81 @@ internal func errorMatchesNonNilFieldsOrClosure(
                     matches = false
                 }
             }
+            if let closure = closure {
+                if let actualError = actualError as? T {
+                    let assertions = gatherFailingExpectations {
+                        closure(actualError as T)
+                    }
+                    let messages = assertions.map { $0.message }
+                    if messages.count > 0 {
+                        matches = false
+                    }
+                } else {
+                    // The closure expects another ErrorType as argument, so this
+                    // is _supposed_ to fail, so that it becomes more obvious.
+                    let assertions = gatherExpectations {
+                        expect(actualError is T).to(equal(true))
+                    }
+                    precondition(assertions.map { $0.message }.count > 0)
+                    matches = false
+                }
+            }
+        }
+        
+        return matches
+}
+
+
+/// A Nimble matcher that succeeds when the actual expression throws any
+/// error or when the passed closures' arbitrary custom matching succeeds.
+///
+/// This duplication to it's generic adequate is required to allow to receive
+/// values of the existential type ErrorType in the closure.
+///
+/// The closure only gets called when an error was thrown.
+public func throwError(
+    closure closure: ((ErrorType) -> Void)? = nil) -> MatcherFunc<Any> {
+        return MatcherFunc { actualExpression, failureMessage in
+            
+            var actualError: ErrorType?
+            do {
+                try actualExpression.throwingEvaluate()
+            } catch let catchedError {
+                actualError = catchedError
+            }
+            
+            setFailureMessageForError(failureMessage, actualError: actualError, closure: closure)
+            return errorMatchesNonNilFieldsOrClosure(actualError, closure: closure)
+        }
+}
+
+internal func setFailureMessageForError(
+    failureMessage: FailureMessage,
+    actualError: ErrorType?,
+    closure: ((ErrorType) -> Void)?) {
+        failureMessage.postfixMessage = "throw error"
+
+        if let _ = closure {
+            failureMessage.postfixMessage += " that satisfies block"
+        } else {
+            failureMessage.postfixMessage = "throw any error"
+        }
+
+        if let actualError = actualError {
+            failureMessage.actualValue = "<\(actualError)>"
+        } else {
+            failureMessage.actualValue = "no error"
+        }
+}
+
+internal func errorMatchesNonNilFieldsOrClosure(
+    actualError: ErrorType?,
+    closure: ((ErrorType) -> Void)?) -> Bool {
+        var matches = false
+
+        if let actualError = actualError {
+            matches = true
+
             if let closure = closure {
                 let assertions = gatherFailingExpectations {
                     closure(actualError)
