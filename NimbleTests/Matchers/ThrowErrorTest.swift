@@ -36,21 +36,31 @@ class ThrowErrorTest: XCTestCase {
     func testPositiveMatches() {
         expect { throw Error.Laugh }.to(throwError())
         expect { throw Error.Laugh }.to(throwError(Error.Laugh))
+        expect { throw Error.Laugh }.to(throwError(errorType: Error.self))
         expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 1)))
     }
 
     func testPositiveMatchesWithClosures() {
+        // Generic typed closure
         expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { error in
             guard case EquatableError.Parameterized(let x) = error else { fail(); return }
             expect(x) >= 1
         })
+        // Explicit typed closure
         expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { (error: EquatableError) in
             guard case .Parameterized(let x) = error else { fail(); return }
             expect(x) >= 1
         })
+        // Typed closure over errorType argument
+        expect { throw EquatableError.Parameterized(x: 42) }.to(throwError(errorType: EquatableError.self) { error in
+            guard case .Parameterized(let x) = error else { fail(); return }
+            expect(x) >= 1
+        })
+        // Typed closure over error argument
         expect { throw Error.Laugh }.to(throwError(Error.Laugh) { error in
             expect(error._domain).to(beginWith("Nim"))
         })
+        // Typed closure over error argument
         expect { throw Error.Laugh }.to(throwError(Error.Laugh) { error in
             expect(error._domain).toNot(beginWith("as"))
         })
@@ -68,6 +78,10 @@ class ThrowErrorTest: XCTestCase {
         // Different case
         failsWithErrorMessage("expected to throw error <NimbleTests.Error.Cry>, got <NimbleTests.Error.Laugh>") {
             expect { throw Error.Laugh }.to(throwError(Error.Cry))
+        }
+        // Different case with closure
+        failsWithErrorMessage("expected to throw error <NimbleTests.Error.Cry> that satisfies block, got <NimbleTests.Error.Laugh>") {
+            expect { throw Error.Laugh }.to(throwError(Error.Cry) { _ in return })
         }
         // Different case, implementing CustomDebugStringConvertible
         failsWithErrorMessage("expected to throw error <code=1>, got <code=0>") {
@@ -113,7 +127,7 @@ class ThrowErrorTest: XCTestCase {
             expect(error._domain).to(equal("foo"))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error that satisfies block, got <NimbleTests.Error.Laugh>"]) {
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <NimbleTests.Error> that satisfies block, got <NimbleTests.Error.Laugh>"]) {
             expect { throw Error.Laugh }.to(throwError(closure: closure))
         }
 
