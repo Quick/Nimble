@@ -76,4 +76,8 @@ public class NMBExpectation : NSObject {
             )
         })
     }
+
+    public class func failWithMessage(message: String, file: String, line: UInt) {
+        fail(message, location: SourceLocation(file: file, line: line))
+    }
 }
