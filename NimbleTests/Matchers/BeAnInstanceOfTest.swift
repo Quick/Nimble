@@ -21,4 +21,24 @@ class BeAnInstanceOfTest: XCTestCase {
             expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSNumber))
         }
     }
+    
+    func testSwiftTypesFailureMessages() {
+        enum TestEnum {
+            case One, Two
+        }
+
+        failsWithErrorMessage("beAnInstanceOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect(1).to(beAnInstanceOf(Int))
+        }
+        failsWithErrorMessage("beAnInstanceOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect("test").to(beAnInstanceOf(String))
+        }
+        failsWithErrorMessage("beAnInstanceOf only works on Objective-C types since the Swift compiler"
+            + " will automatically type check Swift-only types. This expectation is redundant.") {
+            expect(TestEnum.One).to(beAnInstanceOf(TestEnum))
+        }
+    }
+    
 }

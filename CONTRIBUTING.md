@@ -47,9 +47,8 @@ it.
 - Make sure your pull request includes any necessary updates to the
   README or other documentation.
 - Be sure the unit tests for both the OS X and iOS targets of Nimble
-  before submitting your pull request. You can run all the OS X unit tests
-  using `./test.sh full`. Use `./test.sh` without `full` to run against only
-  the latest of OS X and iOS.
+  before submitting your pull request. You can run all the OS X & iOS unit
+  tests using `./test`.
 - If you've added a file to the project, make sure it's included in both
   the OS X and iOS targets.
 - To make minor updates to old versions of Nimble that support Swift
@@ -95,9 +94,14 @@ some "ground rules":
 The process is relatively straight forward, but here's is a useful checklist for tagging:
 
 - Bump the version in `Nimble.podspec` (update, commit, push to github)
-- Look a changes from the previously tagged release and write release notes: `git log v0.4.0....HEAD`
+- Look a changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
 - Tag the version: `git tag -s vA.B.C -F release-notes-file`
 - Push the tag: `git push origin master --tags`
 - Push the podspec file to trunk: `pod trunk push Nimble.podspec`
+- Build the carthage pre-built binary:
+  - `carthage build --no-skip-current`
+  - `carthage archive Nimble`
 - Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
+  - Use the same release notes you created for the tag, but tweak up formatting for github.
+  - Attach the carthage release `Nimble.framework.zip` to the release.
 - Announce!
