@@ -36,9 +36,10 @@
     expectFailureMessage(@"expected to be empty, got <{(1)}>", ^{
         expect([NSSet setWithObject:@1]).to(beEmpty());
     });
-    expectFailureMessage(@"expected to be empty, got <NSHashTable {[12] 1}>", ^{
-        NSHashTable *table = [NSHashTable hashTableWithOptions:NSPointerFunctionsStrongMemory];
-        [table addObject:@1];
+    NSHashTable *table = [NSHashTable hashTableWithOptions:NSPointerFunctionsStrongMemory];
+    [table addObject:@1];
+    NSString *tableString = [[table description] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    expectFailureMessage(([NSString stringWithFormat:@"expected to be empty, got <%@>", tableString]), ^{
         expect(table).to(beEmpty());
     });
 
