@@ -3,21 +3,31 @@ import Foundation
 internal func expressionMatches<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String) -> (Bool, FailureMessage) {
     let msg = FailureMessage()
     msg.to = to
-    let pass = matcher.matches(expression, failureMessage: msg)
-    if msg.actualValue == "" {
-        msg.actualValue = "<\(stringify(expression.evaluate()))>"
+    do {
+        let pass = try matcher.matches(expression, failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+        }
+        return (pass, msg)
+    } catch let error {
+        msg.actualValue = "an unexpected error thrown: <\(error)>"
+        return (false, msg)
     }
-    return (pass, msg)
 }
 
 internal func expressionDoesNotMatch<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, toNot: String) -> (Bool, FailureMessage) {
     let msg = FailureMessage()
     msg.to = toNot
-    let pass = matcher.doesNotMatch(expression, failureMessage: msg)
-    if msg.actualValue == "" {
-        msg.actualValue = "<\(stringify(expression.evaluate()))>"
+    do {
+        let pass = try matcher.doesNotMatch(expression, failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+        }
+        return (pass, msg)
+    } catch let error {
+        msg.actualValue = "an unexpected error thrown: <\(error)>"
+        return (false, msg)
     }
-    return (pass, msg)
 }
 
 public struct Expectation<T> {
