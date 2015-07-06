@@ -3,14 +3,14 @@ internal struct ObjCMatcherWrapper : Matcher {
 
     func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.matches(
-            ({ actualExpression.evaluate() }),
+            ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
     }
 
     func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.doesNotMatch(
-            ({ actualExpression.evaluate() }),
+            ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
     }
