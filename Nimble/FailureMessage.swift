@@ -1,5 +1,3 @@
-import Foundation
-
 /// Encapsulates the failure message that matchers can report to the end user.
 ///
 /// This is shared state between Nimble and matchers that mutate this value.

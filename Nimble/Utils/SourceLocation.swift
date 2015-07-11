@@ -1,6 +1,3 @@
-import Foundation
-
-
 @objc public class SourceLocation : CustomStringConvertible {
     public let file: String
     public let line: UInt

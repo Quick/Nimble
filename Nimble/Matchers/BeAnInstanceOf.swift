@@ -1,5 +1,3 @@
-import Foundation
-
 // A Nimble matcher that catches attempts to use beAnInstanceOf with non Objective-C types
 public func beAnInstanceOf(expectedClass: Any) -> NonNilMatcherFunc<Any> {
     return NonNilMatcherFunc {actualExpression, failureMessage in

@@ -1,5 +1,3 @@
-import Foundation
-
 /// Only classes, protocols, methods, properties, and subscript declarations can be
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.

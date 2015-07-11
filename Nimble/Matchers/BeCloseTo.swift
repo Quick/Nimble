@@ -1,5 +1,3 @@
-import Foundation
-
 internal let DefaultDelta = 0.0001
 
 internal func isCloseTo(actualValue: Double?, expectedValue: Double, delta: Double, failureMessage: FailureMessage) -> Bool {

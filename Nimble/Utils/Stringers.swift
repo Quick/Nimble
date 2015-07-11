@@ -1,6 +1,3 @@
-import Foundation
-
-
 internal func identityAsString(value: AnyObject?) -> String {
     if value == nil {
         return "nil"

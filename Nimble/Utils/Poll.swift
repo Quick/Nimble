@@ -1,5 +1,3 @@
-import Foundation
-
 internal enum PollResult : BooleanType {
     case Success, Failure, Timeout
 

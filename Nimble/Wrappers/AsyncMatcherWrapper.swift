@@ -1,5 +1,3 @@
-import Foundation
-
 internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
     let timeoutInterval: NSTimeInterval

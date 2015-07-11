@@ -1,5 +1,3 @@
-import Foundation
-
 public typealias MatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool
 public typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage, shouldNotMatch: Bool) -> Bool
 @objc public class NMBObjCMatcher : NMBMatcher {

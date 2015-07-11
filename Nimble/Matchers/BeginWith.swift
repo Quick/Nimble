@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.
 public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
