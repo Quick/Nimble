@@ -1,6 +1,3 @@
-import Foundation
-
-
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
 public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {

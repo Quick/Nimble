@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
 /// Values can support equal by supporting the Equatable protocol.
 ///

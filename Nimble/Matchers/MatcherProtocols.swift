@@ -1,5 +1,3 @@
-import Foundation
-
 /// Implement this protocol to implement a custom matcher for Swift
 public protocol Matcher {
     typealias ValueType

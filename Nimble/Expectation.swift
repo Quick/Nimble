@@ -1,5 +1,3 @@
-import Foundation
-
 internal func expressionMatches<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String) -> (Bool, FailureMessage) {
     let msg = FailureMessage()
     msg.to = to

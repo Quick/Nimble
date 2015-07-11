@@ -1,4 +1,3 @@
-import Foundation
 import XCTest
 
 /// Default handler for Nimble. This assertion handler passes failures along to

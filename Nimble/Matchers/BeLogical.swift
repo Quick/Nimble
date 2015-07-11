@@ -1,5 +1,3 @@
-import Foundation
-
 internal func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
     return FullMatcherFunc { actualExpression, failureMessage, isNegation in
         let pass: Bool
