@@ -47,4 +47,21 @@
     });
 }
 
+- (void)testVariadicArguments {
+    NSArray *array = @[@1, @2];
+    expect(array).to(contain(@1, @2));
+    expect(array).toNot(contain(@"HI", @"whale"));
+    expect(@"String").to(contain(@"Str", @"ng"));
+    expect(@"Other").toNot(contain(@"Str", @"Oth"));
+
+
+    expectFailureMessage(@"expected to contain <Optional(a), Optional(bar)>, got <(a,b,c)>", ^{
+        expect(@[@"a", @"b", @"c"]).to(contain(@"a", @"bar"));
+    });
+
+    expectFailureMessage(@"expected to not contain <Optional(bar), Optional(b)>, got <(a,b,c)>", ^{
+        expect(@[@"a", @"b", @"c"]).toNot(contain(@"bar", @"b"));
+    });
+}
+
 @end
