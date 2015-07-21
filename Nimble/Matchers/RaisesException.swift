@@ -97,7 +97,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         return matches
 }
 
-@objc public class NMBObjCRaiseExceptionMatcher : NMBMatcher {
+public class NMBObjCRaiseExceptionMatcher : NSObject, NMBMatcher {
     internal var _name: String?
     internal var _reason: String?
     internal var _userInfo: NSDictionary?
