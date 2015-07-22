@@ -3,7 +3,7 @@ import Foundation
 /// Only classes, protocols, methods, properties, and subscript declarations can be
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
-@objc internal class NMBWait {
+internal class NMBWait: NSObject {
     internal class func until(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
         var completed = false
         var token: dispatch_once_t = 0

@@ -32,7 +32,7 @@ public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double 
     }
 }
 
-@objc public class NMBObjCBeCloseToMatcher : NMBMatcher {
+public class NMBObjCBeCloseToMatcher : NSObject, NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {
