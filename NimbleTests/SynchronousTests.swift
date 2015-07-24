@@ -87,8 +87,31 @@ class SynchronousTest: XCTestCase {
         }
     }
 
-
     func testNotToMatchesLikeToNot() {
         expect(1).notTo(MatcherFunc { expr, failure in false })
+    }
+    
+    func testToMatcher_CustomFailureMessage() {
+        failsWithErrorMessage(
+            "These aren't equal!\n" +
+            "expected to match, got <1>") {
+                expect(1).to(MatcherFunc { expr, failure in false }, description: "These aren't equal!")
+        }
+    }
+    
+    func testNotToMatcher_CustomFailureMessage() {
+        failsWithErrorMessage(
+            "These aren't equal!\n" +
+            "expected to not match, got <1>") {
+                expect(1).notTo(MatcherFunc { expr, failure in true }, description: "These aren't equal!")
+        }
+    }
+    
+    func testToNotMatcher_CustomFailureMessage() {
+        failsWithErrorMessage(
+            "These aren't equal!\n" +
+            "expected to not match, got <1>") {
+                expect(1).toNot(MatcherFunc { expr, failure in true }, description: "These aren't equal!")
+        }
     }
 }

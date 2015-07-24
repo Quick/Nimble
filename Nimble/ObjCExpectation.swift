@@ -63,7 +63,8 @@ public class NMBExpectation : NSObject {
         return ({ matcher in
             self.expectValue.toEventually(
                 ObjCMatcherWrapper(matcher: matcher),
-                timeout: self._timeout
+                timeout: self._timeout,
+                description: nil
             )
         })
     }
@@ -72,7 +73,8 @@ public class NMBExpectation : NSObject {
         return ({ matcher in
             self.expectValue.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher),
-                timeout: self._timeout
+                timeout: self._timeout,
+                description: nil
             )
         })
     }
