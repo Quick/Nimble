@@ -87,6 +87,7 @@ class SynchronousTest: XCTestCase {
         }
     }
 
+
     func testNotToMatchesLikeToNot() {
         expect(1).notTo(MatcherFunc { expr, failure in false })
     }
