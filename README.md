@@ -142,6 +142,21 @@ expect(1 + 1).to(equal(3), description: "Make sure libKindergartenMath is loaded
 // expected to equal <3>, got <2>
 ```
 
+Or the *WithDescription version in Objective-C:
+
+```objc
+// Objective-C
+
+@import Nimble;
+
+expect(@(1+1)).to(equal(@3));
+// failed - expected to equal <3.0000>, got <2.0000>
+
+expect(@(1+1)).toWithDescription(equal(@3), @"Make sure libKindergartenMath is loaded");
+// failed - Make sure libKindergartenMath is loaded
+// expected to equal <3.0000>, got <2.0000>
+```
+
 ## Type Checking
 
 Nimble makes sure you don't compare two types that don't match:

@@ -48,7 +48,13 @@ public class NMBExpectation : NSObject {
             self.expectValue.to(ObjCMatcherWrapper(matcher: matcher))
         })
     }
-
+    
+    public var toWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
+        })
+    }
+    
     public var toNot: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toNot(
@@ -56,8 +62,18 @@ public class NMBExpectation : NSObject {
             )
         })
     }
-
+    
+    public var toNotWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toNot(
+                ObjCMatcherWrapper(matcher: matcher), description: description
+            )
+        })
+    }
+    
     public var notTo: (NMBMatcher) -> Void { return toNot }
+
+    public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
 
     public var toEventually: (NMBMatcher) -> Void {
         return ({ matcher in
@@ -68,7 +84,17 @@ public class NMBExpectation : NSObject {
             )
         })
     }
-
+    
+    public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toEventually(
+                ObjCMatcherWrapper(matcher: matcher),
+                timeout: self._timeout,
+                description: description
+            )
+        })
+    }
+    
     public var toEventuallyNot: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toEventuallyNot(
@@ -78,6 +104,20 @@ public class NMBExpectation : NSObject {
             )
         })
     }
+    
+    public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toEventuallyNot(
+                ObjCMatcherWrapper(matcher: matcher),
+                timeout: self._timeout,
+                description: description
+            )
+        })
+    }
+    
+    public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
+    
+    public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
 
     public class func failWithMessage(message: String, file: String, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))
