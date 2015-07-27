@@ -92,7 +92,10 @@ public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDe
 
 // MARK: - Operators
 
-infix operator ≈ {}
+infix operator ≈ {
+    associativity none
+    precedence 130
+}
 
 public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
     lhs.to(beCloseTo(rhs))
