@@ -64,7 +64,7 @@ internal func pollBlock(pollInterval pollInterval: NSTimeInterval, timeoutInterv
         return .Timeout
     }
 
-    var pass: Bool = false
+    var pass = false
     do {
         repeat {
             pass = try expression()
@@ -72,9 +72,9 @@ internal func pollBlock(pollInterval pollInterval: NSTimeInterval, timeoutInterv
                 break
             }
 
-            let runDate = NSDate().dateByAddingTimeInterval(pollInterval) as NSDate
+            let runDate = NSDate().dateByAddingTimeInterval(pollInterval)
             runLoop.runUntilDate(runDate)
-        } while(NSDate().timeIntervalSinceDate(startDate) < timeoutInterval);
+        } while(NSDate().timeIntervalSinceDate(startDate) < timeoutInterval)
     } catch let error {
         return .ErrorThrown(error)
     }
