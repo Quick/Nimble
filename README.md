@@ -127,6 +127,36 @@ expect(seagull.squawk).toNot(equal(@"Oh, hello there!"));
 expect(seagull.squawk).notTo(equal(@"Oh, hello there!"));
 ```
 
+## Custom Failure Messages
+
+Would you like to add more information to the test's failure messages? Use the `description` optional argument to add your own text:
+
+```swift
+// Swift
+
+expect(1 + 1).to(equal(3))
+// failed - expected to equal <3>, got <2>
+
+expect(1 + 1).to(equal(3), description: "Make sure libKindergartenMath is loaded")
+// failed - Make sure libKindergartenMath is loaded
+// expected to equal <3>, got <2>
+```
+
+Or the *WithDescription version in Objective-C:
+
+```objc
+// Objective-C
+
+@import Nimble;
+
+expect(@(1+1)).to(equal(@3));
+// failed - expected to equal <3.0000>, got <2.0000>
+
+expect(@(1+1)).toWithDescription(equal(@3), @"Make sure libKindergartenMath is loaded");
+// failed - Make sure libKindergartenMath is loaded
+// expected to equal <3.0000>, got <2.0000>
+```
+
 ## Type Checking
 
 Nimble makes sure you don't compare two types that don't match:
@@ -1048,4 +1078,4 @@ target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
 end
 ```
 
-Finally run `pod install`. 
+Finally run `pod install`.
