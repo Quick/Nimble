@@ -74,5 +74,8 @@ class AsyncTest: XCTestCase {
                 done()
             }
         }
+
+        // "clear" runloop to ensure this test doesn't poison other tests
+        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(2.0))
     }
 }
