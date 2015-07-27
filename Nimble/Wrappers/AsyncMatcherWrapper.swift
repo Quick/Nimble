@@ -14,28 +14,34 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
         let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
-            self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
+            try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-            case .Success: return true
-            case .Failure: return false
-            case .Timeout:
-                failureMessage.postfixMessage += " (Stall on main thread)."
-                return false
+        case .Success: return true
+        case .Failure: return false
+        case let .ErrorThrown(error):
+            failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
+            return false
+        case .Timeout:
+            failureMessage.postfixMessage += " (Stall on main thread)."
+            return false
         }
     }
 
     func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
         let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
-            self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
+            try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-            case .Success: return true
-            case .Failure: return false
-            case .Timeout:
-                failureMessage.postfixMessage += " (Stall on main thread)."
-                return false
+        case .Success: return true
+        case .Failure: return false
+        case let .ErrorThrown(error):
+            failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
+            return false
+        case .Timeout:
+            failureMessage.postfixMessage += " (Stall on main thread)."
+            return false
         }
     }
 }

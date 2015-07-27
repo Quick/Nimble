@@ -36,8 +36,15 @@ public class NMBObjCMatcher : NSObject, NMBMatcher {
     }
 
     private func canMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
-        if !canMatchNil && actualExpression.evaluate() == nil {
-            failureMessage.postfixActual = " (use beNil() to match nils)"
+        do {
+            if !canMatchNil {
+                if try actualExpression.evaluate() == nil {
+                    failureMessage.postfixActual = " (use beNil() to match nils)"
+                    return false
+                }
+            }
+        } catch let error {
+            failureMessage.actualValue = "an unexpected error thrown: \(error)"
             return false
         }
         return true

@@ -2,12 +2,26 @@ import XCTest
 import Nimble
 
 class SynchronousTest: XCTestCase {
+    let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
+    private func doThrowError() throws -> Int {
+        throw errorToThrow
+    }
+
     func testFailAlwaysFails() {
         failsWithErrorMessage("My error message") {
             fail("My error message")
         }
         failsWithErrorMessage("fail() always fails") {
             fail()
+        }
+    }
+
+    func testUnexpectedErrorsThrownFails() {
+        failsWithErrorMessage("expected to equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.to(equal(1))
+        }
+        failsWithErrorMessage("expected to not equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.toNot(equal(1))
         }
     }
 
@@ -18,15 +32,15 @@ class SynchronousTest: XCTestCase {
 
     func testToProvidesActualValueExpression() {
         var value: Int?
-        expect(1).to(MatcherFunc { expr, failure in value = expr.evaluate(); return true })
+        expect(1).to(MatcherFunc { expr, failure in value = try expr.evaluate(); return true })
         expect(value).to(equal(1))
     }
 
     func testToProvidesAMemoizedActualValueExpression() {
         var callCount = 0
         expect{ callCount++ }.to(MatcherFunc { expr, failure in
-            expr.evaluate()
-            expr.evaluate()
+            try expr.evaluate()
+            try expr.evaluate()
             return true
         })
         expect(callCount).to(equal(1))
@@ -36,7 +50,7 @@ class SynchronousTest: XCTestCase {
         var callCount = 0
         expect{ callCount++ }.to(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
-            expr.evaluate()
+            try expr.evaluate()
             return true
         })
         expect(callCount).to(equal(1))
@@ -57,15 +71,15 @@ class SynchronousTest: XCTestCase {
 
     func testToNotProvidesActualValueExpression() {
         var value: Int?
-        expect(1).toNot(MatcherFunc { expr, failure in value = expr.evaluate(); return false })
+        expect(1).toNot(MatcherFunc { expr, failure in value = try expr.evaluate(); return false })
         expect(value).to(equal(1))
     }
 
     func testToNotProvidesAMemoizedActualValueExpression() {
         var callCount = 0
         expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
-            expr.evaluate()
-            expr.evaluate()
+            try expr.evaluate()
+            try expr.evaluate()
             return false
         })
         expect(callCount).to(equal(1))
@@ -75,7 +89,7 @@ class SynchronousTest: XCTestCase {
         var callCount = 0
         expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
-            expr.evaluate()
+            try expr.evaluate()
             return false
         })
         expect(callCount).to(equal(1))

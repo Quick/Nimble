@@ -15,11 +15,17 @@ internal class NMBWait: NSObject {
             }
             return completed
         }
-        if result == PollResult.Failure {
+        switch (result) {
+        case .Failure:
             let pluralize = (timeout == 1 ? "" : "s")
             fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
-        } else if result == PollResult.Timeout {
+        case .Timeout:
             fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
+        case let .ErrorThrown(error):
+            // Technically, we can never reach this via a public API call
+            fail("Unexpected error thrown: \(error)", file: file, line: line)
+        case .Success:
+            break
         }
     }
 
