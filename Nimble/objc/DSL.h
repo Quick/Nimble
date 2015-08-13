@@ -111,6 +111,10 @@ NIMBLE_EXPORT NMBWaitUntilBlock nmb_wait_until_builder(NSString *file, NSUIntege
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define expect(...) NMB_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
 #define expectAction(...) NMB_expect(^id{ (__VA_ARGS__); return nil; }, __FILE__, __LINE__)
+#define failWithMessage(msg) NMB_failWithMessage(msg, @(__FILE__), __LINE__)
+#define fail() failWithMessage(@"fail() always fails")
+
+
 #define waitUntilTimeout NMB_waitUntilTimeout
 #define waitUntil NMB_waitUntil
 #endif
