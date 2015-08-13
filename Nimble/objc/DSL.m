@@ -23,6 +23,10 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(), const char 
     }, file, line);
 }
 
+NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger line) {
+    return [NMBExpectation failWithMessage:msg file:file line:line];
+}
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass) {
     return [NMBObjCMatcher beAnInstanceOfMatcher:expectedClass];
 }
