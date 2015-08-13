@@ -121,7 +121,7 @@ NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger
 #define expect(...) NMB_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
 #define expectAction(BLOCK) NMB_expectAction((BLOCK), __FILE__, __LINE__)
 #define failWithMessage(msg) NMB_failWithMessage(msg, @(__FILE__), __LINE__)
-#define fail() failWithMessage(@"")
+#define fail() failWithMessage(@"fail() always fails")
 
 
 #define waitUntilTimeout NMB_waitUntilTimeout
