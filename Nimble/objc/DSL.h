@@ -106,6 +106,8 @@ NIMBLE_SHORT(id<NMBMatcher> allPass(id matcher),
 typedef void (^NMBWaitUntilTimeoutBlock)(NSTimeInterval timeout, void (^action)(void (^)(void)));
 typedef void (^NMBWaitUntilBlock)(void (^action)(void (^)(void)));
 
+NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger line);
+
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock NMB_waitUntilTimeoutBuilder(NSString *file, NSUInteger line);
 NIMBLE_EXPORT NMBWaitUntilBlock NMB_waitUntilBuilder(NSString *file, NSUInteger line);
 
@@ -115,6 +117,10 @@ NIMBLE_EXPORT NMBWaitUntilBlock NMB_waitUntilBuilder(NSString *file, NSUInteger 
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define expect(...) NMB_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
 #define expectAction(...) NMB_expect(^id{ (__VA_ARGS__); return nil; }, __FILE__, __LINE__)
+#define failWithMessage(msg) NMB_failWithMessage(msg, @(__FILE__), __LINE__)
+#define fail() failWithMessage(@"fail() always fails")
+
+
 #define waitUntilTimeout NMB_waitUntilTimeout
 #define waitUntil NMB_waitUntil
 #endif
