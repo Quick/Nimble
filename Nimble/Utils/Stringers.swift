@@ -29,7 +29,7 @@ internal func stringify<S: SequenceType>(value: S) -> String {
             strings.append(stringify(value))
         }
     } while value != nil
-    let str = ", ".join(strings)
+    let str = strings.joinWithSeparator(", ")
     return "[\(str)]"
 }
 
