@@ -41,6 +41,14 @@ extension NSArray : NMBOrderedCollection {}
 }
 extension NSNumber : NMBDoubleConvertible { }
 
+extension NSDate: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        get {
+            return self.timeIntervalSinceReferenceDate
+        }
+    }
+}
+
 /// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
 ///  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 ///
