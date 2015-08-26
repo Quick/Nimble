@@ -13,10 +13,10 @@ class ContainTest: XCTestCase {
         expect(NSArray(array: ["a"])).toNot(contain("b"))
         expect(NSArray(object: 1) as NSArray?).to(contain(1))
 
-        failsWithErrorMessage("expected to contain <bar>, got <[a, b, c]>") {
+        failsWithErrorMessage("expected to contain <bar>, got <[\"a\", \"b\", \"c\"]>") {
             expect(["a", "b", "c"]).to(contain("bar"))
         }
-        failsWithErrorMessage("expected to not contain <b>, got <[a, b, c]>") {
+        failsWithErrorMessage("expected to not contain <b>, got <[\"a\", \"b\", \"c\"]>") {
             expect(["a", "b", "c"]).toNot(contain("b"))
         }
 
@@ -54,11 +54,11 @@ class ContainTest: XCTestCase {
         expect([1, 2, 3]).to(contain(1, 2))
         expect([1, 2, 3]).toNot(contain(1, 4))
 
-        failsWithErrorMessage("expected to contain <a, bar>, got <[a, b, c]>") {
+        failsWithErrorMessage("expected to contain <a, bar>, got <[\"a\", \"b\", \"c\"]>") {
             expect(["a", "b", "c"]).to(contain("a", "bar"))
         }
 
-        failsWithErrorMessage("expected to not contain <bar, b>, got <[a, b, c]>") {
+        failsWithErrorMessage("expected to not contain <bar, b>, got <[\"a\", \"b\", \"c\"]>") {
             expect(["a", "b", "c"]).toNot(contain("bar", "b"))
         }
     }

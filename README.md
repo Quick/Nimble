@@ -661,7 +661,7 @@ If you're using Swift 2.0+, you can use the `throwError` matcher to check if an 
 expect{ try somethingThatThrows() }.to(throwError())
 
 // Passes if somethingThatThrows() throws an error with a given domain:
-expect{ try somethingThatThrows() }.to(throwError { error in
+expect{ try somethingThatThrows() }.to(throwError { (error: ErrorType) in
     expect(error._domain).to(equal(NSCocoaErrorDomain))
 })
 
@@ -690,7 +690,7 @@ expect(actual).to(raiseException(named: name, reason: reason))
 
 // Passes if actual raises an exception and it passes expectations in the block
 // (in this case, if name begins with 'a r')
-expect { exception.raise() }.to(raiseException { exception in
+expect { exception.raise() }.to(raiseException { (exception: NSException) in
     expect(exception.name).to(beginWith("a r"))
 })
 ```

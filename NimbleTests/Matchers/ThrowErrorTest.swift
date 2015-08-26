@@ -56,30 +56,30 @@ class ThrowErrorTest: XCTestCase {
             expect(x) >= 1
         })
         // Typed closure over error argument
-        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { error in
+        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { (error: Error) in
             expect(error._domain).to(beginWith("Nim"))
         })
         // Typed closure over error argument
-        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { error in
+        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { (error: Error) in
             expect(error._domain).toNot(beginWith("as"))
         })
     }
 
     func testNegativeMatches() {
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <NimbleTests.EquatableError.Parameterized(2)>, got <NimbleTests.EquatableError.Parameterized(1)>") {
+        failsWithErrorMessage("expected to throw error <Parameterized(2)>, got <Parameterized(1)>") {
             expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
         }
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <NimbleTests.EquatableError.Parameterized(2)>, got <NimbleTests.EquatableError.Parameterized(1)>") {
+        failsWithErrorMessage("expected to throw error <Parameterized(2)>, got <Parameterized(1)>") {
             expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
         }
         // Different case
-        failsWithErrorMessage("expected to throw error <NimbleTests.Error.Cry>, got <NimbleTests.Error.Laugh>") {
+        failsWithErrorMessage("expected to throw error <Cry>, got <Laugh>") {
             expect { throw Error.Laugh }.to(throwError(Error.Cry))
         }
         // Different case with closure
-        failsWithErrorMessage("expected to throw error <NimbleTests.Error.Cry> that satisfies block, got <NimbleTests.Error.Laugh>") {
+        failsWithErrorMessage("expected to throw error <Cry> that satisfies block, got <Laugh>") {
             expect { throw Error.Laugh }.to(throwError(Error.Cry) { _ in return })
         }
         // Different case, implementing CustomDebugStringConvertible
@@ -97,11 +97,11 @@ class ThrowErrorTest: XCTestCase {
 
     func testNegativeNegatedMatches() {
         // No error at all
-        failsWithErrorMessage("expected to not throw any error, got <NimbleTests.Error.Laugh>") {
+        failsWithErrorMessage("expected to not throw any error, got <Laugh>") {
             expect { throw Error.Laugh }.toNot(throwError())
         }
         // Different error
-        failsWithErrorMessage("expected to not throw error <NimbleTests.Error.Laugh>, got <NimbleTests.Error.Laugh>") {
+        failsWithErrorMessage("expected to not throw error <Laugh>, got <Laugh>") {
             expect { throw Error.Laugh }.toNot(throwError(Error.Laugh))
         }
     }
@@ -113,7 +113,7 @@ class ThrowErrorTest: XCTestCase {
             })
         }
         
-        failsWithErrorMessage("expected to throw error <NimbleTests.Error.Laugh> that satisfies block, got no error") {
+        failsWithErrorMessage("expected to throw error <Laugh> that satisfies block, got no error") {
             expect { return }.to(throwError(Error.Laugh) { error in
                 fail()
             })
@@ -126,11 +126,11 @@ class ThrowErrorTest: XCTestCase {
             expect(error._domain).to(equal("foo"))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <NimbleTests.Error> that satisfies block, got <NimbleTests.Error.Laugh>"]) {
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <Error> that satisfies block, got <Laugh>"]) {
             expect { throw Error.Laugh }.to(throwError(closure: closure))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error <NimbleTests.Error.Laugh> that satisfies block, got <NimbleTests.Error.Laugh>"]) {
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error <Laugh> that satisfies block, got <Laugh>"]) {
             expect { throw Error.Laugh }.to(throwError(Error.Laugh, closure: closure))
         }
     }
