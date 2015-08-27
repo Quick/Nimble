@@ -42,7 +42,13 @@ extension NSArray : NMBOrderedCollection {}
 extension NSNumber : NMBDoubleConvertible {
 }
 
-private let dateFormatter = NSDateFormatter()
+private let dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    
+    return formatter
+    }()
 
 extension NSDate: NMBDoubleConvertible {
     public var doubleValue: CDouble {
@@ -57,9 +63,7 @@ extension NMBDoubleConvertible {
     public var stringRepresentation: String {
         get {
             if let date = self as? NSDate {
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
-                dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-                return "\(dateFormatter.stringFromDate(date))"
+                return dateFormatter.stringFromDate(date)
             }
             
             if let debugStringConvertible = self as? CustomDebugStringConvertible {
