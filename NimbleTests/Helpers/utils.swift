@@ -81,7 +81,7 @@ extension NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let d = dateFormatter.dateFromString(dateTimeString)!
-        self.init(timeInterval:0, sinceDate:d)
+        let date = dateFormatter.dateFromString(dateTimeString)!
+        self.init(timeInterval:0, sinceDate:date)
     }
 }
