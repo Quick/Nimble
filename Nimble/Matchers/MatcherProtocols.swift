@@ -38,13 +38,30 @@ extension NSArray : NMBOrderedCollection {}
 /// Protocol for types to support beCloseTo() matcher
 @objc public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
+    var stringRepresentation: String { get }
 }
-extension NSNumber : NMBDoubleConvertible { }
+extension NSNumber : NMBDoubleConvertible {
+    public var stringRepresentation: String {
+        get {
+            return NSString(format: "%.4f", (self)).description
+        }
+    }
+}
+
+private let dateFormatter = NSDateFormatter()
 
 extension NSDate: NMBDoubleConvertible {
     public var doubleValue: CDouble {
         get {
             return self.timeIntervalSinceReferenceDate
+        }
+    }
+    
+    public var stringRepresentation: String {
+        get {
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+            return "\(dateFormatter.stringFromDate(self))"
         }
     }
 }

@@ -33,8 +33,10 @@ class BeCloseToTest: XCTestCase {
     func testBeCloseToWithNSDate() {
         expect(NSDate(dateTimeString: "2015-08-26 11:43:00")).to(beCloseTo(NSDate(dateTimeString: "2015-08-26 11:43:05"), within: 10))
         
-        failsWithErrorMessage("expected to not be close to <462296591.0000> (within 10.0000), got <462296580.0000>") {
-            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")).toNot(beCloseTo(NSDate(dateTimeString: "2015-08-26 11:43:11"), within: 10))
+        failsWithErrorMessage("expected to not be close to <2015-08-26 11:43:00.0050> (within 0.0040), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")).toNot(beCloseTo(expectedDate, within: 0.004))
         }
     }
     

@@ -47,6 +47,13 @@ internal func stringify<T>(value: T) -> String {
     return String(value)
 }
 
+internal func stringify(value: NMBDoubleConvertible) -> String {
+    if let value = value as? Double {
+        return NSString(format: "%.4f", (value)).description
+    }
+    return value.stringRepresentation
+}
+
 internal func stringify<T>(value: T?) -> String {
     if let unboxed = value {
        return stringify(unboxed)
