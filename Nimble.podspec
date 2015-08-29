@@ -15,4 +15,5 @@ Pod::Spec.new do |s|
   s.source_files = "Nimble", "Nimble/**/*.{swift,h,m}"
   s.framework    = "XCTest"
   s.requires_arc = true
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end
