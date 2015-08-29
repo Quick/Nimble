@@ -55,6 +55,8 @@ it.
   1.1, issue a pull request against the `swift-1.1` branch. The master
   branch supports Swift 1.2. Travis CI will only pass for pull requests
   issued against the `swift-1.1` branch.
+- If you're making a configuration change, make sure to edit both the xcode
+  project and the podspec file.
 
 ### Style Conventions
 
