@@ -1,5 +1,6 @@
 import XCTest
 import Nimble
+import Swift
 
 class AsyncTest: XCTestCase {
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
@@ -62,6 +63,8 @@ class AsyncTest: XCTestCase {
                 done()
             }
         }
+        // "clear" runloop to ensure this test doesn't poison other tests
+        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
     }
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
