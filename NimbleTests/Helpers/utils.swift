@@ -75,3 +75,13 @@ public class NimbleHelper : NSObject {
         failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
+
+extension NSDate {
+    convenience init(dateTimeString:String) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let date = dateFormatter.dateFromString(dateTimeString)!
+        self.init(timeInterval:0, sinceDate:date)
+    }
+}
