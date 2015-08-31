@@ -52,6 +52,18 @@ if [ -z "`which $POD`" ]; then
 fi
 echo " > Cocoapods is installed"
 
+echo " > Is this a reasonable tag?"
+
+echo $VERSION_TAG | grep -q "^vv"
+if [ $? -eq 0 ]; then
+    die "This tag ($VERSION) is an incorrect format. You should remove the 'v' prefix."
+fi
+
+echo $VERSION_TAG | grep -q -E "^v\d+\.\d+\.\d+(-\w+(\.\d)?)?\$"
+if [ $? -ne 0 ]; then
+    die "This tag ($VERSION) is an incorrect format. It should be in 'v{MAJOR}.{MINOR}.{PATCH}(-{PRERELEASE_NAME}.{PRERELEASE_VERSION})' form."
+fi
+
 echo " > Is this version ($VERSION) unique?"
 git describe --exact-match "$VERSION_TAG" 2>&1 > /dev/null
 if [ $? -eq 0 ]; then
@@ -161,4 +173,6 @@ echo " - Go to $GITHUB_TAGS_URL and mark this as a release."
 echo "   - Paste the contents of $RELEASE_NOTES into the release notes. Tweak for Github styling."
 echo "   - Attach ${CARTHAGE_FRAMEWORK_NAME}.framework.zip to it."
 echo " - Announce!"
+
+rm Nimble.podspec.backup
 
