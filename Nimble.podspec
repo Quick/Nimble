@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Quick/Nimble.git", :tag => "v#{s.version}" }
 
   s.source_files = "Nimble", "Nimble/**/*.{swift,h,m}"
-  s.framework    = "XCTest"
+  s.weak_framework = "XCTest"
   s.requires_arc = true
-  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'OTHER_LDFLAGS' => '-weak-lswiftXCTest', 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"' }
 end
