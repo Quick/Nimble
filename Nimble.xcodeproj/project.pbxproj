@@ -173,6 +173,10 @@
 		29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59621B551ED2002D767E /* ThrowErrorTest.swift */; };
 		29EA59661B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		29EA59671B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
+		472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; settings = {ASSET_TAGS = (); }; };
+		472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
+		472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
+		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -345,6 +349,8 @@
 		1FFD729C1963FCAB00CD29A2 /* Nimble-OSXTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Nimble-OSXTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		29EA59621B551ED2002D767E /* ThrowErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowErrorTest.swift; sourceTree = "<group>"; };
 		29EA59651B551EE6002D767E /* ThrowError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowError.swift; sourceTree = "<group>"; };
+		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
+		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
@@ -490,6 +496,7 @@
 				1F925F01195C189500ED456B /* ContainTest.swift */,
 				1F925EFE195C187600ED456B /* EndWithTest.swift */,
 				1F925F04195C18B700ED456B /* EqualTest.swift */,
+				472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */,
 				DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */,
 				1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */,
 				29EA59621B551ED2002D767E /* ThrowErrorTest.swift */,
@@ -525,6 +532,7 @@
 				1FD8CD171968AB07008ED995 /* BeLogical.swift */,
 				1FD8CD181968AB07008ED995 /* BeNil.swift */,
 				1FD8CD1A1968AB07008ED995 /* Contain.swift */,
+				472FD1341B9E085700C7B8DA /* HaveCount.swift */,
 				1FD8CD1B1968AB07008ED995 /* EndWith.swift */,
 				1FD8CD1C1968AB07008ED995 /* Equal.swift */,
 				DDB4D5EC19FE43C200E9D9FE /* Match.swift */,
@@ -826,6 +834,7 @@
 				1FD8CD341968AB07008ED995 /* DSL.swift in Sources */,
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
+				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +891,7 @@
 				1F925EE9195C124400ED456B /* BeAnInstanceOfTest.swift in Sources */,
 				29EA59631B551ED2002D767E /* ThrowErrorTest.swift in Sources */,
 				1F4A566A1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */,
+				472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +938,7 @@
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
+				472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +995,7 @@
 				1F925EEA195C124400ED456B /* BeAnInstanceOfTest.swift in Sources */,
 				29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */,
 				1F4A566B1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */,
+				472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
