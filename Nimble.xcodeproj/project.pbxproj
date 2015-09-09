@@ -177,6 +177,8 @@
 		472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
+		4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; settings = {ASSET_TAGS = (); }; };
+		4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; settings = {ASSET_TAGS = (); }; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -351,6 +353,7 @@
 		29EA59651B551EE6002D767E /* ThrowError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowError.swift; sourceTree = "<group>"; };
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
+		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
@@ -601,6 +604,7 @@
 				1F4A56931A3B346F009E1637 /* ObjCContainTest.m */,
 				1F4A56961A3B34AA009E1637 /* ObjCEndWithTest.m */,
 				1F4A56991A3B3539009E1637 /* ObjCEqualTest.m */,
+				4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */,
 				1F4A569C1A3B3565009E1637 /* ObjCMatchTest.m */,
 				1F4A569F1A3B359E009E1637 /* ObjCRaiseExceptionTest.m */,
 				965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */,
@@ -883,6 +887,7 @@
 				1F4A56851A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A8F19CF439B00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				1F925F05195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566D1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
@@ -987,6 +992,7 @@
 				1F4A56861A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D51963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				1F925F06195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566E1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
