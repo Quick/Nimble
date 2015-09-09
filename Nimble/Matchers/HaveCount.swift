@@ -1,5 +1,8 @@
 import Foundation
 
+
+/// A Nimble matcher that succeeds when the actual array's count equals
+/// the expected value
 public func haveCount<T: Equatable>(expectedValue: Int) -> MatcherFunc<[T]> {
     return MatcherFunc { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
