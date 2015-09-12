@@ -19,9 +19,11 @@ expect(ocean.isClean).toEventually(beTruthy())
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Some Background: Expressing Outcomes Using Assertions in XCTest](#some-background-expressing-outcomes-using-assertions-in-xctest)
 - [Nimble: Expectations Using `expect(...).to`](#nimble-expectations-using-expectto)
+  - [Custom Failure Messages](#custom-failure-messages)
   - [Type Checking](#type-checking)
   - [Operator Overloads](#operator-overloads)
   - [Lazily Computed Values](#lazily-computed-values)
@@ -35,10 +37,12 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Comparisons](#comparisons)
   - [Types/Classes](#typesclasses)
   - [Truthiness](#truthiness)
+  - [Swift Error Handling](#swift-error-handling)
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
   - [Strings](#strings)
   - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
+  - [Verify collection count](#verify-collection-count)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -855,6 +859,28 @@ For Swift the actual value has to be a SequenceType, e.g. an array, a set or a c
 
 For Objective-C the actual value has to be a NSFastEnumeration, e.g. NSArray and NSSet, of NSObjects and only the variant which
 uses another matcher is available here.
+
+## Verify collection count
+
+```swift
+// passes if actual collection's count is equal to expected
+expect(actual).to(haveCount(expected))
+
+// passes if actual collection's count is not equal to expected
+expect(actual).notTo(haveCount(expected))
+```
+
+```objc
+// passes if actual collection's count is equal to expected
+expect(actual).to(haveCount(expected))
+
+// passes if actual collection's count is not equal to expected
+expect(actual).notTo(haveCount(expected))
+```
+
+For Swift the actual value must be a `CollectionType` such as array, dictionary or set.
+
+For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
 
 # Writing Your Own Matchers
 

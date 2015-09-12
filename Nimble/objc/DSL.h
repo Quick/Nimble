@@ -21,6 +21,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> equal(id expectedValue),
              NMB_equal(expectedValue));
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_haveCount(id expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> haveCount(id expectedValue),
+             NMB_haveCount(expectedValue));
+
 NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue);
 NIMBLE_SHORT(NMBObjCBeCloseToMatcher *beCloseTo(id expectedValue),
              NMB_beCloseTo(expectedValue));

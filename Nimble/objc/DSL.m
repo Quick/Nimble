@@ -113,6 +113,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue) {
     return [NMBObjCMatcher equalMatcher:expectedValue];
 }
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_haveCount(id expectedValue) {
+    return [NMBObjCMatcher haveCountMatcher:expectedValue];
+}
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue) {
     return [NMBObjCMatcher matchMatcher:expectedValue];
 }
