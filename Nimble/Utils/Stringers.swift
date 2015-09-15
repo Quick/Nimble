@@ -23,13 +23,13 @@ internal func stringify<S: SequenceType>(value: S) -> String {
     var generator = value.generate()
     var strings = [String]()
     var value: S.Generator.Element?
-    do {
+    repeat {
         value = generator.next()
         if value != nil {
             strings.append(stringify(value))
         }
     } while value != nil
-    let str = ", ".join(strings)
+    let str = strings.joinWithSeparator(", ")
     return "[\(str)]"
 }
 
@@ -44,7 +44,14 @@ internal func stringify<T>(value: T) -> String {
     if let value = value as? Double {
         return NSString(format: "%.4f", (value)).description
     }
-    return toString(value)
+    return String(value)
+}
+
+internal func stringify(value: NMBDoubleConvertible) -> String {
+    if let value = value as? Double {
+        return NSString(format: "%.4f", (value)).description
+    }
+    return value.stringRepresentation
 }
 
 internal func stringify<T>(value: T?) -> String {

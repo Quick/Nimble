@@ -10,24 +10,24 @@ import Foundation
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func raiseException(
-    named: String? = nil,
+    named named: String? = nil,
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
     closure: ((NSException) -> Void)? = nil) -> MatcherFunc<Any> {
         return MatcherFunc { actualExpression, failureMessage in
 
             var exception: NSException?
-            var capture = NMBExceptionCapture(handler: ({ e in
+            let capture = NMBExceptionCapture(handler: ({ e in
                 exception = e
             }), finally: nil)
 
             capture.tryBlock {
-                actualExpression.evaluate()
+                try! actualExpression.evaluate()
                 return
             }
 
-            setFailureMessageForException(failureMessage, exception, named, reason, userInfo, closure)
-            return exceptionMatchesNonNilFieldsOrClosure(exception, named, reason, userInfo, closure)
+            setFailureMessageForException(failureMessage, exception: exception, named: named, reason: reason, userInfo: userInfo, closure: closure)
+            return exceptionMatchesNonNilFieldsOrClosure(exception, named: named, reason: reason, userInfo: userInfo, closure: closure)
         }
 }
 
@@ -49,7 +49,7 @@ internal func setFailureMessageForException(
         if let userInfo = userInfo {
             failureMessage.postfixMessage += " with userInfo <\(userInfo)>"
         }
-        if let closure = closure {
+        if let _ = closure {
             failureMessage.postfixMessage += " that satisfies block"
         }
         if named == nil && reason == nil && userInfo == nil && closure == nil {
@@ -87,7 +87,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
                 let assertions = gatherFailingExpectations {
                     closure(exception)
                 }
-                let messages = map(assertions) { $0.message }
+                let messages = assertions.map { $0.message }
                 if messages.count > 0 {
                     matches = false
                 }
@@ -97,7 +97,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         return matches
 }
 
-@objc public class NMBObjCRaiseExceptionMatcher : NMBMatcher {
+public class NMBObjCRaiseExceptionMatcher : NSObject, NMBMatcher {
     internal var _name: String?
     internal var _reason: String?
     internal var _userInfo: NSDictionary?
@@ -114,7 +114,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         let block: () -> Any? = ({ actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
 
-        return raiseException(
+        return try! raiseException(
             named: _name,
             reason: _reason,
             userInfo: _userInfo,

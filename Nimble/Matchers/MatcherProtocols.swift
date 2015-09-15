@@ -3,8 +3,8 @@ import Foundation
 /// Implement this protocol to implement a custom matcher for Swift
 public protocol Matcher {
     typealias ValueType
-    func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
-    func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) -> Bool
+    func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
+    func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
 }
 
 /// Objective-C interface to the Swift variant of Matcher.
@@ -21,7 +21,7 @@ extension NSArray : NMBContainer {}
 extension NSSet : NMBContainer {}
 extension NSHashTable : NMBContainer {}
 
-/// Protocol for types that support only beEmpty()
+/// Protocol for types that support only beEmpty(), haveCount() matchers
 @objc public protocol NMBCollection {
     var count: Int { get }
 }
@@ -39,8 +39,45 @@ extension NSArray : NMBOrderedCollection {}
 @objc public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
 }
-extension NSNumber : NMBDoubleConvertible { }
-extension NSDecimalNumber : NMBDoubleConvertible { } // TODO: not the best to downsize
+extension NSNumber : NMBDoubleConvertible {
+}
+
+private let dateFormatter: NSDateFormatter = {
+    let formatter = NSDateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
+    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    
+    return formatter
+    }()
+
+extension NSDate: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        get {
+            return self.timeIntervalSinceReferenceDate
+        }
+    }
+}
+
+
+extension NMBDoubleConvertible {
+    public var stringRepresentation: String {
+        get {
+            if let date = self as? NSDate {
+                return dateFormatter.stringFromDate(date)
+            }
+            
+            if let debugStringConvertible = self as? CustomDebugStringConvertible {
+                return debugStringConvertible.debugDescription
+            }
+            
+            if let stringConvertible = self as? CustomStringConvertible {
+                return stringConvertible.description
+            }
+            
+            return ""
+        }
+    }
+}
 
 /// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
 ///  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.

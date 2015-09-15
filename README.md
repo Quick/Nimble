@@ -1,7 +1,5 @@
 # Nimble
 
-[![Circle CI](https://circleci.com/gh/Quick/Nimble/tree/master.svg?style=svg&circle-token=6115c5d83f74a6c59a484dd8921b97096404a5f3)](https://circleci.com/gh/Quick/Nimble/tree/master)
-
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
 [Cedar](https://github.com/pivotal/cedar).
@@ -21,9 +19,11 @@ expect(ocean.isClean).toEventually(beTruthy())
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Some Background: Expressing Outcomes Using Assertions in XCTest](#some-background-expressing-outcomes-using-assertions-in-xctest)
 - [Nimble: Expectations Using `expect(...).to`](#nimble-expectations-using-expectto)
+  - [Custom Failure Messages](#custom-failure-messages)
   - [Type Checking](#type-checking)
   - [Operator Overloads](#operator-overloads)
   - [Lazily Computed Values](#lazily-computed-values)
@@ -37,10 +37,12 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Comparisons](#comparisons)
   - [Types/Classes](#typesclasses)
   - [Truthiness](#truthiness)
+  - [Swift Error Handling](#swift-error-handling)
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
   - [Strings](#strings)
   - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
+  - [Verify collection count](#verify-collection-count)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -50,6 +52,7 @@ expect(ocean.isClean).toEventually(beTruthy())
 - [Installing Nimble](#installing-nimble)
   - [Installing Nimble as a Submodule](#installing-nimble-as-a-submodule)
   - [Installing Nimble via CocoaPods](#installing-nimble-via-cocoapods)
+  - [Using Nimble without XCTest](#using-nimble-without-xctest)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -129,6 +132,36 @@ expect(seagull.squawk).toNot(equal(@"Oh, hello there!"));
 expect(seagull.squawk).notTo(equal(@"Oh, hello there!"));
 ```
 
+## Custom Failure Messages
+
+Would you like to add more information to the test's failure messages? Use the `description` optional argument to add your own text:
+
+```swift
+// Swift
+
+expect(1 + 1).to(equal(3))
+// failed - expected to equal <3>, got <2>
+
+expect(1 + 1).to(equal(3), description: "Make sure libKindergartenMath is loaded")
+// failed - Make sure libKindergartenMath is loaded
+// expected to equal <3>, got <2>
+```
+
+Or the *WithDescription version in Objective-C:
+
+```objc
+// Objective-C
+
+@import Nimble;
+
+expect(@(1+1)).to(equal(@3));
+// failed - expected to equal <3.0000>, got <2.0000>
+
+expect(@(1+1)).toWithDescription(equal(@3), @"Make sure libKindergartenMath is loaded");
+// failed - Make sure libKindergartenMath is loaded
+// expected to equal <3.0000>, got <2.0000>
+```
+
 ## Type Checking
 
 Nimble makes sure you don't compare two types that don't match:
@@ -201,14 +234,14 @@ value:
 NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException
                                                  reason:@"Not enough fish in the sea."
                                                userInfo:nil];
-expectAction([exception raise]).to(raiseException());
+expectAction(^{ [exception raise]; }).to(raiseException());
 
 // Use the property-block syntax to be more specific.
-expectAction([exception raise]).to(raiseException().named(NSInternalInconsistencyException));
-expectAction([exception raise]).to(raiseException().
+expectAction(^{ [exception raise]; }).to(raiseException().named(NSInternalInconsistencyException));
+expectAction(^{ [exception raise]; }).to(raiseException().
     named(NSInternalInconsistencyException).
     reason("Not enough fish in the sea"));
-expectAction([exception raise]).to(raiseException().
+expectAction(^{ [exception raise]; }).to(raiseException().
     named(NSInternalInconsistencyException).
     reason("Not enough fish in the sea").
     userInfo(@{@"something": @"is fishy"}));
@@ -364,7 +397,7 @@ to keep in mind when using Nimble in Objective-C:
    ```objc
    // Objective-C
 
-   expectAction([exception raise]).to(raiseException());
+   expectAction(^{ [exception raise]; }).to(raiseException());
    ```
 
 ## Disabling Objective-C Shorthand
@@ -622,6 +655,30 @@ expect(actual).to(beFalse());
 expect(actual).to(beNil());
 ```
 
+## Swift Error Handling
+
+If you're using Swift 2.0+, you can use the `throwError` matcher to check if an error is thrown.
+
+```swift
+// Swift
+
+// Passes if somethingThatThrows() throws an ErrorType:
+expect{ try somethingThatThrows() }.to(throwError())
+
+// Passes if somethingThatThrows() throws an error with a given domain:
+expect{ try somethingThatThrows() }.to(throwError { (error: ErrorType) in
+    expect(error._domain).to(equal(NSCocoaErrorDomain))
+})
+
+// Passes if somethingThatThrows() throws an error with a given case:
+expect{ try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadCorruptError))
+
+// Passes if somethingThatThrows() throws an error with a given type:
+expect{ try somethingThatThrows() }.to(throwError(errorType: MyError.self))
+```
+
+Note: This feature is only available in Swift.
+
 ## Exceptions
 
 ```swift
@@ -638,7 +695,7 @@ expect(actual).to(raiseException(named: name, reason: reason))
 
 // Passes if actual raises an exception and it passes expectations in the block
 // (in this case, if name begins with 'a r')
-expect { exception.raise() }.to(raiseException { exception in
+expect { exception.raise() }.to(raiseException { (exception: NSException) in
     expect(exception.name).to(beginWith("a r"))
 })
 ```
@@ -802,6 +859,28 @@ For Swift the actual value has to be a SequenceType, e.g. an array, a set or a c
 
 For Objective-C the actual value has to be a NSFastEnumeration, e.g. NSArray and NSSet, of NSObjects and only the variant which
 uses another matcher is available here.
+
+## Verify collection count
+
+```swift
+// passes if actual collection's count is equal to expected
+expect(actual).to(haveCount(expected))
+
+// passes if actual collection's count is not equal to expected
+expect(actual).notTo(haveCount(expected))
+```
+
+```objc
+// passes if actual collection's count is equal to expected
+expect(actual).to(haveCount(expected))
+
+// passes if actual collection's count is not equal to expected
+expect(actual).notTo(haveCount(expected))
+```
+
+For Swift the actual value must be a `CollectionType` such as array, dictionary or set.
+
+For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
 
 # Writing Your Own Matchers
 
@@ -1010,9 +1089,12 @@ extension NMBObjCMatcher {
   Quick and Nimble, follow [the installation instructions in the Quick
   README](https://github.com/Quick/Quick#how-to-install-quick).
 
-Nimble can currently be installed in one of two ways: using CocoaPods, or with git submodules. The master branch of
-Nimble supports Swift 1.2. For Swift 1.1 support, use the `swift-1.1`
-branch.
+Nimble can currently be installed in one of two ways: using CocoaPods, or with
+git submodules.
+
+- The `swift-2.0` branch support Swift 2.0.
+- The `master` branch of Nimble supports Swift 1.2.
+- For Swift 1.1 support, use the `swift-1.1` branch.
 
 ## Installing Nimble as a Submodule
 
@@ -1031,8 +1113,9 @@ install just Nimble.
 
 ## Installing Nimble via CocoaPods
 
-To use Nimble in CocoaPods to test your iOS or OS X applications, update CocoaPods to Version 0.36.0.
-Then add Nimble to your podfile and add the ```use_frameworks!``` line to enable Swift support for Cocoapods.
+To use Nimble in CocoaPods to test your iOS or OS X applications, add Nimble to
+your podfile and add the ```use_frameworks!``` line to enable Swift support for
+Cocoapods.
 
 ```ruby
 platform :ios, '8.0'
@@ -1043,11 +1126,50 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
   use_frameworks!
-  # If you're using Swift 1.2 (Xcode 6.3 beta), use this:
-  pod 'Nimble', '~> 0.4.0'
+  # If you're using Swift 2.0 (Xcode 7), use this:
+  pod 'Nimble', '2.0.0-rc.2'
+  # If you're using Swift 1.2 (Xcode 6), use this:
+  pod 'Nimble', '~> 1.0.0'
   # Otherwise, use this commented out line for Swift 1.1 (Xcode 6.2):
   # pod 'Nimble', '~> 0.3.0'
 end
 ```
 
-Finally run `pod install`. 
+Finally run `pod install`.
+
+## Using Nimble without XCTest
+
+Nimble is integrated with XCTest to allow it work well when used in Xcode test
+bundles, however it can also be used in a standalone app. After installing
+Nimble using one of the above methods, there are two additional steps required
+to make this work.
+
+1. Create a custom assertion handler and assign an instance of it to the
+   global `NimbleAssertionHandler` variable. For example:
+
+```swift
+class MyAssertionHandler : AssertionHandler {
+    func assert(assertion: Bool, message: FailureMessage, location: SourceLocation) {
+        if (!assertion) {
+            print("Expectation failed: \(message.stringValue)")
+        }
+    }
+}
+```
+```swift
+// Somewhere before you use any assertions
+NimbleAssertionHandler = MyAssertionHandler()
+```
+
+2. Add a post-build action to fix an issue with the Swift XCTest support
+   library being unnecessarily copied into your app
+  * Edit your scheme in Xcode, and navigate to Build -> Post-actions
+  * Click the "+" icon and select "New Run Script Action"
+  * Open the "Provide build settings from" dropdown and select your target
+  * Enter the following script contents:
+```
+rm "${SWIFT_STDLIB_TOOL_DESTINATION_DIR}/libswiftXCTest.dylib"
+```
+
+You can now use Nimble assertions in your code and handle failures as you see
+fit.

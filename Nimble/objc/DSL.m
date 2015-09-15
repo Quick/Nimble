@@ -9,11 +9,18 @@ SWIFT_CLASS("_TtC6Nimble7NMBWait")
 
 @end
 
-NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), const char *file, unsigned int line) {
+NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), NSString *file, NSUInteger line) {
     return [[NMBExpectation alloc] initWithActualBlock:actualBlock
                                               negative:NO
-                                                  file:[[NSString alloc] initWithFormat:@"%s", file]
+                                                  file:file
                                                   line:line];
+}
+
+NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(), NSString *file, NSUInteger line) {
+    return NMB_expect(^id{
+        actualBlock();
+        return nil;
+    }, file, line);
 }
 
 NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger line) {
@@ -80,8 +87,22 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beEmpty() {
     return [NMBObjCMatcher beEmptyMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring) {
-    return [NMBObjCMatcher containMatcher:itemOrSubstring];
+NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, ...) {
+    NSMutableArray *itemOrSubstringArray = [NSMutableArray array];
+
+    if (itemOrSubstring) {
+        [itemOrSubstringArray addObject:itemOrSubstring];
+
+        va_list args;
+        va_start(args, itemOrSubstring);
+        id next;
+        while ((next = va_arg(args, id))) {
+            [itemOrSubstringArray addObject:next];
+        }
+        va_end(args);
+    }
+
+    return [NMBObjCMatcher containMatcher:itemOrSubstringArray];
 }
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
@@ -90,6 +111,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue) {
     return [NMBObjCMatcher equalMatcher:expectedValue];
+}
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_haveCount(id expectedValue) {
+    return [NMBObjCMatcher haveCountMatcher:expectedValue];
 }
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue) {

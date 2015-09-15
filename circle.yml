@@ -2,6 +2,11 @@ machine:
   xcode:
     version: "6.3.1"
 
+general:
+  branches:
+    ignore:
+      - swift-2.0 # Circle CI doesn't support Xcode 7/Swift 2.0 yet.
+
 # despite what circle ci says, xctool 0.2.3 cannot run
 # ios simulator tests on iOS frameworks for whatever reason.
 #

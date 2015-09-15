@@ -3,14 +3,14 @@ internal struct ObjCMatcherWrapper : Matcher {
 
     func matches(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.matches(
-            ({ actualExpression.evaluate() }),
+            ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
     }
 
     func doesNotMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.doesNotMatch(
-            ({ actualExpression.evaluate() }),
+            ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
     }
@@ -32,7 +32,7 @@ public class NMBExpectation : NSObject {
     }
 
     private var expectValue: Expectation<NSObject> {
-        return expect(file: _file, line: _line){
+        return expect(_file, line: _line){
             self._actualBlock() as NSObject?
         }
     }
@@ -49,6 +49,12 @@ public class NMBExpectation : NSObject {
         })
     }
 
+    public var toWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
+        })
+    }
+
     public var toNot: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toNot(
@@ -57,13 +63,34 @@ public class NMBExpectation : NSObject {
         })
     }
 
+    public var toNotWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toNot(
+                ObjCMatcherWrapper(matcher: matcher), description: description
+            )
+        })
+    }
+
     public var notTo: (NMBMatcher) -> Void { return toNot }
+
+    public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
 
     public var toEventually: (NMBMatcher) -> Void {
         return ({ matcher in
             self.expectValue.toEventually(
                 ObjCMatcherWrapper(matcher: matcher),
-                timeout: self._timeout
+                timeout: self._timeout,
+                description: nil
+            )
+        })
+    }
+
+    public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toEventually(
+                ObjCMatcherWrapper(matcher: matcher),
+                timeout: self._timeout,
+                description: description
             )
         })
     }
@@ -72,10 +99,25 @@ public class NMBExpectation : NSObject {
         return ({ matcher in
             self.expectValue.toEventuallyNot(
                 ObjCMatcherWrapper(matcher: matcher),
-                timeout: self._timeout
+                timeout: self._timeout,
+                description: nil
             )
         })
     }
+
+    public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
+        return ({ matcher, description in
+            self.expectValue.toEventuallyNot(
+                ObjCMatcherWrapper(matcher: matcher),
+                timeout: self._timeout,
+                description: description
+            )
+        })
+    }
+
+    public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
+
+    public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
 
     public class func failWithMessage(message: String, file: String, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))

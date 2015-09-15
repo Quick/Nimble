@@ -2,12 +2,12 @@ import Foundation
 import Nimble
 import XCTest
 
-func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     var filePath = file
     var lineNumber = line
 
     let recorder = AssertionRecorder()
-    withAssertionHandler(recorder, closure)
+    withAssertionHandler(recorder, closure: closure)
 
     for msg in messages {
         var lastFailure: AssertionRecord?
@@ -47,12 +47,12 @@ func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt 
         file: file,
         line: line,
         preferOriginalSourceLocation: preferOriginalSourceLocation,
-        closure
+        closure: closure
     )
 }
 
 func failsWithErrorMessageForNil(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
-    failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure)
+    failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
 func deferToMainQueue(action: () -> Void) {
@@ -64,14 +64,24 @@ func deferToMainQueue(action: () -> Void) {
 
 public class NimbleHelper : NSObject {
     class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, block)
+        failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     class func expectFailureMessages(messages: [NSString], block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(messages as! [String], file: file, line: line, preferOriginalSourceLocation: true, block)
+        failsWithErrorMessage(messages as! [String], file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, block)
+        failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    }
+}
+
+extension NSDate {
+    convenience init(dateTimeString:String) {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let date = dateFormatter.dateFromString(dateTimeString)!
+        self.init(timeInterval:0, sinceDate:date)
     }
 }

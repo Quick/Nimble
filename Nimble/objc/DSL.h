@@ -14,11 +14,16 @@
 #define NIMBLE_SHORT(PROTO, ORIGINAL) FOUNDATION_STATIC_INLINE PROTO { return (ORIGINAL); }
 #endif
 
-NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), const char *file, unsigned int line);
+NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), NSString *file, NSUInteger line);
+NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(), NSString *file, NSUInteger line);
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> equal(id expectedValue),
              NMB_equal(expectedValue));
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_haveCount(id expectedValue);
+NIMBLE_SHORT(id<NMBMatcher> haveCount(id expectedValue),
+             NMB_haveCount(expectedValue));
 
 NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue);
 NIMBLE_SHORT(NMBObjCBeCloseToMatcher *beCloseTo(id expectedValue),
@@ -80,9 +85,11 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beEmpty(void);
 NIMBLE_SHORT(id<NMBMatcher> beEmpty(void),
              NMB_beEmpty());
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_contain(id itemOrSubstring);
-NIMBLE_SHORT(id<NMBMatcher> contain(id itemOrSubstring),
-             NMB_contain(itemOrSubstring));
+NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, ...) NS_REQUIRES_NIL_TERMINATION;
+#define NMB_contain(...) NMB_containWithNilTermination(__VA_ARGS__, nil)
+#ifndef NIMBLE_DISABLE_SHORT_SYNTAX
+#define contain(...) NMB_contain(__VA_ARGS__)
+#endif
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring);
 NIMBLE_SHORT(id<NMBMatcher> endWith(id itemElementOrSubstring),
@@ -111,12 +118,14 @@ NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock NMB_waitUntilTimeoutBuilder(NSString *file, NSUInteger line);
 NIMBLE_EXPORT NMBWaitUntilBlock NMB_waitUntilBuilder(NSString *file, NSUInteger line);
 
+NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger line);
+
 #define NMB_waitUntilTimeout NMB_waitUntilTimeoutBuilder(@(__FILE__), __LINE__)
 #define NMB_waitUntil NMB_waitUntilBuilder(@(__FILE__), __LINE__)
 
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
-#define expect(...) NMB_expect(^id{ return (__VA_ARGS__); }, __FILE__, __LINE__)
-#define expectAction(...) NMB_expect(^id{ (__VA_ARGS__); return nil; }, __FILE__, __LINE__)
+#define expect(...) NMB_expect(^id{ return (__VA_ARGS__); }, @(__FILE__), __LINE__)
+#define expectAction(BLOCK) NMB_expectAction((BLOCK), @(__FILE__), __LINE__)
 #define failWithMessage(msg) NMB_failWithMessage(msg, @(__FILE__), __LINE__)
 #define fail() failWithMessage(@"fail() always fails")
 
