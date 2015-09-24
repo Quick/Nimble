@@ -4,7 +4,8 @@ import Foundation
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
 internal class NMBWait: NSObject {
-    internal class func until(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+    //Dupliation of functions required because of action covariance only. Likely it could be removed with release of Swift 2.1, as it resolves covariance problem.
+    internal class func until(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (done:() -> Void) -> Void) -> Void {
         var completed = false
         var token: dispatch_once_t = 0
         let result = pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
@@ -15,6 +16,26 @@ internal class NMBWait: NSObject {
             }
             return completed
         }
+        
+        NMBWait.reportResult(forTimeout: timeout, file: file, line: line, result: result)
+    }
+
+    internal class func until(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (done:(Any...) -> Void) -> Void) -> Void {
+        var completed = false
+        var token: dispatch_once_t = 0
+        let result = pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
+            dispatch_once(&token) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    action() { _ in completed = true }
+                }
+            }
+            return completed
+        }
+     
+        NMBWait.reportResult(forTimeout: timeout, file: file, line: line, result: result)
+    }
+    
+    private class func reportResult(forTimeout timeout: NSTimeInterval, file: String, line: UInt, result: PollResult) {
         switch (result) {
         case .Failure:
             let pluralize = (timeout == 1 ? "" : "s")
@@ -28,7 +49,7 @@ internal class NMBWait: NSObject {
             break
         }
     }
-
+    
     @objc(untilFile:line:action:)
     internal class func until(file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
         until(timeout: 1, file: file, line: line, action: action)
@@ -38,13 +59,13 @@ internal class NMBWait: NSObject {
 /// Wait asynchronously until the done closure is called.
 ///
 /// This will advance the run loop.
-public func waitUntil(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+public func waitUntil(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: ((Any...) -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
 
 /// Wait asynchronously until the done closure is called.
 ///
 /// This will advance the run loop.
-public func waitUntil(file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+public func waitUntil(file: String = __FILE__, line: UInt = __LINE__, action: ((Any...) -> Void) -> Void) -> Void {
     NMBWait.until(timeout: 1, file: file, line: line, action: action)
 }
