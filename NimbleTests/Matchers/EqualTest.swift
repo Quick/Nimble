@@ -69,38 +69,6 @@ class EqualTest: XCTestCase {
             expect(Set([1, 2, 3])) != Set([1, 2, 3])
         }
     }
-    
-    func testErrorTypeEquality() {
-        enum FakeError : ErrorType {
-            case Error1, Error2
-        }
-        
-        let error1: ErrorType? = FakeError.Error1
-        expect(error1).to(equal(FakeError.Error1))
-        expect(error1).toNot(equal(FakeError.Error2))
-        expect(error1) == FakeError.Error1
-        expect(error1) != FakeError.Error2
-        
-        failsWithErrorMessageForNil("expected to equal <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>, got <nil>") {
-            expect(nil as FakeError?).to(equal(FakeError.Error1))
-        }
-        
-        failsWithErrorMessage("expected to equal <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>, got <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error2>") {
-            expect(FakeError.Error2).to(equal(FakeError.Error1))
-        }
-        
-        failsWithErrorMessage("expected to equal <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>, got <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error2>") {
-            expect(FakeError.Error2) == FakeError.Error1
-        }
-        
-        failsWithErrorMessage("expected to not equal <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>, got <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>") {
-            expect(FakeError.Error1).toNot(equal(FakeError.Error1))
-        }
-        
-        failsWithErrorMessage("expected to not equal <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>, got <NimbleTests.EqualTest.(testErrorTypeEquality (NimbleTests.EqualTest) -> () -> ()).(FakeError #1).Error1>") {
-            expect(FakeError.Error1) != FakeError.Error1
-        }
-    }
 
     func testDoesNotMatchNils() {
         failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {

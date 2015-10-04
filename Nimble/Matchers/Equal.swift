@@ -69,26 +69,6 @@ public func equal<T: Comparable>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Se
     })
 }
 
-/** 
-A Nimble matcher that succeeds when the actual value's domain and code are equal to 
-the expected value's domain and code
-*/
-public func equal(expectedValue: ErrorType?) -> NonNilMatcherFunc<ErrorType> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
-        let actualValue = try actualExpression.evaluate()
-        if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
-            }
-            return false
-        }
-        
-        return (expectedValue!._domain == actualValue!._domain)
-            && (expectedValue!._code == actualValue!._code)
-    }
-}
-
 private func equal<T>(expectedValue: Set<T>?, stringify: Set<T>? -> String) -> NonNilMatcherFunc<Set<T>> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
@@ -157,14 +137,6 @@ public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]
 
 public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
-}
-
-public func ==(lhs: Expectation<ErrorType>, rhs: ErrorType?) {
-    return lhs.to(equal(rhs))
-}
-
-public func !=(lhs: Expectation<ErrorType>, rhs: ErrorType?) {
-    return lhs.toNot(equal(rhs))
 }
 
 extension NMBObjCMatcher {
