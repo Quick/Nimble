@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-REMOTE_BRANCH=swift-2.0
+REMOTE_BRANCH=master
 POD_NAME=Nimble
 PODSPEC=Nimble.podspec
 GITHUB_TAGS_URL=https://github.com/Quick/Nimble/tags
@@ -65,7 +65,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo " > Is this version ($VERSION) unique?"
-git describe --exact-match "$VERSION_TAG" 2>&1 > /dev/null
+git describe --exact-match "$VERSION_TAG" > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     if [ -z "$FORCE_TAG" ]; then
         die "This tag ($VERSION) already exists. Aborting. Append '-f' to override"
@@ -77,7 +77,23 @@ else
 fi
 
 if [ ! -f "$RELEASE_NOTES" ]; then
-    die "Failed to find $RELEASE_NOTES. Aborting."
+    echo " > Failed to find $RELEASE_NOTES. Prompting editor"
+    RELEASE_NOTES=.release-changes
+    LATEST_TAG=`git for-each-ref refs/tags --sort=-refname --format="%(refname:short)" | grep 'v\\?\\d\\+\\.\\d\\+\\.\\d\\+' | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last'`
+    echo " > Latest tag ${LATEST_TAG}"
+    echo "Nimble v$VERSION" > $RELEASE_NOTES
+    echo "================" >> $RELEASE_NOTES
+    echo >> $RELEASE_NOTES
+    echo "# Changelog from ${LATEST_TAG}..HEAD" >> $RELEASE_NOTES
+    git log ${LATEST_TAG}..HEAD | sed -e 's/^/# /' >> $RELEASE_NOTES
+    $EDITOR $RELEASE_NOTES
+    diff -q $RELEASE_NOTES ${RELEASE_NOTES}.backup > /dev/null 2>&1
+    STATUS=$?
+    rm ${RELEASE_NOTES}.backup
+    if [ $STATUS -eq 0 ]; then
+        rm $RELEASE_NOTES
+        die "No changes in release notes file. Aborting."
+    fi
 fi
 echo " > Release notes: $RELEASE_NOTES"
 
@@ -128,7 +144,8 @@ $CARTHAGE build --no-skip-current || die "Failed to build framework for carthage
 
 echo "-> Setting podspec version"
 cat "$PODSPEC" | grep 's.version' | grep -q "\"$VERSION\""
-if [ $? -eq 0 ]; then
+SET_PODSPEC_VERSION=$?
+if [ $SET_PODSPEC_VERSION -eq 0 ]; then
     echo " > Podspec already set to $VERSION. Skipping."
 else
     sed -i.backup "s/s.version *= *\".*\"/s.version      = \"$VERSION\"/g" "$PODSPEC" || {
@@ -138,8 +155,6 @@ else
 
     git add Nimble.podspec || { restore_podspec; die "Failed to add Nimble.podspec to INDEX"; }
     git commit -m "Bumping version to $VERSION" || { restore_podspec; die "Failed to push updated version: $VERSION"; }
-    git push origin "$REMOTE_BRANCH" || die "Failed to push to origin"
-    echo " > Pushed version to origin"
 fi
 
 if [ -z "$FORCE_TAG" ]; then
@@ -152,6 +167,12 @@ else
     git tag -f -s "$VERSION_TAG" -F "$RELEASE_NOTES" || die "Failed to tag version"
     echo "-> Pushing tag to origin (force)"
     git push origin "$VERSION_TAG" -f || die "Failed to push tag '$VERSION_TAG' to origin"
+fi
+
+if [ $SET_PODSPEC_VERSION -ne 0 ]; then
+    rm $RELEASE_NOTES
+    git push origin "$REMOTE_BRANCH" || die "Failed to push to origin"
+    echo " > Pushed version to origin"
 fi
 
 echo
