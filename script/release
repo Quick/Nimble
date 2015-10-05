@@ -13,6 +13,7 @@ function help {
     echo
     echo "VERSION should be the version to release, should not include the 'v' prefix"
     echo "RELEASE_NOTES should be a file that lists all the release notes for this version"
+    echo "              if file does not exist, creates a git-style commit with a diff as a comment"
     echo
     echo "FLAGS"
     echo "  -f  Forces override of tag"
@@ -196,4 +197,3 @@ echo "   - Attach ${CARTHAGE_FRAMEWORK_NAME}.framework.zip to it."
 echo " - Announce!"
 
 rm Nimble.podspec.backup
-
