@@ -14,7 +14,7 @@
     expect(@[]).to(haveCount(@0));
     expect(@[@1]).notTo(haveCount(@0));
 
-    expectFailureMessage(@"expected to have (1,2,3) with count 3, got 1", ^{
+    expectFailureMessage(@"expected to have (1,2,3) with count 1, got 3", ^{
         expect(@[@1, @2, @3]).to(haveCount(@1));
     });
 
@@ -28,7 +28,7 @@
     expect(@{@"1":@1, @"2":@2, @"3":@3}).to(haveCount(@3));
     expect(@{@"1":@1, @"2":@2, @"3":@3}).notTo(haveCount(@1));
 
-    expectFailureMessage(@"expected to have {1 = 1;2 = 2;3 = 3;} with count 3, got 1", ^{
+    expectFailureMessage(@"expected to have {1 = 1;2 = 2;3 = 3;} with count 1, got 3", ^{
         expect(@{@"1":@1, @"2":@2, @"3":@3}).to(haveCount(@1));
     });
 
@@ -46,7 +46,7 @@
     expect(table).to(haveCount(@3));
     expect(table).notTo(haveCount(@1));
 
-    expectFailureMessage(@"expected to have NSHashTable {[2] 2[12] 1[13] 3}with count 3, got 1", ^{
+    expectFailureMessage(@"expected to have NSHashTable {[2] 2[12] 1[13] 3}with count 1, got 3", ^{
         expect(table).to(haveCount(@1));
     });
 
@@ -61,7 +61,7 @@
     expect(set).to(haveCount(@3));
     expect(set).notTo(haveCount(@1));
 
-    expectFailureMessage(@"expected to have {(3,1,2)} with count 3, got 1", ^{
+    expectFailureMessage(@"expected to have {(3,1,2)} with count 1, got 3", ^{
         expect(set).to(haveCount(@1));
     });
 

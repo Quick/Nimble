@@ -6,7 +6,7 @@ class HaveCountTest: XCTestCase {
         expect([1, 2, 3]).to(haveCount(3))
         expect([1, 2, 3]).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have [1, 2, 3] with count 3, got 1") {
+        failsWithErrorMessage("expected to have [1, 2, 3] with count 1, got 3") {
             expect([1, 2, 3]).to(haveCount(1))
         }
 
@@ -19,7 +19,7 @@ class HaveCountTest: XCTestCase {
         expect(["1":1, "2":2, "3":3]).to(haveCount(3))
         expect(["1":1, "2":2, "3":3]).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have [\"2\": 2, \"1\": 1, \"3\": 3] with count 3, got 1") {
+        failsWithErrorMessage("expected to have [\"2\": 2, \"1\": 1, \"3\": 3] with count 1, got 3") {
             expect(["1":1, "2":2, "3":3]).to(haveCount(1))
         }
 
@@ -32,7 +32,7 @@ class HaveCountTest: XCTestCase {
         expect(Set([1, 2, 3])).to(haveCount(3))
         expect(Set([1, 2, 3])).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have [2, 3, 1] with count 3, got 1") {
+        failsWithErrorMessage("expected to have [2, 3, 1] with count 1, got 3") {
             expect(Set([1, 2, 3])).to(haveCount(1))
         }
 
