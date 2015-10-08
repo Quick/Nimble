@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.author       = "Quick Contributors"
   s.ios.deployment_target = "7.0"
   s.osx.deployment_target = "10.9"
+  s.tvos.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/Quick/Nimble.git", :tag => "v#{s.version}" }
 
   s.source_files = "Nimble", "Nimble/**/*.{swift,h,m}"
