@@ -38,15 +38,6 @@ internal class NMBWait: NSObject {
 /// Wait asynchronously until the done closure is called.
 ///
 /// This will advance the run loop.
-public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: ((Any?...) -> Void) -> Void) -> Void {
-    NMBWait.until(timeout: timeout, file: file, line: line, action: bridgeToVoidAction(action))
-}
-
-/// This bridging function should not be required in Swift 2.1 as it supports function covariance
-private func bridgeToVoidAction(vargAction: ((Any?...) -> Void) -> Void) -> ((() -> Void) -> Void) {
-    return { voidDone in
-        vargAction() { _ in
-            voidDone()
-        }
-    }
+public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+    NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }

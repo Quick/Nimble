@@ -81,10 +81,4 @@ class AsyncTest: XCTestCase {
         // "clear" runloop to ensure this test doesn't poison other tests
         NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(2.0))
     }
-    
-    func testWaitUntilTakesAnyArguments() {
-        waitUntil { done in
-            done(nil, 0, "", NSNumber.self, {})
-        }
-    }
 }
