@@ -82,7 +82,7 @@ if [ ! -f "$RELEASE_NOTES" ]; then
     RELEASE_NOTES=.release-changes
     LATEST_TAG=`git for-each-ref refs/tags --sort=-refname --format="%(refname:short)" | grep 'v\\?\\d\\+\\.\\d\\+\\.\\d\\+' | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| a.gsub("v", "").split(".").map(&:to_i) <=> b.gsub("v", "").split(".").map(&:to_i) }.last'`
     echo " > Latest tag ${LATEST_TAG}"
-    echo "Nimble v$VERSION" > $RELEASE_NOTES
+    echo "${POD_NAME} v$VERSION" > $RELEASE_NOTES
     echo "================" >> $RELEASE_NOTES
     echo >> $RELEASE_NOTES
     echo "# Changelog from ${LATEST_TAG}..HEAD" >> $RELEASE_NOTES
@@ -131,8 +131,8 @@ echo " > Verified ownership to $POD_NAME pod"
 echo "--- Releasing version $VERSION (tag: $VERSION_TAG)..."
 
 function restore_podspec {
-    if [ -f 'Nimble.podspec.backup' ]; then
-        mv -f Nimble.podspec{.backup,}
+    if [ -f "${PODSPEC}.backup" ]; then
+        mv -f ${PODSPEC}{.backup,}
     fi
 }
 
@@ -154,7 +154,7 @@ else
         die "Failed to update version in podspec"
     }
 
-    git add Nimble.podspec || { restore_podspec; die "Failed to add Nimble.podspec to INDEX"; }
+    git add ${PODSPEC} || { restore_podspec; die "Failed to add ${PODSPEC} to INDEX"; }
     git commit -m "Bumping version to $VERSION" || { restore_podspec; die "Failed to push updated version: $VERSION"; }
 fi
 
@@ -196,4 +196,4 @@ echo "   - Paste the contents of $RELEASE_NOTES into the release notes. Tweak fo
 echo "   - Attach ${CARTHAGE_FRAMEWORK_NAME}.framework.zip to it."
 echo " - Announce!"
 
-rm Nimble.podspec.backup
+rm ${PODSPEC}.backup
