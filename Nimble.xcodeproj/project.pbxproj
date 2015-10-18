@@ -173,12 +173,12 @@
 		29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59621B551ED2002D767E /* ThrowErrorTest.swift */; };
 		29EA59661B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		29EA59671B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
-		472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; settings = {ASSET_TAGS = (); }; };
+		472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
-		4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; settings = {ASSET_TAGS = (); }; };
-		4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; settings = {ASSET_TAGS = (); }; };
+		4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
+		4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -609,7 +609,6 @@
 				1F4A569F1A3B359E009E1637 /* ObjCRaiseExceptionTest.m */,
 				965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */,
 				DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */,
-				30FC9B081B7E48670097E2D6 /* ObjCSyncTest.m */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -725,7 +724,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Jeff Hui";
 				TargetAttributes = {
 					1F1A74281940169200FFFC47 = {
@@ -867,7 +866,6 @@
 				1F925F0B195C18E100ED456B /* BeLessThanTest.swift in Sources */,
 				1F9DB8FB1A74E793002E96AD /* ObjCBeEmptyTest.m in Sources */,
 				1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
-				30FC9B091B7E48670097E2D6 /* ObjCSyncTest.m in Sources */,
 				1F4A56761A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				1F925EF9195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F4A56701A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
@@ -973,7 +971,6 @@
 				1F925F0C195C18E100ED456B /* BeLessThanTest.swift in Sources */,
 				1F9DB8FC1A74E793002E96AD /* ObjCBeEmptyTest.m in Sources */,
 				1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
-				30FC9B0A1B7E48670097E2D6 /* ObjCSyncTest.m in Sources */,
 				1F4A56771A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F4A56711A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
@@ -1077,6 +1074,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1166,6 +1164,7 @@
 					XCTest,
 					"-weak-lswiftXCTest",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
@@ -1197,6 +1196,7 @@
 					XCTest,
 					"-weak-lswiftXCTest",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
@@ -1220,6 +1220,7 @@
 				INFOPLIST_FILE = NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/NimbleTests-Bridging-Header.h";
@@ -1238,6 +1239,7 @@
 				INFOPLIST_FILE = NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/NimbleTests-Bridging-Header.h";
@@ -1272,6 +1274,7 @@
 					XCTest,
 					"-weak-lswiftXCTest",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
@@ -1306,6 +1309,7 @@
 					XCTest,
 					"-weak-lswiftXCTest",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
@@ -1332,6 +1336,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
@@ -1353,6 +1358,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
