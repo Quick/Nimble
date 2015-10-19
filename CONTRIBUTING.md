@@ -41,7 +41,7 @@ Be sure to include in your issue:
 
 ## Building the Project
 
-- Use `Nimble.xcproj` to work on Nimble.
+- Use `Nimble.xcodeproj` to work on Nimble.
 
 ## Pull Requests
 
