@@ -95,7 +95,7 @@ some "ground rules":
 
 The process is relatively straight forward, but here's is a useful checklist for tagging:
 
-- Look a changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
+- Look at changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
 - Run the release script: `./script/release A.B.C release-notes-file`
 - Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
   - Use the same release notes you created for the tag, but tweak up formatting for github.
