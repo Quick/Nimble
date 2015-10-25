@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F5DF1541BDCA0CE00C3A531"
-               BuildableName = "Nimble-tvOS.framework"
+               BuildableName = "Nimble.framework"
                BlueprintName = "Nimble-tvOS"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F5DF15D1BDCA0CE00C3A531"
-               BuildableName = "Nimble-tvOSTests.xctest"
+               BuildableName = "NimbleTests.xctest"
                BlueprintName = "Nimble-tvOSTests"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F5DF1541BDCA0CE00C3A531"
-            BuildableName = "Nimble-tvOS.framework"
+            BuildableName = "Nimble.framework"
             BlueprintName = "Nimble-tvOS"
             ReferencedContainer = "container:Nimble.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F5DF1541BDCA0CE00C3A531"
-            BuildableName = "Nimble-tvOS.framework"
+            BuildableName = "Nimble.framework"
             BlueprintName = "Nimble-tvOS"
             ReferencedContainer = "container:Nimble.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F5DF1541BDCA0CE00C3A531"
-            BuildableName = "Nimble-tvOS.framework"
+            BuildableName = "Nimble.framework"
             BlueprintName = "Nimble-tvOS"
             ReferencedContainer = "container:Nimble.xcodeproj">
          </BuildableReference>
