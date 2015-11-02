@@ -31,43 +31,47 @@ class CallRecorderTest: XCTestCase {
         
         // then
         let expectedRecordedFunctions = ["doStuff()", "doStuff()", "doStuffWith(string:)"]
-        XCTAssertEqual(testExample.calledFunctionList, expectedRecordedFunctions, "should record function names in order")
+        expect(testExample.calledFunctionList).to(equal(expectedRecordedFunctions), description: "should record function names in order")
     }
     
     func testRecordingArguments() { // most of these tests are here because Swift's 'Any' Protocol is not Equatable
         // given
         let testExample = TestExample()
-        let set1Arg1 = "foo"
-        let set2Arg1 = 1
-        let set2Arg2 = 2
-        let set3Arg1 = "bar"
+        let expectedSet1Arg1 = "foo"
+        let expectedSet2Arg1 = 1
+        let expectedSet2Arg2 = 2
+        let expectedSet3Arg1 = "bar"
         
         // when
-        testExample.doStuffWith(string: set1Arg1)
-        testExample.doMoreStuffWith(int1: set2Arg1, int2: set2Arg2)
-        testExample.doStuffWith(string: set3Arg1)
-        
+        testExample.doStuffWith(string: expectedSet1Arg1)
+        testExample.doMoreStuffWith(int1: expectedSet2Arg1, int2: expectedSet2Arg2)
+        testExample.doStuffWith(string: expectedSet3Arg1)
         
         // then
         func countFailureMessage(count count: Int, set: Int) -> String {return "should have \(count) argument(s) in set \(set)" }
         func typeFailureMessage(set set: Int, arg: Int) -> String { return "should match type for set \(set), argument \(arg)" }
         func descFailureMessage(set set: Int, arg: Int) -> String { return "should match string interpolation for set \(set), argument \(arg)" }
         
-        XCTAssertEqual(testExample.calledArgumentsList.count, 3, "should have 3 sets of arguments")
+        let actualset1Arg1 = testExample.calledArgumentsList[0][0]
+        let actualset2Arg1 = testExample.calledArgumentsList[1][0]
+        let actualset2Arg2 = testExample.calledArgumentsList[1][1]
+        let actualset3Arg1 = testExample.calledArgumentsList[2][0]
         
-        XCTAssertEqual(testExample.calledArgumentsList[0].count, 1, countFailureMessage(count: 1, set: 1))
-        XCTAssertEqual("\(testExample.calledArgumentsList[0][0].dynamicType)", "\(set1Arg1.dynamicType)", typeFailureMessage(set: 1, arg: 1))
-        XCTAssertEqual("\(testExample.calledArgumentsList[0][0])", "\(set1Arg1)", descFailureMessage(set: 1, arg: 1))
+        expect(testExample.calledArgumentsList.count).to(equal(3), description: "should have 3 sets of arguments")
         
-        XCTAssertEqual(testExample.calledArgumentsList[1].count, 2, countFailureMessage(count: 2, set: 2))
-        XCTAssertEqual("\(testExample.calledArgumentsList[1][0].dynamicType)", "\(set2Arg1.dynamicType)", typeFailureMessage(set: 2, arg: 1))
-        XCTAssertEqual("\(testExample.calledArgumentsList[1][0])", "\(set2Arg1)", descFailureMessage(set: 2, arg: 1))
-        XCTAssertEqual("\(testExample.calledArgumentsList[1][1].dynamicType)", "\(set2Arg2.dynamicType)", typeFailureMessage(set: 2, arg: 2))
-        XCTAssertEqual("\(testExample.calledArgumentsList[1][1])", "\(set2Arg2)", descFailureMessage(set: 2, arg: 2))
+        expect(testExample.calledArgumentsList[0].count).to(equal(1), description: countFailureMessage(count: 1, set: 1))
+        expect("\(actualset1Arg1.dynamicType)").to(equal("\(expectedSet1Arg1.dynamicType)"), description: typeFailureMessage(set: 1, arg: 1))
+        expect("\(actualset1Arg1)").to(equal("\(expectedSet1Arg1)"), description: descFailureMessage(set: 1, arg: 1))
+        
+        expect(testExample.calledArgumentsList[1].count).to(equal(2), description: countFailureMessage(count: 2, set: 2))
+        expect("\(actualset2Arg1.dynamicType)").to(equal("\(expectedSet2Arg1.dynamicType)"), description: typeFailureMessage(set: 2, arg: 1))
+        expect("\(actualset2Arg1)").to(equal("\(expectedSet2Arg1)"), description: descFailureMessage(set: 2, arg: 1))
+        expect("\(actualset2Arg2.dynamicType)").to(equal("\(expectedSet2Arg2.dynamicType)"), description: typeFailureMessage(set: 2, arg: 2))
+        expect("\(actualset2Arg2)").to(equal("\(expectedSet2Arg2)"), description: descFailureMessage(set: 2, arg: 2))
 
-        XCTAssertEqual(testExample.calledArgumentsList[2].count, 1, countFailureMessage(count: 1, set: 3))
-        XCTAssertEqual("\(testExample.calledArgumentsList[2][0].dynamicType)", "\(set3Arg1.dynamicType)", typeFailureMessage(set: 3, arg: 1))
-        XCTAssertEqual("\(testExample.calledArgumentsList[2][0])", "\(set3Arg1)", descFailureMessage(set: 3, arg: 1))
+        expect(testExample.calledArgumentsList[2].count).to(equal(1), description: countFailureMessage(count: 1, set: 3))
+        expect("\(actualset3Arg1.dynamicType)").to(equal("\(expectedSet3Arg1.dynamicType)"), description: typeFailureMessage(set: 3, arg: 1))
+        expect("\(actualset3Arg1)").to(equal("\(expectedSet3Arg1)"), description: descFailureMessage(set: 3, arg: 1))
     }
     
     func testResetingTheRecordedLists() {
@@ -81,11 +85,12 @@ class CallRecorderTest: XCTestCase {
         testExample.doStuffWith(string: "bar")
         
         // then
-        XCTAssertEqual(testExample.calledFunctionList.count, 1, "should have 1 function recorded")
-        XCTAssertEqual(testExample.calledFunctionList[0], "doStuffWith(string:)", "should have correct function recorded")
+        expect(testExample.calledFunctionList.count).to(equal(1), description: "should have 1 function recorded")
+        let recordedFunction = testExample.calledFunctionList[0] // <- swift doesn't like accessing an array directly in the expect function
+        expect(recordedFunction).to(equal("doStuffWith(string:)"), description: "should have correct function recorded")
         
-        XCTAssertEqual(testExample.calledArgumentsList.count, 1, "should have 1 set of arguments recorded")
-        XCTAssertEqual(testExample.calledArgumentsList[0].count, 1, "should have 1 argument in first argument set")
-        XCTAssertEqual("\(testExample.calledArgumentsList[0][0])", "bar", "should have correct argument in first argument set recorded")
+        expect(testExample.calledArgumentsList.count).to(equal(1), description: "should have 1 set of arguments recorded")
+        expect(testExample.calledArgumentsList[0].count).to(equal(1), description: "should have 1 argument in first argument set")
+        expect("\(testExample.calledArgumentsList[0][0])").to(equal("bar"), description: "should have correct argument in first argument set recorded")
     }
 }
