@@ -93,4 +93,16 @@ class CallRecorderTest: XCTestCase {
         expect(testExample.calledArgumentsList[0].count).to(equal(1), description: "should have 1 argument in first argument set")
         expect("\(testExample.calledArgumentsList[0][0])").to(equal("bar"), description: "should have correct argument in first argument set recorded")
     }
+    
+    func testDidCallFunction() {
+        // given
+        let testExample = TestExample()
+        
+        // when
+        testExample.doStuff()
+        
+        // then
+        expect(testExample.didCall(function: "doStuff()")).to(beTrue(), description: "should have called function")
+        expect(testExample.didCall(function: "neverGonnaCall()")).to(beFalse(), description: "should not have called function")
+    }
 }
