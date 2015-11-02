@@ -37,10 +37,10 @@ class CallRecorderTest: XCTestCase {
     func testRecordingArguments() { // most of these tests are here because Swift's 'Any' Protocol is not Equatable
         // given
         let testExample = TestExample()
-        let set1Arg1 = "one"
-        let set2Arg1 = 5
-        let set2Arg2 = 10
-        let set3Arg1 = "three"
+        let set1Arg1 = "foo"
+        let set2Arg1 = 1
+        let set2Arg2 = 2
+        let set3Arg1 = "bar"
         
         // when
         testExample.doStuffWith(string: set1Arg1)
@@ -53,7 +53,7 @@ class CallRecorderTest: XCTestCase {
         func typeFailureMessage(set set: Int, arg: Int) -> String { return "should match type for set \(set), argument \(arg)" }
         func descFailureMessage(set set: Int, arg: Int) -> String { return "should match string interpolation for set \(set), argument \(arg)" }
         
-        XCTAssertEqual(testExample.calledArgumentsList.count, 3, "should have 3 sets of Arguments")
+        XCTAssertEqual(testExample.calledArgumentsList.count, 3, "should have 3 sets of arguments")
         
         XCTAssertEqual(testExample.calledArgumentsList[0].count, 1, countFailureMessage(count: 1, set: 1))
         XCTAssertEqual("\(testExample.calledArgumentsList[0][0].dynamicType)", "\(set1Arg1.dynamicType)", typeFailureMessage(set: 1, arg: 1))
@@ -68,5 +68,24 @@ class CallRecorderTest: XCTestCase {
         XCTAssertEqual(testExample.calledArgumentsList[2].count, 1, countFailureMessage(count: 1, set: 3))
         XCTAssertEqual("\(testExample.calledArgumentsList[2][0].dynamicType)", "\(set3Arg1.dynamicType)", typeFailureMessage(set: 3, arg: 1))
         XCTAssertEqual("\(testExample.calledArgumentsList[2][0])", "\(set3Arg1)", descFailureMessage(set: 3, arg: 1))
+    }
+    
+    func testResetingTheRecordedLists() {
+        // given
+        let testExample = TestExample()
+        testExample.doStuffWith(string: "foo")
+        testExample.doMoreStuffWith(int1: 1, int2: 2)
+        
+        // when
+        testExample.clearRecordedLists()
+        testExample.doStuffWith(string: "bar")
+        
+        // then
+        XCTAssertEqual(testExample.calledFunctionList.count, 1, "should have 1 function recorded")
+        XCTAssertEqual(testExample.calledFunctionList[0], "doStuffWith(string:)", "should have correct function recorded")
+        
+        XCTAssertEqual(testExample.calledArgumentsList.count, 1, "should have 1 set of arguments recorded")
+        XCTAssertEqual(testExample.calledArgumentsList[0].count, 1, "should have 1 argument in first argument set")
+        XCTAssertEqual("\(testExample.calledArgumentsList[0][0])", "bar", "should have correct argument in first argument set recorded")
     }
 }
