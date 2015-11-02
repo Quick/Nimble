@@ -249,6 +249,12 @@
 		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
 		4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
+		7A55E9F71BE69FAC008CA773 /* CallRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9F61BE69FAC008CA773 /* CallRecorder.swift */; settings = {ASSET_TAGS = (); }; };
+		7A55E9F81BE69FAC008CA773 /* CallRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9F61BE69FAC008CA773 /* CallRecorder.swift */; settings = {ASSET_TAGS = (); }; };
+		7A55E9F91BE69FAC008CA773 /* CallRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9F61BE69FAC008CA773 /* CallRecorder.swift */; settings = {ASSET_TAGS = (); }; };
+		7A55E9FB1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9FA1BE6A7DE008CA773 /* CallRecorderTest.swift */; settings = {ASSET_TAGS = (); }; };
+		7A55E9FC1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9FA1BE6A7DE008CA773 /* CallRecorderTest.swift */; settings = {ASSET_TAGS = (); }; };
+		7A55E9FD1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A55E9FA1BE6A7DE008CA773 /* CallRecorderTest.swift */; settings = {ASSET_TAGS = (); }; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -433,6 +439,8 @@
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
+		7A55E9F61BE69FAC008CA773 /* CallRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CallRecorder.swift; path = Nimble/CallRecorder.swift; sourceTree = SOURCE_ROOT; };
+		7A55E9FA1BE6A7DE008CA773 /* CallRecorderTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallRecorderTest.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
@@ -529,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD8CD041968AB07008ED995 /* Adapters */,
+				7A55E9F61BE69FAC008CA773 /* CallRecorder.swift */,
 				1FD8CD081968AB07008ED995 /* DSL.swift */,
 				DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */,
 				1FD8CD091968AB07008ED995 /* Expectation.swift */,
@@ -592,6 +601,7 @@
 				1F925F0A195C18E100ED456B /* BeLessThanTest.swift */,
 				1F925EEE195C136500ED456B /* BeLogicalTest.swift */,
 				1F925EF8195C175000ED456B /* BeNilTest.swift */,
+				7A55E9FA1BE6A7DE008CA773 /* CallRecorderTest.swift */,
 				1F925F01195C189500ED456B /* ContainTest.swift */,
 				1F925EFE195C187600ED456B /* EndWithTest.swift */,
 				1F925F04195C18B700ED456B /* EqualTest.swift */,
@@ -978,6 +988,7 @@
 				1FD8CD661968AB07008ED995 /* NMBExceptionCapture.m in Sources */,
 				DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */,
 				DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */,
+				7A55E9F71BE69FAC008CA773 /* CallRecorder.swift in Sources */,
 				1FD8CD3E1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				DDB4D5ED19FE43C200E9D9FE /* Match.swift in Sources */,
 				1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
@@ -1045,6 +1056,7 @@
 				1F4A56791A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568B1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
 				DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
+				7A55E9FB1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */,
 				1F4A567F1A3B333F009E1637 /* ObjCBeLessThanTest.m in Sources */,
 				1F925EE6195C121200ED456B /* AsynchronousTest.swift in Sources */,
 				1F0648CC19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */,
@@ -1083,6 +1095,7 @@
 				1F5DF1911BDCA0F500C3A531 /* ObjCMatcher.swift in Sources */,
 				1F5DF1781BDCA0F500C3A531 /* BeAnInstanceOf.swift in Sources */,
 				1F5DF1771BDCA0F500C3A531 /* BeAKindOf.swift in Sources */,
+				7A55E9F91BE69FAC008CA773 /* CallRecorder.swift in Sources */,
 				1F5DF17F1BDCA0F500C3A531 /* BeLessThan.swift in Sources */,
 				1F5DF17C1BDCA0F500C3A531 /* BeGreaterThan.swift in Sources */,
 				1F5DF1831BDCA0F500C3A531 /* Contain.swift in Sources */,
@@ -1117,6 +1130,7 @@
 			files = (
 				1F5DF1A31BDCA10200C3A531 /* BeLogicalTest.swift in Sources */,
 				1F5DF1951BDCA10200C3A531 /* utils.swift in Sources */,
+				7A55E9FD1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */,
 				1F5DF1981BDCA10200C3A531 /* BeAKindOfTest.swift in Sources */,
 				1F5DF19B1BDCA10200C3A531 /* BeEmptyTest.swift in Sources */,
 				1F5DF1A11BDCA10200C3A531 /* BeLessThanOrEqualToTest.swift in Sources */,
@@ -1163,6 +1177,7 @@
 				1FD8CD671968AB07008ED995 /* NMBExceptionCapture.m in Sources */,
 				DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */,
 				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
+				7A55E9F81BE69FAC008CA773 /* CallRecorder.swift in Sources */,
 				1FD8CD3F1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
@@ -1230,6 +1245,7 @@
 				1F4A567A1A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568C1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
 				DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
+				7A55E9FC1BE6A7DE008CA773 /* CallRecorderTest.swift in Sources */,
 				1F4A56801A3B333F009E1637 /* ObjCBeLessThanTest.m in Sources */,
 				1F925EE7195C121200ED456B /* AsynchronousTest.swift in Sources */,
 				1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */,
