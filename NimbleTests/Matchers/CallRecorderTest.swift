@@ -105,4 +105,22 @@ class CallRecorderTest: XCTestCase {
         expect(testExample.didCall(function: "doStuff()")).to(beTrue(), description: "should have called function")
         expect(testExample.didCall(function: "neverGonnaCall()")).to(beFalse(), description: "should not have called function")
     }
+    
+    func testDidCallFunctionWithArguments() {
+        // given
+        let testExample = TestExample()
+        
+        // when
+        testExample.doStuffWith(string: "hi")
+        
+        // then
+        expect(testExample.didCall(function: "doStuffWith(string:)", withArgs: ["hi"])).to(beTrue(),
+            description: "should have called function with arguments")
+        expect(testExample.didCall(function: "doStuffWith(string:)", withArgs: ["hello"])).to(beFalse(),
+            description: "should fail when calling function with wrong arguments")
+        expect(testExample.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["hi"])).to(beFalse(),
+            description: "should fail when calling wrong function with correct argument")
+        expect(testExample.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["nope"])).to(beFalse(),
+            description: "should fail when calling wrong function")
+    }
 }
