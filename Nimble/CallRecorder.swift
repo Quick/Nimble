@@ -1,5 +1,5 @@
 
-/* bug in swift causes every enum WITHOUT an associated value's "description" to be the first declared
+/* bug in Swift causes every enum WITHOUT an associated value's "description" to be the first declared
 enum value WITHOUT an associated value's description
 i.e. -> since ".DontCare" is the first enum value then the default description for ".DontCare",
 ".NonNil", and ".Nil" will all be "DontCare" -> must override to fix issue by conforming to "CustomStringConvertible" */

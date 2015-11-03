@@ -27,7 +27,7 @@ class CallRecorderTest: XCTestCase {
         expect(testClass.calledFunctionList).to(equal(expectedRecordedFunctions), description: "should record function names in order")
     }
     
-    func testRecordingArguments() { // most of these tests are here because Swift's 'Any' Protocol is not Equatable
+    func testRecordingArguments() { // most of these 'expects' are here because Swift's 'Any' Protocol is not Equatable
         // given
         let testClass = TestClass()
         let expectedSet1Arg1 = "foo"
@@ -157,6 +157,20 @@ class CallRecorderTest: XCTestCase {
             description: "should fail when calling wrong function with correct argument")
         expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["nope"])).to(beFalse(),
             description: "should fail when calling wrong function")
+    }
+    
+    func testDidCallFunctionWithOptionalArguments() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doWeirdStuffWith(string1: "hello", string2: nil)
+        
+        // then
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: ["hello" as String?, nil as String?]))
+            .to(beTrue(), description: "should have called correct funtion with correct Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: ["hello", Optional<String>.None]))
+            .to(beFalse(), description: "should fail to call correct funtion with correct but Non-Optional values")
     }
     
     func testDidCallFunctionWithArgumentsANumberOfTimes() {
