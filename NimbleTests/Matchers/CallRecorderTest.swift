@@ -67,7 +67,7 @@ class CallRecorderTest: XCTestCase {
         expect("\(actualset3Arg1)").to(equal("\(expectedSet3Arg1)"), description: descFailureMessage(set: 3, arg: 1))
     }
     
-    func testResetingTheRecordedLists() {
+    func testResettingTheRecordedLists() {
         // given
         let testClass = TestClass()
         testClass.doStuffWith(string: "foo")
@@ -86,6 +86,8 @@ class CallRecorderTest: XCTestCase {
         expect(testClass.calledArgumentsList[0].count).to(equal(1), description: "should have 1 argument in first argument set")
         expect("\(testClass.calledArgumentsList[0][0])").to(equal("bar"), description: "should have correct argument in first argument set recorded")
     }
+    
+    // MARK: Did Call Tests
     
     func testDidCallFunction() {
         // given
@@ -227,7 +229,9 @@ class CallRecorderTest: XCTestCase {
             description: "should NOT have called function with arguments at most 1 time")
     }
     
-    func testDidCallFunctionWithDontCareArgument() {
+    // MARK: Argument Enum Tests
+    
+    func testDontCareArgument() {
         // given
         let testClass = TestClass()
         
@@ -243,7 +247,7 @@ class CallRecorderTest: XCTestCase {
             .to(beTrue(), description: "should have called function with non-nil and dont care arguments")
     }
     
-    func testDidCallFunctionWithNonNilArgument() {
+    func testNonNilArgument() {
         // given
         let testClass = TestClass()
         
@@ -257,7 +261,7 @@ class CallRecorderTest: XCTestCase {
             .to(beFalse(), description: "should NOT have called function with non-nil and non-nil arguments")
     }
     
-    func testDidCallFunctionWithNilArgument() {
+    func testNilArgument() {
         // given
         let testClass = TestClass()
         
