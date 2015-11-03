@@ -1,6 +1,25 @@
 
-// Implementation Example:
+/* bug in swift causes every enum WITHOUT an associated value's "description" to be the first declared
+enum value WITHOUT an associated value's description
+i.e. -> since ".DontCare" is the first enum value then the default description for ".DontCare",
+".NonNil", and ".Nil" will all be "DontCare" -> must override to fix issue by conforming to "CustomStringConvertible" */
 
+public enum Argument : CustomStringConvertible {
+    case DontCare
+    case NonNil
+    case Nil
+    
+    public var description: String {
+        switch self {
+        case .DontCare:
+            return "Argument.DontCare"
+        case .NonNil:
+            return "Argument.NonNil"
+        case .Nil:
+            return "Argument.Nil"
+        }
+    }
+}
 
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
@@ -129,5 +148,23 @@ private func isEqualArgsLists(passedArgs passedArgs: Array<Any>, recordedArgs: A
 }
 
 private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
-    return passedArg.dynamicType == recordedArg.dynamicType && "\(passedArg)" == "\(recordedArg)"
+    if let passedArgAsArgumentEnum = passedArg as? Argument {
+        switch passedArgAsArgumentEnum {
+        case .DontCare:
+            return true
+        case .NonNil:
+            return !isNil(recordedArg)
+        case .Nil:
+            return isNil(recordedArg)
+        }
+    } else {
+        return passedArg.dynamicType == recordedArg.dynamicType && "\(passedArg)" == "\(recordedArg)"
+    }
+}
+
+// Currently best known way to check for nil (Swift doesn't allow -> 'Any' == 'nil')
+private func isNil(value: Any) -> Bool {
+    let isValueAnOptional = "\(value.dynamicType)".rangeOfString("^Optional<", options: .RegularExpressionSearch, range: nil, locale: nil) != nil
+    
+    return isValueAnOptional && "\(value)" == "nil"
 }

@@ -10,6 +10,7 @@ class CallRecorderTest: XCTestCase {
         func doStuff() { self.recordCall(function: __FUNCTION__) }
         func doStuffWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
         func doMoreStuffWith(int1 int1: Int, int2: Int) { self.recordCall(function: __FUNCTION__, arguments: int1, int2) }
+        func doWeirdStuffWith(string1 string1: String?, string2: String?) { self.recordCall(function: __FUNCTION__, arguments: string1, string2) }
     }
     
     func testRecordingFunctions() {
@@ -210,5 +211,49 @@ class CallRecorderTest: XCTestCase {
             description: "should have called function with arguments at most 3 times")
         expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atMost: 1)).to(beFalse(),
             description: "should NOT have called function with arguments at most 1 time")
+    }
+    
+    func testDidCallFunctionWithDontCareArgument() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doMoreStuffWith(int1: 1, int2: 5)
+        testClass.doMoreStuffWith(int1: 1, int2: 6)
+        testClass.doWeirdStuffWith(string1: "hi", string2: nil)
+        
+        // then
+        expect(testClass.didCall(function: "doMoreStuffWith(int1:int2:)", withArgs: [1, Argument.DontCare]))
+            .to(beTrue(), description: "should have called function with 1 and dont care")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: ["hi" as String?, Argument.DontCare]))
+            .to(beTrue(), description: "should have called function with non-nil and dont care arguments")
+    }
+    
+    func testDidCallFunctionWithNonNilArgument() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doWeirdStuffWith(string1: "hi", string2: nil)
+        
+        // then
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: [Argument.NonNil, Argument.DontCare]))
+            .to(beTrue(), description: "should have called function with non-nil and dont care arguments")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: [Argument.DontCare, Argument.NonNil]))
+            .to(beFalse(), description: "should NOT have called function with non-nil and non-nil arguments")
+    }
+    
+    func testDidCallFunctionWithNilArgument() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doWeirdStuffWith(string1: "hi", string2: nil)
+        
+        // then
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: [Argument.DontCare, Argument.Nil]))
+            .to(beTrue(), description: "should have called function with dont care and nil arguments")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string1:string2:)", withArgs: [Argument.Nil, Argument.DontCare]))
+            .to(beFalse(), description: "should NOT have called function with nil and dont care arguments")
     }
 }
