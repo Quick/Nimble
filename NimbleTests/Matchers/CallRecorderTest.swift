@@ -98,6 +98,48 @@ class CallRecorderTest: XCTestCase {
         expect(testClass.didCall(function: "neverGonnaCall()")).to(beFalse(), description: "should not have called function")
     }
     
+    func testDidCallFunctionANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        testClass.doStuff()
+        
+        // then
+        expect(testClass.didCall(function: "doStuff()", count: 2)).to(beTrue(), description: "should have called function 2 times")
+        expect(testClass.didCall(function: "doStuff()", count: 1)).to(beFalse(), description: "should NOT have called the function 1 time")
+        expect(testClass.didCall(function: "doStuff()", count: 3)).to(beFalse(), description: "should NOT have called the function 3 times")
+    }
+    
+    func testDidCallFunctionAtLeastANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        testClass.doStuff()
+        
+        // then
+        expect(testClass.didCall(function: "doStuff()", atLeast: 2)).to(beTrue(), description: "should have called function at least 2 times")
+        expect(testClass.didCall(function: "doStuff()", atLeast: 1)).to(beTrue(), description: "should have called function at least 1 time")
+        expect(testClass.didCall(function: "doStuff()", atLeast: 3)).to(beFalse(), description: "should NOT have called function at least 3 times")
+    }
+    
+    func testDidCallFunctionAtMostANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        testClass.doStuff()
+        
+        // then
+        expect(testClass.didCall(function: "doStuff()", atMost: 2)).to(beTrue(), description: "should have called function at most 2 times")
+        expect(testClass.didCall(function: "doStuff()", atMost: 3)).to(beTrue(), description: "should have called function at most 3 times")
+        expect(testClass.didCall(function: "doStuff()", atMost: 1)).to(beFalse(), description: "should NOT have called function at most 1 time")
+    }
+    
     func testDidCallFunctionWithArguments() {
         // given
         let testClass = TestClass()
@@ -114,5 +156,59 @@ class CallRecorderTest: XCTestCase {
             description: "should fail when calling wrong function with correct argument")
         expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["nope"])).to(beFalse(),
             description: "should fail when calling wrong function")
+    }
+    
+    func testDidCallFunctionWithArgumentsANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hi")
+        
+        // then
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], count: 2)).to(beTrue(),
+            description: "should have called function with arguments 2 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], count: 1)).to(beFalse(),
+            description: "should NOT have called function with arguments 1 time")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], count: 3)).to(beFalse(),
+            description: "should NOT have called function with arguments 3 times")
+    }
+    
+    func testDidCallFunctionWithArgumentsAtLeastANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hi")
+        
+        // then
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atLeast: 2)).to(beTrue(),
+            description: "should have called function with arguments at least 2 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atLeast: 1)).to(beTrue(),
+            description: "should have called function with arguments at least 1 time")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atLeast: 3)).to(beFalse(),
+            description: "should NOT have called function with arguments 3 times")
+    }
+    
+    func testDidCallFunctionWithArgumentsAtMostANumberOfTimes() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hello")
+        testClass.doStuffWith(string: "hi")
+        
+        // then
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atMost: 2)).to(beTrue(),
+            description: "should have called function with arguments at most 2 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atMost: 3)).to(beTrue(),
+            description: "should have called function with arguments at most 3 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atMost: 1)).to(beFalse(),
+            description: "should NOT have called function with arguments at most 1 time")
     }
 }

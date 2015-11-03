@@ -19,7 +19,14 @@ public protocol CallRecorder : class {
     
     // For Internal Use ONLY
     func didCall(function function: String) -> Bool
+    func didCall(function function: String, count: Int) -> Bool
+    func didCall(function function: String, atLeast count: Int) -> Bool
+    func didCall(function function: String, atMost count: Int) -> Bool
+    
     func didCall(function function: String, withArgs arguments: Array<Any>) -> Bool
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> Bool
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> Bool
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> Bool
 }
 
 public extension CallRecorder {
@@ -33,12 +40,40 @@ public extension CallRecorder {
         self.calledArgumentsList = Array<Array<Any>>()
     }
     
+    // MARK: Did Call Function
+    
     func didCall(function function: String) -> Bool {
         return timesCalled(function) > 0
     }
     
+    func didCall(function function: String, count: Int) -> Bool {
+        return timesCalled(function) == count
+    }
+    
+    func didCall(function function: String, atLeast count: Int) -> Bool {
+        return timesCalled(function) >= count
+    }
+    
+    func didCall(function function: String, atMost count: Int) -> Bool {
+        return timesCalled(function) <= count
+    }
+    
+    // MARK: Did Call Function With Arguments
+    
     func didCall(function function: String, withArgs arguments: Array<Any>) -> Bool {
         return timesCalled(function: function, arguments: arguments) > 0
+    }
+    
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> Bool {
+        return timesCalled(function: function, arguments: arguments) == count
+    }
+    
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> Bool {
+        return timesCalled(function: function, arguments: arguments) >= count
+    }
+    
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> Bool {
+        return timesCalled(function: function, arguments: arguments) <= count
     }
     
     // MARK: Protocol Helper Functions
