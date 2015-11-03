@@ -13,7 +13,7 @@ public protocol CallRecorder : class {
     // **MUST** call in every method you want to spy
     func recordCall(function function: String, arguments: Any...)
     
-    // Used if you want to reset the called function/parameters lists
+    // Used if you want to reset the called function/arguments lists
     func clearRecordedLists()
     
     
@@ -99,7 +99,7 @@ private func numberOfMatchingCalls(function function: String, functions: Array<S
     
     for index in potentialMatchIndexes {
         let recordedArgsList = argsLists[index]
-        if isEqualParamsLists(passedParams: argsList, recordedParams: recordedArgsList) {
+        if isEqualArgsLists(passedArgs: argsList, recordedArgs: recordedArgsList) {
             correctCallsCount++
         }
     }
@@ -111,16 +111,16 @@ private func matchingIndexesFor(functionName functionName: String, functionList:
     return functionList.enumerate().map { functionName == $1 ? $0 : -1 }.filter { $0 != -1 }
 }
 
-private func isEqualParamsLists(passedParams passedParams: Array<Any>, recordedParams: Array<Any>) -> Bool {
-    if passedParams.count != recordedParams.count {
+private func isEqualArgsLists(passedArgs passedArgs: Array<Any>, recordedArgs: Array<Any>) -> Bool {
+    if passedArgs.count != recordedArgs.count {
         return false
     }
     
-    for var index = 0; index < recordedParams.count; index++ {
-        let passedParam = passedParams[index]
-        let recordedParam = recordedParams[index]
+    for var index = 0; index < recordedArgs.count; index++ {
+        let passedArg = passedArgs[index]
+        let recordedArg = recordedArgs[index]
         
-        if !isEqualParams(passedParam: passedParam, recordedParam: recordedParam) {
+        if !isEqualArgs(passedArg: passedArg, recordedArg: recordedArg) {
             return false
         }
     }
@@ -128,6 +128,6 @@ private func isEqualParamsLists(passedParams passedParams: Array<Any>, recordedP
     return true
 }
 
-private func isEqualParams(passedParam passedParam: Any, recordedParam: Any) -> Bool {
-    return passedParam.dynamicType == recordedParam.dynamicType && "\(passedParam)" == "\(recordedParam)"
+private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
+    return passedArg.dynamicType == recordedArg.dynamicType && "\(passedArg)" == "\(recordedArg)"
 }
