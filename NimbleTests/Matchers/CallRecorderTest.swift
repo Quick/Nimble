@@ -231,6 +231,18 @@ class CallRecorderTest: XCTestCase {
     
     // MARK: Argument Enum Tests
     
+    func testArgumentEnumDiscription() {
+        // given
+        let dontCare = Argument.DontCare
+        let nonNil = Argument.NonNil
+        let nilly = Argument.Nil
+        
+        // then
+        expect("\(dontCare)").to(equal("Argument.DontCare"))
+        expect("\(nonNil)").to(equal("Argument.NonNil"))
+        expect("\(nilly)").to(equal("Argument.Nil"))
+    }
+    
     func testDontCareArgument() {
         // given
         let testClass = TestClass()
