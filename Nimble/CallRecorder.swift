@@ -8,6 +8,7 @@ public enum Argument : CustomStringConvertible {
     case DontCare
     case NonNil
     case Nil
+    case InstanceOf(type: Any.Type)
     
     public var description: String {
         switch self {
@@ -17,6 +18,8 @@ public enum Argument : CustomStringConvertible {
             return "Argument.NonNil"
         case .Nil:
             return "Argument.Nil"
+        case .InstanceOf(let type):
+            return "Argument.InstanceOf(\(type))"
         }
     }
 }
@@ -156,6 +159,11 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
             return !isNil(recordedArg)
         case .Nil:
             return isNil(recordedArg)
+        case .InstanceOf(let type):
+            let cleanedType = "\(type)".replaceMatching(regex: "\\.Type+$", withString: "")
+            let cleanedRecordedArgType = "\(recordedArg.dynamicType)"
+                        
+            return cleanedType == cleanedRecordedArgType
         }
     } else {
         return passedArg.dynamicType == recordedArg.dynamicType && "\(passedArg)" == "\(recordedArg)"
@@ -167,4 +175,12 @@ private func isNil(value: Any) -> Bool {
     let isValueAnOptional = "\(value.dynamicType)".rangeOfString("^Optional<", options: .RegularExpressionSearch, range: nil, locale: nil) != nil
     
     return isValueAnOptional && "\(value)" == "nil"
+}
+
+// MARK: Private Extensions
+
+private extension String {
+    private func replaceMatching(regex regex: String, withString string: String) -> String {
+        return self.stringByReplacingOccurrencesOfString(regex, withString: string, options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+    }
 }

@@ -236,11 +236,13 @@ class CallRecorderTest: XCTestCase {
         let dontCare = Argument.DontCare
         let nonNil = Argument.NonNil
         let nilly = Argument.Nil
+        let instanceOf = Argument.InstanceOf(type: String.self)
         
         // then
         expect("\(dontCare)").to(equal("Argument.DontCare"))
         expect("\(nonNil)").to(equal("Argument.NonNil"))
         expect("\(nilly)").to(equal("Argument.Nil"))
+        expect("\(instanceOf)").to(equal("Argument.InstanceOf(String)"))
     }
     
     func testDontCareArgument() {
@@ -284,5 +286,27 @@ class CallRecorderTest: XCTestCase {
             .to(beTrue(), description: "should SUCCEED to call function with dont care and nil arguments")
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Nil, Argument.DontCare]))
             .to(beFalse(), description: "should FAIL to call function with nil and dont care arguments")
+    }
+    
+    func testInstanceOfArgument() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "hello")
+        testClass.doWeirdStuffWith(string: "hi", int: nil)
+        
+        // then
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOf(type: String.self)]))
+            .to(beTrue(), description: "should SUCCEED to call function with instance of String arguments")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOf(type: Int.self)]))
+            .to(beFalse(), description: "should FAIL to call function with instance of Int arguments")
+        
+        let expectedArgs1: Array<Any> = [Argument.InstanceOf(type: Optional<String>.self), Argument.InstanceOf(type: Optional<Int>.self)]
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs1))
+            .to(beTrue(), description: "should SUCCEED to call function with instance of String? and Int? arguments")
+        let expectedArgs2: Array<Any> = [Argument.InstanceOf(type: String.self), Argument.InstanceOf(type: Int.self)]
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs2))
+            .to(beFalse(), description: "should FAIL to call function with String and Int arguments")
     }
 }
