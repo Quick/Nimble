@@ -9,6 +9,7 @@ public enum Argument : CustomStringConvertible {
     case NonNil
     case Nil
     case InstanceOf(type: Any.Type)
+    case KindOf(type: AnyObject.Type)
     
     public var description: String {
         switch self {
@@ -20,6 +21,8 @@ public enum Argument : CustomStringConvertible {
             return "Argument.Nil"
         case .InstanceOf(let type):
             return "Argument.InstanceOf(\(type))"
+        case .KindOf(let type):
+            return "Argument.KindOf(\(type))"
         }
     }
 }
@@ -162,8 +165,14 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
         case .InstanceOf(let type):
             let cleanedType = "\(type)".replaceMatching(regex: "\\.Type+$", withString: "")
             let cleanedRecordedArgType = "\(recordedArg.dynamicType)"
-                        
+            
             return cleanedType == cleanedRecordedArgType
+        case .KindOf(let type):
+            if let recordedArgAsObject = recordedArg as? AnyObject {
+                return recordedArgAsObject.isKindOfClass(type)
+            }
+            
+            return false
         }
     } else {
         return passedArg.dynamicType == recordedArg.dynamicType && "\(passedArg)" == "\(recordedArg)"

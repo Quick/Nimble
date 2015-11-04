@@ -11,6 +11,7 @@ class CallRecorderTest: XCTestCase {
         func doStuffWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
         func doMoreStuffWith(int1 int1: Int, int2: Int) { self.recordCall(function: __FUNCTION__, arguments: int1, int2) }
         func doWeirdStuffWith(string string: String?, int: Int?) { self.recordCall(function: __FUNCTION__, arguments: string, int) }
+        func doCrazyStuffWith(object object: NSObject) { self.recordCall(function: __FUNCTION__, arguments: object) }
     }
     
     func testRecordingFunctions() {
@@ -237,12 +238,14 @@ class CallRecorderTest: XCTestCase {
         let nonNil = Argument.NonNil
         let nilly = Argument.Nil
         let instanceOf = Argument.InstanceOf(type: String.self)
+        let kindOf = Argument.KindOf(type: NSObject.self)
         
         // then
         expect("\(dontCare)").to(equal("Argument.DontCare"))
         expect("\(nonNil)").to(equal("Argument.NonNil"))
         expect("\(nilly)").to(equal("Argument.Nil"))
         expect("\(instanceOf)").to(equal("Argument.InstanceOf(String)"))
+        expect("\(kindOf)").to(equal("Argument.KindOf(NSObject)"))
     }
     
     func testDontCareArgument() {
@@ -308,5 +311,23 @@ class CallRecorderTest: XCTestCase {
         let expectedArgs2: Array<Any> = [Argument.InstanceOf(type: String.self), Argument.InstanceOf(type: Int.self)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs2))
             .to(beFalse(), description: "should FAIL to call function with String and Int arguments")
+    }
+    
+    func testKindOfClassArgument() {
+        // given
+        class SubClass : NSObject {}
+        class SubSubClass : SubClass {}
+        let testClass = TestClass()
+        
+        // when
+        testClass.doCrazyStuffWith(object: SubClass())
+        
+        // then
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: NSObject.self)]))
+            .to(beTrue(), description: "should SUCCEED to call function with kind of NSObject argument")
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: SubClass.self)]))
+            .to(beTrue(), description: "should SUCCEED to call function with kind of SubClass argument")
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: SubSubClass.self)]))
+            .to(beFalse(), description: "should FAIL to call function with kind of SubSubClass argument")
     }
 }
