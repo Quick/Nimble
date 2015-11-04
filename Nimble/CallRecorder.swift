@@ -162,8 +162,8 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
     }
 }
 
-// Currently best known way to check for nil (Swift doesn't allow -> 'Any' == 'nil')
 private func isNil(value: Any) -> Bool {
+    // Currently best known way to check for nil (Swift doesn't allow -> 'Any' == 'nil')
     let isValueAnOptional = "\(value.dynamicType)".rangeOfString("^Optional<", options: .RegularExpressionSearch, range: nil, locale: nil) != nil
     
     return isValueAnOptional && "\(value)" == "nil"
