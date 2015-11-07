@@ -2,13 +2,15 @@
 /* bug in Swift causes every enum WITHOUT an associated value's "description" to be the first declared
 enum value WITHOUT an associated value's description
 i.e. -> since ".DontCare" is the first enum value then the default description for ".DontCare",
-".NonNil", and ".Nil" will all be "DontCare" -> must override to fix issue by conforming to "CustomStringConvertible" */
+".NonNil", and ".Nil" will all be "DontCare" -> must override to fix issue by conforming to "CustomStringConvertible" 
+    This is not reproducable in a Playground */
 
 public enum Argument : CustomStringConvertible {
     case DontCare
     case NonNil
     case Nil
     case InstanceOf(type: Any.Type)
+    case InstanceOfWith(type: Any.Type, option: ArgumentOption)
     case KindOf(type: AnyObject.Type)
     
     public var description: String {
@@ -21,8 +23,27 @@ public enum Argument : CustomStringConvertible {
             return "Argument.Nil"
         case .InstanceOf(let type):
             return "Argument.InstanceOf(\(type))"
+        case .InstanceOfWith(let input):
+            return "Argument.InstanceOfWith(\(input.type), \(input.option))"
         case .KindOf(let type):
             return "Argument.KindOf(\(type))"
+        }
+    }
+}
+
+public enum ArgumentOption : CustomStringConvertible {
+    case DontCare
+    case NonOptional
+    case Optional
+    
+    public var description: String {
+        switch self {
+        case .DontCare:
+            return "ArgumentOption.DontCare"
+        case .NonOptional:
+            return "ArgumentOption.NonOptional"
+        case .Optional:
+            return "ArgumentOption.Optional"
         }
     }
 }
@@ -167,6 +188,21 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
             let cleanedRecordedArgType = "\(recordedArg.dynamicType)"
             
             return cleanedType == cleanedRecordedArgType
+        case .InstanceOfWith(let input):
+            let isRecordedArgAnOptional = "\(recordedArg.dynamicType)".indexForMatching(regex: "^Optional<") != nil
+            let passesOptionCheck = (input.option == ArgumentOption.DontCare) ||
+                                    (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
+                                    (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
+            
+            if !passesOptionCheck {
+                return false
+            }
+            
+            let cleanedType = "\(input.type)".replaceMatching(regex: "\\.Type+$", withString: "")
+            let cleanedRecordedArgType = "\(recordedArg.dynamicType)".replaceMatching(regex: "^Optional<", withString: "")
+                .replaceMatching(regex: ">+$", withString: "")
+            
+            return cleanedType == cleanedRecordedArgType
         case .KindOf(let type):
             if let recordedArgAsObject = recordedArg as? AnyObject {
                 return recordedArgAsObject.isKindOfClass(type)
@@ -190,6 +226,10 @@ private func isNil(value: Any) -> Bool {
 
 private extension String {
     private func replaceMatching(regex regex: String, withString string: String) -> String {
-        return self.stringByReplacingOccurrencesOfString(regex, withString: string, options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+        return self.stringByReplacingOccurrencesOfString(regex, withString: string, options: .RegularExpressionSearch, range: nil)
+    }
+    
+    private func indexForMatching(regex regex: String) -> Range<Index>? {
+        return self.rangeOfString(regex, options: .RegularExpressionSearch, range: nil, locale: nil)
     }
 }
