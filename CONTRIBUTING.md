@@ -38,6 +38,8 @@ Be sure to include in your issue:
 - Your Xcode version (eg - Xcode 7.0.1 7A1001)
 - Your version of Nimble (eg - v2.0.0 or git sha `20a3f3b4e63cc8d97c92c4164bf36f2a2c9a6e1b`)
 - What are the steps to reproduce this issue?
+- If the problem is on a UI Testing Bundle, Unit Testing Bundle, or some other target configuration
+- Are you using carthage or cocoapods?
 
 ## Building the Project
 
