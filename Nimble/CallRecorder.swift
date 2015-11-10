@@ -48,6 +48,12 @@ public enum ArgumentOption : CustomStringConvertible {
     }
 }
 
+public struct DidCallResult {
+    public let success: Bool
+//    let allCalledDescription: String
+//    let successfullyCalledCount: Int
+}
+
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
     // Implementation Example:
@@ -64,15 +70,15 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String) -> Bool
-    func didCall(function function: String, count: Int) -> Bool
-    func didCall(function function: String, atLeast count: Int) -> Bool
-    func didCall(function function: String, atMost count: Int) -> Bool
+    func didCall(function function: String) -> DidCallResult
+    func didCall(function function: String, count: Int) -> DidCallResult
+    func didCall(function function: String, atLeast count: Int) -> DidCallResult
+    func didCall(function function: String, atMost count: Int) -> DidCallResult
     
-    func didCall(function function: String, withArgs arguments: Array<Any>) -> Bool
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> Bool
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> Bool
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> Bool
+    func didCall(function function: String, withArgs arguments: Array<Any>) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> DidCallResult
 }
 
 public extension CallRecorder {
@@ -88,38 +94,38 @@ public extension CallRecorder {
     
     // MARK: Did Call Function
     
-    func didCall(function function: String) -> Bool {
-        return timesCalled(function) > 0
+    func didCall(function function: String) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function) > 0)
     }
     
-    func didCall(function function: String, count: Int) -> Bool {
-        return timesCalled(function) == count
+    func didCall(function function: String, count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function) == count)
     }
     
-    func didCall(function function: String, atLeast count: Int) -> Bool {
-        return timesCalled(function) >= count
+    func didCall(function function: String, atLeast count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function) >= count)
     }
     
-    func didCall(function function: String, atMost count: Int) -> Bool {
-        return timesCalled(function) <= count
+    func didCall(function function: String, atMost count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function) <= count)
     }
     
     // MARK: Did Call Function With Arguments
     
-    func didCall(function function: String, withArgs arguments: Array<Any>) -> Bool {
-        return timesCalled(function: function, arguments: arguments) > 0
+    func didCall(function function: String, withArgs arguments: Array<Any>) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) > 0)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> Bool {
-        return timesCalled(function: function, arguments: arguments) == count
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) == count)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> Bool {
-        return timesCalled(function: function, arguments: arguments) >= count
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) >= count)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> Bool {
-        return timesCalled(function: function, arguments: arguments) <= count
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> DidCallResult {
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) <= count)
     }
     
     // MARK: Protocol Helper Functions
