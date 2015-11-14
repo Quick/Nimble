@@ -88,7 +88,7 @@ class CallRecorderTest: XCTestCase {
         expect("\(testClass.calledArgumentsList[0][0])").to(equal("bar"), description: "should have correct argument in first argument set recorded")
     }
     
-    // MARK: Did Call Tests
+    // MARK: Did Call Success Tests
     
     func testDidCallFunction() {
         // given
@@ -228,6 +228,128 @@ class CallRecorderTest: XCTestCase {
             description: "should SUCCEED to call function with arguments at most 3 times")
         expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], atMost: 1).success).to(beFalse(),
             description: "should FAIL to call function with arguments at most 1 time")
+    }
+    
+    // MARK: Did Call - Recorded Calls Description Tests
+    
+    func testRecordedCallsDescriptionNoCalls() {
+        // given
+        let testClass = TestClass()
+        
+        // then
+        let result1 : DidCallResult = testClass.didCall(function: "not a function")
+        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1)
+        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1)
+        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: -1)
+        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [])
+        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1)
+        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1)
+        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1)
+        
+        let recordedCallsDescriptions : Array<String> = [result1.recordedCallsDescription,
+                                                         result2.recordedCallsDescription,
+                                                         result3.recordedCallsDescription,
+                                                         result4.recordedCallsDescription,
+                                                         result5.recordedCallsDescription,
+                                                         result6.recordedCallsDescription,
+                                                         result7.recordedCallsDescription,
+                                                         result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<>")))
+    }
+    
+    func testRecordedCallsDescriptionSingleCallWithNoArguments() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        
+        // then
+        let result1 : DidCallResult = testClass.didCall(function: "not a function")
+        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1)
+        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1)
+        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: -1)
+        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [])
+        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1)
+        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1)
+        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1)
+        
+        print(result1)
+        
+        let recordedCallsDescriptions : Array<String> = [result1.recordedCallsDescription,
+            result2.recordedCallsDescription,
+            result3.recordedCallsDescription,
+            result4.recordedCallsDescription,
+            result5.recordedCallsDescription,
+            result6.recordedCallsDescription,
+            result7.recordedCallsDescription,
+            result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<doStuff()>")))
+    }
+    
+    func testRecordedCallsDescriptionSingleCallWithArguments() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doMoreStuffWith(int1: 5, int2: 10)
+        
+        // then
+        let result1 : DidCallResult = testClass.didCall(function: "not a function")
+        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1)
+        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1)
+        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: -1)
+        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [])
+        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1)
+        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1)
+        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1)
+        
+        print(result1)
+        
+        let recordedCallsDescriptions : Array<String> = [result1.recordedCallsDescription,
+            result2.recordedCallsDescription,
+            result3.recordedCallsDescription,
+            result4.recordedCallsDescription,
+            result5.recordedCallsDescription,
+            result6.recordedCallsDescription,
+            result7.recordedCallsDescription,
+            result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<doMoreStuffWith(int1:int2:) with 5, 10>")))
+    }
+    
+    func testRecordedCallsDescriptionMultipleCalls() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        testClass.doMoreStuffWith(int1: 5, int2: 10)
+        
+        // then
+        let result1 : DidCallResult = testClass.didCall(function: "not a function")
+        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1)
+        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1)
+        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: -1)
+        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [])
+        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1)
+        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1)
+        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1)
+        
+        print(result1)
+        
+        let recordedCallsDescriptions : Array<String> = [result1.recordedCallsDescription,
+            result2.recordedCallsDescription,
+            result3.recordedCallsDescription,
+            result4.recordedCallsDescription,
+            result5.recordedCallsDescription,
+            result6.recordedCallsDescription,
+            result7.recordedCallsDescription,
+            result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<doStuff()>, <doMoreStuffWith(int1:int2:) with 5, 10>")))
     }
     
     // MARK: Argument Enum Tests

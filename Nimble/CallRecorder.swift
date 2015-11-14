@@ -50,8 +50,8 @@ public enum ArgumentOption : CustomStringConvertible {
 
 public struct DidCallResult {
     public let success: Bool
-//    let allCalledDescription: String
-//    let successfullyCalledCount: Int
+    public let recordedCallsDescription: String
+//    public let successfullyCalledCount: Int
 }
 
 public protocol CallRecorder : class {
@@ -95,37 +95,37 @@ public extension CallRecorder {
     // MARK: Did Call Function
     
     func didCall(function function: String) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) > 0)
+        return DidCallResult(success: timesCalled(function) > 0, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) == count)
+        return DidCallResult(success: timesCalled(function) == count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, atLeast count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) >= count)
+        return DidCallResult(success: timesCalled(function) >= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, atMost count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) <= count)
+        return DidCallResult(success: timesCalled(function) <= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     // MARK: Did Call Function With Arguments
     
     func didCall(function function: String, withArgs arguments: Array<Any>) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) > 0)
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) > 0, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) == count)
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) == count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) >= count)
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) >= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) <= count)
+        return DidCallResult(success: timesCalled(function: function, arguments: arguments) <= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
     }
     
     // MARK: Protocol Helper Functions
@@ -136,6 +136,24 @@ public extension CallRecorder {
     
     private func timesCalled(function function: String, arguments: Array<Any>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.calledFunctionList, argsList: arguments, argsLists: self.calledArgumentsList)
+    }
+    
+    private func descriptionOfRecordedCalls() -> String {
+        if self.calledFunctionList.isEmpty {
+            return "<>"
+        }
+        
+        return zip(self.calledFunctionList, self.calledArgumentsList).reduce("", combine: { (concatenatedString, element: (function: String, argumentList: Array<Any>)) -> String in
+            var entry = element.function
+            
+            let parameterListStringRepresentation = element.argumentList.stringRepresentation()
+            if !parameterListStringRepresentation.isEmpty {
+                entry += " with " + parameterListStringRepresentation
+            }
+            entry = "<" + entry + ">"
+            
+            return concatenatedString.isEmpty ? entry : concatenatedString + ", " + entry
+        })
     }
 }
 
@@ -237,5 +255,11 @@ private extension String {
     
     private func indexForMatching(regex regex: String) -> Range<Index>? {
         return self.rangeOfString(regex, options: .RegularExpressionSearch, range: nil, locale: nil)
+    }
+}
+
+private extension Array {
+    private func stringRepresentation() -> String {
+        return self.map{ "\($0)" }.joinWithSeparator(", ")
     }
 }
