@@ -54,6 +54,23 @@ public struct DidCallResult {
 //    public let successfullyCalledCount: Int
 }
 
+public enum DidCallResultIncludeOption : CustomStringConvertible {
+    case Yes
+    case No
+    case OnlyOnUnsuccess
+    
+    public var description: String {
+        switch self {
+        case .Yes:
+            return "DidCallResultIncludeOption.Yes"
+        case .No:
+            return "DidCallResultIncludeOption.No"
+        case .OnlyOnUnsuccess:
+            return "DidCallResultIncludeOption.OnlyOnUnsuccess"
+        }
+    }
+}
+
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
     // Implementation Example:
@@ -70,15 +87,15 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String) -> DidCallResult
-    func didCall(function function: String, count: Int) -> DidCallResult
-    func didCall(function function: String, atLeast count: Int) -> DidCallResult
-    func didCall(function function: String, atMost count: Int) -> DidCallResult
+    func didCall(function function: String, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
     
-    func didCall(function function: String, withArgs arguments: Array<Any>) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
 }
 
 public extension CallRecorder {
@@ -94,38 +111,54 @@ public extension CallRecorder {
     
     // MARK: Did Call Function
     
-    func didCall(function function: String) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) > 0, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function) > 0
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) == count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function) == count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, atLeast count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) >= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function) >= count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, atMost count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function) <= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function) <= count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
     // MARK: Did Call Function With Arguments
     
-    func didCall(function function: String, withArgs arguments: Array<Any>) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) > 0, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, withArgs arguments: Array<Any>, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function: function, arguments: arguments) > 0
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) == count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function: function, arguments: arguments) == count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) >= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function: function, arguments: arguments) >= count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int) -> DidCallResult {
-        return DidCallResult(success: timesCalled(function: function, arguments: arguments) <= count, recordedCallsDescription: self.descriptionOfRecordedCalls())
+    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success = timesCalled(function: function, arguments: arguments) <= count
+        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
     // MARK: Protocol Helper Functions
@@ -138,22 +171,15 @@ public extension CallRecorder {
         return numberOfMatchingCalls(function: function, functions: self.calledFunctionList, argsList: arguments, argsLists: self.calledArgumentsList)
     }
     
-    private func descriptionOfRecordedCalls() -> String {
-        if self.calledFunctionList.isEmpty {
-            return "<>"
+    private func descriptionOfRecordedCalls(wasSuccessful success: Bool, returnOption: DidCallResultIncludeOption) -> String {
+        switch returnOption {
+        case .Yes:
+            return descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
+        case .No:
+            return ""
+        case .OnlyOnUnsuccess:
+            return success ? "" : descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
         }
-        
-        return zip(self.calledFunctionList, self.calledArgumentsList).reduce("", combine: { (concatenatedString, element: (function: String, argumentList: Array<Any>)) -> String in
-            var entry = element.function
-            
-            let parameterListStringRepresentation = element.argumentList.stringRepresentation()
-            if !parameterListStringRepresentation.isEmpty {
-                entry += " with " + parameterListStringRepresentation
-            }
-            entry = "<" + entry + ">"
-            
-            return concatenatedString.isEmpty ? entry : concatenatedString + ", " + entry
-        })
     }
 }
 
@@ -244,6 +270,24 @@ private func isNil(value: Any) -> Bool {
     let isValueAnOptional = "\(value.dynamicType)".rangeOfString("^Optional<", options: .RegularExpressionSearch, range: nil, locale: nil) != nil
     
     return isValueAnOptional && "\(value)" == "nil"
+}
+
+private func descriptionOfCalls(functionList functionList: Array<String>, argumentsList: Array<Array<Any>>) -> String {
+    if functionList.isEmpty {
+        return "<>"
+    }
+    
+    return zip(functionList, argumentsList).reduce("", combine: { (concatenatedString, element: (function: String, argumentList: Array<Any>)) -> String in
+        var entry = element.function
+        
+        let parameterListStringRepresentation = element.argumentList.stringRepresentation()
+        if !parameterListStringRepresentation.isEmpty {
+            entry += " with " + parameterListStringRepresentation
+        }
+        entry = "<" + entry + ">"
+        
+        return concatenatedString.isEmpty ? entry : concatenatedString + ", " + entry
+    })
 }
 
 // MARK: Private Extensions
