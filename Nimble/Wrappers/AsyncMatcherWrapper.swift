@@ -54,8 +54,9 @@ extension Expectation {
     /// at each pollInterval until the timeout is reached.
     public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01, description: String? = nil) {
         if expression.isClosure {
-            let (pass, msg) = expressionMatches(
+            let (pass, msg) = Nimble.expression(
                 expression,
+                matches: matches,
                 matcher: AsyncMatcherWrapper(
                     fullMatcher: matcher,
                     timeoutInterval: timeout,
@@ -72,20 +73,7 @@ extension Expectation {
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
     public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01, description: String? = nil) {
-        if expression.isClosure {
-            let (pass, msg) = expressionDoesNotMatch(
-                expression,
-                matcher: AsyncMatcherWrapper(
-                    fullMatcher: matcher,
-                    timeoutInterval: timeout,
-                    pollInterval: pollInterval),
-                toNot: "to eventually not",
-                description: description
-            )
-            verify(pass, msg)
-        } else {
-            verify(false, toEventuallyRequiresClosureError)
-        }
+        not.toEventually(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to not match by checking
