@@ -17,13 +17,19 @@ func expression<T, U where U: Matcher, U.ValueType == T>(expression: Expression<
     }
 }
 
-public struct Expectation<T> {
+public struct Expectation<T>: _ExpectationType {
+    public typealias Expected = T
+
     let expression: Expression<T>
 
     var matches = true
 
     init(expression: Expression<T>) {
         self.expression = expression
+    }
+
+    public var to: Expectation<T> {
+        return self
     }
 
     public var not: Expectation<T> {
@@ -57,4 +63,14 @@ public struct Expectation<T> {
     // see:
     // - AsyncMatcherWrapper for extension
     // - NMBExpectation for Objective-C interface
+}
+
+public protocol _ExpectationType {
+    typealias Expected
+}
+
+extension _ExpectationType {
+    var expectation: Expectation<Expected> {
+        return self as! Expectation<Expected>
+    }
 }
