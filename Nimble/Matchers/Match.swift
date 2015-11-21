@@ -1,5 +1,13 @@
 import Foundation
 
+extension _ExpectationType where Expected == String {
+    /// A Nimble matcher that succeeds when the actual string satisfies the regular expression
+    /// described by the expected string.
+    public func match(expectedValue: String, description: String? = nil) {
+        expectation.to(Nimble.match(expectedValue), description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual string satisfies the regular expression
 /// described by the expected string.
 public func match(expectedValue: String?) -> NonNilMatcherFunc<String> {
