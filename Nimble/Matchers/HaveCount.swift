@@ -1,5 +1,13 @@
 import Foundation
 
+extension _ExpectationType where Expected: CollectionType {
+    /// A Nimble matcher that succeeds when the actual CollectionType's count equals
+    /// the expected value
+    public func haveCount(expectedValue: Expected.Index.Distance, description: String? = nil) {
+        expectation.to(Nimble.haveCount(expectedValue), description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual CollectionType's count equals
 /// the expected value
 public func haveCount<T: CollectionType>(expectedValue: T.Index.Distance) -> NonNilMatcherFunc<T> {
