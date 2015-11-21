@@ -1,5 +1,30 @@
 import Foundation
 
+extension _ExpectationType where Expected: SequenceType, Expected.Generator.Element: Equatable {
+    /// A Nimble matcher that succeeds when the actual sequence contains the expected value.
+    public func contain(item: Expected.Generator.Element, description: String? = nil) {
+        expectation.to(Nimble.contain(item), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == String {
+    /// A Nimble matcher that succeeds when the actual string contains the expected substring.
+    public func contain(substring: String, description: String? = nil) {
+        expectation.to(Nimble.contain(substring), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == [AnyObject] {
+    /// A Nimble matcher that succeeds when the actual sequence contains the expected value.
+    public func contain(item: AnyObject, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "contain <\(item)>"
+            let actual = try actualExpression.evaluate()
+            return actual != nil && (actual! as NSArray).containsObject(item)
+        }, description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual sequence contains the expected value.
 public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
     return contain(items)
