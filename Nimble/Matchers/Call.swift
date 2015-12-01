@@ -85,13 +85,67 @@ public func call(function function: String, withArguments arguments: [Any]) -> F
     }
 }
 
+public func call(function function: String, withArguments arguments: [Any], count: Int) -> FullMatcherFunc<CallRecorder> {
+    return FullMatcherFunc { expression, failureMessage, isNegationTest in
+        guard let expressionValue = try expression.evaluate() else {
+            return false
+        }
+        
+        let result = expressionValue.didCall(function: function, withArgs: arguments, count: count, recordedCallsDescOption: .OnlyOnUnsuccess)
+        
+        if !result.success {
+            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "exactly", count: count)
+            failureMessage.actualValue = result.recordedCallsDescription
+        }
+        
+        return result.success
+    }
+}
+
+public func call(function function: String, withArguments arguments: [Any], atLeast: Int) -> FullMatcherFunc<CallRecorder> {
+    return FullMatcherFunc { expression, failureMessage, isNegationTest in
+        guard let expressionValue = try expression.evaluate() else {
+            return false
+        }
+        
+        let result = expressionValue.didCall(function: function, withArgs: arguments, atLeast: atLeast, recordedCallsDescOption: .OnlyOnUnsuccess)
+        
+        if !result.success {
+            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at least", count: atLeast)
+            failureMessage.actualValue = result.recordedCallsDescription
+        }
+        
+        return result.success
+    }
+}
+
+public func call(function function: String, withArguments arguments: [Any], atMost: Int) -> FullMatcherFunc<CallRecorder> {
+    return FullMatcherFunc { expression, failureMessage, isNegationTest in
+        guard let expressionValue = try expression.evaluate() else {
+            return false
+        }
+        
+        let result = expressionValue.didCall(function: function, withArgs: arguments, atMost: atMost, recordedCallsDescOption: .OnlyOnUnsuccess)
+        
+        if !result.success {
+            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at most", count: atMost)
+            failureMessage.actualValue = result.recordedCallsDescription
+        }
+        
+        return result.success
+    }
+}
+
 // MARK: Private
 
 private func descriptionOfAttemptedCall(object object: Any, function: String, arguments: [Any], countDescription: String, count: Int) -> String {
     var description = "call <\(function)> from \(object.dynamicType)"
+    
     if !arguments.isEmpty {
         description += " with \(arguments.map{ "\($0)" }.joinWithSeparator(", "))"
-    } else if !countDescription.isEmpty {
+    }
+    
+    if !countDescription.isEmpty {
         let pluralism = count == 1 ? "" : "s"
         description += " \(countDescription) \(count) time\(pluralism)"
     }

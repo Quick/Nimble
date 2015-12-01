@@ -11,9 +11,7 @@ class CallTest : XCTestCase {
         
         func doStuff() { self.recordCall(function: __FUNCTION__) }
         func doStuffWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
-//        func doMoreStuffWith(int1 int1: Int, int2: Int) { self.recordCall(function: __FUNCTION__, arguments: int1, int2) }
-//        func doWeirdStuffWith(string string: String?, int: Int?) { self.recordCall(function: __FUNCTION__, arguments: string, int) }
-//        func doCrazyStuffWith(object object: NSObject) { self.recordCall(function: __FUNCTION__, arguments: object) }
+        func doThingsWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
     }
     
     func testCall() {
@@ -151,5 +149,104 @@ class CallTest : XCTestCase {
         // then
         let expectedMessage = "expected to call <doStuffWith(string:)> from TestClass with string, got <doStuffWith(string:) with swift>"
         failsWithErrorMessage(expectedMessage) { failingTest() }
+    }
+    
+    func testCallWithParametersAndCount() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "quick")
+        testClass.doStuffWith(string: "nimble")
+        
+        // then
+        expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], count: 1))
+    }
+    
+    func testCallWithParametersAndCountFailureMessage() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuffWith(string: "quick")
+        testClass.doStuffWith(string: "nimble")
+        
+        // when
+        let failingTest1 = { expect(testClass).to(call(function: "doDifferentStuffWith(string:)", withArguments: ["swift"], count: 1)) }
+        let failingTest2 = { expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], count: 2)) }
+        
+        // then
+        let got = "got <doStuffWith(string:) with quick>, <doStuffWith(string:) with nimble>"
+        
+        let expectedMessage1 = "expected to call <doDifferentStuffWith(string:)> from TestClass with swift exactly 1 time, \(got)"
+        failsWithErrorMessage(expectedMessage1) { failingTest1() }
+        
+        let expectedMessage2 = "expected to call <doStuffWith(string:)> from TestClass with nimble exactly 2 times, \(got)"
+        failsWithErrorMessage(expectedMessage2) { failingTest2() }
+    }
+    
+    func testCallWithParametersAndAtLeast() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "quick")
+        testClass.doStuffWith(string: "nimble")
+        
+        // then
+        expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atLeast: 1))
+    }
+    
+    func testCallWithParametersAndAtLeastFailureMessage() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuffWith(string: "quick")
+        testClass.doStuffWith(string: "nimble")
+        
+        // when
+        let failingTest1 = { expect(testClass).to(call(function: "doDifferentStuffWith(string:)", withArguments: ["swift"], atLeast: 1)) }
+        let failingTest2 = { expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atLeast: 2)) }
+        
+        // then
+        let got = "got <doStuffWith(string:) with quick>, <doStuffWith(string:) with nimble>"
+        
+        let expectedMessage1 = "expected to call <doDifferentStuffWith(string:)> from TestClass with swift at least 1 time, \(got)"
+        failsWithErrorMessage(expectedMessage1) { failingTest1() }
+        
+        let expectedMessage2 = "expected to call <doStuffWith(string:)> from TestClass with nimble at least 2 times, \(got)"
+        failsWithErrorMessage(expectedMessage2) { failingTest2() }
+    }
+    
+    func testCallWithParametersAndAtMost() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuffWith(string: "quick")
+        testClass.doStuffWith(string: "nimble")
+        
+        // then
+        expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atMost: 1))
+    }
+    
+    func testCallWithParametersAndAtMostFailureMessage() {
+        // given
+        let testClass = TestClass()
+        testClass.doThingsWith(string: "call matcher")
+        testClass.doThingsWith(string: "call matcher")
+        testClass.doStuffWith(string: "swift")
+        testClass.doStuffWith(string: "swift")
+        testClass.doStuffWith(string: "swift")
+        
+        // when
+        let failingTest1 = { expect(testClass).to(call(function: "doThingsWith(string:)", withArguments: ["call matcher"], atMost: 1)) }
+        let failingTest2 = { expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["swift"], atMost: 2)) }
+        
+        // then
+        let got = "got <doThingsWith(string:) with call matcher>, <doThingsWith(string:) with call matcher>, <doStuffWith(string:) with swift>, <doStuffWith(string:) with swift>, <doStuffWith(string:) with swift>"
+        
+        let expectedMessage1 = "expected to call <doThingsWith(string:)> from TestClass with call matcher at most 1 time, \(got)"
+        failsWithErrorMessage(expectedMessage1) { failingTest1() }
+        
+        let expectedMessage2 = "expected to call <doStuffWith(string:)> from TestClass with swift at most 2 times, \(got)"
+        failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
 }
