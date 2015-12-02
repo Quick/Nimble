@@ -57,6 +57,7 @@ public struct DidCallResult {
 public enum DidCallResultIncludeOption : CustomStringConvertible {
     case Yes
     case No
+    case OnlyOnSuccess
     case OnlyOnUnsuccess
     
     public var description: String {
@@ -65,6 +66,8 @@ public enum DidCallResultIncludeOption : CustomStringConvertible {
             return "DidCallResultIncludeOption.Yes"
         case .No:
             return "DidCallResultIncludeOption.No"
+        case .OnlyOnSuccess:
+            return "DidCallResultIncludeOption.OnlyOnSuccess"
         case .OnlyOnUnsuccess:
             return "DidCallResultIncludeOption.OnlyOnUnsuccess"
         }
@@ -177,6 +180,8 @@ public extension CallRecorder {
             return descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
         case .No:
             return ""
+        case .OnlyOnSuccess:
+            return success ? descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList) : ""
         case .OnlyOnUnsuccess:
             return success ? "" : descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
         }

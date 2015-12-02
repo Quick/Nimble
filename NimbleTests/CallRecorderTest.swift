@@ -235,14 +235,14 @@ class CallRecorderTest: XCTestCase {
         let testClass = TestClass()
         
         // then
-        let result1 : DidCallResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .Yes)
-        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .Yes)
-        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .Yes)
-        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: 1, recordedCallsDescOption: .Yes)
-        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .Yes)
-        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .Yes)
-        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
-        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .Yes)
+        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .Yes)
+        let result2 = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .Yes)
+        let result3 = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .Yes)
+        let result4 = testClass.didCall(function: "not a function", atMost: 1, recordedCallsDescOption: .Yes)
+        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .Yes)
+        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .Yes)
+        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
+        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .Yes)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
@@ -261,14 +261,69 @@ class CallRecorderTest: XCTestCase {
         let testClass = TestClass()
         
         // then
-        let result1 : DidCallResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .No)
-        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .No)
-        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .No)
-        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: 1, recordedCallsDescOption: .No)
-        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .No)
-        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .No)
-        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .No)
-        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .No)
+        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .No)
+        let result2 = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .No)
+        let result3 = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .No)
+        let result4 = testClass.didCall(function: "not a function", atMost: 1, recordedCallsDescOption: .No)
+        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .No)
+        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .No)
+        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .No)
+        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .No)
+        
+        let recordedCallsDescriptions = [result1.recordedCallsDescription,
+                                         result2.recordedCallsDescription,
+                                         result3.recordedCallsDescription,
+                                         result4.recordedCallsDescription,
+                                         result5.recordedCallsDescription,
+                                         result6.recordedCallsDescription,
+                                         result7.recordedCallsDescription,
+                                         result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(beEmpty()))
+    }
+    
+    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnSuccessForSuccessCase() {
+        // given
+        let testClass = TestClass()
+        
+        // when
+        testClass.doStuff()
+        
+        // then
+        let result1 = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnSuccess)
+        let result2 = testClass.didCall(function: "doStuff()", count: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result3 = testClass.didCall(function: "doStuff()", atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result4 = testClass.didCall(function: "doStuff()", atMost: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result5 = testClass.didCall(function: "doStuff()", withArgs: [], recordedCallsDescOption: .OnlyOnSuccess)
+        let result6 = testClass.didCall(function: "doStuff()", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result7 = testClass.didCall(function: "doStuff()", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result8 = testClass.didCall(function: "doStuff()", withArgs: [], atMost: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        
+        let recordedCallsDescriptions = [result1.recordedCallsDescription,
+                                         result2.recordedCallsDescription,
+                                         result3.recordedCallsDescription,
+                                         result4.recordedCallsDescription,
+                                         result5.recordedCallsDescription,
+                                         result6.recordedCallsDescription,
+                                         result7.recordedCallsDescription,
+                                         result8.recordedCallsDescription]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<doStuff()>")))
+    }
+    
+    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnSuccessForUnSuccessCase() {
+        // given
+        let testClass = TestClass()
+        
+        // then
+        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnSuccess)
+        let result2 = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result3 = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result4 = testClass.didCall(function: "not a function", atMost: -1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .OnlyOnSuccess)
+        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
+        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .OnlyOnSuccess)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
@@ -290,14 +345,14 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuff()
         
         // then
-        let result1 : DidCallResult = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result2 : DidCallResult = testClass.didCall(function: "doStuff()", count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result3 : DidCallResult = testClass.didCall(function: "doStuff()", atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result4 : DidCallResult = testClass.didCall(function: "doStuff()", atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result5 : DidCallResult = testClass.didCall(function: "doStuff()", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result6 : DidCallResult = testClass.didCall(function: "doStuff()", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result7 : DidCallResult = testClass.didCall(function: "doStuff()", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result8 : DidCallResult = testClass.didCall(function: "doStuff()", withArgs: [], atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result1 = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result2 = testClass.didCall(function: "doStuff()", count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result3 = testClass.didCall(function: "doStuff()", atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result4 = testClass.didCall(function: "doStuff()", atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result5 = testClass.didCall(function: "doStuff()", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result6 = testClass.didCall(function: "doStuff()", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result7 = testClass.didCall(function: "doStuff()", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result8 = testClass.didCall(function: "doStuff()", withArgs: [], atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
@@ -316,14 +371,14 @@ class CallRecorderTest: XCTestCase {
         let testClass = TestClass()
         
         // then
-        let result1 : DidCallResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result2 : DidCallResult = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result3 : DidCallResult = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result4 : DidCallResult = testClass.didCall(function: "not a function", atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result5 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-        let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result2 = testClass.didCall(function: "not a function", count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result3 = testClass.didCall(function: "not a function", atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result4 = testClass.didCall(function: "not a function", atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
+        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
@@ -341,11 +396,13 @@ class CallRecorderTest: XCTestCase {
         // given
         let yes = DidCallResultIncludeOption.Yes
         let no = DidCallResultIncludeOption.No
+        let onlyOnSuccess = DidCallResultIncludeOption.OnlyOnSuccess
         let onlyOnUnsuccess = DidCallResultIncludeOption.OnlyOnUnsuccess
         
         // then
         expect("\(yes)").to(equal("DidCallResultIncludeOption.Yes"))
         expect("\(no)").to(equal("DidCallResultIncludeOption.No"))
+        expect("\(onlyOnSuccess)").to(equal("DidCallResultIncludeOption.OnlyOnSuccess"))
         expect("\(onlyOnUnsuccess)").to(equal("DidCallResultIncludeOption.OnlyOnUnsuccess"))
     }
     
