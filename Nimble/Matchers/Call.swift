@@ -15,7 +15,7 @@ public func call(function function: String) -> FullMatcherFunc<CallRecorder> {
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -34,7 +34,7 @@ public func call(function function: String, count: Int) -> FullMatcherFunc<CallR
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -53,7 +53,7 @@ public func call(function function: String, atLeast: Int) -> FullMatcherFunc<Cal
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -72,7 +72,7 @@ public func call(function function: String, atMost: Int) -> FullMatcherFunc<Call
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -91,7 +91,7 @@ public func call(function function: String, withArguments arguments: [Any]) -> F
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -110,7 +110,7 @@ public func call(function function: String, withArguments arguments: [Any], coun
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -129,7 +129,7 @@ public func call(function function: String, withArguments arguments: [Any], atLe
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -148,7 +148,7 @@ public func call(function function: String, withArguments arguments: [Any], atMo
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return result.success
+        return isSuccessfulTest(result.success, isNegationTest)
     }
 }
 
@@ -174,4 +174,8 @@ private func descriptionOfAttemptedCall(object object: Any, function: String, ar
     }
     
     return description
+}
+
+private func isSuccessfulTest(didDoIt: Bool, _ isNegationTest: Bool) -> Bool {
+    return didDoIt && !isNegationTest || !didDoIt && isNegationTest
 }

@@ -21,6 +21,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuff()"))
+        expect(testClass).toNot(call(function: "doThings()"))
     }
     
     func testCallFailureMessage() {
@@ -57,6 +58,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", count: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", count: 2))
     }
     
     func testCallWithCountFailureMessage() {
@@ -97,6 +99,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", atLeast: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", atLeast: 2))
     }
     
     func testCallWithAtLeastFailureMessage() {
@@ -137,6 +140,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", atMost: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", atMost: 0))
     }
     
     func testCallWithAtMostFailureMessage() {
@@ -178,10 +182,11 @@ class CallTest : XCTestCase {
         let testClass = TestClass()
         
         // when
-        testClass.doStuffWith(string: "string")
+        testClass.doStuffWith(string: "quick")
         
         // then
-        expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["string"]))
+        expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["quick"]))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", withArguments: ["nimble"]))
     }
     
     func testCallWithArgumentsFailureMessage() {
@@ -219,6 +224,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], count: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", withArguments: ["nimble"], count: 2))
     }
     
     func testCallWithArgumentsAndCountFailureMessage() {
@@ -263,6 +269,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atLeast: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atLeast: 2))
     }
     
     func testCallWithArgumentsAndAtLeastFailureMessage() {
@@ -307,6 +314,7 @@ class CallTest : XCTestCase {
         
         // then
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atMost: 1))
+        expect(testClass).toNot(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atMost: 0))
     }
     
     func testCallWithArgumentsAndAtMostFailureMessage() {
