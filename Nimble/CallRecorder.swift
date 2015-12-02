@@ -77,10 +77,8 @@ public enum DidCallResultIncludeOption : CustomStringConvertible {
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
     // Implementation Example:
-    // var calledFunctionList = Array<String>()
-    // var calledArgumentsList = Array<Array<Any>>()
-    var calledFunctionList: Array<String> {get set}
-    var calledArgumentsList: Array<Array<Any>> {get set}
+    // var called = (functionList: [String](), argumentsList: [[Any]]())
+    var called: (functionList: [String], argumentsList: [[Any]]) {get set}
     
     // **MUST** call in every method you want to spy
     func recordCall(function function: String, arguments: Any...)
@@ -103,13 +101,13 @@ public protocol CallRecorder : class {
 
 public extension CallRecorder {
     func recordCall(function function: String, arguments: Any...) {
-        self.calledFunctionList.append(function)
-        self.calledArgumentsList.append(arguments)
+        self.called.functionList.append(function)
+        self.called.argumentsList.append(arguments)
     }
     
     func clearRecordedLists() {
-        self.calledFunctionList = Array<String>()
-        self.calledArgumentsList = Array<Array<Any>>()
+        self.called.functionList = Array<String>()
+        self.called.argumentsList = Array<Array<Any>>()
     }
     
     // MARK: Did Call Function
@@ -167,23 +165,23 @@ public extension CallRecorder {
     // MARK: Protocol Helper Functions
     
     private func timesCalled(function: String) -> Int {
-        return numberOfMatchingCalls(function: function, functions: self.calledFunctionList)
+        return numberOfMatchingCalls(function: function, functions: self.called.functionList)
     }
     
     private func timesCalled(function function: String, arguments: Array<Any>) -> Int {
-        return numberOfMatchingCalls(function: function, functions: self.calledFunctionList, argsList: arguments, argsLists: self.calledArgumentsList)
+        return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
     }
     
     private func descriptionOfRecordedCalls(wasSuccessful success: Bool, returnOption: DidCallResultIncludeOption) -> String {
         switch returnOption {
         case .Yes:
-            return descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
+            return descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
         case .No:
             return ""
         case .OnlyOnSuccess:
-            return success ? descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList) : ""
+            return success ? descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList) : ""
         case .OnlyOnUnsuccess:
-            return success ? "" : descriptionOfCalls(functionList: self.calledFunctionList, argumentsList: self.calledArgumentsList)
+            return success ? "" : descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
         }
     }
 }
