@@ -886,7 +886,7 @@ For Objective-C the actual value has to be one of the following classes `NSArray
 - All Call Matchers can be used with `to()` and `toNot()`
 - Easy to implement (especially if already using protocols!)
   - Create a mock that conforms to `CallMatcher`
-  - Paste in two variable declarations with default values to conform to `CallMatcher` Protocol
+  - Paste in one variable declaration with a default value to conform to `CallMatcher` Protocol
   - In every function (the ones that should be recorded) call the `recordCall()` function passing in `__FUNCTION__` for function signature and arguments as an array (when recorded function has arguments)
 - Currently ONLY works in swift
 - Call matchers use the `description` variable from `CustomStringConvertible` protocol to equate arguments
@@ -956,8 +956,7 @@ class RealApiService : ApiService {
 
 // The Mock Class
 class MockApiService : ApiService, CallRecorder {
-    var calledFunctionList = Array<String>() // <-- Needed for CallRecorder Protocol (just copy and paste)
-    var calledParametersList = Array<Array<Any>>() // <-- Needed for CallRecorder Protocol (just copy and paste)
+    var called = (functionList: [String](), argumentsList: [[Any]]()) // <-- **REQUIRED**
 
     // AnApiService Functions
     func getCachedStrings() -> [String] {
