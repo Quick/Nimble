@@ -173,7 +173,8 @@ private func descriptionOfAttemptedCall(object object: Any, function: String, ar
     var description = "call <\(function)> from \(object.dynamicType)"
     
     if !arguments.isEmpty {
-        description += " with \(arguments.map{ "\($0)" }.joinWithSeparator(", "))"
+        let argumentsDescription = arguments.map{ "\($0)" }.joinWithSeparator(", ")
+        description += " with \(argumentsDescription)"
     }
     
     if !countDescription.isEmpty {
