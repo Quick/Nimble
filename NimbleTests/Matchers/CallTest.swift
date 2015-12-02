@@ -38,6 +38,18 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage) { failingTest() }
     }
     
+    func testCallFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()")) }
+        
+        // then
+        let expectedMessage = "expected to call function, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
+    }
+    
     func testCallWithCount() {
         // given
         let testClass = TestClass()
@@ -66,6 +78,18 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
+    func testCallWithCountFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", count: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
+    }
+    
     func testCallWithAtLeast() {
         // given
         let testClass = TestClass()
@@ -92,6 +116,18 @@ class CallTest : XCTestCase {
         
         let expectedMessage2 = "expected to call <doStuff()> from TestClass at least 2 times, got <doStuff()>"
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
+    }
+    
+    func testCallWithAtLeastFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", atLeast: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function at least count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
     func testCallWithAtMost() {
@@ -127,6 +163,18 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
+    func testCallWithAtMostFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", atMost: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function at most count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
+    }
+    
     func testCallWithParameters() {
         // given
         let testClass = TestClass()
@@ -149,6 +197,18 @@ class CallTest : XCTestCase {
         // then
         let expectedMessage = "expected to call <doStuffWith(string:)> from TestClass with string, got <doStuffWith(string:) with swift>"
         failsWithErrorMessage(expectedMessage) { failingTest() }
+    }
+    
+    func testCallWithParametersFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", withArguments: [])) }
+        
+        // then
+        let expectedMessage = "expected to call function with arguments, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
     func testCallWithParametersAndCount() {
@@ -183,6 +243,18 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
+    func testCallWithParametersAndCountFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", withArguments: [], count: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function with arguments count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
+    }
+    
     func testCallWithParametersAndAtLeast() {
         // given
         let testClass = TestClass()
@@ -213,6 +285,18 @@ class CallTest : XCTestCase {
         
         let expectedMessage2 = "expected to call <doStuffWith(string:)> from TestClass with nimble at least 2 times, \(got)"
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
+    }
+    
+    func testCallWithParametersAndAtLeastFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", withArguments: [], atLeast: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function with arguments at least count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
     func testCallWithParametersAndAtMost() {
@@ -248,5 +332,17 @@ class CallTest : XCTestCase {
         
         let expectedMessage2 = "expected to call <doStuffWith(string:)> from TestClass with swift at most 2 times, \(got)"
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
+    }
+    
+    func testCallWithParametersAndAtMostFailureMessageForNil() {
+        // given
+        let nilTestClass : TestClass? = nil
+        
+        // when
+        let failingTest = { expect(nilTestClass).to(call(function: "doStuff()", withArguments: [], atMost: 1)) }
+        
+        // then
+        let expectedMessage = "expected to call function with arguments at most count times, got <nil>"
+        failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
 }

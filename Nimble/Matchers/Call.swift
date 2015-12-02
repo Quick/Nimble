@@ -3,6 +3,8 @@ import Foundation
 public func call(function function: String) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -20,6 +22,8 @@ public func call(function function: String) -> FullMatcherFunc<CallRecorder> {
 public func call(function function: String, count: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kCount
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -37,6 +41,8 @@ public func call(function function: String, count: Int) -> FullMatcherFunc<CallR
 public func call(function function: String, atLeast: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kAtLeast
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -54,6 +60,8 @@ public func call(function function: String, atLeast: Int) -> FullMatcherFunc<Cal
 public func call(function function: String, atMost: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kAtMost
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -71,6 +79,8 @@ public func call(function function: String, atMost: Int) -> FullMatcherFunc<Call
 public func call(function function: String, withArguments arguments: [Any]) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kWithArgs
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -88,6 +98,8 @@ public func call(function function: String, withArguments arguments: [Any]) -> F
 public func call(function function: String, withArguments arguments: [Any], count: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kWithArgs + kCount
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -105,6 +117,8 @@ public func call(function function: String, withArguments arguments: [Any], coun
 public func call(function function: String, withArguments arguments: [Any], atLeast: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kWithArgs + kAtLeast
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -122,6 +136,8 @@ public func call(function function: String, withArguments arguments: [Any], atLe
 public func call(function function: String, withArguments arguments: [Any], atMost: Int) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
+            failureMessage.postfixMessage = kCallFunc + kWithArgs + kAtMost
+            failureMessage.postfixActual = kNilReminderString
             return false
         }
         
@@ -137,6 +153,13 @@ public func call(function function: String, withArguments arguments: [Any], atMo
 }
 
 // MARK: Private
+
+private let kCallFunc = "call function"
+private let kWithArgs = " with arguments"
+private let kCount = " count times"
+private let kAtLeast = " at least count times"
+private let kAtMost = " at most count times"
+private let kNilReminderString = " (use beNil() to match nils)"
 
 private func descriptionOfAttemptedCall(object object: Any, function: String, arguments: [Any], countDescription: String, count: Int) -> String {
     var description = "call <\(function)> from \(object.dynamicType)"
