@@ -43,6 +43,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Strings](#strings)
   - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
   - [Verify collection count](#verify-collection-count)
+  - [Called Functions (NEW)](#called-functions)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -877,6 +878,113 @@ expect(actual).notTo(haveCount(expected))
 For Swift the actual value must be a `CollectionType` such as array, dictionary or set.
 
 For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
+
+## Called Functions
+
+- Test whether a function was called on an instance of a class
+- Rich Failure Messages that include entire list of called functions and arguments
+- All Call Matchers can be used with `to()` and `toNot()`
+- Easy to implement (especially if already using protocols!)
+  - Create a mock that conforms to `CallMatcher`
+  - Paste in two variable declarations with default values to conform to `CallMatcher` Protocol
+  - In every function (the ones that should be recorded) call the `recordCall()` function passing in `__FUNCTION__` for function signature and arguments as an array (when recorded function has arguments)
+- Currently ONLY works in swift
+- Call matchers use the `description` variable from `CustomStringConvertible` protocol to equate arguments
+  - For custom types, conform to `CustomStringConvertible` protocol and override `description` variable to return a string that will uniquely identify that instance
+    - Required for class types since the default `description` includes the pointer value
+
+### Example Tests
+```swift
+// Swift ONLY
+
+// passes if mock did call function
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)"))
+
+// passes if mock did call function a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", count: 2))
+
+// passes if mock did call function at least a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", atLeast: 2))
+
+// passes if mock did call function at most a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", atMost: 2))
+
+// passes if mock did call function with argument specifications
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.InstanceOf(type: String.self)]))
+
+// passes if mock did call function with argument specifications a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.DontCare], count: 2))
+
+// passes if mock did call function with argument specifications at least a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.NonNil], atLeast: 2))
+
+// passes if mock did call function with argument specifications at most a number of times
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.KindOf(type: NSObject.self)], atMost: 2))
+```
+
+Argument enum options: (use when the exact comparison of the argument is not needed)
+- `case DontCare`
+- `case NonNil`
+- `case Nil`
+- `case InstanceOf(type: Any.Type)`
+- `case InstanceOfWith(type: Any.Type, option: ArgumentOption)`
+- `case KindOf(type: AnyObject.Type)`
+
+ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the type passed in is optional, non-optional, or don't care)
+- `case DontCare`
+- `case NonOptional`
+- `case Optional`
+
+### Example Mock
+```swift
+// The Protocol
+protocol ApiService : class {
+    func getCachedStrings() -> [String]
+    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void
+}
+
+// The Real Class
+class RealApiService : ApiService {
+    func getCachedStrings() -> [String] {
+        // return real things
+    }
+
+    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
+        // do real stuff
+    }
+}
+
+// The Mock Class
+class MockApiService : ApiService, CallRecorder {
+    var calledFunctionList = Array<String>() // <-- Needed for CallRecorder Protocol (just copy and paste)
+    var calledParametersList = Array<Array<Any>>() // <-- Needed for CallRecorder Protocol (just copy and paste)
+
+    // AnApiService Functions
+    func getCachedStrings() -> [String] {
+        self.recordCall(function: __FUNCTION__) // <-- **REQUIRED**
+        return [""]
+    }
+
+    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
+        self.recordCall(function: __FUNCTION__, parameters: [url]) // <-- **REQUIRED**
+    }
+}
+```
+
+> Could also use inheritance with the subclass overriding all functions and replacing implementation with `self.recordCall()` functions. However, this is unadvised as it could lead to forgotten functions when adding functionality to base class in the future.
+
+### Example Conforming to CustomStringConvertible
+```swift
+public struct Person : CustomStringConvertible {
+    let firstName: String
+    let lastName: String
+    let age: Int
+
+    public var description: String {
+        return "firstName: \(firstName), lastName: \(lastName), age: \(age)"
+    }
+}
+```
 
 # Writing Your Own Matchers
 
