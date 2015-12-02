@@ -3,8 +3,6 @@ import Nimble
 
 class CallTest : XCTestCase {
     
-    let kXCTestMessage = "should pass test\n"
-    
     class TestClass : CallRecorder {
         var calledFunctionList = Array<String>()
         var calledArgumentsList = Array<Array<Any>>()
@@ -175,7 +173,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
-    func testCallWithParameters() {
+    func testCallWithArguments() {
         // given
         let testClass = TestClass()
         
@@ -186,7 +184,7 @@ class CallTest : XCTestCase {
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["string"]))
     }
     
-    func testCallWithParametersFailureMessage() {
+    func testCallWithArgumentsFailureMessage() {
         // given
         let testClass = TestClass()
         testClass.doStuffWith(string: "swift")
@@ -199,7 +197,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage) { failingTest() }
     }
     
-    func testCallWithParametersFailureMessageForNil() {
+    func testCallWithArgumentsFailureMessageForNil() {
         // given
         let nilTestClass : TestClass? = nil
         
@@ -211,7 +209,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
-    func testCallWithParametersAndCount() {
+    func testCallWithArgumentsAndCount() {
         // given
         let testClass = TestClass()
         
@@ -223,7 +221,7 @@ class CallTest : XCTestCase {
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], count: 1))
     }
     
-    func testCallWithParametersAndCountFailureMessage() {
+    func testCallWithArgumentsAndCountFailureMessage() {
         // given
         let testClass = TestClass()
         testClass.doStuffWith(string: "quick")
@@ -243,7 +241,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
-    func testCallWithParametersAndCountFailureMessageForNil() {
+    func testCallWithArgumentsAndCountFailureMessageForNil() {
         // given
         let nilTestClass : TestClass? = nil
         
@@ -255,7 +253,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
-    func testCallWithParametersAndAtLeast() {
+    func testCallWithArgumentsAndAtLeast() {
         // given
         let testClass = TestClass()
         
@@ -267,7 +265,7 @@ class CallTest : XCTestCase {
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atLeast: 1))
     }
     
-    func testCallWithParametersAndAtLeastFailureMessage() {
+    func testCallWithArgumentsAndAtLeastFailureMessage() {
         // given
         let testClass = TestClass()
         testClass.doStuffWith(string: "quick")
@@ -287,7 +285,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
-    func testCallWithParametersAndAtLeastFailureMessageForNil() {
+    func testCallWithArgumentsAndAtLeastFailureMessageForNil() {
         // given
         let nilTestClass : TestClass? = nil
         
@@ -299,7 +297,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessageForNil(expectedMessage) { failingTest() }
     }
     
-    func testCallWithParametersAndAtMost() {
+    func testCallWithArgumentsAndAtMost() {
         // given
         let testClass = TestClass()
         
@@ -311,7 +309,7 @@ class CallTest : XCTestCase {
         expect(testClass).to(call(function: "doStuffWith(string:)", withArguments: ["nimble"], atMost: 1))
     }
     
-    func testCallWithParametersAndAtMostFailureMessage() {
+    func testCallWithArgumentsAndAtMostFailureMessage() {
         // given
         let testClass = TestClass()
         testClass.doThingsWith(string: "call matcher")
@@ -334,7 +332,7 @@ class CallTest : XCTestCase {
         failsWithErrorMessage(expectedMessage2) { failingTest2() }
     }
     
-    func testCallWithParametersAndAtMostFailureMessageForNil() {
+    func testCallWithArgumentsAndAtMostFailureMessageForNil() {
         // given
         let nilTestClass : TestClass? = nil
         
