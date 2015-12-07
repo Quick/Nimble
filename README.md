@@ -197,7 +197,7 @@ expect(10) > 2
 
 ## Lazily Computed Values
 
-The `expect` function doesn't evalaute the value it's given until it's
+The `expect` function doesn't evaluate the value it's given until it's
 time to match. So Nimble can test whether an expression raises an
 exception once evaluated:
 
