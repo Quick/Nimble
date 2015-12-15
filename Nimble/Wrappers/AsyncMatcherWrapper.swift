@@ -13,8 +13,13 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
 
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
-        let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
-            try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
+        let result = pollBlock(
+            pollInterval: pollInterval,
+            timeoutInterval: timeoutInterval,
+            file: actualExpression.location.file,
+            line: actualExpression.location.line,
+            fnName: "expect(...).toEventually(...)") {
+                try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
         case .Success: return true
@@ -22,7 +27,10 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
         case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case .Timeout:
+        case let .RaisedException(exception):
+            failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
+            return false
+        case .BlockedRunLoop:
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
         }
@@ -30,8 +38,13 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
 
     func doesNotMatch(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
         let uncachedExpression = actualExpression.withoutCaching()
-        let result = pollBlock(pollInterval: pollInterval, timeoutInterval: timeoutInterval) {
-            try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
+        let result = pollBlock(
+            pollInterval: pollInterval,
+            timeoutInterval: timeoutInterval,
+            file: actualExpression.location.file,
+            line: actualExpression.location.line,
+            fnName: "expect(...).toEventuallyNot(...)") {
+                try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
         case .Success: return true
@@ -39,7 +52,10 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
         case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case .Timeout:
+        case let .RaisedException(exception):
+            failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
+            return false
+        case .BlockedRunLoop:
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
         }

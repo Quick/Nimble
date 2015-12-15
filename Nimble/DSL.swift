@@ -1,3 +1,5 @@
+import Foundation
+
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
 public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
@@ -29,4 +31,20 @@ public func fail(message: String, file: String = __FILE__, line: UInt = __LINE__
 /// Always fails the test.
 public func fail(file: String = __FILE__, line: UInt = __LINE__) {
     fail("fail() always fails", file: file, line: line)
+}
+
+/// Like Swift's precondition(), but raises NSExceptions instead of sigaborts
+internal func nimblePrecondition(
+    @autoclosure expr: () -> Bool,
+    @autoclosure _ name: () -> String,
+    @autoclosure _ message: () -> String) -> Bool {
+        let result = expr()
+        if !result {
+            let e = NSException(
+                name: name(),
+                reason: message(),
+                userInfo: nil)
+            e.raise()
+        }
+        return result
 }

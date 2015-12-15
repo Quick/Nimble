@@ -45,17 +45,31 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testAsyncTestingViaWaitUntilNegativeMatches() {
+    func testAsyncTestngViaWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
             waitUntil(timeout: 1) { done in return }
         }
+    }
+
+    func testAsyncTestingViaWaitUntilTimesOutWhenSleepingOnMainThreadAsync() {
+        var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                NSThread.sleepForTimeInterval(0.1)
-                done()
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    NSThread.sleepForTimeInterval(0.1)
+                    done()
+                    waiting = false
+                }
             }
         }
 
+        // "clear" runloop to ensure this test doesn't poison other tests
+        repeat {
+            NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
+        } while(waiting)
+    }
+
+    func testAsyncTestingViaWaitUntilNegativeMatches() {
         failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
                 NSThread.sleepForTimeInterval(0.1)
@@ -63,22 +77,41 @@ class AsyncTest: XCTestCase {
                 done()
             }
         }
-        // "clear" runloop to ensure this test doesn't poison other tests
-        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
     }
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSThread.sleepForTimeInterval(2.0)
-        }
-
         failsWithErrorMessage("Stall on main thread - too much enqueued on main run loop before waitUntil executes.") {
-            waitUntil { done in
+            print("start")
+            waitUntil(timeout: 1) { done in
+                print("waitUntil")
+                dispatch_async(dispatch_get_main_queue()) {
+                    print("dispatch")
+                    NSThread.sleepForTimeInterval(5.0)
+                    print("done")
+                    done()
+                }
+            }
+        }
+    }
+
+    func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
+        let referenceLine = __LINE__ + 7
+        var msg = "Unexpected exception raised: Nested async expectations are not allowed...\n\n"
+        msg += "The call to\n\t"
+        msg += "expect(...).toEventually(...) at \(__FILE__):\(referenceLine + 7)\n"
+        msg += "triggered this exception because\n\t"
+        msg += "waitUntil(...) at \(__FILE__):\(referenceLine + 1)\n"
+        msg += "is currently managing the main run loop."
+        failsWithErrorMessage(msg) {
+            waitUntil(timeout: 2.0) { done in
+                var protected: Int = 0
+                dispatch_async(dispatch_get_main_queue()) {
+                    protected = 1
+                }
+
+                expect(protected).toEventually(equal(1))
                 done()
             }
         }
-
-        // "clear" runloop to ensure this test doesn't poison other tests
-        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(2.0))
     }
 }

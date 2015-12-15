@@ -36,8 +36,10 @@
 
     expectFailureMessage(@"Waited more than 0.01 seconds", ^{
         waitUntilTimeout(0.01, ^(void (^done)(void)){
-            [NSThread sleepForTimeInterval:0.1];
-            done();
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [NSThread sleepForTimeInterval:0.1];
+                done();
+            });
         });
     });
 
