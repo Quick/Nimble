@@ -24,6 +24,8 @@ internal class NimbleEnvironment {
         get { return NimbleAssertionHandler }
         set { NimbleAssertionHandler = newValue }
     }
+
+#if _runtime(_ObjC)
     var awaiter: Awaiter
 
     init() {
@@ -32,4 +34,5 @@ internal class NimbleEnvironment {
             asyncQueue: dispatch_get_main_queue(),
             timeoutQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
     }
+#endif
 }

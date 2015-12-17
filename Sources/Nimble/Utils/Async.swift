@@ -1,5 +1,42 @@
 import Foundation
+#if _runtime(_ObjC)
 import Dispatch
+#endif
+
+internal enum AwaitResult<T> {
+    /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
+    case Incomplete
+    /// TimedOut indicates the result reached its defined timeout limit before returning
+    case TimedOut
+    /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
+    /// the timeout code.
+    ///
+    /// This may also mean the async code waiting upon may have never actually ran within the
+    /// required time because other timers & sources are running on the main run loop.
+    case BlockedRunLoop
+    /// The async block successfully executed and returned a given result
+    case Completed(T)
+    /// When a Swift Error is thrown
+    case ErrorThrown(ErrorType)
+    /// When an Objective-C Exception is raised
+    case RaisedException(NSException)
+
+    func isIncomplete() -> Bool {
+        switch self {
+        case .Incomplete: return true
+        default: return false
+        }
+    }
+
+    func isCompleted() -> Bool {
+        switch self {
+        case .Completed(_): return true
+        default: return false
+        }
+    }
+}
+
+#if _runtime(_ObjC)
 
 private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
 private let pollLeeway: UInt64 = NSEC_PER_MSEC
@@ -49,39 +86,6 @@ internal class AssertionWaitLock: WaitLock {
 
     func releaseWaitingLock() {
         currentWaiter = nil
-    }
-}
-
-internal enum AwaitResult<T> {
-    /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
-    case Incomplete
-    /// TimedOut indicates the result reached its defined timeout limit before returning
-    case TimedOut
-    /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
-    /// the timeout code.
-    ///
-    /// This may also mean the async code waiting upon may have never actually ran within the
-    /// required time because other timers & sources are running on the main run loop.
-    case BlockedRunLoop
-    /// The async block successfully executed and returned a given result
-    case Completed(T)
-    /// When a Swift Error is thrown
-    case ErrorThrown(ErrorType)
-    /// When an Objective-C Exception is raised
-    case RaisedException(NSException)
-
-    func isIncomplete() -> Bool {
-        switch self {
-        case .Incomplete: return true
-        default: return false
-        }
-    }
-
-    func isCompleted() -> Bool {
-        switch self {
-        case .Completed(_): return true
-        default: return false
-        }
     }
 }
 
@@ -331,6 +335,8 @@ internal class Awaiter {
     }
 }
 
+#endif
+
 internal func pollBlock(
     pollInterval pollInterval: NSTimeInterval,
     timeoutInterval: NSTimeInterval,
@@ -338,6 +344,7 @@ internal func pollBlock(
     line: UInt,
     fnName: String = __FUNCTION__,
     expression: () throws -> Bool) -> AwaitResult<Bool> {
+    #if _runtime(_ObjC)
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             do {
@@ -351,4 +358,12 @@ internal func pollBlock(
         }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval / 2.0).wait(fnName, file: file, line: line)
 
         return result
+    #else
+        do {
+            let pass = try expression()
+            return pass ? .Completed(true) : .TimedOut
+        } catch let error {
+            return .ErrorThrown(error)
+        }
+    #endif
 }

@@ -1,5 +1,6 @@
 import Foundation
 
+#if _runtime(_ObjC)
 private enum ErrorResult {
     case Exception(NSException)
     case Error(ErrorType)
@@ -89,3 +90,4 @@ internal func blockedRunLoopErrorMessageFor(fnName: String, leeway: NSTimeInterv
 public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
+#endif
