@@ -7,7 +7,7 @@ private let pollLeeway: UInt64 = NSEC_PER_MSEC
 /// Stores debugging information about callers
 internal struct WaitingInfo: CustomStringConvertible {
     let name: String
-    let file: String
+    let file: FileString
     let lineNumber: UInt
 
     var description: String {
@@ -16,7 +16,7 @@ internal struct WaitingInfo: CustomStringConvertible {
 }
 
 internal protocol WaitLock {
-    func acquireWaitingLock(fnName: String, file: String, line: UInt)
+    func acquireWaitingLock(fnName: String, file: FileString, line: UInt)
     func releaseWaitingLock()
     func isWaitingLocked() -> Bool
 }
@@ -25,7 +25,7 @@ internal class AssertionWaitLock: WaitLock {
     private var currentWaiter: WaitingInfo? = nil
     init() { }
 
-    func acquireWaitingLock(fnName: String, file: String, line: UInt) {
+    func acquireWaitingLock(fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
         nimblePrecondition(
             NSThread.isMainThread(),
@@ -218,7 +218,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
-    func wait(fnName: String = __FUNCTION__, file: String = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
+    func wait(fnName: String = __FUNCTION__, file: FileString = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
             file: file,
@@ -334,7 +334,7 @@ internal class Awaiter {
 internal func pollBlock(
     pollInterval pollInterval: NSTimeInterval,
     timeoutInterval: NSTimeInterval,
-    file: String,
+    file: FileString,
     line: UInt,
     fnName: String = __FUNCTION__,
     expression: () throws -> Bool) -> AwaitResult<Bool> {
