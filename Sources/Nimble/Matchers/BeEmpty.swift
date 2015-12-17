@@ -21,7 +21,7 @@ public func beEmpty() -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = try actualExpression.evaluate()
-        return actualString == nil || (actualString! as NSString).length  == 0
+        return actualString == nil || NSString(string: actualString!).length  == 0
     }
 }
 

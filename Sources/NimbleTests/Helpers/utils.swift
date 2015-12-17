@@ -63,16 +63,16 @@ func deferToMainQueue(action: () -> Void) {
 }
 
 public class NimbleHelper : NSObject {
-    class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    class func expectFailureMessage(message: NSString, block: () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessage(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    class func expectFailureMessages(messages: [NSString], block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(messages as! [String], file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    class func expectFailureMessages(messages: [NSString], block: () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessage(messages.map({ String($0) }), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessageForNil(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
 
