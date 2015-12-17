@@ -9,6 +9,14 @@ internal func identityAsString(value: AnyObject?) -> String {
     }
 }
 
+internal func classAsString(cls: AnyClass) -> String {
+#if _runtime(_ObjC)
+    return NSStringFromClass(cls)
+#else
+    return String(cls)
+#endif
+}
+
 internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
