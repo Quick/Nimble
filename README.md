@@ -616,7 +616,7 @@ expect(dolphin).to(beAKindOf([Mammal class]));
 ## Truthiness
 
 ```swift
-// Passes if actual is not nil, false, or an object with a boolean value of false:
+// Passes if actual is not nil, true, or an object with a boolean value of true:
 expect(actual).to(beTruthy())
 
 // Passes if actual is only true (not nil or an object conforming to BooleanType true):
@@ -635,7 +635,7 @@ expect(actual).to(beNil())
 ```objc
 // Objective-C
 
-// Passes if actual is not nil, false, or an object with a boolean value of false:
+// Passes if actual is not nil, true, or an object with a boolean value of true:
 expect(actual).to(beTruthy());
 
 // Passes if actual is only true (not nil or an object conforming to BooleanType true):
