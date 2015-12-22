@@ -42,9 +42,11 @@ internal enum AwaitResult<T> {
 /// This class is thread-safe at receiving an "response" to this promise.
 internal class AwaitPromise<T> {
     private(set) internal var asyncResult: AwaitResult<T> = .Incomplete
-    private var token: dispatch_once_t = 0
+    private var signal: dispatch_semaphore_t
 
-    init() { }
+    init() {
+        signal = dispatch_semaphore_create(1)
+    }
 
     /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
     /// this method will resolve in a no-op.
@@ -53,7 +55,7 @@ internal class AwaitPromise<T> {
     /// the closure is never called.
     func resolveResult(result: AwaitResult<T>, closure: () -> Void = {}) {
         probe.emit("Attempt to resolve with result: \(result) (addr=\(unsafeAddressOf(self)))")
-        dispatch_once(&token) {
+        if dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0 {
             probe.emit("Successfully to resolved with result: \(result) (addr=\(unsafeAddressOf(self)))")
             self.asyncResult = result
             closure()
