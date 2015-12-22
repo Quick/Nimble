@@ -47,9 +47,9 @@ private let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
     formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-    
+
     return formatter
-    }()
+}()
 
 extension NSDate: NMBDoubleConvertible {
     public var doubleValue: CDouble {

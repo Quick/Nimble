@@ -34,7 +34,7 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
         case .Incomplete:
-            fatalError("Bug In Nimble: Unreachable code path reached")
+            internalError("Reached .Incomplete state for toEventually(...).")
         }
     }
 
@@ -61,7 +61,7 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
         case .Incomplete:
-            fatalError("Bug In Nimble: Unreachable code path reached")
+            internalError("Reached .Incomplete state for toEventuallyNot(...).")
         }
     }
 }

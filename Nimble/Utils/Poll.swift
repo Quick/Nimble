@@ -4,6 +4,49 @@ import Dispatch
 private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
 private let pollLeeway: UInt64 = NSEC_PER_MSEC
 
+/// Stores debugging information about callers
+internal struct WaitingInfo: CustomStringConvertible {
+    let name: String
+    let file: String
+    let lineNumber: UInt
+
+    var description: String {
+        return "\(name) at \(file):\(lineNumber)"
+    }
+}
+
+internal protocol WaitLock {
+    func acquireWaitingLock(fnName: String, file: String, line: UInt)
+    func releaseWaitingLock()
+}
+
+internal class AssertionWaitLock: WaitLock {
+    private var currentWaiter: WaitingInfo? = nil
+    init() { }
+
+    func acquireWaitingLock(fnName: String, file: String, line: UInt) {
+        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        nimblePrecondition(
+            NSThread.isMainThread(),
+            "InvalidNimbleAPIUsage",
+            "\(fnName) can only run on the main thread"
+        )
+        nimblePrecondition(
+            currentWaiter == nil,
+            "InvalidNimbleAPIUsage",
+            "Nested async expectations are not allowed...\n\n" +
+                "The call to\n\t\(info)\n" +
+                "triggered this exception because\n\t\(currentWaiter!)\n" +
+            "is currently managing the main run loop."
+        )
+        currentWaiter = info
+    }
+
+    func releaseWaitingLock() {
+        currentWaiter = nil
+    }
+}
+
 internal enum AwaitResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case Incomplete
@@ -60,34 +103,24 @@ internal class AwaitPromise<T> {
     }
 }
 
-/// Stores debugging information about callers
-private struct WaitingInfo: CustomStringConvertible {
-    let name: String
-    let file: String
-    let lineNumber: UInt
-
-    var description: String {
-        return "\(name) at \(file):\(lineNumber)"
-    }
-}
-
-private var currentWaiting: WaitingInfo? = nil
-
 /// Factory for building fully configured AwaitPromises and waiting for their results.
 ///
 /// This factory stores all the state for an async expectation so that Await doesn't
 /// doesn't have to manage it.
 internal class AwaitPromiseBuilder<T> {
+    let waitLock: WaitLock
     let timeoutSource: dispatch_source_t
     let asyncSource: dispatch_source_t?
     let startAsyncAction: () throws -> Void
     let promise: AwaitPromise<T>
 
     internal init(
+        waitLock: WaitLock,
         promise: AwaitPromise<T>,
         timeoutSource: dispatch_source_t,
         asyncSource: dispatch_source_t?,
         startAsyncAction: () throws -> Void) {
+            self.waitLock = waitLock
             self.promise = promise
             self.timeoutSource = timeoutSource
             self.asyncSource = asyncSource
@@ -176,26 +209,15 @@ internal class AwaitPromiseBuilder<T> {
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
     func wait(fnName: String = __FUNCTION__, file: String = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
-        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        nimblePrecondition(
-            NSThread.isMainThread(),
-            "InvalidNimbleAPIUsage",
-            "\(fnName) can only run on the main thread"
-        )
-        nimblePrecondition(
-            currentWaiting == nil,
-            "InvalidNimbleAPIUsage",
-            "Nested async expectations are not allowed...\n\n" +
-            "The call to\n\t\(info)\n" +
-            "triggered this exception because\n\t\(currentWaiting!)\n" +
-            "is currently managing the main run loop."
-        )
-        currentWaiting = info
+        waitLock.acquireWaitingLock(
+            fnName,
+            file: file,
+            line: line)
 
         let capture = NMBExceptionCapture(handler: ({ exception in
             self.promise.resolveResult(.RaisedException(exception))
         }), finally: ({
-            currentWaiting = nil
+            self.waitLock.releaseWaitingLock()
         }))
         capture.tryBlock {
             do {
@@ -220,15 +242,15 @@ internal class AwaitPromiseBuilder<T> {
 }
 
 internal class Awaiter {
+    let waitLock: WaitLock
     let timeoutQueue: dispatch_queue_t
     let asyncQueue: dispatch_queue_t
 
-    static let defaultAsyncQueue = dispatch_get_main_queue()
-    static let defaultTimeoutQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)
-
     internal init(
-        asyncQueue: dispatch_queue_t = defaultAsyncQueue,
-        timeoutQueue: dispatch_queue_t = defaultTimeoutQueue) {
+        waitLock: WaitLock,
+        asyncQueue: dispatch_queue_t,
+        timeoutQueue: dispatch_queue_t) {
+            self.waitLock = waitLock
             self.asyncQueue = asyncQueue
             self.timeoutQueue = timeoutQueue
     }
@@ -248,6 +270,7 @@ internal class Awaiter {
             let timeoutSource = createTimerSource(timeoutQueue)
 
             return AwaitPromiseBuilder(
+                waitLock: waitLock,
                 promise: promise,
                 timeoutSource: timeoutSource,
                 asyncSource: nil) {
@@ -265,6 +288,7 @@ internal class Awaiter {
         let asyncSource = createTimerSource(asyncQueue)
 
         return AwaitPromiseBuilder(
+            waitLock: waitLock,
             promise: promise,
             timeoutSource: timeoutSource,
             asyncSource: asyncSource) {
@@ -295,8 +319,8 @@ internal func pollBlock(
     line: UInt,
     fnName: String = __FUNCTION__,
     expression: () throws -> Bool) -> AwaitResult<Bool> {
-        let result = Awaiter().poll(pollInterval) { () throws -> Bool? in
-
+        let awaiter = NimbleEnvironment.activeInstance.awaiter
+        let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             do {
                 if try expression() {
                     return true

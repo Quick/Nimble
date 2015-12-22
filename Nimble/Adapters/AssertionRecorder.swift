@@ -44,11 +44,12 @@ public class AssertionRecorder : AssertionHandler {
 ///
 /// @see AssertionHandler
 public func withAssertionHandler(tempAssertionHandler: AssertionHandler, closure: () throws -> Void) {
-    let oldRecorder = NimbleAssertionHandler
+    let environment = NimbleEnvironment.activeInstance
+    let oldRecorder = environment.assertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({
-        NimbleAssertionHandler = oldRecorder
+        environment.assertionHandler = oldRecorder
     }))
-    NimbleAssertionHandler = tempAssertionHandler
+    environment.assertionHandler = tempAssertionHandler
     capturer.tryBlock {
         try! closure()
     }
@@ -65,7 +66,7 @@ public func withAssertionHandler(tempAssertionHandler: AssertionHandler, closure
 ///
 /// @see gatherFailingExpectations
 public func gatherExpectations(silently silently: Bool = false, closure: () -> Void) -> [AssertionRecord] {
-    let previousRecorder = NimbleAssertionHandler
+    let previousRecorder = NimbleEnvironment.activeInstance.assertionHandler
     let recorder = AssertionRecorder()
     let handlers: [AssertionHandler]
 

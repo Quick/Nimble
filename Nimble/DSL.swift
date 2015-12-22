@@ -20,7 +20,8 @@ public func expect<T>(file: String = __FILE__, line: UInt = __LINE__, expression
 
 /// Always fails the test with a message and a specified location.
 public func fail(message: String, location: SourceLocation) {
-    NimbleAssertionHandler.assert(false, message: FailureMessage(stringValue: message), location: location)
+    let handler = NimbleEnvironment.activeInstance.assertionHandler
+    handler.assert(false, message: FailureMessage(stringValue: message), location: location)
 }
 
 /// Always fails the test with a message.
@@ -47,4 +48,13 @@ internal func nimblePrecondition(
             e.raise()
         }
         return result
+}
+
+@noreturn
+internal func internalError(msg: String, file: String = __FILE__, line: UInt = __LINE__) {
+    fatalError(
+        "Nimble Bug Found: \(msg) at \(file):\(line).\n" +
+        "Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the " +
+        "code snippet that caused this error."
+    )
 }

@@ -14,19 +14,21 @@ internal class NMBWait: NSObject {
             }
     }
 
+    // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
         timeout timeout: NSTimeInterval,
         file: String = __FILE__,
         line: UInt = __LINE__,
         action: (() -> Void) throws -> Void) -> Void {
-            let result = Awaiter().performBlock { (done: (Bool) -> Void) throws -> Void in
+            let awaiter = NimbleEnvironment.activeInstance.awaiter
+            let result = awaiter.performBlock { (done: (Bool) -> Void) throws -> Void in
                 try action() {
                     done(true)
                 }
             }.timeout(timeout).wait("waitUntil(...)", file: file, line: line)
 
             switch result {
-            case .Incomplete: fatalError("Bad implementation: Should never reach .Incomplete state")
+            case .Incomplete: internalError("Reached .Incomplete state for waitUntil(...).")
             case .BlockedRunLoop:
                 fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
             case .TimedOut:
