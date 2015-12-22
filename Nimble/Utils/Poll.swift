@@ -94,7 +94,7 @@ internal class AwaitPromiseBuilder<T> {
             self.startAsyncAction = startAsyncAction
     }
 
-    func enqueueTimeout(timeoutInterval: NSTimeInterval) -> Self {
+    func timeout(timeoutInterval: NSTimeInterval) -> Self {
         // = Discussion =
         //
         // There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -171,6 +171,8 @@ internal class AwaitPromiseBuilder<T> {
     ///   be stopped.
     /// - The async expectation timed out
     /// - The async expectation succeeded
+    /// - The async expectation raised an unexpected exception (objc)
+    /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
     func wait(fnName: String = __FUNCTION__, file: String = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
@@ -303,7 +305,7 @@ internal func pollBlock(
             } catch let error {
                 throw error
             }
-        }.enqueueTimeout(timeoutInterval).wait(fnName, file: file, line: line)
+        }.timeout(timeoutInterval).wait(fnName, file: file, line: line)
 
         return result
 }

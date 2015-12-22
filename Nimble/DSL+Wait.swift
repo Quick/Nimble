@@ -23,7 +23,7 @@ internal class NMBWait: NSObject {
                 try action() {
                     done(true)
                 }
-            }.enqueueTimeout(timeout).wait("waitUntil(...)", file: file, line: line)
+            }.timeout(timeout).wait("waitUntil(...)", file: file, line: line)
 
             switch result {
             case .Incomplete: fatalError("Bad implementation: Should never reach .Incomplete state")
