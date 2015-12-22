@@ -1,7 +1,6 @@
 import Foundation
 import Dispatch
 
-private var probe = Probe.asyncProbe
 private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
 private let pollLeeway: UInt64 = NSEC_PER_MSEC
 
@@ -54,9 +53,7 @@ internal class AwaitPromise<T> {
     /// Accepts an optional closure to be call IF the value is set with its given value. Otherwise
     /// the closure is never called.
     func resolveResult(result: AwaitResult<T>, closure: () -> Void = {}) {
-        probe.emit("Attempt to resolve with result: \(result) (addr=\(unsafeAddressOf(self)))")
         if dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0 {
-            probe.emit("Successfully to resolved with result: \(result) (addr=\(unsafeAddressOf(self)))")
             self.asyncResult = result
             closure()
         }
@@ -126,7 +123,6 @@ internal class AwaitPromiseBuilder<T> {
         // checked.
         //
         // In addition, stopping the run loop is used to halt code executed on the main run loop.
-        probe.emit("Start Timer for \(timeoutInterval) seconds")
         dispatch_source_set_timer(
             timeoutSource,
             dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval * Double(NSEC_PER_SEC))),
@@ -135,17 +131,14 @@ internal class AwaitPromiseBuilder<T> {
         )
         dispatch_source_set_event_handler(timeoutSource) {
             guard self.promise.asyncResult.isIncomplete() else { return }
-            probe.emit("Event Handler Triggered")
             let timedOutSem = dispatch_semaphore_create(0)
             let semTimedOutOrBlocked = dispatch_semaphore_create(0)
             dispatch_semaphore_signal(semTimedOutOrBlocked)
             let runLoop = CFRunLoopGetMain()
             CFRunLoopPerformBlock(runLoop, kCFRunLoopDefaultMode) {
-                probe.emit("In Main Run Loop")
                 if dispatch_semaphore_wait(semTimedOutOrBlocked, DISPATCH_TIME_NOW) == 0 {
                     dispatch_semaphore_signal(timedOutSem)
                     dispatch_semaphore_signal(semTimedOutOrBlocked)
-                    probe.emit("Exceeded Timer")
                     self.promise.resolveResult(.TimedOut) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
@@ -156,12 +149,10 @@ internal class AwaitPromiseBuilder<T> {
             let now = dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval / 2.0 * Double(NSEC_PER_SEC)))
             let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
             let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
-            probe.emit("Checking for stalled run loop")
             if didNotTimeOut && timeoutWasNotTriggered {
                 self.promise.resolveResult(.BlockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())
                 }
-                probe.emit("Detected Blocked Run Loop")
             }
         }
         return self
@@ -197,14 +188,12 @@ internal class AwaitPromiseBuilder<T> {
             "triggered this exception because\n\t\(currentWaiting!)\n" +
             "is currently managing the main run loop."
         )
-        probe.emit("Begin Waiting")
         currentWaiting = info
 
         let capture = NMBExceptionCapture(handler: ({ exception in
             self.promise.resolveResult(.RaisedException(exception))
         }), finally: ({
             currentWaiting = nil
-            probe.emit("End Waiting: \(self.promise.asyncResult)")
         }))
         capture.tryBlock {
             do {
@@ -260,7 +249,6 @@ internal class Awaiter {
                 promise: promise,
                 timeoutSource: timeoutSource,
                 asyncSource: nil) {
-                    probe.emit("Calling user block")
                     try closure {
                         promise.resolveResult(.Completed($0)) {
                             CFRunLoopStop(CFRunLoopGetMain())
@@ -308,14 +296,11 @@ internal func pollBlock(
         let result = Awaiter().poll(pollInterval) { () throws -> Bool? in
 
             do {
-                Probe.asyncProbe.emit("Calling user-defined block")
                 if try expression() {
-                    probe.emit("User-defined block returned successful match")
                     return true
                 }
                 return nil
             } catch let error {
-                probe.emit("User-defined block returned threw an error")
                 throw error
             }
         }.enqueueTimeout(timeoutInterval).wait(fnName, file: file, line: line)

@@ -20,7 +20,6 @@ internal class NMBWait: NSObject {
         line: UInt = __LINE__,
         action: (() -> Void) throws -> Void) -> Void {
             let result = Awaiter().performBlock { (done: (Bool) -> Void) throws -> Void in
-                Probe.asyncProbe.emit("Calling user-defined block")
                 try action() {
                     done(true)
                 }
