@@ -9,9 +9,19 @@ internal class NMBWait: NSObject {
         file: String = __FILE__,
         line: UInt = __LINE__,
         action: (() -> Void) -> Void) -> Void {
-            let result = Awaiter().performBlock { (done: (Bool) -> Void) -> Void in
+            return throwableUntil(timeout: timeout, file: file, line: line) { (done: () -> Void) throws -> Void in
+                action() { done() }
+            }
+    }
+
+    internal class func throwableUntil(
+        timeout timeout: NSTimeInterval,
+        file: String = __FILE__,
+        line: UInt = __LINE__,
+        action: (() -> Void) throws -> Void) -> Void {
+            let result = Awaiter().performBlock { (done: (Bool) -> Void) throws -> Void in
                 Probe.asyncProbe.emit("Calling user-defined block")
-                action() {
+                try action() {
                     done(true)
                 }
             }.enqueueTimeout(timeout).wait("waitUntil(...)", file: file, line: line)
@@ -25,6 +35,8 @@ internal class NMBWait: NSObject {
                 fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
             case let .RaisedException(exception):
                 fail("Unexpected exception raised: \(exception)")
+            case let .ErrorThrown(error):
+                fail("Unexpected error thrown: \(error)")
             case .Completed(_): // success
                 break
             }

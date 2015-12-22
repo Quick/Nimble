@@ -22,8 +22,8 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case .Success: return true
-        case .Failure: return false
+        case let .Completed(isSuccessful): return isSuccessful
+        case .TimedOut: return false
         case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
@@ -33,6 +33,8 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
         case .BlockedRunLoop:
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
+        case .Incomplete:
+            fatalError("Bug In Nimble: Unreachable code path reached")
         }
     }
 
@@ -47,8 +49,8 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case .Success: return true
-        case .Failure: return false
+        case let .Completed(isSuccessful): return isSuccessful
+        case .TimedOut: return false
         case let .ErrorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
@@ -58,6 +60,8 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
         case .BlockedRunLoop:
             failureMessage.postfixMessage += " (Stall on main thread)."
             return false
+        case .Incomplete:
+            fatalError("Bug In Nimble: Unreachable code path reached")
         }
     }
 }

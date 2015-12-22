@@ -5,30 +5,6 @@ private var probe = Probe.asyncProbe
 private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
 private let pollLeeway: UInt64 = NSEC_PER_MSEC
 
-// TODO: Remove me? verify that this is superseeded by AwaitResult
-internal enum PollResult: BooleanType {
-    case Success, Failure, BlockedRunLoop
-    case ErrorThrown(ErrorType)
-    case RaisedException(NSException)
-
-    init(value: Bool) {
-        if value {
-            self = .Success
-        } else {
-            self = .Failure
-        }
-    }
-
-    var boolValue : Bool {
-        switch (self) {
-        case .Success:
-            return true
-        default:
-            return false
-        }
-    }
-}
-
 internal enum AwaitResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case Incomplete
@@ -42,6 +18,9 @@ internal enum AwaitResult<T> {
     case BlockedRunLoop
     /// The async block successfully executed and returned a given result
     case Completed(T)
+    /// When a Swift Error is thrown
+    case ErrorThrown(ErrorType)
+    /// When an Objective-C Exception is raised
     case RaisedException(NSException)
 
     func isIncomplete() -> Bool {
@@ -102,14 +81,14 @@ private var currentWaiting: WaitingInfo? = nil
 internal class AwaitPromiseBuilder<T> {
     let timeoutSource: dispatch_source_t
     let asyncSource: dispatch_source_t?
-    let startAsyncAction: () -> Void
+    let startAsyncAction: () throws -> Void
     let promise: AwaitPromise<T>
 
     internal init(
         promise: AwaitPromise<T>,
         timeoutSource: dispatch_source_t,
         asyncSource: dispatch_source_t?,
-        startAsyncAction: () -> Void) {
+        startAsyncAction: () throws -> Void) {
             self.promise = promise
             self.timeoutSource = timeoutSource
             self.asyncSource = asyncSource
@@ -172,7 +151,7 @@ internal class AwaitPromiseBuilder<T> {
             }
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
-            let now = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+            let now = dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval / 2.0 * Double(NSEC_PER_SEC)))
             let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
             let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
             probe.emit("Checking for stalled run loop")
@@ -226,7 +205,11 @@ internal class AwaitPromiseBuilder<T> {
             probe.emit("End Waiting: \(self.promise.asyncResult)")
         }))
         capture.tryBlock {
-            self.startAsyncAction()
+            do {
+                try self.startAsyncAction()
+            } catch let error {
+                self.promise.resolveResult(.ErrorThrown(error))
+            }
             dispatch_resume(self.timeoutSource)
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
@@ -266,24 +249,25 @@ internal class Awaiter {
         )
     }
 
-    func performBlock<T>(closure: ((T) -> Void) -> Void) -> AwaitPromiseBuilder<T> {
-        let promise = AwaitPromise<T>()
-        let timeoutSource = createTimerSource(timeoutQueue)
+    func performBlock<T>(
+        closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
+            let promise = AwaitPromise<T>()
+            let timeoutSource = createTimerSource(timeoutQueue)
 
-        return AwaitPromiseBuilder(
-            promise: promise,
-            timeoutSource: timeoutSource,
-            asyncSource: nil) {
-                probe.emit("Calling user block")
-                closure {
-                    promise.resolveResult(.Completed($0)) {
-                        CFRunLoopStop(CFRunLoopGetMain())
+            return AwaitPromiseBuilder(
+                promise: promise,
+                timeoutSource: timeoutSource,
+                asyncSource: nil) {
+                    probe.emit("Calling user block")
+                    try closure {
+                        promise.resolveResult(.Completed($0)) {
+                            CFRunLoopStop(CFRunLoopGetMain())
+                        }
                     }
-                }
-        }
+            }
     }
 
-    func poll<T>(pollInterval: NSTimeInterval, closure: () -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(pollInterval: NSTimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
@@ -295,8 +279,14 @@ internal class Awaiter {
                 let interval = UInt64(pollInterval * Double(NSEC_PER_SEC))
                 dispatch_source_set_timer(asyncSource, DISPATCH_TIME_NOW, interval, pollLeeway)
                 dispatch_source_set_event_handler(asyncSource) {
-                    if let result = closure() {
-                        promise.resolveResult(.Completed(result)) {
+                    do {
+                        if let result = try closure() {
+                            promise.resolveResult(.Completed(result)) {
+                                CFRunLoopStop(CFRunLoopGetCurrent())
+                            }
+                        }
+                    } catch let error {
+                        promise.resolveResult(.ErrorThrown(error)) {
                             CFRunLoopStop(CFRunLoopGetCurrent())
                         }
                     }
@@ -312,27 +302,21 @@ internal func pollBlock(
     file: String,
     line: UInt,
     fnName: String = __FUNCTION__,
-    expression: () throws -> Bool) -> PollResult {
-        let result = Awaiter().poll(pollInterval) { () -> PollResult? in
+    expression: () throws -> Bool) -> AwaitResult<Bool> {
+        let result = Awaiter().poll(pollInterval) { () throws -> Bool? in
 
             do {
                 Probe.asyncProbe.emit("Calling user-defined block")
                 if try expression() {
                     probe.emit("User-defined block returned successful match")
-                    return .Success
+                    return true
                 }
                 return nil
             } catch let error {
                 probe.emit("User-defined block returned threw an error")
-                return .ErrorThrown(error)
+                throw error
             }
         }.enqueueTimeout(timeoutInterval).wait(fnName, file: file, line: line)
 
-        switch result {
-        case .Incomplete: fatalError("Bad implementation: Should never reach .Incomplete state")
-        case .BlockedRunLoop: return .BlockedRunLoop
-        case .TimedOut: return .Failure
-        case let .RaisedException(exception): return .RaisedException(exception)
-        case let .Completed(result): return result
-        }
+        return result
 }
