@@ -81,13 +81,9 @@ class AsyncTest: XCTestCase {
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
         failsWithErrorMessage("Stall on main thread - too much enqueued on main run loop before waitUntil executes.") {
-            print("start")
             waitUntil(timeout: 1) { done in
-                print("waitUntil")
                 dispatch_async(dispatch_get_main_queue()) {
-                    print("dispatch")
                     NSThread.sleepForTimeInterval(5.0)
-                    print("done")
                     done()
                 }
             }
