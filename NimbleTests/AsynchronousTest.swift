@@ -9,7 +9,7 @@ class AsyncTest: XCTestCase {
         throw errorToThrow
     }
 
-    func testAsyncTestingViaEventuallyPositiveMatches() {
+    func testToEventuallyPositiveMatches() {
         var value = 0
         deferToMainQueue { value = 1 }
         expect { value }.toEventually(equal(1))
@@ -18,7 +18,7 @@ class AsyncTest: XCTestCase {
         expect { value }.toEventuallyNot(equal(1))
     }
 
-    func testAsyncTestingViaEventuallyNegativeMatches() {
+    func testToEventuallyNegativeMatches() {
         let value = 0
         failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {
             expect { value }.toEventuallyNot(equal(0))
@@ -34,7 +34,7 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testAsyncTestingViaWaitUntilPositiveMatches() {
+    func testWaitUntilPositiveMatches() {
         waitUntil { done in
             done()
         }
@@ -45,13 +45,13 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testAsyncTestngViaWaitUntilTimesOutIfNotCalled() {
+    func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
             waitUntil(timeout: 1) { done in return }
         }
     }
 
-    func testAsyncTestingViaWaitUntilTimesOutWhenSleepingOnMainThreadAsync() {
+    func testWaitUntilTimesOutWhenSleepingOnMainThreadAsync() {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
@@ -69,7 +69,7 @@ class AsyncTest: XCTestCase {
         } while(waiting)
     }
 
-    func testAsyncTestingViaWaitUntilNegativeMatches() {
+    func testWaitUntilNegativeMatches() {
         failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
                 NSThread.sleepForTimeInterval(0.1)
@@ -109,5 +109,44 @@ class AsyncTest: XCTestCase {
                 done()
             }
         }
+    }
+
+    func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
+        waitUntil { done in
+            deferToMainQueue {
+                done()
+            }
+        }
+
+        waitUntil { done in
+            deferToMainQueue {
+                done()
+                expect {
+                    done()
+                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            }
+        }
+    }
+
+    func testWaitUntilMustBeInMainThread() {
+        var executedAsyncBlock: Bool = false
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            expect {
+                waitUntil { done in done() }
+            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            executedAsyncBlock = true
+        }
+        expect(executedAsyncBlock).toEventually(beTruthy())
+    }
+
+    func testToEventuallyMustBeInMainThread() {
+        var executedAsyncBlock: Bool = false
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            expect {
+                expect(1).toEventually(equal(2))
+            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            executedAsyncBlock = true
+        }
+        expect(executedAsyncBlock).toEventually(beTruthy())
     }
 }

@@ -29,7 +29,7 @@ internal class AssertionWaitLock: WaitLock {
         nimblePrecondition(
             NSThread.isMainThread(),
             "InvalidNimbleAPIUsage",
-            "\(fnName) can only run on the main thread"
+            "\(fnName) can only run on the main thread."
         )
         nimblePrecondition(
             currentWaiter == nil,
@@ -93,12 +93,14 @@ internal class AwaitPromise<T> {
     /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
     /// this method will resolve in a no-op.
     ///
-    /// Accepts an optional closure to be call IF the value is set with its given value. Otherwise
-    /// the closure is never called.
-    func resolveResult(result: AwaitResult<T>, closure: () -> Void = {}) {
+    /// @returns a Bool that indicates if the async result was accepted or rejected because another
+    ///          value was recieved first.
+    func resolveResult(result: AwaitResult<T>) -> Bool {
         if dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0 {
             self.asyncResult = result
-            closure()
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -172,7 +174,7 @@ internal class AwaitPromiseBuilder<T> {
                 if dispatch_semaphore_wait(semTimedOutOrBlocked, DISPATCH_TIME_NOW) == 0 {
                     dispatch_semaphore_signal(timedOutSem)
                     dispatch_semaphore_signal(semTimedOutOrBlocked)
-                    self.promise.resolveResult(.TimedOut) {
+                    if self.promise.resolveResult(.TimedOut) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
                 }
@@ -183,7 +185,7 @@ internal class AwaitPromiseBuilder<T> {
             let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
             let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
             if didNotTimeOut && timeoutWasNotTriggered {
-                self.promise.resolveResult(.BlockedRunLoop) {
+                if self.promise.resolveResult(.BlockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())
                 }
             }
@@ -268,6 +270,7 @@ internal class Awaiter {
         closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
+            var completionCount = 0
 
             return AwaitPromiseBuilder(
                 waitLock: waitLock,
@@ -275,7 +278,13 @@ internal class Awaiter {
                 timeoutSource: timeoutSource,
                 asyncSource: nil) {
                     try closure {
-                        promise.resolveResult(.Completed($0)) {
+                        completionCount += 1
+                        nimblePrecondition(
+                            completionCount < 2,
+                            "InvalidNimbleAPIUsage",
+                            "Done closure's was called multiple times. waitUntil(..) expects its " +
+                            "completion closure to only be called once.")
+                        if promise.resolveResult(.Completed($0)) {
                             CFRunLoopStop(CFRunLoopGetMain())
                         }
                     }
@@ -297,12 +306,12 @@ internal class Awaiter {
                 dispatch_source_set_event_handler(asyncSource) {
                     do {
                         if let result = try closure() {
-                            promise.resolveResult(.Completed(result)) {
+                            if promise.resolveResult(.Completed(result)) {
                                 CFRunLoopStop(CFRunLoopGetCurrent())
                             }
                         }
                     } catch let error {
-                        promise.resolveResult(.ErrorThrown(error)) {
+                        if promise.resolveResult(.ErrorThrown(error)) {
                             CFRunLoopStop(CFRunLoopGetCurrent())
                         }
                     }
