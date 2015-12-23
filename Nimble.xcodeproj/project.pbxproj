@@ -99,7 +99,7 @@
 		1F5DF1891BDCA0F500C3A531 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1F5DF18A1BDCA0F500C3A531 /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		1F5DF18B1BDCA0F500C3A531 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD251968AB07008ED995 /* Functional.swift */; };
-		1F5DF18C1BDCA0F500C3A531 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Poll.swift */; };
+		1F5DF18C1BDCA0F500C3A531 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Async.swift */; };
 		1F5DF18D1BDCA0F500C3A531 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD271968AB07008ED995 /* SourceLocation.swift */; };
 		1F5DF18E1BDCA0F500C3A531 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD281968AB07008ED995 /* Stringers.swift */; };
 		1F5DF18F1BDCA0F500C3A531 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD2A1968AB07008ED995 /* AsyncMatcherWrapper.swift */; };
@@ -232,8 +232,8 @@
 		1FD8CD651968AB07008ED995 /* NMBExceptionCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD8CD221968AB07008ED995 /* NMBExceptionCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD8CD661968AB07008ED995 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD231968AB07008ED995 /* NMBExceptionCapture.m */; };
 		1FD8CD671968AB07008ED995 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD231968AB07008ED995 /* NMBExceptionCapture.m */; };
-		1FD8CD6A1968AB07008ED995 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Poll.swift */; };
-		1FD8CD6B1968AB07008ED995 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Poll.swift */; };
+		1FD8CD6A1968AB07008ED995 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Async.swift */; };
+		1FD8CD6B1968AB07008ED995 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Async.swift */; };
 		1FD8CD701968AB07008ED995 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD2A1968AB07008ED995 /* AsyncMatcherWrapper.swift */; };
 		1FD8CD711968AB07008ED995 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD2A1968AB07008ED995 /* AsyncMatcherWrapper.swift */; };
 		1FD8CD741968AB07008ED995 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD2C1968AB07008ED995 /* MatcherFunc.swift */; };
@@ -423,7 +423,7 @@
 		1FD8CD221968AB07008ED995 /* NMBExceptionCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBExceptionCapture.h; sourceTree = "<group>"; };
 		1FD8CD231968AB07008ED995 /* NMBExceptionCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMBExceptionCapture.m; sourceTree = "<group>"; };
 		1FD8CD251968AB07008ED995 /* Functional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
-		1FD8CD261968AB07008ED995 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		1FD8CD261968AB07008ED995 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		1FD8CD271968AB07008ED995 /* SourceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
 		1FD8CD281968AB07008ED995 /* Stringers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
 		1FD8CD2A1968AB07008ED995 /* AsyncMatcherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncMatcherWrapper.swift; sourceTree = "<group>"; };
@@ -662,7 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD8CD251968AB07008ED995 /* Functional.swift */,
-				1FD8CD261968AB07008ED995 /* Poll.swift */,
+				1FD8CD261968AB07008ED995 /* Async.swift */,
 				1FD8CD271968AB07008ED995 /* SourceLocation.swift */,
 				1FD8CD281968AB07008ED995 /* Stringers.swift */,
 			);
@@ -1001,7 +1001,7 @@
 				1FD8CD621968AB07008ED995 /* DSL.m in Sources */,
 				1FD8CD421968AB07008ED995 /* BeEmpty.swift in Sources */,
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
-				1FD8CD6A1968AB07008ED995 /* Poll.swift in Sources */,
+				1FD8CD6A1968AB07008ED995 /* Async.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD761968AB07008ED995 /* ObjCMatcher.swift in Sources */,
@@ -1104,7 +1104,7 @@
 				1F5DF17B1BDCA0F500C3A531 /* BeginWith.swift in Sources */,
 				1F5DF17E1BDCA0F500C3A531 /* BeIdenticalTo.swift in Sources */,
 				1F5DF17A1BDCA0F500C3A531 /* BeEmpty.swift in Sources */,
-				1F5DF18C1BDCA0F500C3A531 /* Poll.swift in Sources */,
+				1F5DF18C1BDCA0F500C3A531 /* Async.swift in Sources */,
 				1F5DF1821BDCA0F500C3A531 /* BeNil.swift in Sources */,
 				1F5DF1AC1BDCA16E00C3A531 /* DSL.m in Sources */,
 				1F5DF16F1BDCA0F500C3A531 /* AssertionDispatcher.swift in Sources */,
@@ -1188,7 +1188,7 @@
 				1FD8CD631968AB07008ED995 /* DSL.m in Sources */,
 				1FD8CD431968AB07008ED995 /* BeEmpty.swift in Sources */,
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
-				1FD8CD6B1968AB07008ED995 /* Poll.swift in Sources */,
+				1FD8CD6B1968AB07008ED995 /* Async.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD771968AB07008ED995 /* ObjCMatcher.swift in Sources */,

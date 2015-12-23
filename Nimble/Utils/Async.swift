@@ -18,6 +18,7 @@ internal struct WaitingInfo: CustomStringConvertible {
 internal protocol WaitLock {
     func acquireWaitingLock(fnName: String, file: String, line: UInt)
     func releaseWaitingLock()
+    func isWaitingLocked() -> Bool
 }
 
 internal class AssertionWaitLock: WaitLock {
@@ -34,12 +35,16 @@ internal class AssertionWaitLock: WaitLock {
         nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
-            "Nested async expectations are not allowed...\n\n" +
-                "The call to\n\t\(info)\n" +
-                "triggered this exception because\n\t\(currentWaiter!)\n" +
+            "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
+            "The call to\n\t\(info)\n" +
+            "triggered this exception because\n\t\(currentWaiter!)\n" +
             "is currently managing the main run loop."
         )
         currentWaiter = info
+    }
+
+    func isWaitingLocked() -> Bool {
+        return currentWaiter != nil
     }
 
     func releaseWaitingLock() {
@@ -105,28 +110,31 @@ internal class AwaitPromise<T> {
     }
 }
 
+internal struct AwaitTrigger {
+    let timeoutSource: dispatch_source_t
+    let actionSource: dispatch_source_t?
+    let start: () throws -> Void
+}
+
 /// Factory for building fully configured AwaitPromises and waiting for their results.
 ///
 /// This factory stores all the state for an async expectation so that Await doesn't
 /// doesn't have to manage it.
 internal class AwaitPromiseBuilder<T> {
+    let awaiter: Awaiter
     let waitLock: WaitLock
-    let timeoutSource: dispatch_source_t
-    let asyncSource: dispatch_source_t?
-    let startAsyncAction: () throws -> Void
+    let trigger: AwaitTrigger
     let promise: AwaitPromise<T>
 
     internal init(
+        awaiter: Awaiter,
         waitLock: WaitLock,
         promise: AwaitPromise<T>,
-        timeoutSource: dispatch_source_t,
-        asyncSource: dispatch_source_t?,
-        startAsyncAction: () throws -> Void) {
+        trigger: AwaitTrigger) {
+            self.awaiter = awaiter
             self.waitLock = waitLock
             self.promise = promise
-            self.timeoutSource = timeoutSource
-            self.asyncSource = asyncSource
-            self.startAsyncAction = startAsyncAction
+            self.trigger = trigger
     }
 
     func timeout(timeoutInterval: NSTimeInterval) -> Self {
@@ -159,12 +167,12 @@ internal class AwaitPromiseBuilder<T> {
         //
         // In addition, stopping the run loop is used to halt code executed on the main run loop.
         dispatch_source_set_timer(
-            timeoutSource,
+            trigger.timeoutSource,
             dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval * Double(NSEC_PER_SEC))),
             DISPATCH_TIME_FOREVER,
             timeoutLeeway
         )
-        dispatch_source_set_event_handler(timeoutSource) {
+        dispatch_source_set_event_handler(trigger.timeoutSource) {
             guard self.promise.asyncResult.isIncomplete() else { return }
             let timedOutSem = dispatch_semaphore_create(0)
             let semTimedOutOrBlocked = dispatch_semaphore_create(0)
@@ -223,18 +231,18 @@ internal class AwaitPromiseBuilder<T> {
         }))
         capture.tryBlock {
             do {
-                try self.startAsyncAction()
+                try self.trigger.start()
             } catch let error {
                 self.promise.resolveResult(.ErrorThrown(error))
             }
-            dispatch_resume(self.timeoutSource)
+            dispatch_resume(self.trigger.timeoutSource)
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
                 NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
             }
-            dispatch_suspend(self.timeoutSource)
-            dispatch_source_cancel(self.timeoutSource)
-            if let asyncSource = self.asyncSource {
+            dispatch_suspend(self.trigger.timeoutSource)
+            dispatch_source_cancel(self.trigger.timeoutSource)
+            if let asyncSource = self.trigger.actionSource {
                 dispatch_source_cancel(asyncSource)
             }
         }
@@ -271,53 +279,55 @@ internal class Awaiter {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
+            let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
+                try closure {
+                    completionCount += 1
+                    nimblePrecondition(
+                        completionCount < 2,
+                        "InvalidNimbleAPIUsage",
+                        "Done closure's was called multiple times. waitUntil(..) expects its " +
+                        "completion closure to only be called once.")
+                    if promise.resolveResult(.Completed($0)) {
+                        CFRunLoopStop(CFRunLoopGetMain())
+                    }
+                }
+            }
 
             return AwaitPromiseBuilder(
+                awaiter: self,
                 waitLock: waitLock,
                 promise: promise,
-                timeoutSource: timeoutSource,
-                asyncSource: nil) {
-                    try closure {
-                        completionCount += 1
-                        nimblePrecondition(
-                            completionCount < 2,
-                            "InvalidNimbleAPIUsage",
-                            "Done closure's was called multiple times. waitUntil(..) expects its " +
-                            "completion closure to only be called once.")
-                        if promise.resolveResult(.Completed($0)) {
-                            CFRunLoopStop(CFRunLoopGetMain())
-                        }
-                    }
-            }
+                trigger: trigger)
     }
 
     func poll<T>(pollInterval: NSTimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
-
-        return AwaitPromiseBuilder(
-            waitLock: waitLock,
-            promise: promise,
-            timeoutSource: timeoutSource,
-            asyncSource: asyncSource) {
-                let interval = UInt64(pollInterval * Double(NSEC_PER_SEC))
-                dispatch_source_set_timer(asyncSource, DISPATCH_TIME_NOW, interval, pollLeeway)
-                dispatch_source_set_event_handler(asyncSource) {
-                    do {
-                        if let result = try closure() {
-                            if promise.resolveResult(.Completed(result)) {
-                                CFRunLoopStop(CFRunLoopGetCurrent())
-                            }
-                        }
-                    } catch let error {
-                        if promise.resolveResult(.ErrorThrown(error)) {
+        let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
+            let interval = UInt64(pollInterval * Double(NSEC_PER_SEC))
+            dispatch_source_set_timer(asyncSource, DISPATCH_TIME_NOW, interval, pollLeeway)
+            dispatch_source_set_event_handler(asyncSource) {
+                do {
+                    if let result = try closure() {
+                        if promise.resolveResult(.Completed(result)) {
                             CFRunLoopStop(CFRunLoopGetCurrent())
                         }
                     }
+                } catch let error {
+                    if promise.resolveResult(.ErrorThrown(error)) {
+                        CFRunLoopStop(CFRunLoopGetCurrent())
+                    }
                 }
-                dispatch_resume(asyncSource)
+            }
+            dispatch_resume(asyncSource)
         }
+
+        return AwaitPromiseBuilder(
+            awaiter: self,
+            waitLock: waitLock,
+            promise: promise,
+            trigger: trigger)
     }
 }
 

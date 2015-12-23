@@ -90,14 +90,16 @@ class AsyncTest: XCTestCase {
     }
 
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
-        let referenceLine = __LINE__ + 7
-        var msg = "Unexpected exception raised: Nested async expectations are not allowed...\n\n"
+        let referenceLine = __LINE__ + 9
+        var msg = "Unexpected exception raised: Nested async expectations are not allowed "
+        msg += "to avoid creating flaky tests."
+        msg += "\n\n"
         msg += "The call to\n\t"
         msg += "expect(...).toEventually(...) at \(__FILE__):\(referenceLine + 7)\n"
         msg += "triggered this exception because\n\t"
         msg += "waitUntil(...) at \(__FILE__):\(referenceLine + 1)\n"
         msg += "is currently managing the main run loop."
-        failsWithErrorMessage(msg) {
+        failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: 2.0) { done in
                 var protected: Int = 0
                 dispatch_async(dispatch_get_main_queue()) {
