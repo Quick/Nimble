@@ -1,6 +1,5 @@
 import XCTest
 import Nimble
-import Swift
 
 class AsyncTest: XCTestCase {
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
