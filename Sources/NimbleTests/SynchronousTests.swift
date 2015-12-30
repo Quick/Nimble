@@ -38,7 +38,7 @@ class SynchronousTest: XCTestCase {
 
     func testToProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return true
@@ -48,7 +48,7 @@ class SynchronousTest: XCTestCase {
 
     func testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return true
@@ -77,7 +77,7 @@ class SynchronousTest: XCTestCase {
 
     func testToNotProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return false
@@ -87,7 +87,7 @@ class SynchronousTest: XCTestCase {
 
     func testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return false
