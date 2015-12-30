@@ -448,8 +448,6 @@ class CallRecorderTest: XCTestCase {
         let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
         let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .Yes)
         
-        print(result1)
-        
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
                                          result3.recordedCallsDescription,
@@ -478,8 +476,6 @@ class CallRecorderTest: XCTestCase {
         let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .Yes)
         let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
         let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .Yes)
-        
-        print(result1)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
@@ -510,8 +506,6 @@ class CallRecorderTest: XCTestCase {
         let result6 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .Yes)
         let result7 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
         let result8 : DidCallResult = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .Yes)
-        
-        print(result1)
         
         let recordedCallsDescriptions = [result1.recordedCallsDescription,
                                          result2.recordedCallsDescription,
