@@ -51,7 +51,6 @@ public enum ArgumentOption : CustomStringConvertible {
 public struct DidCallResult {
     public let success: Bool
     public let recordedCallsDescription: String
-//    public let successfullyCalledCount: Int
 }
 
 public enum DidCallResultIncludeOption : CustomStringConvertible {
