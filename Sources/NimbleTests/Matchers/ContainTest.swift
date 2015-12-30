@@ -19,9 +19,9 @@ class ContainTest: XCTestCase, XCTestCaseProvider {
         expect(["foo", "bar", "baz"]).to(contain("baz"))
         expect([1, 2, 3]).toNot(contain(4))
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))
-        expect(NSArray(array: ["a"])).to(contain("a"))
-        expect(NSArray(array: ["a"])).toNot(contain("b"))
-        expect(NSArray(object: 1) as NSArray?).to(contain(1))
+        expect(NSArray(array: [NSString(string: "a")])).to(contain(NSString(string: "a")))
+        expect(NSArray(array: [NSString(string: "a")])).toNot(contain(NSString(string:"b")))
+        expect(NSArray(object: NSNumber(integer: 1)) as NSArray?).to(contain(NSNumber(integer: 1)))
 
         failsWithErrorMessage("expected to contain <bar>, got <[\"a\", \"b\", \"c\"]>") {
             expect(["a", "b", "c"]).to(contain("bar"))

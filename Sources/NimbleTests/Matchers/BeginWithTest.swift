@@ -20,16 +20,18 @@ class BeginWithTest: XCTestCase, XCTestCaseProvider {
         expect(NSString(string: "foobar").description).to(beginWith("foo"))
         expect(NSString(string: "foobar").description).toNot(beginWith("oo"))
 
+#if _runtime(_ObjC)
         expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
         expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
+#endif
     }
 
     func testNegativeMatches() {
         failsWithErrorMessageForNil("expected to begin with <b>, got <nil>") {
-            expect(nil as NSArray?).to(beginWith("b"))
+            expect(nil as NSArray?).to(beginWith(NSString(string: "b")))
         }
         failsWithErrorMessageForNil("expected to not begin with <b>, got <nil>") {
-            expect(nil as NSArray?).toNot(beginWith("b"))
+            expect(nil as NSArray?).toNot(beginWith(NSString(string: "b")))
         }
 
         failsWithErrorMessage("expected to begin with <2>, got <[1, 2, 3]>") {
