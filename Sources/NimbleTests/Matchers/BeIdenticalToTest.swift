@@ -14,7 +14,8 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeIdenticalToPositive() {
-        expect(NSNumber(integer:1)).to(beIdenticalTo(NSNumber(integer:1)))
+        let value = NSDate()
+        expect(value).to(beIdenticalTo(value))
     }
 
     func testBeIdenticalToNegative() {
@@ -41,7 +42,8 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     }
     
     func testOperators() {
-        expect(NSNumber(integer:1)) === NSNumber(integer:1)
+        let value = NSDate()
+        expect(value) === value
         expect(NSNumber(integer:1)) !== NSNumber(integer:2)
     }
 }
