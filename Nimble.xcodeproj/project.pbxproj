@@ -259,6 +259,9 @@
 		BC45D5BE1C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
 		BC45D5BF1C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
 		BC45D5C01C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
+		BCF12A211C36EC7900789343 /* RegexUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF12A201C36EC7900789343 /* RegexUtils.swift */; };
+		BCF12A221C36EC7900789343 /* RegexUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF12A201C36EC7900789343 /* RegexUtils.swift */; };
+		BCF12A231C36EC7900789343 /* RegexUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF12A201C36EC7900789343 /* RegexUtils.swift */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
@@ -443,6 +446,7 @@
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		BC45D5621C3235A6007C72F3 /* PostNotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotificationTest.swift; sourceTree = "<group>"; };
 		BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCollector.swift; sourceTree = "<group>"; };
+		BCF12A201C36EC7900789343 /* RegexUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexUtils.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
@@ -506,6 +510,7 @@
 			children = (
 				1F14FB63194180C5009F2A08 /* utils.swift */,
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
+				BCF12A201C36EC7900789343 /* RegexUtils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1054,6 +1059,7 @@
 				1F4A56941A3B346F009E1637 /* ObjCContainTest.m in Sources */,
 				1F299EAB19627B2D002641AF /* BeEmptyTest.swift in Sources */,
 				1F925EF6195C147800ED456B /* BeCloseToTest.swift in Sources */,
+				BCF12A211C36EC7900789343 /* RegexUtils.swift in Sources */,
 				1F4A56791A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568B1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
 				DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
@@ -1155,6 +1161,7 @@
 				1F5DF1941BDCA10200C3A531 /* UserDescriptionTest.swift in Sources */,
 				1F5DF19F1BDCA10200C3A531 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F5DF1991BDCA10200C3A531 /* BeAnInstanceOfTest.swift in Sources */,
+				BCF12A231C36EC7900789343 /* RegexUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1250,7 @@
 				1F4A56951A3B346F009E1637 /* ObjCContainTest.m in Sources */,
 				1F299EAC19627B2D002641AF /* BeEmptyTest.swift in Sources */,
 				1F925EF7195C147800ED456B /* BeCloseToTest.swift in Sources */,
+				BCF12A221C36EC7900789343 /* RegexUtils.swift in Sources */,
 				1F4A567A1A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				1F4A568C1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
 				DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,

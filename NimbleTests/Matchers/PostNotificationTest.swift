@@ -40,16 +40,47 @@ class PostNotificationTest: XCTestCase {
 
     func testFailsWhenNoNotificationsArePosted() {
         let testNotification = NSNotification(name: "Foo", object: nil)
-        let pattern = "expected to equal \\<\\[NSConcreteNotification [0-9a-fx]+ \\{name = Foo\\}\\]\\>, got \\<\\[\\]\\>"
-        let expectedMessage = try! NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions())
-        failsWithErrorMessage(expectedMessage) {
+        let pattern = try! "expected to equal <[NSConcreteNotification %addr% {name = Foo}]>, got <[]>"
+                           .escapedRegularExpressionWithAddressToken()
+        failsWithErrorMessage(pattern) {
             expect(expression: postedNotifications {
                 // no notifications here!
             }).to(equal([testNotification]))
         }
     }
 
+    func testFailsWhenNotificationWithWrongNameIsPosted() {
+        let testNotification = NSNotification(name: "Foo", object: nil)
+        let pattern = try! ("expected to equal <[NSConcreteNotification %addr% {name = Foo}]>,"
+                           + " got <[NSConcreteNotification %addr% {name = Fooa}]>")
+                           .escapedRegularExpressionWithAddressToken()
+        failsWithErrorMessage(pattern) {
+            expect(expression: postedNotifications {
+                NSNotificationCenter.defaultCenter().postNotificationName(testNotification.name + "a", object: nil)
+            }).to(equal([testNotification]))
+        }
+    }
+
+    func testFailsWhenNotificationWithWrongObjectIsPosted() {
+        let testNotification = NSNotification(name: "Foo", object: nil)
+        let pattern = try! ("expected to equal <[NSConcreteNotification %addr% {name = Foo}]>,"
+                           + " got <[NSConcreteNotification %addr% {name = Foo; object = <NSObject: %addr%>}]>")
+                           .escapedRegularExpressionWithAddressToken()
+        failsWithErrorMessage(pattern) {
+            expect(expression: postedNotifications {
+                NSNotificationCenter.defaultCenter().postNotificationName(testNotification.name, object: NSObject())
+            }).to(equal([testNotification]))
+        }
+    }
 
 // MARK: - Async
 
+    func testPassesWhenExpectedNotificationEventuallyIsPosted() {
+        let testNotification = NSNotification(name: "Foo", object: nil)
+        expect(expression: postedNotifications {
+            deferToMainQueue {
+                NSNotificationCenter.defaultCenter().postNotification(testNotification)
+            }
+        }).toEventually(equal([testNotification]))
+    }
 }
