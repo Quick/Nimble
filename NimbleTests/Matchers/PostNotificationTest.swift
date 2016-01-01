@@ -14,6 +14,7 @@ class PostNotificationTest: XCTestCase {
 
     func testPassesWhenNoNotificationsArePosted() {
         expect(expression: postedNotifications {
+            // no notifications here!
         }).to(beEmpty())
     }
 
@@ -37,6 +38,18 @@ class PostNotificationTest: XCTestCase {
 
 // MARK: - Failing
 
+    func testFailsWhenNoNotificationsArePosted() {
+        let testNotification = NSNotification(name: "Foo", object: nil)
+        let pattern = "expected to equal \\<\\[NSConcreteNotification [0-9a-fx]+ \\{name = Foo\\}\\]\\>, got \\<\\[\\]\\>"
+        let expectedMessage = try! NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions())
+        failsWithErrorMessage(expectedMessage) {
+            expect(expression: postedNotifications {
+                // no notifications here!
+            }).to(equal([testNotification]))
+        }
+    }
 
+
+// MARK: - Async
 
 }

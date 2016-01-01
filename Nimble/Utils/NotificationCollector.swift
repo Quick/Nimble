@@ -9,6 +9,7 @@
 import Foundation
 
 class NotificationCollector {
+
     private var observedNotifications: [NSNotification]
     private let notificationCenter: NSNotificationCenter
     private var token: AnyObject?

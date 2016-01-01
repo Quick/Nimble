@@ -2,20 +2,43 @@ import Foundation
 import Nimble
 import XCTest
 
-func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
+protocol FailureMessageEquatable {
+    func matchesFailureMessage(message: String) -> Bool
+}
+
+extension String: FailureMessageEquatable {
+    func matchesFailureMessage(message: String) -> Bool {
+        return self == message
+    }
+}
+
+extension NSRegularExpression: FailureMessageEquatable {
+    func matchesFailureMessage(message: String) -> Bool {
+        let entireString = NSRange(location: 0, length: message.characters.count)
+        return !matchesInString(message, options: NSMatchingOptions(), range: entireString).isEmpty
+    }
+}
+
+extension NSString: FailureMessageEquatable {
+    func matchesFailureMessage(message: String) -> Bool {
+        return isEqualToString(message)
+    }
+}
+
+func failsWithErrorMessage(expectedFailureMessages: [FailureMessageEquatable], file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     var filePath = file
     var lineNumber = line
 
     let recorder = AssertionRecorder()
     withAssertionHandler(recorder, closure: closure)
 
-    for msg in messages {
+    for expectedMessage in expectedFailureMessages {
         var lastFailure: AssertionRecord?
         var foundFailureMessage = false
 
         for assertion in recorder.assertions {
             lastFailure = assertion
-            if assertion.message.stringValue == msg {
+            if expectedMessage.matchesFailureMessage(assertion.message.stringValue) {
                 foundFailureMessage = true
                 break
             }
@@ -33,7 +56,7 @@ func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UI
         }
 
         if let lastFailure = lastFailure {
-            let msg = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(msg)\""
+            let msg = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(expectedMessage)\""
             XCTFail(msg, file: filePath, line: lineNumber)
         } else {
             XCTFail("expected failure message, but got none", file: filePath, line: lineNumber)
@@ -41,7 +64,7 @@ func failsWithErrorMessage(messages: [String], file: String = __FILE__, line: UI
     }
 }
 
-func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(message: FailureMessageEquatable, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     return failsWithErrorMessage(
         [message],
         file: file,
@@ -51,7 +74,7 @@ func failsWithErrorMessage(message: String, file: String = __FILE__, line: UInt 
     )
 }
 
-func failsWithErrorMessageForNil(message: String, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessageForNil(message: FailureMessageEquatable, file: String = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
@@ -64,15 +87,15 @@ func deferToMainQueue(action: () -> Void) {
 
 public class NimbleHelper : NSObject {
     class func expectFailureMessage(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(message as FailureMessageEquatable, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     class func expectFailureMessages(messages: [NSString], block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessage(messages as! [String], file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(messages.map { $0 as FailureMessageEquatable }, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: String, line: UInt) {
-        failsWithErrorMessageForNil(message as String, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessageForNil(message as FailureMessageEquatable, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
 
