@@ -32,7 +32,7 @@ class NotificationCollector {
     }
 }
 
-public typealias CollectedNotificationsFunc = () throws -> [NSNotification]
+public typealias CollectedNotificationsFunc = () throws -> [NSNotification]?
 
 public func postedNotifications(notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter(),
                                 block: () throws -> Void) -> CollectedNotificationsFunc {
