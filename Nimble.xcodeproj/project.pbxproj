@@ -249,6 +249,12 @@
 		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
 		4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */; };
+		7B5358BA1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyOneOfTest.swift */; };
+		7B5358BB1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyOneOfTest.swift */; };
+		7B5358BC1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyOneOfTest.swift */; };
+		7B5358BE1C38479700A23FAA /* SatisfyOneOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyOneOf.swift */; };
+		7B5358BF1C38479700A23FAA /* SatisfyOneOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyOneOf.swift */; };
+		7B5358C01C38479700A23FAA /* SatisfyOneOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyOneOf.swift */; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -433,6 +439,8 @@
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
+		7B5358B91C3846C900A23FAA /* SatisfyOneOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyOneOfTest.swift; sourceTree = "<group>"; };
+		7B5358BD1C38479700A23FAA /* SatisfyOneOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyOneOf.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
@@ -599,6 +607,7 @@
 				DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */,
 				1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */,
 				29EA59621B551ED2002D767E /* ThrowErrorTest.swift */,
+				7B5358B91C3846C900A23FAA /* SatisfyOneOfTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -638,6 +647,7 @@
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
 				29EA59651B551EE6002D767E /* ThrowError.swift */,
+				7B5358BD1C38479700A23FAA /* SatisfyOneOf.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -1000,6 +1010,7 @@
 				1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD761968AB07008ED995 /* ObjCMatcher.swift in Sources */,
 				1FD8CD341968AB07008ED995 /* DSL.swift in Sources */,
+				7B5358BE1C38479700A23FAA /* SatisfyOneOf.swift in Sources */,
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
@@ -1053,6 +1064,7 @@
 				1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
 				4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
+				7B5358BA1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */,
 				1F925F05195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566D1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
 				DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */,
@@ -1105,6 +1117,7 @@
 				1F5DF18D1BDCA0F500C3A531 /* SourceLocation.swift in Sources */,
 				1F5DF1701BDCA0F500C3A531 /* DSL.swift in Sources */,
 				1F5DF1721BDCA0F500C3A531 /* Expectation.swift in Sources */,
+				7B5358C01C38479700A23FAA /* SatisfyOneOf.swift in Sources */,
 				1F5DF18B1BDCA0F500C3A531 /* Functional.swift in Sources */,
 				1F5DF1871BDCA0F500C3A531 /* Match.swift in Sources */,
 				1F5DF1901BDCA0F500C3A531 /* MatcherFunc.swift in Sources */,
@@ -1119,6 +1132,7 @@
 				1F5DF1951BDCA10200C3A531 /* utils.swift in Sources */,
 				1F5DF1981BDCA10200C3A531 /* BeAKindOfTest.swift in Sources */,
 				1F5DF19B1BDCA10200C3A531 /* BeEmptyTest.swift in Sources */,
+				7B5358BC1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */,
 				1F5DF1A11BDCA10200C3A531 /* BeLessThanOrEqualToTest.swift in Sources */,
 				1F5DF1961BDCA10200C3A531 /* ObjectWithLazyProperty.swift in Sources */,
 				1F5DF1AB1BDCA10200C3A531 /* ThrowErrorTest.swift in Sources */,
@@ -1185,6 +1199,7 @@
 				1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD771968AB07008ED995 /* ObjCMatcher.swift in Sources */,
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
+				7B5358BF1C38479700A23FAA /* SatisfyOneOf.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */,
@@ -1238,6 +1253,7 @@
 				1F0648D51963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
 				4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
+				7B5358BB1C3846C900A23FAA /* SatisfyOneOfTest.swift in Sources */,
 				1F925F06195C18B700ED456B /* EqualTest.swift in Sources */,
 				1F4A566E1A3B3159009E1637 /* ObjCBeKindOfTest.m in Sources */,
 				DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */,
