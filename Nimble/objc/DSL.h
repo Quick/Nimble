@@ -107,11 +107,11 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id matcher);
 NIMBLE_SHORT(id<NMBMatcher> allPass(id matcher),
              NMB_allPass(matcher));
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyOneOfWithNilTermination(id matcher, ...)
+NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithNilTermination(id matcher, ...)
     NS_REQUIRES_NIL_TERMINATION;
-#define NMB_satisfyOneOf(...) NMB_satisfyOneOfWithNilTermination(__VA_ARGS__, nil)
+#define NMB_satisfyAnyOf(...) NMB_satisfyAnyOfWithNilTermination(__VA_ARGS__, nil)
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
-#define satisfyOneOf(...) NMB_satisfyOneOf(__VA_ARGS__)
+#define satisfyAnyOf(...) NMB_satisfyAnyOf(__VA_ARGS__)
 #endif
 
 // In order to preserve breakpoint behavior despite using macros to fill in __FILE__ and __LINE__,

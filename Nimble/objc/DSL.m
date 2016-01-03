@@ -125,7 +125,7 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id expectedValue) {
     return [NMBObjCMatcher allPassMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyOneOfWithNilTermination(id matcher, ...) {
+NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithNilTermination(id matcher, ...) {
     NSMutableArray *matcherArray = [NSMutableArray array];
     
     if (matcher) {
@@ -140,7 +140,7 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyOneOfWithNilTermination(id matcher, ...)
         va_end(args);
     }
     
-    return [NMBObjCMatcher satisfyOneOfMatcher:matcherArray];
+    return [NMBObjCMatcher satisfyAnyOfMatcher:matcherArray];
 }
 
 NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {

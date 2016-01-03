@@ -1,10 +1,10 @@
 import Foundation
 
-public func satisfyOneOf<T,U where U: Matcher, U.ValueType == T>(matchers: U...) -> NonNilMatcherFunc<T> {
-    return satisfyOneOf(matchers)
+public func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: U...) -> NonNilMatcherFunc<T> {
+    return satisfyAnyOf(matchers)
 }
 
-internal func satisfyOneOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]) -> NonNilMatcherFunc<T> {
+internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc<T> { actualExpression, failureMessage in
         var fullPostfixMessage = "match one of: "
         var matches = false
@@ -28,7 +28,7 @@ internal func satisfyOneOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]
 }
 
 extension NMBObjCMatcher {
-    public class func satisfyOneOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
+    public class func satisfyAnyOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             var elementEvaluators = [NonNilMatcherFunc<NSObject>]()
             for matcher in matchers {
@@ -41,7 +41,7 @@ extension NMBObjCMatcher {
                 elementEvaluators.append(NonNilMatcherFunc(elementEvaluator))
             }
             
-            return try! satisfyOneOf(elementEvaluators).matches(actualExpression, failureMessage: failureMessage)
+            return try! satisfyAnyOf(elementEvaluators).matches(actualExpression, failureMessage: failureMessage)
         }
     }
 }
