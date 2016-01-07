@@ -256,9 +256,9 @@
 		BC45D5631C3235A6007C72F3 /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5621C3235A6007C72F3 /* PostNotificationTest.swift */; };
 		BC45D5641C3235A6007C72F3 /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5621C3235A6007C72F3 /* PostNotificationTest.swift */; };
 		BC45D5651C3235A6007C72F3 /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5621C3235A6007C72F3 /* PostNotificationTest.swift */; };
-		BC45D5BE1C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
-		BC45D5BF1C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
-		BC45D5C01C35CC08007C72F3 /* NotificationCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */; };
+		BC45D5BE1C35CC08007C72F3 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* PostNotification.swift */; };
+		BC45D5BF1C35CC08007C72F3 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* PostNotification.swift */; };
+		BC45D5C01C35CC08007C72F3 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC45D5BD1C35CC08007C72F3 /* PostNotification.swift */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
@@ -442,7 +442,7 @@
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
 		BC45D5621C3235A6007C72F3 /* PostNotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotificationTest.swift; sourceTree = "<group>"; };
-		BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCollector.swift; sourceTree = "<group>"; };
+		BC45D5BD1C35CC08007C72F3 /* PostNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostNotification.swift; path = ../Utils/PostNotification.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
@@ -626,6 +626,7 @@
 		1FD8CD0C1968AB07008ED995 /* Matchers */ = {
 			isa = PBXGroup;
 			children = (
+				BC45D5BD1C35CC08007C72F3 /* PostNotification.swift */,
 				DDB1BC781A92235600F743C3 /* AllPass.swift */,
 				1FD8CD0E1968AB07008ED995 /* BeAKindOf.swift */,
 				1FD8CD0D1968AB07008ED995 /* BeAnInstanceOf.swift */,
@@ -669,7 +670,6 @@
 				1FD8CD261968AB07008ED995 /* Poll.swift */,
 				1FD8CD271968AB07008ED995 /* SourceLocation.swift */,
 				1FD8CD281968AB07008ED995 /* Stringers.swift */,
-				BC45D5BD1C35CC08007C72F3 /* NotificationCollector.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -998,7 +998,7 @@
 				1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1FD8CD561968AB07008ED995 /* Contain.swift in Sources */,
-				BC45D5BE1C35CC08007C72F3 /* NotificationCollector.swift in Sources */,
+				BC45D5BE1C35CC08007C72F3 /* PostNotification.swift in Sources */,
 				1FD8CD481968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1FD8CD701968AB07008ED995 /* AsyncMatcherWrapper.swift in Sources */,
 				1FD8CD441968AB07008ED995 /* BeginWith.swift in Sources */,
@@ -1105,7 +1105,7 @@
 				1F5DF17D1BDCA0F500C3A531 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1F5DF18E1BDCA0F500C3A531 /* Stringers.swift in Sources */,
 				1F5DF1AD1BDCA16E00C3A531 /* NMBExceptionCapture.m in Sources */,
-				BC45D5C01C35CC08007C72F3 /* NotificationCollector.swift in Sources */,
+				BC45D5C01C35CC08007C72F3 /* PostNotification.swift in Sources */,
 				1F5DF16D1BDCA0F500C3A531 /* AdapterProtocols.swift in Sources */,
 				1F5DF17B1BDCA0F500C3A531 /* BeginWith.swift in Sources */,
 				1F5DF17E1BDCA0F500C3A531 /* BeIdenticalTo.swift in Sources */,
@@ -1187,7 +1187,7 @@
 				1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1FD8CD571968AB07008ED995 /* Contain.swift in Sources */,
-				BC45D5BF1C35CC08007C72F3 /* NotificationCollector.swift in Sources */,
+				BC45D5BF1C35CC08007C72F3 /* PostNotification.swift in Sources */,
 				1FD8CD491968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1FD8CD711968AB07008ED995 /* AsyncMatcherWrapper.swift in Sources */,
 				1FD8CD451968AB07008ED995 /* BeginWith.swift in Sources */,
