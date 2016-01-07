@@ -886,6 +886,7 @@ For Objective-C the actual value has to be one of the following classes `NSArray
 expect(actual).to(satisfyAnyOf(beLessThan(10), beGreaterThan(20)))
 
 // can include any number of matchers -- the following will pass
+// **be careful** -- too many matchers can be the sign of an unfocused test
 expect(6).to(satisfyAnyOf(equal(2), equal(3), equal(4), equal(5), equal(6), equal(7)))
 ```
 
@@ -894,8 +895,14 @@ expect(6).to(satisfyAnyOf(equal(2), equal(3), equal(4), equal(5), equal(6), equa
 expect(actual).to(satisfyAnyOf(beLessThan(@10), beGreaterThan(@20)))
 
 // can include any number of matchers -- the following will pass
+// **be careful** -- too many matchers can be the sign of an unfocused test
 expect(@6).to(satisfyAnyOf(equal(@2), equal(@3), equal(@4), equal(@5), equal(@6), equal(@7)))
 ```
+
+Note: This matcher allows you to chain any number of matchers together. This provides flexibility, 
+      but if you find yourself chaining many matchers together in one test, consider whether you  
+      could instead refactor that single test into multiple, more precisely focused tests for 
+      better coverage. 
 
 # Writing Your Own Matchers
 

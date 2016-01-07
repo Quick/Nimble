@@ -1,5 +1,7 @@
 import Foundation
 
+/// A Nimble matcher that succeeds when the actual value matches with any of the matchers
+/// provided in the variable list of matchers. 
 public func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: U...) -> NonNilMatcherFunc<T> {
     return satisfyAnyOf(matchers)
 }
