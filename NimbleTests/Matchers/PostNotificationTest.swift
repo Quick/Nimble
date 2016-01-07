@@ -32,9 +32,7 @@ class PostNotificationTest: XCTestCase {
 
     func testFailsWhenNoNotificationsArePosted() {
         let testNotification = NSNotification(name: "Foo", object: nil)
-        let pattern = try! "expected to equal <[NSConcreteNotification %addr% {name = Foo}]>, got <[]>"
-                           .escapedRegularExpressionWithAddressToken()
-        failsWithErrorMessage(pattern) {
+        failsWithErrorMessage("expected to equal <[\(testNotification)]>, got <[]>") {
             expect(expression: postedNotifications {
                 // no notifications here!
             }).to(equal([testNotification]))
@@ -42,26 +40,22 @@ class PostNotificationTest: XCTestCase {
     }
 
     func testFailsWhenNotificationWithWrongNameIsPosted() {
-        let testNotification = NSNotification(name: "Foo", object: nil)
-        let pattern = try! ("expected to equal <[NSConcreteNotification %addr% {name = Foo}]>,"
-                           + " got <[NSConcreteNotification %addr% {name = Fooa}]>")
-                           .escapedRegularExpressionWithAddressToken()
-        failsWithErrorMessage(pattern) {
+        let n1 = NSNotification(name: "Foo", object: nil)
+        let n2 = NSNotification(name: n1.name + "a", object: nil)
+        failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect(expression: postedNotifications {
-                NSNotificationCenter.defaultCenter().postNotificationName(testNotification.name + "a", object: nil)
-            }).to(equal([testNotification]))
+                NSNotificationCenter.defaultCenter().postNotification(n2)
+            }).to(equal([n1]))
         }
     }
 
     func testFailsWhenNotificationWithWrongObjectIsPosted() {
-        let testNotification = NSNotification(name: "Foo", object: nil)
-        let pattern = try! ("expected to equal <[NSConcreteNotification %addr% {name = Foo}]>,"
-                           + " got <[NSConcreteNotification %addr% {name = Foo; object = <NSObject: %addr%>}]>")
-                           .escapedRegularExpressionWithAddressToken()
-        failsWithErrorMessage(pattern) {
+        let n1 = NSNotification(name: "Foo", object: nil)
+        let n2 = NSNotification(name: n1.name, object: NSObject())
+        failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect(expression: postedNotifications {
-                NSNotificationCenter.defaultCenter().postNotificationName(testNotification.name, object: NSObject())
-            }).to(equal([testNotification]))
+                NSNotificationCenter.defaultCenter().postNotification(n2)
+            }).to(equal([n1]))
         }
     }
 
