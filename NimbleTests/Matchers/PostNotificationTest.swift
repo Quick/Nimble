@@ -1,11 +1,3 @@
-//
-//  PostNotificationTest.swift
-//  Nimble
-//
-//  Created by Brian Gerstle on 12/28/15.
-//  Copyright © 2015 Jeff Hui. All rights reserved.
-//
-
 import XCTest
 import Nimble
 

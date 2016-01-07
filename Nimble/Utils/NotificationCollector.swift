@@ -1,11 +1,3 @@
-//
-//  NotificationCollector.swift
-//  Nimble
-//
-//  Created by Brian Gerstle on 12/31/15.
-//  Copyright © 2015 Jeff Hui. All rights reserved.
-//
-
 import Foundation
 
 class NotificationCollector {

@@ -1,11 +1,3 @@
-//
-//  RegexUtils.swift
-//  Nimble
-//
-//  Created by Brian Gerstle on 1/1/16.
-//  Copyright © 2016 Jeff Hui. All rights reserved.
-//
-
 import Foundation
 
 extension NSCharacterSet {
