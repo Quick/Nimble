@@ -14,7 +14,6 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).toEventually(...)"
-        let leeway = timeoutInterval / 2.0
         let result = pollBlock(
             pollInterval: pollInterval,
             timeoutInterval: timeoutInterval,
