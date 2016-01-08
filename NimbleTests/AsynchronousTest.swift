@@ -50,7 +50,7 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testWaitUntilTimesOutWhenSleepingOnMainThreadAsync() {
+    func testWaitUntilTimesOutWhenExceedingItsTime() {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
@@ -79,12 +79,11 @@ class AsyncTest: XCTestCase {
     }
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
-        failsWithErrorMessage("Stall on main thread - too much enqueued on main run loop before waitUntil executes.") {
+        let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
+        failsWithErrorMessage(msg) {
             waitUntil(timeout: 1) { done in
-                dispatch_async(dispatch_get_main_queue()) {
-                    NSThread.sleepForTimeInterval(5.0)
-                    done()
-                }
+                NSThread.sleepForTimeInterval(5.0)
+                done()
             }
         }
     }

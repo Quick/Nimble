@@ -27,6 +27,7 @@ internal class NMBWait: NSObject {
         line: UInt = __LINE__,
         action: (() -> Void) throws -> Void) -> Void {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
+            let leeway = timeout / 2.0
             let result = awaiter.performBlock { (done: (ErrorResult) -> Void) throws -> Void in
                 dispatch_async(dispatch_get_main_queue()) {
                     let capture = NMBExceptionCapture(
@@ -45,12 +46,13 @@ internal class NMBWait: NSObject {
                         }
                     }
                 }
-            }.timeout(timeout).wait("waitUntil(...)", file: file, line: line)
+            }.timeout(timeout, forcefullyAbortTimeout: leeway).wait("waitUntil(...)", file: file, line: line)
 
             switch result {
             case .Incomplete: internalError("Reached .Incomplete state for waitUntil(...).")
             case .BlockedRunLoop:
-                fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
+                fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
+                    file: file, line: line)
             case .TimedOut:
                 let pluralize = (timeout == 1 ? "" : "s")
                 fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
@@ -71,6 +73,10 @@ internal class NMBWait: NSObject {
     internal class func until(file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
         until(timeout: 1, file: file, line: line, action: action)
     }
+}
+
+internal func blockedRunLoopErrorMessageFor(fnName: String, leeway: NSTimeInterval) -> String {
+    return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive (\(leeway) seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
 }
 
 /// Wait asynchronously until the done closure is called or the timeout has been reached.

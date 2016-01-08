@@ -13,12 +13,14 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
 
     func matches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool {
         let uncachedExpression = actualExpression.withoutCaching()
+        let fnName = "expect(...).toEventually(...)"
+        let leeway = timeoutInterval / 2.0
         let result = pollBlock(
             pollInterval: pollInterval,
             timeoutInterval: timeoutInterval,
             file: actualExpression.location.file,
             line: actualExpression.location.line,
-            fnName: "expect(...).toEventually(...)") {
+            fnName: fnName) {
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
@@ -31,7 +33,7 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
         case .BlockedRunLoop:
-            failureMessage.postfixMessage += " (Stall on main thread)."
+            failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
         case .Incomplete:
             internalError("Reached .Incomplete state for toEventually(...).")
@@ -58,7 +60,7 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
         case .BlockedRunLoop:
-            failureMessage.postfixMessage += " (Stall on main thread)."
+            failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
         case .Incomplete:
             internalError("Reached .Incomplete state for toEventuallyNot(...).")

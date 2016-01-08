@@ -137,7 +137,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(timeoutInterval: NSTimeInterval) -> Self {
+    func timeout(timeoutInterval: NSTimeInterval, forcefullyAbortTimeout: NSTimeInterval) -> Self {
         // = Discussion =
         //
         // There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -189,7 +189,7 @@ internal class AwaitPromiseBuilder<T> {
             }
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
-            let now = dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInterval / 2.0 * Double(NSEC_PER_SEC)))
+            let now = dispatch_time(DISPATCH_TIME_NOW, Int64(forcefullyAbortTimeout * Double(NSEC_PER_SEC)))
             let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
             let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
             if didNotTimeOut && timeoutWasNotTriggered {
@@ -348,7 +348,7 @@ internal func pollBlock(
             } catch let error {
                 throw error
             }
-        }.timeout(timeoutInterval).wait(fnName, file: file, line: line)
+        }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval / 2.0).wait(fnName, file: file, line: line)
 
         return result
 }
