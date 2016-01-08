@@ -342,10 +342,8 @@ You can also provide a callback by using the `waitUntil` function:
 
 waitUntil { done in
   // do some stuff that takes a while...
-  dispatch_async(dispatch_get_main_queue()) {
-    NSThread.sleepForTimeInterval(0.5)
-    done()
-  }
+  NSThread.sleepForTimeInterval(0.5)
+  done()
 }
 ```
 
@@ -354,10 +352,8 @@ waitUntil { done in
 
 waitUntil(^(void (^done)(void)){
   // do some stuff that takes a while...
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [NSThread sleepForTimeInterval:0.5];
-    done();
-  });
+  [NSThread sleepForTimeInterval:0.5];
+  done();
 });
 ```
 
@@ -368,10 +364,8 @@ waitUntil(^(void (^done)(void)){
 
 waitUntil(timeout: 10) { done in
   // do some stuff that takes a while...
-  dispatch_async(dispatch_get_main_queue()) {
-    NSThread.sleepForTimeInterval(1)
-    done()
-  }
+  NSThread.sleepForTimeInterval(1)
+  done()
 }
 ```
 
@@ -380,10 +374,8 @@ waitUntil(timeout: 10) { done in
 
 waitUntilTimeout(10, ^(void (^done)(void)){
   // do some stuff that takes a while...
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [NSThread sleepForTimeInterval:1];
-    done();
-  });
+  [NSThread sleepForTimeInterval:1];
+  done();
 });
 ```
 
