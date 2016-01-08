@@ -280,7 +280,7 @@ internal class Awaiter {
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
             let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
-                try closure {
+                try closure() {
                     completionCount += 1
                     nimblePrecondition(
                         completionCount < 2,

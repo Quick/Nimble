@@ -1,5 +1,11 @@
 import Foundation
 
+private enum ErrorResult {
+    case Exception(NSException)
+    case Error(ErrorType)
+    case None
+}
+
 /// Only classes, protocols, methods, properties, and subscript declarations can be
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
@@ -21,9 +27,23 @@ internal class NMBWait: NSObject {
         line: UInt = __LINE__,
         action: (() -> Void) throws -> Void) -> Void {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
-            let result = awaiter.performBlock { (done: (Bool) -> Void) throws -> Void in
-                try action() {
-                    done(true)
+            let result = awaiter.performBlock { (done: (ErrorResult) -> Void) throws -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    let capture = NMBExceptionCapture(
+                        handler: ({ exception in
+                            done(.Exception(exception))
+                        }),
+                        finally: ({ })
+                    )
+                    capture.tryBlock {
+                        do {
+                            try action() {
+                                done(.None)
+                            }
+                        } catch let e {
+                            done(.Error(e))
+                        }
+                    }
                 }
             }.timeout(timeout).wait("waitUntil(...)", file: file, line: line)
 
@@ -38,7 +58,11 @@ internal class NMBWait: NSObject {
                 fail("Unexpected exception raised: \(exception)")
             case let .ErrorThrown(error):
                 fail("Unexpected error thrown: \(error)")
-            case .Completed(_): // success
+            case .Completed(.Exception(let exception)):
+                fail("Unexpected exception raised: \(exception)")
+            case .Completed(.Error(let error)):
+                fail("Unexpected error thrown: \(error)")
+            case .Completed(.None): // success
                 break
             }
     }
