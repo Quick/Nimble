@@ -76,7 +76,7 @@ extension Expectation {
     ///
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
-    /// is executing. Any attempts to touch the run loop may calls non-deterministic behavior.
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionMatches(
@@ -99,7 +99,7 @@ extension Expectation {
     ///
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
-    /// is executing. Any attempts to touch the run loop may calls non-deterministic behavior.
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionDoesNotMatch(
@@ -124,7 +124,7 @@ extension Expectation {
     ///
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
-    /// is executing. Any attempts to touch the run loop may calls non-deterministic behavior.
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toNotEventually<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = 1, pollInterval: NSTimeInterval = 0.01, description: String? = nil) {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }

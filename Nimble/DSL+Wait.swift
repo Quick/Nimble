@@ -85,7 +85,7 @@ internal func blockedRunLoopErrorMessageFor(fnName: String, leeway: NSTimeInterv
 /// Call the done() closure to indicate the waiting has completed.
 /// 
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
-/// is executing. Any attempts to touch the run loop may calls non-deterministic behavior.
+/// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
 public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
