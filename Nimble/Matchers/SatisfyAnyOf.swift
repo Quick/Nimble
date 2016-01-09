@@ -29,6 +29,18 @@ internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]
     }
 }
 
+public func ||<T>(left: NonNilMatcherFunc<T>, right: NonNilMatcherFunc<T>) -> NonNilMatcherFunc<T> {
+    return satisfyAnyOf(left, right)
+}
+
+public func ||<T>(left: FullMatcherFunc<T>, right: FullMatcherFunc<T>) -> NonNilMatcherFunc<T> {
+    return satisfyAnyOf(left, right)
+}
+
+public func ||<T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherFunc<T> {
+    return satisfyAnyOf(left, right)
+}
+
 extension NMBObjCMatcher {
     public class func satisfyAnyOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
