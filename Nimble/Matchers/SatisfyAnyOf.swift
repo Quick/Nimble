@@ -16,7 +16,7 @@ internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]
             matches = try matcher.matches(actualExpression, failureMessage: failureMessage)
             fullPostfixMessage += "\(failureMessage.postfixMessage)}"
             if i < (matchers.count - 1) {
-                fullPostfixMessage += ", "
+                fullPostfixMessage += ", or "
             }
         }
         
