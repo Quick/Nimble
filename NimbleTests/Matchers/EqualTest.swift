@@ -159,6 +159,35 @@ class EqualTest: XCTestCase {
 
         expect(1).toNot(equal(nil))
     }
+    
+    func testArrayOfOptionalsEquality() {
+        let array1: Array<Int?> = [1, nil, 3]
+        let array2: Array<Int?> = [nil, 2, 3]
+        let array3: Array<Int?> = [1, nil, 3]
+        
+        expect(array1).toNot(equal(array2))
+        expect(array1).to(equal(array3))
+        expect(array2).toNot(equal(array3))
+        
+        let allNils1: Array<String?> = [nil, nil, nil, nil]
+        let allNils2: Array<String?> = [nil, nil, nil, nil]
+        let notReallyAllNils: Array<String?> = [nil, nil, nil, "turtles"]
+        
+        expect(allNils1).to(equal(allNils2))
+        expect(allNils1).toNot(equal(notReallyAllNils))
+        
+        let noNils1: Array<Int?> = [1, 2, 3, 4, 5]
+        let noNils2: Array<Int?> = [1, 3, 5, 7, 9]
+        
+        expect(noNils1).toNot(equal(noNils2))
+        
+        failsWithErrorMessage("expected to equal <[Optional(1), nil]>, got <[nil, Optional(2)]>") {
+            let arrayOfOptionalInts: Array<Int?> = [nil, 2]
+            let anotherArrayOfOptionalInts: Array<Int?> = [1, nil]
+            expect(arrayOfOptionalInts).to(equal(anotherArrayOfOptionalInts))
+            return
+        }
+    }
 
     func testDictionariesWithDifferentSequences() {
         // see: https://github.com/Quick/Nimble/issues/61
