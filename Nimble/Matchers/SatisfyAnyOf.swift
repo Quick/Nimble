@@ -44,6 +44,11 @@ public func ||<T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherF
 extension NMBObjCMatcher {
     public class func satisfyAnyOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+            if matchers.isEmpty {
+                failureMessage.stringValue = "satisfyAnyOf must be called with at least one matcher"
+                return false
+            }
+            
             var elementEvaluators = [NonNilMatcherFunc<NSObject>]()
             for matcher in matchers {
                 let elementEvaluator: (Expression<NSObject>, FailureMessage) -> Bool = {

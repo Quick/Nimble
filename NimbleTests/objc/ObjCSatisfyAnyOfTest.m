@@ -24,5 +24,9 @@
                          " <5.0000> in <[5.0000, 6.0000, 7.0000]>}, or {equal <(1,2,3,4)>}, got (5,6,7)", ^{
                              expect(@[@5, @6, @7]).to(satisfyAnyOf(allPass(beLessThan(@4)), equal(@[@1, @2, @3, @4])));
                          });
+    
+    expectFailureMessage(@"satisfyAnyOf must be called with at least one matcher", ^{
+        expect(@"turtles").to(satisfyAnyOf());
+    });
 }
 @end
