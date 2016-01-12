@@ -107,9 +107,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id matcher);
 NIMBLE_SHORT(id<NMBMatcher> allPass(id matcher),
              NMB_allPass(matcher));
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithNilTermination(id matcher, ...)
-    NS_REQUIRES_NIL_TERMINATION;
-#define NMB_satisfyAnyOf(...) NMB_satisfyAnyOfWithNilTermination(__VA_ARGS__, nil)
+NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithMatchers(id matchers);
+#define NMB_satisfyAnyOf(...) NMB_satisfyAnyOfWithMatchers(@[__VA_ARGS__])
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define satisfyAnyOf(...) NMB_satisfyAnyOf(__VA_ARGS__)
 #endif
