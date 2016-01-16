@@ -37,6 +37,7 @@ public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -51,3 +52,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

@@ -66,6 +66,7 @@ private func contain(items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func containMatcher(expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -89,3 +90,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

@@ -30,6 +30,7 @@ public func haveCount(expectedValue: Int) -> MatcherFunc<NMBCollection> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func haveCountMatcher(expected: NSNumber) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -46,3 +47,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

@@ -47,6 +47,7 @@ public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func endWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -61,3 +62,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif
