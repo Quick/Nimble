@@ -38,6 +38,7 @@ public func ||<T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherF
     return satisfyAnyOf(left, right)
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func satisfyAnyOfMatcher(matchers: [NMBObjCMatcher]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -61,3 +62,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

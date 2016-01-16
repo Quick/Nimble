@@ -7,11 +7,13 @@ public protocol Matcher {
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
 }
 
+#if _runtime(_ObjC)
 /// Objective-C interface to the Swift variant of Matcher.
 @objc public protocol NMBMatcher {
     func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
     func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
+#endif
 
 /// Protocol for types that support contain() matcher.
 @objc public protocol NMBContainer {

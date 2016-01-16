@@ -9,6 +9,7 @@ public func beNil<T>() -> MatcherFunc<T> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beNilMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
@@ -16,3 +17,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

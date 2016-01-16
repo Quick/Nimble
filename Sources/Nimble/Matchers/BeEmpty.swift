@@ -68,6 +68,7 @@ public func beEmpty() -> NonNilMatcherFunc<NMBCollection> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beEmptyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -88,3 +89,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif
