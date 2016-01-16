@@ -27,8 +27,7 @@ private func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all {
-                let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
-                let range = actual.rangeOfString($0, options: [], range: scanRange, locale: nil)
+                let range = actual.rangeOfString($0)
                 return range != nil && !range!.isEmpty
             }
         }
