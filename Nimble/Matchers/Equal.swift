@@ -53,6 +53,37 @@ public func equal<T: Equatable>(expectedValue: [T]?) -> NonNilMatcherFunc<[T]> {
     }
 }
 
+/// A Nimble matcher allowing comparison of collection with optional type
+public func equal<T: Equatable>(expectedValue: [T?]) -> NonNilMatcherFunc<[T?]> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+        if let actualValue = try actualExpression.evaluate() {
+            if expectedValue.count != actualValue.count {
+                return false
+            }
+            
+            for (index, item) in actualValue.enumerate() {
+                let otherItem = expectedValue[index]
+                if item == nil && otherItem == nil {
+                    continue
+                } else if item == nil && otherItem != nil {
+                    return false
+                } else if item != nil && otherItem == nil {
+                    return false
+                } else if item! != otherItem! {
+                    return false
+                }
+            }
+            
+            return true
+        } else {
+            failureMessage.postfixActual = " (use beNil() to match nils)"
+        }
+        
+        return false
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
     return equal(expectedValue, stringify: stringify)
