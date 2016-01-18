@@ -1,32 +1,72 @@
 import Foundation
 
+private enum ErrorResult {
+    case Exception(NSException)
+    case Error(ErrorType)
+    case None
+}
+
 /// Only classes, protocols, methods, properties, and subscript declarations can be
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
 internal class NMBWait: NSObject {
-    internal class func until(timeout timeout: NSTimeInterval, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
-        var completed = false
-        var token: dispatch_once_t = 0
-        let result = pollBlock(pollInterval: 0.01, timeoutInterval: timeout) {
-            dispatch_once(&token) {
-                dispatch_async(dispatch_get_main_queue()) {
-                    action() { completed = true }
-                }
+    internal class func until(
+        timeout timeout: NSTimeInterval,
+        file: String = __FILE__,
+        line: UInt = __LINE__,
+        action: (() -> Void) -> Void) -> Void {
+            return throwableUntil(timeout: timeout, file: file, line: line) { (done: () -> Void) throws -> Void in
+                action() { done() }
             }
-            return completed
-        }
-        switch (result) {
-        case .Failure:
-            let pluralize = (timeout == 1 ? "" : "s")
-            fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
-        case .Timeout:
-            fail("Stall on main thread - too much enqueued on main run loop before waitUntil executes.", file: file, line: line)
-        case let .ErrorThrown(error):
-            // Technically, we can never reach this via a public API call
-            fail("Unexpected error thrown: \(error)", file: file, line: line)
-        case .Success:
-            break
-        }
+    }
+
+    // Using a throwable closure makes this method not objc compatible.
+    internal class func throwableUntil(
+        timeout timeout: NSTimeInterval,
+        file: String = __FILE__,
+        line: UInt = __LINE__,
+        action: (() -> Void) throws -> Void) -> Void {
+            let awaiter = NimbleEnvironment.activeInstance.awaiter
+            let leeway = timeout / 2.0
+            let result = awaiter.performBlock { (done: (ErrorResult) -> Void) throws -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    let capture = NMBExceptionCapture(
+                        handler: ({ exception in
+                            done(.Exception(exception))
+                        }),
+                        finally: ({ })
+                    )
+                    capture.tryBlock {
+                        do {
+                            try action() {
+                                done(.None)
+                            }
+                        } catch let e {
+                            done(.Error(e))
+                        }
+                    }
+                }
+            }.timeout(timeout, forcefullyAbortTimeout: leeway).wait("waitUntil(...)", file: file, line: line)
+
+            switch result {
+            case .Incomplete: internalError("Reached .Incomplete state for waitUntil(...).")
+            case .BlockedRunLoop:
+                fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
+                    file: file, line: line)
+            case .TimedOut:
+                let pluralize = (timeout == 1 ? "" : "s")
+                fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
+            case let .RaisedException(exception):
+                fail("Unexpected exception raised: \(exception)")
+            case let .ErrorThrown(error):
+                fail("Unexpected error thrown: \(error)")
+            case .Completed(.Exception(let exception)):
+                fail("Unexpected exception raised: \(exception)")
+            case .Completed(.Error(let error)):
+                fail("Unexpected error thrown: \(error)")
+            case .Completed(.None): // success
+                break
+            }
     }
 
     @objc(untilFile:line:action:)
@@ -35,9 +75,17 @@ internal class NMBWait: NSObject {
     }
 }
 
-/// Wait asynchronously until the done closure is called.
+internal func blockedRunLoopErrorMessageFor(fnName: String, leeway: NSTimeInterval) -> String {
+    return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive (\(leeway) seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
+}
+
+/// Wait asynchronously until the done closure is called or the timeout has been reached.
 ///
-/// This will advance the run loop.
+/// @discussion
+/// Call the done() closure to indicate the waiting has completed.
+/// 
+/// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+/// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
 public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }

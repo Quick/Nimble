@@ -36,7 +36,8 @@ public struct Expectation<T> {
     let expression: Expression<T>
 
     public func verify(pass: Bool, _ message: FailureMessage) {
-        NimbleAssertionHandler.assert(pass, message: message, location: expression.location)
+        let handler = NimbleEnvironment.activeInstance.assertionHandler
+        handler.assert(pass, message: message, location: expression.location)
     }
 
     /// Tests the actual value using a matcher to match.

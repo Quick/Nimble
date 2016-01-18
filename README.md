@@ -308,6 +308,12 @@ dispatch_async(dispatch_get_main_queue(), ^{
 expect(ocean).toEventually(contain(@"dolphins", @"whales"));
 ```
 
+Note: toEventually triggers its polls on the main thread. Blocking the main
+thread will cause Nimble to stop the run loop. This can cause test pollution
+for whatever incomplete code that was running on the main thread.  Blocking the
+main thread can be caused by blocking IO, calls to sleep(), deadlocks, and
+synchronous IPC.
+
 In the above example, `ocean` is constantly re-evaluated. If it ever
 contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
@@ -373,6 +379,12 @@ waitUntilTimeout(10, ^(void (^done)(void)){
   done();
 });
 ```
+
+Note: waitUntil triggers its timeout code on the main thread. Blocking the main
+thread will cause Nimble to stop the run loop to continue. This can cause test
+pollution for whatever incomplete code that was running on the main thread.
+Blocking the main thread can be caused by blocking IO, calls to sleep(),
+deadlocks, and synchronous IPC.
 
 ## Objective-C Support
 

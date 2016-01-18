@@ -1,6 +1,5 @@
 import XCTest
 import Nimble
-import Swift
 
 class AsyncTest: XCTestCase {
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
@@ -9,7 +8,7 @@ class AsyncTest: XCTestCase {
         throw errorToThrow
     }
 
-    func testAsyncTestingViaEventuallyPositiveMatches() {
+    func testToEventuallyPositiveMatches() {
         var value = 0
         deferToMainQueue { value = 1 }
         expect { value }.toEventually(equal(1))
@@ -18,7 +17,7 @@ class AsyncTest: XCTestCase {
         expect { value }.toEventuallyNot(equal(1))
     }
 
-    func testAsyncTestingViaEventuallyNegativeMatches() {
+    func testToEventuallyNegativeMatches() {
         let value = 0
         failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {
             expect { value }.toEventuallyNot(equal(0))
@@ -34,7 +33,7 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testAsyncTestingViaWaitUntilPositiveMatches() {
+    func testWaitUntilPositiveMatches() {
         waitUntil { done in
             done()
         }
@@ -45,17 +44,31 @@ class AsyncTest: XCTestCase {
         }
     }
 
-    func testAsyncTestingViaWaitUntilNegativeMatches() {
+    func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
             waitUntil(timeout: 1) { done in return }
         }
+    }
+
+    func testWaitUntilTimesOutWhenExceedingItsTime() {
+        var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                NSThread.sleepForTimeInterval(0.1)
-                done()
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    NSThread.sleepForTimeInterval(0.1)
+                    done()
+                    waiting = false
+                }
             }
         }
 
+        // "clear" runloop to ensure this test doesn't poison other tests
+        repeat {
+            NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
+        } while(waiting)
+    }
+
+    func testWaitUntilNegativeMatches() {
         failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
                 NSThread.sleepForTimeInterval(0.1)
@@ -63,22 +76,77 @@ class AsyncTest: XCTestCase {
                 done()
             }
         }
-        // "clear" runloop to ensure this test doesn't poison other tests
-        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
     }
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSThread.sleepForTimeInterval(2.0)
+        let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
+        failsWithErrorMessage(msg) {
+            waitUntil(timeout: 1) { done in
+                NSThread.sleepForTimeInterval(5.0)
+                done()
+            }
         }
+    }
 
-        failsWithErrorMessage("Stall on main thread - too much enqueued on main run loop before waitUntil executes.") {
-            waitUntil { done in
+    func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
+        let referenceLine = __LINE__ + 9
+        var msg = "Unexpected exception raised: Nested async expectations are not allowed "
+        msg += "to avoid creating flaky tests."
+        msg += "\n\n"
+        msg += "The call to\n\t"
+        msg += "expect(...).toEventually(...) at \(__FILE__):\(referenceLine + 7)\n"
+        msg += "triggered this exception because\n\t"
+        msg += "waitUntil(...) at \(__FILE__):\(referenceLine + 1)\n"
+        msg += "is currently managing the main run loop."
+        failsWithErrorMessage(msg) { // reference line
+            waitUntil(timeout: 2.0) { done in
+                var protected: Int = 0
+                dispatch_async(dispatch_get_main_queue()) {
+                    protected = 1
+                }
+
+                expect(protected).toEventually(equal(1))
+                done()
+            }
+        }
+    }
+
+    func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
+        waitUntil { done in
+            deferToMainQueue {
                 done()
             }
         }
 
-        // "clear" runloop to ensure this test doesn't poison other tests
-        NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(2.0))
+        waitUntil { done in
+            deferToMainQueue {
+                done()
+                expect {
+                    done()
+                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            }
+        }
+    }
+
+    func testWaitUntilMustBeInMainThread() {
+        var executedAsyncBlock: Bool = false
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            expect {
+                waitUntil { done in done() }
+            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            executedAsyncBlock = true
+        }
+        expect(executedAsyncBlock).toEventually(beTruthy())
+    }
+
+    func testToEventuallyMustBeInMainThread() {
+        var executedAsyncBlock: Bool = false
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            expect {
+                expect(1).toEventually(equal(2))
+            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            executedAsyncBlock = true
+        }
+        expect(executedAsyncBlock).toEventually(beTruthy())
     }
 }
