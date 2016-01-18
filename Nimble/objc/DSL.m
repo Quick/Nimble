@@ -125,6 +125,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id expectedValue) {
     return [NMBObjCMatcher allPassMatcher:expectedValue];
 }
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithMatchers(id matchers) {
+    return [NMBObjCMatcher satisfyAnyOfMatcher:matchers];
+}
+
 NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {
     return [NMBObjCMatcher raiseExceptionMatcher];
 }
