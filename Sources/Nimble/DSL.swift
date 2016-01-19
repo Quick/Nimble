@@ -38,14 +38,20 @@ public func fail(file: String = __FILE__, line: UInt = __LINE__) {
 internal func nimblePrecondition(
     @autoclosure expr: () -> Bool,
     @autoclosure _ name: () -> String,
-    @autoclosure _ message: () -> String) -> Bool {
+    @autoclosure _ message: () -> String,
+    file: StaticString = __FILE__,
+    line: UInt = __LINE__) -> Bool {
         let result = expr()
         if !result {
+#if _runtime(_ObjC)
             let e = NSException(
                 name: name(),
                 reason: message(),
                 userInfo: nil)
             e.raise()
+#else
+            preconditionFailure("\(name()) - \(message())", file: file, line: line)
+#endif
         }
         return result
 }
