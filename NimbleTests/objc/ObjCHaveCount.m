@@ -46,11 +46,18 @@
     expect(table).to(haveCount(@3));
     expect(table).notTo(haveCount(@1));
 
-    expectFailureMessage(@"expected to have NSHashTable {[2] 2[12] 1[13] 3}with count 1, got 3", ^{
+    NSString *msg = [NSString stringWithFormat:
+                     @"expected to have %@with count 1, got 3",
+                     table];
+    expectFailureMessage(msg, ^{
         expect(table).to(haveCount(@1));
     });
 
-    expectFailureMessage(@"expected to not have NSHashTable {[2] 2[12] 1[13] 3}with count 3, got 3", ^{
+
+    msg = [NSString stringWithFormat:
+           @"expected to not have %@with count 3, got 3",
+           table];
+    expectFailureMessage(msg, ^{
         expect(table).notTo(haveCount(@3));
     });
 }
