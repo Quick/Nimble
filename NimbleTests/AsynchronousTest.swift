@@ -115,12 +115,6 @@ class AsyncTest: XCTestCase {
         waitUntil { done in
             deferToMainQueue {
                 done()
-            }
-        }
-
-        waitUntil { done in
-            deferToMainQueue {
-                done()
                 expect {
                     done()
                 }.to(raiseException(named: "InvalidNimbleAPIUsage"))
