@@ -48,7 +48,7 @@
 
     NSString *msg = [NSString stringWithFormat:
                      @"expected to have %@with count 1, got 3",
-                     table];
+                     [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
     expectFailureMessage(msg, ^{
         expect(table).to(haveCount(@1));
     });
@@ -56,7 +56,7 @@
 
     msg = [NSString stringWithFormat:
            @"expected to not have %@with count 3, got 3",
-           table];
+           [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
     expectFailureMessage(msg, ^{
         expect(table).notTo(haveCount(@3));
     });
