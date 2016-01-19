@@ -208,6 +208,7 @@ exception once evaluated:
 // Note: Swift currently doesn't have exceptions.
 //       Only Objective-C code can raise exceptions
 //       that Nimble will catch.
+//       (see https://github.com/Quick/Nimble/issues/220#issuecomment-172667064)
 let exception = NSException(
   name: NSInternalInconsistencyException,
   reason: "Not enough fish in the sea.",
@@ -728,7 +729,7 @@ expect(actual).to(raiseException().satisfyingBlock(^(NSException *exception) {
 }));
 ```
 
-Note: Swift currently doesn't have exceptions. Only Objective-C code can raise
+Note: Swift currently doesn't have exceptions (see [#220](https://github.com/Quick/Nimble/issues/220#issuecomment-172667064)). Only Objective-C code can raise
 exceptions that Nimble will catch.
 
 ## Collection Membership
