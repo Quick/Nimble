@@ -1160,7 +1160,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
   use_frameworks!
-  pod 'Nimble', '~> 3.0.0'
+  pod 'Nimble', '~> 3.1.0'
 end
 ```
 
