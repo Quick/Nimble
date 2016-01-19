@@ -1,7 +1,14 @@
 import XCTest
 import Nimble
 
-class SatisfyAnyOfTest: XCTestCase {
+class SatisfyAnyOfTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testSatisfyAnyOf", testSatisfyAnyOf),
+            ("testOperatorOr", testOperatorOr),
+        ]
+    }
+
     func testSatisfyAnyOf() {
         expect(2).to(satisfyAnyOf(equal(2), equal(3)))
         expect(2).toNot(satisfyAnyOf(equal(3), equal("turtles")))

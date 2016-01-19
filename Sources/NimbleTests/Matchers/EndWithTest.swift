@@ -1,7 +1,13 @@
 import XCTest
 import Nimble
 
-class EndWithTest: XCTestCase {
+class EndWithTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testEndWithPositives", testEndWithPositives),
+            ("testEndWithNegatives", testEndWithNegatives),
+        ]
+    }
 
     func testEndWithPositives() {
         expect([1, 2, 3]).to(endWith(3))

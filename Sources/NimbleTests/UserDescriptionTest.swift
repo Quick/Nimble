@@ -1,7 +1,17 @@
 import XCTest
 import Nimble
 
-class UserDescriptionTest: XCTestCase {
+class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testToMatcher_CustomFailureMessage", testToMatcher_CustomFailureMessage),
+            ("testNotToMatcher_CustomFailureMessage", testNotToMatcher_CustomFailureMessage),
+            ("testToNotMatcher_CustomFailureMessage", testToNotMatcher_CustomFailureMessage),
+            ("testToEventuallyMatch_CustomFailureMessage", testToEventuallyMatch_CustomFailureMessage),
+            ("testToEventuallyNotMatch_CustomFailureMessage", testToEventuallyNotMatch_CustomFailureMessage),
+            ("testToNotEventuallyMatch_CustomFailureMessage", testToNotEventuallyMatch_CustomFailureMessage),
+        ]
+    }
     
     func testToMatcher_CustomFailureMessage() {
         failsWithErrorMessage(

@@ -246,6 +246,9 @@
 		29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59621B551ED2002D767E /* ThrowErrorTest.swift */; };
 		29EA59661B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		29EA59671B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
+		347155CA1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
+		347155CB1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
+		347155CC1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
 		472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
@@ -441,6 +444,7 @@
 		1FFD729B1963FCAB00CD29A2 /* NimbleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		29EA59621B551ED2002D767E /* ThrowErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowErrorTest.swift; sourceTree = "<group>"; };
 		29EA59651B551EE6002D767E /* ThrowError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowError.swift; sourceTree = "<group>"; };
+		347155C91C337C8900549F03 /* XCTestCaseProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseProvider.swift; sourceTree = "<group>"; };
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
@@ -512,6 +516,7 @@
 			children = (
 				1F14FB63194180C5009F2A08 /* utils.swift */,
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
+				347155C91C337C8900549F03 /* XCTestCaseProvider.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1072,6 +1077,7 @@
 				1F4A56851A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A8F19CF439B00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				347155CA1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				7B5358BA1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */,
@@ -1163,6 +1169,7 @@
 				1F5DF1931BDCA10200C3A531 /* SynchronousTests.swift in Sources */,
 				1F5DF19D1BDCA10200C3A531 /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F5DF1A41BDCA10200C3A531 /* BeNilTest.swift in Sources */,
+				347155CC1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				1F5DF1AA1BDCA10200C3A531 /* RaisesExceptionTest.swift in Sources */,
 				1F5DF1941BDCA10200C3A531 /* UserDescriptionTest.swift in Sources */,
 				1F5DF19F1BDCA10200C3A531 /* BeIdenticalToObjectTest.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				1F4A56861A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D51963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				347155CB1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				7B5358BB1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */,

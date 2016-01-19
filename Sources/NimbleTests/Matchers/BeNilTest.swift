@@ -1,7 +1,13 @@
 import XCTest
 import Nimble
 
-class BeNilTest: XCTestCase {
+class BeNilTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testBeNil", testBeNil),
+        ]
+    }
+
     func producesNil() -> Array<Int>? {
         return nil
     }
