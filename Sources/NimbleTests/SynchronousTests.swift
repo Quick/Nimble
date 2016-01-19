@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 class SynchronousTest: XCTestCase {
-    let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
+    let errorToThrow = NSError(domain: NSCocoaErrorDomain, code: 42, userInfo: nil)
     private func doThrowError() throws -> Int {
         throw errorToThrow
     }
