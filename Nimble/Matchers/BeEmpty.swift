@@ -1,5 +1,20 @@
 import Foundation
 
+extension _ExpectationType where Expected: SequenceType {
+    /// A Nimble matcher that succeeds when a value is "empty". For collections, this
+    /// means the are no items in that collection. For strings, it is an empty string.
+    public func beEmpty(description description: String? = nil) {
+        expectation.to(Nimble.beEmpty(), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == String {
+    /// A Nimble matcher that succeeds when a value is "empty". For collections, this
+    /// means the are no items in that collection. For strings, it is an empty string.
+    public func beEmpty(description description: String? = nil) {
+        expectation.to(Nimble.beEmpty(), description: description)
+    }
+}
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.

@@ -1,5 +1,13 @@
 import Foundation
 
+extension _ExpectationType where Expected: Comparable {
+    /// A Nimble matcher that succeeds when the actual value is less than
+    /// or equal to the expected value.
+    public func beLessThanOrEqualTo(expectedValue: Expected, description: String? = nil) {
+        expectation.to(Nimble.beLessThanOrEqualTo(expectedValue), description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual value is less than
 /// or equal to the expected value.
 public func beLessThanOrEqualTo<T: Comparable>(expectedValue: T?) -> NonNilMatcherFunc<T> {

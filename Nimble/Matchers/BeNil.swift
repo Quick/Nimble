@@ -1,5 +1,12 @@
 import Foundation
 
+extension _ExpectationType {
+    /// A Nimble matcher that succeeds when the actual value is nil.
+    public func beNil(description description: String? = nil) {
+        expectation.to(Nimble.beNil(), description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual value is nil.
 public func beNil<T>() -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in

@@ -1,5 +1,32 @@
 import Foundation
 
+extension _ExpectationType where Expected: SequenceType, Expected.Generator.Element: Equatable {
+    /// A Nimble matcher that succeeds when the actual sequence's first element
+    /// is equal to the expected value.
+    public func beginWith(startingElement: Expected.Generator.Element, description: String? = nil) {
+        expectation.to(Nimble.beginWith(startingElement), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == [AnyObject] {
+    /// A Nimble matcher that succeeds when the actual collection's first element
+    /// is equal to the expected object.
+    public func beginWith(startingElement: AnyObject, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "begin with <\(startingElement)>"
+            let collection = try actualExpression.evaluate()
+            return collection != nil && (collection! as NSArray).indexOfObject(startingElement) == 0
+        }, description: description)
+    }
+}
+
+extension _ExpectationType where Expected == String {
+    /// A Nimble matcher that succeeds when the actual string contains expected substring
+    /// where the expected substring's location is zero.
+    public func beginWith(startingSubstring: String, description: String? = nil) {
+        expectation.to(Nimble.beginWith(startingSubstring), description: description)
+    }
+}
 
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.

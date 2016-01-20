@@ -3,6 +3,48 @@ import Nimble
 
 class ContainTest: XCTestCase {
     func testContain() {
+        expect([1, 2, 3]).to.contain(1)
+        expect([1, 2, 3] as [CInt]).to.contain(1 as CInt)
+        expect([1, 2, 3] as Array<CInt>).to.contain(1 as CInt)
+        expect(["foo", "bar", "baz"]).to.contain("baz")
+        expect([1, 2, 3]).to.not.contain(4)
+        expect(["foo", "bar", "baz"]).to.not.contain("ba")
+        expect(["a"] as [AnyObject]).to.contain("a")
+        expect(["a"] as [AnyObject]).to.not.contain("b")
+        expect([1] as [AnyObject]).to.contain(1)
+
+        failsWithErrorMessage("expected to contain <bar>, got <[\"a\", \"b\", \"c\"]>") {
+            expect(["a", "b", "c"]).to.contain("bar")
+        }
+        failsWithErrorMessage("expected to not contain <b>, got <[\"a\", \"b\", \"c\"]>") {
+            expect(["a", "b", "c"]).to.not.contain("b")
+        }
+
+        failsWithErrorMessageForNil("expected to contain <bar>, got <nil>") {
+            expect(nil as [String]?).to.contain("bar")
+        }
+        failsWithErrorMessageForNil("expected to not contain <b>, got <nil>") {
+            expect(nil as [String]?).to.not.contain("b")
+        }
+    }
+
+    func testContainSubstring() {
+        expect("foo").to.contain("o")
+        expect("foo").to.contain("oo")
+        expect("foo").to.not.contain("z")
+        expect("foo").to.not.contain("zz")
+
+        failsWithErrorMessage("expected to contain <bar>, got <foo>") {
+            expect("foo").to.contain("bar")
+        }
+        failsWithErrorMessage("expected to not contain <oo>, got <foo>") {
+            expect("foo").to.not.contain("oo")
+        }
+    }
+}
+
+class ContainDeprecatedTest: XCTestCase {
+    func testContain() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3] as [CInt]).to(contain(1 as CInt))
         expect([1, 2, 3] as Array<CInt>).to(contain(1 as CInt))

@@ -1,5 +1,11 @@
 import Foundation
 
+extension _ExpectationType where Expected: Comparable {
+    /// A Nimble matcher that succeeds when the actual value is greater than the expected value.
+    public func beGreaterThan(expectedValue: Expected, description: String? = nil) {
+        expectation.to(Nimble.beGreaterThan(expectedValue), description: description)
+    }
+}
 
 /// A Nimble matcher that succeeds when the actual value is greater than the expected value.
 public func beGreaterThan<T: Comparable>(expectedValue: T?) -> NonNilMatcherFunc<T> {

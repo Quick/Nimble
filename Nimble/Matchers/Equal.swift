@@ -1,5 +1,85 @@
 import Foundation
 
+extension _ExpectationType where Expected: Equatable {
+    /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+    /// Values can support equal by supporting the Equatable protocol.
+    ///
+    /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+    public func equal(expectedValue: Expected, description: String? = nil) {
+        expectation.to(Nimble.equal(expectedValue), description: description)
+    }
+}
+
+extension _ExpectationType where Expected: _ArrayType, Expected.Element: Equatable {
+    /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+    /// Values can support equal by supporting the Equatable protocol.
+    ///
+    /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+    public func equal(expectedValue: Expected, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+            let actualValue = try actualExpression.evaluate()
+            if actualValue == nil {
+                return false
+            }
+            return expectedValue.array == actualValue!.array
+        }, description: description)
+    }
+}
+
+extension _ExpectationType where Expected: _SetType, Expected.Element: Comparable {
+    /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+    /// Values can support equal by supporting the Equatable protocol.
+    ///
+    /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+    public func equal(expectedValue: Expected, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            if let actualValue = try actualExpression.evaluate() {
+                let expected = expectedValue.set
+                let actual = actualValue.set
+
+                failureMessage.actualValue = "<\(Array(actual).sort { $0 < $1 })>"
+                failureMessage.postfixMessage = "equal <\(Array(expected).sort { $0 < $1 })>"
+
+                if expected == actual {
+                    return true
+                }
+
+                let missing = expected.subtract(actual)
+                if missing.count > 0 {
+                    failureMessage.postfixActual += ", missing <\(stringify(missing))>"
+                }
+
+                let extra = actual.subtract(expected)
+                if extra.count > 0 {
+                    failureMessage.postfixActual += ", extra <\(stringify(extra))>"
+                }
+            } else {
+                failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+            }
+
+            return false
+        }, description: description)
+    }
+}
+
+extension _ExpectationType where Expected: _OptionalType, Expected.WrappedType: Equatable {
+    /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+    /// Values can support equal by supporting the Equatable protocol.
+    ///
+    /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+    public func equal(expectedValue: Expected, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+            let actualValue = try actualExpression.evaluate()
+            if actualValue == nil {
+                return false
+            }
+            return expectedValue.optional == actualValue!.optional
+        }, description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
 /// Values can support equal by supporting the Equatable protocol.
 ///
@@ -176,4 +256,32 @@ extension NMBObjCMatcher {
             return try! equal(expected).matches(actualExpression, failureMessage: failureMessage)
         }
     }
+}
+
+// Required for nil equality conformances
+
+public protocol _OptionalType {
+    typealias WrappedType
+}
+extension Optional: _OptionalType {
+    public typealias WrappedType = Wrapped
+}
+extension _OptionalType {
+    var optional: WrappedType? { return self as? WrappedType }
+}
+
+public protocol _ArrayType {
+    typealias Element
+}
+extension Array: _ArrayType {}
+extension _ArrayType {
+    var array: [Element] { return self as! [Element] }
+}
+
+public protocol _SetType: Equatable {
+    typealias Element: Hashable
+}
+extension Set: _SetType {}
+extension _SetType {
+    var set: Set<Element> { return self as! Set<Element> }
 }

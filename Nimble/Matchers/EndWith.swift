@@ -1,5 +1,33 @@
 import Foundation
 
+extension _ExpectationType where Expected: SequenceType, Expected.Generator.Element: Equatable {
+    /// A Nimble matcher that succeeds when the actual sequence's last element
+    /// is equal to the expected value.
+    public func endWith(endingElement: Expected.Generator.Element, description: String? = nil) {
+        expectation.to(Nimble.endWith(endingElement), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == [AnyObject] {
+    /// A Nimble matcher that succeeds when the actual collection's last element
+    /// is equal to the expected object.
+    public func endWith(endingElement: AnyObject, description: String? = nil) {
+        expectation.to(NonNilMatcherFunc { actualExpression, failureMessage in
+            failureMessage.postfixMessage = "end with <\(endingElement)>"
+            let collection = try actualExpression.evaluate()
+            return collection != nil && (collection! as NSArray).indexOfObject(endingElement) == collection!.count - 1
+        }, description: description)
+    }
+}
+
+extension _ExpectationType where Expected == String {
+    /// A Nimble matcher that succeeds when the actual string contains the expected substring
+    /// where the expected substring's location is the actual string's length minus the
+    /// expected substring's length.
+    public func endWith(substring: String, description: String? = nil) {
+        expectation.to(Nimble.endWith(substring), description: description)
+    }
+}
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.

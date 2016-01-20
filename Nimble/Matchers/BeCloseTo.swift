@@ -12,6 +12,32 @@ internal func isCloseTo(actualValue: NMBDoubleConvertible?, expectedValue: NMBDo
     return actualValue != nil && abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta
 }
 
+extension _ExpectationType where Expected == Double {
+    /// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+    /// point values which can have imprecise results when doing arithmetic on them.
+    ///
+    /// @see equal
+    public func beCloseTo(expectedValue: Double, within delta: Double = DefaultDelta, description: String? = nil) {
+        expectation.to(Nimble.beCloseTo(expectedValue, within: delta), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == [Double] {
+    public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta, description: String? = nil) {
+        expectation.to(Nimble.beCloseTo(expectedValues, within: delta), description: description)
+    }
+}
+
+extension _ExpectationType where Expected == NMBDoubleConvertible {
+    /// A Nimble matcher that succeeds when a value is close to another. This is used for floating
+    /// point values which can have imprecise results when doing arithmetic on them.
+    ///
+    /// @see equal
+    public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta, description: String? = nil) {
+        expectation.to(Nimble.beCloseTo(expectedValue, within: delta), description: description)
+    }
+}
+
 /// A Nimble matcher that succeeds when a value is close to another. This is used for floating
 /// point values which can have imprecise results when doing arithmetic on them.
 ///

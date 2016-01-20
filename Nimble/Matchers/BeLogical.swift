@@ -1,5 +1,32 @@
 import Foundation
 
+extension _ExpectationType where Expected == Bool {
+    /// A Nimble matcher that succeeds when the actual value is exactly true.
+    /// This matcher will not match against nils.
+    public func beTrue(description description: String? = nil) {
+        expectation.to(Nimble.beTrue(), description: description)
+    }
+
+    /// A Nimble matcher that succeeds when the actual value is exactly false.
+    /// This matcher will not match against nils.
+    public func beFalse(description description: String? = nil) {
+        expectation.to(Nimble.beFalse(), description: description)
+    }
+}
+
+extension _ExpectationType {
+    /// A Nimble matcher that succeeds when the actual value is not logically false.
+    public func beTruthy(description description: String? = nil) {
+        expectation.to(Nimble.beTruthy(), description: description)
+    }
+
+    /// A Nimble matcher that succeeds when the actual value is logically false.
+    /// This matcher will match against nils.
+    public func beFalsy(description description: String? = nil) {
+        expectation.to(Nimble.beFalsy(), description: description)
+    }
+}
+
 internal func matcherWithFailureMessage<T, M: Matcher where M.ValueType == T>(matcher: M, postprocessor: (FailureMessage) -> Void) -> FullMatcherFunc<T> {
     return FullMatcherFunc { actualExpression, failureMessage, isNegation in
         let pass: Bool
