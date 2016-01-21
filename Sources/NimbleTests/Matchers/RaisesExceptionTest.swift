@@ -1,7 +1,17 @@
 import XCTest
 import Nimble
 
-class RaisesExceptionTest: XCTestCase {
+class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testPositiveMatches", testPositiveMatches),
+            ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),
+            ("testNegativeMatches", testNegativeMatches),
+            ("testNegativeMatchesDoNotCallClosureWithoutException", testNegativeMatchesDoNotCallClosureWithoutException),
+            ("testNegativeMatchesWithClosure", testNegativeMatchesWithClosure),
+        ]
+    }
+
     var anException = NSException(name: "laugh", reason: "Lulz", userInfo: ["key": "value"])
 
     func testPositiveMatches() {

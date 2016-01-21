@@ -1,7 +1,13 @@
 import XCTest
 import Nimble
 
-class BeGreaterThanOrEqualToTest: XCTestCase {
+class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testGreaterThanOrEqualTo", testGreaterThanOrEqualTo),
+            ("testGreaterThanOrEqualToOperator", testGreaterThanOrEqualToOperator),
+        ]
+    }
 
     func testGreaterThanOrEqualTo() {
         expect(10).to(beGreaterThanOrEqualTo(10))
