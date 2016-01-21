@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
     let timeoutInterval: NSTimeInterval
@@ -129,3 +131,5 @@ extension Expectation {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
+
+#endif

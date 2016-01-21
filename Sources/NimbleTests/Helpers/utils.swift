@@ -55,12 +55,14 @@ func failsWithErrorMessageForNil(message: String, file: FileString = __FILE__, l
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
+#if _runtime(_ObjC)
 func deferToMainQueue(action: () -> Void) {
     dispatch_async(dispatch_get_main_queue()) {
         NSThread.sleepForTimeInterval(0.01)
         action()
     }
 }
+#endif
 
 public class NimbleHelper : NSObject {
     class func expectFailureMessage(message: NSString, block: () -> Void, file: FileString, line: UInt) {
