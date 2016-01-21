@@ -21,7 +21,7 @@ public func beEmpty() -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = try actualExpression.evaluate()
-        return actualString == nil || (actualString! as NSString).length  == 0
+        return actualString == nil || NSString(string: actualString!).length  == 0
     }
 }
 
@@ -68,6 +68,7 @@ public func beEmpty() -> NonNilMatcherFunc<NMBCollection> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beEmptyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -82,9 +83,10 @@ extension NMBObjCMatcher {
                 return try! beEmpty().matches(expr, failureMessage: failureMessage)
             } else if let actualValue = actualValue {
                 failureMessage.postfixMessage = "be empty (only works for NSArrays, NSSets, NSDictionaries, NSHashTables, and NSStrings)"
-                failureMessage.actualValue = "\(NSStringFromClass(actualValue.dynamicType)) type"
+                failureMessage.actualValue = "\(classAsString(actualValue.dynamicType)) type"
             }
             return false
         }
     }
 }
+#endif

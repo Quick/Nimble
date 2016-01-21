@@ -1,7 +1,21 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeCloseToTest: XCTestCase {
+class BeCloseToTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testBeCloseTo", testBeCloseTo),
+            ("testBeCloseToWithin", testBeCloseToWithin),
+            ("testBeCloseToWithNSNumber", testBeCloseToWithNSNumber),
+            ("testBeCloseToWithNSDate", testBeCloseToWithNSDate),
+            ("testBeCloseToOperator", testBeCloseToOperator),
+            ("testBeCloseToWithinOperator", testBeCloseToWithinOperator),
+            ("testPlusMinusOperator", testPlusMinusOperator),
+            ("testBeCloseToArray", testBeCloseToArray),
+        ]
+    }
+
     func testBeCloseTo() {
         expect(1.2).to(beCloseTo(1.2001))
         expect(1.2 as CDouble).to(beCloseTo(1.2001))

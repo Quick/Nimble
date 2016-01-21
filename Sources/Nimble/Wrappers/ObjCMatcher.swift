@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 public typealias MatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool
 public typealias FullMatcherBlock = (actualExpression: Expression<NSObject>, failureMessage: FailureMessage, shouldNotMatch: Bool) -> Bool
 
@@ -76,3 +78,4 @@ public class NMBObjCMatcher : NSObject, NMBMatcher {
     }
 }
 
+#endif

@@ -1,7 +1,16 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeAnInstanceOfTest: XCTestCase {
+class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testPositiveMatch", testPositiveMatch),
+            ("testFailureMessages", testFailureMessages),
+            ("testSwiftTypesFailureMessages", testSwiftTypesFailureMessages),
+        ]
+    }
+
     func testPositiveMatch() {
         expect(NSNull()).to(beAnInstanceOf(NSNull))
         expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSDate))
@@ -14,10 +23,15 @@ class BeAnInstanceOfTest: XCTestCase {
         failsWithErrorMessageForNil("expected to be an instance of NSString, got <nil>") {
             expect(nil as NSString?).to(beAnInstanceOf(NSString))
         }
-        failsWithErrorMessage("expected to be an instance of NSString, got <__NSCFNumber instance>") {
+#if _runtime(_ObjC)
+        let numberTypeName = "__NSCFNumber"
+#else
+        let numberTypeName = "NSNumber"
+#endif
+        failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
             expect(NSNumber(integer:1)).to(beAnInstanceOf(NSString))
         }
-        failsWithErrorMessage("expected to not be an instance of NSNumber, got <__NSCFNumber instance>") {
+        failsWithErrorMessage("expected to not be an instance of NSNumber, got <\(numberTypeName) instance>") {
             expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSNumber))
         }
     }

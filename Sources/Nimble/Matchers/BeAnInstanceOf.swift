@@ -16,15 +16,20 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObjec
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
+            failureMessage.actualValue = "<\(classAsString(validInstance.dynamicType)) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be an instance of \(NSStringFromClass(expectedClass))"
+        failureMessage.postfixMessage = "be an instance of \(classAsString(expectedClass))"
+#if _runtime(_ObjC)
         return instance != nil && instance!.isMemberOfClass(expectedClass)
+#else
+        return instance != nil && instance!.dynamicType == expectedClass
+#endif
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beAnInstanceOfMatcher(expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -32,3 +37,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

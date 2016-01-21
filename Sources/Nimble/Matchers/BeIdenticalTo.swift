@@ -19,6 +19,7 @@ public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beIdenticalToMatcher(expected: NSObject?) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -26,3 +27,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

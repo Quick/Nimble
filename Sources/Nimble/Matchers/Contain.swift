@@ -9,7 +9,7 @@ private func contain<S: SequenceType, T: Equatable where S.Generator.Element == 
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = try actualExpression.evaluate() {
-            return all(items) {
+            return items.all {
                 return actual.contains($0)
             }
         }
@@ -26,9 +26,8 @@ private func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
-            return all(substrings) {
-                let scanRange = Range(start: actual.startIndex, end: actual.endIndex)
-                let range = actual.rangeOfString($0, options: [], range: scanRange, locale: nil)
+            return substrings.all {
+                let range = actual.rangeOfString($0)
                 return range != nil && !range!.isEmpty
             }
         }
@@ -45,7 +44,7 @@ private func contain(substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
-            return all(substrings) { actual.rangeOfString($0.description).length != 0 }
+            return substrings.all { actual.rangeOfString($0.description).length != 0 }
         }
         return false
     }
@@ -59,13 +58,14 @@ public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
 private func contain(items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
-        let actual = try actualExpression.evaluate()
-        return all(items) { item in
-            return actual != nil && actual!.containsObject(item)
+        guard let actual = try actualExpression.evaluate() else { return false }
+        return items.all { item in
+            return item != nil && actual.containsObject(item!)
         }
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func containMatcher(expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -89,3 +89,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

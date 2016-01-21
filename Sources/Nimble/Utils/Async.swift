@@ -1,56 +1,7 @@
 import Foundation
+#if _runtime(_ObjC)
 import Dispatch
-
-private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
-private let pollLeeway: UInt64 = NSEC_PER_MSEC
-
-/// Stores debugging information about callers
-internal struct WaitingInfo: CustomStringConvertible {
-    let name: String
-    let file: String
-    let lineNumber: UInt
-
-    var description: String {
-        return "\(name) at \(file):\(lineNumber)"
-    }
-}
-
-internal protocol WaitLock {
-    func acquireWaitingLock(fnName: String, file: String, line: UInt)
-    func releaseWaitingLock()
-    func isWaitingLocked() -> Bool
-}
-
-internal class AssertionWaitLock: WaitLock {
-    private var currentWaiter: WaitingInfo? = nil
-    init() { }
-
-    func acquireWaitingLock(fnName: String, file: String, line: UInt) {
-        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        nimblePrecondition(
-            NSThread.isMainThread(),
-            "InvalidNimbleAPIUsage",
-            "\(fnName) can only run on the main thread."
-        )
-        nimblePrecondition(
-            currentWaiter == nil,
-            "InvalidNimbleAPIUsage",
-            "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
-            "The call to\n\t\(info)\n" +
-            "triggered this exception because\n\t\(currentWaiter!)\n" +
-            "is currently managing the main run loop."
-        )
-        currentWaiter = info
-    }
-
-    func isWaitingLocked() -> Bool {
-        return currentWaiter != nil
-    }
-
-    func releaseWaitingLock() {
-        currentWaiter = nil
-    }
-}
+#endif
 
 internal enum AwaitResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
@@ -82,6 +33,59 @@ internal enum AwaitResult<T> {
         case .Completed(_): return true
         default: return false
         }
+    }
+}
+
+#if _runtime(_ObjC)
+
+private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
+private let pollLeeway: UInt64 = NSEC_PER_MSEC
+
+/// Stores debugging information about callers
+internal struct WaitingInfo: CustomStringConvertible {
+    let name: String
+    let file: FileString
+    let lineNumber: UInt
+
+    var description: String {
+        return "\(name) at \(file):\(lineNumber)"
+    }
+}
+
+internal protocol WaitLock {
+    func acquireWaitingLock(fnName: String, file: FileString, line: UInt)
+    func releaseWaitingLock()
+    func isWaitingLocked() -> Bool
+}
+
+internal class AssertionWaitLock: WaitLock {
+    private var currentWaiter: WaitingInfo? = nil
+    init() { }
+
+    func acquireWaitingLock(fnName: String, file: FileString, line: UInt) {
+        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        nimblePrecondition(
+            NSThread.isMainThread(),
+            "InvalidNimbleAPIUsage",
+            "\(fnName) can only run on the main thread."
+        )
+        nimblePrecondition(
+            currentWaiter == nil,
+            "InvalidNimbleAPIUsage",
+            "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
+            "The call to\n\t\(info)\n" +
+            "triggered this exception because\n\t\(currentWaiter!)\n" +
+            "is currently managing the main run loop."
+        )
+        currentWaiter = info
+    }
+
+    func isWaitingLocked() -> Bool {
+        return currentWaiter != nil
+    }
+
+    func releaseWaitingLock() {
+        currentWaiter = nil
     }
 }
 
@@ -218,7 +222,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
-    func wait(fnName: String = __FUNCTION__, file: String = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
+    func wait(fnName: String = __FUNCTION__, file: FileString = __FILE__, line: UInt = __LINE__) -> AwaitResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
             file: file,
@@ -331,13 +335,16 @@ internal class Awaiter {
     }
 }
 
+#endif
+
 internal func pollBlock(
     pollInterval pollInterval: NSTimeInterval,
     timeoutInterval: NSTimeInterval,
-    file: String,
+    file: FileString,
     line: UInt,
     fnName: String = __FUNCTION__,
     expression: () throws -> Bool) -> AwaitResult<Bool> {
+    #if _runtime(_ObjC)
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             do {
@@ -351,4 +358,12 @@ internal func pollBlock(
         }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval / 2.0).wait(fnName, file: file, line: line)
 
         return result
+    #else
+        do {
+            let pass = try expression()
+            return pass ? .Completed(true) : .TimedOut
+        } catch let error {
+            return .ErrorThrown(error)
+        }
+    #endif
 }

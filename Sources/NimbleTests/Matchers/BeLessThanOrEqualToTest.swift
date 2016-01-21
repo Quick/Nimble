@@ -1,7 +1,15 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeLessThanOrEqualToTest: XCTestCase {
+class BeLessThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testLessThanOrEqualTo", testLessThanOrEqualTo),
+            ("testLessThanOrEqualToOperator", testLessThanOrEqualToOperator),
+        ]
+    }
+
     func testLessThanOrEqualTo() {
         expect(10).to(beLessThanOrEqualTo(10))
         expect(2).to(beLessThanOrEqualTo(10))
@@ -9,8 +17,10 @@ class BeLessThanOrEqualToTest: XCTestCase {
 
         expect(NSNumber(int:2)).to(beLessThanOrEqualTo(10))
         expect(NSNumber(int:2)).toNot(beLessThanOrEqualTo(1))
+#if _runtime(_ObjC)
         expect(2).to(beLessThanOrEqualTo(NSNumber(int:10)))
         expect(2).toNot(beLessThanOrEqualTo(NSNumber(int:1)))
+#endif
 
         failsWithErrorMessage("expected to be less than or equal to <0>, got <2>") {
             expect(2).to(beLessThanOrEqualTo(0))

@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 /// A Nimble matcher that succeeds when the actual expression raises an
 /// exception with the specified name, reason, and/or userInfo.
 ///
@@ -57,7 +59,7 @@ internal func setFailureMessageForException(
         }
 
         if let exception = exception {
-            failureMessage.actualValue = "\(NSStringFromClass(exception.dynamicType)) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
+            failureMessage.actualValue = "\(classAsString(exception.dynamicType)) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
         } else {
             failureMessage.actualValue = "no exception"
         }
@@ -176,3 +178,4 @@ extension NMBObjCMatcher {
         return NMBObjCRaiseExceptionMatcher(name: nil, reason: nil, userInfo: nil, block: nil)
     }
 }
+#endif

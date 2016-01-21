@@ -1,7 +1,25 @@
+import Foundation
 import XCTest
 import Nimble
 
-class EqualTest: XCTestCase {
+class EqualTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testEquality", testEquality),
+            ("testArrayEquality", testArrayEquality),
+            ("testSetEquality", testSetEquality),
+            ("testDoesNotMatchNils", testDoesNotMatchNils),
+            ("testDictionaryEquality", testDictionaryEquality),
+            ("testNSObjectEquality", testNSObjectEquality),
+            ("testOperatorEquality", testOperatorEquality),
+            ("testOperatorEqualityWithArrays", testOperatorEqualityWithArrays),
+            ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
+            ("testOptionalEquality", testOptionalEquality),
+            ("testArrayOfOptionalsEquality", testArrayOfOptionalsEquality),
+            ("testDictionariesWithDifferentSequences", testDictionariesWithDifferentSequences),
+        ]
+    }
+
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))
@@ -32,7 +50,7 @@ class EqualTest: XCTestCase {
         expect(array1).to(equal([1, 2, 3]))
         expect(array1).toNot(equal([1, 2] as Array<Int>))
 
-        expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
+        expect(NSArray(array: [NSNumber(integer: 1), NSNumber(integer: 2), NSNumber(integer: 3)])).to(equal(NSArray(array: [NSNumber(integer: 1), NSNumber(integer: 2), NSNumber(integer: 3)])))
 
         failsWithErrorMessage("expected to equal <[1, 2]>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(equal([1, 2]))
@@ -112,8 +130,10 @@ class EqualTest: XCTestCase {
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
+#if _runtime(_ObjC)
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(expected))
+#endif
     }
 
     func testNSObjectEquality() {

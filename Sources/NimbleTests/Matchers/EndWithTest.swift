@@ -1,7 +1,14 @@
+import Foundation
 import XCTest
 import Nimble
 
-class EndWithTest: XCTestCase {
+class EndWithTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testEndWithPositives", testEndWithPositives),
+            ("testEndWithNegatives", testEndWithNegatives),
+        ]
+    }
 
     func testEndWithPositives() {
         expect([1, 2, 3]).to(endWith(3))
@@ -13,8 +20,10 @@ class EndWithTest: XCTestCase {
         expect(NSString(string: "foobar").description).to(endWith("bar"))
         expect(NSString(string: "foobar").description).toNot(endWith("oo"))
 
+#if _runtime(_ObjC)
         expect(NSArray(array: ["a", "b"])).to(endWith("b"))
         expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
+#endif
     }
 
     func testEndWithNegatives() {

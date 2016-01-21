@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 // A Nimble matcher that catches attempts to use beAKindOf with non Objective-C types
 public func beAKindOf(expectedClass: Any) -> NonNilMatcherFunc<Any> {
     return NonNilMatcherFunc {actualExpression, failureMessage in
@@ -16,11 +18,11 @@ public func beAKindOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
+            failureMessage.actualValue = "<\(classAsString(validInstance.dynamicType)) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be a kind of \(NSStringFromClass(expectedClass))"
+        failureMessage.postfixMessage = "be a kind of \(classAsString(expectedClass))"
         return instance != nil && instance!.isKindOfClass(expectedClass)
     }
 }
@@ -32,3 +34,5 @@ extension NMBObjCMatcher {
         }
     }
 }
+
+#endif

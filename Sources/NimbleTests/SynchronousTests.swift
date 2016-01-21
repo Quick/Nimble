@@ -1,8 +1,27 @@
+import Foundation
 import XCTest
 import Nimble
 
-class SynchronousTest: XCTestCase {
-    let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
+class SynchronousTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testFailAlwaysFails", testFailAlwaysFails),
+            ("testUnexpectedErrorsThrownFails", testUnexpectedErrorsThrownFails),
+            ("testToMatchesIfMatcherReturnsTrue", testToMatchesIfMatcherReturnsTrue),
+            ("testToProvidesActualValueExpression", testToProvidesActualValueExpression),
+            ("testToProvidesAMemoizedActualValueExpression", testToProvidesActualValueExpression),
+            ("testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
+            ("testToMatchAgainstLazyProperties", testToMatchAgainstLazyProperties),
+            ("testToNotMatchesIfMatcherReturnsTrue", testToNotMatchesIfMatcherReturnsTrue),
+            ("testToNotProvidesActualValueExpression", testToNotProvidesActualValueExpression),
+            ("testToNotProvidesAMemoizedActualValueExpression", testToNotProvidesAMemoizedActualValueExpression),
+            ("testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
+            ("testToNotNegativeMatches", testToNotNegativeMatches),
+            ("testNotToMatchesLikeToNot", testNotToMatchesLikeToNot),
+        ]
+    }
+
+    let errorToThrow = NSError(domain: NSCocoaErrorDomain, code: 42, userInfo: nil)
     private func doThrowError() throws -> Int {
         throw errorToThrow
     }
@@ -17,12 +36,14 @@ class SynchronousTest: XCTestCase {
     }
 
     func testUnexpectedErrorsThrownFails() {
+#if _runtime(_ObjC) // This test triggers a weird segfault on Linux currently
         failsWithErrorMessage("expected to equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.to(equal(1))
         }
         failsWithErrorMessage("expected to not equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toNot(equal(1))
         }
+#endif
     }
 
     func testToMatchesIfMatcherReturnsTrue() {
@@ -38,7 +59,7 @@ class SynchronousTest: XCTestCase {
 
     func testToProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return true
@@ -48,7 +69,7 @@ class SynchronousTest: XCTestCase {
 
     func testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return true
@@ -77,7 +98,7 @@ class SynchronousTest: XCTestCase {
 
     func testToNotProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return false
@@ -87,7 +108,7 @@ class SynchronousTest: XCTestCase {
 
     func testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return false

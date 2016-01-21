@@ -31,7 +31,19 @@ extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
     }
 }
 
-class ThrowErrorTest: XCTestCase {
+class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testPositiveMatches", testPositiveMatches),
+            ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),
+            ("testNegativeMatches", testNegativeMatches),
+            ("testPositiveNegatedMatches", testPositiveNegatedMatches),
+            ("testNegativeNegatedMatches", testNegativeNegatedMatches),
+            ("testNegativeMatchesDoNotCallClosureWithoutError", testNegativeMatchesDoNotCallClosureWithoutError),
+            ("testNegativeMatchesWithClosure", testNegativeMatchesWithClosure),
+        ]
+    }
+
     func testPositiveMatches() {
         expect { throw Error.Laugh }.to(throwError())
         expect { throw Error.Laugh }.to(throwError(Error.Laugh))
