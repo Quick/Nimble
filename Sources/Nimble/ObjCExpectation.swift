@@ -1,3 +1,5 @@
+import Foundation
+
 internal struct ObjCMatcherWrapper : Matcher {
     let matcher: NMBMatcher
 
