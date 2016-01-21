@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 /// A Nimble matcher that succeeds when the actual expression raises an
 /// exception with the specified name, reason, and/or userInfo.
 ///
@@ -176,3 +178,4 @@ extension NMBObjCMatcher {
         return NMBObjCRaiseExceptionMatcher(name: nil, reason: nil, userInfo: nil, block: nil)
     }
 }
+#endif
