@@ -19,8 +19,8 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeIdenticalToNegative() {
-        expect(NSNumber(integer:1)).toNot(beIdenticalTo("yo"))
-        expect([1]).toNot(beIdenticalTo([1]))
+        expect(NSNumber(integer:1)).toNot(beIdenticalTo(NSString(string: "yo")))
+        expect(NSArray(array: [NSNumber(integer: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(integer: 1)])))
     }
 
     func testBeIdenticalToPositiveMessage() {

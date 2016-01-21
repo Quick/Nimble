@@ -50,7 +50,9 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(array1).to(equal([1, 2, 3]))
         expect(array1).toNot(equal([1, 2] as Array<Int>))
 
+#if _runtime(_ObjC)
         expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
+#endif
 
         failsWithErrorMessage("expected to equal <[1, 2]>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(equal([1, 2]))
@@ -130,8 +132,10 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
+#if _runtime(_ObjC)
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(expected))
+#endif
     }
 
     func testNSObjectEquality() {

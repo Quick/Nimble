@@ -16,7 +16,9 @@ class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
         expect(1).toNot(beGreaterThanOrEqualTo(2))
         expect(NSNumber(int:1)).toNot(beGreaterThanOrEqualTo(2))
         expect(NSNumber(int:2)).to(beGreaterThanOrEqualTo(NSNumber(int:2)))
+#if _runtime(_ObjC)
         expect(1).to(beGreaterThanOrEqualTo(NSNumber(int:0)))
+#endif
 
         failsWithErrorMessage("expected to be greater than or equal to <2>, got <0>") {
             expect(0).to(beGreaterThanOrEqualTo(2))

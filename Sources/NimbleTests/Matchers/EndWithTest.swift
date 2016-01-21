@@ -20,8 +20,10 @@ class EndWithTest: XCTestCase, XCTestCaseProvider {
         expect(NSString(string: "foobar").description).to(endWith("bar"))
         expect(NSString(string: "foobar").description).toNot(endWith("oo"))
 
+#if _runtime(_ObjC)
         expect(NSArray(array: ["a", "b"])).to(endWith("b"))
         expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
+#endif
     }
 
     func testEndWithNegatives() {
