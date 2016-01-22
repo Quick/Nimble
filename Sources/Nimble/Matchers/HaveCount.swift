@@ -30,6 +30,7 @@ public func haveCount(expectedValue: Int) -> MatcherFunc<NMBCollection> {
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func haveCountMatcher(expected: NSNumber) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -40,9 +41,10 @@ extension NMBObjCMatcher {
                 return try! haveCount(expected.integerValue).matches(expr, failureMessage: failureMessage)
             } else if let actualValue = actualValue {
                 failureMessage.postfixMessage = "get type of NSArray, NSSet, NSDictionary, or NSHashTable"
-                failureMessage.actualValue = "\(NSStringFromClass(actualValue.dynamicType))"
+                failureMessage.actualValue = "\(classAsString(actualValue.dynamicType))"
             }
             return false
         }
     }
 }
+#endif

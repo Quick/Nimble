@@ -8,6 +8,14 @@ internal func identityAsString(value: AnyObject?) -> String {
     return NSString(format: "<%p>", unsafeBitCast(value!, Int.self)).description
 }
 
+internal func classAsString(cls: AnyClass) -> String {
+#if _runtime(_ObjC)
+    return NSStringFromClass(cls)
+#else
+    return String(cls)
+#endif
+}
+
 internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
@@ -15,9 +23,18 @@ internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     }
 }
 
+#if _runtime(_ObjC)
 @objc internal protocol NMBStringer {
     func NMB_stringify() -> String
 }
+
+extension NSArray : NMBStringer {
+    func NMB_stringify() -> String {
+        let str = self.componentsJoinedByString(", ")
+        return "[\(str)]"
+    }
+}
+#endif
 
 internal func stringify<S: SequenceType>(value: S) -> String {
     var generator = value.generate()
@@ -31,13 +48,6 @@ internal func stringify<S: SequenceType>(value: S) -> String {
     } while value != nil
     let str = strings.joinWithSeparator(", ")
     return "[\(str)]"
-}
-
-extension NSArray : NMBStringer {
-    func NMB_stringify() -> String {
-        let str = self.componentsJoinedByString(", ")
-        return "[\(str)]"
-    }
 }
 
 internal func stringify<T>(value: T) -> String {

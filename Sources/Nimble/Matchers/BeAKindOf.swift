@@ -16,11 +16,11 @@ public func beAKindOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(NSStringFromClass(validInstance.dynamicType)) instance>"
+            failureMessage.actualValue = "<\(classAsString(validInstance.dynamicType)) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be a kind of \(NSStringFromClass(expectedClass))"
+        failureMessage.postfixMessage = "be a kind of \(classAsString(expectedClass))"
         return instance != nil && instance!.isKindOfClass(expectedClass)
     }
 }

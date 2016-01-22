@@ -1,3 +1,6 @@
+#if os(Linux)
+import Glibc
+#endif
 import Foundation
 
 internal let DefaultDelta = 0.0001
@@ -32,6 +35,7 @@ public func beCloseTo(expectedValue: NMBDoubleConvertible, within delta: Double 
     }
 }
 
+#if _runtime(_ObjC)
 public class NMBObjCBeCloseToMatcher : NSObject, NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
@@ -70,6 +74,7 @@ extension NMBObjCMatcher {
         return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
 }
+#endif
 
 public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDelta) -> NonNilMatcherFunc <[Double]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in

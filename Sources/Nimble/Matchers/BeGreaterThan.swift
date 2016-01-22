@@ -27,6 +27,7 @@ public func >(lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
     lhs.to(beGreaterThan(rhs))
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beGreaterThanMatcher(expected: NMBComparable?) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -35,3 +36,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif

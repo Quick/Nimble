@@ -1,7 +1,7 @@
 import Foundation
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: String = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
+public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: FileString = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -10,7 +10,7 @@ public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: 
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: String = __FILE__, line: UInt = __LINE__, expression: () throws -> T?) -> Expectation<T> {
+public func expect<T>(file: FileString = __FILE__, line: UInt = __LINE__, expression: () throws -> T?) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -25,12 +25,12 @@ public func fail(message: String, location: SourceLocation) {
 }
 
 /// Always fails the test with a message.
-public func fail(message: String, file: String = __FILE__, line: UInt = __LINE__) {
+public func fail(message: String, file: FileString = __FILE__, line: UInt = __LINE__) {
     fail(message, location: SourceLocation(file: file, line: line))
 }
 
 /// Always fails the test.
-public func fail(file: String = __FILE__, line: UInt = __LINE__) {
+public func fail(file: FileString = __FILE__, line: UInt = __LINE__) {
     fail("fail() always fails", file: file, line: line)
 }
 
@@ -38,14 +38,20 @@ public func fail(file: String = __FILE__, line: UInt = __LINE__) {
 internal func nimblePrecondition(
     @autoclosure expr: () -> Bool,
     @autoclosure _ name: () -> String,
-    @autoclosure _ message: () -> String) -> Bool {
+    @autoclosure _ message: () -> String,
+    file: StaticString = __FILE__,
+    line: UInt = __LINE__) -> Bool {
         let result = expr()
         if !result {
+#if _runtime(_ObjC)
             let e = NSException(
                 name: name(),
                 reason: message(),
                 userInfo: nil)
             e.raise()
+#else
+            preconditionFailure("\(name()) - \(message())", file: file, line: line)
+#endif
         }
         return result
 }
