@@ -1,7 +1,25 @@
+import Foundation
 import XCTest
 import Nimble
 
-class EqualTest: XCTestCase {
+class EqualTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testEquality", testEquality),
+            ("testArrayEquality", testArrayEquality),
+            ("testSetEquality", testSetEquality),
+            ("testDoesNotMatchNils", testDoesNotMatchNils),
+            ("testDictionaryEquality", testDictionaryEquality),
+            ("testNSObjectEquality", testNSObjectEquality),
+            ("testOperatorEquality", testOperatorEquality),
+            ("testOperatorEqualityWithArrays", testOperatorEqualityWithArrays),
+            ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
+            ("testOptionalEquality", testOptionalEquality),
+            ("testArrayOfOptionalsEquality", testArrayOfOptionalsEquality),
+            ("testDictionariesWithDifferentSequences", testDictionariesWithDifferentSequences),
+        ]
+    }
+
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))

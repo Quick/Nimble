@@ -1,7 +1,15 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeEmptyTest: XCTestCase {
+class BeEmptyTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testBeEmptyPositive", testBeEmptyPositive),
+            ("testBeEmptyNegative", testBeEmptyNegative),
+        ]
+    }
+
     func testBeEmptyPositive() {
         expect([] as [Int]).to(beEmpty())
         expect([1]).toNot(beEmpty())

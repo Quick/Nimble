@@ -1,7 +1,14 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeginWithTest: XCTestCase {
+class BeginWithTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testPositiveMatches", testPositiveMatches),
+            ("testNegativeMatches", testNegativeMatches),
+        ]
+    }
 
     func testPositiveMatches() {
         expect([1, 2, 3]).to(beginWith(1))

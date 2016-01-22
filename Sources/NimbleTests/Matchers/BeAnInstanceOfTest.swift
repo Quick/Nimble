@@ -1,7 +1,16 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeAnInstanceOfTest: XCTestCase {
+class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testPositiveMatch", testPositiveMatch),
+            ("testFailureMessages", testFailureMessages),
+            ("testSwiftTypesFailureMessages", testSwiftTypesFailureMessages),
+        ]
+    }
+
     func testPositiveMatch() {
         expect(NSNull()).to(beAnInstanceOf(NSNull))
         expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSDate))

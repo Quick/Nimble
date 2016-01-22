@@ -1,7 +1,26 @@
+import Foundation
 import XCTest
 import Nimble
 
-class SynchronousTest: XCTestCase {
+class SynchronousTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testFailAlwaysFails", testFailAlwaysFails),
+            ("testUnexpectedErrorsThrownFails", testUnexpectedErrorsThrownFails),
+            ("testToMatchesIfMatcherReturnsTrue", testToMatchesIfMatcherReturnsTrue),
+            ("testToProvidesActualValueExpression", testToProvidesActualValueExpression),
+            ("testToProvidesAMemoizedActualValueExpression", testToProvidesActualValueExpression),
+            ("testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
+            ("testToMatchAgainstLazyProperties", testToMatchAgainstLazyProperties),
+            ("testToNotMatchesIfMatcherReturnsTrue", testToNotMatchesIfMatcherReturnsTrue),
+            ("testToNotProvidesActualValueExpression", testToNotProvidesActualValueExpression),
+            ("testToNotProvidesAMemoizedActualValueExpression", testToNotProvidesAMemoizedActualValueExpression),
+            ("testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
+            ("testToNotNegativeMatches", testToNotNegativeMatches),
+            ("testNotToMatchesLikeToNot", testNotToMatchesLikeToNot),
+        ]
+    }
+
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
     private func doThrowError() throws -> Int {
         throw errorToThrow

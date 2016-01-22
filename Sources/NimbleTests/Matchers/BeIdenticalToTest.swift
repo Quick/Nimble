@@ -1,7 +1,18 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeIdenticalToTest: XCTestCase {
+class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testBeIdenticalToPositive", testBeIdenticalToPositive),
+            ("testBeIdenticalToNegative", testBeIdenticalToNegative),
+            ("testBeIdenticalToPositiveMessage", testBeIdenticalToPositiveMessage),
+            ("testBeIdenticalToNegativeMessage", testBeIdenticalToNegativeMessage),
+            ("testOperators", testOperators),
+        ]
+    }
+
     func testBeIdenticalToPositive() {
         expect(NSNumber(integer:1)).to(beIdenticalTo(NSNumber(integer:1)))
     }

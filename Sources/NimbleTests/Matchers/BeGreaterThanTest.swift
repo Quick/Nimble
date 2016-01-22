@@ -1,7 +1,15 @@
+import Foundation
 import XCTest
 import Nimble
 
-class BeGreaterThanTest: XCTestCase {
+class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
+    var allTests: [(String, () -> Void)] {
+        return [
+            ("testGreaterThan", testGreaterThan),
+            ("testGreaterThanOperator", testGreaterThanOperator),
+        ]
+    }
+    
     func testGreaterThan() {
         expect(10).to(beGreaterThan(2))
         expect(1).toNot(beGreaterThan(2))
