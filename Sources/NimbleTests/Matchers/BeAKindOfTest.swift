@@ -1,6 +1,8 @@
 import XCTest
 import Nimble
 
+#if _runtime(_ObjC)
+
 class TestNull : NSNull {}
 
 class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
@@ -51,3 +53,4 @@ class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         }
     }
 }
+#endif

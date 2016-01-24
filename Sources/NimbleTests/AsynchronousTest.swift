@@ -2,6 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
+#if _runtime(_ObjC)
+
 class AsyncTest: XCTestCase, XCTestCaseProvider {
     var allTests: [(String, () -> Void)] {
         return [
@@ -161,3 +163,4 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         expect(executedAsyncBlock).toEventually(beTruthy())
     }
 }
+#endif

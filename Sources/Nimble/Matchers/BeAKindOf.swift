@@ -1,5 +1,7 @@
 import Foundation
 
+#if _runtime(_ObjC)
+
 // A Nimble matcher that catches attempts to use beAKindOf with non Objective-C types
 public func beAKindOf(expectedClass: Any) -> NonNilMatcherFunc<Any> {
     return NonNilMatcherFunc {actualExpression, failureMessage in
@@ -32,3 +34,5 @@ extension NMBObjCMatcher {
         }
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
 import Foundation
+
+#if _runtime(_ObjC)
 import Dispatch
 
 private let timeoutLeeway: UInt64 = NSEC_PER_MSEC
@@ -352,3 +354,5 @@ internal func pollBlock(
 
         return result
 }
+
+#endif

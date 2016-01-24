@@ -1,6 +1,8 @@
 import XCTest
 import Nimble
 
+#if _runtime(_ObjC)
+
 class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
     var allTests: [(String, () -> Void)] {
         return [
@@ -161,3 +163,4 @@ class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
         }
     }
 }
+#endif
