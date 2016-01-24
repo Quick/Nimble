@@ -2,10 +2,11 @@ import Foundation
 
 
 internal func identityAsString(value: AnyObject?) -> String {
-    if value == nil {
+    if let value = value {
+        return NSString(format: "<%p>", unsafeBitCast(value, Int.self)).description
+    } else {
         return "nil"
     }
-    return NSString(format: "<%p>", unsafeBitCast(value!, Int.self)).description
 }
 
 internal func classAsString(cls: AnyClass) -> String {

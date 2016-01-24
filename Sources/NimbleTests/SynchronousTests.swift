@@ -21,7 +21,7 @@ class SynchronousTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
+    let errorToThrow = NSError(domain: NSCocoaErrorDomain, code: 42, userInfo: nil)
     private func doThrowError() throws -> Int {
         throw errorToThrow
     }
@@ -57,7 +57,7 @@ class SynchronousTest: XCTestCase, XCTestCaseProvider {
 
     func testToProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return true
@@ -67,7 +67,7 @@ class SynchronousTest: XCTestCase, XCTestCaseProvider {
 
     func testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.to(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return true
@@ -96,7 +96,7 @@ class SynchronousTest: XCTestCase, XCTestCaseProvider {
 
     func testToNotProvidesAMemoizedActualValueExpression() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             try expr.evaluate()
             try expr.evaluate()
             return false
@@ -106,7 +106,7 @@ class SynchronousTest: XCTestCase, XCTestCaseProvider {
 
     func testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
         var callCount = 0
-        expect{ callCount++ }.toNot(MatcherFunc { expr, failure in
+        expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
             try expr.evaluate()
             return false
