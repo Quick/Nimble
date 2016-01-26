@@ -53,6 +53,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance);
 NIMBLE_SHORT(id<NMBMatcher> beIdenticalTo(id expectedInstance),
              NMB_beIdenticalTo(expectedInstance));
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_be(id expectedInstance);
+NIMBLE_SHORT(id<NMBMatcher> be(id expectedInstance),
+             NMB_be(expectedInstance));
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue);
 NIMBLE_SHORT(id<NMBMatcher> beLessThan(NSNumber *expectedValue),
              NMB_beLessThan(expectedValue));

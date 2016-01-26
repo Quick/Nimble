@@ -55,6 +55,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance) {
     return [NMBObjCMatcher beIdenticalToMatcher:expectedInstance];
 }
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_be(id expectedInstance) {
+    return [NMBObjCMatcher beIdenticalToMatcher:expectedInstance];
+}
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue) {
     return [NMBObjCMatcher beLessThanMatcher:expectedValue];
 }
