@@ -13,7 +13,7 @@ private enum ErrorResult {
 internal class NMBWait: NSObject {
     internal class func until(
         timeout timeout: NSTimeInterval,
-        file: String = __FILE__,
+        file: FileString = __FILE__,
         line: UInt = __LINE__,
         action: (() -> Void) -> Void) -> Void {
             return throwableUntil(timeout: timeout, file: file, line: line) { (done: () -> Void) throws -> Void in
@@ -24,7 +24,7 @@ internal class NMBWait: NSObject {
     // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
         timeout timeout: NSTimeInterval,
-        file: String = __FILE__,
+        file: FileString = __FILE__,
         line: UInt = __LINE__,
         action: (() -> Void) throws -> Void) -> Void {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
@@ -71,7 +71,7 @@ internal class NMBWait: NSObject {
     }
 
     @objc(untilFile:line:action:)
-    internal class func until(file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+    internal class func until(file: FileString = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
         until(timeout: 1, file: file, line: line, action: action)
     }
 }
@@ -87,7 +87,7 @@ internal func blockedRunLoopErrorMessageFor(fnName: String, leeway: NSTimeInterv
 /// 
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
 /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-public func waitUntil(timeout timeout: NSTimeInterval = 1, file: String = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+public func waitUntil(timeout timeout: NSTimeInterval = 1, file: FileString = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
 #endif
