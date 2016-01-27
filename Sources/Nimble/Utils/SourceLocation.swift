@@ -6,7 +6,7 @@ public typealias FileString = String
 public typealias FileString = StaticString
 #endif
 
-public class SourceLocation : NSObject {
+public final class SourceLocation : NSObject {
     public let file: FileString
     public let line: UInt
 
