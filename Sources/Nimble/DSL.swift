@@ -57,7 +57,7 @@ internal func nimblePrecondition(
 }
 
 @noreturn
-internal func internalError(msg: String, file: String = __FILE__, line: UInt = __LINE__) {
+internal func internalError(msg: String, file: FileString = __FILE__, line: UInt = __LINE__) {
     fatalError(
         "Nimble Bug Found: \(msg) at \(file):\(line).\n" +
         "Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the " +
