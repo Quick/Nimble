@@ -24,11 +24,11 @@ internal struct ObjCMatcherWrapper : Matcher {
 public class NMBExpectation : NSObject {
     internal let _actualBlock: () -> NSObject!
     internal var _negative: Bool
-    internal let _file: String
+    internal let _file: FileString
     internal let _line: UInt
     internal var _timeout: NSTimeInterval = 1.0
 
-    public init(actualBlock: () -> NSObject!, negative: Bool, file: String, line: UInt) {
+    public init(actualBlock: () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
@@ -123,7 +123,7 @@ public class NMBExpectation : NSObject {
 
     public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
 
-    public class func failWithMessage(message: String, file: String, line: UInt) {
+    public class func failWithMessage(message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))
     }
 }
