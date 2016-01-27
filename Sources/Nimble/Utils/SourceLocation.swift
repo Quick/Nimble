@@ -1,10 +1,6 @@
 import Foundation
 
-#if _runtime(_ObjC)
-public typealias FileString = String
-#else
 public typealias FileString = StaticString
-#endif
 
 public final class SourceLocation : NSObject {
     public let file: FileString

@@ -72,6 +72,7 @@ internal class NMBWait: NSObject {
 
     @objc(untilFile:line:action:)
     internal class func until(file: FileString = __FILE__, line: UInt = __LINE__, action: (() -> Void) -> Void) -> Void {
+		// TODO: `StaticString` is not available in Objective-C!
         until(timeout: 1, file: file, line: line, action: action)
     }
 }
