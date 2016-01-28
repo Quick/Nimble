@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class EqualTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testEquality", testEquality),
             ("testArrayEquality", testArrayEquality),

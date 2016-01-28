@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 class HaveCountTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testHaveCountForArray", testHaveCountForArray),
             ("testHaveCountForDictionary", testHaveCountForDictionary),

@@ -6,7 +6,7 @@ import Nimble
 class TestNull : NSNull {}
 
 class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testPositiveMatch", testPositiveMatch),
             ("testFailureMessages", testFailureMessages),

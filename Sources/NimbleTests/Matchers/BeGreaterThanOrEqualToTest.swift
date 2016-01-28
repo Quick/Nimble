@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testGreaterThanOrEqualTo", testGreaterThanOrEqualTo),
             ("testGreaterThanOrEqualToOperator", testGreaterThanOrEqualToOperator),

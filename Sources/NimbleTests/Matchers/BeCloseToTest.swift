@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeCloseToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testBeCloseTo", testBeCloseTo),
             ("testBeCloseToWithin", testBeCloseToWithin),

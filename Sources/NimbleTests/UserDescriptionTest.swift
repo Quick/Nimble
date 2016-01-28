@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testToMatcher_CustomFailureMessage", testToMatcher_CustomFailureMessage),
             ("testNotToMatcher_CustomFailureMessage", testNotToMatcher_CustomFailureMessage),

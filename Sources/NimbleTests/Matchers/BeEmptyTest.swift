@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeEmptyTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testBeEmptyPositive", testBeEmptyPositive),
             ("testBeEmptyNegative", testBeEmptyNegative),
