@@ -39,7 +39,12 @@ class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
         expect(NSNumber(int:1)) > 0
 #endif
 
-        failsWithErrorMessage("expected to be greater than <2.0000>, got <1.0000>") {
+#if _runtime(_ObjC)
+        let (expectedRepresentation, actualRepresentation) = ("2.0000", "1.0000")
+#else
+        let (expectedRepresentation, actualRepresentation) = ("2", "1")
+#endif
+        failsWithErrorMessage("expected to be greater than <\(expectedRepresentation)>, got <\(actualRepresentation)>") {
             expect(1) > 2
             return
         }

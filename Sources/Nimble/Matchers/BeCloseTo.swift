@@ -80,6 +80,8 @@ public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDe
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = try actualExpression.evaluate() {
+            failureMessage.actualValue = "<\(stringify(actual))>"
+
             if actual.count != expectedValues.count {
                 return false
             } else {
