@@ -99,6 +99,7 @@ private let dateFormatter: NSDateFormatter = {
     return formatter
 }()
 
+#if _runtime(_ObjC)
 extension NSDate: NMBDoubleConvertible {
     public var doubleValue: CDouble {
         get {
@@ -106,6 +107,7 @@ extension NSDate: NMBDoubleConvertible {
         }
     }
 }
+#endif
 
 
 extension NMBDoubleConvertible {
