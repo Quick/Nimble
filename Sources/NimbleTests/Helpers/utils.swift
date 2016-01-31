@@ -1,5 +1,5 @@
 import Foundation
-import Nimble
+@testable import Nimble
 import XCTest
 
 func failsWithErrorMessage(messages: [String], file: FileString = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
@@ -32,12 +32,15 @@ func failsWithErrorMessage(messages: [String], file: FileString = __FILE__, line
             }
         }
 
+        let message: String
         if let lastFailure = lastFailure {
-            let msg = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(msg)\""
-            XCTFail(msg, file: filePath, line: lineNumber)
+            message = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(msg)\""
         } else {
-            XCTFail("expected failure message, but got none", file: filePath, line: lineNumber)
+            message = "expected failure message, but got none"
         }
+        NimbleAssertionHandler.assert(false,
+                                      message: FailureMessage(stringValue: message),
+                                      location: SourceLocation(file: filePath, line: lineNumber))
     }
 }
 
