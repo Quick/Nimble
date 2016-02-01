@@ -1,6 +1,7 @@
 import Foundation
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
+@warn_unused_result(message="Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
 public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: FileString = __FILE__, line: UInt = __LINE__) -> Expectation<T> {
     return Expectation(
         expression: Expression(
@@ -10,6 +11,7 @@ public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: 
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
+@warn_unused_result(message="Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
 public func expect<T>(file: FileString = __FILE__, line: UInt = __LINE__, expression: () throws -> T?) -> Expectation<T> {
     return Expectation(
         expression: Expression(
