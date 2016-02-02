@@ -5,7 +5,7 @@ import Nimble
 #if _runtime(_ObjC)
 
 class AsyncTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),

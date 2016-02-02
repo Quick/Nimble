@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testPositiveMatch", testPositiveMatch),
             ("testFailureMessages", testFailureMessages),
@@ -23,10 +23,15 @@ class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessageForNil("expected to be an instance of NSString, got <nil>") {
             expect(nil as NSString?).to(beAnInstanceOf(NSString))
         }
-        failsWithErrorMessage("expected to be an instance of NSString, got <__NSCFNumber instance>") {
+#if _runtime(_ObjC)
+        let numberTypeName = "__NSCFNumber"
+#else
+        let numberTypeName = "NSNumber"
+#endif
+        failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
             expect(NSNumber(integer:1)).to(beAnInstanceOf(NSString))
         }
-        failsWithErrorMessage("expected to not be an instance of NSNumber, got <__NSCFNumber instance>") {
+        failsWithErrorMessage("expected to not be an instance of NSNumber, got <\(numberTypeName) instance>") {
             expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSNumber))
         }
     }

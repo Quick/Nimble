@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeLessThanTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testLessThan", testLessThan),
             ("testLessThanOperator", testLessThanOperator),
@@ -13,11 +13,13 @@ class BeLessThanTest: XCTestCase, XCTestCaseProvider {
     func testLessThan() {
         expect(2).to(beLessThan(10))
         expect(2).toNot(beLessThan(1))
+#if _runtime(_ObjC)
         expect(NSNumber(integer:2)).to(beLessThan(10))
         expect(NSNumber(integer:2)).toNot(beLessThan(1))
 
         expect(2).to(beLessThan(NSNumber(integer:10)))
         expect(2).toNot(beLessThan(NSNumber(integer:1)))
+#endif
 
         failsWithErrorMessage("expected to be less than <0>, got <2>") {
             expect(2).to(beLessThan(0))
@@ -36,9 +38,16 @@ class BeLessThanTest: XCTestCase, XCTestCaseProvider {
 
     func testLessThanOperator() {
         expect(0) < 1
+#if _runtime(_ObjC)
         expect(NSNumber(int:0)) < 1
+#endif
 
-        failsWithErrorMessage("expected to be less than <1.0000>, got <2.0000>") {
+#if _runtime(_ObjC)
+        let (expectedRepresentation, actualRepresentation) = ("1.0000", "2.0000")
+#else
+        let (expectedRepresentation, actualRepresentation) = ("1", "2")
+#endif
+        failsWithErrorMessage("expected to be less than <\(expectedRepresentation)>, got <\(actualRepresentation)>") {
             expect(2) < 1
             return
         }

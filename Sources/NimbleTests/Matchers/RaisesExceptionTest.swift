@@ -4,7 +4,7 @@ import Nimble
 #if _runtime(_ObjC)
 
 class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testPositiveMatches", testPositiveMatches),
             ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),

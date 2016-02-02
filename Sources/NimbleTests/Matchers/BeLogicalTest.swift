@@ -20,7 +20,7 @@ enum ConvertsToBool : BooleanType, CustomStringConvertible {
 }
 
 class BeTruthyTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testShouldMatchNonNilTypes", testShouldMatchNonNilTypes),
             ("testShouldMatchTrue", testShouldMatchTrue),
@@ -85,7 +85,7 @@ class BeTruthyTest : XCTestCase, XCTestCaseProvider {
 }
 
 class BeTrueTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testShouldMatchTrue", testShouldMatchTrue),
             ("testShouldNotMatchFalse", testShouldNotMatchFalse),
@@ -121,7 +121,7 @@ class BeTrueTest : XCTestCase, XCTestCaseProvider {
 }
 
 class BeFalsyTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testShouldMatchNilTypes", testShouldMatchNilTypes),
             ("testShouldNotMatchTrue", testShouldNotMatchTrue),
@@ -168,7 +168,7 @@ class BeFalsyTest : XCTestCase, XCTestCaseProvider {
 }
 
 class BeFalseTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testShouldNotMatchTrue", testShouldNotMatchTrue),
             ("testShouldMatchFalse", testShouldMatchFalse),

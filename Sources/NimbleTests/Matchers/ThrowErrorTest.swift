@@ -32,7 +32,7 @@ extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
 }
 
 class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testPositiveMatches", testPositiveMatches),
             ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),

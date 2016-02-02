@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () -> Void)] {
+    var allTests: [(String, () throws -> Void)] {
         return [
             ("testBeIdenticalToPositive", testBeIdenticalToPositive),
             ("testBeIdenticalToNegative", testBeIdenticalToNegative),
