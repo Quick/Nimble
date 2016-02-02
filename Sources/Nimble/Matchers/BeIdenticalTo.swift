@@ -19,6 +19,11 @@ public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 
+/// Alias for "beIdenticalTo"
+public func be<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
+    return beIdenticalTo(expected)
+}
+
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beIdenticalToMatcher(expected: NSObject?) -> NMBObjCMatcher {

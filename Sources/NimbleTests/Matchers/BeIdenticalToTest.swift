@@ -10,6 +10,7 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
             ("testBeIdenticalToPositiveMessage", testBeIdenticalToPositiveMessage),
             ("testBeIdenticalToNegativeMessage", testBeIdenticalToNegativeMessage),
             ("testOperators", testOperators),
+            ("testBeAlias", testBeAlias)
         ]
     }
 
@@ -40,10 +41,23 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
             expect(value1).toNot(beIdenticalTo(value2))
         }
     }
-    
+
     func testOperators() {
         let value = NSDate()
         expect(value) === value
         expect(NSNumber(integer:1)) !== NSNumber(integer:2)
+    }
+
+    func testBeAlias() {
+        expect(NSNumber(integer:1)).to(be(NSNumber(integer:1)))
+        expect(NSNumber(integer:1)).toNot(be("turtles"))
+        expect([1]).toNot(be([1]))
+
+        let value1 = NSArray(array: [])
+        let value2 = NSArray(array: [])
+        let message = "expected to not be identical to \(identityAsString(value2)), got \(identityAsString(value1))"
+        failsWithErrorMessage(message) {
+            expect(value1).toNot(be(value2))
+        }
     }
 }
