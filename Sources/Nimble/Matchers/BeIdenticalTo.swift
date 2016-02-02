@@ -19,7 +19,10 @@ public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 
-/// Alias for "beIdenticalTo"
+/// A Nimble matcher that succeeds when the actual value is the same instance
+/// as the expected instance.
+///
+/// Alias for "beIdenticalTo".
 public func be<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
     return beIdenticalTo(expected)
 }
