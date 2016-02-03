@@ -59,12 +59,12 @@ func failsWithErrorMessageForNil(message: String, file: FileString = __FILE__, l
 }
 
 #if _runtime(_ObjC)
-func deferToMainQueue(action: () -> Void) {
-    dispatch_async(dispatch_get_main_queue()) {
-        NSThread.sleepForTimeInterval(0.01)
-        action()
+    func deferToMainQueue(action: () -> Void) {
+        dispatch_async(dispatch_get_main_queue()) {
+            NSThread.sleepForTimeInterval(0.01)
+            action()
+        }
     }
-}
 #endif
 
 public class NimbleHelper : NSObject {

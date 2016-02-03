@@ -176,6 +176,12 @@
 		1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
 		1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
 		1FC494AC1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
+		1FCF914F1C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91501C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91511C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91531C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
+		1FCF91541C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
+		1FCF91551C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
 		1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
@@ -408,6 +414,8 @@
 		1F9DB8FA1A74E793002E96AD /* ObjCBeEmptyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCBeEmptyTest.m; sourceTree = "<group>"; };
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleEnvironment.swift; sourceTree = "<group>"; };
+		1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotificationTest.swift; sourceTree = "<group>"; };
+		1FCF91521C61C8A400B15DCB /* PostNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotification.swift; sourceTree = "<group>"; };
 		1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
 		1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleXCTestHandler.swift; sourceTree = "<group>"; };
@@ -625,6 +633,7 @@
 				1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */,
 				29EA59621B551ED2002D767E /* ThrowErrorTest.swift */,
 				7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */,
+				1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -666,6 +675,7 @@
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
 				29EA59651B551EE6002D767E /* ThrowError.swift */,
 				7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */,
+				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -1010,6 +1020,7 @@
 				DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3E1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				DDB4D5ED19FE43C200E9D9FE /* Match.swift in Sources */,
+				1FCF91531C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				29EA59661B551EE6002D767E /* ThrowError.swift in Sources */,
 				1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */,
@@ -1068,6 +1079,7 @@
 				1F4A56971A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567C1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
+				1FCF914F1C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */,
 				1F4A56911A3B344A009E1637 /* ObjCBeNilTest.m in Sources */,
 				1F8A37B01B7C5042001C8357 /* ObjCSyncTest.m in Sources */,
@@ -1121,6 +1133,7 @@
 				1F5DF1771BDCA0F500C3A531 /* BeAKindOf.swift in Sources */,
 				1F5DF17F1BDCA0F500C3A531 /* BeLessThan.swift in Sources */,
 				1F5DF17C1BDCA0F500C3A531 /* BeGreaterThan.swift in Sources */,
+				1FCF91551C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1F5DF1831BDCA0F500C3A531 /* Contain.swift in Sources */,
 				1F5DF1731BDCA0F500C3A531 /* ObjCExpectation.swift in Sources */,
 				1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */,
@@ -1168,6 +1181,7 @@
 				1F5DF1A91BDCA10200C3A531 /* MatchTest.swift in Sources */,
 				1F5DF1A81BDCA10200C3A531 /* HaveCountTest.swift in Sources */,
 				1F5DF1971BDCA10200C3A531 /* AllPassTest.swift in Sources */,
+				1FCF91511C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				1F5DF19C1BDCA10200C3A531 /* BeginWithTest.swift in Sources */,
 				1F5DF1A01BDCA10200C3A531 /* BeIdenticalToTest.swift in Sources */,
 				1F5DF19A1BDCA10200C3A531 /* BeCloseToTest.swift in Sources */,
@@ -1206,6 +1220,7 @@
 				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3F1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
+				1FCF91541C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
 				29EA59671B551EE6002D767E /* ThrowError.swift in Sources */,
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
@@ -1264,6 +1279,7 @@
 				1F4A56981A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567D1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
+				1FCF91501C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */,
 				1F4A56921A3B344A009E1637 /* ObjCBeNilTest.m in Sources */,
 				1F8A37B11B7C5042001C8357 /* ObjCSyncTest.m in Sources */,
@@ -1463,7 +1479,6 @@
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1496,7 +1511,6 @@
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -1680,7 +1694,6 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -1715,7 +1728,6 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
