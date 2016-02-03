@@ -3,7 +3,7 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
-public func beIdenticalTo<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
+public func beIdenticalTo(expected: AnyObject?) -> NonNilMatcherFunc<AnyObject> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let actual = try actualExpression.evaluate()
         failureMessage.actualValue = "\(identityAsString(actual))"
@@ -12,10 +12,10 @@ public func beIdenticalTo<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
     }
 }
 
-public func ===<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
+public func ===(lhs: Expectation<AnyObject>, rhs: AnyObject?) {
     lhs.to(beIdenticalTo(rhs))
 }
-public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
+public func !==(lhs: Expectation<AnyObject>, rhs: AnyObject?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 
@@ -23,7 +23,7 @@ public func !==<T: AnyObject>(lhs: Expectation<T>, rhs: T?) {
 /// as the expected instance.
 ///
 /// Alias for "beIdenticalTo".
-public func be<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
+public func be(expected: AnyObject?) -> NonNilMatcherFunc<AnyObject> {
     return beIdenticalTo(expected)
 }
 
@@ -31,7 +31,8 @@ public func be<T: AnyObject>(expected: T?) -> NonNilMatcherFunc<T> {
 extension NMBObjCMatcher {
     public class func beIdenticalToMatcher(expected: NSObject?) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
-            return try! beIdenticalTo(expected).matches(actualExpression, failureMessage: failureMessage)
+            let aExpr = actualExpression.cast { $0 as AnyObject? }
+            return try! beIdenticalTo(expected).matches(aExpr, failureMessage: failureMessage)
         }
     }
 }
