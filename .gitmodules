@@ -1,0 +1,3 @@
+[submodule "Lib/CwlPreconditionTesting"]
+	path = Lib/CwlPreconditionTesting
+	url = git://github.com/mattgallagher/CwlPreconditionTesting.git

@@ -1,5 +1,5 @@
 .DS_Store
-xcuserdata/
+**/xcuserdata/*
 build/
 .idea
 DerivedData/
