@@ -929,7 +929,7 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 - Easy to implement (especially if already using protocols!)
   - Create a mock that conforms to `CallMatcher`
   - Paste in one variable declaration with a default value to conform to `CallMatcher` Protocol
-  - In every function (the ones that should be recorded) call the `recordCall()` function passing in all arguments
+  - In every function (the ones that should be recorded) call the `recordCall()` function passing in all arguments (if any)
 - Currently ONLY works in swift
 - Call matchers use the `description` variable from `CustomStringConvertible` protocol to equate arguments
   - For custom types, conform to `CustomStringConvertible` protocol and override `description` variable to return a string that will uniquely identify that instance
@@ -1007,7 +1007,7 @@ class MockApiService : ApiService, CallRecorder {
     }
 
     func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
-        self.recordCall(arguments: url) // <-- **REQUIRED**
+        self.recordCall(arguments: [url]) // <-- **REQUIRED**
         completion(["put something here to test what happens to returned value"]) // <-- makes asynchronous calls synchronous
     }
 }

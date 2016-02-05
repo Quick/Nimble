@@ -7,10 +7,10 @@ class CallRecorderTest: XCTestCase {
         var called = (functionList: [String](), argumentsList: [[Any]]())
         
         func doStuff() { self.recordCall() }
-        func doStuffWith(string string: String) { self.recordCall(arguments: string) }
-        func doMoreStuffWith(int1 int1: Int, int2: Int) { self.recordCall(arguments: int1, int2) }
-        func doWeirdStuffWith(string string: String?, int: Int?) { self.recordCall(arguments: string, int) }
-        func doCrazyStuffWith(object object: NSObject) { self.recordCall(arguments: object) }
+        func doStuffWith(string string: String) { self.recordCall(arguments: [string]) }
+        func doMoreStuffWith(int1 int1: Int, int2: Int) { self.recordCall(arguments: [int1, int2]) }
+        func doWeirdStuffWith(string string: String?, int: Int?) { self.recordCall(arguments: [string, int]) }
+        func doCrazyStuffWith(object object: NSObject) { self.recordCall(arguments: [object]) }
     }
     
     func testRecordingFunctions() {
