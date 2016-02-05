@@ -186,7 +186,7 @@ private func descriptionOfAttemptedCall(object object: Any, function: String, ar
 }
 
 private func isSuccessfulTest(didDoIt: Bool, _ isNegationTest: Bool) -> Bool {
-    return didDoIt && !isNegationTest || !didDoIt && isNegationTest
+    return didDoIt != isNegationTest
 }
 
 private func didCallResultIncludeOptionFor(isNegationTest isNegationTest: Bool) -> DidCallResultIncludeOption {
