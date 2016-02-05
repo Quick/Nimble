@@ -43,6 +43,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Strings](#strings)
   - [Checking if all elements of a collection pass a condition](#checking-if-all-elements-of-a-collection-pass-a-condition)
   - [Verify collection count](#verify-collection-count)
+  - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
   - [Called Functions (NEW)](#called-functions)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
@@ -208,6 +209,7 @@ exception once evaluated:
 // Note: Swift currently doesn't have exceptions.
 //       Only Objective-C code can raise exceptions
 //       that Nimble will catch.
+//       (see https://github.com/Quick/Nimble/issues/220#issuecomment-172667064)
 let exception = NSException(
   name: NSInternalInconsistencyException,
   reason: "Not enough fish in the sea.",
@@ -308,6 +310,12 @@ dispatch_async(dispatch_get_main_queue(), ^{
 expect(ocean).toEventually(contain(@"dolphins", @"whales"));
 ```
 
+Note: toEventually triggers its polls on the main thread. Blocking the main
+thread will cause Nimble to stop the run loop. This can cause test pollution
+for whatever incomplete code that was running on the main thread.  Blocking the
+main thread can be caused by blocking IO, calls to sleep(), deadlocks, and
+synchronous IPC.
+
 In the above example, `ocean` is constantly re-evaluated. If it ever
 contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
@@ -373,6 +381,12 @@ waitUntilTimeout(10, ^(void (^done)(void)){
   done();
 });
 ```
+
+Note: waitUntil triggers its timeout code on the main thread. Blocking the main
+thread will cause Nimble to stop the run loop to continue. This can cause test
+pollution for whatever incomplete code that was running on the main thread.
+Blocking the main thread can be caused by blocking IO, calls to sleep(),
+deadlocks, and synchronous IPC.
 
 ## Objective-C Support
 
@@ -716,7 +730,7 @@ expect(actual).to(raiseException().satisfyingBlock(^(NSException *exception) {
 }));
 ```
 
-Note: Swift currently doesn't have exceptions. Only Objective-C code can raise
+Note: Swift currently doesn't have exceptions (see [#220](https://github.com/Quick/Nimble/issues/220#issuecomment-172667064)). Only Objective-C code can raise
 exceptions that Nimble will catch.
 
 ## Collection Membership
@@ -879,6 +893,34 @@ For Swift the actual value must be a `CollectionType` such as array, dictionary 
 
 For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
 
+## Matching a value to any of a group of matchers
+
+```swift
+// passes if actual is either less than 10 or greater than 20
+expect(actual).to(satisfyAnyOf(beLessThan(10), beGreaterThan(20)))
+
+// can include any number of matchers -- the following will pass
+// **be careful** -- too many matchers can be the sign of an unfocused test
+expect(6).to(satisfyAnyOf(equal(2), equal(3), equal(4), equal(5), equal(6), equal(7)))
+
+// in Swift you also have the option to use the || operator to achieve a similar function
+expect(82).to(beLessThan(50) || beGreaterThan(80))
+```
+
+```objc
+// passes if actual is either less than 10 or greater than 20
+expect(actual).to(satisfyAnyOf(beLessThan(@10), beGreaterThan(@20)))
+
+// can include any number of matchers -- the following will pass
+// **be careful** -- too many matchers can be the sign of an unfocused test
+expect(@6).to(satisfyAnyOf(equal(@2), equal(@3), equal(@4), equal(@5), equal(@6), equal(@7)))
+```
+
+Note: This matcher allows you to chain any number of matchers together. This provides flexibility, 
+      but if you find yourself chaining many matchers together in one test, consider whether you  
+      could instead refactor that single test into multiple, more precisely focused tests for 
+      better coverage. 
+
 ## Called Functions
 
 - Test whether a function was called on an instance of a class
@@ -985,6 +1027,7 @@ public struct Person : CustomStringConvertible {
     }
 }
 ```
+
 
 # Writing Your Own Matchers
 
@@ -1226,7 +1269,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'YOUR_APP_NAME_HERE_Tests', :exclusive => true do
   use_frameworks!
-  pod 'Nimble', '~> 3.0.0'
+  pod 'Nimble', '~> 3.1.0'
 end
 ```
 
