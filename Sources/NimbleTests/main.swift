@@ -32,4 +32,5 @@ XCTMain([
     // RaisesExceptionTest(),
     ThrowErrorTest(),
     SatisfyAnyOfTest(),
+    PostNotificationTest(),
 ])

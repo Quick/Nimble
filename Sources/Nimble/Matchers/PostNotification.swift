@@ -40,6 +40,7 @@ public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification
     notificationsMatcher: T,
     fromNotificationCenter center: NSNotificationCenter = NSNotificationCenter.defaultCenter())
     -> MatcherFunc<Any> {
+        let _ = mainThread // Force lazy-loading of this value
         let collector = NotificationCollector(notificationCenter: center)
         collector.startObserving()
         var once: Bool = false
