@@ -3,7 +3,11 @@ import Foundation
 internal class NotificationCollector {
     private(set) var observedNotifications: [NSNotification]
     private let notificationCenter: NSNotificationCenter
+    #if _runtime(_ObjC)
     private var token: AnyObject?
+    #else
+    private var token: NSObjectProtocol?
+    #endif
 
     required init(notificationCenter: NSNotificationCenter) {
         self.notificationCenter = notificationCenter
@@ -11,17 +15,26 @@ internal class NotificationCollector {
     }
 
     func startObserving() {
-        self.token = self.notificationCenter.addObserverForName(nil, object: nil, queue: nil) { [weak self] n -> Void in
-            self?.observedNotifications.append(n)
+        self.token = self.notificationCenter.addObserverForName(nil, object: nil, queue: nil) {
+            // linux-swift gets confused by .append(n)
+            [weak self] n in self?.observedNotifications += [n]
         }
     }
 
     deinit {
-        if let token = self.token {
-            self.notificationCenter.removeObserver(token)
-        }
+        #if _runtime(_ObjC)
+            if let token = self.token {
+                self.notificationCenter.removeObserver(token)
+            }
+        #else
+            if let token = self.token as? AnyObject {
+                self.notificationCenter.removeObserver(token)
+            }
+        #endif
     }
 }
+
+private let mainThread = pthread_self()
 
 public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification]>(
     notificationsMatcher: T,
@@ -35,7 +48,7 @@ public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification
                 return collector.observedNotifications
                 }, location: actualExpression.location, withoutCaching: true)
 
-            assert(NSThread.isMainThread(), "Only expecting closure to be evaluated on main thread.")
+            assert(pthread_equal(mainThread, pthread_self()) != 0, "Only expecting closure to be evaluated on main thread.")
             if !once {
                 once = true
                 try actualExpression.evaluate()

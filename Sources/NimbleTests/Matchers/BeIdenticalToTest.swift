@@ -50,8 +50,12 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
 
     func testBeAlias() {
         expect(NSNumber(integer:1)).to(be(NSNumber(integer:1)))
-        expect(NSNumber(integer:1)).toNot(be("turtles"))
-        expect([1]).toNot(be([1]))
+        expect(NSNumber(integer:1)).toNot(be(NSString(stringLiteral: "turtles")))
+        #if _runtime(_ObjC)
+            expect([1]).toNot(be([1]))
+        #else
+            expect(NSArray(array: [NSNumber(integer: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(integer: 1)])))
+        #endif
 
         let value1 = NSArray(array: [])
         let value2 = NSArray(array: [])
