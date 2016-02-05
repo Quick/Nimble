@@ -1,12 +1,12 @@
 
 /* bug in Swift causes every enum WITHOUT an associated value's "description" to be the first declared
 enum value WITHOUT an associated value's description
-i.e. -> since ".DontCare" is the first enum value then the default description for ".DontCare",
-".NonNil", and ".Nil" will all be "DontCare" -> must override to fix issue by conforming to "CustomStringConvertible" 
+i.e. -> since ".Anything" is the first enum value then the default description for ".Anything",
+".NonNil", and ".Nil" will all be "Anything" -> must override to fix issue by conforming to "CustomStringConvertible" 
     This is not reproducable in a Playground */
 
 public enum Argument : CustomStringConvertible {
-    case DontCare
+    case Anything
     case NonNil
     case Nil
     case InstanceOf(type: Any.Type)
@@ -15,8 +15,8 @@ public enum Argument : CustomStringConvertible {
     
     public var description: String {
         switch self {
-        case .DontCare:
-            return "Argument.DontCare"
+        case .Anything:
+            return "Argument.Anything"
         case .NonNil:
             return "Argument.NonNil"
         case .Nil:
@@ -32,14 +32,14 @@ public enum Argument : CustomStringConvertible {
 }
 
 public enum ArgumentOption : CustomStringConvertible {
-    case DontCare
+    case Anything
     case NonOptional
     case Optional
     
     public var description: String {
         switch self {
-        case .DontCare:
-            return "ArgumentOption.DontCare"
+        case .Anything:
+            return "ArgumentOption.Anything"
         case .NonOptional:
             return "ArgumentOption.NonOptional"
         case .Optional:
@@ -229,7 +229,7 @@ private func isEqualArgsLists(passedArgs passedArgs: Array<Any>, recordedArgs: A
 private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
     if let passedArgAsArgumentEnum = passedArg as? Argument {
         switch passedArgAsArgumentEnum {
-        case .DontCare:
+        case .Anything:
             return true
         case .NonNil:
             return !isNil(recordedArg)
@@ -242,7 +242,7 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
             return cleanedType == cleanedRecordedArgType
         case .InstanceOfWith(let input):
             let isRecordedArgAnOptional = "\(recordedArg.dynamicType)".indexForMatching(regex: "^Optional<") != nil
-            let passesOptionCheck = (input.option == ArgumentOption.DontCare) ||
+            let passesOptionCheck = (input.option == ArgumentOption.Anything) ||
                                     (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
                                     (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
             

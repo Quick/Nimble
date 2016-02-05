@@ -913,7 +913,7 @@ expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", atMost: 2))
 expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.InstanceOf(type: String.self)]))
 
 // passes if mock did call function with argument specifications a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.DontCare], count: 2))
+expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.Anything], count: 2))
 
 // passes if mock did call function with argument specifications at least a number of times
 expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.NonNil], atLeast: 2))
@@ -923,15 +923,15 @@ expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["
 ```
 
 Argument enum options: (use when the exact comparison of the argument is not needed)
-- `case DontCare`
+- `case Anything`
 - `case NonNil`
 - `case Nil`
 - `case InstanceOf(type: Any.Type)`
 - `case InstanceOfWith(type: Any.Type, option: ArgumentOption)`
 - `case KindOf(type: AnyObject.Type)`
 
-ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the type passed in is optional, non-optional, or don't care)
-- `case DontCare`
+ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the type passed in is optional, non-optional, or anything)
+- `case Anything`
 - `case NonOptional`
 - `case Optional`
 
