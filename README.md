@@ -887,7 +887,7 @@ For Objective-C the actual value has to be one of the following classes `NSArray
 - Easy to implement (especially if already using protocols!)
   - Create a mock that conforms to `CallMatcher`
   - Paste in one variable declaration with a default value to conform to `CallMatcher` Protocol
-  - In every function (the ones that should be recorded) call the `recordCall()` function passing in `__FUNCTION__` for function signature and arguments as an array (when recorded function has arguments)
+  - In every function (the ones that should be recorded) call the `recordCall()` function passing in all arguments
 - Currently ONLY works in swift
 - Call matchers use the `description` variable from `CustomStringConvertible` protocol to equate arguments
   - For custom types, conform to `CustomStringConvertible` protocol and override `description` variable to return a string that will uniquely identify that instance
@@ -960,12 +960,13 @@ class MockApiService : ApiService, CallRecorder {
 
     // AnApiService Functions
     func getCachedStrings() -> [String] {
-        self.recordCall(function: __FUNCTION__) // <-- **REQUIRED**
-        return [""]
+        self.recordCall() // <-- **REQUIRED**
+        return ["put something here to test what happens to returned value"]
     }
 
     func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
-        self.recordCall(function: __FUNCTION__, parameters: [url]) // <-- **REQUIRED**
+        self.recordCall(arguments: url) // <-- **REQUIRED**
+        completion(["put something here to test what happens to returned value"]) // <-- makes asynchronous calls synchronous
     }
 }
 ```

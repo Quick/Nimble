@@ -99,7 +99,7 @@ public protocol CallRecorder : class {
 }
 
 public extension CallRecorder {
-    func recordCall(function function: String, arguments: Any...) {
+    func recordCall(function function: String = __FUNCTION__, arguments: Any...) {
         self.called.functionList.append(function)
         self.called.argumentsList.append(arguments)
     }

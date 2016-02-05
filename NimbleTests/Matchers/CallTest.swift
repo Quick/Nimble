@@ -6,9 +6,9 @@ class CallTest : XCTestCase {
     class TestClass : CallRecorder {
         var called = (functionList: [String](), argumentsList: [[Any]]())
         
-        func doStuff() { self.recordCall(function: __FUNCTION__) }
-        func doStuffWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
-        func doThingsWith(string string: String) { self.recordCall(function: __FUNCTION__, arguments: string) }
+        func doStuff() { self.recordCall() }
+        func doStuffWith(string string: String) { self.recordCall(arguments: string) }
+        func doThingsWith(string string: String) { self.recordCall(arguments: string) }
     }
     
     func testCall() {
