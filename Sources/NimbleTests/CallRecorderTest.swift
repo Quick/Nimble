@@ -226,169 +226,69 @@ class CallRecorderTest: XCTestCase {
     
     // MARK: Did Call - Recorded Calls Description Tests
     
-    // TODO: going down to one method so only one method needs to be tested for desciption options
+    func testDidCallResultShouldIncludeDescriptionOptionYes() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuff()
+        
+        // when
+        let passingResult = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .Yes)
+        let failingResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .Yes)
+        
+        // then
+        let recordedCallsDescriptions = [
+            passingResult.recordedCallsDescription,
+            failingResult.recordedCallsDescription
+        ]
+        
+        expect(recordedCallsDescriptions).to(allPass(equal("<doStuff()>")))
+    }
     
-//    func testDidCallResultShouldIncludeDescriptionOptionYes() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .Yes)
-//        let result2 = testClass.didCall(function: "not a function", countSpecifier: .Exactly(1), recordedCallsDescOption: .Yes)
-//        let result3 = testClass.didCall(function: "not a function", countSpecifier: .AtLeast(1), recordedCallsDescOption: .Yes)
-//        let result4 = testClass.didCall(function: "not a function", countSpecifier: .AtMost(1), recordedCallsDescOption: .Yes)
-//        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .Yes)
-//        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .Yes)
-//        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .Yes)
-//        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .Yes)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(equal("<>")))
-//    }
+    func testDidCallResultShouldIncludeDescriptionOptionNo() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuff()
+        
+        // when
+        let passingResult = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .No)
+        let failingResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .No)
+        
+        // then
+        let recordedCallsDescriptions = [
+            passingResult.recordedCallsDescription,
+            failingResult.recordedCallsDescription
+        ]
+        
+        expect(recordedCallsDescriptions).to(allPass(beEmpty()))
+    }
     
-//    func testDidCallResultShouldIncludeDescriptionOptionNo() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .No)
-//        let result2 = testClass.didCall(function: "not a function", countSpecifier: .Exactly(1), recordedCallsDescOption: .No)
-//        let result3 = testClass.didCall(function: "not a function", countSpecifier: .AtLeast(1), recordedCallsDescOption: .No)
-//        let result4 = testClass.didCall(function: "not a function", countSpecifier: .AtMost(1), recordedCallsDescOption: .No)
-//        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .No)
-//        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .No)
-//        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .No)
-//        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: 1, recordedCallsDescOption: .No)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(beEmpty()))
-//    }
+    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnSuccess() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuff()
+        
+        // when
+        let passingResult = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnSuccess)
+        let failingResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnSuccess)
+        
+        // then
+        expect(passingResult.recordedCallsDescription).to(equal("<doStuff()>"))
+        expect(failingResult.recordedCallsDescription).to(beEmpty())
+    }
     
-//    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnSuccessForSuccessCase() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // when
-//        testClass.doStuff()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnSuccess)
-//        let result2 = testClass.didCall(function: "doStuff()", countSpecifier: .Exactly(1), recordedCallsDescOption: .OnlyOnSuccess)
-//        let result3 = testClass.didCall(function: "doStuff()", countSpecifier: .AtLeast(1), recordedCallsDescOption: .OnlyOnSuccess)
-//        let result4 = testClass.didCall(function: "doStuff()", atMost: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result5 = testClass.didCall(function: "doStuff()", withArgs: [], recordedCallsDescOption: .OnlyOnSuccess)
-//        let result6 = testClass.didCall(function: "doStuff()", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result7 = testClass.didCall(function: "doStuff()", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result8 = testClass.didCall(function: "doStuff()", withArgs: [], atMost: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(equal("<doStuff()>")))
-//    }
-    
-//    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnSuccessForUnSuccessCase() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnSuccess)
-//        let result2 = testClass.didCall(function: "not a function", countSpecifier: .Exactly(1), recordedCallsDescOption: .OnlyOnSuccess)
-//        let result3 = testClass.didCall(function: "not a function", countSpecifier: .AtLeast(1), recordedCallsDescOption: .OnlyOnSuccess)
-//        let result4 = testClass.didCall(function: "not a function", atMost: -1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .OnlyOnSuccess)
-//        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnSuccess)
-//        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .OnlyOnSuccess)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(beEmpty()))
-//    }
-    
-//    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnUnsuccessForSuccessCase() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // when
-//        testClass.doStuff()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result2 = testClass.didCall(function: "doStuff()", countSpecifier: .Exactly(1), recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result3 = testClass.didCall(function: "doStuff()", countSpecifier: .AtLeast(1), recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result4 = testClass.didCall(function: "doStuff()", atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result5 = testClass.didCall(function: "doStuff()", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result6 = testClass.didCall(function: "doStuff()", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result7 = testClass.didCall(function: "doStuff()", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result8 = testClass.didCall(function: "doStuff()", withArgs: [], atMost: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(beEmpty()))
-//    }
-    
-//    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnUnsuccessForUnsuccessCase() {
-//        // given
-//        let testClass = TestClass()
-//        
-//        // then
-//        let result1 = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result2 = testClass.didCall(function: "not a function", countSpecifier: .Exactly(1), recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result3 = testClass.didCall(function: "not a function", countSpecifier: .AtLeast(1), recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result4 = testClass.didCall(function: "not a function", atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result5 = testClass.didCall(function: "not a function", withArgs: [], recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result6 = testClass.didCall(function: "not a function", withArgs: [], count: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result7 = testClass.didCall(function: "not a function", withArgs: [], atLeast: 1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        let result8 = testClass.didCall(function: "not a function", withArgs: [], atMost: -1, recordedCallsDescOption: .OnlyOnUnsuccess)
-//        
-//        let recordedCallsDescriptions = [result1.recordedCallsDescription,
-//                                         result2.recordedCallsDescription,
-//                                         result3.recordedCallsDescription,
-//                                         result4.recordedCallsDescription,
-//                                         result5.recordedCallsDescription,
-//                                         result6.recordedCallsDescription,
-//                                         result7.recordedCallsDescription,
-//                                         result8.recordedCallsDescription]
-//        
-//        expect(recordedCallsDescriptions).to(allPass(equal("<>")))
-//    }
+    func testDidCallResultShouldIncludeDescriptionOptionOnlyOnUnsuccess() {
+        // given
+        let testClass = TestClass()
+        testClass.doStuff()
+        
+        // when
+        let passingResult = testClass.didCall(function: "doStuff()", recordedCallsDescOption: .OnlyOnUnsuccess)
+        let failingResult = testClass.didCall(function: "not a function", recordedCallsDescOption: .OnlyOnUnsuccess)
+        
+        // then
+        expect(passingResult.recordedCallsDescription).to(beEmpty())
+        expect(failingResult.recordedCallsDescription).to(equal("<doStuff()>"))
+    }
     
     func testDidCallResultShouldIncludeOptionEnumDiscription() {
         // given
