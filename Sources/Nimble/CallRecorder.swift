@@ -93,7 +93,6 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
     func didCall(function function: String, withArgs arguments: Array<Any>, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
 }
 
@@ -108,23 +107,7 @@ public extension CallRecorder {
         self.called.argumentsList = Array<Array<Any>>()
     }
     
-    // MARK: Did Call Function
-    
-    func didCall(function function: String, countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success: Bool
-        switch countSpecifier {
-            case .Exactly(let count): success = timesCalled(function) == count
-            case .AtLeast(let count): success = timesCalled(function) >= count
-            case .AtMost(let count): success = timesCalled(function) <= count
-        }
-        
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    // MARK: Did Call Function With Arguments
-    
-    func didCall(function function: String, withArgs arguments: Array<Any>, countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+    func didCall(function function: String, withArgs arguments: Array<Any> = [Any](), countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
         let success: Bool
         switch countSpecifier {
             case .Exactly(let count): success = timesCalled(function, arguments: arguments) == count
@@ -137,10 +120,6 @@ public extension CallRecorder {
     }
     
     // MARK: Protocol Helper Functions
-    
-    private func timesCalled(function: String) -> Int {
-        return numberOfMatchingCalls(function: function, functions: self.called.functionList)
-    }
     
     private func timesCalled(function: String, arguments: Array<Any>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
@@ -155,18 +134,19 @@ public extension CallRecorder {
         case .OnlyOnSuccess:
             return success ? descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList) : ""
         case .OnlyOnUnsuccess:
-            return success ? "" : descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
+            return !success ? descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList) : ""
         }
     }
 }
 
 // MARK: Helper Functions
 
-private func numberOfMatchingCalls(function function: String, functions: Array<String>) -> Int {
-    return functions.reduce(0) { $1 == function ? $0 + 1 : $0 }
-}
-
 private func numberOfMatchingCalls(function function: String, functions: Array<String>, argsList: Array<Any>, argsLists: Array<Array<Any>>) -> Int {
+    // if no args passed in then only check if function was called (allows user to not care about args being passed in)
+    guard argsList.count != 0 else {
+        return functions.reduce(0) { $1 == function ? $0 + 1 : $0 }
+    }
+    
     let potentialMatchIndexes = matchingIndexesFor(functionName: function, functionList: functions)
     var correctCallsCount = 0
     
@@ -181,7 +161,7 @@ private func numberOfMatchingCalls(function function: String, functions: Array<S
 }
 
 private func matchingIndexesFor(functionName functionName: String, functionList: Array<String>) -> [Int] {
-    return functionList.enumerate().map { functionName == $1 ? $0 : -1 }.filter { $0 != -1 }
+    return functionList.enumerate().map { $1 == functionName ? $0 : -1 }.filter { $0 != -1 }
 }
 
 private func isEqualArgsLists(passedArgs passedArgs: Array<Any>, recordedArgs: Array<Any>) -> Bool {
