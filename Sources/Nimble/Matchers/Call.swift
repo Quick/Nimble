@@ -29,7 +29,7 @@ public func call(function function: String, count: Int) -> FullMatcherFunc<CallR
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, count: count, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, countSpecifier: .Exactly(count), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "exactly", count: count)
@@ -49,7 +49,7 @@ public func call(function function: String, atLeast: Int) -> FullMatcherFunc<Cal
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, atLeast: atLeast, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, countSpecifier: .AtLeast(atLeast), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "at least", count: atLeast)
@@ -69,7 +69,7 @@ public func call(function function: String, atMost: Int) -> FullMatcherFunc<Call
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, atMost: atMost, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, countSpecifier: .AtMost(atMost), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "at most", count: atMost)
@@ -109,7 +109,7 @@ public func call(function function: String, withArguments arguments: [Any], coun
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, count: count, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .Exactly(count), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "exactly", count: count)
@@ -129,7 +129,7 @@ public func call(function function: String, withArguments arguments: [Any], atLe
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, atLeast: atLeast, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .AtLeast(atLeast), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at least", count: atLeast)
@@ -149,7 +149,7 @@ public func call(function function: String, withArguments arguments: [Any], atMo
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, atMost: atMost, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .AtMost(atMost), recordedCallsDescOption: includeOption)
         
         if !isSuccessfulTest(result.success, isNegationTest) {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at most", count: atMost)

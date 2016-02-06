@@ -73,6 +73,12 @@ public enum DidCallResultIncludeOption : CustomStringConvertible {
     }
 }
 
+public enum CountSpecifier {
+    case Exactly(Int)
+    case AtLeast(Int)
+    case AtMost(Int)
+}
+
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
     // Implementation Example:
@@ -87,15 +93,8 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    
-    func didCall(function function: String, withArgs arguments: Array<Any>, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArgs arguments: Array<Any>, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
 }
 
 public extension CallRecorder {
@@ -111,52 +110,28 @@ public extension CallRecorder {
     
     // MARK: Did Call Function
     
-    func didCall(function function: String, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function) > 0
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function) == count
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function) >= count
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function) <= count
+    func didCall(function function: String, countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success: Bool
+        switch countSpecifier {
+            case .Exactly(let count): success = timesCalled(function) == count
+            case .AtLeast(let count): success = timesCalled(function) >= count
+            case .AtMost(let count): success = timesCalled(function) <= count
+        }
+        
         let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
         return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
     // MARK: Did Call Function With Arguments
     
-    func didCall(function function: String, withArgs arguments: Array<Any>, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function: function, arguments: arguments) > 0
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, withArgs arguments: Array<Any>, count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function: function, arguments: arguments) == count
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, withArgs arguments: Array<Any>, atLeast count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function: function, arguments: arguments) >= count
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
-        return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
-    }
-    
-    func didCall(function function: String, withArgs arguments: Array<Any>, atMost count: Int, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
-        let success = timesCalled(function: function, arguments: arguments) <= count
+    func didCall(function function: String, withArgs arguments: Array<Any>, countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+        let success: Bool
+        switch countSpecifier {
+            case .Exactly(let count): success = timesCalled(function, arguments: arguments) == count
+            case .AtLeast(let count): success = timesCalled(function, arguments: arguments) >= count
+            case .AtMost(let count): success = timesCalled(function, arguments: arguments) <= count
+        }
+        
         let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
         return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
@@ -167,7 +142,7 @@ public extension CallRecorder {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList)
     }
     
-    private func timesCalled(function function: String, arguments: Array<Any>) -> Int {
+    private func timesCalled(function: String, arguments: Array<Any>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
     }
     
