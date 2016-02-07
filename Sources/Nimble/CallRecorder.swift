@@ -86,7 +86,7 @@ public protocol CallRecorder : class {
     var called: (functionList: [String], argumentsList: [[Any]]) {get set}
     
     // **MUST** call in every method you want to spy
-    func recordCall(function function: String, arguments: [Any])
+    func recordCall(function function: String, arguments: Any...)
     
     // Used if you want to reset the called function/arguments lists
     func clearRecordedLists()
@@ -97,7 +97,7 @@ public protocol CallRecorder : class {
 }
 
 public extension CallRecorder {
-    func recordCall(function function: String = __FUNCTION__, arguments: [Any] = [Any]()) {
+    func recordCall(function function: String = __FUNCTION__, arguments: Any...) {
         self.called.functionList.append(function)
         self.called.argumentsList.append(arguments)
     }

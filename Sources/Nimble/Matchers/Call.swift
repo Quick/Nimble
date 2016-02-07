@@ -1,6 +1,6 @@
 import Foundation
 
-public func call(function function: String, withArguments arguments: [Any] = [Any](), countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
+public func call(function: String, withArguments arguments: Any..., countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
             failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)

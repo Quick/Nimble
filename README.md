@@ -940,28 +940,28 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 // Swift ONLY
 
 // passes if mock did call function
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)"))
+expect(mock).to(call("functionNameWith(arg1:arg2:)"))
 
 // passes if mock did call function a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", count: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .Exactly(1)))
 
 // passes if mock did call function at least a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", atLeast: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtLeast(2)))
 
 // passes if mock did call function at most a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", atMost: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtMost(1)))
 
 // passes if mock did call function with argument specifications
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.InstanceOf(type: String.self)]))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.InstanceOf(type: String.self)))
 
 // passes if mock did call function with argument specifications a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.Anything], count: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.Anything, countSpecifier: .Exactly(2)))
 
 // passes if mock did call function with argument specifications at least a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.NonNil], atLeast: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.NonNil, countSpecifier: .AtLeast(2)))
 
 // passes if mock did call function with argument specifications at most a number of times
-expect(mock).to(call(function: "functionNameWith(arg1:arg2:)", withArguments: ["firstArg", Argument.KindOf(type: NSObject.self)], atMost: 2))
+expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.KindOf(type: NSObject.self), countSpecifier: .AtMost(2)))
 ```
 
 Argument enum options: (use when the exact comparison of the argument is not needed)
@@ -980,35 +980,33 @@ ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the 
 ### Example Mock
 ```swift
 // The Protocol
-protocol ApiService : class {
-    func getCachedStrings() -> [String]
-    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void
+protocol StringService : class {
+    func giveMeAString() -> String
+    func hereAreTwoStrings(string1: String, string2: String)
 }
 
 // The Real Class
-class RealApiService : ApiService {
-    func getCachedStrings() -> [String] {
-        // return real things
+class RealStringService : ApiService {
+    func giveMeAString() -> String {
+        return "a real string"
     }
 
-    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
-        // do real stuff
+    func hereAreTwoStrings(string1: String, string2: String) {
+        // do real stuff with string
     }
 }
 
 // The Mock Class
-class MockApiService : ApiService, CallRecorder {
+class MockStringService : ApiService, CallRecorder {
     var called = (functionList: [String](), argumentsList: [[Any]]()) // <-- **REQUIRED**
 
-    // AnApiService Functions
-    func getCachedStrings() -> [String] {
+    func giveMeAString() -> String {
         self.recordCall() // <-- **REQUIRED**
-        return ["put something here to test what happens to returned value"]
+        return "a mocked value"
     }
 
-    func getStringsFromAPIWith(completion: (returnedStrings: [String]) -> Void) -> Void {
-        self.recordCall(arguments: [url]) // <-- **REQUIRED**
-        completion(["put something here to test what happens to returned value"]) // <-- makes asynchronous calls synchronous
+    func hereAreTwoStrings(string1: String, string2: String) {
+        self.recordCall(arguments: string1, string2) // <-- **REQUIRED**
     }
 }
 ```
@@ -1023,7 +1021,7 @@ public struct Person : CustomStringConvertible {
     let age: Int
 
     public var description: String {
-        return "firstName: \(firstName), lastName: \(lastName), age: \(age)"
+        return "Persion -> firstName: \(firstName), lastName: \(lastName), age: \(age)"
     }
 }
 ```
