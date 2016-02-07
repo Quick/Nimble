@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
+if which xcodebuild; then
 BUILD_DIR=`pwd`/build
 LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
 LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
 BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
 RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
 BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
+fi
 
 set -e
 
@@ -54,6 +56,11 @@ function test_osx {
     run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx$BUILD_OSX_SDK_VERSION" build test
 }
 
+function test_swiftpm {
+    run swift build --clean && swift build
+    run .build/debug/NimbleTests
+}
+
 function test() {
     test_ios
     test_osx
@@ -71,6 +78,7 @@ function help {
     echo " ios          - Runs the tests as an iOS device"
     echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
     echo " all          - Runs both ios and osx tests"
+    echo " swiftpm      - Runs the tests built by the Swift Package Manager (Linux only)"
     echo " help         - Displays this help"
     echo
     exit 1
@@ -86,6 +94,7 @@ function main {
             osx) test_osx ;;
             test) test ;;
             all) test ;;
+            swiftpm) test_swiftpm ;;
             help) help ;;
         esac
     done
