@@ -93,7 +93,7 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String, withArgs arguments: Array<Any>, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArguments arguments: Array<Any>, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
 }
 
 public extension CallRecorder {
@@ -107,7 +107,7 @@ public extension CallRecorder {
         self.called.argumentsList = Array<Array<Any>>()
     }
     
-    func didCall(function function: String, withArgs arguments: Array<Any> = [Any](), countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+    func didCall(function function: String, withArguments arguments: Array<Any> = [Any](), countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
         let success: Bool
         switch countSpecifier {
             case .Exactly(let count): success = timesCalled(function, arguments: arguments) == count

@@ -1,180 +1,51 @@
 import Foundation
 
-public func call(function function: String) -> FullMatcherFunc<CallRecorder> {
+public func call(function function: String, withArguments arguments: [Any] = [Any](), countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc
-            failureMessage.postfixActual = kNilReminderString
+            failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)
+            failureMessage.postfixActual = " (use beNil() to match nils)"
             return false
         }
         
         let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, recordedCallsDescOption: includeOption)
+        let result = expressionValue.didCall(function: function, withArguments: arguments, countSpecifier: countSpecifier, recordedCallsDescOption: includeOption)
+        let successfulTest = isSuccessfulTest(result.success, isNegationTest)
         
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "", count: 0)
+        if !successfulTest {
+            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countSpecifier: countSpecifier)
             failureMessage.actualValue = result.recordedCallsDescription
         }
         
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, count: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kCount
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, countSpecifier: .Exactly(count), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "exactly", count: count)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, atLeast: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kAtLeast
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, countSpecifier: .AtLeast(atLeast), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "at least", count: atLeast)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, atMost: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kAtMost
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, countSpecifier: .AtMost(atMost), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: [], countDescription: "at most", count: atMost)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, withArguments arguments: [Any]) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kWithArgs
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "", count: 0)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, withArguments arguments: [Any], count: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kWithArgs + kCount
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .Exactly(count), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "exactly", count: count)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, withArguments arguments: [Any], atLeast: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kWithArgs + kAtLeast
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .AtLeast(atLeast), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at least", count: atLeast)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
-    }
-}
-
-public func call(function function: String, withArguments arguments: [Any], atMost: Int) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
-        guard let expressionValue = try expression.evaluate() else {
-            failureMessage.postfixMessage = kCallFunc + kWithArgs + kAtMost
-            failureMessage.postfixActual = kNilReminderString
-            return false
-        }
-        
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
-        let result = expressionValue.didCall(function: function, withArgs: arguments, countSpecifier: .AtMost(atMost), recordedCallsDescOption: includeOption)
-        
-        if !isSuccessfulTest(result.success, isNegationTest) {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countDescription: "at most", count: atMost)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
-        
-        return isSuccessfulTest(result.success, isNegationTest)
+        return successfulTest
     }
 }
 
 // MARK: Private
 
-private let kCallFunc = "call function"
-private let kWithArgs = " with arguments"
-private let kCount = " count times"
-private let kAtLeast = " at least count times"
-private let kAtMost = " at most count times"
-private let kNilReminderString = " (use beNil() to match nils)"
-
-private func descriptionOfAttemptedCall(object object: Any, function: String, arguments: [Any], countDescription: String, count: Int) -> String {
+private func descriptionOfAttemptedCall(object object: Any, function: String, arguments: [Any], countSpecifier: CountSpecifier) -> String {
     var description = "call <\(function)> from \(object.dynamicType)"
     
     if !arguments.isEmpty {
         let argumentsDescription = arguments.map{ "\($0)" }.joinWithSeparator(", ")
         description += " with \(argumentsDescription)"
+    }
+    
+    let countDescription: String
+    let count: Int
+    switch countSpecifier {
+        case .Exactly(let _count):
+            countDescription = "exactly"
+            count = _count
+        case .AtLeast(let _count) where _count != 1:
+            countDescription = "at least"
+            count = _count
+        case .AtMost(let _count):
+            countDescription = "at most"
+            count = _count
+        default:
+            countDescription = ""
+            count = -1
     }
     
     if !countDescription.isEmpty {
@@ -183,6 +54,26 @@ private func descriptionOfAttemptedCall(object object: Any, function: String, ar
     }
     
     return description
+}
+
+private func postfixMessageForNilCase(arguments arguments: [Any], countSpecifier: CountSpecifier) -> String {
+    var postfixMessage = "call function"
+    
+    if arguments.count != 0 {
+        postfixMessage += " with arguments"
+    }
+    
+    switch countSpecifier {
+        case .Exactly(_):
+            postfixMessage += " count times"
+        case .AtLeast(let count) where count != 1:
+            postfixMessage += " at least count times"
+        case .AtMost(_):
+            postfixMessage += " at most count times"
+        default: break
+    }
+    
+    return postfixMessage
 }
 
 private func isSuccessfulTest(didDoIt: Bool, _ isNegationTest: Bool) -> Bool {

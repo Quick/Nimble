@@ -153,13 +153,13 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: "hi")
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hi"], recordedCallsDescOption: .No).success).to(beTrue(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hi"], recordedCallsDescOption: .No).success).to(beTrue(),
             description: "should SUCCEED to call correct function with correct arguments")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], recordedCallsDescOption: .No).success).to(beFalse(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], recordedCallsDescOption: .No).success).to(beFalse(),
             description: "should FAIL to call correct function with wrong arguments")
-        expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["hi"], recordedCallsDescOption: .No).success).to(beFalse(),
+        expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArguments: ["hi"], recordedCallsDescOption: .No).success).to(beFalse(),
             description: "should FAIL to call wrong function with correct argument")
-        expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArgs: ["nope"], recordedCallsDescOption: .No).success).to(beFalse(),
+        expect(testClass.didCall(function: "neverGonnaCallWith(string:)", withArguments: ["nope"], recordedCallsDescOption: .No).success).to(beFalse(),
             description: "should FAIL to call wrong function")
     }
     
@@ -171,8 +171,8 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hello", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: ["hello" as String?, nil as Int?], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call correct funtion with correct Optional values")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: ["hello", Optional<Int>.None], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call correct funtion with correct but Non-Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello" as String?, nil as Int?], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call correct funtion with correct Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello", Optional<Int>.None], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call correct funtion with correct but Non-Optional values")
     }
     
     func testDidCallFunctionWithArgumentsANumberOfTimes() {
@@ -185,9 +185,9 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: "hi")
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .Exactly(2), recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with arguments 2 times")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .Exactly(1), recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with arguments 1 time")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .Exactly(3), recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with arguments 3 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .Exactly(2), recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with arguments 2 times")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .Exactly(1), recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with arguments 1 time")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .Exactly(3), recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with arguments 3 times")
     }
     
     func testDidCallFunctionWithArgumentsAtLeastANumberOfTimes() {
@@ -200,11 +200,11 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: "hi")
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtLeast(2), recordedCallsDescOption: .No).success).to(beTrue(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtLeast(2), recordedCallsDescOption: .No).success).to(beTrue(),
             description: "should SUCCEED to call function with arguments at least 2 times")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtLeast(1), recordedCallsDescOption: .No).success).to(beTrue(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtLeast(1), recordedCallsDescOption: .No).success).to(beTrue(),
             description: "should SUCCEED to call function with arguments at least 1 time")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtLeast(3), recordedCallsDescOption: .No).success).to(beFalse(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtLeast(3), recordedCallsDescOption: .No).success).to(beFalse(),
             description: "should FAIL to call function with arguments 3 times")
     }
     
@@ -218,11 +218,11 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: "hi")
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtMost(2), recordedCallsDescOption: .No).success).to(beTrue(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtMost(2), recordedCallsDescOption: .No).success).to(beTrue(),
             description: "should SUCCEED to call function with arguments at most 2 times")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtMost(3), recordedCallsDescOption: .No).success).to(beTrue(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtMost(3), recordedCallsDescOption: .No).success).to(beTrue(),
             description: "should SUCCEED to call function with arguments at most 3 times")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: ["hello"], countSpecifier: .AtMost(1), recordedCallsDescOption: .No).success).to(beFalse(),
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: ["hello"], countSpecifier: .AtMost(1), recordedCallsDescOption: .No).success).to(beFalse(),
             description: "should FAIL to call function with arguments at most 1 time")
     }
     
@@ -266,8 +266,8 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doMoreStuffWith(int1:int2:)", withArgs: [Argument.Anything, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with 1 and dont care")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Anything, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with non-nil and dont care arguments")
+        expect(testClass.didCall(function: "doMoreStuffWith(int1:int2:)", withArguments: [Argument.Anything, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with 1 and dont care")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.Anything, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with non-nil and dont care arguments")
     }
     
     func testNonNilArgument() {
@@ -278,8 +278,8 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.NonNil, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with non-nil and dont care arguments")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Anything, Argument.NonNil], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with non-nil and non-nil arguments")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.NonNil, Argument.Anything], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with non-nil and dont care arguments")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.Anything, Argument.NonNil], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with non-nil and non-nil arguments")
     }
     
     func testNilArgument() {
@@ -290,9 +290,9 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Anything, Argument.Nil], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.Anything, Argument.Nil], recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with dont care and nil arguments")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Nil, Argument.Anything], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.Nil, Argument.Anything], recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with nil and dont care arguments")
     }
     
@@ -305,16 +305,16 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOf(type: String.self)], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOf(type: String.self)], recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with instance of String argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOf(type: Int.self)], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOf(type: Int.self)], recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with instance of Int argument")
         
         let expectedArgs1: Array<Any> = [Argument.InstanceOf(type: Optional<String>.self), Argument.InstanceOf(type: Optional<Int>.self)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs1, recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs1, recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with instance of String? and Int? arguments")
         let expectedArgs2: Array<Any> = [Argument.InstanceOf(type: String.self), Argument.InstanceOf(type: Int.self)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs2, recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2, recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with String and Int arguments")
     }
     
@@ -327,8 +327,8 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: 5)
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOfWith(type: String.self, option: .Anything)], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with instance of String with optional requirement 'dont care' argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOfWith(type: Int.self, option: .Anything)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of Int with optional requirement 'dont care' argument")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: String.self, option: .Anything)], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with instance of String with optional requirement 'dont care' argument")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: Int.self, option: .Anything)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of Int with optional requirement 'dont care' argument")
     }
     
     func testInstanceOfWithArgumentNonOptionalArgumentOption() {
@@ -340,9 +340,9 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: 5)
         
         // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOfWith(type: String.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with instance of String with optional requirement 'non-optional' argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOfWith(type: Int.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of Int with optional requirement 'non-optional' argument")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: [Argument.Anything, Argument.InstanceOfWith(type: Int.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with 'dont care' and instance of Int with optional requirement 'non-optional' arguments")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: String.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with instance of String with optional requirement 'non-optional' argument")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: Int.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of Int with optional requirement 'non-optional' argument")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.Anything, Argument.InstanceOfWith(type: Int.self, option: .NonOptional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with 'dont care' and instance of Int with optional requirement 'non-optional' arguments")
     }
     
     func testInstanceOfWithArgumentOptionalArgumentOption() {
@@ -355,10 +355,10 @@ class CallRecorderTest: XCTestCase {
         
         // then
         let expectedArgs1: Array<Any> = [Argument.Anything, Argument.InstanceOfWith(type: Int.self, option: .Optional)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs1, recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with 'dont care' and instance of Int with optional requirement 'optional' argument")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs1, recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with 'dont care' and instance of Int with optional requirement 'optional' argument")
         let expectedArgs2: Array<Any> = [Argument.Anything, Argument.InstanceOfWith(type: String.self, option: .Optional)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArgs: expectedArgs2, recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with 'dont care' and instance of String with optional requirement 'optional' argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArgs: [Argument.InstanceOfWith(type: String.self, option: .Optional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of String with optional requirement 'optional' arguments")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2, recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with 'dont care' and instance of String with optional requirement 'optional' argument")
+        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: String.self, option: .Optional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of String with optional requirement 'optional' arguments")
     }
     
     func testKindOfClassArgument() {
@@ -371,11 +371,11 @@ class CallRecorderTest: XCTestCase {
         testClass.doCrazyStuffWith(object: SubClass())
         
         // then
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: NSObject.self)], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.KindOf(type: NSObject.self)], recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with kind of NSObject argument")
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: SubClass.self)], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.KindOf(type: SubClass.self)], recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with kind of SubClass argument")
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArgs: [Argument.KindOf(type: SubSubClass.self)], recordedCallsDescOption: .No).success)
+        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.KindOf(type: SubSubClass.self)], recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with kind of SubSubClass argument")
     }
     
