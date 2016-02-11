@@ -279,11 +279,11 @@
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
 		965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
+		965DA2141C62AAAD00D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
+		965DA2161C62AB0100D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
 		AEBA64701C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
 		AEBA64711C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
 		AEBA64721C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
-		965DA2141C62AAAD00D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
-		965DA2161C62AB0100D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
@@ -474,8 +474,8 @@
 		964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowAssertionTest.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
+		965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CwlPreconditionTesting.framework; path = ../Debug/CwlPreconditionTesting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentTestCaseTracker.m; sourceTree = "<group>"; };
-		965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CwlPreconditionTesting.framework; path = "../../Library/Developer/Xcode/DerivedData/Nimble-gfplyfamlpdclbfhdyyvdjhoiuzl/Build/Products/Debug/CwlPreconditionTesting.framework"; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
