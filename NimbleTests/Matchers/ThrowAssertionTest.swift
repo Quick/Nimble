@@ -5,7 +5,7 @@ import CwlPreconditionTesting
 class ThrowAssertionTest: XCTestCase {
     
     func testPositiveMatch() {
-        expect { precondition(false, "Fatal message") }.to(throwAssertion())
+        expect { _ -> Void in fatalError() }.to(throwAssertion())
     }
     
     func testErrorThrown() {
