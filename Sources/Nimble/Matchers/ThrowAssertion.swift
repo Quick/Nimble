@@ -1,5 +1,4 @@
 import Foundation
-import CwlPreconditionTesting
 
 public func throwAssertion() -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in

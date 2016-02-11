@@ -1,6 +1,5 @@
 import XCTest
 import Nimble
-import CwlPreconditionTesting
 
 class ThrowAssertionTest: XCTestCase {
     
