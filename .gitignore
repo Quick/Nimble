@@ -1,5 +1,7 @@
 .DS_Store
 **/xcuserdata/*
+**/*.xccheckout
+**/*.xcscmblueprint
 build/
 .idea
 DerivedData/
