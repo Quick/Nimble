@@ -176,6 +176,12 @@
 		1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
 		1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
 		1FC494AC1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
+		1FCF914F1C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91501C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91511C61C85A00B15DCB /* PostNotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */; };
+		1FCF91531C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
+		1FCF91541C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
+		1FCF91551C61C8A400B15DCB /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF91521C61C8A400B15DCB /* PostNotification.swift */; };
 		1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
@@ -246,6 +252,9 @@
 		29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59621B551ED2002D767E /* ThrowErrorTest.swift */; };
 		29EA59661B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		29EA59671B551EE6002D767E /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
+		347155CA1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
+		347155CB1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
+		347155CC1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347155C91C337C8900549F03 /* XCTestCaseProvider.swift */; };
 		472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		472FD13A1B9E0A9F00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
@@ -270,6 +279,9 @@
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
 		965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
+		AEBA64701C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
+		AEBA64711C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
+		AEBA64721C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */; };
 		965DA2141C62AAAD00D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
 		965DA2161C62AB0100D28D43 /* CwlPreconditionTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
@@ -410,6 +422,8 @@
 		1F9DB8FA1A74E793002E96AD /* ObjCBeEmptyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCBeEmptyTest.m; sourceTree = "<group>"; };
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleEnvironment.swift; sourceTree = "<group>"; };
+		1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotificationTest.swift; sourceTree = "<group>"; };
+		1FCF91521C61C8A400B15DCB /* PostNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotification.swift; sourceTree = "<group>"; };
 		1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
 		1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
 		1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleXCTestHandler.swift; sourceTree = "<group>"; };
@@ -447,9 +461,9 @@
 		1FD8CD2D1968AB07008ED995 /* ObjCMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCMatcher.swift; sourceTree = "<group>"; };
 		1FDBD8661AF8A4FF0089F27B /* AssertionDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssertionDispatcher.swift; sourceTree = "<group>"; };
 		1FFD729B1963FCAB00CD29A2 /* NimbleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbleTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		1FFD729C1963FCAB00CD29A2 /* Nimble-OSXTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Nimble-OSXTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		29EA59621B551ED2002D767E /* ThrowErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowErrorTest.swift; sourceTree = "<group>"; };
 		29EA59651B551EE6002D767E /* ThrowError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowError.swift; sourceTree = "<group>"; };
+		347155C91C337C8900549F03 /* XCTestCaseProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseProvider.swift; sourceTree = "<group>"; };
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
@@ -460,6 +474,7 @@
 		964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowAssertionTest.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
 		965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDescriptionTest.swift; sourceTree = "<group>"; };
+		AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentTestCaseTracker.m; sourceTree = "<group>"; };
 		965DA2131C62AAAD00D28D43 /* CwlPreconditionTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CwlPreconditionTesting.framework; path = "../../Library/Developer/Xcode/DerivedData/Nimble-gfplyfamlpdclbfhdyyvdjhoiuzl/Build/Products/Debug/CwlPreconditionTesting.framework"; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
@@ -526,6 +541,7 @@
 			children = (
 				1F14FB63194180C5009F2A08 /* utils.swift */,
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
+				347155C91C337C8900549F03 /* XCTestCaseProvider.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -571,7 +587,8 @@
 				1FD8CD291968AB07008ED995 /* Wrappers */,
 				965DA2151C62AAC600D28D43 /* Frameworks */,
 			);
-			path = Nimble;
+			name = Nimble;
+			path = Sources/Nimble;
 			sourceTree = "<group>";
 		};
 		1F1A742C1940169200FFFC47 /* Supporting Files */ = {
@@ -593,7 +610,8 @@
 				1F925EE3195C11B000ED456B /* Matchers */,
 				1F1A74391940169200FFFC47 /* Supporting Files */,
 			);
-			path = NimbleTests;
+			name = NimbleTests;
+			path = Sources/NimbleTests;
 			sourceTree = "<group>";
 		};
 		1F1A74391940169200FFFC47 /* Supporting Files */ = {
@@ -630,6 +648,7 @@
 				964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */,
 				29EA59621B551ED2002D767E /* ThrowErrorTest.swift */,
 				7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */,
+				1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -672,6 +691,7 @@
 				964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */,
 				29EA59651B551EE6002D767E /* ThrowError.swift */,
 				7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */,
+				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
 			);
 			path = Matchers;
 			sourceTree = "<group>";
@@ -683,6 +703,7 @@
 				1FD8CD211968AB07008ED995 /* DSL.m */,
 				1FD8CD221968AB07008ED995 /* NMBExceptionCapture.h */,
 				1FD8CD231968AB07008ED995 /* NMBExceptionCapture.m */,
+				AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -711,7 +732,6 @@
 		1FFD729A1963FC8200CD29A2 /* objc */ = {
 			isa = PBXGroup;
 			children = (
-				1FFD729C1963FCAB00CD29A2 /* Nimble-OSXTests-Bridging-Header.h */,
 				1F4A56681A3B3074009E1637 /* NimbleSpecHelper.h */,
 				1FFD729B1963FCAB00CD29A2 /* NimbleTests-Bridging-Header.h */,
 				1F4A56651A3B305F009E1637 /* ObjCAsyncTest.m */,
@@ -1016,6 +1036,7 @@
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1FDBD8671AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				1F43728A1A1B343800EB80F8 /* Functional.swift in Sources */,
+				AEBA64701C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */,
 				1FD8CD3C1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				1FD8CD501968AB07008ED995 /* BeLogical.swift in Sources */,
 				1F0FEA9A1AF32DA4001E554E /* ObjCExpectation.swift in Sources */,
@@ -1024,6 +1045,7 @@
 				DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3E1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				DDB4D5ED19FE43C200E9D9FE /* Match.swift in Sources */,
+				1FCF91531C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				29EA59661B551EE6002D767E /* ThrowError.swift in Sources */,
 				1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */,
@@ -1084,6 +1106,7 @@
 				1F4A56971A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567C1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
+				1FCF914F1C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */,
 				1F4A56911A3B344A009E1637 /* ObjCBeNilTest.m in Sources */,
 				1F8A37B01B7C5042001C8357 /* ObjCSyncTest.m in Sources */,
@@ -1099,6 +1122,7 @@
 				1F4A56851A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A8F19CF439B00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				347155CA1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				4793854D1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F08195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				7B5358BA1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */,
@@ -1127,6 +1151,7 @@
 				1F5DF18A1BDCA0F500C3A531 /* ThrowError.swift in Sources */,
 				1F5DF1891BDCA0F500C3A531 /* RaisesException.swift in Sources */,
 				1F5DF1761BDCA0F500C3A531 /* AllPass.swift in Sources */,
+				AEBA64721C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */,
 				1F5DF1861BDCA0F500C3A531 /* HaveCount.swift in Sources */,
 				1F5DF1811BDCA0F500C3A531 /* BeLogical.swift in Sources */,
 				1F5DF1741BDCA0F500C3A531 /* Expression.swift in Sources */,
@@ -1135,6 +1160,7 @@
 				1F5DF1771BDCA0F500C3A531 /* BeAKindOf.swift in Sources */,
 				1F5DF17F1BDCA0F500C3A531 /* BeLessThan.swift in Sources */,
 				1F5DF17C1BDCA0F500C3A531 /* BeGreaterThan.swift in Sources */,
+				1FCF91551C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1F5DF1831BDCA0F500C3A531 /* Contain.swift in Sources */,
 				1F5DF1731BDCA0F500C3A531 /* ObjCExpectation.swift in Sources */,
 				1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */,
@@ -1184,6 +1210,7 @@
 				1F5DF1A91BDCA10200C3A531 /* MatchTest.swift in Sources */,
 				1F5DF1A81BDCA10200C3A531 /* HaveCountTest.swift in Sources */,
 				1F5DF1971BDCA10200C3A531 /* AllPassTest.swift in Sources */,
+				1FCF91511C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				1F5DF19C1BDCA10200C3A531 /* BeginWithTest.swift in Sources */,
 				1F5DF1A01BDCA10200C3A531 /* BeIdenticalToTest.swift in Sources */,
 				1F5DF19A1BDCA10200C3A531 /* BeCloseToTest.swift in Sources */,
@@ -1192,6 +1219,7 @@
 				1F5DF1931BDCA10200C3A531 /* SynchronousTests.swift in Sources */,
 				1F5DF19D1BDCA10200C3A531 /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F5DF1A41BDCA10200C3A531 /* BeNilTest.swift in Sources */,
+				347155CC1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				1F5DF1AA1BDCA10200C3A531 /* RaisesExceptionTest.swift in Sources */,
 				1F5DF1941BDCA10200C3A531 /* UserDescriptionTest.swift in Sources */,
 				1F5DF19F1BDCA10200C3A531 /* BeIdenticalToObjectTest.swift in Sources */,
@@ -1212,6 +1240,7 @@
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				1F43728B1A1B343900EB80F8 /* Functional.swift in Sources */,
+				AEBA64711C5C5FD10060A057 /* CurrentTestCaseTracker.m in Sources */,
 				1FD8CD3D1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				1FD8CD511968AB07008ED995 /* BeLogical.swift in Sources */,
 				1F0FEA9B1AF32DA4001E554E /* ObjCExpectation.swift in Sources */,
@@ -1220,6 +1249,7 @@
 				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
 				1FD8CD3F1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
+				1FCF91541C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
 				29EA59671B551EE6002D767E /* ThrowError.swift in Sources */,
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
@@ -1280,6 +1310,7 @@
 				1F4A56981A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567D1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
+				1FCF91501C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */,
 				1F4A56921A3B344A009E1637 /* ObjCBeNilTest.m in Sources */,
 				1F8A37B11B7C5042001C8357 /* ObjCSyncTest.m in Sources */,
@@ -1295,6 +1326,7 @@
 				1F4A56861A3B33A0009E1637 /* ObjCBeTruthyTest.m in Sources */,
 				DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F0648D51963AAB2001F9C46 /* SynchronousTests.swift in Sources */,
+				347155CB1C337C8900549F03 /* XCTestCaseProvider.swift in Sources */,
 				4793854E1BA0BB2500296F85 /* ObjCHaveCount.m in Sources */,
 				1F925F09195C18CF00ED456B /* BeGreaterThanTest.swift in Sources */,
 				7B5358BB1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */,
@@ -1463,7 +1495,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1478,7 +1510,6 @@
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1497,7 +1528,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1511,7 +1542,6 @@
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -1527,13 +1557,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
-				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/NimbleTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1546,13 +1576,13 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
-				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/NimbleTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -1569,7 +1599,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1602,7 +1632,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1630,12 +1660,13 @@
 					"$(inherited)",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
@@ -1650,12 +1681,13 @@
 					"$(inherited)",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
@@ -1678,7 +1710,7 @@
 					"$(inherited)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1693,7 +1725,6 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -1713,7 +1744,7 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = Nimble/Info.plist;
+				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1728,7 +1759,6 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -1746,14 +1776,14 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1768,14 +1798,14 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NimbleTests/Info.plist;
+				INFOPLIST_FILE = Sources/NimbleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "NimbleTests/objc/Nimble-OSXTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/NimbleTests/objc/NimbleTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
