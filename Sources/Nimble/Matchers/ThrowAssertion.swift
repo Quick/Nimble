@@ -1,5 +1,7 @@
 import Foundation
 
+#if !os(tvOS)
+
 public func throwAssertion() -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
     #if arch(x86_64)
@@ -31,3 +33,6 @@ public func throwAssertion() -> MatcherFunc<Void> {
     #endif
     }
 }
+
+
+#endif

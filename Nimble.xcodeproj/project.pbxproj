@@ -277,7 +277,6 @@
 		9630C0121C6D0B18000693EE /* CwlCatchBadInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00B1C6D0B18000693EE /* CwlCatchBadInstruction.m */; };
 		9630C0131C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */; };
 		9630C0141C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */; };
-		9630C0151C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */; };
 		9630C0191C6D0B2F000693EE /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0161C6D0B2F000693EE /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9630C01A1C6D0B2F000693EE /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0161C6D0B2F000693EE /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9630C01B1C6D0B2F000693EE /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0161C6D0B2F000693EE /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1257,7 +1256,6 @@
 				9630C0321C6D139F000693EE /* CwlDarwinDefinitions.swift in Sources */,
 				9630C0251C6D0B82000693EE /* mach_excServer.c in Sources */,
 				9630C0211C6D0B2F000693EE /* CwlCatchException.swift in Sources */,
-				9630C0151C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */,
 				9630C0121C6D0B18000693EE /* CwlCatchBadInstruction.m in Sources */,
 				9630C01E1C6D0B2F000693EE /* CwlCatchException.m in Sources */,
 				9630C02E1C6D125F000693EE /* CwlBadInstructionException.swift in Sources */,

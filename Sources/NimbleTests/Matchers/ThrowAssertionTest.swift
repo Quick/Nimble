@@ -3,6 +3,8 @@ import Nimble
 
 class ThrowAssertionTest: XCTestCase {
     
+    #if !os(tvOS)
+    
     func testPositiveMatch() {
         expect { _ -> Void in fatalError() }.to(throwAssertion())
     }
@@ -33,4 +35,5 @@ class ThrowAssertionTest: XCTestCase {
         expect(reachedPoint1) == true
     }
     
+    #endif
 }
