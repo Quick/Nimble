@@ -1123,7 +1123,6 @@
 				1FD8CD421968AB07008ED995 /* BeEmpty.swift in Sources */,
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6A1968AB07008ED995 /* Async.swift in Sources */,
-				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD761968AB07008ED995 /* ObjCMatcher.swift in Sources */,
@@ -1139,6 +1138,7 @@
 				9630C0101C6D0B18000693EE /* CwlCatchBadInstruction.m in Sources */,
 				9630C01C1C6D0B2F000693EE /* CwlCatchException.m in Sources */,
 				9630C02C1C6D125F000693EE /* CwlBadInstructionException.swift in Sources */,
+				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

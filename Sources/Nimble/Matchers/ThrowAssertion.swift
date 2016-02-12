@@ -2,6 +2,7 @@ import Foundation
 
 public func throwAssertion() -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
+    #if arch(x86_64)
         failureMessage.postfixMessage = "throw an assertion"
         failureMessage.actualValue = nil
         
@@ -25,5 +26,8 @@ public func throwAssertion() -> MatcherFunc<Void> {
         }
         
         return true
+    #else
+        fatalError("The throwAssertion Nimble matcher can only run on x86_64 platforms (e.g. Mac, iPhone 5s or later simulators, and tvOS simulator)")
+    #endif
     }
 }
