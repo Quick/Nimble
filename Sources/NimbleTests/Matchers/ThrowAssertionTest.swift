@@ -3,8 +3,8 @@ import Nimble
 
 class ThrowAssertionTest: XCTestCase {
     
-    #if !os(tvOS)
-    
+    #if !os(tvOS) && _runtime(_ObjC)
+
     func testPositiveMatch() {
         expect { _ -> Void in fatalError() }.to(throwAssertion())
     }
