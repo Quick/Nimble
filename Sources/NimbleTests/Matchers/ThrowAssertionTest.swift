@@ -1,8 +1,8 @@
+#if _runtime(_ObjC)
+    
 import XCTest
 import Nimble
 
-#if _runtime(_ObjC)
-    
 class ThrowAssertionTest: XCTestCase {
     
     func testPositiveMatch() {
