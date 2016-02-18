@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 
-#if !os(tvOS) && _runtime(_ObjC)
+#if _runtime(_ObjC)
     
 class ThrowAssertionTest: XCTestCase {
     
