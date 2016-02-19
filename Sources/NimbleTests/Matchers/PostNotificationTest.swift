@@ -17,9 +17,20 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
 
     var notificationCenter: NSNotificationCenter!
 
+    #if _runtime(_ObjC)
     override func setUp() {
-        notificationCenter = NSNotificationCenter()
+        _setUp()
         super.setUp()
+    }
+    #else
+    func setUp() {
+        _setUp()
+    }
+    #endif
+
+
+    func _setUp() {
+        notificationCenter = NSNotificationCenter()
     }
 
     func testPassesWhenNoNotificationsArePosted() {
