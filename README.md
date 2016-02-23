@@ -387,6 +387,19 @@ pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
 deadlocks, and synchronous IPC.
 
+In some cases (e.g. when running on slower machines) it can be useful to modify
+the default timeout and poll interval values. This can be done as follows:
+
+```swift
+// Swift
+
+// Increase the global timeout to 5 seconds:
+Nimble.Defaults.AsyncTimeout = 5
+
+// Slow the polling interval to 0.1 seconds:
+Nimble.Defaults.AsyncPollInterval = 0.1
+```
+
 ## Objective-C Support
 
 Nimble has full support for Objective-C. However, there are two things
