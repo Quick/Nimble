@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 
-#if _runtime(_ObjC)
+#if _runtime(_ObjC) && !SWIFT_PACKAGE
 
 class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
     var allTests: [(String, () throws -> Void)] {

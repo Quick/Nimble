@@ -68,15 +68,15 @@ func failsWithErrorMessageForNil(message: String, file: FileString = __FILE__, l
 #endif
 
 public class NimbleHelper : NSObject {
-    class func expectFailureMessage(message: NSString, block: () -> Void, file: FileString, line: UInt) {
+    public class func expectFailureMessage(message: NSString, block: () -> Void, file: FileString, line: UInt) {
         failsWithErrorMessage(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    class func expectFailureMessages(messages: [NSString], block: () -> Void, file: FileString, line: UInt) {
+    public class func expectFailureMessages(messages: [NSString], block: () -> Void, file: FileString, line: UInt) {
         failsWithErrorMessage(messages.map({ String($0) }), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: FileString, line: UInt) {
+    public class func expectFailureMessageForNil(message: NSString, block: () -> Void, file: FileString, line: UInt) {
         failsWithErrorMessageForNil(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }

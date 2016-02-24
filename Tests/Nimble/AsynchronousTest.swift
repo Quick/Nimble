@@ -2,6 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
+// These tests require the ObjC runtimes do not currently have the GCD and run loop facilities
+// required for working with Nimble's async matchers
 #if _runtime(_ObjC)
 
 class AsyncTest: XCTestCase, XCTestCaseProvider {
@@ -108,6 +110,8 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
+        // Currently we are unable to catch Objective-C exceptions when built by the Swift Package Manager
+#if !SWIFT_PACKAGE
         let referenceLine = __LINE__ + 9
         var msg = "Unexpected exception raised: Nested async expectations are not allowed "
         msg += "to avoid creating flaky tests."
@@ -128,9 +132,11 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
                 done()
             }
         }
+#endif
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
+#if !SWIFT_PACKAGE
         waitUntil { done in
             deferToMainQueue {
                 done()
@@ -139,9 +145,11 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
                 }.to(raiseException(named: "InvalidNimbleAPIUsage"))
             }
         }
+#endif
     }
 
     func testWaitUntilMustBeInMainThread() {
+#if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             expect {
@@ -150,9 +158,11 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             executedAsyncBlock = true
         }
         expect(executedAsyncBlock).toEventually(beTruthy())
+#endif
     }
 
     func testToEventuallyMustBeInMainThread() {
+#if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             expect {
@@ -161,6 +171,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             executedAsyncBlock = true
         }
         expect(executedAsyncBlock).toEventually(beTruthy())
+#endif
     }
 }
 #endif
