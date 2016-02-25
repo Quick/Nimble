@@ -63,6 +63,12 @@ function test_swiftpm {
 function test() {
     test_ios
     test_osx
+
+    if which swift-test; then
+        test_swiftpm
+    else
+        echo "Not testing with the Swift Package Manager because swift-test is not installed"
+    fi
 }
 
 function clean {
