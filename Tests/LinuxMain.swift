@@ -1,4 +1,5 @@
 import XCTest
+@testable import Nimbletest
 
 // This is the entry point for NimbleTests on Linux
 
