@@ -15,18 +15,36 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
+    var notificationCenter: NSNotificationCenter!
+
+    #if _runtime(_ObjC)
+    override func setUp() {
+        _setUp()
+        super.setUp()
+    }
+    #else
+    func setUp() {
+        _setUp()
+    }
+    #endif
+
+
+    func _setUp() {
+        notificationCenter = NSNotificationCenter()
+    }
+
     func testPassesWhenNoNotificationsArePosted() {
         expect {
             // no notifications here!
             return nil
-        }.to(postNotifications(beEmpty()))
+        }.to(postNotifications(beEmpty(), fromNotificationCenter: notificationCenter))
     }
 
     func testPassesWhenExpectedNotificationIsPosted() {
         let testNotification = NSNotification(name: "Foo", object: nil)
         expect {
-            NSNotificationCenter.defaultCenter().postNotification(testNotification)
-        }.to(postNotifications(equal([testNotification])))
+            self.notificationCenter.postNotification(testNotification)
+        }.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
     }
 
     func testPassesWhenAllExpectedNotificationsArePosted() {
@@ -35,10 +53,10 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         let n1 = NSNotification(name: "Foo", object: foo)
         let n2 = NSNotification(name: "Bar", object: bar)
         expect {
-            NSNotificationCenter.defaultCenter().postNotification(n1)
-            NSNotificationCenter.defaultCenter().postNotification(n2)
+            self.notificationCenter.postNotification(n1)
+            self.notificationCenter.postNotification(n2)
             return nil
-        }.to(postNotifications(equal([n1, n2])))
+        }.to(postNotifications(equal([n1, n2]), fromNotificationCenter: notificationCenter))
     }
 
     func testFailsWhenNoNotificationsArePosted() {
@@ -47,7 +65,7 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
             expect {
                 // no notifications here!
                 return nil
-            }.to(postNotifications(equal([testNotification])))
+            }.to(postNotifications(equal([testNotification]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
@@ -56,9 +74,9 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         let n2 = NSNotification(name: n1.name + "a", object: nil)
         failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect {
-                NSNotificationCenter.defaultCenter().postNotification(n2)
+                self.notificationCenter.postNotification(n2)
                 return nil
-            }.to(postNotifications(equal([n1])))
+            }.to(postNotifications(equal([n1]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
@@ -67,9 +85,9 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         let n2 = NSNotification(name: n1.name, object: NSObject())
         failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect {
-                NSNotificationCenter.defaultCenter().postNotification(n2)
+                self.notificationCenter.postNotification(n2)
                 return nil
-            }.to(postNotifications(equal([n1])))
+            }.to(postNotifications(equal([n1]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
@@ -78,10 +96,10 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
             let testNotification = NSNotification(name: "Foo", object: nil)
             expect {
                 deferToMainQueue {
-                    NSNotificationCenter.defaultCenter().postNotification(testNotification)
+                    self.notificationCenter.postNotification(testNotification)
                 }
                 return nil
-                }.toEventually(postNotifications(equal([testNotification])))
+            }.toEventually(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
         #else
             print("\(__FUNCTION__) is missing because toEventually is not implement on this platform")
         #endif
