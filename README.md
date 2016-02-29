@@ -667,7 +667,7 @@ expect(actual).to(beNil());
 
 ## Swift Assertions
 
-If you're using Swift 2.0+, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by @mattgallagher's provides in [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting)
+If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library
 
 ```swift
 // Swift
@@ -679,7 +679,7 @@ expect{ try somethingThatThrows() }.to(throwAssertion())
 Notes:
 
 * This feature is only available in Swift.
-* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices_.
+* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices, only simulators_.
 * The tvOS simulator is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
 
 ## Swift Error Handling
@@ -932,10 +932,10 @@ expect(actual).to(satisfyAnyOf(beLessThan(@10), beGreaterThan(@20)))
 expect(@6).to(satisfyAnyOf(equal(@2), equal(@3), equal(@4), equal(@5), equal(@6), equal(@7)))
 ```
 
-Note: This matcher allows you to chain any number of matchers together. This provides flexibility, 
-      but if you find yourself chaining many matchers together in one test, consider whether you  
-      could instead refactor that single test into multiple, more precisely focused tests for 
-      better coverage. 
+Note: This matcher allows you to chain any number of matchers together. This provides flexibility,
+      but if you find yourself chaining many matchers together in one test, consider whether you
+      could instead refactor that single test into multiple, more precisely focused tests for
+      better coverage.
 
 # Writing Your Own Matchers
 
