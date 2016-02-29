@@ -27,7 +27,9 @@ public func throwAssertion() -> MatcherFunc<Void> {
         
         return true
     #else
-        fatalError("The throwAssertion Nimble matcher can only run on x86_64 platforms with Objective-C (e.g. Mac, iPhone 5s or later simulators)")
+        fatalError("The throwAssertion Nimble matcher can only run on x86_64 platforms with " +
+            "Objective-C (e.g. Mac, iPhone 5s or later simulators). You can silence this error " +
+            "by placing the test case inside an #if arch(x86_64) or _runtime(_ObjC) conditional statement")
     #endif
     }
 }
