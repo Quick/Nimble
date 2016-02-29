@@ -665,6 +665,23 @@ expect(actual).to(beFalse());
 expect(actual).to(beNil());
 ```
 
+## Swift Assertions
+
+If you're using Swift 2.0+, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by @mattgallagher's provides in [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting)
+
+```swift
+// Swift
+
+// Passes if somethingThatThrows() fails an assertion, such as calling fatalError():
+expect{ try somethingThatThrows() }.to(throwAssertion())
+```
+
+Notes:
+
+* This feature is only available in Swift.
+* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices_.
+* The tvOS simulator is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
+
 ## Swift Error Handling
 
 If you're using Swift 2.0+, you can use the `throwError` matcher to check if an error is thrown.
