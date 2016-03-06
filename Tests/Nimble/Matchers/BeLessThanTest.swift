@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class BeLessThanTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeLessThanTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeLessThanTest -> () throws -> Void)] {
         return [
             ("testLessThan", testLessThan),
             ("testLessThanOperator", testLessThanOperator),

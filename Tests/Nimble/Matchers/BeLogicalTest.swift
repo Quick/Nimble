@@ -19,8 +19,8 @@ enum ConvertsToBool : Boolean, CustomStringConvertible {
     }
 }
 
-class BeTruthyTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeTruthyTest -> () throws -> Void)] {
         return [
             ("testShouldMatchNonNilTypes", testShouldMatchNonNilTypes),
             ("testShouldMatchTrue", testShouldMatchTrue),
@@ -84,8 +84,8 @@ class BeTruthyTest : XCTestCase, XCTestCaseProvider {
     }
 }
 
-class BeTrueTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeTrueTest : XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeTrueTest -> () throws -> Void)] {
         return [
             ("testShouldMatchTrue", testShouldMatchTrue),
             ("testShouldNotMatchFalse", testShouldNotMatchFalse),
@@ -120,8 +120,8 @@ class BeTrueTest : XCTestCase, XCTestCaseProvider {
     }
 }
 
-class BeFalsyTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeFalsyTest : XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeFalsyTest -> () throws -> Void)] {
         return [
             ("testShouldMatchNilTypes", testShouldMatchNilTypes),
             ("testShouldNotMatchTrue", testShouldNotMatchTrue),
@@ -167,8 +167,8 @@ class BeFalsyTest : XCTestCase, XCTestCaseProvider {
     }
 }
 
-class BeFalseTest : XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeFalseTest : XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeFalseTest -> () throws -> Void)] {
         return [
             ("testShouldNotMatchTrue", testShouldNotMatchTrue),
             ("testShouldMatchFalse", testShouldMatchFalse),

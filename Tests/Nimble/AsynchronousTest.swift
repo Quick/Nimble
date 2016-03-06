@@ -6,8 +6,8 @@ import Nimble
 // required for working with Nimble's async matchers
 #if _runtime(_ObjC)
 
-class AsyncTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class AsyncTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, AsyncTest -> () throws -> Void)] {
         return [
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),

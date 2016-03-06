@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 @testable import Nimble
 
-class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeIdenticalToTest -> () throws -> Void)] {
         return [
             ("testBeIdenticalToPositive", testBeIdenticalToPositive),
             ("testBeIdenticalToNegative", testBeIdenticalToNegative),

@@ -1,8 +1,8 @@
 import XCTest
 import Nimble
 
-class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, UserDescriptionTest -> () throws -> Void)] {
         return [
             ("testToMatcher_CustomFailureMessage", testToMatcher_CustomFailureMessage),
             ("testNotToMatcher_CustomFailureMessage", testNotToMatcher_CustomFailureMessage),
