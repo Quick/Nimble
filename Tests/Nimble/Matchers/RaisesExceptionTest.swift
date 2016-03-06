@@ -3,8 +3,8 @@ import Nimble
 
 #if _runtime(_ObjC) && !SWIFT_PACKAGE
 
-class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, RaisesExceptionTest -> () throws -> Void)] {
         return [
             ("testPositiveMatches", testPositiveMatches),
             ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),

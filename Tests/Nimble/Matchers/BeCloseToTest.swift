@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class BeCloseToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeCloseToTest -> () throws -> Void)] {
         return [
             ("testBeCloseTo", testBeCloseTo),
             ("testBeCloseToWithin", testBeCloseToWithin),

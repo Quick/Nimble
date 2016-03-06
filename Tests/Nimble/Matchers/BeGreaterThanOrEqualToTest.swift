@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeGreaterThanOrEqualToTest -> () throws -> Void)] {
         return [
             ("testGreaterThanOrEqualTo", testGreaterThanOrEqualTo),
             ("testGreaterThanOrEqualToOperator", testGreaterThanOrEqualToOperator),

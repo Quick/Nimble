@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class SynchronousTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class SynchronousTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, SynchronousTest -> () throws -> Void)] {
         return [
             ("testFailAlwaysFails", testFailAlwaysFails),
             ("testUnexpectedErrorsThrownFails", testUnexpectedErrorsThrownFails),

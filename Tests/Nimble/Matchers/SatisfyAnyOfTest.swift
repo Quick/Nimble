@@ -1,8 +1,8 @@
 import XCTest
 import Nimble
 
-class SatisfyAnyOfTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class SatisfyAnyOfTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, SatisfyAnyOfTest -> () throws -> Void)] {
         return [
             ("testSatisfyAnyOf", testSatisfyAnyOf),
             ("testOperatorOr", testOperatorOr),
