@@ -54,6 +54,13 @@ internal func stringify<S: SequenceType>(value: S) -> String {
 internal func stringify<T>(value: T) -> String {
     if let value = value as? Double {
         return NSString(format: "%.4f", (value)).description
+    } else if let value = value as? NSData {
+#if os(Linux)
+        // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11)
+        return "NSData<length=\(value.length)>"
+#else
+        return "NSData<hash=\(value.hash),length=\(value.length)>"
+#endif
     }
     return String(value)
 }
