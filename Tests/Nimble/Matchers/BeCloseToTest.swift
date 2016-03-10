@@ -38,13 +38,8 @@ class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(NSNumber(double:1.2)).to(beCloseTo(9.300, within: 10))
         expect(NSNumber(double:1.2)).to(beCloseTo(NSNumber(double:9.300), within: 10))
         expect(1.2).to(beCloseTo(NSNumber(double:9.300), within: 10))
-
-#if _runtime(_ObjC)
-        let expectedRepresentation = "1.2000"
-#else
-        let expectedRepresentation = "1.2"
-#endif
-        failsWithErrorMessage("expected to not be close to <1.2001> (within 1.0000), got <\(expectedRepresentation)>") {
+        
+        failsWithErrorMessage("expected to not be close to <1.2001> (within 1.0000), got <1.2000>") {
             expect(NSNumber(double:1.2)).toNot(beCloseTo(1.2001, within: 1.0))
         }
     }

@@ -7,8 +7,8 @@ internal let DefaultDelta = 0.0001
 
 internal func isCloseTo(actualValue: NMBDoubleConvertible?, expectedValue: NMBDoubleConvertible, delta: Double, failureMessage: FailureMessage) -> Bool {
     failureMessage.postfixMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
-    if actualValue != nil {
-        failureMessage.actualValue = "<\(stringify(actualValue!))>"
+    if let actualValue = actualValue {
+        failureMessage.actualValue = "<\(stringify(actualValue))>"
     } else {
         failureMessage.actualValue = "<nil>"
     }
