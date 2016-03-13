@@ -76,6 +76,24 @@ extension Array: TestOutputStringConvertible {
     }
 }
 
+extension AnySequence: TestOutputStringConvertible {
+    public var testDescription: String {
+        let generator = self.generate()
+        var strings = [String]()
+        var value: AnySequence.Generator.Element?
+        
+        repeat {
+            value = generator.next()
+            if let value = value {
+                strings.append(stringify(value))
+            }
+        } while value != nil
+        
+        let list = strings.joinWithSeparator(", ")
+        return "[\(list)]"
+    }
+}
+
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
         let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
