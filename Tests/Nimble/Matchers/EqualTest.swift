@@ -10,6 +10,7 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
             ("testSetEquality", testSetEquality),
             ("testDoesNotMatchNils", testDoesNotMatchNils),
             ("testDictionaryEquality", testDictionaryEquality),
+            ("testDataEquality", testDataEquality),
             ("testNSObjectEquality", testNSObjectEquality),
             ("testOperatorEquality", testOperatorEquality),
             ("testOperatorEqualityWithArrays", testOperatorEqualityWithArrays),
@@ -136,6 +137,27 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(expected))
 #endif
+    }
+
+    func testDataEquality() {
+        let actual = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
+        let expected = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
+        let unexpected = "foobarfoo".dataUsingEncoding(NSUTF8StringEncoding)
+
+        expect(actual).to(equal(expected))
+        expect(actual).toNot(equal(unexpected))
+
+        #if os(Linux)
+            // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11)
+            let expectedErrorMessage = "expected to equal <NSData<length=9>>, got <NSData<length=6>>"
+        #else
+            let expectedErrorMessage = "expected to equal <NSData<hash=92856895,length=9>>,"
+                + " got <NSData<hash=114710658,length=6>>"
+        #endif
+
+        failsWithErrorMessage(expectedErrorMessage) {
+            expect(actual).to(equal(unexpected))
+        }
     }
 
     func testNSObjectEquality() {
