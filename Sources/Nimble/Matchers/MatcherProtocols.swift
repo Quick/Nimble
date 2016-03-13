@@ -109,8 +109,8 @@ extension NSDate: NMBDoubleConvertible {
 }
 #endif
 
-extension NSDate: Stringifiable {
-    public var stringify: String {
+extension NSDate: TestOutputStringConvertible {
+    public var testDescription: String {
         return dateFormatter.stringFromDate(self)
     }
 }

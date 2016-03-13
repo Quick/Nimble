@@ -31,27 +31,27 @@ internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
 /// error messages in custom matchers.
 ///
 /// - SeeAlso: `CustomDebugStringConvertible`
-public protocol Stringifiable {
-    var stringify: String { get }
+public protocol TestOutputStringConvertible {
+    var testDescription: String { get }
 }
 
-extension Double: Stringifiable {
-    public var stringify: String {
-        return NSNumber(double: self).stringify
+extension Double: TestOutputStringConvertible {
+    public var testDescription: String {
+        return NSNumber(double: self).testDescription
     }
 }
 
-extension Float: Stringifiable {
-    public var stringify: String {
-        return NSNumber(float: self).stringify
+extension Float: TestOutputStringConvertible {
+    public var testDescription: String {
+        return NSNumber(float: self).testDescription
     }
 }
 
-extension NSNumber: Stringifiable {
+extension NSNumber: TestOutputStringConvertible {
     // This is using `NSString(format:)` instead of
     // `String(format:)` because the latter somehow breaks
     // the travis CI build on linux.
-    public var stringify: String {
+    public var testDescription: String {
         let description = self.description
         
         if description.containsString(".") {
@@ -69,28 +69,28 @@ extension NSNumber: Stringifiable {
     }
 }
 
-extension Array: Stringifiable {
-    public var stringify: String {
+extension Array: TestOutputStringConvertible {
+    public var testDescription: String {
         let list = self.map(Nimble.stringify).joinWithSeparator(", ")
         return "[\(list)]"
     }
 }
 
-extension NSArray: Stringifiable {
-    public var stringify: String {
+extension NSArray: TestOutputStringConvertible {
+    public var testDescription: String {
         let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
         return "(\(list))"
     }
 }
 
-extension String: Stringifiable {
-    public var stringify: String {
+extension String: TestOutputStringConvertible {
+    public var testDescription: String {
         return self
     }
 }
 
-extension NSData: Stringifiable {
-    public var stringify: String {
+extension NSData: TestOutputStringConvertible {
+    public var testDescription: String {
         #if os(Linux)
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11-16)
             return "NSData<length=\(self.length)>"
@@ -107,17 +107,17 @@ extension NSData: Stringifiable {
 /// - parameter value: A value that will show up in a test's output.
 ///
 /// - returns: The string that is returned can be
-///     customized per type by conforming a type to the `Stringifiable`
-///     protocol. When stringifying a non-`Stringifiable` type, this
+///     customized per type by conforming a type to the `TestOutputStringConvertible`
+///     protocol. When stringifying a non-`TestOutputStringConvertible` type, this
 ///     function will return the value's debug description and then its
 ///     normal description if available and in that order. Otherwise it
 ///     will return the result of constructing a string from the value.
 ///
-/// - SeeAlso: `Stringifiable`
+/// - SeeAlso: `TestOutputStringConvertible`
 @warn_unused_result
 public func stringify<T>(value: T) -> String {
-    if let value = value as? Stringifiable {
-        return value.stringify
+    if let value = value as? TestOutputStringConvertible {
+        return value.testDescription
     }
     
     if let value = value as? CustomDebugStringConvertible {
