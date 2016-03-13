@@ -41,13 +41,7 @@ class BeLessThanTest: XCTestCase, XCTestCaseProvider {
 #if _runtime(_ObjC)
         expect(NSNumber(int:0)) < 1
 #endif
-
-#if _runtime(_ObjC)
-        let (expectedRepresentation, actualRepresentation) = ("1.0000", "2.0000")
-#else
-        let (expectedRepresentation, actualRepresentation) = ("1", "2")
-#endif
-        failsWithErrorMessage("expected to be less than <\(expectedRepresentation)>, got <\(actualRepresentation)>") {
+        failsWithErrorMessage("expected to be less than <1>, got <2>") {
             expect(2) < 1
             return
         }

@@ -24,19 +24,6 @@ internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
     }
 }
 
-#if _runtime(_ObjC)
-@objc internal protocol NMBStringer {
-    func NMB_stringify() -> String
-}
-
-extension NSArray : NMBStringer {
-    func NMB_stringify() -> String {
-        let str = self.componentsJoinedByString(", ")
-        return "[\(str)]"
-    }
-}
-#endif
-
 /// A type with a customized test output text representation.
 ///
 /// This textual representation is produced when values will be
@@ -50,22 +37,35 @@ public protocol Stringifiable {
 
 extension Double: Stringifiable {
     public var stringify: String {
-        // These are using `NSString(format:)` instead of 
-        // `String(format:)` because the latter somehow breaks
-        // the travis CI build on linux.
-        return NSString(format: "%0.4f", self).description
+        return NSNumber(double: self).stringify
     }
 }
 
 extension Float: Stringifiable {
     public var stringify: String {
-        return NSString(format: "%0.4f", self).description
+        return NSNumber(float: self).stringify
     }
 }
 
 extension NSNumber: Stringifiable {
+    // This is using `NSString(format:)` instead of
+    // `String(format:)` because the latter somehow breaks
+    // the travis CI build on linux.
     public var stringify: String {
-        return NSString(format: "%0.4f", self.doubleValue).description
+        let description = self.description
+        
+        if description.containsString(".") {
+            // Travis linux swiftpm build doesn't like casting String to NSString,
+            // which is why this annoying nested initializer thing is here.
+            // Maybe this will change in a future snapshot.
+            let decimalPlaces = NSString(string: NSString(string: description)
+                .componentsSeparatedByString(".")[1])
+            
+            if decimalPlaces.length > 4 {
+                return NSString(format: "%0.4f", self.doubleValue).description
+            }
+        }
+        return self.description
     }
 }
 
@@ -78,7 +78,8 @@ extension Array: Stringifiable {
 
 extension NSArray: Stringifiable {
     public var stringify: String {
-        return self.description
+        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
+        return "(\(list))"
     }
 }
 
@@ -134,3 +135,12 @@ public func stringify<T>(value: T?) -> String {
     }
     return "nil"
 }
+
+#if _runtime(_ObjC)
+@objc public class NMBStringer: NSObject {
+    @warn_unused_result
+    @objc public class func stringify(obj: AnyObject?) -> String {
+        return Nimble.stringify(obj)
+    }
+}
+#endif

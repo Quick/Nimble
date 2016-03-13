@@ -15,10 +15,10 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to equal <2.0000>, got <1.0000>", ^{
+    expectFailureMessage(@"expected to equal <2>, got <1>", ^{
         expect(@1).to(equal(@2));
     });
-    expectFailureMessage(@"expected to not equal <1.0000>, got <1.0000>", ^{
+    expectFailureMessage(@"expected to not equal <1>, got <1>", ^{
         expect(@1).toNot(equal(@1));
     });
 }

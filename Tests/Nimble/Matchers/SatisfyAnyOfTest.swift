@@ -33,7 +33,7 @@ class SatisfyAnyOfTest: XCTestCase, XCTestCaseProvider {
                 expect(false).to(satisfyAnyOf(beTrue()))
         }
         failsWithErrorMessage(
-            "expected to not match one of: {be less than <10.5000>}, or {be greater than <100.7500>}, or {be close to <50.1000> (within 0.0001)}, got 50.10001") {
+            "expected to not match one of: {be less than <10.5>}, or {be greater than <100.75>}, or {be close to <50.1> (within 0.0001)}, got 50.10001") {
                 expect(50.10001).toNot(satisfyAnyOf(beLessThan(10.5), beGreaterThan(100.75), beCloseTo(50.1)))
         }
     }
