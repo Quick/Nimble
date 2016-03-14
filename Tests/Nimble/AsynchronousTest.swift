@@ -23,7 +23,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testToEventuallyMustBeInMainThread", testToEventuallyMustBeInMainThread),
         ]
     }
-    
+
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
 
     private func doThrowError() throws -> Int {
@@ -197,3 +197,4 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 }
 #endif
+
