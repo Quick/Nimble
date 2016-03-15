@@ -807,7 +807,8 @@
 			children = (
 				9630C0091C6D0ABA000693EE /* CwlPreconditionTesting */,
 			);
-			path = Lib;
+			name = Lib;
+			path = Sources/Lib;
 			sourceTree = "<group>";
 		};
 		9630C0091C6D0ABA000693EE /* CwlPreconditionTesting */ = {
