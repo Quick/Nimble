@@ -11,14 +11,14 @@
     NSArray *array = @[@1, @2, @3];
     NSString *result = NMBStringify(array);
     
-    XCTAssert([result isEqualToString:@"(1, 2, 3)"], @"got <%@>, expected <(1, 2, 3)>", result);
+    expect(result).to(equal(@"(1, 2, 3)"));
 }
 
 - (void)testItRoundsLongDecimals {
     NSNumber *num = @291.123782163;
     NSString *result = NMBStringify(num);
     
-    XCTAssert([result isEqualToString:@"291.1238"], @"got <%@>, expected <291.1238>", result);
+    expect(result).to(equal(@"291.1238"));
 }
 
 @end
