@@ -46,6 +46,16 @@ Be sure to include in your issue:
 
 - Use `Nimble.xcodeproj` to work on Nimble.
 
+## Running the Swift Package Manager tests
+
+1. [Download and install a Swift development snapshot](https://swift.org/download/)
+2. Add `swift` to your `PATH`:
+
+    export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
+
+3. Run `swift build --help` to verify it's installed correctly
+4. Run `./test swiftpm`
+
 ## Pull Requests
 
 - Nothing is trivial. Submit pull requests for anything: typos,
