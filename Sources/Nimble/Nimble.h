@@ -1,10 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "NMBExceptionCapture.h"
 #import "DSL.h"
-#import "CwlCatchException.h"
-#import "CwlCatchBadInstruction.h"
 
-#if TARGET_OS_IPHONE
+#if !TARGET_OS_TV
+    #import "CwlCatchException.h"
+    #import "CwlCatchBadInstruction.h"
+#endif
+
+#if TARGET_OS_IPHONE && !TARGET_OS_TV
     #import "mach_excServer.h"
 #endif
 
