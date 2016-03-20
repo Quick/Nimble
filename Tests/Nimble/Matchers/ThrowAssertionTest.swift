@@ -6,7 +6,10 @@ import Nimble
 class ThrowAssertionTest: XCTestCase {
     
     func testPositiveMatch() {
-        expect { () throws -> Void? in fatalError() }.to(throwAssertion())
+        let closure : () throws -> Void? = {
+            _ in fatalError()
+        }
+        expect(expression: closure).to(throwAssertion())
     }
     
     func testErrorThrown() {
