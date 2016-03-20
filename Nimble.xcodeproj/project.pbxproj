@@ -299,7 +299,6 @@
 		964CFEFF1C4FF48900513336 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */; };
 		964CFF011C5019AD00513336 /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */; };
 		964CFF021C501A1E00513336 /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */; };
-		964CFF031C501A1F00513336 /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFF001C5019AD00513336 /* ThrowAssertionTest.swift */; };
 		965B0D091B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0A1B62B8ED0005AE66 /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */; };
@@ -1260,7 +1259,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				964CFF031C501A1F00513336 /* ThrowAssertionTest.swift in Sources */,
 				1F5DF1A31BDCA10200C3A531 /* BeLogicalTest.swift in Sources */,
 				1F5DF1951BDCA10200C3A531 /* utils.swift in Sources */,
 				1F5DF1981BDCA10200C3A531 /* BeAKindOfTest.swift in Sources */,
