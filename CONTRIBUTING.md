@@ -48,13 +48,11 @@ Be sure to include in your issue:
 
 ## Running the Swift Package Manager tests
 
-1. [Download and install a Swift development snapshot](https://swift.org/download/)
-2. Add `swift` to your `PATH`:
+1. Install `swiftenv` by running a line from the build script (`.travis.yml`):
 
-    export PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:"${PATH}"
+    eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
 
-3. Run `swift build --help` to verify it's installed correctly
-4. Run `./test swiftpm`
+2. Run `./test swiftpm`
 
 ## Pull Requests
 
