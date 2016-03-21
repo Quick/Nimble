@@ -16,10 +16,10 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to contain <Optional(3)>, got <(1,2)>", ^{
+    expectFailureMessage(@"expected to contain <Optional(3)>, got <(1, 2)>", ^{
         expect((@[@1, @2])).to(contain(@3));
     });
-    expectFailureMessage(@"expected to not contain <Optional(2)>, got <(1,2)>", ^{
+    expectFailureMessage(@"expected to not contain <Optional(2)>, got <(1, 2)>", ^{
         expect((@[@1, @2])).toNot(contain(@2));
     });
 
@@ -32,10 +32,10 @@
 }
 
 - (void)testNilMatches {
-    expectNilFailureMessage(@"expected to contain <3.0000>, got <nil>", ^{
+    expectNilFailureMessage(@"expected to contain <3>, got <nil>", ^{
         expect(nil).to(contain(@3));
     });
-    expectNilFailureMessage(@"expected to not contain <3.0000>, got <nil>", ^{
+    expectNilFailureMessage(@"expected to not contain <3>, got <nil>", ^{
         expect(nil).toNot(contain(@3));
     });
 
@@ -55,11 +55,11 @@
     expect(@"Other").toNot(contain(@"Str", @"Oth"));
 
 
-    expectFailureMessage(@"expected to contain <Optional(a), Optional(bar)>, got <(a,b,c)>", ^{
+    expectFailureMessage(@"expected to contain <Optional(a), Optional(bar)>, got <(a, b, c)>", ^{
         expect(@[@"a", @"b", @"c"]).to(contain(@"a", @"bar"));
     });
 
-    expectFailureMessage(@"expected to not contain <Optional(bar), Optional(b)>, got <(a,b,c)>", ^{
+    expectFailureMessage(@"expected to not contain <Optional(bar), Optional(b)>, got <(a, b, c)>", ^{
         expect(@[@"a", @"b", @"c"]).toNot(contain(@"bar", @"b"));
     });
 }

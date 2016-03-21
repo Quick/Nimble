@@ -15,19 +15,19 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to be close to <0.0000> (within 0.0010), got <1.0000>", ^{
+    expectFailureMessage(@"expected to be close to <0> (within 0.001), got <1>", ^{
         expect(@1).to(beCloseTo(@0));
     });
-    expectFailureMessage(@"expected to not be close to <0.0000> (within 0.0010), got <0.0001>", ^{
+    expectFailureMessage(@"expected to not be close to <0> (within 0.001), got <0.0001>", ^{
         expect(@(0.0001)).toNot(beCloseTo(@0));
     });
 }
 
 - (void)testNilMatches {
-    expectNilFailureMessage(@"expected to be close to <0.0000> (within 0.0010), got <nil>", ^{
+    expectNilFailureMessage(@"expected to be close to <0> (within 0.001), got <nil>", ^{
         expect(nil).to(beCloseTo(@0));
     });
-    expectNilFailureMessage(@"expected to not be close to <0.0000> (within 0.0010), got <nil>", ^{
+    expectNilFailureMessage(@"expected to not be close to <0> (within 0.001), got <nil>", ^{
         expect(nil).toNot(beCloseTo(@0));
     });
 }

@@ -14,7 +14,7 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to be true, got <0.0000>", ^{
+    expectFailureMessage(@"expected to be true, got <0>", ^{
         expect(@NO).to(beTrue());
     });
     expectFailureMessage(@"expected to be true, got <nil>", ^{
