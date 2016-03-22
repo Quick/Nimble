@@ -101,7 +101,7 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
                 return nil
             }.toEventually(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
         #else
-            print("\(__FUNCTION__) is missing because toEventually is not implement on this platform")
+            print("\(#function) is missing because toEventually is not implement on this platform")
         #endif
     }
 }
