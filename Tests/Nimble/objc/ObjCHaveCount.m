@@ -14,11 +14,11 @@
     expect(@[]).to(haveCount(@0));
     expect(@[@1]).notTo(haveCount(@0));
 
-    expectFailureMessage(@"expected to have (1,2,3) with count 1, got 3", ^{
+    expectFailureMessage(@"expected to have (1, 2, 3) with count 1, got 3", ^{
         expect(@[@1, @2, @3]).to(haveCount(@1));
     });
 
-    expectFailureMessage(@"expected to not have (1,2,3) with count 3, got 3", ^{
+    expectFailureMessage(@"expected to not have (1, 2, 3) with count 3, got 3", ^{
         expect(@[@1, @2, @3]).notTo(haveCount(@3));
     });
 
@@ -73,6 +73,21 @@
     });
 
     expectFailureMessage(@"expected to not have {(3,1,2)} with count 3, got 3", ^{
+        expect(set).notTo(haveCount(@3));
+    });
+}
+
+- (void)testHaveCountForNSIndexSet {
+    NSIndexSet *const set = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 3)];
+
+    expect(set).to(haveCount(@3));
+    expect(set).notTo(haveCount(@1));
+
+    expectFailureMessage(@"expected to have (1, 2, 3) with count 1, got 3", ^{
+        expect(set).to(haveCount(@1));
+    });
+
+    expectFailureMessage(@"expected to not have (1, 2, 3) with count 3, got 3", ^{
         expect(set).notTo(haveCount(@3));
     });
 }

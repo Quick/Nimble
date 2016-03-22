@@ -28,11 +28,11 @@ class HaveCountTest: XCTestCase, XCTestCaseProvider {
         expect(dictionary).to(haveCount(3))
         expect(dictionary).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have \(dictionary) with count 1, got 3") {
+        failsWithErrorMessage("expected to have \(stringify(dictionary)) with count 1, got 3") {
             expect(dictionary).to(haveCount(1))
         }
 
-        failsWithErrorMessage("expected to not have \(dictionary) with count 3, got 3") {
+        failsWithErrorMessage("expected to not have \(stringify(dictionary)) with count 3, got 3") {
             expect(dictionary).notTo(haveCount(3))
         }
     }
@@ -42,11 +42,11 @@ class HaveCountTest: XCTestCase, XCTestCaseProvider {
         expect(set).to(haveCount(3))
         expect(set).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have \(set) with count 1, got 3") {
+        failsWithErrorMessage("expected to have \(stringify(set)) with count 1, got 3") {
             expect(set).to(haveCount(1))
         }
 
-        failsWithErrorMessage("expected to not have \(set) with count 3, got 3") {
+        failsWithErrorMessage("expected to not have \(stringify(set)) with count 3, got 3") {
             expect(set).notTo(haveCount(3))
         }
     }

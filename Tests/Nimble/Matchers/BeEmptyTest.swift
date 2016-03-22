@@ -33,6 +33,9 @@ class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         expect(NSSet()).to(beEmpty())
         expect(NSSet(array: [NSNumber(integer: 1)])).toNot(beEmpty())
 
+        expect(NSIndexSet()).to(beEmpty())
+        expect(NSIndexSet(index: 1)).toNot(beEmpty())
+
         expect(NSString()).to(beEmpty())
         expect(NSString(string: "hello")).toNot(beEmpty())
 
@@ -53,6 +56,20 @@ class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("expected to be empty, got <[1]>") {
             expect([1]).to(beEmpty())
+        }
+
+        failsWithErrorMessage("expected to not be empty, got <{()}>") {
+            expect(NSSet()).toNot(beEmpty());
+        }
+        failsWithErrorMessage("expected to be empty, got <{(1)}>") {
+            expect(NSSet(object: NSNumber(int: 1))).to(beEmpty());
+        }
+
+        failsWithErrorMessage("expected to not be empty, got <()>") {
+            expect(NSIndexSet()).toNot(beEmpty());
+        }
+        failsWithErrorMessage("expected to be empty, got <(1)>") {
+            expect(NSIndexSet(index: 1)).to(beEmpty());
         }
 
         failsWithErrorMessage("expected to not be empty, got <>") {
