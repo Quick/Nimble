@@ -24,7 +24,7 @@ internal class NMBWait: NSObject {
     // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
         timeout timeout: NSTimeInterval,
-                file: FileString = #file,
+        file: FileString = #file,
         line: UInt = #line,
         action: (() -> Void) throws -> Void) -> Void {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
