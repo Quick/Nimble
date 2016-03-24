@@ -2,7 +2,7 @@ import Foundation
 @testable import Nimble
 import XCTest
 
-func failsWithErrorMessage(messages: [String], file: FileString = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
+func failsWithErrorMessage(messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     var filePath = file
     var lineNumber = line
 
@@ -44,7 +44,7 @@ func failsWithErrorMessage(messages: [String], file: FileString = __FILE__, line
     }
 }
 
-func failsWithErrorMessage(message: String, file: FileString = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     return failsWithErrorMessage(
         [message],
         file: file,
@@ -54,7 +54,7 @@ func failsWithErrorMessage(message: String, file: FileString = __FILE__, line: U
     )
 }
 
-func failsWithErrorMessageForNil(message: String, file: FileString = __FILE__, line: UInt = __LINE__, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessageForNil(message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 

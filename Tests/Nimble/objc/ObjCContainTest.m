@@ -16,10 +16,10 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to contain <Optional(3)>, got <(1, 2)>", ^{
+    expectFailureMessage(@"expected to contain <3>, got <(1, 2)>", ^{
         expect((@[@1, @2])).to(contain(@3));
     });
-    expectFailureMessage(@"expected to not contain <Optional(2)>, got <(1, 2)>", ^{
+    expectFailureMessage(@"expected to not contain <2>, got <(1, 2)>", ^{
         expect((@[@1, @2])).toNot(contain(@2));
     });
 
