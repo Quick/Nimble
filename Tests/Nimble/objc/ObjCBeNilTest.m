@@ -13,7 +13,7 @@
 }
 
 - (void)testNegativeMatches {
-    expectFailureMessage(@"expected to be nil, got <1.0000>", ^{
+    expectFailureMessage(@"expected to be nil, got <1>", ^{
         expect(@1).to(beNil());
     });
     expectFailureMessage(@"expected to not be nil, got <nil>", ^{

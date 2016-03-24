@@ -12,6 +12,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
             ("testWaitUntilPositiveMatches", testWaitUntilPositiveMatches),
+            ("testToEventuallyWithCustomDefaultTimeout", testToEventuallyWithCustomDefaultTimeout),
             ("testWaitUntilTimesOutIfNotCalled", testWaitUntilTimesOutIfNotCalled),
             ("testWaitUntilTimesOutWhenExceedingItsTime", testWaitUntilTimesOutWhenExceedingItsTime),
             ("testWaitUntilNegativeMatches", testWaitUntilNegativeMatches),
@@ -22,7 +23,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testToEventuallyMustBeInMainThread", testToEventuallyMustBeInMainThread),
         ]
     }
-    
+
     let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
 
     private func doThrowError() throws -> Int {
@@ -52,6 +53,27 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to eventually not equal <0>, got an unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
+    }
+
+    func testToEventuallyWithCustomDefaultTimeout() {
+        AsyncDefaults.Timeout = 2
+        defer {
+            AsyncDefaults.Timeout = 1
+        }
+
+        var value = 0
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            NSThread.sleepForTimeInterval(1.1)
+            value = 1
+        }
+        expect { value }.toEventually(equal(1))
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            NSThread.sleepForTimeInterval(1.1)
+            value = 0
+        }
+        expect { value }.toEventuallyNot(equal(1))
     }
 
     func testWaitUntilPositiveMatches() {
@@ -112,14 +134,14 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
         // Currently we are unable to catch Objective-C exceptions when built by the Swift Package Manager
 #if !SWIFT_PACKAGE
-        let referenceLine = __LINE__ + 9
+        let referenceLine = #line + 9
         var msg = "Unexpected exception raised: Nested async expectations are not allowed "
         msg += "to avoid creating flaky tests."
         msg += "\n\n"
         msg += "The call to\n\t"
-        msg += "expect(...).toEventually(...) at \(__FILE__):\(referenceLine + 7)\n"
+        msg += "expect(...).toEventually(...) at \(#file):\(referenceLine + 7)\n"
         msg += "triggered this exception because\n\t"
-        msg += "waitUntil(...) at \(__FILE__):\(referenceLine + 1)\n"
+        msg += "waitUntil(...) at \(#file):\(referenceLine + 1)\n"
         msg += "is currently managing the main run loop."
         failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: 2.0) { done in
@@ -175,3 +197,4 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 }
 #endif
+
