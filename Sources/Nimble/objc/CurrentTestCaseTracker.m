@@ -12,7 +12,14 @@ SWIFT_CLASS("_TtC6Nimble22CurrentTestCaseTracker")
 
 + (void)load {
     CurrentTestCaseTracker *tracker = [CurrentTestCaseTracker sharedInstance];
-    [[XCTestObservationCenter sharedTestObservationCenter] addTestObserver:tracker];
+    // XCode 7.3 introduced a bug where early registration of a test observer prevented
+    // default XCTest test observer from being registered. That caused no longs being printed
+    // onto console, which in result broke several tools that relied on this.
+    // In order to go around the issue we're deferring registration to allow default
+    // test observer to register first.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[XCTestObservationCenter sharedTestObservationCenter] addTestObserver:tracker];
+    });
 }
 
 @end
