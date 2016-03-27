@@ -700,6 +700,23 @@ expect{ try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadC
 expect{ try somethingThatThrows() }.to(throwError(errorType: MyError.self))
 ```
 
+If you are working directly with `ErrorType` values, as is sometimes the case when using `Result` or `Promise` types, you can use the `matchError` matcher to check if the error is the same error is is supposed to be, without requiring explicit casting.
+
+```swift
+// Swift
+
+let actual: ErrorType = …
+
+// Passes if actual contains any error value from the MyErrorEnum type:
+expect(actual).to(matchError(MyErrorEnum))
+
+// Passes if actual contains the Timeout value from the MyErrorEnum type:
+expect(actual).to(matchError(MyErrorEnum.Timeout))
+
+// Passes if actual contains an NSError equal to the given one:
+expect(actual).to(matchError(NSError(domain: "err", code: 123, userInfo: nil)))
+```
+
 Note: This feature is only available in Swift.
 
 ## Exceptions
