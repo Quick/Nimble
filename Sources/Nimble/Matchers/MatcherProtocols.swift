@@ -46,6 +46,7 @@ public protocol NMBCollection {
 #endif
 
 extension NSSet : NMBCollection {}
+extension NSIndexSet : NMBCollection {}
 extension NSDictionary : NMBCollection {}
 
 #if _runtime(_ObjC)
