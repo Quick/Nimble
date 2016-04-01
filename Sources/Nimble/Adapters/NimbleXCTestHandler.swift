@@ -65,7 +65,7 @@ func isXCTestAvailable() -> Bool {
 private func recordFailure(message: String, location: SourceLocation) {
 #if _runtime(_ObjC)
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
-        testCase.recordFailureWithDescription(message, inFile: location.file, atLine: location.line, expected: true)
+        testCase.recordFailure(withDescription: message, inFile: location.file, atLine: location.line, expected: true)
     } else {
         let msg = "Attempted to report a test failure to XCTest while no test case was running. " +
         "The failure was:\n\"\(message)\"\nIt occurred at: \(location.file):\(location.line)"

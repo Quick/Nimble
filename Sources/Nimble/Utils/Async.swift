@@ -68,7 +68,7 @@ internal enum AwaitResult<T> {
     /// The async block successfully executed and returned a given result
     case Completed(T)
     /// When a Swift Error is thrown
-    case ErrorThrown(ErrorType)
+    case ErrorThrown(ErrorProtocol)
     /// When an Objective-C Exception is raised
     case RaisedException(NSException)
 
@@ -240,7 +240,7 @@ internal class AwaitPromiseBuilder<T> {
             dispatch_resume(self.trigger.timeoutSource)
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
-                NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture())
+                NSRunLoop.current().runMode(NSDefaultRunLoopMode, before: NSDate.distantFuture())
             }
             dispatch_suspend(self.trigger.timeoutSource)
             dispatch_source_cancel(self.trigger.timeoutSource)

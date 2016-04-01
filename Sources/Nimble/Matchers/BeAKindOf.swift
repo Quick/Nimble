@@ -23,7 +23,7 @@ public func beAKindOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
             failureMessage.actualValue = "<nil>"
         }
         failureMessage.postfixMessage = "be a kind of \(classAsString(expectedClass))"
-        return instance != nil && instance!.isKindOfClass(expectedClass)
+        return instance != nil && instance!.isKind(of: expectedClass)
     }
 }
 

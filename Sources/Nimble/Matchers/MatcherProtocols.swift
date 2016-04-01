@@ -17,14 +17,25 @@ public protocol Matcher {
 
 #if _runtime(_ObjC)
 /// Protocol for types that support contain() matcher.
+#if swift(>=3)
+@objc public protocol NMBContainer {
+    @objc(containsObject:)
+    func contains(anObject: AnyObject!) -> Bool
+}
+#else
 @objc public protocol NMBContainer {
     func containsObject(object: AnyObject!) -> Bool
 }
+#endif
 
 extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
+#if swift(>=3) && !os(Linux)
+    func contains(anObject: AnyObject?) -> Bool
+#else
     func containsObject(object: AnyObject) -> Bool
+#endif
 }
 #endif
 
@@ -51,12 +62,23 @@ extension NSDictionary : NMBCollection {}
 
 #if _runtime(_ObjC)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
+#if swift(>=3)
+@objc public protocol NMBOrderedCollection : NMBCollection {
+    @objc(indexOfObject:)
+    func index(of anObject: AnyObject) -> Int
+}
+#else
 @objc public protocol NMBOrderedCollection : NMBCollection {
     func indexOfObject(object: AnyObject!) -> Int
 }
+#endif
 #else
 public protocol NMBOrderedCollection : NMBCollection {
+#if swift(>=3) && !os(Linux)
+    func index(of anObject: AnyObject) -> Int
+#else
     func indexOfObject(object: AnyObject) -> Int
+#endif
 }
 #endif
 
@@ -112,7 +134,7 @@ extension NSDate: NMBDoubleConvertible {
 
 extension NSDate: TestOutputStringConvertible {
     public var testDescription: String {
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
 }
 

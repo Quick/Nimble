@@ -3,12 +3,12 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
-public func endWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {
+public func endWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(endingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
         if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.generate()
+            var actualGenerator = actualValue.makeIterator()
             var lastItem: T?
             var item: T?
             repeat {
@@ -28,7 +28,11 @@ public func endWith(endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCol
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = try actualExpression.evaluate()
+#if swift(>=3) && !os(Linux)
+        return collection != nil && collection!.index(of: endingElement) == collection!.count - 1
+#else
         return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
+#endif
     }
 }
 
@@ -40,7 +44,7 @@ public func endWith(endingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
-            let range = collection.rangeOfString(endingSubstring)
+            let range = collection.range(of: endingSubstring)
             return range != nil && range!.endIndex == collection.endIndex
         }
         return false

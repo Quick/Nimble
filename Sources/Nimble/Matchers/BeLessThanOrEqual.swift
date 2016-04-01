@@ -15,7 +15,7 @@ public func beLessThanOrEqualTo<T: NMBComparable>(expectedValue: T?) -> NonNilMa
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be less than or equal to <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
-        return actualValue != nil && actualValue!.NMB_compare(expectedValue) != NSComparisonResult.OrderedDescending
+        return actualValue != nil && actualValue!.NMB_compare(expectedValue) != NSComparisonResult.orderedDescending
     }
 }
 

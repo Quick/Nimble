@@ -61,7 +61,7 @@ func failsWithErrorMessageForNil(message: String, file: FileString = #file, line
 #if _runtime(_ObjC)
     func deferToMainQueue(action: () -> Void) {
         dispatch_async(dispatch_get_main_queue()) {
-            NSThread.sleepForTimeInterval(0.01)
+            NSThread.sleep(forTimeInterval: 0.01)
             action()
         }
     }
@@ -86,7 +86,7 @@ extension NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let date = dateFormatter.dateFromString(dateTimeString)!
-        self.init(timeInterval:0, sinceDate:date)
+        let date = dateFormatter.date(from: dateTimeString)!
+        self.init(timeInterval:0, since:date)
     }
 }

@@ -62,7 +62,7 @@ public func equal<T: Equatable>(expectedValue: [T?]) -> NonNilMatcherFunc<[T?]> 
                 return false
             }
             
-            for (index, item) in actualValue.enumerate() {
+            for (index, item) in actualValue.enumerated() {
                 let otherItem = expectedValue[index]
                 if item == nil && otherItem == nil {
                     continue
@@ -93,7 +93,7 @@ public func equal<T>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
 public func equal<T: Comparable>(expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
     return equal(expectedValue, stringify: {
         if let set = $0 {
-            return stringify(Array(set).sort { $0 < $1 })
+            return stringify(Array(set).sorted { $0 < $1 })
         } else {
             return "nil"
         }

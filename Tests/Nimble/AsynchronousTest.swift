@@ -64,13 +64,13 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         var value = 0
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            NSThread.sleepForTimeInterval(1.1)
+            NSThread.sleep(forTimeInterval: 1.1)
             value = 1
         }
         expect { value }.toEventually(equal(1))
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            NSThread.sleepForTimeInterval(1.1)
+            NSThread.sleep(forTimeInterval: 1.1)
             value = 0
         }
         expect { value }.toEventuallyNot(equal(1))
@@ -98,7 +98,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    NSThread.sleepForTimeInterval(0.1)
+                    NSThread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
                 }
@@ -107,14 +107,14 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         // "clear" runloop to ensure this test doesn't poison other tests
         repeat {
-            NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
+            NSRunLoop.main().run(until: NSDate().addingTimeInterval(0.2))
         } while(waiting)
     }
 
     func testWaitUntilNegativeMatches() {
         failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
-                NSThread.sleepForTimeInterval(0.1)
+                NSThread.sleep(forTimeInterval: 0.1)
                 expect(1).to(equal(2))
                 done()
             }
@@ -125,7 +125,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
         failsWithErrorMessage(msg) {
             waitUntil(timeout: 1) { done in
-                NSThread.sleepForTimeInterval(5.0)
+                NSThread.sleep(forTimeInterval: 5.0)
                 done()
             }
         }

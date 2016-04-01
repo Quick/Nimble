@@ -81,7 +81,7 @@ public func beCloseTo(expectedValues: [Double], within delta: Double = DefaultDe
             if actual.count != expectedValues.count {
                 return false
             } else {
-                for (index, actualItem) in actual.enumerate() {
+                for (index, actualItem) in actual.enumerated() {
                     if fabs(actualItem - expectedValues[index]) > delta {
                         return false
                     }

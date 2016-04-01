@@ -3,14 +3,14 @@ import Foundation
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
-public func beEmpty<S: SequenceType>() -> NonNilMatcherFunc<S> {
+public func beEmpty<S: Sequence>() -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
             return true
         }
-        var generator = actualSeq!.generate()
+        var generator = actualSeq!.makeIterator()
         return generator.next() == nil
     }
 }
@@ -36,7 +36,7 @@ public func beEmpty() -> NonNilMatcherFunc<NSString> {
 }
 
 // Without specific overrides, beEmpty() is ambiguous for NSDictionary, NSArray,
-// etc, since they conform to SequenceType as well as NMBCollection.
+// etc, since they conform to Sequence as well as NMBCollection.
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.

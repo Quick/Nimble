@@ -3,11 +3,11 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.
-public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
+public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.generate()
+            var actualGenerator = actualValue.makeIterator()
             return actualGenerator.next() == startingElement
         }
         return false
@@ -20,7 +20,11 @@ public func beginWith(startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrdere
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = try actualExpression.evaluate()
+#if swift(>=3) && !os(Linux)
+        return collection != nil && collection!.index(of: startingElement) == 0
+#else
         return collection != nil && collection!.indexOfObject(startingElement) == 0
+#endif
     }
 }
 
@@ -30,7 +34,7 @@ public func beginWith(startingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         if let actual = try actualExpression.evaluate() {
-            let range = actual.rangeOfString(startingSubstring)
+            let range = actual.range(of: startingSubstring)
             return range != nil && range!.startIndex == actual.startIndex
         }
         return false

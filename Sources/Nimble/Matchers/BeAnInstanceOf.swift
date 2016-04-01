@@ -22,7 +22,7 @@ public func beAnInstanceOf(expectedClass: AnyClass) -> NonNilMatcherFunc<NSObjec
         }
         failureMessage.postfixMessage = "be an instance of \(classAsString(expectedClass))"
 #if _runtime(_ObjC)
-        return instance != nil && instance!.isMemberOfClass(expectedClass)
+        return instance != nil && instance!.isMember(of: expectedClass)
 #else
         return instance != nil && instance!.dynamicType == expectedClass
 #endif

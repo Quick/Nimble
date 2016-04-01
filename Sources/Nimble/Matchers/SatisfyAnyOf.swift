@@ -14,10 +14,10 @@ internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(matchers: [U]
             if try matcher.matches(actualExpression, failureMessage: failureMessage) {
                 matches = true
             }
-            postfixMessages.addObject(NSString(string: "{\(failureMessage.postfixMessage)}"))
+            postfixMessages.add(NSString(string: "{\(failureMessage.postfixMessage)}"))
         }
 
-        failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoinedByString(", or ")
+        failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoined(by: ", or ")
         if let actualValue = try actualExpression.evaluate() {
             failureMessage.actualValue = "\(actualValue)"
         }

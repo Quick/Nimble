@@ -1,11 +1,17 @@
 import Foundation
 
-extension SequenceType {
-    internal func all(fn: Generator.Element -> Bool) -> Bool {
+extension Sequence {
+    internal func all(fn: Iterator.Element -> Bool) -> Bool {
         for item in self {
-            if !fn(item) {
-                return false
-            }
+            #if swift(>=3)
+                if !fn(item) {
+                    return false
+                }
+            #else
+                if !fn(item as! Iterator.Element) {
+                    return false
+                }
+            #endif
         }
         return true
     }

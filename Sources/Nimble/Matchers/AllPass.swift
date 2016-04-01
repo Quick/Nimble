@@ -1,11 +1,11 @@
 import Foundation
 
-public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
+public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
     (passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return allPass("pass a condition", passFunc)
 }
 
-public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
+public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
     (passName: String, _ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             expression, failureMessage in
@@ -14,21 +14,27 @@ public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
         }
 }
 
-public func allPass<U,V where U: SequenceType, V: Matcher, U.Generator.Element == V.ValueType>
+public func allPass<U,V where U: Sequence, V: Matcher, U.Iterator.Element == V.ValueType>
     (matcher: V) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             try matcher.matches($0, failureMessage: $1)
         }
 }
 
-private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element == T>
+private func createAllPassMatcher<T,U where U: Sequence, U.Iterator.Element == T>
     (elementEvaluator:(Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U> {
         return NonNilMatcherFunc { actualExpression, failureMessage in
             failureMessage.actualValue = nil
             if let actualValue = try actualExpression.evaluate() {
                 for currentElement in actualValue {
-                    let exp = Expression(
-                        expression: {currentElement}, location: actualExpression.location)
+                    #if swift(>=3)
+                        let exp = Expression(
+                            expression: {currentElement}, location: actualExpression.location)
+                    #else
+                        // FIXME: following force cast is needed for Swift3 to Swift 2.2
+                        let exp = Expression(
+                            expression: {currentElement as! U.Iterator.Element}, location: actualExpression.location)
+                    #endif
                     if try !elementEvaluator(exp, failureMessage) {
                         failureMessage.postfixMessage =
                             "all \(failureMessage.postfixMessage),"
@@ -57,7 +63,7 @@ extension NMBObjCMatcher {
             
             var collectionIsUsable = true
             if let value = actualValue as? NSFastEnumeration {
-                let generator = NSFastGenerator(value)
+                let generator = NSFastEnumerationIterator(value)
                 while let obj:AnyObject = generator.next() {
                     if let nsObject = obj as? NSObject {
                         nsObjects.append(nsObject)

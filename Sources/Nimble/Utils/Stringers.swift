@@ -3,7 +3,7 @@ import Foundation
 
 internal func identityAsString(value: AnyObject?) -> String {
     if let value = value {
-        return NSString(format: "<%p>", unsafeBitCast(value, Int.self)).description
+        return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
         return "nil"
     }
@@ -54,12 +54,12 @@ extension NSNumber: TestOutputStringConvertible {
     public var testDescription: String {
         let description = self.description
         
-        if description.containsString(".") {
+        if description.contains(".") {
             // Travis linux swiftpm build doesn't like casting String to NSString,
             // which is why this annoying nested initializer thing is here.
             // Maybe this will change in a future snapshot.
             let decimalPlaces = NSString(string: NSString(string: description)
-                .componentsSeparatedByString(".")[1])
+                .componentsSeparated(by: ".")[1])
             
             if decimalPlaces.length > 4 {
                 return NSString(format: "%0.4f", self.doubleValue).description
@@ -71,16 +71,16 @@ extension NSNumber: TestOutputStringConvertible {
 
 extension Array: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = self.map(Nimble.stringify).joinWithSeparator(", ")
+        let list = self.map(Nimble.stringify).joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension AnySequence: TestOutputStringConvertible {
     public var testDescription: String {
-        let generator = self.generate()
+        let generator = self.makeIterator()
         var strings = [String]()
-        var value: AnySequence.Generator.Element?
+        var value: AnySequence.Iterator.Element?
         
         repeat {
             value = generator.next()
@@ -89,21 +89,21 @@ extension AnySequence: TestOutputStringConvertible {
             }
         } while value != nil
         
-        let list = strings.joinWithSeparator(", ")
+        let list = strings.joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
+        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }
 
 extension NSIndexSet: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
+        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }

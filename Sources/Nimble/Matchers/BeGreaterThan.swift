@@ -14,7 +14,7 @@ public func beGreaterThan(expectedValue: NMBComparable?) -> NonNilMatcherFunc<NM
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
-        let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.OrderedDescending
+        let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == NSComparisonResult.orderedDescending
         return matches
     }
 }

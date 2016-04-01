@@ -20,12 +20,12 @@ class MatchErrorTest: XCTestCase, XCTestCaseProvider {
         expect(Error.Laugh).to(matchError(Error.self))
         expect(EquatableError.Parameterized(x: 1)).to(matchError(EquatableError.Parameterized(x: 1)))
 
-        expect(Error.Laugh as ErrorType).to(matchError(Error.Laugh))
+        expect(Error.Laugh as ErrorProtocol).to(matchError(Error.Laugh))
     }
 
     func testMatchErrorNegative() {
         expect(Error.Laugh).toNot(matchError(Error.Cry))
-        expect(Error.Laugh as ErrorType).toNot(matchError(Error.Cry))
+        expect(Error.Laugh as ErrorProtocol).toNot(matchError(Error.Cry))
     }
 
     func testMatchNSErrorPositive() {
@@ -68,11 +68,11 @@ class MatchErrorTest: XCTestCase, XCTestCaseProvider {
 
     func testDoesNotMatchNils() {
         failsWithErrorMessageForNil("expected to match error <Laugh>, got no error") {
-            expect(nil as ErrorType?).to(matchError(Error.Laugh))
+            expect(nil as ErrorProtocol?).to(matchError(Error.Laugh))
         }
 
         failsWithErrorMessageForNil("expected to not match error <Laugh>, got no error") {
-            expect(nil as ErrorType?).toNot(matchError(Error.Laugh))
+            expect(nil as ErrorProtocol?).toNot(matchError(Error.Laugh))
         }
     }
 }

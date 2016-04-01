@@ -140,9 +140,9 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testDataEquality() {
-        let actual = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let expected = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let unexpected = "foobarfoo".dataUsingEncoding(NSUTF8StringEncoding)
+        let actual = "foobar".data(usingEncoding: NSUTF8StringEncoding)
+        let expected = "foobar".data(usingEncoding: NSUTF8StringEncoding)
+        let unexpected = "foobarfoo".data(usingEncoding: NSUTF8StringEncoding)
 
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
