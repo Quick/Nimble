@@ -134,7 +134,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
 
     func testNegativeMatchesWithClosure() {
 #if SWIFT_PACKAGE
-        let moduleName = "Nimbletest"
+        let moduleName = "NimbleTestSuite"
 #else
         let moduleName = "NimbleTests"
 #endif

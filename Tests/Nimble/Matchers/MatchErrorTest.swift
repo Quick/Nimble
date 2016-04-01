@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class MatchErrorTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, MatchErrorTest -> () throws -> Void)] {
         return [
             ("testMatchErrorPositive", testMatchErrorPositive),
             ("testMatchErrorNegative", testMatchErrorNegative),
