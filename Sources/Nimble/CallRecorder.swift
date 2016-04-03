@@ -1,4 +1,27 @@
 
+// In order to use GloballyEquatable, conform to Equatable
+public protocol GloballyEquatable {
+    func isEqualTo(other: GloballyEquatable) -> Bool
+}
+
+public extension GloballyEquatable where Self : Equatable {
+    func isEqualTo(other: GloballyEquatable) -> Bool {
+        if let other = other as? Self {
+            return self == other
+        }
+
+        return false
+    }
+}
+
+public extension GloballyEquatable {
+    func isEqualTo(other: GloballyEquatable) -> Bool {
+        assertionFailure("type '\(Self.self)' does not conform to 'Equatable'")
+        return false
+    }
+}
+
+
 /* bug in Swift causes every enum WITHOUT an associated value's "description" to be the first declared
 enum value WITHOUT an associated value's description
 i.e. -> since ".Anything" is the first enum value then the default description for ".Anything",
