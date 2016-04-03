@@ -4,7 +4,7 @@ import Nimble
 class CallTest : XCTestCase {
     
     class TestClass : CallRecorder {
-        var called = (functionList: [String](), argumentsList: [[Any]]())
+        var called = (functionList: [String](), argumentsList: [[GloballyEquatable]]())
         
         func doStuff() {
             self.recordCall()

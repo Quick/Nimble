@@ -1,6 +1,6 @@
 import Foundation
 
-public func call(function: String, withArguments arguments: Any..., countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
+public func call(function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
     return FullMatcherFunc { expression, failureMessage, isNegationTest in
         guard let expressionValue = try expression.evaluate() else {
             failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)
@@ -23,7 +23,7 @@ public func call(function: String, withArguments arguments: Any..., countSpecifi
 
 // MARK: Private
 
-private func descriptionOfAttemptedCall(object object: Any, function: String, arguments: [Any], countSpecifier: CountSpecifier) -> String {
+private func descriptionOfAttemptedCall(object object: CallRecorder, function: String, arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
     var description = "call <\(function)> from \(object.dynamicType)"
     
     if !arguments.isEmpty {
@@ -56,7 +56,7 @@ private func descriptionOfAttemptedCall(object object: Any, function: String, ar
     return description
 }
 
-private func postfixMessageForNilCase(arguments arguments: [Any], countSpecifier: CountSpecifier) -> String {
+private func postfixMessageForNilCase(arguments arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
     var postfixMessage = "call function"
     
     if arguments.count != 0 {

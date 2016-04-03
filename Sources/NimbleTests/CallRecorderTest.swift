@@ -1,10 +1,47 @@
 import XCTest
 import Nimble
 
+extension String : GloballyEquatable {}
+extension Int : GloballyEquatable {}
+extension NSObject : GloballyEquatable {}
+extension Optional : GloballyEquatable, Equatable {}
+
+/*
+Would like to use Mirror here but there is currently a bug in Swift (I have filed an issue on the Swift project Jira board: SR-1132)
+When that one gets fixed this won't have to be done on the client's side and instead handled automatically also without making Optional
+conform to Equatable
+*/
+public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
+    if let lhs = lhs, rhs = rhs {
+        if let lhs = lhs as? GloballyEquatable, let rhs = rhs as? GloballyEquatable {
+            return lhs.isEqualTo(rhs)
+        }
+        
+        assertionFailure("Trying to equate two Optionals without making \(lhs) and/or \(rhs) conform to GloballyEquatable")
+        return false
+    }
+    
+    let leftIsReal : Bool
+    if let _ = lhs {
+        leftIsReal = true
+    } else {
+        leftIsReal = false
+    }
+    
+    let rightIsReal : Bool
+    if let _ = lhs {
+        rightIsReal = true
+    } else {
+        rightIsReal = false
+    }
+    
+    return !leftIsReal && !rightIsReal
+}
+
 class CallRecorderTest: XCTestCase {
     
     class TestClass : CallRecorder {
-        var called = (functionList: [String](), argumentsList: [[Any]]())
+        var called = (functionList: [String](), argumentsList: [[GloballyEquatable]]())
         
         func doStuff() {
             self.recordCall()
@@ -324,10 +361,10 @@ class CallRecorderTest: XCTestCase {
         expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOf(type: Int.self)], recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with instance of Int argument")
         
-        let expectedArgs1: Array<Any> = [Argument.InstanceOf(type: Optional<String>.self), Argument.InstanceOf(type: Optional<Int>.self)]
+        let expectedArgs1: Array<GloballyEquatable> = [Argument.InstanceOf(type: Optional<String>.self), Argument.InstanceOf(type: Optional<Int>.self)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs1, recordedCallsDescOption: .No).success)
             .to(beTrue(), description: "should SUCCEED to call function with instance of String? and Int? arguments")
-        let expectedArgs2: Array<Any> = [Argument.InstanceOf(type: String.self), Argument.InstanceOf(type: Int.self)]
+        let expectedArgs2: Array<GloballyEquatable> = [Argument.InstanceOf(type: String.self), Argument.InstanceOf(type: Int.self)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2, recordedCallsDescOption: .No).success)
             .to(beFalse(), description: "should FAIL to call function with String and Int arguments")
     }
@@ -368,9 +405,9 @@ class CallRecorderTest: XCTestCase {
         testClass.doWeirdStuffWith(string: "hi", int: 5)
         
         // then
-        let expectedArgs1: Array<Any> = [Argument.Anything, Argument.InstanceOfWith(type: Int.self, option: .Optional)]
+        let expectedArgs1: Array<GloballyEquatable> = [Argument.Anything, Argument.InstanceOfWith(type: Int.self, option: .Optional)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs1, recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call function with 'dont care' and instance of Int with optional requirement 'optional' argument")
-        let expectedArgs2: Array<Any> = [Argument.Anything, Argument.InstanceOfWith(type: String.self, option: .Optional)]
+        let expectedArgs2: Array<GloballyEquatable> = [Argument.Anything, Argument.InstanceOfWith(type: String.self, option: .Optional)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2, recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with 'dont care' and instance of String with optional requirement 'optional' argument")
         expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.InstanceOfWith(type: String.self, option: .Optional)], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call function with instance of String with optional requirement 'optional' arguments")
     }
