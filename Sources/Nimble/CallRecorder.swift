@@ -139,7 +139,7 @@ public extension CallRecorder {
     }
 }
 
-// MARK: Helper Functions
+// MARK: Private Helper Functions
 
 private func numberOfMatchingCalls(function function: String, functions: Array<String>, argsList: Array<Any>, argsLists: Array<Array<Any>>) -> Int {
     // if no args passed in then only check if function was called (allows user to not care about args being passed in)
@@ -196,7 +196,7 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
             
             return cleanedType == cleanedRecordedArgType
         case .InstanceOfWith(let input):
-            let isRecordedArgAnOptional = "\(recordedArg.dynamicType)".indexForMatching(regex: "^Optional<") != nil
+            let isRecordedArgAnOptional = isOptional(recordedArg)
             let passesOptionCheck = (input.option == ArgumentOption.Anything) ||
                                     (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
                                     (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
@@ -214,7 +214,8 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
             if let recordedArgAsObject = recordedArg as? AnyObject {
                 return recordedArgAsObject.isKindOfClass(type)
             }
-            
+
+            assertionFailure(".KindOf only works on arguments that are a subclass of AnyObject")
             return false
         }
     } else {
@@ -223,10 +224,16 @@ private func isEqualArgs(passedArg passedArg: Any, recordedArg: Any) -> Bool {
 }
 
 private func isNil(value: Any) -> Bool {
-    // Currently best known way to check for nil (Swift doesn't allow -> 'Any' == 'nil')
-    let isValueAnOptional = "\(value.dynamicType)".rangeOfString("^Optional<", options: .RegularExpressionSearch, range: nil, locale: nil) != nil
+    let mirror = Mirror(reflecting: value)
+    let hasAValue = mirror.children.first?.value != nil
     
-    return isValueAnOptional && "\(value)" == "nil"
+    return mirror.displayStyle == .Optional && !hasAValue
+}
+
+private func isOptional(value: Any) -> Bool {
+    let mirror = Mirror(reflecting: value)
+    
+    return mirror.displayStyle == .Optional
 }
 
 private func descriptionOfCalls(functionList functionList: Array<String>, argumentsList: Array<Array<Any>>) -> String {
