@@ -1,18 +1,19 @@
 #!/bin/bash
 
-if which xcodebuild; then
-BUILD_DIR=`pwd`/build
-LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
-LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
-BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
-RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
-BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
+GREEN="\033[0;32m"
+CLEAR="\033[0m"
+
+if which xcodebuild > /dev/null; then
+    echo -e "Gathering ${GREEN}xcodebuild sdk versions${CLEAR}..."
+    BUILD_DIR=`pwd`/build
+    LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+    RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+    BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
 fi
 
 set -e
-
-GREEN="\x1B[01;92m"
-CLEAR="\x1B[0m"
 
 function color_if_overridden {
     local actual=$1
@@ -40,7 +41,7 @@ function print_env {
 }
 
 function run {
-    echo "$GREEN==>$CLEAR $@"
+    echo -e "$GREEN==>$CLEAR $@"
     "$@"
 }
 
@@ -57,13 +58,18 @@ function test_osx {
 }
 
 function test_swiftpm {
-    run swift build --clean && swift build
-    run .build/debug/NimbleTests
+    run swift build --clean && swift build && swift test
 }
 
 function test() {
     test_ios
     test_osx
+
+    if which swift-test; then
+        test_swiftpm
+    else
+        echo "Not testing with the Swift Package Manager because swift-test is not installed"
+    fi
 }
 
 function clean {
@@ -78,7 +84,7 @@ function help {
     echo " ios          - Runs the tests as an iOS device"
     echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
     echo " all          - Runs both ios and osx tests"
-    echo " swiftpm      - Runs the tests built by the Swift Package Manager (Linux only)"
+    echo " swiftpm      - Runs the tests built by the Swift Package Manager"
     echo " help         - Displays this help"
     echo
     exit 1
