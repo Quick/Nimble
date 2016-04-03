@@ -1108,19 +1108,6 @@ class StubStringService : ApiService, CallRecorder {
 
 > Could also use inheritance with the subclass overriding all functions and replacing implementation with `self.recordCall()` functions. However, this is unadvised as it could lead to forgotten functions when adding functionality to base class in the future.
 
-### Example Conforming to CustomStringConvertible
-```swift
-public struct Person : CustomStringConvertible {
-    let firstName: String
-    let lastName: String
-    let age: Int
-
-    public var description: String {
-        return "Persion -> firstName: \(firstName), lastName: \(lastName), age: \(age)"
-    }
-}
-```
-
 
 # Writing Your Own Matchers
 
