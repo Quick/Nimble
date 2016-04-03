@@ -927,41 +927,106 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 - Rich Failure Messages that include entire list of called functions and arguments
 - All Call Matchers can be used with `to()` and `toNot()`
 - Easy to implement (especially if already using protocols!)
-  - Create a mock that conforms to `CallMatcher`
+  - Create a stub that conforms to `CallMatcher`
   - Paste in one variable declaration with a default value to conform to `CallMatcher` Protocol
   - In every function (the ones that should be recorded) call the `recordCall()` function passing in all arguments (if any)
 - Currently ONLY works in swift
-- Call matchers use the `description` variable from `CustomStringConvertible` protocol to equate arguments
-  - For custom types, conform to `CustomStringConvertible` protocol and override `description` variable to return a string that will uniquely identify that instance
-    - Required for class types since the default `description` includes the pointer value
+- Call matchers use `GloballyEquatable` protocol to equate arguments
+  - Make types conform to `GloballyEquatable` (without having to add any special implementation!)
+    - Compiler won't let you run tests until all arguments being passed in (to either `recordCall()` function and `call()` matcher function) conform to `GloballyEquatable`
+  - Make types conform to `Equatable` protocol (for custom types you will have to create `==()` function with custom type as parameters)
+    - If you forget to conform to `Equatable` an `assertionFailure()` will be called telling you which class does not conform
+  - If you want to pass in Optionals
+    - Do the same rules as above using the code below to make Optionals correctly conform to `Equatable` and `GloballyEquatable`
+
+### Example GloballyEquatable Conformance
+```swift
+extension String : GloballyEquatable {}
+```
+
+### Example Equatable Conformance
+```swift
+// declare Person as Equatable
+struct Person : Equatable {
+    var name : String
+    var age : Int
+}
+
+// determine how you want two Persons to equate to true/false
+func ==(lhs: Person, rhs: Person) -> Bool {
+    let namesMatch = lhs.name == rhs.name
+    let agesMatch = lhs.age == rhs.age
+    
+    return namesMatch && agesMatch
+}
+```
+
+## Example Opional Conformance to GloballyEquatable and Equatable
+```swift
+// Copy and Paste (DO NOT MODIFY!!)
+
+extension Optional : GloballyEquatable, Equatable {}
+
+public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
+    if let lhs = lhs, rhs = rhs {
+        guard let lhsGE = lhs as? GloballyEquatable else {
+            assertionFailure("type '\(lhs.self)' does not conform to 'GloballyEquatable'")
+            return false
+        }
+        
+        guard let rhsGE = rhs as? GloballyEquatable else {
+            assertionFailure("type '\(rhs.self)' does not conform to 'GloballyEquatable'")
+            return false
+        }
+        
+        return lhsGE.isEqualTo(rhsGE)
+    }
+    
+    let leftIsReal : Bool
+    if let _ = lhs {
+        leftIsReal = true
+    } else {
+        leftIsReal = false
+    }
+    
+    let rightIsReal : Bool
+    if let _ = lhs {
+        rightIsReal = true
+    } else {
+        rightIsReal = false
+    }
+    
+    return !leftIsReal && !rightIsReal // allows two Optional<T>.None to equate to true
+}
+```
 
 ### Example Tests
 ```swift
 // Swift ONLY
 
-// passes if mock did call function
-expect(mock).to(call("functionNameWith(arg1:arg2:)"))
+// passes if function was called
+expect(stub).to(call("functionNameWith(arg1:arg2:)"))
 
-// passes if mock did call function a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .Exactly(1)))
+// passes if function was called a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .Exactly(1)))
 
-// passes if mock did call function at least a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtLeast(2)))
+// passes if function was called at least a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtLeast(2)))
 
-// passes if mock did call function at most a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtMost(1)))
+// passes if function was called at most a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtMost(1)))
 
-// passes if mock did call function with argument specifications
-expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.InstanceOf(type: String.self)))
+// passes if function was called with argument specifications
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.InstanceOf(type: String.self)))
 
-// passes if mock did call function with argument specifications a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.Anything, countSpecifier: .Exactly(2)))
+// passes if function was called with argument specifications a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.Anything, countSpecifier: .Exactly(2)))
 
-// passes if mock did call function with argument specifications at least a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.NonNil, countSpecifier: .AtLeast(2)))
+// passes if function was called with argument specifications at least a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.NonNil, countSpecifier: .AtLeast(2)))
 
-// passes if mock did call function with argument specifications at most a number of times
-expect(mock).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.KindOf(type: NSObject.self), countSpecifier: .AtMost(2)))
+// passes if function was called with argument specifications at most a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.KindOf(type: NSObject.self), countSpecifier: .AtMost(2)))
 ```
 
 Argument enum options: (use when the exact comparison of the argument is not needed)
@@ -977,7 +1042,7 @@ ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the 
 - `case NonOptional`
 - `case Optional`
 
-### Example Mock
+### Example Stub
 ```swift
 // The Protocol
 protocol StringService : class {
@@ -996,13 +1061,13 @@ class RealStringService : ApiService {
     }
 }
 
-// The Mock Class
-class MockStringService : ApiService, CallRecorder {
+// The Stub Class
+class StubStringService : ApiService, CallRecorder {
     var called = (functionList: [String](), argumentsList: [[Any]]()) // <-- **REQUIRED**
 
     func giveMeAString() -> String {
         self.recordCall() // <-- **REQUIRED**
-        return "a mocked value"
+        return "a stubbed value"
     }
 
     func hereAreTwoStrings(string1: String, string2: String) {

@@ -13,12 +13,17 @@ conform to Equatable
 */
 public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
     if let lhs = lhs, rhs = rhs {
-        if let lhs = lhs as? GloballyEquatable, let rhs = rhs as? GloballyEquatable {
-            return lhs.isEqualTo(rhs)
+        guard let lhsGE = lhs as? GloballyEquatable else {
+            assertionFailure("type '\(lhs.self)' does not conform to 'GloballyEquatable'")
+            return false
         }
         
-        assertionFailure("Trying to equate two Optionals without making \(lhs) and/or \(rhs) conform to GloballyEquatable")
-        return false
+        guard let rhsGE = rhs as? GloballyEquatable else {
+            assertionFailure("type '\(rhs.self)' does not conform to 'GloballyEquatable'")
+            return false
+        }
+        
+        return lhsGE.isEqualTo(rhsGE)
     }
     
     let leftIsReal : Bool
@@ -35,7 +40,7 @@ public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
         rightIsReal = false
     }
     
-    return !leftIsReal && !rightIsReal
+    return !leftIsReal && !rightIsReal // allows two Optional<T>.None to equate to true
 }
 
 class CallRecorderTest: XCTestCase {
