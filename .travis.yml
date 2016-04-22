@@ -4,7 +4,6 @@ matrix:
   include:
     - os: osx
       env: TYPE=podspec
-      rvm: 1.9.3
     - os: osx
       env: NIMBLE_RUNTIME_IOS_SDK_VERSION=9.0 TYPE=ios
     - os: osx
