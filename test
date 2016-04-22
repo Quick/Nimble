@@ -58,6 +58,9 @@ function test_osx {
 }
 
 function test_podspec {
+    echo "Gathering CocoaPods installation information..."
+    run pod --version
+
     run pod lib lint Nimble.podspec
 }
 
