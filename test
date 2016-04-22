@@ -58,6 +58,8 @@ function test_osx {
 }
 
 function test_podspec {
+    echo "Using system Ruby..."
+    run run rvm use system
     echo "Gathering CocoaPods installation information..."
     run pod --version
 
