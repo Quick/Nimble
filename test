@@ -57,6 +57,13 @@ function test_osx {
     run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx$BUILD_OSX_SDK_VERSION" build test
 }
 
+function test_podspec {
+    echo "Gathering CocoaPods installation information..."
+    run bundle exec pod --version
+    echo "Linting podspec..."
+    run bundle exec pod lib lint Nimble.podspec
+}
+
 function test_swiftpm {
     run swift build --clean && swift build && swift test
 }
@@ -83,6 +90,7 @@ function help {
     echo " clean        - Cleans the derived data directory of Xcode. Assumes default location"
     echo " ios          - Runs the tests as an iOS device"
     echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
+    echo " podspec      - Runs pod lib lint against the podspec to detect breaking changes"
     echo " all          - Runs both ios and osx tests"
     echo " swiftpm      - Runs the tests built by the Swift Package Manager"
     echo " help         - Displays this help"
@@ -98,6 +106,7 @@ function main {
             clean) clean ;;
             ios) test_ios ;;
             osx) test_osx ;;
+            podspec) test_podspec ;;
             test) test ;;
             all) test ;;
             swiftpm) test_swiftpm ;;
