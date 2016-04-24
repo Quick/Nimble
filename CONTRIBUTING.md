@@ -104,9 +104,8 @@ The process is relatively straight forward, but here's is a useful checklist for
 
 - Look at changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
 - Run the release script: `./script/release A.B.C release-notes-file`
-- Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
-  - Use the same release notes you created for the tag, but tweak up formatting for github.
-  - Attach the carthage release `Nimble.framework.zip` to the release.
+- The script will prompt you to create a new [GitHub release](https://github.com/Quick/Nimble/releases).
+  - Use the same release notes you created for the tag, but tweak up formatting for GitHub.
 - Update [Quick](https://github.com/Quick/Quick)
   - Update Quick's submodule reference to the newly released Nimble version
   - Update Nimble version in `README.md` and Documentation in [Quick](https://github.com/Quick/Quick) if it's not a patch version update.
