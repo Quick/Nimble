@@ -60,8 +60,9 @@ function test_osx {
 function test_podspec {
     echo puts \"hi\" | ruby
     echo "Gathering CocoaPods installation information..."
-    run pod --version
-    run pod lib lint Nimble.podspec
+    run bundle install
+    run bundle exec pod --version
+    run bundle exec pod lib lint Nimble.podspec
 }
 
 function test_swiftpm {
