@@ -58,11 +58,9 @@ function test_osx {
 }
 
 function test_podspec {
-    echo puts \"hi\" | ruby
     echo "Gathering CocoaPods installation information..."
-    run sudo gem install bundler
-    run bundle install
     run bundle exec pod --version
+    echo "Linting podspec..."
     run bundle exec pod lib lint Nimble.podspec
 }
 
