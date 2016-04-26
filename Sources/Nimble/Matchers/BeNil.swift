@@ -1,5 +1,23 @@
 import Foundation
 
+public let Nil = NilLiteral()
+
+public struct NilLiteral: NilLiteralConvertible {
+    public init(nilLiteral: ()) {}
+    public init() {}
+}
+
+extension NilLiteral: Equatable {}
+public func ==(lhs: NilLiteral, rhs: NilLiteral) -> Bool { return true }
+
+public func ==<T>(lhs: Expectation<T>, rhs: NilLiteral) {
+    lhs.to(beNil())
+}
+
+public func !=<T>(lhs: Expectation<T>, rhs: NilLiteral) {
+    lhs.toNot(beNil())
+}
+
 /// A Nimble matcher that succeeds when the actual value is nil.
 public func beNil<T>() -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
