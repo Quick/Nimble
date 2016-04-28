@@ -28,16 +28,16 @@ class BeNilTest: XCTestCase, XCTestCaseProvider {
     }
     
     func testBeNilWithEqualityOperator() {
-        expect(nil as Float?) == Nil
-        expect(20 as Int?) != Nil
-        expect(self.producesNil()) == Nil
+        expect(nil as Float?) == nil
+        expect(20 as Int?) != nil
+        expect(self.producesNil()) == nil
         
         failsWithErrorMessage("expected to not be nil, got <nil>") {
-            expect(nil as String?) != Nil
+            expect(nil as String?) != nil
         }
         
         failsWithErrorMessage("expected to be nil, got <-99999>") {
-            expect(-99999 as Int?) == Nil
+            expect(-99999 as Int?) == nil
         }
     }
 }

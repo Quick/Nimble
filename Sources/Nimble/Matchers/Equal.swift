@@ -130,43 +130,43 @@ private func equal<T>(expectedValue: Set<T>?, stringify: Set<T>? -> String) -> N
     }
 }
 
-public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
+public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
+public func !=<T: Equatable>(lhs: Expectation<T>, rhs: T) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
+public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
+public func !=<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+public func ==<T>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+public func !=<T>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+public func ==<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
+public func !=<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
+public func ==<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
+public func !=<T: Equatable, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]) {
     lhs.toNot(equal(rhs))
 }
 
