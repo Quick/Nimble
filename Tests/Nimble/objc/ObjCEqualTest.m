@@ -24,7 +24,6 @@
 }
 
 - (void)testNilMatches {
-    
     expectNilFailureMessage(@"expected to equal <nil>, got <nil>", ^{
         expect(nil).to(equal(nil));
     });
