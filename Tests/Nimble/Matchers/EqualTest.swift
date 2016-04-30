@@ -8,6 +8,7 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
             ("testEquality", testEquality),
             ("testArrayEquality", testArrayEquality),
             ("testSetEquality", testSetEquality),
+            ("testDoesNotMatchNils", testDoesNotMatchNils),
             ("testDictionaryEquality", testDictionaryEquality),
             ("testDataEquality", testDataEquality),
             ("testNSObjectEquality", testNSObjectEquality),
@@ -65,6 +66,10 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(Set<Int>()) == Set<Int>()
         expect(Set([1, 2])) != Set<Int>()
 
+        failsWithErrorMessageForNil("expected to equal <[1, 2]>, got <nil>") {
+            expect(nil as Set<Int>?).to(equal(Set([1, 2])))
+        }
+
         failsWithErrorMessage("expected to equal <[1, 2, 3]>, got <[2, 3]>, missing <[1]>") {
             expect(Set([2, 3])).to(equal(Set([1, 2, 3])))
         }
@@ -83,6 +88,18 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
 
         failsWithErrorMessage("expected to not equal <[1, 2, 3]>, got <[1, 2, 3]>") {
             expect(Set([1, 2, 3])) != Set([1, 2, 3])
+        }
+    }
+
+    func testDoesNotMatchNils() {
+        failsWithErrorMessageForNil("expected to not equal <bar>, got <nil>") {
+            expect(nil as String?).toNot(equal("bar"))
+        }
+        failsWithErrorMessageForNil("expected to not equal <[1]>, got <nil>") {
+            expect(nil as [Int]?).toNot(equal([1]))
+        }
+        failsWithErrorMessageForNil("expected to not equal <[1: 1]>, got <nil>") {
+            expect(nil as [Int: Int]?).toNot(equal([1: 1]))
         }
     }
 

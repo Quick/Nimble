@@ -19,8 +19,7 @@ public func equal<T: Equatable>(expectedValue: T) -> NonNilMatcherFunc<T> {
 public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]) -> NonNilMatcherFunc<[T: C]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
-        let _actualValue = try actualExpression.evaluate()
-        guard let actualValue = _actualValue else { return false }
+        guard let actualValue = try actualExpression.evaluate() else { return false }
         return expectedValue == actualValue
     }
 }
