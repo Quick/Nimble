@@ -75,7 +75,7 @@ public func equal<T>(expectedValue: Set<T>) -> NonNilMatcherFunc<Set<T>> {
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T: Comparable>(expectedValue: Set<T>) -> NonNilMatcherFunc<Set<T>> {
     return equal(expectedValue, stringify: {
-        return stringify(Array($0).sort { $0 < $1 })
+        return stringify(Array($0).sort(<))
     })
 }
 
