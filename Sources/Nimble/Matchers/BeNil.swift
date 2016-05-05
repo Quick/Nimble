@@ -13,6 +13,8 @@ public func ==(lhs: NilLiteral, rhs: NilLiteral) -> Bool { return true }
 /// nil expectations. For a given expectation `expectThing`,
 /// `expectThing == nil` and `expectThing.to(beNil)` are
 /// equivalent expressions.
+///
+/// - SeeAlso: `beNil()`
 public func ==<T>(lhs: Expectation<T>, rhs: NilLiteral) {
     lhs.to(beNil())
 }
@@ -21,6 +23,8 @@ public func ==<T>(lhs: Expectation<T>, rhs: NilLiteral) {
 /// nonnil expectations. For a given expectation `expectThing`,
 /// `expectThing != nil` and `expectThing.toNot(beNil)` are
 /// equivalent expressions.
+///
+/// - SeeAlso: `beNil()`
 public func !=<T>(lhs: Expectation<T>, rhs: NilLiteral) {
     lhs.toNot(beNil())
 }

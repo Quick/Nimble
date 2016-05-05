@@ -3,7 +3,8 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
 /// Values can support equal by supporting the Equatable protocol.
 ///
-/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+/// - SeeAlso: `beCloseTo(_:)` for matching imprecise types (eg - floats, doubles) and
+///    `beNil()` for matching `nil`.
 public func equal<T: Equatable>(expectedValue: T) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
@@ -15,7 +16,8 @@ public func equal<T: Equatable>(expectedValue: T) -> NonNilMatcherFunc<T> {
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
 /// Values can support equal by supporting the Equatable protocol.
 ///
-/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+/// - SeeAlso: `beCloseTo(_:)` for matching imprecise types (eg - floats, doubles) and
+///    `beNil()` for matching `nil`.
 public func equal<T: Equatable, C: Equatable>(expectedValue: [T: C]) -> NonNilMatcherFunc<[T: C]> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
