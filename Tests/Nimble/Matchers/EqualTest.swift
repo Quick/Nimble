@@ -179,6 +179,11 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
 
     func testOptionalEquality() {
         expect(1 as CInt?).to(equal(1))
+        expect("One" as String?).to(equal("One"))
+        
+        failsWithErrorMessageForNil("expected to equal <Two>, got <nil>") {
+            expect(nil as String?).to(equal("Two"))
+        }
     }
     
     func testArrayOfOptionalsEquality() {
