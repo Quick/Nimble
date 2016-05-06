@@ -45,7 +45,7 @@ public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
             let range = collection.range(of: endingSubstring)
-            return range != nil && range!.endIndex == collection.endIndex
+            return range != nil && range!.upperBound == collection.endIndex
         }
         return false
     }

@@ -44,10 +44,4 @@ import Foundation
             return sleepForTimeInterval(ti)
         }
     }
-
-    extension String {
-        func data(using encoding: NSStringEncoding, allowLossyConversion: Bool = false) -> NSData? {
-            return dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
-        }
-    }
 #endif

@@ -112,12 +112,12 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: Set<T>? -> String) ->
                     return true
                 }
 
-                let missing = expectedValue.subtract(actualValue)
+                let missing = expectedValue.subtracting(actualValue)
                 if missing.count > 0 {
                     failureMessage.postfixActual += ", missing <\(stringify(missing))>"
                 }
 
-                let extra = actualValue.subtract(expectedValue)
+                let extra = actualValue.subtracting(expectedValue)
                 if extra.count > 0 {
                     failureMessage.postfixActual += ", extra <\(stringify(extra))>"
                 }

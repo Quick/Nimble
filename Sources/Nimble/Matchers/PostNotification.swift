@@ -38,7 +38,7 @@ private let mainThread = pthread_self()
 
 public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification]>(
     _ notificationsMatcher: T,
-    fromNotificationCenter center: NSNotificationCenter = NSNotificationCenter.defaultCenter())
+    fromNotificationCenter center: NSNotificationCenter = NSNotificationCenter.default())
     -> MatcherFunc<Any> {
         let _ = mainThread // Force lazy-loading of this value
         let collector = NotificationCollector(notificationCenter: center)

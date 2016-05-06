@@ -35,7 +35,7 @@ public func beginWith(_ startingSubstring: String) -> NonNilMatcherFunc<String> 
         failureMessage.postfixMessage = "begin with <\(startingSubstring)>"
         if let actual = try actualExpression.evaluate() {
             let range = actual.range(of: startingSubstring)
-            return range != nil && range!.startIndex == actual.startIndex
+            return range != nil && range!.lowerBound == actual.startIndex
         }
         return false
     }
