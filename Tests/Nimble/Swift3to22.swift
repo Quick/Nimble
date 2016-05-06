@@ -2,10 +2,6 @@ import Foundation
 
 #if os(Linux)
     extension NSDate {
-        func addingTimeInterval(ti: NSTimeInterval) -> NSDate {
-            return dateByAddingTimeInterval(ti)
-        }
-
         convenience init(timeInterval secsToBeAdded: NSTimeInterval, since date: NSDate) {
             self.init(timeInterval: secsToBeAdded, sinceDate: date)
         }

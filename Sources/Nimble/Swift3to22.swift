@@ -14,12 +14,6 @@ import XCTest
         internal static var orderedDescending: NSComparisonResult { return .OrderedDescending }
     }
 
-    extension NSDateFormatter {
-        internal func string(from date: NSDate) -> String {
-            return stringFromDate(date)
-        }
-    }
-
     extension NSMutableArray {
         internal func add(_ anObject: AnyObject) {
             addObject(anObject)

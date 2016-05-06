@@ -19,10 +19,11 @@ public protocol Matcher {
 /// Protocol for types that support contain() matcher.
 @objc public protocol NMBContainer {
     @objc(containsObject:)
-    func contains(_ anObject: AnyObject!) -> Bool
+    func contains(_ anObject: AnyObject) -> Bool
 }
 
-extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
+// FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
+//extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
 #if !os(Linux)
