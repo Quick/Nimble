@@ -27,14 +27,8 @@ private func createAllPassMatcher<T,U where U: Sequence, U.Iterator.Element == T
             failureMessage.actualValue = nil
             if let actualValue = try actualExpression.evaluate() {
                 for currentElement in actualValue {
-                    #if swift(>=3)
-                        let exp = Expression(
-                            expression: {currentElement}, location: actualExpression.location)
-                    #else
-                        // FIXME: following force cast is needed for Swift3 to Swift 2.2
-                        let exp = Expression(
-                            expression: {currentElement as! U.Iterator.Element}, location: actualExpression.location)
-                    #endif
+                    let exp = Expression(
+                        expression: {currentElement}, location: actualExpression.location)
                     if try !elementEvaluator(exp, failureMessage) {
                         failureMessage.postfixMessage =
                             "all \(failureMessage.postfixMessage),"

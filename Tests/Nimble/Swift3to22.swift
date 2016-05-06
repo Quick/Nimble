@@ -1,12 +1,6 @@
 import Foundation
 
-#if !swift(>=3)
-    internal func unsafeBitCast<T, U>(x: T, to: U.Type) -> U {
-        return unsafeBitCast(x, to)
-    }
-#endif
-
-#if !swift(>=3) || os(Linux)
+#if os(Linux)
     extension NSDate {
         func addingTimeInterval(ti: NSTimeInterval) -> NSDate {
             return dateByAddingTimeInterval(ti)

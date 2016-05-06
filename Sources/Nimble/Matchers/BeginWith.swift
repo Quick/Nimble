@@ -20,7 +20,7 @@ public func beginWith(_ startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrde
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = try actualExpression.evaluate()
-#if swift(>=3) && !os(Linux)
+#if !os(Linux)
         return collection != nil && collection!.index(of: startingElement) == 0
 #else
         return collection != nil && collection!.indexOfObject(startingElement) == 0

@@ -1,75 +1,7 @@
 import Foundation
 import XCTest
 
-#if !swift(>=3)
-    public typealias Boolean = BooleanType
-    public typealias Collection = CollectionType
-    public typealias ErrorProtocol = ErrorType
-
-    internal func unsafeBitCast<T, U>(x: T, to: U.Type) -> U {
-        return unsafeBitCast(x, to)
-    }
-
-    typealias NSFastEnumerationIterator = NSFastGenerator
-
-    extension NSObjectProtocol {
-        internal func isKind(of aClass: Swift.AnyClass) -> Bool {
-            return isKindOfClass(aClass)
-        }
-
-        internal func isMember(of aClass: Swift.AnyClass) -> Bool {
-            return isMemberOfClass(aClass)
-        }
-    }
-
-    public protocol Sequence: SequenceType {
-        associatedtype Iterator: GeneratorType = Generator
-    }
-
-    extension Sequence {
-        internal func makeIterator() -> Iterator {
-            return generate() as! Iterator
-        }
-
-        internal func enumerated() -> EnumerateSequence<Self> {
-            return enumerate()
-        }
-
-        internal func sorted(@noescape isOrderedBefore isOrderedBefore: (Generator.Element, Generator.Element) -> Bool) -> [Generator.Element] {
-            return sort(isOrderedBefore)
-        }
-    }
-
-    extension Sequence where Iterator.Element: Equatable {
-        internal func contains(element: Iterator.Element) -> Bool {
-            for case let item as Iterator.Element in self where item == element {
-                return true
-            }
-            return false
-        }
-    }
-
-    extension Sequence where Generator.Element == String {
-        internal func joined(separator separator: String) -> String {
-            return joinWithSeparator(separator)
-        }
-    }
-
-    extension AnySequence: Sequence {}
-    extension Array: Sequence {}
-    extension Dictionary: Sequence {}
-    extension Set: Sequence {}
-
-
-    extension XCTestCase {
-        @nonobjc internal func recordFailure(withDescription description: String, inFile filePath: String, atLine lineNumber: UInt, expected: Bool) {
-            recordFailureWithDescription(description, inFile: filePath, atLine: lineNumber, expected: expected)
-        }
-    }
-
-#endif
-
-#if !swift(>=3) || os(Linux)
+#if os(Linux)
     extension NSCharacterSet {
         internal class func whitespacesAndNewlines() -> NSCharacterSet {
             return whitespaceAndNewlineCharacterSet()

@@ -17,21 +17,15 @@ public protocol Matcher {
 
 #if _runtime(_ObjC)
 /// Protocol for types that support contain() matcher.
-#if swift(>=3)
 @objc public protocol NMBContainer {
     @objc(containsObject:)
     func contains(_ anObject: AnyObject!) -> Bool
 }
-#else
-@objc public protocol NMBContainer {
-    func containsObject(_ object: AnyObject!) -> Bool
-}
-#endif
 
 extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
-#if swift(>=3) && !os(Linux)
+#if !os(Linux)
     func contains(_ anObject: AnyObject?) -> Bool
 #else
     func containsObject(_ object: AnyObject) -> Bool
@@ -62,19 +56,13 @@ extension NSDictionary : NMBCollection {}
 
 #if _runtime(_ObjC)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
-#if swift(>=3)
 @objc public protocol NMBOrderedCollection : NMBCollection {
     @objc(indexOfObject:)
     func index(of anObject: AnyObject) -> Int
 }
 #else
-@objc public protocol NMBOrderedCollection : NMBCollection {
-    func indexOfObject(_ object: AnyObject!) -> Int
-}
-#endif
-#else
 public protocol NMBOrderedCollection : NMBCollection {
-#if swift(>=3) && !os(Linux)
+#if !os(Linux)
     func index(of anObject: AnyObject) -> Int
 #else
     func indexOfObject(_ object: AnyObject) -> Int
