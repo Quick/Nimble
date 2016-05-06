@@ -101,6 +101,13 @@ extension NSArray: TestOutputStringConvertible {
     }
 }
 
+extension NSIndexSet: TestOutputStringConvertible {
+    public var testDescription: String {
+        let list = Array(self).map(Nimble.stringify).joinWithSeparator(", ")
+        return "(\(list))"
+    }
+}
+
 extension String: TestOutputStringConvertible {
     public var testDescription: String {
         return self
