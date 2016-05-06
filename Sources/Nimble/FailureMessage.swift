@@ -33,9 +33,9 @@ public class FailureMessage: NSObject {
         _stringValueOverride = stringValue
     }
 
-    internal func stripNewlines(str: String) -> String {
-        var lines: [String] = NSString(string: str).componentsSeparated(by: "\n") as [String]
-        let whitespace = NSCharacterSet.whitespaceAndNewline()
+    internal func stripNewlines(_ str: String) -> String {
+        var lines: [String] = NSString(string: str).components(separatedBy: "\n") as [String]
+        let whitespace = NSCharacterSet.whitespacesAndNewlines()
         lines = lines.map { line in NSString(string: line).trimmingCharacters(in: whitespace) }
         return lines.joined(separator: "")
     }

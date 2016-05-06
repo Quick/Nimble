@@ -24,8 +24,17 @@ import Foundation
     }
 
     extension NSNotificationCenter {
-        func post(notification: NSNotification) {
+        func post(_ notification: NSNotification) {
             postNotification(notification)
+        }
+    }
+
+    extension NSNumber {
+        internal convenience init(value: Int) {
+            self.init(integer:value)
+        }
+        internal convenience init(value: Double) {
+            self.init(double:value)
         }
     }
 
@@ -47,7 +56,7 @@ import Foundation
     }
 
     extension String {
-        func data(usingEncoding encoding: NSStringEncoding, allowLossyConversion: Bool = false) -> NSData? {
+        func data(using encoding: NSStringEncoding, allowLossyConversion: Bool = false) -> NSData? {
             return dataUsingEncoding(encoding, allowLossyConversion: allowLossyConversion)
         }
     }

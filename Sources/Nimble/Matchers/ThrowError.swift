@@ -12,7 +12,7 @@ import Foundation
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func throwError<T: ErrorProtocol>(
-    error: T? = nil,
+    _ error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) -> MatcherFunc<Any> {
         return MatcherFunc { actualExpression, failureMessage in
@@ -37,7 +37,7 @@ public func throwError<T: ErrorProtocol>(
 ///
 /// The closure only gets called when an error was thrown.
 public func throwError(
-    closure closure: ((ErrorProtocol) -> Void)? = nil) -> MatcherFunc<Any> {
+    closure: ((ErrorProtocol) -> Void)? = nil) -> MatcherFunc<Any> {
         return MatcherFunc { actualExpression, failureMessage in
             
             var actualError: ErrorProtocol?

@@ -1,8 +1,8 @@
 import Foundation
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-@warn_unused_result(message="Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
-public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
+@warn_unused_result(message:"Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
+public func expect<T>(@autoclosure(escaping) _ expression: () throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -11,8 +11,8 @@ public func expect<T>(@autoclosure(escaping) expression: () throws -> T?, file: 
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
-@warn_unused_result(message="Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
-public func expect<T>(file: FileString = #file, line: UInt = #line, expression: () throws -> T?) -> Expectation<T> {
+@warn_unused_result(message:"Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
+public func expect<T>(_ file: FileString = #file, line: UInt = #line, expression: () throws -> T?) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -21,24 +21,24 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, expression: 
 }
 
 /// Always fails the test with a message and a specified location.
-public func fail(message: String, location: SourceLocation) {
+public func fail(_ message: String, location: SourceLocation) {
     let handler = NimbleEnvironment.activeInstance.assertionHandler
     handler.assert(false, message: FailureMessage(stringValue: message), location: location)
 }
 
 /// Always fails the test with a message.
-public func fail(message: String, file: FileString = #file, line: UInt = #line) {
+public func fail(_ message: String, file: FileString = #file, line: UInt = #line) {
     fail(message, location: SourceLocation(file: file, line: line))
 }
 
 /// Always fails the test.
-public func fail(file: FileString = #file, line: UInt = #line) {
+public func fail(_ file: FileString = #file, line: UInt = #line) {
     fail("fail() always fails", file: file, line: line)
 }
 
 /// Like Swift's precondition(), but raises NSExceptions instead of sigaborts
 internal func nimblePrecondition(
-    @autoclosure expr: () -> Bool,
+    @autoclosure _ expr: () -> Bool,
     @autoclosure _ name: () -> String,
     @autoclosure _ message: () -> String,
     file: StaticString = #file,
@@ -59,7 +59,7 @@ internal func nimblePrecondition(
 }
 
 @noreturn
-internal func internalError(msg: String, file: FileString = #file, line: UInt = #line) {
+internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) {
     fatalError(
         "Nimble Bug Found: \(msg) at \(file):\(line).\n" +
         "Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the " +

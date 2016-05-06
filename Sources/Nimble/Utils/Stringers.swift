@@ -1,7 +1,7 @@
 import Foundation
 
 
-internal func identityAsString(value: AnyObject?) -> String {
+internal func identityAsString(_ value: AnyObject?) -> String {
     if let value = value {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
@@ -9,7 +9,7 @@ internal func identityAsString(value: AnyObject?) -> String {
     }
 }
 
-internal func classAsString(cls: AnyClass) -> String {
+internal func classAsString(_ cls: AnyClass) -> String {
 #if _runtime(_ObjC)
     return NSStringFromClass(cls)
 #else
@@ -17,7 +17,7 @@ internal func classAsString(cls: AnyClass) -> String {
 #endif
 }
 
-internal func arrayAsString<T>(items: [T], joiner: String = ", ") -> String {
+internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
         return accum + prefix + "\(stringify(item))"
@@ -37,13 +37,13 @@ public protocol TestOutputStringConvertible {
 
 extension Double: TestOutputStringConvertible {
     public var testDescription: String {
-        return NSNumber(double: self).testDescription
+        return NSNumber(value: self).testDescription
     }
 }
 
 extension Float: TestOutputStringConvertible {
     public var testDescription: String {
-        return NSNumber(float: self).testDescription
+        return NSNumber(value: self).testDescription
     }
 }
 
@@ -59,7 +59,7 @@ extension NSNumber: TestOutputStringConvertible {
             // which is why this annoying nested initializer thing is here.
             // Maybe this will change in a future snapshot.
             let decimalPlaces = NSString(string: NSString(string: description)
-                .componentsSeparated(by: ".")[1])
+                .components(separatedBy: ".")[1])
             
             if decimalPlaces.length > 4 {
                 return NSString(format: "%0.4f", self.doubleValue).description
@@ -140,7 +140,7 @@ extension NSData: TestOutputStringConvertible {
 ///
 /// - SeeAlso: `TestOutputStringConvertible`
 @warn_unused_result
-public func stringify<T>(value: T) -> String {
+public func stringify<T>(_ value: T) -> String {
     if let value = value as? TestOutputStringConvertible {
         return value.testDescription
     }
@@ -154,7 +154,7 @@ public func stringify<T>(value: T) -> String {
 
 /// -SeeAlso: `stringify<T>(value: T)`
 @warn_unused_result
-public func stringify<T>(value: T?) -> String {
+public func stringify<T>(_ value: T?) -> String {
     if let unboxed = value {
         return stringify(unboxed)
     }
@@ -164,7 +164,7 @@ public func stringify<T>(value: T?) -> String {
 #if _runtime(_ObjC)
 @objc public class NMBStringer: NSObject {
     @warn_unused_result
-    @objc public class func stringify(obj: AnyObject?) -> String {
+    @objc public class func stringify(_ obj: AnyObject?) -> String {
         return Nimble.stringify(obj)
     }
 }

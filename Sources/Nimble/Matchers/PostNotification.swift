@@ -37,7 +37,7 @@ internal class NotificationCollector {
 private let mainThread = pthread_self()
 
 public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification]>(
-    notificationsMatcher: T,
+    _ notificationsMatcher: T,
     fromNotificationCenter center: NSNotificationCenter = NSNotificationCenter.defaultCenter())
     -> MatcherFunc<Any> {
         let _ = mainThread // Force lazy-loading of this value

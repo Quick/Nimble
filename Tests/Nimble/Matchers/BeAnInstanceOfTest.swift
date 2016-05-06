@@ -13,7 +13,7 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
 
     func testPositiveMatch() {
         expect(NSNull()).to(beAnInstanceOf(NSNull))
-        expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSDate))
+        expect(NSNumber(value:1)).toNot(beAnInstanceOf(NSDate))
     }
 
     func testFailureMessages() {
@@ -29,10 +29,10 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         let numberTypeName = "NSNumber"
 #endif
         failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
-            expect(NSNumber(integer:1)).to(beAnInstanceOf(NSString))
+            expect(NSNumber(value:1)).to(beAnInstanceOf(NSString))
         }
         failsWithErrorMessage("expected to not be an instance of NSNumber, got <\(numberTypeName) instance>") {
-            expect(NSNumber(integer:1)).toNot(beAnInstanceOf(NSNumber))
+            expect(NSNumber(value:1)).toNot(beAnInstanceOf(NSNumber))
         }
     }
     

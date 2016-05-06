@@ -2,7 +2,7 @@ import Foundation
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-internal func memoizedClosure<T>(closure: () throws -> T) -> (Bool) throws -> T {
+internal func memoizedClosure<T>(_ closure: () throws -> T) -> (Bool) throws -> T {
     var cache: T?
     return ({ withoutCaching in
         if (withoutCaching || cache == nil) {
@@ -76,7 +76,7 @@ public struct Expression<T> {
     ///
     /// @param block The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(block: (T?) throws -> U?) -> Expression<U> {
+    public func cast<U>(_ block: (T?) throws -> U?) -> Expression<U> {
         return Expression<U>(expression: ({ try block(self.evaluate()) }), location: self.location, isClosure: self.isClosure)
     }
 

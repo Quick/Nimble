@@ -32,8 +32,8 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPassesWhenAllExpectedNotificationsArePosted() {
-        let foo = NSNumber(int: 1)
-        let bar = NSNumber(int: 2)
+        let foo = NSNumber(value: 1)
+        let bar = NSNumber(value: 2)
         let n1 = NSNotification(name: "Foo", object: foo)
         let n2 = NSNotification(name: "Bar", object: bar)
         expect {

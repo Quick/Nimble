@@ -43,7 +43,7 @@ extension XCTestCase {
 }
 
 extension XCTestCaseNameProvider {
-    private func assertContainsTest(name: String) {
+    private func assertContainsTest(_ name: String) {
         let contains = self.allTestNames.contains(name)
         XCTAssert(contains, "Test '\(name)' is missing from the allTests array")
     }

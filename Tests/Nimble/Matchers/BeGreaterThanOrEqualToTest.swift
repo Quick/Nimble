@@ -14,10 +14,10 @@ final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
         expect(10).to(beGreaterThanOrEqualTo(10))
         expect(10).to(beGreaterThanOrEqualTo(2))
         expect(1).toNot(beGreaterThanOrEqualTo(2))
-        expect(NSNumber(int:1)).toNot(beGreaterThanOrEqualTo(2))
-        expect(NSNumber(int:2)).to(beGreaterThanOrEqualTo(NSNumber(int:2)))
+        expect(NSNumber(value:1)).toNot(beGreaterThanOrEqualTo(2))
+        expect(NSNumber(value:2)).to(beGreaterThanOrEqualTo(NSNumber(value:2)))
 #if _runtime(_ObjC)
-        expect(1).to(beGreaterThanOrEqualTo(NSNumber(int:0)))
+        expect(1).to(beGreaterThanOrEqualTo(NSNumber(value:0)))
 #endif
 
         failsWithErrorMessage("expected to be greater than or equal to <2>, got <0>") {
@@ -39,8 +39,8 @@ final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
     func testGreaterThanOrEqualToOperator() {
         expect(0) >= 0
         expect(1) >= 0
-        expect(NSNumber(int:1)) >= 1
-        expect(NSNumber(int:1)) >= NSNumber(int:1)
+        expect(NSNumber(value:1)) >= 1
+        expect(NSNumber(value:1)) >= NSNumber(value:1)
 
         failsWithErrorMessage("expected to be greater than or equal to <2>, got <1>") {
             expect(1) >= 2

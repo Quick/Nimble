@@ -3,7 +3,7 @@ import Foundation
 // Generic
 
 internal func setFailureMessageForError<T: ErrorProtocol>(
-    failureMessage: FailureMessage,
+    _ failureMessage: FailureMessage,
     postfixMessageVerb: String = "throw",
     actualError: ErrorProtocol?,
     error: T? = nil,
@@ -35,14 +35,14 @@ internal func setFailureMessageForError<T: ErrorProtocol>(
 }
 
 internal func errorMatchesExpectedError<T: ErrorProtocol>(
-    actualError: ErrorProtocol,
+    _ actualError: ErrorProtocol,
     expectedError: T) -> Bool {
     return actualError._domain == expectedError._domain
         && actualError._code   == expectedError._code
 }
 
 internal func errorMatchesExpectedError<T: ErrorProtocol where T: Equatable>(
-    actualError: ErrorProtocol,
+    _ actualError: ErrorProtocol,
     expectedError: T) -> Bool {
     if let actualError = actualError as? T {
         return actualError == expectedError
@@ -51,7 +51,7 @@ internal func errorMatchesExpectedError<T: ErrorProtocol where T: Equatable>(
 }
 
 internal func errorMatchesNonNilFieldsOrClosure<T: ErrorProtocol>(
-    actualError: ErrorProtocol?,
+    _ actualError: ErrorProtocol?,
     error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) -> Bool {
@@ -92,7 +92,7 @@ internal func errorMatchesNonNilFieldsOrClosure<T: ErrorProtocol>(
 // Non-generic
 
 internal func setFailureMessageForError(
-    failureMessage: FailureMessage,
+    _ failureMessage: FailureMessage,
     actualError: ErrorProtocol?,
     closure: ((ErrorProtocol) -> Void)?) {
     failureMessage.postfixMessage = "throw error"
@@ -111,7 +111,7 @@ internal func setFailureMessageForError(
 }
 
 internal func errorMatchesNonNilFieldsOrClosure(
-    actualError: ErrorProtocol?,
+    _ actualError: ErrorProtocol?,
     closure: ((ErrorProtocol) -> Void)?) -> Bool {
     var matches = false
 

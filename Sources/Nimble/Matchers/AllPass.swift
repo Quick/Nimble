@@ -1,12 +1,12 @@
 import Foundation
 
 public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
-    (passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
+    (_ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return allPass("pass a condition", passFunc)
 }
 
 public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
-    (passName: String, _ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
+    (_ passName: String, _ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             expression, failureMessage in
             failureMessage.postfixMessage = passName
@@ -15,14 +15,14 @@ public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
 }
 
 public func allPass<U,V where U: Sequence, V: Matcher, U.Iterator.Element == V.ValueType>
-    (matcher: V) -> NonNilMatcherFunc<U> {
+    (_ matcher: V) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             try matcher.matches($0, failureMessage: $1)
         }
 }
 
 private func createAllPassMatcher<T,U where U: Sequence, U.Iterator.Element == T>
-    (elementEvaluator:(Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U> {
+    (_ elementEvaluator:(Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U> {
         return NonNilMatcherFunc { actualExpression, failureMessage in
             failureMessage.actualValue = nil
             if let actualValue = try actualExpression.evaluate() {
@@ -55,7 +55,7 @@ private func createAllPassMatcher<T,U where U: Sequence, U.Iterator.Element == T
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func allPassMatcher(matcher: NMBObjCMatcher) -> NMBObjCMatcher {
+    public class func allPassMatcher(_ matcher: NMBObjCMatcher) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

@@ -18,7 +18,7 @@ internal struct WaitingInfo: CustomStringConvertible {
 }
 
 internal protocol WaitLock {
-    func acquireWaitingLock(fnName: String, file: FileString, line: UInt)
+    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt)
     func releaseWaitingLock()
     func isWaitingLocked() -> Bool
 }
@@ -27,7 +27,7 @@ internal class AssertionWaitLock: WaitLock {
     private var currentWaiter: WaitingInfo? = nil
     init() { }
 
-    func acquireWaitingLock(fnName: String, file: FileString, line: UInt) {
+    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
         nimblePrecondition(
             NSThread.isMainThread(),
@@ -102,7 +102,7 @@ internal class AwaitPromise<T> {
     ///
     /// @returns a Bool that indicates if the async result was accepted or rejected because another
     ///          value was recieved first.
-    func resolveResult(result: AwaitResult<T>) -> Bool {
+    func resolveResult(_ result: AwaitResult<T>) -> Bool {
         if dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0 {
             self.asyncResult = result
             return true
@@ -139,7 +139,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(timeoutInterval: NSTimeInterval, forcefullyAbortTimeout: NSTimeInterval) -> Self {
+    func timeout(_ timeoutInterval: NSTimeInterval, forcefullyAbortTimeout: NSTimeInterval) -> Self {
         // = Discussion =
         //
         // There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -220,7 +220,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .Incomplete.
-    func wait(fnName: String = #function, file: FileString = #file, line: UInt = #line) -> AwaitResult<T> {
+    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> AwaitResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
             file: file,
@@ -240,7 +240,7 @@ internal class AwaitPromiseBuilder<T> {
             dispatch_resume(self.trigger.timeoutSource)
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
-                NSRunLoop.current().runMode(NSDefaultRunLoopMode, before: NSDate.distantFuture())
+                NSRunLoop.current().run(mode: NSDefaultRunLoopMode, before: NSDate.distantFuture())
             }
             dispatch_suspend(self.trigger.timeoutSource)
             dispatch_source_cancel(self.trigger.timeoutSource)
@@ -267,7 +267,7 @@ internal class Awaiter {
             self.timeoutQueue = timeoutQueue
     }
 
-    private func createTimerSource(queue: dispatch_queue_t) -> dispatch_source_t {
+    private func createTimerSource(_ queue: dispatch_queue_t) -> dispatch_source_t {
         return dispatch_source_create(
             DISPATCH_SOURCE_TYPE_TIMER,
             0,
@@ -277,7 +277,7 @@ internal class Awaiter {
     }
 
     func performBlock<T>(
-        closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
+        _ closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
@@ -302,7 +302,7 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(pollInterval: NSTimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: NSTimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
@@ -334,7 +334,7 @@ internal class Awaiter {
 }
 
 internal func pollBlock(
-    pollInterval pollInterval: NSTimeInterval,
+    pollInterval: NSTimeInterval,
     timeoutInterval: NSTimeInterval,
     file: FileString,
     line: UInt,

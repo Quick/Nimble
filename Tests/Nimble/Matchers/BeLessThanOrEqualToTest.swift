@@ -15,11 +15,11 @@ final class BeLessThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
         expect(2).to(beLessThanOrEqualTo(10))
         expect(2).toNot(beLessThanOrEqualTo(1))
 
-        expect(NSNumber(int:2)).to(beLessThanOrEqualTo(10))
-        expect(NSNumber(int:2)).toNot(beLessThanOrEqualTo(1))
+        expect(NSNumber(value:2)).to(beLessThanOrEqualTo(10))
+        expect(NSNumber(value:2)).toNot(beLessThanOrEqualTo(1))
 #if _runtime(_ObjC)
-        expect(2).to(beLessThanOrEqualTo(NSNumber(int:10)))
-        expect(2).toNot(beLessThanOrEqualTo(NSNumber(int:1)))
+        expect(2).to(beLessThanOrEqualTo(NSNumber(value:10)))
+        expect(2).toNot(beLessThanOrEqualTo(NSNumber(value:1)))
 #endif
 
         failsWithErrorMessage("expected to be less than or equal to <0>, got <2>") {

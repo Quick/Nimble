@@ -71,7 +71,7 @@ import XCTest
 
 #if !swift(>=3) || os(Linux)
     extension NSCharacterSet {
-        internal class func whitespaceAndNewline() -> NSCharacterSet {
+        internal class func whitespacesAndNewlines() -> NSCharacterSet {
             return whitespaceAndNewlineCharacterSet()
         }
     }
@@ -89,7 +89,7 @@ import XCTest
     }
 
     extension NSMutableArray {
-        internal func add(anObject: AnyObject) {
+        internal func add(_ anObject: AnyObject) {
             addObject(anObject)
         }
         internal func componentsJoined(by separator: String) -> String {
@@ -103,17 +103,26 @@ import XCTest
         }
     }
 
+    extension NSNumber {
+        internal convenience init(value: Double) {
+            self.init(double:value)
+        }
+        internal convenience init(value: Float) {
+            self.init(float:value)
+        }
+    }
+
     extension NSRunLoop {
         internal class func current() -> NSRunLoop {
             return currentRunLoop()
         }
-        internal func runMode(mode: String, before limitDate: NSDate) -> Bool {
+        internal func run(mode: String, before limitDate: NSDate) -> Bool {
             return runMode(mode, beforeDate: limitDate)
         }
     }
 
     extension NSString {
-        internal func componentsSeparated(by separator: String) -> [String] {
+        internal func components(separatedBy separator: String) -> [String] {
             return componentsSeparatedByString(separator)
         }
         internal func range(of searchString: String) -> NSRange {
@@ -147,7 +156,7 @@ import XCTest
     }
 
     extension String {
-        internal func contains(other: String) -> Bool {
+        internal func contains(_ other: String) -> Bool {
             return containsString(other)
         }
         internal func range(of aString: String, options mask: NSStringCompareOptions = [], range searchRange: Range<Index>? = nil, locale: NSLocale? = nil) -> Range<Index>? {

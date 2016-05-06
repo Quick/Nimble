@@ -140,9 +140,9 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testDataEquality() {
-        let actual = "foobar".data(usingEncoding: NSUTF8StringEncoding)
-        let expected = "foobar".data(usingEncoding: NSUTF8StringEncoding)
-        let unexpected = "foobarfoo".data(usingEncoding: NSUTF8StringEncoding)
+        let actual = "foobar".data(using: NSUTF8StringEncoding)
+        let expected = "foobar".data(using: NSUTF8StringEncoding)
+        let unexpected = "foobarfoo".data(using: NSUTF8StringEncoding)
 
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
@@ -161,10 +161,10 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber(integer:1)).to(equal(NSNumber(integer:1)))
-        expect(NSNumber(integer:1)) == NSNumber(integer:1)
-        expect(NSNumber(integer:1)) != NSNumber(integer:2)
-        expect { NSNumber(integer:1) }.to(equal(1))
+        expect(NSNumber(value:1)).to(equal(NSNumber(value:1)))
+        expect(NSNumber(value:1)) == NSNumber(value:1)
+        expect(NSNumber(value:1)) != NSNumber(value:2)
+        expect { NSNumber(value:1) }.to(equal(1))
     }
 
     func testOperatorEquality() {

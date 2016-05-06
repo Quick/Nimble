@@ -18,7 +18,7 @@ internal class ExceptionCapture {
         self.finally = finally
     }
 
-    func tryBlock(unsafeBlock: (() -> Void)) {
+    func tryBlock(_ unsafeBlock: (() -> Void)) {
         // We have no way of handling Objective C exceptions in Swift,
         // so we just go ahead and run the unsafeBlock as-is
         unsafeBlock()

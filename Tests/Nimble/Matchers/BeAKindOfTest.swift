@@ -17,7 +17,7 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     func testPositiveMatch() {
         expect(TestNull()).to(beAKindOf(NSNull))
         expect(NSObject()).to(beAKindOf(NSObject))
-        expect(NSNumber(integer:1)).toNot(beAKindOf(NSDate))
+        expect(NSNumber(value:1)).toNot(beAKindOf(NSDate))
     }
 
     func testFailureMessages() {
@@ -28,10 +28,10 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
             expect(nil as NSString?).to(beAKindOf(NSString))
         }
         failsWithErrorMessage("expected to be a kind of NSString, got <__NSCFNumber instance>") {
-            expect(NSNumber(integer:1)).to(beAKindOf(NSString))
+            expect(NSNumber(value:1)).to(beAKindOf(NSString))
         }
         failsWithErrorMessage("expected to not be a kind of NSNumber, got <__NSCFNumber instance>") {
-            expect(NSNumber(integer:1)).toNot(beAKindOf(NSNumber))
+            expect(NSNumber(value:1)).toNot(beAKindOf(NSNumber))
         }
     }
     

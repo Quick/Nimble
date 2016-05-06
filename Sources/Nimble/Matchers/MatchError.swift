@@ -5,7 +5,7 @@ import Foundation
 ///
 /// Errors are tried to be compared by their implementation of Equatable,
 /// otherwise they fallback to comparision by _domain and _code.
-public func matchError<T: ErrorProtocol>(error: T) -> NonNilMatcherFunc<ErrorProtocol> {
+public func matchError<T: ErrorProtocol>(_ error: T) -> NonNilMatcherFunc<ErrorProtocol> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let actualError: ErrorProtocol? = try actualExpression.evaluate()
 
@@ -16,7 +16,7 @@ public func matchError<T: ErrorProtocol>(error: T) -> NonNilMatcherFunc<ErrorPro
 
 /// A Nimble matcher that succeeds when the actual expression evaluates to an
 /// error of the specified type
-public func matchError<T: ErrorProtocol>(errorType: T.Type) -> NonNilMatcherFunc<ErrorProtocol> {
+public func matchError<T: ErrorProtocol>(_ errorType: T.Type) -> NonNilMatcherFunc<ErrorProtocol> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let actualError: ErrorProtocol? = try actualExpression.evaluate()
 
