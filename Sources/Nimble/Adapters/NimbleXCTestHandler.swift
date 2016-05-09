@@ -42,11 +42,11 @@ class NimbleXCTestUnavailableHandler : AssertionHandler {
 
     private(set) var currentTestCase: XCTestCase?
 
-    @objc func testCaseWillStart(testCase: XCTestCase) {
+    @objc func testCaseWillStart(_ testCase: XCTestCase) {
         currentTestCase = testCase
     }
 
-    @objc func testCaseDidFinish(testCase: XCTestCase) {
+    @objc func testCaseDidFinish(_ testCase: XCTestCase) {
         currentTestCase = nil
     }
 }
