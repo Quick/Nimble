@@ -60,8 +60,16 @@ extension NSNumber: TestOutputStringConvertible {
             // Maybe this will change in a future snapshot.
             let decimalPlaces = NSString(string: NSString(string: description)
                 .components(separatedBy: ".")[1])
-            
-            if decimalPlaces.length > 4 {
+
+            // SeeAlso: https://bugs.swift.org/browse/SR-1464
+            switch decimalPlaces.length {
+            case 1:
+                return NSString(format: "%0.1f", self.doubleValue).description
+            case 2:
+                return NSString(format: "%0.2f", self.doubleValue).description
+            case 3:
+                return NSString(format: "%0.3f", self.doubleValue).description
+            default:
                 return NSString(format: "%0.4f", self.doubleValue).description
             }
         }
