@@ -178,12 +178,12 @@ internal class AwaitPromiseBuilder<T> {
             guard self.promise.asyncResult.isIncomplete() else { return }
             let timedOutSem = dispatch_semaphore_create(0)
             let semTimedOutOrBlocked = dispatch_semaphore_create(0)
-            dispatch_semaphore_signal(semTimedOutOrBlocked)
+            dispatch_semaphore_signal(semTimedOutOrBlocked!)
             let runLoop = CFRunLoopGetMain()
             CFRunLoopPerformBlock(runLoop, kCFRunLoopDefaultMode) {
-                if dispatch_semaphore_wait(semTimedOutOrBlocked, DISPATCH_TIME_NOW) == 0 {
-                    dispatch_semaphore_signal(timedOutSem)
-                    dispatch_semaphore_signal(semTimedOutOrBlocked)
+                if dispatch_semaphore_wait(semTimedOutOrBlocked!, DISPATCH_TIME_NOW) == 0 {
+                    dispatch_semaphore_signal(timedOutSem!)
+                    dispatch_semaphore_signal(semTimedOutOrBlocked!)
                     if self.promise.resolveResult(.TimedOut) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
@@ -192,8 +192,8 @@ internal class AwaitPromiseBuilder<T> {
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
             let now = dispatch_time(DISPATCH_TIME_NOW, Int64(forcefullyAbortTimeout * Double(NSEC_PER_SEC)))
-            let didNotTimeOut = dispatch_semaphore_wait(timedOutSem, now) != 0
-            let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked, 0) == 0
+            let didNotTimeOut = dispatch_semaphore_wait(timedOutSem!, now) != 0
+            let timeoutWasNotTriggered = dispatch_semaphore_wait(semTimedOutOrBlocked!, 0) == 0
             if didNotTimeOut && timeoutWasNotTriggered {
                 if self.promise.resolveResult(.BlockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())

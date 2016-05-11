@@ -3,7 +3,7 @@ import XCTest
 @testable import Nimble
 
 final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, BeIdenticalToTest -> () throws -> Void)] {
+    static var allTests: [(String, (BeIdenticalToTest) -> () throws -> Void)] {
         return [
             ("testBeIdenticalToPositive", testBeIdenticalToPositive),
             ("testBeIdenticalToNegative", testBeIdenticalToNegative),
@@ -55,7 +55,7 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
         #if _runtime(_ObjC)
             expect([1]).toNot(be([1]))
         #else
-            expect(NSArray(array: [NSNumber(integer: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(integer: 1)])))
+            expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
         #endif
 
         let value1 = NSArray(array: [])

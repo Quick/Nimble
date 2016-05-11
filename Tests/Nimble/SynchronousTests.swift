@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 final class SynchronousTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, SynchronousTest -> () throws -> Void)] {
+    static var allTests: [(String, (SynchronousTest) -> () throws -> Void)] {
         return [
             ("testFailAlwaysFails", testFailAlwaysFails),
             ("testUnexpectedErrorsThrownFails", testUnexpectedErrorsThrownFails),

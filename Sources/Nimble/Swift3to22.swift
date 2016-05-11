@@ -26,15 +26,6 @@ import XCTest
         }
     }
 
-    extension NSNumber {
-        internal convenience init(value: Double) {
-            self.init(double:value)
-        }
-        internal convenience init(value: Float) {
-            self.init(float:value)
-        }
-    }
-
     extension NSRunLoop {
         internal class func current() -> NSRunLoop {
             return currentRunLoop()

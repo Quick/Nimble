@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 final class AllPassTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, AllPassTest -> () throws -> Void)] {
+    static var allTests: [(String, (AllPassTest) -> () throws -> Void)] {
         return [
             ("testAllPassArray", testAllPassArray),
             ("testAllPassMatcher", testAllPassMatcher),

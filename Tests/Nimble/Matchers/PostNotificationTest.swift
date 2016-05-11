@@ -3,7 +3,7 @@ import Nimble
 import Foundation
 
 final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, PostNotificationTest -> () throws -> Void)] {
+    static var allTests: [(String, (PostNotificationTest) -> () throws -> Void)] {
         return [
             ("testPassesWhenNoNotificationsArePosted", testPassesWhenNoNotificationsArePosted),
             ("testPassesWhenExpectedNotificationIsPosted", testPassesWhenExpectedNotificationIsPosted),

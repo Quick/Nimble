@@ -4,7 +4,7 @@ import Nimble
 #if _runtime(_ObjC)
 
 final class MatchTest:XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, MatchTest -> () throws -> Void)] {
+    static var allTests: [(String, (MatchTest) -> () throws -> Void)] {
         return [
             ("testMatchPositive", testMatchPositive),
             ("testMatchNegative", testMatchNegative),

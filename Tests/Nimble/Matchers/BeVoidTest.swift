@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 
 final class BeVoidTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, BeVoidTest -> () throws -> Void)] {
+    static var allTests: [(String, (BeVoidTest) -> () throws -> Void)] {
         return [
             ("testBeVoid", testBeVoid),
         ]

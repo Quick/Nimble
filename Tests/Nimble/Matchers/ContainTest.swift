@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 final class ContainTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, ContainTest -> () throws -> Void)] {
+    static var allTests: [(String, (ContainTest) -> () throws -> Void)] {
         return [
             ("testContain", testContain),
             ("testContainSubstring", testContainSubstring),

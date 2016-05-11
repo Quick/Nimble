@@ -73,12 +73,6 @@ public protocol NMBOrderedCollection : NMBCollection {
 
 extension NSArray : NMBOrderedCollection {}
 
-#if _runtime(_ObjC)
-/// Protocol for types to support beCloseTo() matcher
-@objc public protocol NMBDoubleConvertible {
-    var doubleValue: CDouble { get }
-}
-#else
 public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
 }
@@ -98,7 +92,6 @@ extension Float : NMBDoubleConvertible {
         }
     }
 }
-#endif
 
 extension NSNumber : NMBDoubleConvertible {
 }

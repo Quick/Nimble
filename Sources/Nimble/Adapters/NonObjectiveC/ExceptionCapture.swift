@@ -14,7 +14,7 @@ class NSException {}
 internal class ExceptionCapture {
     let finally: (() -> Void)?
 
-    init(handler: ((NSException!) -> Void)?, finally: (() -> Void)?) {
+    init(handler: ((NSException) -> Void)?, finally: (() -> Void)?) {
         self.finally = finally
     }
 

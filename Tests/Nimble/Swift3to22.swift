@@ -19,15 +19,6 @@ import Foundation
         }
     }
 
-    extension NSNumber {
-        internal convenience init(value: Int) {
-            self.init(integer:value)
-        }
-        internal convenience init(value: Double) {
-            self.init(double:value)
-        }
-    }
-
     extension NSRunLoop {
         @available(OSX 10.5, *)
         internal class func main() -> NSRunLoop {

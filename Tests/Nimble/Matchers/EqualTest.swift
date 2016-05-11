@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 final class EqualTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, EqualTest -> () throws -> Void)] {
+    static var allTests: [(String, (EqualTest) -> () throws -> Void)] {
         return [
             ("testEquality", testEquality),
             ("testArrayEquality", testArrayEquality),
@@ -135,7 +135,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
 
 #if _runtime(_ObjC)
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(expected))
+        expect(NSDictionary(object: "bar", forKey: "foo") as? [String:String]).to(equal(expected))
 #endif
     }
 

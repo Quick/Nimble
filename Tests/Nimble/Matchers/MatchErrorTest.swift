@@ -3,7 +3,7 @@ import XCTest
 import Nimble
 
 final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, MatchErrorTest -> () throws -> Void)] {
+    static var allTests: [(String, (MatchErrorTest) -> () throws -> Void)] {
         return [
             ("testMatchErrorPositive", testMatchErrorPositive),
             ("testMatchErrorNegative", testMatchErrorNegative),

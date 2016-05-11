@@ -83,7 +83,9 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
             if reason != nil && exception.reason != reason {
                 matches = false
             }
-            if userInfo != nil && exception.userInfo != userInfo {
+            if let exceptionUserInfo = exception.userInfo as? NSDictionary,
+                let userInfo = userInfo
+                where exceptionUserInfo != userInfo {
                 matches = false
             }
             if let closure = closure {
