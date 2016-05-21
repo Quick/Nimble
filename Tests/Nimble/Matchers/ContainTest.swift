@@ -9,6 +9,7 @@ class ContainTest: XCTestCase, XCTestCaseProvider {
             ("testContainSubstring", testContainSubstring),
             ("testContainObjCSubstring", testContainObjCSubstring),
             ("testVariadicArguments", testVariadicArguments),
+            ("testCollectionArguments", testCollectionArguments),
         ]
     }
 
@@ -72,6 +73,23 @@ class ContainTest: XCTestCase, XCTestCaseProvider {
 
         failsWithErrorMessage("expected to not contain <bar, b>, got <[a, b, c]>") {
             expect(["a", "b", "c"]).toNot(contain("bar", "b"))
+        }
+    }
+
+    func testCollectionArguments() {
+        expect([1, 2, 3]).to(contain([1, 2]))
+        expect([1, 2, 3]).toNot(contain([1, 4]))
+
+        let collection = Array(1...10)
+        let slice = Array(collection[3...5])
+        expect(collection).to(contain(slice))
+
+        failsWithErrorMessage("expected to contain <a, bar>, got <[a, b, c]>") {
+            expect(["a", "b", "c"]).to(contain(["a", "bar"]))
+        }
+
+        failsWithErrorMessage("expected to not contain <bar, b>, got <[a, b, c]>") {
+            expect(["a", "b", "c"]).toNot(contain(["bar", "b"]))
         }
     }
 }
