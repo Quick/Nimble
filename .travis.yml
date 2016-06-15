@@ -8,6 +8,8 @@ matrix:
     - os: osx
       env: NIMBLE_RUNTIME_IOS_SDK_VERSION=9.0 TYPE=ios
     - os: osx
+      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=9.0 TYPE=tvos
+    - os: osx
       env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.10 TYPE=osx
     - os: osx
       env: TYPE=swiftpm
