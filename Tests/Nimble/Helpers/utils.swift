@@ -60,8 +60,8 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
 
 #if _runtime(_ObjC)
     func deferToMainQueue(action: () -> Void) {
-        dispatch_async(dispatch_get_main_queue()) {
-            NSThread.sleep(forTimeInterval: 0.01)
+        DispatchQueue.main.async() {
+            Thread.sleep(forTimeInterval: 0.01)
             action()
         }
     }
@@ -83,9 +83,9 @@ public class NimbleHelper : NSObject {
 
 extension NSDate {
     convenience init(dateTimeString:String) {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.locale = Locale(localeIdentifier: "en_US_POSIX")
         let date = dateFormatter.date(from: dateTimeString)!
         self.init(timeInterval:0, since:date)
     }
