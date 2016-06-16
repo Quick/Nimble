@@ -177,7 +177,7 @@ internal class AwaitPromiseBuilder<T> {
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
             let runLoop = CFRunLoopGetMain()
-            CFRunLoopPerformBlock(runLoop, CFRunLoopMode.defaultMode as! CFTypeRef) {
+            CFRunLoopPerformBlock(runLoop, CFRunLoopMode.defaultMode.rawValue) {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .Success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
