@@ -574,7 +574,7 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1F1871B91CA89E1B00A34BF2 /* ObjectiveC */ = {
+		1F1871B91CA89E1B00A34BF2 /* NimbleObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
 				F8A1BE321CB3777F00031679 /* CurrentTestCaseTracker.h */,
@@ -582,13 +582,12 @@
 				1F1871BD1CA89EDB00A34BF2 /* DSL.m */,
 				1F1871BE1CA89EDB00A34BF2 /* NMBExceptionCapture.h */,
 				1F1871BF1CA89EDB00A34BF2 /* NMBExceptionCapture.m */,
-				1F1871C21CA89EDB00A34BF2 /* NMBExpectation.swift */,
-				1F1871C31CA89EDB00A34BF2 /* NMBObjCMatcher.swift */,
 				1F1871C01CA89EDB00A34BF2 /* NMBStringify.h */,
 				1F1871C11CA89EDB00A34BF2 /* NMBStringify.m */,
 				F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */,
 			);
-			path = ObjectiveC;
+			name = NimbleObjectiveC;
+			path = Sources/NimbleObjectiveC;
 			sourceTree = "<group>";
 		};
 		1F1871BA1CA89E2500A34BF2 /* NonObjectiveC */ = {
@@ -604,6 +603,7 @@
 			children = (
 				1F2752D119445B8400052A26 /* README.md */,
 				1F1A742B1940169200FFFC47 /* Nimble */,
+				1F1871B91CA89E1B00A34BF2 /* NimbleObjectiveC */,
 				1F1A74381940169200FFFC47 /* NimbleTests */,
 				1F1A742A1940169200FFFC47 /* Products */,
 			);
@@ -706,7 +706,8 @@
 				1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */,
 				1FD8CD071968AB07008ED995 /* NimbleXCTestHandler.swift */,
 				1F1871BA1CA89E2500A34BF2 /* NonObjectiveC */,
-				1F1871B91CA89E1B00A34BF2 /* ObjectiveC */,
+				1F1871C21CA89EDB00A34BF2 /* NMBExpectation.swift */,
+				1F1871C31CA89EDB00A34BF2 /* NMBObjCMatcher.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
