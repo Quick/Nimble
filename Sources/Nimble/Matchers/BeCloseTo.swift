@@ -104,21 +104,21 @@ public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ≈(lhs: Expectation<Double>, rhs: Double) {
+public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: NMBDoubleConvertible) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ≈(lhs: Expectation<Double>, rhs: (expected: Double, delta: Double)) {
+public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ==(lhs: Expectation<Double>, rhs: (expected: Double, delta: Double)) {
+public func ==(lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
 // make this higher precedence than exponents so the Doubles either end aren't pulled in
 // unexpectantly
 infix operator ± { precedence 170 }
-public func ±(lhs: Double, rhs: Double) -> (expected: Double, delta: Double) {
+public func ±(lhs: NMBDoubleConvertible, rhs: Double) -> (expected: NMBDoubleConvertible, delta: Double) {
     return (expected: lhs, delta: rhs)
 }

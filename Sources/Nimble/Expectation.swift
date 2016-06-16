@@ -33,7 +33,8 @@ internal func expressionDoesNotMatch<T, U where U: Matcher, U.ValueType == T>(_ 
 }
 
 public struct Expectation<T> {
-    let expression: Expression<T>
+
+    public let expression: Expression<T>
 
     public func verify(_ pass: Bool, _ message: FailureMessage) {
         let handler = NimbleEnvironment.activeInstance.assertionHandler

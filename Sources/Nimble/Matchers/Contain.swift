@@ -5,7 +5,7 @@ public func contain<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ i
     return contain(items)
 }
 
-private func contain<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ items: [T]) -> NonNilMatcherFunc<S> {
+public func contain<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ items: [T]) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = try actualExpression.evaluate() {
@@ -22,7 +22,7 @@ public func contain(_ substrings: String...) -> NonNilMatcherFunc<String> {
     return contain(substrings)
 }
 
-private func contain(_ substrings: [String]) -> NonNilMatcherFunc<String> {
+public func contain(_ substrings: [String]) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
@@ -40,7 +40,7 @@ public func contain(_ substrings: NSString...) -> NonNilMatcherFunc<NSString> {
     return contain(substrings)
 }
 
-private func contain(_ substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
+public func contain(_ substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
@@ -55,7 +55,7 @@ public func contain(_ items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
     return contain(items)
 }
 
-private func contain(_ items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
