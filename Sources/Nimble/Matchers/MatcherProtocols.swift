@@ -43,8 +43,8 @@ extension NSSet : NMBContainer {}
     var count: Int { get }
 }
 
-extension NSHashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
-extension NSMapTable : NMBCollection {}
+extension HashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
+extension MapTable : NMBCollection {}
 #else
 public protocol NMBCollection {
     var count: Int { get }
@@ -96,10 +96,10 @@ extension Float : NMBDoubleConvertible {
 extension NSNumber : NMBDoubleConvertible {
 }
 
-private let dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
-    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
 
     return formatter
 }()
@@ -116,7 +116,7 @@ extension NSDate: NMBDoubleConvertible {
 
 extension NSDate: TestOutputStringConvertible {
     public var testDescription: String {
-        return dateFormatter.string(from: self)
+        return dateFormatter.string(from: self as Date)
     }
 }
 
@@ -126,7 +126,7 @@ extension NSDate: TestOutputStringConvertible {
 /// Types that conform to Swift's Comparable protocol will work implicitly too
 #if _runtime(_ObjC)
 @objc public protocol NMBComparable {
-    func NMB_compare(_ otherObject: NMBComparable!) -> NSComparisonResult
+    func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }
 #else
 // This should become obsolete once Corelibs Foundation adds Comparable conformance to NSNumber
@@ -136,12 +136,12 @@ public protocol NMBComparable {
 #endif
 
 extension NSNumber : NMBComparable {
-    public func NMB_compare(_ otherObject: NMBComparable!) -> NSComparisonResult {
+    public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
         return compare(otherObject as! NSNumber)
     }
 }
 extension NSString : NMBComparable {
-    public func NMB_compare(_ otherObject: NMBComparable!) -> NSComparisonResult {
+    public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
         return compare(otherObject as! String)
     }
 }

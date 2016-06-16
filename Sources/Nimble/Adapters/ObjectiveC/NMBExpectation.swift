@@ -26,7 +26,7 @@ public class NMBExpectation : NSObject {
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: NSTimeInterval = 1.0
+    internal var _timeout: TimeInterval = 1.0
 
     public init(actualBlock: () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
@@ -41,7 +41,7 @@ public class NMBExpectation : NSObject {
         }
     }
 
-    public var withTimeout: (NSTimeInterval) -> NMBExpectation {
+    public var withTimeout: (TimeInterval) -> NMBExpectation {
         return ({ timeout in self._timeout = timeout
             return self
         })

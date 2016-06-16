@@ -12,7 +12,7 @@ private enum ErrorResult {
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
 internal class NMBWait: NSObject {
     internal class func until(
-        timeout: NSTimeInterval,
+        timeout: TimeInterval,
         file: FileString = #file,
         line: UInt = #line,
         action: (() -> Void) -> Void) -> Void {
@@ -23,14 +23,14 @@ internal class NMBWait: NSObject {
 
     // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
-        timeout: NSTimeInterval,
+        timeout: TimeInterval,
         file: FileString = #file,
         line: UInt = #line,
         action: (() -> Void) throws -> Void) -> Void {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
             let leeway = timeout / 2.0
             let result = awaiter.performBlock { (done: (ErrorResult) -> Void) throws -> Void in
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async() {
                     let capture = NMBExceptionCapture(
                         handler: ({ exception in
                             done(.Exception(exception))
@@ -76,7 +76,7 @@ internal class NMBWait: NSObject {
     }
 }
 
-internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: NSTimeInterval) -> String {
+internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: TimeInterval) -> String {
     return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive (\(leeway) seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
 }
 
@@ -87,7 +87,7 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: NSTimeInte
 /// 
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
 /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-public func waitUntil(timeout: NSTimeInterval = 1, file: FileString = #file, line: UInt = #line, action: (() -> Void) -> Void) -> Void {
+public func waitUntil(timeout: TimeInterval = 1, file: FileString = #file, line: UInt = #line, action: (() -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
 #endif

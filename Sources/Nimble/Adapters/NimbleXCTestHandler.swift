@@ -69,7 +69,7 @@ private func recordFailure(_ message: String, location: SourceLocation) {
     } else {
         let msg = "Attempted to report a test failure to XCTest while no test case was running. " +
         "The failure was:\n\"\(message)\"\nIt occurred at: \(location.file):\(location.line)"
-        NSException(name: NSInternalInconsistencyException, reason: msg, userInfo: nil).raise()
+        NSException(name: NSExceptionName.internalInconsistencyException, reason: msg, userInfo: nil).raise()
     }
 #else
     XCTFail("\(message)\n", file: location.file, line: location.line)

@@ -5,7 +5,7 @@ import Foundation
 internal class NimbleEnvironment {
     static var activeInstance: NimbleEnvironment {
         get {
-            let env = NSThread.current().threadDictionary["NimbleEnvironment"]
+            let env = Thread.current().threadDictionary["NimbleEnvironment"]
             if let env = env as? NimbleEnvironment {
                 return env
             } else {
@@ -15,7 +15,7 @@ internal class NimbleEnvironment {
             }
         }
         set {
-            NSThread.current().threadDictionary["NimbleEnvironment"] = newValue
+            Thread.current().threadDictionary["NimbleEnvironment"] = newValue
         }
     }
 
@@ -31,8 +31,8 @@ internal class NimbleEnvironment {
     init() {
         awaiter = Awaiter(
             waitLock: AssertionWaitLock(),
-            asyncQueue: dispatch_get_main_queue(),
-            timeoutQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
+            asyncQueue: DispatchQueue.main,
+            timeoutQueue: DispatchQueue.global(attributes: .qosUserInitiated))
     }
 #endif
 }

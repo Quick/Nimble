@@ -47,7 +47,7 @@ internal func nimblePrecondition(
         if !result {
 #if _runtime(_ObjC)
             let e = NSException(
-                name: name(),
+                name: NSExceptionName(rawValue: name()),
                 reason: message(),
                 userInfo: nil)
             e.raise()

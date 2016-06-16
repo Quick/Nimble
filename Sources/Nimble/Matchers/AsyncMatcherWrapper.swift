@@ -3,16 +3,16 @@ import Foundation
 #if _runtime(_ObjC)
 
 public struct AsyncDefaults {
-    public static var Timeout: NSTimeInterval = 1
-    public static var PollInterval: NSTimeInterval = 0.01
+    public static var Timeout: TimeInterval = 1
+    public static var PollInterval: TimeInterval = 0.01
 }
 
 internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Matcher {
     let fullMatcher: U
-    let timeoutInterval: NSTimeInterval
-    let pollInterval: NSTimeInterval
+    let timeoutInterval: TimeInterval
+    let pollInterval: TimeInterval
 
-    init(fullMatcher: U, timeoutInterval: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval) {
+    init(fullMatcher: U, timeoutInterval: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval) {
       self.fullMatcher = fullMatcher
       self.timeoutInterval = timeoutInterval
       self.pollInterval = pollInterval
@@ -84,7 +84,7 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventually<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
+    public func toEventually<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionMatches(
                 expression,
@@ -107,7 +107,7 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
+    public func toEventuallyNot<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         if expression.isClosure {
             let (pass, msg) = expressionDoesNotMatch(
                 expression,
@@ -132,7 +132,7 @@ extension Expectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
-    public func toNotEventually<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
+    public func toNotEventually<U where U: Matcher, U.ValueType == T>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }

@@ -77,7 +77,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         if let exception = exception {
             matches = true
 
-            if named != nil && exception.name != named {
+            if let named = named where exception.name.rawValue != named {
                 matches = false
             }
             if reason != nil && exception.reason != reason {
