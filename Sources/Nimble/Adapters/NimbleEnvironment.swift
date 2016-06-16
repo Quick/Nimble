@@ -31,8 +31,8 @@ internal class NimbleEnvironment {
     init() {
         awaiter = Awaiter(
             waitLock: AssertionWaitLock(),
-            asyncQueue: DispatchQueue.main,
-            timeoutQueue: DispatchQueue.global(attributes: .qosUserInitiated))
+            asyncQueue: .main,
+            timeoutQueue: .global(attributes: .qosUserInitiated))
     }
 #endif
 }
