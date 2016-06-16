@@ -169,7 +169,7 @@ internal class AwaitPromiseBuilder<T> {
         //
         // In addition, stopping the run loop is used to halt code executed on the main run loop.
         trigger.timeoutSource.scheduleOneshot(
-            deadline: DispatchTime.now() + timeoutInterval * TimeInterval(NSEC_PER_SEC),
+            deadline: DispatchTime.now() + timeoutInterval,
             leeway: timeoutLeeway)
         trigger.timeoutSource.setEventHandler() {
             guard self.promise.asyncResult.isIncomplete() else { return }
@@ -188,7 +188,7 @@ internal class AwaitPromiseBuilder<T> {
             }
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
-            let now = DispatchTime.now() + forcefullyAbortTimeout * TimeInterval(NSEC_PER_SEC)
+            let now = DispatchTime.now() + forcefullyAbortTimeout
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .Success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .Success
             if didNotTimeOut && timeoutWasNotTriggered {
