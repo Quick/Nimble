@@ -1,16 +1,16 @@
 import Foundation
 
-public func call(function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> FullMatcherFunc<CallRecorder> {
-    return FullMatcherFunc { expression, failureMessage, isNegationTest in
+public func call(function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
+    return NonNilMatcherFunc { expression, failureMessage in
         guard let expressionValue = try expression.evaluate() else {
             failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)
             failureMessage.postfixActual = " (use beNil() to match nils)"
             return false
         }
         
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: isNegationTest)
+        let includeOption = didCallResultIncludeOptionFor(isNegationTest: false) // TODO: is neg
         let result = expressionValue.didCall(function: function, withArguments: arguments, countSpecifier: countSpecifier, recordedCallsDescOption: includeOption)
-        let successfulTest = isSuccessfulTest(result.success, isNegationTest)
+        let successfulTest = isSuccessfulTest(result.success, false) // TODO: is neg
         
         if !successfulTest {
             failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countSpecifier: countSpecifier)

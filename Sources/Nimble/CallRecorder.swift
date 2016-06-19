@@ -6,10 +6,32 @@ public protocol GloballyEquatable {
 
 public extension GloballyEquatable where Self : Equatable {
     func isEqualTo(other: GloballyEquatable) -> Bool {
-        if let other = other as? Self {
-            return self == other
+        if (self.dynamicType == other.dynamicType) {
+            let selfMirror = Mirror(reflecting: self)
+            let otherMirror = Mirror(reflecting: other)
+            
+            // HACK #1
+            let bothAreOptionals = selfMirror.displayStyle == .Optional && otherMirror.displayStyle == .Optional
+            if bothAreOptionals && selfMirror.children.first == nil && otherMirror.children.first == nil {
+                print(selfMirror.children.first)
+                print(otherMirror.children.first)
+                return true
+            }
+            
+            // HACK #2
+            let atLeastOneIsOptional = selfMirror.displayStyle == .Optional || otherMirror.displayStyle == .Optional
+            if !bothAreOptionals && atLeastOneIsOptional {
+                return false
+            }
+            
+            // HACK #1: if other is Optional<SameType>.None then if let will auto fail even if Self is Optional<SameType>
+            // HACK #2: if let will auto unwrap other (of type Optional<SameType> even if Self is also Optional<SameType>
+            // 'if let' seems to have been broken/redesigned since I've last worked on this
+            if let other = other as? Self {
+                return self == other
+            }
         }
-
+        
         return false
     }
 }

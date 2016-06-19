@@ -222,13 +222,13 @@ class CallRecorderTest: XCTestCase {
     func testDidCallFunctionWithOptionalArguments() {
         // given
         let testClass = TestClass()
-        
+                
         // when
         testClass.doWeirdStuffWith(string: "hello", int: nil)
         
         // then
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello" as String?, nil as Int?], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call correct funtion with correct Optional values")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello", Optional<Int>.None], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call correct funtion with correct but Non-Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello" as String?, nil as Int?], recordedCallsDescOption: .No).success).to(beTrue(), description: "should SUCCEED to call correct function with correct Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello", Optional<Int>.None], recordedCallsDescOption: .No).success).to(beFalse(), description: "should FAIL to call correct function with correct but Non-Optional values")
     }
     
     func testDidCallFunctionWithArgumentsANumberOfTimes() {
