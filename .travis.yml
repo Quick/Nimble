@@ -3,16 +3,31 @@ language: generic
 matrix:
   include:
     - os: osx
+      sudo: required
+      env: TYPE=podspec
+    - os: osx
       env: NIMBLE_RUNTIME_IOS_SDK_VERSION=9.0 TYPE=ios
+    - os: osx
+      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=9.0 TYPE=tvos
     - os: osx
       env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.10 TYPE=osx
     - os: osx
       env: TYPE=swiftpm
+    - os: osx
+      env: NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0 TYPE=ios
+      osx_image: xcode8
+    - os: osx
+      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0 TYPE=tvos
+      osx_image: xcode8
+    - os: osx
+      env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.12 TYPE=osx
+      osx_image: xcode8
     - os: linux
       dist: trusty
       sudo: required
       env: TYPE=swiftpm
 install:
   - if [[ "$TYPE" == "swiftpm" ]]; then eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"; fi
+  - if [[ "$TYPE" == "podspec" ]]; then sudo gem install bundler; bundle install; fi
 script:
   - ./test $TYPE
