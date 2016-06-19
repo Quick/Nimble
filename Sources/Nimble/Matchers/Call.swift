@@ -8,16 +8,12 @@ public func call(function: String, withArguments arguments: GloballyEquatable...
             return false
         }
         
-        let includeOption = didCallResultIncludeOptionFor(isNegationTest: false) // TODO: is neg
-        let result = expressionValue.didCall(function: function, withArguments: arguments, countSpecifier: countSpecifier, recordedCallsDescOption: includeOption)
-        let successfulTest = isSuccessfulTest(result.success, false) // TODO: is neg
+        let result = expressionValue.didCall(function: function, withArguments: arguments, countSpecifier: countSpecifier)
         
-        if !successfulTest {
-            failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countSpecifier: countSpecifier)
-            failureMessage.actualValue = result.recordedCallsDescription
-        }
+        failureMessage.postfixMessage = descriptionOfAttemptedCall(object: expressionValue, function: function, arguments: arguments, countSpecifier: countSpecifier)
+        failureMessage.actualValue = result.recordedCallsDescription
         
-        return successfulTest
+        return result.success
     }
 }
 
@@ -74,12 +70,4 @@ private func postfixMessageForNilCase(arguments arguments: [GloballyEquatable], 
     }
     
     return postfixMessage
-}
-
-private func isSuccessfulTest(didDoIt: Bool, _ isNegationTest: Bool) -> Bool {
-    return didDoIt != isNegationTest
-}
-
-private func didCallResultIncludeOptionFor(isNegationTest isNegationTest: Bool) -> DidCallResultIncludeOption {
-    return isNegationTest ? .OnlyOnSuccess : .OnlyOnUnsuccess
 }

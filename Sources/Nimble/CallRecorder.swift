@@ -98,26 +98,6 @@ public struct DidCallResult {
     public let recordedCallsDescription: String
 }
 
-public enum DidCallResultIncludeOption : CustomStringConvertible {
-    case Yes
-    case No
-    case OnlyOnSuccess
-    case OnlyOnUnsuccess
-    
-    public var description: String {
-        switch self {
-        case .Yes:
-            return "DidCallResultIncludeOption.Yes"
-        case .No:
-            return "DidCallResultIncludeOption.No"
-        case .OnlyOnSuccess:
-            return "DidCallResultIncludeOption.OnlyOnSuccess"
-        case .OnlyOnUnsuccess:
-            return "DidCallResultIncludeOption.OnlyOnUnsuccess"
-        }
-    }
-}
-
 public enum CountSpecifier {
     case Exactly(Int)
     case AtLeast(Int)
@@ -138,7 +118,7 @@ public protocol CallRecorder : class {
     
     
     // For Internal Use ONLY
-    func didCall(function function: String, withArguments arguments: Array<GloballyEquatable>, countSpecifier: CountSpecifier, recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult
+    func didCall(function function: String, withArguments arguments: Array<GloballyEquatable>, countSpecifier: CountSpecifier) -> DidCallResult
 }
 
 public extension CallRecorder {
@@ -152,7 +132,7 @@ public extension CallRecorder {
         self.called.argumentsList = Array<Array<GloballyEquatable>>()
     }
     
-    func didCall(function function: String, withArguments arguments: Array<GloballyEquatable> = [GloballyEquatable](), countSpecifier: CountSpecifier = .AtLeast(1), recordedCallsDescOption: DidCallResultIncludeOption) -> DidCallResult {
+    func didCall(function function: String, withArguments arguments: Array<GloballyEquatable> = [GloballyEquatable](), countSpecifier: CountSpecifier = .AtLeast(1)) -> DidCallResult {
         let success: Bool
         switch countSpecifier {
             case .Exactly(let count): success = timesCalled(function, arguments: arguments) == count
@@ -160,7 +140,7 @@ public extension CallRecorder {
             case .AtMost(let count): success = timesCalled(function, arguments: arguments) <= count
         }
         
-        let recordedCallsDescription = self.descriptionOfRecordedCalls(wasSuccessful: success, returnOption: recordedCallsDescOption)
+        let recordedCallsDescription = descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
         return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
@@ -168,19 +148,6 @@ public extension CallRecorder {
     
     private func timesCalled(function: String, arguments: Array<GloballyEquatable>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
-    }
-    
-    private func descriptionOfRecordedCalls(wasSuccessful success: Bool, returnOption: DidCallResultIncludeOption) -> String {
-        switch returnOption {
-        case .Yes:
-            return descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
-        case .No:
-            return ""
-        case .OnlyOnSuccess:
-            return success ? descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList) : ""
-        case .OnlyOnUnsuccess:
-            return !success ? descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList) : ""
-        }
     }
 }
 
