@@ -1,3 +1,4 @@
+import Foundation
 
 // In order to use GloballyEquatable, conform to Equatable
 public protocol GloballyEquatable {
