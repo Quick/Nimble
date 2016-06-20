@@ -273,10 +273,6 @@ private extension String {
     private func replaceMatching(regex regex: String, withString string: String) -> String {
         return self.stringByReplacingOccurrencesOfString(regex, withString: string, options: .RegularExpressionSearch, range: nil)
     }
-    
-    private func indexForMatching(regex regex: String) -> Range<Index>? {
-        return self.rangeOfString(regex, options: .RegularExpressionSearch, range: nil, locale: nil)
-    }
 }
 
 private extension Array {
