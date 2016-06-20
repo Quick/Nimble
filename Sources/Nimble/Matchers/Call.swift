@@ -1,4 +1,3 @@
-import Foundation
 
 public func call(function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
     return NonNilMatcherFunc { expression, failureMessage in
