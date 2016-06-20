@@ -122,7 +122,7 @@ public protocol CallRecorder : class {
 }
 
 public extension CallRecorder {
-    func recordCall(function function: String = __FUNCTION__, arguments: GloballyEquatable...) {
+    func recordCall(function function: String = #function, arguments: GloballyEquatable...) {
         self.called.functionList.append(function)
         self.called.argumentsList.append(arguments)
     }
@@ -165,7 +165,7 @@ private func numberOfMatchingCalls(function function: String, functions: Array<S
     for index in potentialMatchIndexes {
         let recordedArgsList = argsLists[index]
         if isEqualArgsLists(passedArgs: argsList, recordedArgs: recordedArgsList) {
-            correctCallsCount++
+            correctCallsCount += 1
         }
     }
     
@@ -181,7 +181,7 @@ private func isEqualArgsLists(passedArgs passedArgs: Array<GloballyEquatable>, r
         return false
     }
     
-    for var index = 0; index < recordedArgs.count; index++ {
+    for index in 0..<recordedArgs.count {
         let passedArg = passedArgs[index]
         let recordedArg = recordedArgs[index]
         
