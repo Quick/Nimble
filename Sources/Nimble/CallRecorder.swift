@@ -56,7 +56,7 @@ public enum Argument : CustomStringConvertible, GloballyEquatable {
     case Nil
     case InstanceOf(type: Any.Type)
     case InstanceOfWith(type: Any.Type, option: ArgumentOption)
-    case KindOf(type: AnyObject.Type)
+    case KindOf(type: AnyClass)
     
     public var description: String {
         switch self {
@@ -223,11 +223,11 @@ private func isEqualArgs(passedArg passedArg: GloballyEquatable, recordedArg: Gl
 
             return cleanedType == cleanedRecordedArgType
         case .KindOf(let type):
-            if let recordedArgAsObject = recordedArg as? AnyObject {
+            if let recordedArgAsObject = recordedArg as? NSObject {
                 return recordedArgAsObject.isKindOfClass(type)
             }
-
-            assertionFailure(".KindOf only works on arguments that are a subclass of AnyObject")
+            
+            assertionFailure("Arguments passed to .KindOf must inherit from NSObject. <\(recordedArg)> of type <\(recordedArg.dynamicType)> does NOT inherit from NSObject.")
             return false
         }
     } else {
