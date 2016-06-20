@@ -1015,21 +1015,8 @@ public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
         return lhsGE.isEqualTo(rhsGE)
     }
     
-    let leftIsReal : Bool
-    if let _ = lhs {
-        leftIsReal = true
-    } else {
-        leftIsReal = false
-    }
-    
-    let rightIsReal : Bool
-    if let _ = lhs {
-        rightIsReal = true
-    } else {
-        rightIsReal = false
-    }
-    
-    return !leftIsReal && !rightIsReal // allows two Optional<T>.None to equate to true
+    // Note: The other cases are handled by a GloballyEquatable extension
+    return false
 }
 ```
 
