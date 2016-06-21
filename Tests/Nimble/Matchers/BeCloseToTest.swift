@@ -12,6 +12,9 @@ class BeCloseToTest: XCTestCase, XCTestCaseProvider {
             ("testBeCloseToOperator", testBeCloseToOperator),
             ("testBeCloseToWithinOperator", testBeCloseToWithinOperator),
             ("testPlusMinusOperator", testPlusMinusOperator),
+            ("testBeCloseToOperatorWithNSDate", testBeCloseToOperatorWithNSDate),
+            ("testBeCloseToWithinOperatorWithNSDate", testBeCloseToWithinOperatorWithNSDate),
+            ("testPlusMinusOperatorWithNSDate", testPlusMinusOperatorWithNSDate),
             ("testBeCloseToArray", testBeCloseToArray),
         ]
     }
@@ -87,6 +90,54 @@ class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to be close to <1> (within 0.1), got <1.2>") {
             expect(1.2) == 1.0 ± 0.1
         }
+    }
+
+    func testBeCloseToOperatorWithNSDate() {
+#if _runtime(_ObjC) // NSDateFormatter isn't functional in swift-corelibs-foundation yet.
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ NSDate(dateTimeString: "2015-08-26 11:43:00")
+
+        failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.0001), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ expectedDate
+        }
+#endif
+    }
+
+    func testBeCloseToWithinOperatorWithNSDate() {
+#if _runtime(_ObjC) // NSDateFormatter isn't functional in swift-corelibs-foundation yet.
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ (NSDate(dateTimeString: "2015-08-26 11:43:05"), 10)
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) == (NSDate(dateTimeString: "2015-08-26 11:43:05"), 10)
+
+        failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ (expectedDate, 0.006)
+        }
+        failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) == (expectedDate, 0.006)
+        }
+#endif
+    }
+
+    func testPlusMinusOperatorWithNSDate() {
+#if _runtime(_ObjC) // NSDateFormatter isn't functional in swift-corelibs-foundation yet.
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ NSDate(dateTimeString: "2015-08-26 11:43:05") ± 10
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) == NSDate(dateTimeString: "2015-08-26 11:43:05") ± 10
+
+        failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) ≈ expectedDate ± 0.006
+        }
+        failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
+
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").dateByAddingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")) == expectedDate ± 0.006
+        }
+#endif
     }
 
     func testBeCloseToArray() {

@@ -8,9 +8,20 @@ matrix:
     - os: osx
       env: NIMBLE_RUNTIME_IOS_SDK_VERSION=9.0 TYPE=ios
     - os: osx
+      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=9.0 TYPE=tvos
+    - os: osx
       env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.10 TYPE=osx
     - os: osx
       env: TYPE=swiftpm
+    - os: osx
+      env: NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0 TYPE=ios
+      osx_image: xcode8
+    - os: osx
+      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0 TYPE=tvos
+      osx_image: xcode8
+    - os: osx
+      env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.12 TYPE=osx
+      osx_image: xcode8
     - os: linux
       dist: trusty
       sudo: required
