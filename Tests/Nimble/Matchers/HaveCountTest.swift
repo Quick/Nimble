@@ -14,11 +14,11 @@ class HaveCountTest: XCTestCase, XCTestCaseProvider {
         expect([1, 2, 3]).to(haveCount(3))
         expect([1, 2, 3]).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have [1, 2, 3] with count 1, got 3") {
+        failsWithErrorMessage("expected to have Array<Int> with count 1, got 3\nActual Value: [1, 2, 3]") {
             expect([1, 2, 3]).to(haveCount(1))
         }
 
-        failsWithErrorMessage("expected to not have [1, 2, 3] with count 3, got 3") {
+        failsWithErrorMessage("expected to not have Array<Int> with count 3, got 3\nActual Value: [1, 2, 3]") {
             expect([1, 2, 3]).notTo(haveCount(3))
         }
     }
@@ -28,12 +28,13 @@ class HaveCountTest: XCTestCase, XCTestCaseProvider {
         expect(dictionary).to(haveCount(3))
         expect(dictionary).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have \(stringify(dictionary)) with count 1, got 3") {
+        failsWithErrorMessage("expected to have Dictionary<String, Int> with count 1, got 3\nActual Value: \(stringify(dictionary))") {
             expect(dictionary).to(haveCount(1))
         }
 
-        failsWithErrorMessage("expected to not have \(stringify(dictionary)) with count 3, got 3") {
-            expect(dictionary).notTo(haveCount(3))
+        failsWithErrorMessage("expected to not have Dictionary<String, Int> with count 3, got 3" +
+            "\nActual Value: \(stringify(dictionary))") {
+                expect(dictionary).notTo(haveCount(3))
         }
     }
 
@@ -42,12 +43,14 @@ class HaveCountTest: XCTestCase, XCTestCaseProvider {
         expect(set).to(haveCount(3))
         expect(set).notTo(haveCount(1))
 
-        failsWithErrorMessage("expected to have \(stringify(set)) with count 1, got 3") {
-            expect(set).to(haveCount(1))
+        failsWithErrorMessage("expected to have Set<Int> with count 1, got 3" +
+            "\nActual Value: \(stringify(set))") {
+                expect(set).to(haveCount(1))
         }
 
-        failsWithErrorMessage("expected to not have \(stringify(set)) with count 3, got 3") {
-            expect(set).notTo(haveCount(3))
+        failsWithErrorMessage("expected to not have Set<Int> with count 3, got 3" +
+            "\nActual Value: \(stringify(set))") {
+                expect(set).notTo(haveCount(3))
         }
     }
 }
