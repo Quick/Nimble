@@ -151,8 +151,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11)
             let expectedErrorMessage = "expected to equal <NSData<length=9>>, got <NSData<length=6>>"
         #else
-            let expectedErrorMessage = "expected to equal <NSData<hash=92856895,length=9>>,"
-                + " got <NSData<hash=114710658,length=6>>"
+            let expectedErrorMessage = "expected to equal <<666f6f62 6172666f 6f>>, got <<666f6f62 6172>>"
         #endif
 
         failsWithErrorMessage(expectedErrorMessage) {
