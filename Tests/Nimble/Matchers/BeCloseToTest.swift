@@ -91,7 +91,6 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeCloseToOperatorWithDate() {
-#if _runtime(_ObjC) // DateFormatter isn't functional in swift-corelibs-foundation yet.
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ Date(dateTimeString: "2015-08-26 11:43:00")
 
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.0001), got <2015-08-26 11:43:00.0000>") {
@@ -99,11 +98,9 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ expectedDate
         }
-#endif
     }
 
     func testBeCloseToWithinOperatorWithDate() {
-#if _runtime(_ObjC) // DateFormatter isn't functional in swift-corelibs-foundation yet.
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ (Date(dateTimeString: "2015-08-26 11:43:05"), 10)
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) == (Date(dateTimeString: "2015-08-26 11:43:05"), 10)
 
@@ -117,11 +114,9 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) == (expectedDate, 0.006)
         }
-#endif
     }
 
     func testPlusMinusOperatorWithDate() {
-#if _runtime(_ObjC) // DateFormatter isn't functional in swift-corelibs-foundation yet.
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ Date(dateTimeString: "2015-08-26 11:43:05") ± 10
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) == Date(dateTimeString: "2015-08-26 11:43:05") ± 10
 
@@ -135,7 +130,6 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) == expectedDate ± 0.006
         }
-#endif
     }
 
     func testBeCloseToArray() {
