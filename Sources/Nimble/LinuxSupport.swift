@@ -3,12 +3,19 @@ import XCTest
 
 #if os(Linux)
     public typealias ComparisonResult = NSComparisonResult
+    public typealias Data = NSData
     public typealias Date = NSDate
     public typealias DateFormatter = NSDateFormatter
     public typealias Locale = NSLocale
     public typealias Notification = NSNotification
     public typealias NotificationCenter = NSNotificationCenter
     public typealias Thread = NSThread
+
+    extension Data {
+        var count: Int {
+            return length
+        }
+    }
 
     extension NSMutableArray {
         internal func add(_ anObject: AnyObject) {
