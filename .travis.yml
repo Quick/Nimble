@@ -2,9 +2,9 @@ osx_image: xcode8
 language: generic
 matrix:
   include:
-    - os: osx
-      sudo: required
-      env: TYPE=podspec
+    # - os: osx
+    #   sudo: required
+    #   env: TYPE=podspec
     - os: osx
       env: NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0 TYPE=ios
     - os: osx
