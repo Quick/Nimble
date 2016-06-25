@@ -81,7 +81,9 @@ public class NimbleHelper : NSObject {
     }
 }
 
-extension NSDate {
+#if os(Linux)
+extension Date {
+    // Date is alias of `NSDate` on linux. So, we need to use `convenience`
     convenience init(dateTimeString:String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -90,3 +92,14 @@ extension NSDate {
         self.init(timeInterval:0, since:date)
     }
 }
+#else
+extension Date {
+    init(dateTimeString:String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(localeIdentifier: "en_US_POSIX")
+        let date = dateFormatter.date(from: dateTimeString)!
+        self.init(timeInterval:0, since:date)
+    }
+}
+#endif
