@@ -1,7 +1,7 @@
 import Foundation
 
 internal class NotificationCollector {
-    private(set) var observedNotifications: [NSNotification]
+    private(set) var observedNotifications: [Notification]
     private let notificationCenter: NotificationCenter
     #if _runtime(_ObjC)
     private var token: AnyObject?
@@ -36,7 +36,7 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
-public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification.Name]>(
+public func postNotifications<T where T: Matcher, T.ValueType == [Notification]>(
     _ notificationsMatcher: T,
     fromNotificationCenter center: NotificationCenter = .default())
     -> MatcherFunc<Any> {
@@ -46,7 +46,7 @@ public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification
         var once: Bool = false
         return MatcherFunc { actualExpression, failureMessage in
             let collectorNotificationsExpression = Expression(memoizedExpression: { _ in
-                return collector.observedNotifications.map { $0.name }
+                return collector.observedNotifications
                 }, location: actualExpression.location, withoutCaching: true)
 
             assert(pthread_equal(mainThread, pthread_self()) != 0, "Only expecting closure to be evaluated on main thread.")
@@ -59,7 +59,7 @@ public func postNotifications<T where T: Matcher, T.ValueType == [NSNotification
             if collector.observedNotifications.isEmpty {
                 failureMessage.actualValue = "no notifications"
             } else {
-                failureMessage.actualValue = "<\(stringify(collector.observedNotifications.map { $0.name }))>"
+                failureMessage.actualValue = "<\(stringify(collector.observedNotifications))>"
             }
             return match
         }

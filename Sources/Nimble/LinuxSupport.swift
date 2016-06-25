@@ -6,6 +6,7 @@ import XCTest
     public typealias Date = NSDate
     public typealias DateFormatter = NSDateFormatter
     public typealias Locale = NSLocale
+    public typealias Notification = NSNotification
     public typealias NotificationCenter = NSNotificationCenter
     public typealias Thread = NSThread
 
