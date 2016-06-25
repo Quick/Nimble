@@ -60,7 +60,7 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
 
 #if _runtime(_ObjC)
     func deferToMainQueue(action: () -> Void) {
-        DispatchQueue.main.async() {
+        DispatchQueue.main.async {
             Thread.sleep(forTimeInterval: 0.01)
             action()
         }

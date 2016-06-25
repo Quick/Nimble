@@ -63,13 +63,13 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var value = 0
 
-        DispatchQueue.global(attributes: .qosDefault).async() {
+        DispatchQueue.global(attributes: .qosDefault).async {
             Thread.sleep(forTimeInterval: 1.1)
             value = 1
         }
         expect { value }.toEventually(equal(1))
 
-        DispatchQueue.global(attributes: .qosDefault).async() {
+        DispatchQueue.global(attributes: .qosDefault).async {
             Thread.sleep(forTimeInterval: 1.1)
             value = 0
         }
@@ -97,7 +97,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                DispatchQueue.global(attributes: .qosDefault).async() {
+                DispatchQueue.global(attributes: .qosDefault).async {
                     Thread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
@@ -146,7 +146,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: 2.0) { done in
                 var protected: Int = 0
-                DispatchQueue.main.async() {
+                DispatchQueue.main.async {
                     protected = 1
                 }
 
@@ -173,7 +173,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        DispatchQueue.global(attributes: .qosDefault).async() {
+        DispatchQueue.global(attributes: .qosDefault).async {
             expect {
                 waitUntil { done in done() }
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
@@ -186,7 +186,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testToEventuallyMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        DispatchQueue.global(attributes: .qosDefault).async() {
+        DispatchQueue.global(attributes: .qosDefault).async {
             expect {
                 expect(1).toEventually(equal(2))
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
