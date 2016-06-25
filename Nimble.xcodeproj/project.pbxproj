@@ -973,9 +973,11 @@
 					};
 					1F925EAC195C0D6300ED456B = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 					};
 					1F925EB6195C0D6300ED456B = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = 1F925EAC195C0D6300ED456B;
 					};
 				};
@@ -1775,6 +1777,7 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -1810,6 +1813,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -1835,6 +1839,7 @@
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1856,6 +1861,7 @@
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
