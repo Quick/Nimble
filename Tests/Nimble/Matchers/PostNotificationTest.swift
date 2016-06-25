@@ -28,7 +28,7 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         let testNotification = Notification(name: Notification.Name("Foo"), object: nil)
         expect {
             self.notificationCenter.post(testNotification)
-        }.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
+        }.to(postNotifications(equal([testNotification.name]), fromNotificationCenter: notificationCenter))
     }
 
     func testPassesWhenAllExpectedNotificationsArePosted() {
@@ -40,38 +40,38 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
             self.notificationCenter.post(n1)
             self.notificationCenter.post(n2)
             return nil
-        }.to(postNotifications(equal([n1, n2]), fromNotificationCenter: notificationCenter))
+        }.to(postNotifications(equal([n1.name, n2.name]), fromNotificationCenter: notificationCenter))
     }
 
     func testFailsWhenNoNotificationsArePosted() {
         let testNotification = Notification(name: Notification.Name("Foo"), object: nil)
-        failsWithErrorMessage("expected to equal <[\(testNotification)]>, got no notifications") {
+        failsWithErrorMessage("expected to equal <[Name(_rawValue: \(testNotification.name.rawValue))]>, got no notifications") {
             expect {
                 // no notifications here!
                 return nil
-            }.to(postNotifications(equal([testNotification]), fromNotificationCenter: self.notificationCenter))
+            }.to(postNotifications(equal([testNotification.name]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
     func testFailsWhenNotificationWithWrongNameIsPosted() {
         let n1 = Notification(name: Notification.Name("Foo"), object: nil)
         let n2 = Notification(name: Notification.Name(n1.name.rawValue + "a"), object: nil)
-        failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
+        failsWithErrorMessage("expected to equal <[Name(_rawValue: \(n1.name.rawValue))]>, got <[Name(_rawValue: \(n2.name.rawValue))]>") {
             expect {
                 self.notificationCenter.post(n2)
                 return nil
-            }.to(postNotifications(equal([n1]), fromNotificationCenter: self.notificationCenter))
+            }.to(postNotifications(equal([n1.name]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
     func testFailsWhenNotificationWithWrongObjectIsPosted() {
         let n1 = Notification(name: Notification.Name("Foo"), object: nil)
         let n2 = Notification(name: n1.name, object: NSObject())
-        failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
+        failsWithErrorMessage("expected to equal <[Name(_rawValue: \(n1.name.rawValue))]>, got <[Name(_rawValue: \(n2.name.rawValue))]>") {
             expect {
                 self.notificationCenter.post(n2)
                 return nil
-            }.to(postNotifications(equal([n1]), fromNotificationCenter: self.notificationCenter))
+            }.to(postNotifications(equal([n1.name]), fromNotificationCenter: self.notificationCenter))
         }
     }
 
@@ -83,7 +83,7 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
                     self.notificationCenter.post(testNotification)
                 }
                 return nil
-            }.toEventually(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
+            }.toEventually(postNotifications(equal([testNotification.name]), fromNotificationCenter: notificationCenter))
         #else
             print("\(#function) is missing because toEventually is not implement on this platform")
         #endif

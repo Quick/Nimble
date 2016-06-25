@@ -80,7 +80,7 @@
                               userInfo(@{@"k": @"v"}));
     });
 
-    expectFailureMessage(@"expected to not raise any exception, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }", ^{
+    expectFailureMessage(@"expected to not raise any exception, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }", ^{
         expectAction(^{ [exception raise]; }).toNot(raiseException());
     });
 }
@@ -96,7 +96,7 @@
         }));
     });
 
-    NSString *outerFailureMessage = @"expected to raise exception that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    NSString *outerFailureMessage = @"expected to raise exception that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  satisfyingBlock(^(NSException *exception) {
@@ -104,7 +104,7 @@
         }));
     });
 
-    outerFailureMessage = @"expected to raise exception with name <foo> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <foo> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(@"foo").
@@ -113,7 +113,7 @@
         }));
     });
 
-    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <bar> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <bar> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(NSInvalidArgumentException).
@@ -123,7 +123,7 @@
         }));
     });
 
-    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> with userInfo <{}> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> with userInfo <{}> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(NSInvalidArgumentException).
@@ -142,7 +142,7 @@
     NSString *outerFailureMessage;
 
     NSString const *innerFailureMessage = @"expected to equal <foo>, got <NSInvalidArgumentException>";
-    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage, innerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(NSInvalidArgumentException).
@@ -152,7 +152,7 @@
     });
 
 
-    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage, innerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(NSInvalidArgumentException).
@@ -163,7 +163,7 @@
     });
 
 
-    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> with userInfo <{key = value;}> that satisfies block, got NSException { name=NSInvalidArgumentException, reason='No food', userInfo=[key: value] }";
+    outerFailureMessage = @"expected to raise exception with name <NSInvalidArgumentException> with reason <No food> with userInfo <{key = value;}> that satisfies block, got NSException { name=NSExceptionName(_rawValue: NSInvalidArgumentException), reason='No food', userInfo=[key: value] }";
     expectFailureMessages((@[outerFailureMessage, innerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  named(NSInvalidArgumentException).

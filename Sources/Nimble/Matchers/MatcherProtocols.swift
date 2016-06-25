@@ -105,6 +105,15 @@ private let dateFormatter: DateFormatter = {
 }()
 
 #if _runtime(_ObjC)
+#if swift(>=3)
+extension Date: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        get {
+            return self.timeIntervalSinceReferenceDate
+        }
+    }
+}
+#else
 extension NSDate: NMBDoubleConvertible {
     public var doubleValue: CDouble {
         get {
@@ -112,7 +121,8 @@ extension NSDate: NMBDoubleConvertible {
         }
     }
 }
-#endif
+#endif // swift >= 3.0
+#endif // _runtime(_ObjC)
 
 extension NSDate: TestOutputStringConvertible {
     public var testDescription: String {
