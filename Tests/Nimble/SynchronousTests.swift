@@ -60,8 +60,8 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
     func testToProvidesAMemoizedActualValueExpression() {
         var callCount = 0
         expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
-            try expr.evaluate()
-            try expr.evaluate()
+            _ = try expr.evaluate()
+            _ = try expr.evaluate()
             return true
         })
         expect(callCount).to(equal(1))
@@ -71,7 +71,7 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
         var callCount = 0
         expect{ callCount += 1 }.to(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
-            try expr.evaluate()
+            _ = try expr.evaluate()
             return true
         })
         expect(callCount).to(equal(1))
@@ -99,8 +99,8 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
     func testToNotProvidesAMemoizedActualValueExpression() {
         var callCount = 0
         expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
-            try expr.evaluate()
-            try expr.evaluate()
+            _ = try expr.evaluate()
+            _ = try expr.evaluate()
             return false
         })
         expect(callCount).to(equal(1))
@@ -110,7 +110,7 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
         var callCount = 0
         expect{ callCount += 1 }.toNot(MatcherFunc { expr, failure in
             expect(callCount).to(equal(0))
-            try expr.evaluate()
+            _ = try expr.evaluate()
             return false
         })
         expect(callCount).to(equal(1))

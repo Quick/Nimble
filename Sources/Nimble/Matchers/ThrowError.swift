@@ -19,7 +19,7 @@ public func throwError<T: ErrorProtocol>(
 
             var actualError: ErrorProtocol?
             do {
-                try actualExpression.evaluate()
+                _ = try actualExpression.evaluate()
             } catch let catchedError {
                 actualError = catchedError
             }
@@ -42,7 +42,7 @@ public func throwError(
             
             var actualError: ErrorProtocol?
             do {
-                try actualExpression.evaluate()
+                _ = try actualExpression.evaluate()
             } catch let catchedError {
                 actualError = catchedError
             }

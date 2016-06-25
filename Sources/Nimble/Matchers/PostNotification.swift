@@ -52,7 +52,7 @@ public func postNotifications<T where T: Matcher, T.ValueType == [Notification]>
             assert(pthread_equal(mainThread, pthread_self()) != 0, "Only expecting closure to be evaluated on main thread.")
             if !once {
                 once = true
-                try actualExpression.evaluate()
+                _ = try actualExpression.evaluate()
             }
 
             let match = try notificationsMatcher.matches(collectorNotificationsExpression, failureMessage: failureMessage)

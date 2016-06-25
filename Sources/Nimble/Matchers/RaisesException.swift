@@ -25,7 +25,7 @@ public func raiseException(
             }), finally: nil)
 
             capture.tryBlock {
-                try! actualExpression.evaluate()
+                _ = try! actualExpression.evaluate()
                 return
             }
 
@@ -115,7 +115,7 @@ public class NMBObjCRaiseExceptionMatcher : NSObject, NMBMatcher {
     }
 
     public func matches(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let block: () -> Any? = ({ actualBlock(); return nil })
+        let block: () -> Any? = ({ _ = actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
 
         return try! raiseException(
