@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/Quick/Nimble.git", :tag => "v#{s.version}" }
 
   s.source_files = "Sources/Nimble/**/*.{swift,h,m}"
-  s.private_header_files = "Sources/Nimble/Adapters/ObjectiveC/CurrentTestCaseTracker.h"
+  s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
   s.requires_arc = true
