@@ -107,7 +107,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         // "clear" runloop to ensure this test doesn't poison other tests
         repeat {
-            RunLoop.main().run(until: Date().addingTimeInterval(0.2))
+            RunLoop.main.run(until: Date().addingTimeInterval(0.2))
         } while(waiting)
     }
 
