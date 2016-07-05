@@ -1,13 +1,19 @@
 import Foundation
 
+// The `haveCount` matchers do not print the full string representation of the collection value,
+// instead they only print the type name and the expected count. This makes it easier to understand
+// the reason for failed expectations. See: https://github.com/Quick/Nimble/issues/308.
+// The representation of the collection content is provided in a new line as an `extendedMessage`.
+
 /// A Nimble matcher that succeeds when the actual CollectionType's count equals
 /// the expected value
 public func haveCount<T: CollectionType>(expectedValue: T.Index.Distance) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
-            failureMessage.postfixMessage = "have \(stringify(actualValue)) with count \(stringify(expectedValue))"
+            failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count
             failureMessage.actualValue = "\(actualValue.count)"
+            failureMessage.extendedMessage = "Actual Value: \(stringify(actualValue))"
             return result
         } else {
             return false
@@ -20,9 +26,10 @@ public func haveCount<T: CollectionType>(expectedValue: T.Index.Distance) -> Non
 public func haveCount(expectedValue: Int) -> MatcherFunc<NMBCollection> {
     return MatcherFunc { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
-            failureMessage.postfixMessage = "have \(stringify(actualValue)) with count \(stringify(expectedValue))"
+            failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count
             failureMessage.actualValue = "\(actualValue.count)"
+            failureMessage.extendedMessage = "Actual Value: \(stringify(actualValue))"
             return result
         } else {
             return false

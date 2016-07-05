@@ -169,3 +169,49 @@ public func stringify<T>(value: T?) -> String {
     }
 }
 #endif
+
+// MARK: Collection Type Stringers
+
+/// Attempts to generate a pretty type string for a given value. If the value is of a Objective-C
+/// collection type, or a subclass thereof, (e.g. `NSArray`, `NSDictionary`, etc.). 
+/// This function will return the type name of the root class of the class cluster for better
+/// readability (e.g. `NSArray` instead of `__NSArrayI`).
+///
+/// For values that don't have a type of an Objective-C collection, this function returns the
+/// default type description.
+///
+/// - parameter value: A value that will be used to determine a type name.
+///
+/// - returns: The name of the class cluster root class for Objective-C collection types, or the
+/// the `dynamicType` of the value for values of any other type.
+public func prettyCollectionType<T>(value: T) -> String {
+    #if _runtime(_ObjC)
+    // Check for types that are not in corelibs-foundation separately
+    if value is NSHashTable {
+        return String(NSHashTable.self)
+    }
+    #endif
+
+    switch value {
+    case is NSArray:
+        return String(NSArray.self)
+    case is NSDictionary:
+        return String(NSDictionary.self)
+    case is NSSet:
+        return String(NSSet.self)
+    case is NSIndexSet:
+        return String(NSIndexSet.self)
+    default:
+        return String(value)
+    }
+}
+
+/// Returns the type name for a given collection type. This overload is used by Swift
+/// collection types.
+///
+/// - parameter collection: A Swift `CollectionType` value.
+///
+/// - returns: A string representing the `dynamicType` of the value.
+public func prettyCollectionType<T: CollectionType>(collection: T) -> String {
+    return String(collection.dynamicType)
+}
