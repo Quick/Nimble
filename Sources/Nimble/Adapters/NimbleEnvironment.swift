@@ -5,7 +5,7 @@ import Foundation
 internal class NimbleEnvironment {
     static var activeInstance: NimbleEnvironment {
         get {
-            let env = Thread.current().threadDictionary["NimbleEnvironment"]
+            let env = Thread.current.threadDictionary["NimbleEnvironment"]
             if let env = env as? NimbleEnvironment {
                 return env
             } else {
@@ -15,7 +15,7 @@ internal class NimbleEnvironment {
             }
         }
         set {
-            Thread.current().threadDictionary["NimbleEnvironment"] = newValue
+            Thread.current.threadDictionary["NimbleEnvironment"] = newValue
         }
     }
 

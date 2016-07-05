@@ -30,7 +30,7 @@ internal class AssertionWaitLock: WaitLock {
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
         _ = nimblePrecondition(
-            Thread.isMainThread(),
+            Thread.isMainThread,
             "InvalidNimbleAPIUsage",
             "\(fnName) can only run on the main thread."
         )
@@ -237,7 +237,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger.timeoutSource.resume()
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
-                RunLoop.current().run(mode: .defaultRunLoopMode, before: .distantFuture)
+                RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
             }
             self.trigger.timeoutSource.suspend()
             self.trigger.timeoutSource.cancel()

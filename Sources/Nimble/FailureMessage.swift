@@ -35,7 +35,7 @@ public class FailureMessage: NSObject {
 
     internal func stripNewlines(_ str: String) -> String {
         var lines: [String] = NSString(string: str).components(separatedBy: "\n") as [String]
-        let whitespace = NSCharacterSet.whitespacesAndNewlines()
+        let whitespace = NSCharacterSet.whitespacesAndNewlines
         lines = lines.map { line in NSString(string: line).trimmingCharacters(in: whitespace) }
         return lines.joined(separator: "")
     }

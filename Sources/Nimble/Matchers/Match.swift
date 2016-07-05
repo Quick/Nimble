@@ -10,7 +10,7 @@ public func match(_ expectedValue: String?) -> NonNilMatcherFunc<String> {
         
         if let actual = try actualExpression.evaluate() {
             if let regexp = expectedValue {
-                return actual.range(of: regexp, options: .regularExpressionSearch) != nil
+                return actual.range(of: regexp, options: .regularExpression) != nil
             }
         }
 
