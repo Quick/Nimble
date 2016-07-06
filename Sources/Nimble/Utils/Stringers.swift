@@ -147,7 +147,6 @@ extension Data: TestOutputStringConvertible {
 ///     will return the result of constructing a string from the value.
 ///
 /// - SeeAlso: `TestOutputStringConvertible`
-@warn_unused_result
 public func stringify<T>(_ value: T) -> String {
     if let value = value as? TestOutputStringConvertible {
         return value.testDescription
@@ -161,7 +160,6 @@ public func stringify<T>(_ value: T) -> String {
 }
 
 /// -SeeAlso: `stringify<T>(value: T)`
-@warn_unused_result
 public func stringify<T>(_ value: T?) -> String {
     if let unboxed = value {
         return stringify(unboxed)
@@ -171,7 +169,6 @@ public func stringify<T>(_ value: T?) -> String {
 
 #if _runtime(_ObjC)
 @objc public class NMBStringer: NSObject {
-    @warn_unused_result
     @objc public class func stringify(_ obj: AnyObject?) -> String {
         return Nimble.stringify(obj)
     }
