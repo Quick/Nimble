@@ -5,7 +5,11 @@ import Foundation
 internal class NimbleEnvironment {
     static var activeInstance: NimbleEnvironment {
         get {
-            let env = Thread.current.threadDictionary["NimbleEnvironment"]
+            #if _runtime(_ObjC) // Xcode 8 beta 2
+                let env = Thread.current.threadDictionary["NimbleEnvironment"]
+            #else
+                let env = Thread.current().threadDictionary["NimbleEnvironment"]
+            #endif
             if let env = env as? NimbleEnvironment {
                 return env
             } else {
@@ -15,7 +19,11 @@ internal class NimbleEnvironment {
             }
         }
         set {
-            Thread.current.threadDictionary["NimbleEnvironment"] = newValue
+            #if _runtime(_ObjC) // Xcode 8 beta 2
+                Thread.current.threadDictionary["NimbleEnvironment"] = newValue
+            #else
+                Thread.current().threadDictionary["NimbleEnvironment"] = newValue
+            #endif
         }
     }
 

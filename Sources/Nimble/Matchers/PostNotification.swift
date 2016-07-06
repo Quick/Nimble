@@ -36,9 +36,15 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
+#if _runtime(_ObjC) // Xcode 8 beta 2
+let notificationCenterDefault = NotificationCenter.default
+#else
+let notificationCenterDefault = NotificationCenter.default()
+#endif
+
 public func postNotifications<T where T: Matcher, T.ValueType == [Notification]>(
     _ notificationsMatcher: T,
-    fromNotificationCenter center: NotificationCenter = .default)
+    fromNotificationCenter center: NotificationCenter = notificationCenterDefault)
     -> MatcherFunc<Any> {
         let _ = mainThread // Force lazy-loading of this value
         let collector = NotificationCollector(notificationCenter: center)
