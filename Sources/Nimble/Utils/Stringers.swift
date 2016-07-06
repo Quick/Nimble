@@ -190,13 +190,6 @@ public func stringify<T>(_ value: T?) -> String {
 /// - returns: The name of the class cluster root class for Objective-C collection types, or the
 /// the `dynamicType` of the value for values of any other type.
 public func prettyCollectionType<T>(_ value: T) -> String {
-    #if _runtime(_ObjC)
-    // Check for types that are not in corelibs-foundation separately
-    if value is NSHashTable {
-        return String(NSHashTable.self)
-    }
-    #endif
-
     switch value {
     case is NSArray:
         return String(NSArray.self)
