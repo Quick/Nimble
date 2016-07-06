@@ -15,23 +15,23 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPositiveMatch() {
-        expect(TestNull()).to(beAKindOf(NSNull))
-        expect(NSObject()).to(beAKindOf(NSObject))
-        expect(NSNumber(value:1)).toNot(beAKindOf(NSDate))
+        expect(TestNull()).to(beAKindOf(NSNull.self))
+        expect(NSObject()).to(beAKindOf(NSObject.self))
+        expect(NSNumber(value:1)).toNot(beAKindOf(NSDate.self))
     }
 
     func testFailureMessages() {
         failsWithErrorMessageForNil("expected to not be a kind of NSNull, got <nil>") {
-            expect(nil as NSNull?).toNot(beAKindOf(NSNull))
+            expect(nil as NSNull?).toNot(beAKindOf(NSNull.self))
         }
         failsWithErrorMessageForNil("expected to be a kind of NSString, got <nil>") {
-            expect(nil as NSString?).to(beAKindOf(NSString))
+            expect(nil as NSString?).to(beAKindOf(NSString.self))
         }
         failsWithErrorMessage("expected to be a kind of NSString, got <__NSCFNumber instance>") {
-            expect(NSNumber(value:1)).to(beAKindOf(NSString))
+            expect(NSNumber(value:1)).to(beAKindOf(NSString.self))
         }
         failsWithErrorMessage("expected to not be a kind of NSNumber, got <__NSCFNumber instance>") {
-            expect(NSNumber(value:1)).toNot(beAKindOf(NSNumber))
+            expect(NSNumber(value:1)).toNot(beAKindOf(NSNumber.self))
         }
     }
     
@@ -41,15 +41,15 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
-            expect(1).to(beAKindOf(Int))
+            expect(1).to(beAKindOf(Int.self))
         }
         failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
-            expect("test").to(beAKindOf(String))
+            expect("test").to(beAKindOf(String.self))
         }
         failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
-            expect(TestEnum.one).to(beAKindOf(TestEnum))
+            expect(TestEnum.one).to(beAKindOf(TestEnum.self))
         }
     }
 }
