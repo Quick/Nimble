@@ -2,19 +2,19 @@ import XCTest
 import Nimble
 
 enum ConvertsToBool : Boolean, CustomStringConvertible {
-    case TrueLike, FalseLike
+    case trueLike, falseLike
 
     var boolValue : Bool {
         switch self {
-        case .TrueLike: return true
-        case .FalseLike: return false
+        case .trueLike: return true
+        case .falseLike: return false
         }
     }
 
     var description : String {
         switch self {
-        case .TrueLike: return "TrueLike"
-        case .FalseLike: return "FalseLike"
+        case .trueLike: return "TrueLike"
+        case .falseLike: return "FalseLike"
         }
     }
 }
@@ -68,18 +68,18 @@ final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
     }
 
     func testShouldMatchBoolConvertibleTypesThatConvertToTrue() {
-        expect(ConvertsToBool.TrueLike).to(beTruthy())
+        expect(ConvertsToBool.trueLike).to(beTruthy())
 
         failsWithErrorMessage("expected to not be truthy, got <TrueLike>") {
-            expect(ConvertsToBool.TrueLike).toNot(beTruthy())
+            expect(ConvertsToBool.trueLike).toNot(beTruthy())
         }
     }
 
     func testShouldNotMatchBoolConvertibleTypesThatConvertToFalse() {
-        expect(ConvertsToBool.FalseLike).toNot(beTruthy())
+        expect(ConvertsToBool.falseLike).toNot(beTruthy())
 
         failsWithErrorMessage("expected to be truthy, got <FalseLike>") {
-            expect(ConvertsToBool.FalseLike).to(beTruthy())
+            expect(ConvertsToBool.falseLike).to(beTruthy())
         }
     }
 }

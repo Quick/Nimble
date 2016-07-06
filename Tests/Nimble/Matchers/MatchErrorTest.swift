@@ -16,16 +16,16 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testMatchErrorPositive() {
-        expect(Error.Laugh).to(matchError(Error.Laugh))
-        expect(Error.Laugh).to(matchError(Error.self))
-        expect(EquatableError.Parameterized(x: 1)).to(matchError(EquatableError.Parameterized(x: 1)))
+        expect(Error.laugh).to(matchError(Error.laugh))
+        expect(Error.laugh).to(matchError(Error.self))
+        expect(EquatableError.parameterized(x: 1)).to(matchError(EquatableError.parameterized(x: 1)))
 
-        expect(Error.Laugh as ErrorProtocol).to(matchError(Error.Laugh))
+        expect(Error.laugh as ErrorProtocol).to(matchError(Error.laugh))
     }
 
     func testMatchErrorNegative() {
-        expect(Error.Laugh).toNot(matchError(Error.Cry))
-        expect(Error.Laugh as ErrorProtocol).toNot(matchError(Error.Cry))
+        expect(Error.laugh).toNot(matchError(Error.cry))
+        expect(Error.laugh as ErrorProtocol).toNot(matchError(Error.cry))
     }
 
     func testMatchNSErrorPositive() {
@@ -43,14 +43,14 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testMatchPositiveMessage() {
-        failsWithErrorMessage("expected to match error <Parameterized(2)>, got <Parameterized(1)>") {
-            expect(EquatableError.Parameterized(x: 1)).to(matchError(EquatableError.Parameterized(x: 2)))
+        failsWithErrorMessage("expected to match error <parameterized(2)>, got <parameterized(1)>") {
+            expect(EquatableError.parameterized(x: 1)).to(matchError(EquatableError.parameterized(x: 2)))
         }
-        failsWithErrorMessage("expected to match error <Cry>, got <Laugh>") {
-            expect(Error.Laugh).to(matchError(Error.Cry))
+        failsWithErrorMessage("expected to match error <cry>, got <laugh>") {
+            expect(Error.laugh).to(matchError(Error.cry))
         }
         failsWithErrorMessage("expected to match error <code=1>, got <code=0>") {
-            expect(CustomDebugStringConvertibleError.A).to(matchError(CustomDebugStringConvertibleError.B))
+            expect(CustomDebugStringConvertibleError.a).to(matchError(CustomDebugStringConvertibleError.b))
         }
 
         failsWithErrorMessage("expected to match error <Error Domain=err Code=1 \"(null)\">, got <Error Domain=err Code=0 \"(null)\">") {
@@ -61,18 +61,18 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testMatchNegativeMessage() {
-        failsWithErrorMessage("expected to not match error <Laugh>, got <Laugh>") {
-            expect(Error.Laugh).toNot(matchError(Error.Laugh))
+        failsWithErrorMessage("expected to not match error <laugh>, got <laugh>") {
+            expect(Error.laugh).toNot(matchError(Error.laugh))
         }
     }
 
     func testDoesNotMatchNils() {
-        failsWithErrorMessageForNil("expected to match error <Laugh>, got no error") {
-            expect(nil as ErrorProtocol?).to(matchError(Error.Laugh))
+        failsWithErrorMessageForNil("expected to match error <laugh>, got no error") {
+            expect(nil as ErrorProtocol?).to(matchError(Error.laugh))
         }
 
-        failsWithErrorMessageForNil("expected to not match error <Laugh>, got no error") {
-            expect(nil as ErrorProtocol?).toNot(matchError(Error.Laugh))
+        failsWithErrorMessageForNil("expected to not match error <laugh>, got no error") {
+            expect(nil as ErrorProtocol?).toNot(matchError(Error.laugh))
         }
     }
 }

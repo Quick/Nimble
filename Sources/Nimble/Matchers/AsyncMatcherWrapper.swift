@@ -30,19 +30,19 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .Completed(isSuccessful): return isSuccessful
-        case .TimedOut: return false
-        case let .ErrorThrown(error):
+        case let .completed(isSuccessful): return isSuccessful
+        case .timedOut: return false
+        case let .errorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .RaisedException(exception):
+        case let .raisedException(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .BlockedRunLoop:
+        case .blockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .Incomplete:
-            internalError("Reached .Incomplete state for toEventually(...).")
+        case .incomplete:
+            internalError("Reached .incomplete state for toEventually(...).")
         }
     }
 
@@ -57,19 +57,19 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
                 try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
         switch (result) {
-        case let .Completed(isSuccessful): return isSuccessful
-        case .TimedOut: return false
-        case let .ErrorThrown(error):
+        case let .completed(isSuccessful): return isSuccessful
+        case .timedOut: return false
+        case let .errorThrown(error):
             failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
             return false
-        case let .RaisedException(exception):
+        case let .raisedException(exception):
             failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
             return false
-        case .BlockedRunLoop:
+        case .blockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
             return false
-        case .Incomplete:
-            internalError("Reached .Incomplete state for toEventuallyNot(...).")
+        case .incomplete:
+            internalError("Reached .incomplete state for toEventuallyNot(...).")
         }
     }
 }

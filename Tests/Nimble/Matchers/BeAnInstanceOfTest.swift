@@ -38,7 +38,7 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
     
     func testSwiftTypesFailureMessages() {
         enum TestEnum {
-            case One, Two
+            case one, two
         }
 
         failsWithErrorMessage("beAnInstanceOf only works on Objective-C types since the Swift compiler"
@@ -51,7 +51,7 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("beAnInstanceOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
-            expect(TestEnum.One).to(beAnInstanceOf(TestEnum))
+            expect(TestEnum.one).to(beAnInstanceOf(TestEnum))
         }
     }
     

@@ -2,12 +2,12 @@ import XCTest
 import Nimble
 
 enum Error : ErrorProtocol {
-    case Laugh
-    case Cry
+    case laugh
+    case cry
 }
 
 enum EquatableError : ErrorProtocol {
-    case Parameterized(x: Int)
+    case parameterized(x: Int)
 }
 
 extension EquatableError : Equatable {
@@ -15,14 +15,14 @@ extension EquatableError : Equatable {
 
 func ==(lhs: EquatableError, rhs: EquatableError) -> Bool {
     switch (lhs, rhs) {
-    case (.Parameterized(let l), .Parameterized(let r)):
+    case (.parameterized(let l), .parameterized(let r)):
         return l == r
     }
 }
 
 enum CustomDebugStringConvertibleError : ErrorProtocol {
-    case A
-    case B
+    case a
+    case b
 }
 
 extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
@@ -45,58 +45,58 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPositiveMatches() {
-        expect { throw Error.Laugh }.to(throwError())
-        expect { throw Error.Laugh }.to(throwError(Error.Laugh))
-        expect { throw Error.Laugh }.to(throwError(errorType: Error.self))
-        expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 1)))
+        expect { throw Error.laugh }.to(throwError())
+        expect { throw Error.laugh }.to(throwError(Error.laugh))
+        expect { throw Error.laugh }.to(throwError(errorType: Error.self))
+        expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 1)))
     }
 
     func testPositiveMatchesWithClosures() {
         // Generic typed closure
-        expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { error in
-            guard case EquatableError.Parameterized(let x) = error else { fail(); return }
+        expect { throw EquatableError.parameterized(x: 42) }.to(throwError { error in
+            guard case EquatableError.parameterized(let x) = error else { fail(); return }
             expect(x) >= 1
         })
         // Explicit typed closure
-        expect { throw EquatableError.Parameterized(x: 42) }.to(throwError { (error: EquatableError) in
-            guard case .Parameterized(let x) = error else { fail(); return }
+        expect { throw EquatableError.parameterized(x: 42) }.to(throwError { (error: EquatableError) in
+            guard case .parameterized(let x) = error else { fail(); return }
             expect(x) >= 1
         })
         // Typed closure over errorType argument
-        expect { throw EquatableError.Parameterized(x: 42) }.to(throwError(errorType: EquatableError.self) { error in
-            guard case .Parameterized(let x) = error else { fail(); return }
+        expect { throw EquatableError.parameterized(x: 42) }.to(throwError(errorType: EquatableError.self) { error in
+            guard case .parameterized(let x) = error else { fail(); return }
             expect(x) >= 1
         })
         // Typed closure over error argument
-        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { (error: Error) in
+        expect { throw Error.laugh }.to(throwError(Error.laugh) { (error: Error) in
             expect(error._domain).to(beginWith("Nim"))
         })
         // Typed closure over error argument
-        expect { throw Error.Laugh }.to(throwError(Error.Laugh) { (error: Error) in
+        expect { throw Error.laugh }.to(throwError(Error.laugh) { (error: Error) in
             expect(error._domain).toNot(beginWith("as"))
         })
     }
 
     func testNegativeMatches() {
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <Parameterized(2)>, got <Parameterized(1)>") {
-            expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
+        failsWithErrorMessage("expected to throw error <parameterized(2)>, got <parameterized(1)>") {
+            expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 2)))
         }
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <Parameterized(2)>, got <Parameterized(1)>") {
-            expect { throw EquatableError.Parameterized(x: 1) }.to(throwError(EquatableError.Parameterized(x: 2)))
+        failsWithErrorMessage("expected to throw error <parameterized(2)>, got <parameterized(1)>") {
+            expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 2)))
         }
         // Different case
-        failsWithErrorMessage("expected to throw error <Cry>, got <Laugh>") {
-            expect { throw Error.Laugh }.to(throwError(Error.Cry))
+        failsWithErrorMessage("expected to throw error <cry>, got <laugh>") {
+            expect { throw Error.laugh }.to(throwError(Error.cry))
         }
         // Different case with closure
-        failsWithErrorMessage("expected to throw error <Cry> that satisfies block, got <Laugh>") {
-            expect { throw Error.Laugh }.to(throwError(Error.Cry) { _ in return })
+        failsWithErrorMessage("expected to throw error <cry> that satisfies block, got <laugh>") {
+            expect { throw Error.laugh }.to(throwError(Error.cry) { _ in return })
         }
         // Different case, implementing CustomDebugStringConvertible
         failsWithErrorMessage("expected to throw error <code=1>, got <code=0>") {
-            expect { throw CustomDebugStringConvertibleError.A }.to(throwError(CustomDebugStringConvertibleError.B))
+            expect { throw CustomDebugStringConvertibleError.a }.to(throwError(CustomDebugStringConvertibleError.b))
         }
     }
 
@@ -104,17 +104,17 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         // No error at all
         expect { return }.toNot(throwError())
         // Different case
-        expect { throw Error.Laugh }.toNot(throwError(Error.Cry))
+        expect { throw Error.laugh }.toNot(throwError(Error.cry))
     }
 
     func testNegativeNegatedMatches() {
         // No error at all
-        failsWithErrorMessage("expected to not throw any error, got <Laugh>") {
-            expect { throw Error.Laugh }.toNot(throwError())
+        failsWithErrorMessage("expected to not throw any error, got <laugh>") {
+            expect { throw Error.laugh }.toNot(throwError())
         }
         // Different error
-        failsWithErrorMessage("expected to not throw error <Laugh>, got <Laugh>") {
-            expect { throw Error.Laugh }.toNot(throwError(Error.Laugh))
+        failsWithErrorMessage("expected to not throw error <laugh>, got <laugh>") {
+            expect { throw Error.laugh }.toNot(throwError(Error.laugh))
         }
     }
 
@@ -125,8 +125,8 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             })
         }
         
-        failsWithErrorMessage("expected to throw error <Laugh> that satisfies block, got no error") {
-            expect { return }.to(throwError(Error.Laugh) { error in
+        failsWithErrorMessage("expected to throw error <laugh> that satisfies block, got no error") {
+            expect { return }.to(throwError(Error.laugh) { error in
                 fail()
             })
         }
@@ -144,12 +144,12 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             expect(error._domain).to(equal("foo"))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <Error> that satisfies block, got <Laugh>"]) {
-            expect { throw Error.Laugh }.to(throwError(closure: closure))
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <Error> that satisfies block, got <laugh>"]) {
+            expect { throw Error.laugh }.to(throwError(closure: closure))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error <Laugh> that satisfies block, got <Laugh>"]) {
-            expect { throw Error.Laugh }.to(throwError(Error.Laugh, closure: closure))
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error <laugh> that satisfies block, got <laugh>"]) {
+            expect { throw Error.laugh }.to(throwError(Error.laugh, closure: closure))
         }
     }
 }

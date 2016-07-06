@@ -56,32 +56,32 @@ internal class AssertionWaitLock: WaitLock {
 
 internal enum AwaitResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
-    case Incomplete
+    case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
-    case TimedOut
+    case timedOut
     /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
     /// the timeout code.
     ///
     /// This may also mean the async code waiting upon may have never actually ran within the
     /// required time because other timers & sources are running on the main run loop.
-    case BlockedRunLoop
+    case blockedRunLoop
     /// The async block successfully executed and returned a given result
-    case Completed(T)
+    case completed(T)
     /// When a Swift Error is thrown
-    case ErrorThrown(ErrorProtocol)
+    case errorThrown(ErrorProtocol)
     /// When an Objective-C Exception is raised
-    case RaisedException(NSException)
+    case raisedException(NSException)
 
     func isIncomplete() -> Bool {
         switch self {
-        case .Incomplete: return true
+        case .incomplete: return true
         default: return false
         }
     }
 
     func isCompleted() -> Bool {
         switch self {
-        case .Completed(_): return true
+        case .completed(_): return true
         default: return false
         }
     }
@@ -90,7 +90,7 @@ internal enum AwaitResult<T> {
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving an "response" to this promise.
 internal class AwaitPromise<T> {
-    private(set) internal var asyncResult: AwaitResult<T> = .Incomplete
+    private(set) internal var asyncResult: AwaitResult<T> = .incomplete
     private var signal: DispatchSemaphore
 
     init() {
@@ -181,7 +181,7 @@ internal class AwaitPromiseBuilder<T> {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .Success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
-                    if self.promise.resolveResult(.TimedOut) {
+                    if self.promise.resolveResult(.timedOut) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
                 }
@@ -192,7 +192,7 @@ internal class AwaitPromiseBuilder<T> {
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .Success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .Success
             if didNotTimeOut && timeoutWasNotTriggered {
-                if self.promise.resolveResult(.BlockedRunLoop) {
+                if self.promise.resolveResult(.blockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())
                 }
             }
@@ -216,7 +216,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected exception (objc)
     /// - The async expectation raised an unexpected error (swift)
     ///
-    /// The returned AwaitResult will NEVER be .Incomplete.
+    /// The returned AwaitResult will NEVER be .incomplete.
     func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> AwaitResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
@@ -224,7 +224,7 @@ internal class AwaitPromiseBuilder<T> {
             line: line)
 
         let capture = NMBExceptionCapture(handler: ({ exception in
-            _ = self.promise.resolveResult(.RaisedException(exception))
+            _ = self.promise.resolveResult(.raisedException(exception))
         }), finally: ({
             self.waitLock.releaseWaitingLock()
         }))
@@ -232,7 +232,7 @@ internal class AwaitPromiseBuilder<T> {
             do {
                 try self.trigger.start()
             } catch let error {
-                _ = self.promise.resolveResult(.ErrorThrown(error))
+                _ = self.promise.resolveResult(.errorThrown(error))
             }
             self.trigger.timeoutSource.resume()
             while self.promise.asyncResult.isIncomplete() {
@@ -281,7 +281,7 @@ internal class Awaiter {
                         "InvalidNimbleAPIUsage",
                         "Done closure's was called multiple times. waitUntil(..) expects its " +
                         "completion closure to only be called once.")
-                    if promise.resolveResult(.Completed($0)) {
+                    if promise.resolveResult(.completed($0)) {
                         CFRunLoopStop(CFRunLoopGetMain())
                     }
                 }
@@ -304,12 +304,12 @@ internal class Awaiter {
             asyncSource.setEventHandler() {
                 do {
                     if let result = try closure() {
-                        if promise.resolveResult(.Completed(result)) {
+                        if promise.resolveResult(.completed(result)) {
                             CFRunLoopStop(CFRunLoopGetCurrent())
                         }
                     }
                 } catch let error {
-                    if promise.resolveResult(.ErrorThrown(error)) {
+                    if promise.resolveResult(.errorThrown(error)) {
                         CFRunLoopStop(CFRunLoopGetCurrent())
                     }
                 }

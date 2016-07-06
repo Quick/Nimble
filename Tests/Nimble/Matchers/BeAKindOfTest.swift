@@ -37,7 +37,7 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     
     func testSwiftTypesFailureMessages() {
         enum TestEnum {
-            case One, Two
+            case one, two
         }
         failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
@@ -49,7 +49,7 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("beAKindOf only works on Objective-C types since the Swift compiler"
             + " will automatically type check Swift-only types. This expectation is redundant.") {
-            expect(TestEnum.One).to(beAKindOf(TestEnum))
+            expect(TestEnum.one).to(beAKindOf(TestEnum))
         }
     }
 }

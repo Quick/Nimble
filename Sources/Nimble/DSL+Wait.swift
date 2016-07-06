@@ -2,9 +2,9 @@ import Foundation
 
 #if _runtime(_ObjC)
 private enum ErrorResult {
-    case Exception(NSException)
-    case Error(ErrorProtocol)
-    case None
+    case exception(NSException)
+    case error(ErrorProtocol)
+    case none
 }
 
 /// Only classes, protocols, methods, properties, and subscript declarations can be
@@ -33,39 +33,39 @@ internal class NMBWait: NSObject {
                 DispatchQueue.main.async {
                     let capture = NMBExceptionCapture(
                         handler: ({ exception in
-                            done(.Exception(exception))
+                            done(.exception(exception))
                         }),
                         finally: ({ })
                     )
                     capture.tryBlock {
                         do {
                             try action() {
-                                done(.None)
+                                done(.none)
                             }
                         } catch let e {
-                            done(.Error(e))
+                            done(.error(e))
                         }
                     }
                 }
             }.timeout(timeout, forcefullyAbortTimeout: leeway).wait("waitUntil(...)", file: file, line: line)
 
             switch result {
-            case .Incomplete: internalError("Reached .Incomplete state for waitUntil(...).")
-            case .BlockedRunLoop:
+            case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")
+            case .blockedRunLoop:
                 fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
                     file: file, line: line)
-            case .TimedOut:
+            case .timedOut:
                 let pluralize = (timeout == 1 ? "" : "s")
                 fail("Waited more than \(timeout) second\(pluralize)", file: file, line: line)
-            case let .RaisedException(exception):
+            case let .raisedException(exception):
                 fail("Unexpected exception raised: \(exception)")
-            case let .ErrorThrown(error):
+            case let .errorThrown(error):
                 fail("Unexpected error thrown: \(error)")
-            case .Completed(.Exception(let exception)):
+            case .completed(.exception(let exception)):
                 fail("Unexpected exception raised: \(exception)")
-            case .Completed(.Error(let error)):
+            case .completed(.error(let error)):
                 fail("Unexpected error thrown: \(error)")
-            case .Completed(.None): // success
+            case .completed(.none): // success
                 break
             }
     }
