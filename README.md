@@ -966,15 +966,15 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 - Currently ONLY works in swift
 - Call matchers use `GloballyEquatable` protocol to equate arguments
   - Make types conform to `GloballyEquatable` (without having to add any special implementation!)
-    - Compiler won't let you run tests until all arguments being passed in (to either `recordCall()` function and `call()` matcher function) conform to `GloballyEquatable`
+    - Compiler won't let you run tests until all arguments being passed in to `recordCall()` function and `call()` matcher function conform to `GloballyEquatable`
   - Make types conform to `Equatable` protocol (for custom types you will have to create `==()` function with custom type as parameters)
-    - If you forget to conform to `Equatable` an `assertionFailure()` will be called telling you which class does not conform
-  - If you want to pass in Optionals
-    - Do the same rules as above using the code below to make Optionals correctly conform to `Equatable` and `GloballyEquatable`
+    - If you forget to conform to `Equatable`, the compiler will only tell you that you are not conforming to `GloballyEquatable`
 
 ### Example GloballyEquatable Conformance
 ```swift
+extension Int : GloballyEquatable {}
 extension String : GloballyEquatable {}
+extension Optional : GloballyEquatable {}
 ```
 
 ### Example Equatable Conformance
@@ -991,32 +991,6 @@ func ==(lhs: Person, rhs: Person) -> Bool {
     let agesMatch = lhs.age == rhs.age
     
     return namesMatch && agesMatch
-}
-```
-
-## Example Opional Conformance to GloballyEquatable and Equatable
-```swift
-// Copy and Paste (DO NOT MODIFY!!)
-
-extension Optional : GloballyEquatable, Equatable {}
-
-public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
-    if let lhs = lhs, rhs = rhs {
-        guard let lhsGE = lhs as? GloballyEquatable else {
-            assertionFailure("type '\(lhs.self)' does not conform to 'GloballyEquatable'")
-            return false
-        }
-        
-        guard let rhsGE = rhs as? GloballyEquatable else {
-            assertionFailure("type '\(rhs.self)' does not conform to 'GloballyEquatable'")
-            return false
-        }
-        
-        return lhsGE.isEqualTo(rhsGE)
-    }
-    
-    // Note: The other cases are handled by a GloballyEquatable extension
-    return false
 }
 ```
 
@@ -1096,7 +1070,7 @@ class StubStringService : ApiService, CallRecorder {
 }
 ```
 
-> Could also use inheritance with the subclass overriding all functions and replacing implementation with `self.recordCall()` functions. However, this is unadvised as it could lead to forgotten functions when adding functionality to base class in the future.
+> Could also use inheritance with the subclass overriding all functions and replacing implementation with `self.recordCall()` functions. However, this is unadvised as it could lead to forgotten functions when adding functionality to the base class in the future.
 
 
 # Writing Your Own Matchers

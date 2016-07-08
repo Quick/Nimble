@@ -4,32 +4,7 @@ import Nimble
 extension String : GloballyEquatable {}
 extension Int : GloballyEquatable {}
 extension NSObject : GloballyEquatable {}
-extension Optional : GloballyEquatable, Equatable {}
-
-/*
-Would like to use Mirror here but there is currently a bug in Swift (I have filed an issue on the Swift project Jira board: SR-1132)
-When that one gets fixed this won't have to be done on the client's side and instead handled automatically also without making Optional
-conform to Equatable
-*/
-public func ==<T>(lhs: Optional<T>, rhs: Optional<T>) -> Bool {
-    if let lhs = lhs, rhs = rhs {
-        guard let lhsGE = lhs as? GloballyEquatable else {
-            assertionFailure("type '\(lhs.self)' does not conform to 'GloballyEquatable'")
-            return false
-        }
-        
-        guard let rhsGE = rhs as? GloballyEquatable else {
-            assertionFailure("type '\(rhs.self)' does not conform to 'GloballyEquatable'")
-            return false
-        }
-        
-        return lhsGE.isEqualTo(rhsGE)
-    }
-    
-    // These cases are covered in the isEqualTo: func in the GloballyEquatable protocol extention
-    // Should never get to this point
-    return false
-}
+extension Optional : GloballyEquatable {}
 
 class CallRecorderTest: XCTestCase {
     

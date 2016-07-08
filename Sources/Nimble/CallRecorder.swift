@@ -1,57 +1,98 @@
 import Foundation
 
+// MARK: OptionalType
+
+public protocol OptionalType: NilLiteralConvertible {
+    associatedtype WrappedType
+    init(_ some: WrappedType)
+    init()
+}
+
+extension OptionalType {
+    init(valueOrNil: WrappedType?) {
+        if let valueOrNil = valueOrNil {
+            self.init(valueOrNil)
+        } else {
+            self.init()
+        }
+    }
+}
+
+extension Optional: OptionalType {
+    public typealias WrappedType = Wrapped
+}
+
+// MARK: GloballyEquatable
+
 // In order to use GloballyEquatable, conform to Equatable
 public protocol GloballyEquatable {
     func isEqualTo(other: GloballyEquatable) -> Bool
 }
 
 public extension GloballyEquatable where Self : Equatable {
-    func isEqualTo(other: GloballyEquatable) -> Bool {
-        if (self.dynamicType == other.dynamicType) {
-            let selfMirror = Mirror(reflecting: self)
-            let otherMirror = Mirror(reflecting: other)
-            
-            // HACK #1
-            let bothAreOptionals = selfMirror.displayStyle == .Optional && otherMirror.displayStyle == .Optional
-            if bothAreOptionals && selfMirror.children.first == nil && otherMirror.children.first == nil {
-                print(selfMirror.children.first)
-                print(otherMirror.children.first)
-                return true
-            }
-            
-            // HACK #2
-            let atLeastOneIsOptional = selfMirror.displayStyle == .Optional || otherMirror.displayStyle == .Optional
-            if !bothAreOptionals && atLeastOneIsOptional {
-                return false
-            }
-            
-            // HACK #1: if other is Optional<SameType>.None then if let will auto fail even if Self is Optional<SameType>
-            // HACK #2: if let will auto unwrap other (of type Optional<SameType> even if Self is also Optional<SameType>
-            // 'if let' seems to have been broken/redesigned since I've last worked on this
-            if let other = other as? Self {
-                return self == other
-            }
+    public func isEqualTo(other: GloballyEquatable) -> Bool {
+        // if 'self' is non-optional and 'other' is optional and other's .Some's associated value's type equals self's type
+        // then the if let below will auto unwrap 'other' to be the non-optional version of self's type
+        if self.dynamicType != other.dynamicType {
+            return false
+        }
+        
+        if let other = other as? Self {
+            return self == other
         }
         
         return false
     }
 }
 
-public extension GloballyEquatable {
-    func isEqualTo(other: GloballyEquatable) -> Bool {
-        assertionFailure("type '\(Self.self)' does not conform to 'Equatable'")
-        return false
+public extension GloballyEquatable where Self : OptionalType {
+    public func isEqualTo(other: GloballyEquatable) -> Bool {
+        if self.dynamicType != other.dynamicType {
+            return false
+        }
+        
+        let selfMirror = Mirror(reflecting: self)
+        let otherMirror = Mirror(reflecting: other)
+        
+        if selfMirror.displayStyle != .Optional {
+            assertionFailure("\(self.dynamicType) is NOT an Optional yet does conform to OptionalType")
+        }
+        if otherMirror.displayStyle != .Optional {
+            assertionFailure("\(other.dynamicType) is NOT an Optional yet does conform to OptionalType")
+        }
+        
+        let selfIsNil = selfMirror.children.first == nil
+        let otherIsNil = otherMirror.children.first == nil
+        
+        if selfIsNil && otherIsNil {
+            // return true if both are nil of the same type
+            return true
+        }
+        if selfIsNil || otherIsNil {
+            return false
+        }
+        
+        guard let selfDotSome = selfMirror.children.first?.value as? WrappedType, otherDotSome = otherMirror.children.first?.value as? WrappedType else {
+            assertionFailure("SHOULD NEVER REACH HERE: self or other is not being conditionally unwrapped to the WrappedType after checking if they are optionals, non-nil, and match types")
+            return false
+        }
+        
+        guard let selfDotSomeGE = selfDotSome as? GloballyEquatable else {
+            assertionFailure("\(selfDotSome.dynamicType) does NOT conform to GloballyEquatable")
+            return false
+        }
+        guard let otherDotSomeGE = otherDotSome as? GloballyEquatable else {
+            assertionFailure("\(otherDotSome.dynamicType) does NOT conform to GloballyEquatable")
+            return false
+        }
+        
+        return selfDotSomeGE.isEqualTo(otherDotSomeGE)
     }
 }
 
+// MARK: Helper Objects
 
-/* bug in Swift causes every enum WITHOUT an associated value's "description" to be the first declared
-enum value WITHOUT an associated value's description
-i.e. -> since ".Anything" is the first enum value then the default description for ".Anything",
-".NonNil", and ".Nil" will all be "Anything" -> must override to fix issue by conforming to "CustomStringConvertible" 
-    This is not reproducable in a Playground */
-
-public enum Argument : CustomStringConvertible, GloballyEquatable {
+public enum Argument : CustomStringConvertible, GloballyEquatable, Equatable {
     case Anything
     case NonNil
     case Nil
@@ -74,6 +115,25 @@ public enum Argument : CustomStringConvertible, GloballyEquatable {
         case .KindOf(let type):
             return "Argument.KindOf(\(type))"
         }
+    }
+}
+
+public func ==(lhs: Argument, rhs: Argument) -> Bool {
+    switch (lhs, rhs) {
+    case (.Anything, .Anything):
+        return true
+    case (.NonNil, .NonNil):
+        return true
+    case (.Nil, .Nil):
+        return true
+    case (let .InstanceOf(lhsType), let .InstanceOf(rhsType)):
+        return lhsType == rhsType
+    case (let .InstanceOfWith(lhsInput), let .InstanceOfWith(rhsInput)):
+        return lhsInput.type == rhsInput.type && lhsInput.option == rhsInput.option
+    case (let .KindOf(lhsType), let .KindOf(rhsType)):
+        return lhsType == rhsType
+    default:
+        return false
     }
 }
 
@@ -104,6 +164,8 @@ public enum CountSpecifier {
     case AtLeast(Int)
     case AtMost(Int)
 }
+
+// MARK: CallRecorder Protocol
 
 public protocol CallRecorder : class {
     // For Interal Use ONLY -> Implement as empty properties when conforming to protocol
@@ -145,7 +207,7 @@ public extension CallRecorder {
         return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
     
-    // MARK: Protocol Helper Functions
+    // MARK: Protocol Extention Helper Functions
     
     private func timesCalled(function: String, arguments: Array<GloballyEquatable>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
