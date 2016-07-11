@@ -37,10 +37,17 @@ internal class NimbleEnvironment {
     var awaiter: Awaiter
 
     init() {
+        let timeoutQueue: DispatchQueue
+        if #available(OSX 10.10, *) {
+            timeoutQueue = .global(attributes: .qosUserInitiated)
+        } else {
+            timeoutQueue = .global(attributes: .priorityHigh)
+        }
+
         awaiter = Awaiter(
             waitLock: AssertionWaitLock(),
             asyncQueue: .main,
-            timeoutQueue: .global(attributes: .qosUserInitiated))
+            timeoutQueue: timeoutQueue)
     }
 #endif
 }
