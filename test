@@ -78,7 +78,10 @@ function test_podspec {
 }
 
 function test_swiftpm {
-    run swift build --clean && swift build && swift test
+    if [ -d .build ]; then
+        run swift build --clean
+    fi
+    run swift build && swift test
 }
 
 function test() {

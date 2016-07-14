@@ -1,13 +1,13 @@
 #import "NMBExceptionCapture.h"
 
 @interface NMBExceptionCapture ()
-@property (nonatomic, copy) void(^handler)(NSException *exception);
-@property (nonatomic, copy) void(^finally)();
+@property (nonatomic, copy) void(^ _Nullable handler)(NSException * _Nullable);
+@property (nonatomic, copy) void(^ _Nullable finally)();
 @end
 
 @implementation NMBExceptionCapture
 
-- (id)initWithHandler:(void(^)(NSException *))handler finally:(void(^)())finally {
+- (nonnull instancetype)initWithHandler:(void(^ _Nullable)(NSException * _Nonnull))handler finally:(void(^ _Nullable)())finally {
     self = [super init];
     if (self) {
         self.handler = handler;
@@ -16,7 +16,7 @@
     return self;
 }
 
-- (void)tryBlock:(void(^)())unsafeBlock {
+- (void)tryBlock:(void(^ _Nonnull)())unsafeBlock {
     @try {
         unsafeBlock();
     }

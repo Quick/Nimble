@@ -1,5 +1,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "Nimble"
+    name: "Nimble",
+    exclude: [
+      "Sources/NimbleObjectiveC"
+    ]
 )

@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class BeginWithTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeginWithTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (BeginWithTest) -> () throws -> Void)] {
         return [
             ("testPositiveMatches", testPositiveMatches),
             ("testNegativeMatches", testNegativeMatches),

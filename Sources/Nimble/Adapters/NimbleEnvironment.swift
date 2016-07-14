@@ -5,7 +5,11 @@ import Foundation
 internal class NimbleEnvironment {
     static var activeInstance: NimbleEnvironment {
         get {
-            let env = NSThread.currentThread().threadDictionary["NimbleEnvironment"]
+            #if _runtime(_ObjC) // Xcode 8 beta 2
+                let env = Thread.current.threadDictionary["NimbleEnvironment"]
+            #else
+                let env = Thread.current().threadDictionary["NimbleEnvironment"]
+            #endif
             if let env = env as? NimbleEnvironment {
                 return env
             } else {
@@ -15,7 +19,11 @@ internal class NimbleEnvironment {
             }
         }
         set {
-            NSThread.currentThread().threadDictionary["NimbleEnvironment"] = newValue
+            #if _runtime(_ObjC) // Xcode 8 beta 2
+                Thread.current.threadDictionary["NimbleEnvironment"] = newValue
+            #else
+                Thread.current().threadDictionary["NimbleEnvironment"] = newValue
+            #endif
         }
     }
 
@@ -29,10 +37,17 @@ internal class NimbleEnvironment {
     var awaiter: Awaiter
 
     init() {
+        let timeoutQueue: DispatchQueue
+        if #available(OSX 10.10, *) {
+            timeoutQueue = .global(attributes: .qosUserInitiated)
+        } else {
+            timeoutQueue = .global(attributes: .priorityHigh)
+        }
+
         awaiter = Awaiter(
             waitLock: AssertionWaitLock(),
-            asyncQueue: dispatch_get_main_queue(),
-            timeoutQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
+            asyncQueue: .main,
+            timeoutQueue: timeoutQueue)
     }
 #endif
 }

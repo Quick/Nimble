@@ -1,11 +1,11 @@
 import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence contains the expected value.
-public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: T...) -> NonNilMatcherFunc<S> {
+public func contain<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ items: T...) -> NonNilMatcherFunc<S> {
     return contain(items)
 }
 
-public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T>(items: [T]) -> NonNilMatcherFunc<S> {
+public func contain<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ items: [T]) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = try actualExpression.evaluate() {
@@ -18,16 +18,16 @@ public func contain<S: SequenceType, T: Equatable where S.Generator.Element == T
 }
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
-public func contain(substrings: String...) -> NonNilMatcherFunc<String> {
+public func contain(_ substrings: String...) -> NonNilMatcherFunc<String> {
     return contain(substrings)
 }
 
-public func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
+public func contain(_ substrings: [String]) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all {
-                let range = actual.rangeOfString($0)
+                let range = actual.range(of: $0)
                 return range != nil && !range!.isEmpty
             }
         }
@@ -36,38 +36,42 @@ public func contain(substrings: [String]) -> NonNilMatcherFunc<String> {
 }
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
-public func contain(substrings: NSString...) -> NonNilMatcherFunc<NSString> {
+public func contain(_ substrings: NSString...) -> NonNilMatcherFunc<NSString> {
     return contain(substrings)
 }
 
-public func contain(substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
+public func contain(_ substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
-            return substrings.all { actual.rangeOfString($0.description).length != 0 }
+            return substrings.all { actual.range(of: $0.description).length != 0 }
         }
         return false
     }
 }
 
 /// A Nimble matcher that succeeds when the actual collection contains the expected object.
-public func contain(items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
     return contain(items)
 }
 
-public func contain(items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
         return items.all { item in
+#if !os(Linux)
+            return item != nil && actual.contains(item!)
+#else
             return item != nil && actual.containsObject(item!)
+#endif
         }
     }
 }
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func containMatcher(expected: [NSObject]) -> NMBObjCMatcher {
+    public class func containMatcher(_ expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

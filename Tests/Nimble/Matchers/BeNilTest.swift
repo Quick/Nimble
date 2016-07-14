@@ -1,8 +1,8 @@
 import XCTest
 import Nimble
 
-class BeNilTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeNilTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (BeNilTest) -> () throws -> Void)] {
         return [
             ("testBeNil", testBeNil),
         ]

@@ -38,7 +38,7 @@ public class NMBObjCMatcher : NSObject, NMBMatcher {
         }))
     }
 
-    private func canMatch(actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
+    private func canMatch(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         do {
             if !canMatchNil {
                 if try actualExpression.evaluate() == nil {
@@ -53,7 +53,7 @@ public class NMBObjCMatcher : NSObject, NMBMatcher {
         return true
     }
 
-    public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func matches(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let expr = Expression(expression: actualBlock, location: location)
         let result = _match(
             actualExpression: expr,
@@ -65,7 +65,7 @@ public class NMBObjCMatcher : NSObject, NMBMatcher {
         }
     }
 
-    public func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func doesNotMatch(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let expr = Expression(expression: actualBlock, location: location)
         let result = _doesNotMatch(
             actualExpression: expr,

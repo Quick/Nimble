@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class EqualTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class EqualTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (EqualTest) -> () throws -> Void)] {
         return [
             ("testEquality", testEquality),
             ("testArrayEquality", testArrayEquality),
@@ -135,24 +135,24 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
 
 #if _runtime(_ObjC)
         expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(expected))
+        expect(NSDictionary(object: "bar", forKey: "foo") as? [String:String]).to(equal(expected))
 #endif
     }
 
     func testDataEquality() {
-        let actual = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let expected = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let unexpected = "foobarfoo".dataUsingEncoding(NSUTF8StringEncoding)
+        let actual = "foobar".data(using: .utf8)
+        let expected = "foobar".data(using: .utf8)
+        let unexpected = "foobarfoo".data(using: .utf8)
 
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
         #if os(Linux)
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11)
-            let expectedErrorMessage = "expected to equal <NSData<length=9>>, got <NSData<length=6>>"
+            let expectedErrorMessage = "expected to equal <Data<length=9>>, got <Data<length=6>>"
         #else
-            let expectedErrorMessage = "expected to equal <NSData<hash=92856895,length=9>>,"
-                + " got <NSData<hash=114710658,length=6>>"
+            let expectedErrorMessage = "expected to equal <Data<hash=92856895,length=9>>,"
+                + " got <Data<hash=114710658,length=6>>"
         #endif
 
         failsWithErrorMessage(expectedErrorMessage) {
@@ -161,10 +161,10 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber(integer:1)).to(equal(NSNumber(integer:1)))
-        expect(NSNumber(integer:1)) == NSNumber(integer:1)
-        expect(NSNumber(integer:1)) != NSNumber(integer:2)
-        expect { NSNumber(integer:1) }.to(equal(1))
+        expect(NSNumber(value:1)).to(equal(NSNumber(value:1)))
+        expect(NSNumber(value:1)) == NSNumber(value:1)
+        expect(NSNumber(value:1)) != NSNumber(value:2)
+        expect { NSNumber(value:1) }.to(equal(1))
     }
 
     func testOperatorEquality() {

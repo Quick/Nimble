@@ -6,8 +6,8 @@ import Nimble
 // required for working with Nimble's async matchers
 #if _runtime(_ObjC)
 
-class AsyncTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class AsyncTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (AsyncTest) -> () throws -> Void)] {
         return [
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
@@ -24,7 +24,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    let errorToThrow = NSError(domain: NSInternalInconsistencyException, code: 42, userInfo: nil)
+    let errorToThrow = NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 42, userInfo: nil)
 
     private func doThrowError() throws -> Int {
         throw errorToThrow
@@ -63,14 +63,14 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var value = 0
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            NSThread.sleepForTimeInterval(1.1)
+        DispatchQueue.global().async {
+            Thread.sleep(forTimeInterval: 1.1)
             value = 1
         }
         expect { value }.toEventually(equal(1))
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            NSThread.sleepForTimeInterval(1.1)
+        DispatchQueue.global().async {
+            Thread.sleep(forTimeInterval: 1.1)
             value = 0
         }
         expect { value }.toEventuallyNot(equal(1))
@@ -97,8 +97,8 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    NSThread.sleepForTimeInterval(0.1)
+                DispatchQueue.global().async {
+                    Thread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
                 }
@@ -107,14 +107,14 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         // "clear" runloop to ensure this test doesn't poison other tests
         repeat {
-            NSRunLoop.mainRunLoop().runUntilDate(NSDate().dateByAddingTimeInterval(0.2))
+            RunLoop.main.run(until: Date().addingTimeInterval(0.2))
         } while(waiting)
     }
 
     func testWaitUntilNegativeMatches() {
         failsWithErrorMessage("expected to equal <2>, got <1>") {
             waitUntil { done in
-                NSThread.sleepForTimeInterval(0.1)
+                Thread.sleep(forTimeInterval: 0.1)
                 expect(1).to(equal(2))
                 done()
             }
@@ -125,7 +125,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
         failsWithErrorMessage(msg) {
             waitUntil(timeout: 1) { done in
-                NSThread.sleepForTimeInterval(5.0)
+                Thread.sleep(forTimeInterval: 5.0)
                 done()
             }
         }
@@ -146,7 +146,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: 2.0) { done in
                 var protected: Int = 0
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     protected = 1
                 }
 
@@ -173,7 +173,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        DispatchQueue.global().async {
             expect {
                 waitUntil { done in done() }
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
@@ -186,7 +186,7 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testToEventuallyMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        DispatchQueue.global().async {
             expect {
                 expect(1).toEventually(equal(2))
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))

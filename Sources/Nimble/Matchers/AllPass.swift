@@ -1,12 +1,12 @@
 import Foundation
 
-public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
-    (passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
+public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
+    (_ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return allPass("pass a condition", passFunc)
 }
 
-public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
-    (passName: String, _ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
+public func allPass<T,U where U: Sequence, U.Iterator.Element == T>
+    (_ passName: String, _ passFunc: (T?) -> Bool) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             expression, failureMessage in
             failureMessage.postfixMessage = passName
@@ -14,15 +14,15 @@ public func allPass<T,U where U: SequenceType, U.Generator.Element == T>
         }
 }
 
-public func allPass<U,V where U: SequenceType, V: Matcher, U.Generator.Element == V.ValueType>
-    (matcher: V) -> NonNilMatcherFunc<U> {
+public func allPass<U,V where U: Sequence, V: Matcher, U.Iterator.Element == V.ValueType>
+    (_ matcher: V) -> NonNilMatcherFunc<U> {
         return createAllPassMatcher() {
             try matcher.matches($0, failureMessage: $1)
         }
 }
 
-private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element == T>
-    (elementEvaluator:(Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U> {
+private func createAllPassMatcher<T,U where U: Sequence, U.Iterator.Element == T>
+    (_ elementEvaluator:(Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U> {
         return NonNilMatcherFunc { actualExpression, failureMessage in
             failureMessage.actualValue = nil
             if let actualValue = try actualExpression.evaluate() {
@@ -49,7 +49,7 @@ private func createAllPassMatcher<T,U where U: SequenceType, U.Generator.Element
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func allPassMatcher(matcher: NMBObjCMatcher) -> NMBObjCMatcher {
+    public class func allPassMatcher(_ matcher: NMBObjCMatcher) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
@@ -57,7 +57,7 @@ extension NMBObjCMatcher {
             
             var collectionIsUsable = true
             if let value = actualValue as? NSFastEnumeration {
-                let generator = NSFastGenerator(value)
+                let generator = NSFastEnumerationIterator(value)
                 while let obj:AnyObject = generator.next() {
                     if let nsObject = obj as? NSObject {
                         nsObjects.append(nsObject)

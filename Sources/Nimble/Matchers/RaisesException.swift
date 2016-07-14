@@ -13,7 +13,7 @@ import Foundation
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func raiseException(
-    named named: String? = nil,
+    named: String? = nil,
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
     closure: ((NSException) -> Void)? = nil) -> MatcherFunc<Any> {
@@ -25,7 +25,7 @@ public func raiseException(
             }), finally: nil)
 
             capture.tryBlock {
-                try! actualExpression.evaluate()
+                _ = try! actualExpression.evaluate()
                 return
             }
 
@@ -35,7 +35,7 @@ public func raiseException(
 }
 
 internal func setFailureMessageForException(
-    failureMessage: FailureMessage,
+    _ failureMessage: FailureMessage,
     exception: NSException?,
     named: String?,
     reason: String?,
@@ -67,7 +67,7 @@ internal func setFailureMessageForException(
 }
 
 internal func exceptionMatchesNonNilFieldsOrClosure(
-    exception: NSException?,
+    _ exception: NSException?,
     named: String?,
     reason: String?,
     userInfo: NSDictionary?,
@@ -77,13 +77,14 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         if let exception = exception {
             matches = true
 
-            if named != nil && exception.name != named {
+            if let named = named where exception.name.rawValue != named {
                 matches = false
             }
             if reason != nil && exception.reason != reason {
                 matches = false
             }
-            if userInfo != nil && exception.userInfo != userInfo {
+            if let userInfo = userInfo, exceptionUserInfo = exception.userInfo
+                where (exceptionUserInfo as NSDictionary) != userInfo {
                 matches = false
             }
             if let closure = closure {
@@ -113,8 +114,8 @@ public class NMBObjCRaiseExceptionMatcher : NSObject, NMBMatcher {
         _block = block
     }
 
-    public func matches(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let block: () -> Any? = ({ actualBlock(); return nil })
+    public func matches(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+        let block: () -> Any? = ({ _ = actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
 
         return try! raiseException(
@@ -125,7 +126,7 @@ public class NMBObjCRaiseExceptionMatcher : NSObject, NMBMatcher {
         ).matches(expr, failureMessage: failureMessage)
     }
 
-    public func doesNotMatch(actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    public func doesNotMatch(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         return !matches(actualBlock, failureMessage: failureMessage, location: location)
     }
 

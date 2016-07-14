@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class ContainTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class ContainTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (ContainTest) -> () throws -> Void)] {
         return [
             ("testContain", testContain),
             ("testContainSubstring", testContainSubstring),

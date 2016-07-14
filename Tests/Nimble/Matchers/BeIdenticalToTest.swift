@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 @testable import Nimble
 
-class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (BeIdenticalToTest) -> () throws -> Void)] {
         return [
             ("testBeIdenticalToPositive", testBeIdenticalToPositive),
             ("testBeIdenticalToNegative", testBeIdenticalToNegative),
@@ -20,13 +20,13 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeIdenticalToNegative() {
-        expect(NSNumber(integer:1)).toNot(beIdenticalTo(NSString(string: "yo")))
-        expect(NSArray(array: [NSNumber(integer: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(integer: 1)])))
+        expect(NSNumber(value:1)).toNot(beIdenticalTo(NSString(string: "yo")))
+        expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
     }
 
     func testBeIdenticalToPositiveMessage() {
-        let num1 = NSNumber(integer:1)
-        let num2 = NSNumber(integer:2)
+        let num1 = NSNumber(value:1)
+        let num2 = NSNumber(value:2)
         let message = "expected to be identical to \(identityAsString(num2)), got \(identityAsString(num1))"
         failsWithErrorMessage(message) {
             expect(num1).to(beIdenticalTo(num2))
@@ -45,17 +45,17 @@ class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     func testOperators() {
         let value = NSDate()
         expect(value) === value
-        expect(NSNumber(integer:1)) !== NSNumber(integer:2)
+        expect(NSNumber(value:1)) !== NSNumber(value:2)
     }
 
     func testBeAlias() {
         let value = NSDate()
         expect(value).to(be(value))
-        expect(NSNumber(integer:1)).toNot(be(NSString(stringLiteral: "turtles")))
+        expect(NSNumber(value:1)).toNot(be(NSString(stringLiteral: "turtles")))
         #if _runtime(_ObjC)
             expect([1]).toNot(be([1]))
         #else
-            expect(NSArray(array: [NSNumber(integer: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(integer: 1)])))
+            expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
         #endif
 
         let value1 = NSArray(array: [])
