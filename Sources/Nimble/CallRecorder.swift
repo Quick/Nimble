@@ -2,25 +2,8 @@ import Foundation
 
 // MARK: OptionalType
 
-public protocol OptionalType: NilLiteralConvertible {
-    associatedtype WrappedType
-    init(_ some: WrappedType)
-    init()
-}
-
-extension OptionalType {
-    init(valueOrNil: WrappedType?) {
-        if let valueOrNil = valueOrNil {
-            self.init(valueOrNil)
-        } else {
-            self.init()
-        }
-    }
-}
-
-extension Optional: OptionalType {
-    public typealias WrappedType = Wrapped
-}
+public protocol OptionalType {}
+extension Optional: OptionalType {}
 
 // MARK: GloballyEquatable
 
@@ -54,39 +37,35 @@ public extension GloballyEquatable where Self : OptionalType {
         let selfMirror = Mirror(reflecting: self)
         let otherMirror = Mirror(reflecting: other)
         
-        if selfMirror.displayStyle != .Optional {
-            assertionFailure("\(self.dynamicType) is NOT an Optional yet does conform to OptionalType")
+        guard selfMirror.displayStyle == .Optional else {
+            assertionFailure("\(self.dynamicType) should NOT conform to OptionalType, this is reserved for Optional<Wrapped>")
+            return false
         }
-        if otherMirror.displayStyle != .Optional {
-            assertionFailure("\(other.dynamicType) is NOT an Optional yet does conform to OptionalType")
+        guard otherMirror.displayStyle == .Optional else {
+            assertionFailure("\(other.dynamicType) should NOT conform to OptionalType, this is reserved for Optional<Wrapped>")
+            return false
         }
         
-        let selfIsNil = selfMirror.children.first == nil
-        let otherIsNil = otherMirror.children.first == nil
+        let selfsWrappedValue = selfMirror.children.first?.value
+        let othersWrappedValue = otherMirror.children.first?.value
         
-        if selfIsNil && otherIsNil {
-            // return true if both are nil of the same type
+        if selfsWrappedValue == nil && othersWrappedValue == nil {
             return true
         }
-        if selfIsNil || otherIsNil {
+        if selfsWrappedValue == nil || othersWrappedValue == nil {
             return false
         }
         
-        guard let selfDotSome = selfMirror.children.first?.value as? WrappedType, otherDotSome = otherMirror.children.first?.value as? WrappedType else {
-            assertionFailure("SHOULD NEVER REACH HERE: self or other is not being conditionally unwrapped to the WrappedType after checking if they are optionals, non-nil, and match types")
+        guard let selfsContainedValueAsGE = selfsWrappedValue as? GloballyEquatable else {
+            assertionFailure("\(selfsWrappedValue.dynamicType) does NOT conform to GloballyEquatable")
+            return false
+        }
+        guard let othersContainedValueAsGE = othersWrappedValue as? GloballyEquatable else {
+            assertionFailure("\(othersWrappedValue.dynamicType) does NOT conform to GloballyEquatable")
             return false
         }
         
-        guard let selfDotSomeGE = selfDotSome as? GloballyEquatable else {
-            assertionFailure("\(selfDotSome.dynamicType) does NOT conform to GloballyEquatable")
-            return false
-        }
-        guard let otherDotSomeGE = otherDotSome as? GloballyEquatable else {
-            assertionFailure("\(otherDotSome.dynamicType) does NOT conform to GloballyEquatable")
-            return false
-        }
-        
-        return selfDotSomeGE.isEqualTo(otherDotSomeGE)
+        return selfsContainedValueAsGE.isEqualTo(othersContainedValueAsGE)
     }
 }
 
