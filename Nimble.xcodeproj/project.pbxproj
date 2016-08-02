@@ -922,9 +922,9 @@
 			productReference = 1F5DF15E1BDCA0CE00C3A531 /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1F925EAC195C0D6300ED456B /* Nimble-OSX */ = {
+		1F925EAC195C0D6300ED456B /* Nimble-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSX" */;
+			buildConfigurationList = 1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOS" */;
 			buildPhases = (
 				1F925EA8195C0D6300ED456B /* Sources */,
 				1F925EA9195C0D6300ED456B /* Frameworks */,
@@ -935,14 +935,14 @@
 			);
 			dependencies = (
 			);
-			name = "Nimble-OSX";
+			name = "Nimble-macOS";
 			productName = "Nimble-OSX";
 			productReference = 1F925EAD195C0D6300ED456B /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1F925EB6195C0D6300ED456B /* Nimble-OSXTests */ = {
+		1F925EB6195C0D6300ED456B /* Nimble-macOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSXTests" */;
+			buildConfigurationList = 1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOSTests" */;
 			buildPhases = (
 				1F925EB3195C0D6300ED456B /* Sources */,
 				1F925EB4195C0D6300ED456B /* Frameworks */,
@@ -956,7 +956,7 @@
 				1F9B7C001968AD760094EB8F /* PBXTargetDependency */,
 				1F9B7C021968AD820094EB8F /* PBXTargetDependency */,
 			);
-			name = "Nimble-OSXTests";
+			name = "Nimble-macOSTests";
 			productName = "Nimble-OSXTests";
 			productReference = 1F925EB7195C0D6300ED456B /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1011,10 +1011,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				1F925EAC195C0D6300ED456B /* Nimble-macOS */,
+				1F925EB6195C0D6300ED456B /* Nimble-macOSTests */,
 				1F1A74281940169200FFFC47 /* Nimble-iOS */,
 				1F1A74331940169200FFFC47 /* Nimble-iOSTests */,
-				1F925EAC195C0D6300ED456B /* Nimble-OSX */,
-				1F925EB6195C0D6300ED456B /* Nimble-OSXTests */,
 				1F5DF1541BDCA0CE00C3A531 /* Nimble-tvOS */,
 				1F5DF15D1BDCA0CE00C3A531 /* Nimble-tvOSTests */,
 			);
@@ -1457,22 +1457,22 @@
 		};
 		1F925EBA195C0D6300ED456B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F925EB9195C0D6300ED456B /* PBXContainerItemProxy */;
 		};
 		1F9B7BFE1968AD760094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7BFD1968AD760094EB8F /* PBXContainerItemProxy */;
 		};
 		1F9B7C001968AD760094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7BFF1968AD760094EB8F /* PBXContainerItemProxy */;
 		};
 		1F9B7C021968AD820094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7C011968AD820094EB8F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1954,7 +1954,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSX" */ = {
+		1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F925EC1195C0D6300ED456B /* Debug */,
@@ -1963,7 +1963,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSXTests" */ = {
+		1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F925EC4195C0D6300ED456B /* Debug */,
