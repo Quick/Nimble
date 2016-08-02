@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F925EAC195C0D6300ED456B"
                BuildableName = "Nimble.framework"
-               BlueprintName = "Nimble-OSX"
+               BlueprintName = "Nimble-macOS"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F925EB6195C0D6300ED456B"
                BuildableName = "NimbleTests.xctest"
-               BlueprintName = "Nimble-OSXTests"
+               BlueprintName = "Nimble-macOSTests"
                ReferencedContainer = "container:Nimble.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F925EAC195C0D6300ED456B"
             BuildableName = "Nimble.framework"
-            BlueprintName = "Nimble-OSX"
+            BlueprintName = "Nimble-macOS"
             ReferencedContainer = "container:Nimble.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
