@@ -922,9 +922,9 @@
 			productReference = 1F5DF15E1BDCA0CE00C3A531 /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1F925EAC195C0D6300ED456B /* Nimble-OSX */ = {
+		1F925EAC195C0D6300ED456B /* Nimble-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSX" */;
+			buildConfigurationList = 1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOS" */;
 			buildPhases = (
 				1F925EA8195C0D6300ED456B /* Sources */,
 				1F925EA9195C0D6300ED456B /* Frameworks */,
@@ -935,14 +935,14 @@
 			);
 			dependencies = (
 			);
-			name = "Nimble-OSX";
+			name = "Nimble-macOS";
 			productName = "Nimble-OSX";
 			productReference = 1F925EAD195C0D6300ED456B /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1F925EB6195C0D6300ED456B /* Nimble-OSXTests */ = {
+		1F925EB6195C0D6300ED456B /* Nimble-macOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSXTests" */;
+			buildConfigurationList = 1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOSTests" */;
 			buildPhases = (
 				1F925EB3195C0D6300ED456B /* Sources */,
 				1F925EB4195C0D6300ED456B /* Frameworks */,
@@ -956,7 +956,7 @@
 				1F9B7C001968AD760094EB8F /* PBXTargetDependency */,
 				1F9B7C021968AD820094EB8F /* PBXTargetDependency */,
 			);
-			name = "Nimble-OSXTests";
+			name = "Nimble-macOSTests";
 			productName = "Nimble-OSXTests";
 			productReference = 1F925EB7195C0D6300ED456B /* NimbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -968,7 +968,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Jeff Hui";
 				TargetAttributes = {
 					1F1A74281940169200FFFC47 = {
@@ -1013,8 +1013,8 @@
 			targets = (
 				1F1A74281940169200FFFC47 /* Nimble-iOS */,
 				1F1A74331940169200FFFC47 /* Nimble-iOSTests */,
-				1F925EAC195C0D6300ED456B /* Nimble-OSX */,
-				1F925EB6195C0D6300ED456B /* Nimble-OSXTests */,
+				1F925EAC195C0D6300ED456B /* Nimble-macOS */,
+				1F925EB6195C0D6300ED456B /* Nimble-macOSTests */,
 				1F5DF1541BDCA0CE00C3A531 /* Nimble-tvOS */,
 				1F5DF15D1BDCA0CE00C3A531 /* Nimble-tvOSTests */,
 			);
@@ -1457,22 +1457,22 @@
 		};
 		1F925EBA195C0D6300ED456B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F925EB9195C0D6300ED456B /* PBXContainerItemProxy */;
 		};
 		1F9B7BFE1968AD760094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7BFD1968AD760094EB8F /* PBXContainerItemProxy */;
 		};
 		1F9B7C001968AD760094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7BFF1968AD760094EB8F /* PBXContainerItemProxy */;
 		};
 		1F9B7C021968AD820094EB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F925EAC195C0D6300ED456B /* Nimble-OSX */;
+			target = 1F925EAC195C0D6300ED456B /* Nimble-macOS */;
 			targetProxy = 1F9B7C011968AD820094EB8F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1504,6 +1504,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1517,7 +1518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1554,6 +1555,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1561,7 +1563,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 2.3;
@@ -1588,7 +1590,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1601,6 +1603,7 @@
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1620,7 +1623,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
@@ -1631,6 +1634,8 @@
 				PRODUCT_MODULE_NAME = Nimble;
 				PRODUCT_NAME = Nimble;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1652,6 +1657,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1668,6 +1674,8 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -1699,6 +1707,7 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1733,6 +1742,8 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1753,6 +1764,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = appletvos;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1774,6 +1786,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -1812,6 +1826,7 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -1846,6 +1861,8 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALID_ARCHS = x86_64;
 			};
 			name = Release;
@@ -1891,6 +1908,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.jeffhui.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NimbleTests;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1942,7 +1960,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSX" */ = {
+		1F925EC0195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F925EC1195C0D6300ED456B /* Debug */,
@@ -1951,7 +1969,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-OSXTests" */ = {
+		1F925EC3195C0D6300ED456B /* Build configuration list for PBXNativeTarget "Nimble-macOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F925EC4195C0D6300ED456B /* Debug */,

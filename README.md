@@ -1165,7 +1165,7 @@ git submodules.
 
 ## Installing Nimble as a Submodule
 
-To use Nimble as a submodule to test your iOS or OS X applications, follow these
+To use Nimble as a submodule to test your iOS, macOS or tvOS applications, follow these
 4 easy steps:
 
 1. Clone the Nimble repository
@@ -1180,7 +1180,7 @@ install just Nimble.
 
 ## Installing Nimble via CocoaPods
 
-To use Nimble in CocoaPods to test your iOS or OS X applications, add Nimble to
+To use Nimble in CocoaPods to test your iOS, macOS or tvOS applications, add Nimble to
 your podfile and add the ```use_frameworks!``` line to enable Swift support for
 CocoaPods.
 
