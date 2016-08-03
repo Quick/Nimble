@@ -103,7 +103,7 @@ internal class AwaitPromise<T> {
     /// @returns a Bool that indicates if the async result was accepted or rejected because another
     ///          value was recieved first.
     func resolveResult(_ result: AwaitResult<T>) -> Bool {
-        if signal.wait(timeout: .now()) == .Success {
+        if signal.wait(timeout: .now()) == .success {
             self.asyncResult = result
             return true
         } else {
@@ -178,7 +178,7 @@ internal class AwaitPromiseBuilder<T> {
             semTimedOutOrBlocked.signal()
             let runLoop = CFRunLoopGetMain()
             CFRunLoopPerformBlock(runLoop, CFRunLoopMode.defaultMode.rawValue) {
-                if semTimedOutOrBlocked.wait(timeout: .now()) == .Success {
+                if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
                     if self.promise.resolveResult(.timedOut) {
@@ -189,8 +189,8 @@ internal class AwaitPromiseBuilder<T> {
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
             let now = DispatchTime.now() + forcefullyAbortTimeout
-            let didNotTimeOut = timedOutSem.wait(timeout: now) != .Success
-            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .Success
+            let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
+            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
             if didNotTimeOut && timeoutWasNotTriggered {
                 if self.promise.resolveResult(.blockedRunLoop) {
                     CFRunLoopStop(CFRunLoopGetMain())
