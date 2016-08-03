@@ -265,7 +265,7 @@ internal class Awaiter {
     }
 
     private func createTimerSource(_ queue: DispatchQueue) -> DispatchSourceTimer {
-        return DispatchSource.timer(flags: .strict, queue: queue)
+        return DispatchSource.makeTimerSource(flags: .strict, queue: queue)
     }
 
     func performBlock<T>(
