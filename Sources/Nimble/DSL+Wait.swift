@@ -3,7 +3,7 @@ import Foundation
 #if _runtime(_ObjC)
 private enum ErrorResult {
     case exception(NSException)
-    case error(ErrorProtocol)
+    case error(Error)
     case none
 }
 

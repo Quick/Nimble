@@ -68,7 +68,7 @@ internal enum AwaitResult<T> {
     /// The async block successfully executed and returned a given result
     case completed(T)
     /// When a Swift Error is thrown
-    case errorThrown(ErrorProtocol)
+    case errorThrown(Error)
     /// When an Objective-C Exception is raised
     case raisedException(NSException)
 
