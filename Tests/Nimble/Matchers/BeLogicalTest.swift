@@ -1,8 +1,17 @@
 import XCTest
 import Nimble
 
-enum ConvertsToBool : Boolean, CustomStringConvertible {
+enum ConvertsToBool : ExpressibleByBooleanLiteral, CustomStringConvertible {
     case trueLike, falseLike
+
+    typealias BooleanLiteralType = Bool
+
+    init(booleanLiteral value: Bool) {
+        switch value {
+        case true: self = .trueLike
+        case false: self = .falseLike
+        }
+    }
 
     var boolValue : Bool {
         switch self {
