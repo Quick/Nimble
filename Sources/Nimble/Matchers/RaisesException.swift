@@ -77,14 +77,14 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         if let exception = exception {
             matches = true
 
-            if let named = named where exception.name.rawValue != named {
+            if let named = named, exception.name.rawValue != named {
                 matches = false
             }
             if reason != nil && exception.reason != reason {
                 matches = false
             }
-            if let userInfo = userInfo, exceptionUserInfo = exception.userInfo
-                where (exceptionUserInfo as NSDictionary) != userInfo {
+            if let userInfo = userInfo, let exceptionUserInfo = exception.userInfo,
+                (exceptionUserInfo as NSDictionary) != userInfo {
                 matches = false
             }
             if let closure = closure {
