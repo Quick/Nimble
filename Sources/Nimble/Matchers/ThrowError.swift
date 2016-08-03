@@ -33,7 +33,7 @@ public func throwError<T: Error>(
 /// error or when the passed closures' arbitrary custom matching succeeds.
 ///
 /// This duplication to it's generic adequate is required to allow to receive
-/// values of the existential type ErrorProtocol in the closure.
+/// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
 public func throwError(

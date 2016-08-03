@@ -1,12 +1,12 @@
 import XCTest
 import Nimble
 
-enum Error : ErrorProtocol {
+enum NimbleError : Error {
     case laugh
     case cry
 }
 
-enum EquatableError : ErrorProtocol {
+enum EquatableError : Error {
     case parameterized(x: Int)
 }
 
@@ -20,7 +20,7 @@ func ==(lhs: EquatableError, rhs: EquatableError) -> Bool {
     }
 }
 
-enum CustomDebugStringConvertibleError : ErrorProtocol {
+enum CustomDebugStringConvertibleError : Error {
     case a
     case b
 }
@@ -45,9 +45,9 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPositiveMatches() {
-        expect { throw Error.laugh }.to(throwError())
-        expect { throw Error.laugh }.to(throwError(Error.laugh))
-        expect { throw Error.laugh }.to(throwError(errorType: Error.self))
+        expect { throw NimbleError.laugh }.to(throwError())
+        expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh))
+        expect { throw NimbleError.laugh }.to(throwError(errorType: NimbleError.self))
         expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 1)))
     }
 
@@ -68,11 +68,11 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             expect(x) >= 1
         })
         // Typed closure over error argument
-        expect { throw Error.laugh }.to(throwError(Error.laugh) { (error: Error) in
+        expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh) { (error: Error) in
             expect(error._domain).to(beginWith("Nim"))
         })
         // Typed closure over error argument
-        expect { throw Error.laugh }.to(throwError(Error.laugh) { (error: Error) in
+        expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh) { (error: Error) in
             expect(error._domain).toNot(beginWith("as"))
         })
     }
@@ -88,11 +88,11 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         }
         // Different case
         failsWithErrorMessage("expected to throw error <cry>, got <laugh>") {
-            expect { throw Error.laugh }.to(throwError(Error.cry))
+            expect { throw NimbleError.laugh }.to(throwError(NimbleError.cry))
         }
         // Different case with closure
         failsWithErrorMessage("expected to throw error <cry> that satisfies block, got <laugh>") {
-            expect { throw Error.laugh }.to(throwError(Error.cry) { _ in return })
+            expect { throw NimbleError.laugh }.to(throwError(NimbleError.cry) { _ in return })
         }
         // Different case, implementing CustomDebugStringConvertible
         failsWithErrorMessage("expected to throw error <code=1>, got <code=0>") {
@@ -104,17 +104,17 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         // No error at all
         expect { return }.toNot(throwError())
         // Different case
-        expect { throw Error.laugh }.toNot(throwError(Error.cry))
+        expect { throw NimbleError.laugh }.toNot(throwError(NimbleError.cry))
     }
 
     func testNegativeNegatedMatches() {
         // No error at all
         failsWithErrorMessage("expected to not throw any error, got <laugh>") {
-            expect { throw Error.laugh }.toNot(throwError())
+            expect { throw NimbleError.laugh }.toNot(throwError())
         }
         // Different error
         failsWithErrorMessage("expected to not throw error <laugh>, got <laugh>") {
-            expect { throw Error.laugh }.toNot(throwError(Error.laugh))
+            expect { throw NimbleError.laugh }.toNot(throwError(NimbleError.laugh))
         }
     }
 
@@ -126,7 +126,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         }
         
         failsWithErrorMessage("expected to throw error <laugh> that satisfies block, got no error") {
-            expect { return }.to(throwError(Error.laugh) { error in
+            expect { return }.to(throwError(NimbleError.laugh) { error in
                 fail()
             })
         }
@@ -138,18 +138,18 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
 #else
         let moduleName = "NimbleTests"
 #endif
-        let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).Error>"
+        let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).NimbleError>"
         let closure = { (error: Error) in
             print("** In closure! With domain \(error._domain)")
             expect(error._domain).to(equal("foo"))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <Error> that satisfies block, got <laugh>"]) {
-            expect { throw Error.laugh }.to(throwError(closure: closure))
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <NimbleError> that satisfies block, got <laugh>"]) {
+            expect { throw NimbleError.laugh }.to(throwError(closure: closure))
         }
 
         failsWithErrorMessage([innerFailureMessage, "expected to throw error <laugh> that satisfies block, got <laugh>"]) {
-            expect { throw Error.laugh }.to(throwError(Error.laugh, closure: closure))
+            expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh, closure: closure))
         }
     }
 }
