@@ -99,7 +99,7 @@ extension NSNumber : NMBDoubleConvertible {
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
-    formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
+    formatter.locale = Locale(identifier: "en_US_POSIX")
 
     return formatter
 }()
