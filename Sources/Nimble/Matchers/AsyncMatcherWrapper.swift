@@ -72,12 +72,62 @@ internal struct AsyncMatcherWrapper<T, U where U: Matcher, U.ValueType == T>: Ma
             internalError("Reached .Incomplete state for toEventuallyNot(...).")
         }
     }
+
+    func alwaysMatches(actualExpression: Expression<T>, failureMessage: FailureMessage) -> Bool  {
+        let uncachedExpression = actualExpression.withoutCaching()
+        let result = pollBlock(
+            pollInterval: pollInterval,
+            timeoutInterval: timeoutInterval,
+            file: actualExpression.location.file,
+            line: actualExpression.location.line,
+            fnName: "expect(...).toAlways(...)") {
+                try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
+        }
+        switch (result) {
+        case let .Completed(isSuccessful): return !isSuccessful
+        case .TimedOut: return true
+        case let .ErrorThrown(error):
+            failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
+            return false
+        case let .RaisedException(exception):
+            failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
+            return false
+        case .BlockedRunLoop:
+            failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
+            return false
+        case .Incomplete:
+            internalError("Reached .Incomplete state for toEventuallyNot(...).")
+        }
+    }
 }
 
 private let toEventuallyRequiresClosureError = FailureMessage(stringValue: "expect(...).toEventually(...) requires an explicit closure (eg - expect { ... }.toEventually(...) )\nSwift 1.2 @autoclosure behavior has changed in an incompatible way for Nimble to function")
 
 
 extension Expectation {
+    /// Tests the actual value using a matcher to match by checking continuously
+    /// at each pollInterval until the timeout is reached or the matcher doesn't match.
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    public func toAlways<U where U: Matcher, U.ValueType == T>(matcher: U, timeout: NSTimeInterval = AsyncDefaults.Timeout, pollInterval: NSTimeInterval = AsyncDefaults.PollInterval, description: String? = nil) {
+        if expression.isClosure {
+            let (pass, msg) = expressionAlwaysMatches(
+                expression,
+                matcher: AsyncMatcherWrapper(
+                    fullMatcher: matcher,
+                    timeoutInterval: timeout,
+                    pollInterval: pollInterval),
+                to: "to always",
+                description: description
+            )
+            verify(pass, msg)
+        } else {
+            verify(false, toEventuallyRequiresClosureError)
+        }
+    }
+
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
     ///

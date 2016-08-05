@@ -5,6 +5,13 @@ public protocol Matcher {
     associatedtype ValueType
     func matches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
     func doesNotMatch(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
+    func alwaysMatches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
+}
+
+extension Matcher {
+    public func alwaysMatches(actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool {
+        return try self.matches(actualExpression, failureMessage: failureMessage)
+    }
 }
 
 #if _runtime(_ObjC)
