@@ -33,6 +33,14 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFun
         failureMessage.postfixMessage = "be truthy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
+            // FIXME: This is a workaround to SR-2290.
+            // See:
+            // - https://bugs.swift.org/browse/SR-2290
+            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
+            if let number = actualValue as? NSNumber {
+                return number.boolValue == true
+            }
+
             return actualValue == (true as T)
         }
         return actualValue != nil
@@ -46,6 +54,14 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc
         failureMessage.postfixMessage = "be falsy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
+            // FIXME: This is a workaround to SR-2290.
+            // See:
+            // - https://bugs.swift.org/browse/SR-2290
+            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
+            if let number = actualValue as? NSNumber {
+                return number.boolValue == false
+            }
+
             return actualValue == (false as T)
         }
         return actualValue == nil
