@@ -73,7 +73,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         if #available(OSX 10.10, *) {
             DispatchQueue.global().async(execute: asyncOperation)
         } else {
-            DispatchQueue.global(priority: .high).async(execute: asyncOperation)
+            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect { value }.toEventually(equal(1))
 
@@ -82,7 +82,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         if #available(OSX 10.10, *) {
             DispatchQueue.global().async(execute: asyncOperation)
         } else {
-            DispatchQueue.global(priority: .high).async(execute: asyncOperation)
+            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect { value }.toEventuallyNot(equal(1))
     }
