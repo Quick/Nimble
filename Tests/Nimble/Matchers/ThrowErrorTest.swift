@@ -144,8 +144,12 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             expect(error._domain).to(equal("foo"))
         }
 
-        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <NimbleError> that satisfies block, got <laugh>"]) {
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error that satisfies block, got <laugh>"]) {
             expect { throw NimbleError.laugh }.to(throwError(closure: closure))
+        }
+
+        failsWithErrorMessage([innerFailureMessage, "expected to throw error from type <NimbleError> that satisfies block, got <laugh>"]) {
+            expect { throw NimbleError.laugh }.to(throwError(errorType: NimbleError.self, closure: closure))
         }
 
         failsWithErrorMessage([innerFailureMessage, "expected to throw error <laugh> that satisfies block, got <laugh>"]) {
