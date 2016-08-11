@@ -63,15 +63,26 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var value = 0
 
-        DispatchQueue.global().async {
+        let sleepThenSetValueTo: (Int) -> () = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
-            value = 1
+            value = newValue
+        }
+
+        var asyncOperation: () -> () = { sleepThenSetValueTo(1) }
+
+        if #available(OSX 10.10, *) {
+            DispatchQueue.global().async(execute: asyncOperation)
+        } else {
+            DispatchQueue.global(priority: .high).async(execute: asyncOperation)
         }
         expect { value }.toEventually(equal(1))
 
-        DispatchQueue.global().async {
-            Thread.sleep(forTimeInterval: 1.1)
-            value = 0
+        asyncOperation = { sleepThenSetValueTo(0) }
+
+        if #available(OSX 10.10, *) {
+            DispatchQueue.global().async(execute: asyncOperation)
+        } else {
+            DispatchQueue.global(priority: .high).async(execute: asyncOperation)
         }
         expect { value }.toEventuallyNot(equal(1))
     }
@@ -97,10 +108,15 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                DispatchQueue.global().async {
+                let asyncOperation: () -> () = {
                     Thread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
+                }
+                if #available(OSX 10.10, *) {
+                    DispatchQueue.global().async(execute: asyncOperation)
+                } else {
+                    DispatchQueue.global(priority: .default).async(execute: asyncOperation)
                 }
             }
         }
@@ -173,11 +189,16 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        DispatchQueue.global().async {
+        let asyncOperation: () -> () = {
             expect {
                 waitUntil { done in done() }
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
+        }
+        if #available(OSX 10.10, *) {
+            DispatchQueue.global().async(execute: asyncOperation)
+        } else {
+            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
@@ -186,11 +207,16 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testToEventuallyMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        DispatchQueue.global().async {
+        let asyncOperation: () -> () = {
             expect {
                 expect(1).toEventually(equal(2))
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
+        }
+        if #available(OSX 10.10, *) {
+            DispatchQueue.global().async(execute: asyncOperation)
+        } else {
+            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
