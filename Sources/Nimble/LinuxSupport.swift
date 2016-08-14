@@ -2,42 +2,18 @@ import Foundation
 import XCTest
 
 #if os(Linux)
-    public typealias ComparisonResult = NSComparisonResult
-    public typealias Data = NSData
-    public typealias Date = NSDate
-    public typealias DateFormatter = NSDateFormatter
-    public typealias Locale = NSLocale
-    public typealias Notification = NSNotification
-    public typealias NotificationCenter = NSNotificationCenter
-    public typealias Thread = NSThread
-
-    extension Data {
-        var count: Int {
-            return length
+    extension Locale {
+        convenience init(identifier: String) {
+            self.init(localeIdentifier: identifier)
         }
     }
 
-    extension NSMutableArray {
-        internal func add(_ anObject: AnyObject) {
-            addObject(anObject)
-        }
-        internal func componentsJoined(by separator: String) -> String {
-            return componentsJoinedByString(separator)
-        }
-    }
-
-    extension NSNotificationCenter {
-        internal class func `default`() -> NSNotificationCenter {
+    extension NotificationCenter {
+        internal class var `default`: NotificationCenter {
             return defaultCenter()
         }
-        internal func addObserver(forName name: String?, object obj: AnyObject?, queue: NSOperationQueue?, using block: (NSNotification) -> Swift.Void) -> NSObjectProtocol {
+        internal func addObserver(forName name: NSNotification.Name?, object obj: AnyObject?, queue: OperationQueue?, using block: (Notification) -> Swift.Void) -> NSObjectProtocol {
             return addObserverForName(name, object: obj, queue: queue, usingBlock: block)
-        }
-    }
-
-    extension NSThread {
-        internal class func current() -> NSThread {
-            return currentThread()
         }
     }
 #endif
