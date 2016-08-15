@@ -700,7 +700,7 @@ expect{ try somethingThatThrows() }.to(throwError { (error: ErrorProtocol) in
 expect{ try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadCorruptError))
 
 // Passes if somethingThatThrows() throws an error with a given type:
-expect{ try somethingThatThrows() }.to(throwError(errorType: MyError.self))
+expect{ try somethingThatThrows() }.to(throwError(errorType: NimbleError.self))
 ```
 
 If you are working directly with `ErrorProtocol` values, as is sometimes the case when using `Result` or `Promise` types, you can use the `matchError` matcher to check if the error is the same error is is supposed to be, without requiring explicit casting.
@@ -710,11 +710,11 @@ If you are working directly with `ErrorProtocol` values, as is sometimes the cas
 
 let actual: ErrorProtocol = …
 
-// Passes if actual contains any error value from the MyErrorEnum type:
-expect(actual).to(matchError(MyErrorEnum))
+// Passes if actual contains any error value from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum))
 
-// Passes if actual contains the Timeout value from the MyErrorEnum type:
-expect(actual).to(matchError(MyErrorEnum.Timeout))
+// Passes if actual contains the Timeout value from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum.Timeout))
 
 // Passes if actual contains an NSError equal to the given one:
 expect(actual).to(matchError(NSError(domain: "err", code: 123, userInfo: nil)))

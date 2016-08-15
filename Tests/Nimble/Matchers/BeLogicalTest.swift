@@ -1,8 +1,18 @@
 import XCTest
 import Nimble
+import Foundation
 
-enum ConvertsToBool : Boolean, CustomStringConvertible {
+enum ConvertsToBool : ExpressibleByBooleanLiteral, CustomStringConvertible {
     case trueLike, falseLike
+
+    typealias BooleanLiteralType = Bool
+
+    init(booleanLiteral value: Bool) {
+        switch value {
+        case true: self = .trueLike
+        case false: self = .falseLike
+        }
+    }
 
     var boolValue : Bool {
         switch self {
@@ -34,7 +44,11 @@ final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldMatchNonNilTypes() {
         expect(true as Bool?).to(beTruthy())
-        expect(1 as Int?).to(beTruthy())
+        #if _runtime(_ObjC)
+            expect(1 as Int?).to(beTruthy())
+        #else
+            expect(1 as NSNumber?).to(beTruthy())
+        #endif
     }
 
     func testShouldMatchTrue() {
@@ -48,7 +62,11 @@ final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
     func testShouldNotMatchNilTypes() {
         expect(false as Bool?).toNot(beTruthy())
         expect(nil as Bool?).toNot(beTruthy())
-        expect(nil as Int?).toNot(beTruthy())
+        #if _runtime(_ObjC)
+            expect(nil as Int?).toNot(beTruthy())
+        #else
+            expect(nil as NSNumber?).toNot(beTruthy())
+        #endif
     }
 
     func testShouldNotMatchFalse() {
@@ -134,7 +152,11 @@ final class BeFalsyTest : XCTestCase, XCTestCaseProvider {
     func testShouldMatchNilTypes() {
         expect(false as Bool?).to(beFalsy())
         expect(nil as Bool?).to(beFalsy())
-        expect(nil as Int?).to(beFalsy())
+        #if _runtime(_ObjC)
+            expect(nil as Int?).to(beFalsy())
+        #else
+            expect(nil as NSNumber?).to(beFalsy())
+        #endif
     }
 
     func testShouldNotMatchTrue() {
@@ -147,7 +169,11 @@ final class BeFalsyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldNotMatchNonNilTypes() {
         expect(true as Bool?).toNot(beFalsy())
-        expect(1 as Int?).toNot(beFalsy())
+        #if _runtime(_ObjC)
+            expect(1 as Int?).toNot(beFalsy())
+        #else
+            expect(1 as NSNumber?).toNot(beFalsy())
+        #endif
     }
 
     func testShouldMatchFalse() {

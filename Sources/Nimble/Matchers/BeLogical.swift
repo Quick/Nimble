@@ -28,14 +28,20 @@ public func beFalse() -> NonNilMatcherFunc<Bool> {
 // MARK: beTruthy() / beFalsy()
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
-public func beTruthy<T>() -> MatcherFunc<T> {
+public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be truthy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
-            if let actualValue = actualValue as? Boolean {
-                return actualValue.boolValue == true
+            // FIXME: This is a workaround to SR-2290.
+            // See:
+            // - https://bugs.swift.org/browse/SR-2290
+            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
+            if let number = actualValue as? NSNumber {
+                return number.boolValue == true
             }
+
+            return actualValue == (true as T)
         }
         return actualValue != nil
     }
@@ -43,14 +49,20 @@ public func beTruthy<T>() -> MatcherFunc<T> {
 
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
-public func beFalsy<T>() -> MatcherFunc<T> {
+public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc<T> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be falsy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
-            if let actualValue = actualValue as? Boolean {
-                return actualValue.boolValue != true
+            // FIXME: This is a workaround to SR-2290.
+            // See:
+            // - https://bugs.swift.org/browse/SR-2290
+            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
+            if let number = actualValue as? NSNumber {
+                return number.boolValue == false
             }
+
+            return actualValue == (false as T)
         }
         return actualValue == nil
     }
@@ -60,14 +72,14 @@ public func beFalsy<T>() -> MatcherFunc<T> {
 extension NMBObjCMatcher {
     public class func beTruthyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Boolean? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
             return try! beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beFalsyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Boolean? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
             return try! beFalsy().matches(expr, failureMessage: failureMessage)
         }
     }

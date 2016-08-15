@@ -2,10 +2,10 @@ import Foundation
 
 // Generic
 
-internal func setFailureMessageForError<T: ErrorProtocol>(
+internal func setFailureMessageForError<T: Error>(
     _ failureMessage: FailureMessage,
     postfixMessageVerb: String = "throw",
-    actualError: ErrorProtocol?,
+    actualError: Error?,
     error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) {
@@ -34,15 +34,15 @@ internal func setFailureMessageForError<T: ErrorProtocol>(
     }
 }
 
-internal func errorMatchesExpectedError<T: ErrorProtocol>(
-    _ actualError: ErrorProtocol,
+internal func errorMatchesExpectedError<T: Error>(
+    _ actualError: Error,
     expectedError: T) -> Bool {
     return actualError._domain == expectedError._domain
         && actualError._code   == expectedError._code
 }
 
-internal func errorMatchesExpectedError<T: ErrorProtocol where T: Equatable>(
-    _ actualError: ErrorProtocol,
+internal func errorMatchesExpectedError<T: Error where T: Equatable>(
+    _ actualError: Error,
     expectedError: T) -> Bool {
     if let actualError = actualError as? T {
         return actualError == expectedError
@@ -50,8 +50,8 @@ internal func errorMatchesExpectedError<T: ErrorProtocol where T: Equatable>(
     return false
 }
 
-internal func errorMatchesNonNilFieldsOrClosure<T: ErrorProtocol>(
-    _ actualError: ErrorProtocol?,
+internal func errorMatchesNonNilFieldsOrClosure<T: Error>(
+    _ actualError: Error?,
     error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) -> Bool {
@@ -93,8 +93,8 @@ internal func errorMatchesNonNilFieldsOrClosure<T: ErrorProtocol>(
 
 internal func setFailureMessageForError(
     _ failureMessage: FailureMessage,
-    actualError: ErrorProtocol?,
-    closure: ((ErrorProtocol) -> Void)?) {
+    actualError: Error?,
+    closure: ((Error) -> Void)?) {
     failureMessage.postfixMessage = "throw error"
 
     if let _ = closure {
@@ -111,8 +111,8 @@ internal func setFailureMessageForError(
 }
 
 internal func errorMatchesNonNilFieldsOrClosure(
-    _ actualError: ErrorProtocol?,
-    closure: ((ErrorProtocol) -> Void)?) -> Bool {
+    _ actualError: Error?,
+    closure: ((Error) -> Void)?) -> Bool {
     var matches = false
 
     if let actualError = actualError {

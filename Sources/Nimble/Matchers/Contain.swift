@@ -60,11 +60,7 @@ public func contain(_ items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
         return items.all { item in
-#if !os(Linux)
             return item != nil && actual.contains(item!)
-#else
-            return item != nil && actual.containsObject(item!)
-#endif
         }
     }
 }

@@ -26,11 +26,7 @@ public protocol Matcher {
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
-#if !os(Linux)
-    func contains(_ anObject: AnyObject?) -> Bool
-#else
-    func containsObject(_ object: AnyObject) -> Bool
-#endif
+    func contains(_ anObject: AnyObject) -> Bool
 }
 #endif
 
@@ -43,8 +39,8 @@ extension NSSet : NMBContainer {}
     var count: Int { get }
 }
 
-extension HashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
-extension MapTable : NMBCollection {}
+extension NSHashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
+extension NSMapTable : NMBCollection {}
 #else
 public protocol NMBCollection {
     var count: Int { get }
@@ -63,11 +59,7 @@ extension NSDictionary : NMBCollection {}
 }
 #else
 public protocol NMBOrderedCollection : NMBCollection {
-#if !os(Linux)
     func index(of anObject: AnyObject) -> Int
-#else
-    func indexOfObject(_ object: AnyObject) -> Int
-#endif
 }
 #endif
 
@@ -99,7 +91,7 @@ extension NSNumber : NMBDoubleConvertible {
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
-    formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
+    formatter.locale = Locale(identifier: "en_US_POSIX")
 
     return formatter
 }()
@@ -129,7 +121,7 @@ extension Date: TestOutputStringConvertible {
 #else
 // This should become obsolete once Corelibs Foundation adds Comparable conformance to NSNumber
 public protocol NMBComparable {
-    func NMB_compare(_ otherObject: NMBComparable!) -> NSComparisonResult
+    func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }
 #endif
 

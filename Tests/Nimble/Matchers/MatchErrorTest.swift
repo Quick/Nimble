@@ -16,16 +16,16 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testMatchErrorPositive() {
-        expect(Error.laugh).to(matchError(Error.laugh))
-        expect(Error.laugh).to(matchError(Error.self))
+        expect(NimbleError.laugh).to(matchError(NimbleError.laugh))
+        expect(NimbleError.laugh).to(matchError(NimbleError.self))
         expect(EquatableError.parameterized(x: 1)).to(matchError(EquatableError.parameterized(x: 1)))
 
-        expect(Error.laugh as ErrorProtocol).to(matchError(Error.laugh))
+        expect(NimbleError.laugh as Error).to(matchError(NimbleError.laugh))
     }
 
     func testMatchErrorNegative() {
-        expect(Error.laugh).toNot(matchError(Error.cry))
-        expect(Error.laugh as ErrorProtocol).toNot(matchError(Error.cry))
+        expect(NimbleError.laugh).toNot(matchError(NimbleError.cry))
+        expect(NimbleError.laugh as Error).toNot(matchError(NimbleError.cry))
     }
 
     func testMatchNSErrorPositive() {
@@ -47,7 +47,7 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
             expect(EquatableError.parameterized(x: 1)).to(matchError(EquatableError.parameterized(x: 2)))
         }
         failsWithErrorMessage("expected to match error <cry>, got <laugh>") {
-            expect(Error.laugh).to(matchError(Error.cry))
+            expect(NimbleError.laugh).to(matchError(NimbleError.cry))
         }
         failsWithErrorMessage("expected to match error <code=1>, got <code=0>") {
             expect(CustomDebugStringConvertibleError.a).to(matchError(CustomDebugStringConvertibleError.b))
@@ -62,17 +62,17 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
 
     func testMatchNegativeMessage() {
         failsWithErrorMessage("expected to not match error <laugh>, got <laugh>") {
-            expect(Error.laugh).toNot(matchError(Error.laugh))
+            expect(NimbleError.laugh).toNot(matchError(NimbleError.laugh))
         }
     }
 
     func testDoesNotMatchNils() {
         failsWithErrorMessageForNil("expected to match error <laugh>, got no error") {
-            expect(nil as ErrorProtocol?).to(matchError(Error.laugh))
+            expect(nil as Error?).to(matchError(NimbleError.laugh))
         }
 
         failsWithErrorMessageForNil("expected to not match error <laugh>, got no error") {
-            expect(nil as ErrorProtocol?).toNot(matchError(Error.laugh))
+            expect(nil as Error?).toNot(matchError(NimbleError.laugh))
         }
     }
 }

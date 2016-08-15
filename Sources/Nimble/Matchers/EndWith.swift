@@ -28,11 +28,7 @@ public func endWith(_ endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedC
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         let collection = try actualExpression.evaluate()
-#if !os(Linux)
         return collection != nil && collection!.index(of: endingElement) == collection!.count - 1
-#else
-        return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
-#endif
     }
 }
 
