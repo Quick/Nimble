@@ -17,7 +17,7 @@ internal class NMBWait: NSObject {
         line: UInt = #line,
         action: @escaping (@escaping () -> Void) -> Void) -> Void {
             return throwableUntil(timeout: timeout, file: file, line: line) { done in
-                action() { done() }
+                action(done)
             }
     }
 
