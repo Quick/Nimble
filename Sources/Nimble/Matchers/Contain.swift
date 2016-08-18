@@ -55,11 +55,11 @@ public func contain(_ substrings: [NSString]) -> NonNilMatcherFunc<NSString> {
 }
 
 /// A Nimble matcher that succeeds when the actual collection contains the expected object.
-public func contain(_ items: AnyObject?...) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ items: Any?...) -> NonNilMatcherFunc<NMBContainer> {
     return contain(items)
 }
 
-public func contain(_ items: [AnyObject?]) -> NonNilMatcherFunc<NMBContainer> {
+public func contain(_ items: [Any?]) -> NonNilMatcherFunc<NMBContainer> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
@@ -79,7 +79,7 @@ extension NMBObjCMatcher {
                 let expr = Expression(expression: ({ value as NMBContainer }), location: location)
 
                 // A straightforward cast on the array causes this to crash, so we have to cast the individual items
-                let expectedOptionals: [AnyObject?] = expected.map({ $0 as AnyObject? })
+                let expectedOptionals: [Any?] = expected.map({ $0 as Any? })
                 return try! contain(expectedOptionals).matches(expr, failureMessage: failureMessage)
             } else if let value = actualValue as? NSString {
                 let expr = Expression(expression: ({ value as String }), location: location)

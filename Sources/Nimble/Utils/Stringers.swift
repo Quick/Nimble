@@ -1,7 +1,7 @@
 import Foundation
 
 
-internal func identityAsString(_ value: AnyObject?) -> String {
+internal func identityAsString(_ value: Any?) -> String {
     if let value = value {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
@@ -169,7 +169,7 @@ public func stringify<T>(_ value: T?) -> String {
 
 #if _runtime(_ObjC)
 @objc public class NMBStringer: NSObject {
-    @objc public class func stringify(_ obj: AnyObject?) -> String {
+    @objc public class func stringify(_ obj: Any?) -> String {
         return Nimble.stringify(obj)
     }
 }
