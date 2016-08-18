@@ -1,8 +1,7 @@
 import Foundation
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-@warn_unused_result(message:"Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
-public func expect<T>( _ expression: @autoclosure(escaping)() throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
+public func expect<T>(_ expression: @autoclosure @escaping () throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -11,8 +10,7 @@ public func expect<T>( _ expression: @autoclosure(escaping)() throws -> T?, file
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
-@warn_unused_result(message:"Follow 'expect(…)' with '.to(…)', '.toNot(…)', 'toEventually(…)', '==', etc.")
-public func expect<T>(_ file: FileString = #file, line: UInt = #line, expression: () throws -> T?) -> Expectation<T> {
+public func expect<T>(_ file: FileString = #file, line: UInt = #line, expression: @escaping () throws -> T?) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -58,8 +56,7 @@ internal func nimblePrecondition(
         return result
 }
 
-@noreturn
-internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) {
+internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) -> Never {
     fatalError(
         "Nimble Bug Found: \(msg) at \(file):\(line).\n" +
         "Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the " +

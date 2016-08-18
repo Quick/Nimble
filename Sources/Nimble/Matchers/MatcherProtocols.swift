@@ -10,8 +10,8 @@ public protocol Matcher {
 #if _runtime(_ObjC)
 /// Objective-C interface to the Swift variant of Matcher.
 @objc public protocol NMBMatcher {
-    func matches(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
-    func doesNotMatch(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func doesNotMatch(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 #endif
 
@@ -19,14 +19,14 @@ public protocol Matcher {
 /// Protocol for types that support contain() matcher.
 @objc public protocol NMBContainer {
     @objc(containsObject:)
-    func contains(_ anObject: AnyObject) -> Bool
+    func contains(_ anObject: Any) -> Bool
 }
 
 // FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
-    func contains(_ anObject: AnyObject) -> Bool
+    func contains(_ anObject: Any) -> Bool
 }
 #endif
 
@@ -55,11 +55,11 @@ extension NSDictionary : NMBCollection {}
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 @objc public protocol NMBOrderedCollection : NMBCollection {
     @objc(indexOfObject:)
-    func index(of anObject: AnyObject) -> Int
+    func index(of anObject: Any) -> Int
 }
 #else
 public protocol NMBOrderedCollection : NMBCollection {
-    func index(of anObject: AnyObject) -> Int
+    func index(of anObject: Any) -> Int
 }
 #endif
 

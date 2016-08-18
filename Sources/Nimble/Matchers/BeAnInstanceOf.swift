@@ -16,7 +16,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObj
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(classAsString(validInstance.dynamicType)) instance>"
+            failureMessage.actualValue = "<\(classAsString(type(of: validInstance))) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }
@@ -24,7 +24,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObj
 #if _runtime(_ObjC)
         return instance != nil && instance!.isMember(of: expectedClass)
 #else
-        return instance != nil && instance!.dynamicType == expectedClass
+        return instance != nil && type(of: instance!) == expectedClass
 #endif
     }
 }

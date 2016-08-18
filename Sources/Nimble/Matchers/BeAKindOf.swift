@@ -18,7 +18,7 @@ public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> 
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(classAsString(validInstance.dynamicType)) instance>"
+            failureMessage.actualValue = "<\(classAsString(type(of: validInstance))) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }

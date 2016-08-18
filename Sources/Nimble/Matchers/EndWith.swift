@@ -3,7 +3,9 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
-public func endWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ endingElement: T) -> NonNilMatcherFunc<S> {
+public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> NonNilMatcherFunc<S>
+    where S.Iterator.Element == T
+{
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 

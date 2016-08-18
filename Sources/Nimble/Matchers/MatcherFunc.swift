@@ -12,7 +12,7 @@
 public struct MatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) throws -> Bool
 
-    public init(_ matcher: (Expression<T>, FailureMessage) throws -> Bool) {
+    public init(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) {
         self.matcher = matcher
     }
 
@@ -39,7 +39,7 @@ public struct MatcherFunc<T>: Matcher {
 public struct NonNilMatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) throws -> Bool
 
-    public init(_ matcher: (Expression<T>, FailureMessage) throws -> Bool) {
+    public init(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) {
         self.matcher = matcher
     }
 

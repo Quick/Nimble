@@ -3,7 +3,9 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.
-public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ startingElement: T) -> NonNilMatcherFunc<S> {
+public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> NonNilMatcherFunc<S>
+    where S.Iterator.Element == T
+{
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = try actualExpression.evaluate() {

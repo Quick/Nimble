@@ -83,7 +83,7 @@ extension NMBObjCMatcher {
                 return try! beEmpty().matches(expr, failureMessage: failureMessage)
             } else if let actualValue = actualValue {
                 failureMessage.postfixMessage = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"
-                failureMessage.actualValue = "\(classAsString(actualValue.dynamicType)) type"
+                failureMessage.actualValue = "\(classAsString(type(of: actualValue))) type"
             }
             return false
         }
