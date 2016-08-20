@@ -4,6 +4,6 @@ let package = Package(
     name: "Nimble",
     exclude: [
       "Sources/NimbleObjectiveC",
-      "Tests/Nimble/objc"
+      "Tests/NimbleTests/objc"
     ]
 )
