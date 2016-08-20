@@ -14,7 +14,7 @@ final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    var anException = NSException(name: "laugh" as NSExceptionName, reason: "Lulz", userInfo: ["key": "value"])
+    var anException = NSException(name: NSExceptionName(rawValue: "laugh"), reason: "Lulz", userInfo: ["key": "value"])
 
     func testPositiveMatches() {
         expect { self.anException.raise() }.to(raiseException())
@@ -25,7 +25,7 @@ final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
 
     func testPositiveMatchesWithClosures() {
         expect { self.anException.raise() }.to(raiseException { (exception: NSException) in
-            expect(exception.name).to(equal("laugh" as NSExceptionName))
+            expect(exception.name).to(equal(NSExceptionName(rawValue: "laugh")))
         })
         expect { self.anException.raise() }.to(raiseException(named: "laugh") { (exception: NSException) in
             expect(exception.name.rawValue).to(beginWith("lau"))
@@ -90,7 +90,7 @@ final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
     func testNegativeMatchesDoNotCallClosureWithoutException() {
         failsWithErrorMessage("expected to raise exception that satisfies block, got no exception") {
             expect { self.anException }.to(raiseException { (exception: NSException) in
-                expect(exception.name).to(equal("foo" as NSExceptionName))
+                expect(exception.name).to(equal(NSExceptionName(rawValue:"foo")))
             })
         }
         
