@@ -10,11 +10,7 @@ internal func identityAsString(_ value: Any?) -> String {
 }
 
 internal func classAsString(_ cls: AnyClass) -> String {
-#if _runtime(_ObjC)
     return NSStringFromClass(cls)
-#else
-    return String(cls)
-#endif
 }
 
 internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {

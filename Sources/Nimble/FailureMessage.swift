@@ -39,10 +39,10 @@ public class FailureMessage: NSObject {
 
     internal func stripNewlines(_ str: String) -> String {
         var lines: [String] = NSString(string: str).components(separatedBy: "\n") as [String]
-        #if _runtime(_ObjC) // Xcode 8 beta 5
+        #if _runtime(_ObjC) // Xcode 8 beta 6
             let whitespace = NSCharacterSet.whitespacesAndNewlines
         #else
-            // swift-3.0-PREVIEW-4 for Linux
+            // swift-3.0-PREVIEW-6 for Linux
             let whitespace = NSCharacterSet.whitespacesAndNewlines()
         #endif
         lines = lines.map { line in NSString(string: line).trimmingCharacters(in: whitespace) }

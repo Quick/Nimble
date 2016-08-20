@@ -12,7 +12,7 @@ import XCTest
         internal class var `default`: NotificationCenter {
             return defaultCenter()
         }
-        internal func addObserver(forName name: NSNotification.Name?, object obj: AnyObject?, queue: OperationQueue?, using block: (Notification) -> Swift.Void) -> NSObjectProtocol {
+        internal func addObserver(forName name: NSNotification.Name?, object obj: AnyObject?, queue: OperationQueue?, using block: @escaping (Notification) -> Swift.Void) -> NSObjectProtocol {
             return addObserverForName(name, object: obj, queue: queue, usingBlock: block)
         }
     }
