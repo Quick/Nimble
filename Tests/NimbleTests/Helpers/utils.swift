@@ -69,15 +69,15 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
 
 public class NimbleHelper : NSObject {
     public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     public class func expectFailureMessages(_ messages: [NSString], block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(messages.map({ String($0) }), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(messages.map({String(describing: $0)}), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     public class func expectFailureMessageForNil(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessageForNil(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessageForNil(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
 
