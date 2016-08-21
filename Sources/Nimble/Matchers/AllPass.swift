@@ -1,6 +1,20 @@
 import Foundation
 
 public func allPass<T,U>
+    (_ passFunc: @escaping (T) -> Bool) -> NonNilMatcherFunc<U>
+    where U: Sequence, U.Iterator.Element == T
+{
+    return allPass { (v: T?) -> Bool in v.map(passFunc) ?? false }
+}
+
+public func allPass<T,U>
+    (_ passName: String, _ passFunc: @escaping (T) -> Bool) -> NonNilMatcherFunc<U>
+    where U: Sequence, U.Iterator.Element == T
+{
+    return allPass(passName) { (v: T?) -> Bool in v.map(passFunc) ?? false }
+}
+
+public func allPass<T,U>
     (_ passFunc: @escaping (T?) -> Bool) -> NonNilMatcherFunc<U>
     where U: Sequence, U.Iterator.Element == T
 {
