@@ -13,8 +13,10 @@ final class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
     func testGreaterThan() {
         expect(10).to(beGreaterThan(2))
         expect(1).toNot(beGreaterThan(2))
-#if _runtime(_ObjC)
+#if SUPPORT_IMPLICIT_BRIDGING_CONVERSION
         expect(NSNumber(value:3)).to(beGreaterThan(2))
+#else
+        expect(NSNumber(value:3)).to(beGreaterThan(2 as NSNumber))
 #endif
         expect(NSNumber(value:1)).toNot(beGreaterThan(NSNumber(value:2)))
 
@@ -35,8 +37,10 @@ final class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
     func testGreaterThanOperator() {
         expect(1) > 0
         expect(NSNumber(value:1)) > NSNumber(value:0)
-#if _runtime(_ObjC)
+#if SUPPORT_IMPLICIT_BRIDGING_CONVERSION
         expect(NSNumber(value:1)) > 0
+#else
+        expect(NSNumber(value:1)) > 0 as NSNumber
 #endif
         failsWithErrorMessage("expected to be greater than <2>, got <1>") {
             expect(1) > 2
