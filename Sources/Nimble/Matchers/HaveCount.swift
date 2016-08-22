@@ -48,7 +48,7 @@ extension NMBObjCMatcher {
                 return try! haveCount(expected.intValue).matches(expr, failureMessage: failureMessage)
             } else if let actualValue = actualValue {
                 failureMessage.postfixMessage = "get type of NSArray, NSSet, NSDictionary, or NSHashTable"
-                failureMessage.actualValue = "\(classAsString(type(of: actualValue)))"
+                failureMessage.actualValue = "\(String(describing: type(of: actualValue)))"
             }
             return false
         }

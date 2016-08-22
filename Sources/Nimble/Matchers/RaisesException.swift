@@ -60,7 +60,7 @@ internal func setFailureMessageForException(
         }
 
         if let exception = exception {
-            failureMessage.actualValue = "\(classAsString(type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
+            failureMessage.actualValue = "\(String(describing: type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
         } else {
             failureMessage.actualValue = "no exception"
         }

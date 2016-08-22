@@ -16,11 +16,11 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObj
     return NonNilMatcherFunc { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(classAsString(type(of: validInstance))) instance>"
+            failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
         } else {
             failureMessage.actualValue = "<nil>"
         }
-        failureMessage.postfixMessage = "be an instance of \(classAsString(expectedClass))"
+        failureMessage.postfixMessage = "be an instance of \(String(describing: expectedClass))"
 #if _runtime(_ObjC)
         return instance != nil && instance!.isMember(of: expectedClass)
 #else

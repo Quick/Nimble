@@ -15,10 +15,6 @@ internal func identityAsString(_ value: Any?) -> String {
     }
 }
 
-internal func classAsString(_ cls: AnyClass) -> String {
-    return String(describing: cls)
-}
-
 internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
