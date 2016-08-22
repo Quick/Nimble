@@ -38,15 +38,11 @@ public class FailureMessage: NSObject {
     }
 
     internal func stripNewlines(_ str: String) -> String {
-        var lines: [String] = NSString(string: str).components(separatedBy: "\n") as [String]
-        #if _runtime(_ObjC) // Xcode 8 beta 6
-            let whitespace = NSCharacterSet.whitespacesAndNewlines
-        #else
-            // swift-3.0-PREVIEW-6 for Linux
-            let whitespace = NSCharacterSet.whitespacesAndNewlines()
-        #endif
-        lines = lines.map { line in NSString(string: line).trimmingCharacters(in: whitespace) }
-        return lines.joined(separator: "")
+        let whitespaces = CharacterSet.whitespacesAndNewlines
+        return str
+            .components(separatedBy: "\n")
+            .map { line in line.trimmingCharacters(in: whitespaces) }
+            .joined(separator: "")
     }
 
     internal func computeStringValue() -> String {
