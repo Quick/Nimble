@@ -1,6 +1,78 @@
 import Foundation
 
-internal func matcherWithFailureMessage<T>(_ matcher: NonNilMatcherFunc<T>, postprocessor: (FailureMessage) -> Void) -> NonNilMatcherFunc<T> {
+extension Int8: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).int8Value
+    }
+}
+
+extension UInt8: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).uint8Value
+    }
+}
+
+extension Int16: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).int16Value
+    }
+}
+
+extension UInt16: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).uint16Value
+    }
+}
+
+extension Int32: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).int32Value
+    }
+}
+
+extension UInt32: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).uint32Value
+    }
+}
+
+extension Int64: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).int64Value
+    }
+}
+
+extension UInt64: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).uint64Value
+    }
+}
+
+extension Float: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).floatValue
+    }
+}
+
+extension Double: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).doubleValue
+    }
+}
+
+extension Int: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).intValue
+    }
+}
+
+extension UInt: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) {
+        self = NSNumber(value: value).uintValue
+    }
+}
+
+internal func matcherWithFailureMessage<T>(_ matcher: NonNilMatcherFunc<T>, postprocessor: @escaping (FailureMessage) -> Void) -> NonNilMatcherFunc<T> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         defer { postprocessor(failureMessage) }
         return try matcher.matcher(actualExpression, failureMessage)

@@ -3,7 +3,9 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's first element
 /// is equal to the expected value.
-public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ startingElement: T) -> NonNilMatcherFunc<S> {
+public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> NonNilMatcherFunc<S>
+    where S.Iterator.Element == T
+{
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = try actualExpression.evaluate() {
@@ -16,7 +18,7 @@ public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_
 
 /// A Nimble matcher that succeeds when the actual collection's first element
 /// is equal to the expected object.
-public func beginWith(_ startingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
+public func beginWith(_ startingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         let collection = try actualExpression.evaluate()
@@ -39,7 +41,7 @@ public func beginWith(_ startingSubstring: String) -> NonNilMatcherFunc<String> 
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func beginWithMatcher(_ expected: AnyObject) -> NMBObjCMatcher {
+    public class func beginWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = try! actualExpression.evaluate()
             if let _ = actual as? String {

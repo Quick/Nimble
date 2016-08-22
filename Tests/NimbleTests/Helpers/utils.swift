@@ -2,7 +2,7 @@ import Foundation
 @testable import Nimble
 import XCTest
 
-func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
+func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: @escaping () throws -> Void) {
     var filePath = file
     var lineNumber = line
 
@@ -44,7 +44,7 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
     }
 }
 
-func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: @escaping () -> Void) {
     return failsWithErrorMessage(
         [message],
         file: file,
@@ -54,12 +54,12 @@ func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UI
     )
 }
 
-func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: @escaping () -> Void) {
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
 #if _runtime(_ObjC)
-    func deferToMainQueue(action: () -> Void) {
+    func deferToMainQueue(action: @escaping () -> Void) {
         DispatchQueue.main.async {
             Thread.sleep(forTimeInterval: 0.01)
             action()
@@ -68,16 +68,16 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
 #endif
 
 public class NimbleHelper : NSObject {
-    public class func expectFailureMessage(_ message: NSString, block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessage(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    public class func expectFailureMessages(_ messages: [NSString], block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(messages.map({ String($0) }), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    public class func expectFailureMessages(_ messages: [NSString], block: @escaping () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessage(messages.map({String(describing: $0)}), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
-    public class func expectFailureMessageForNil(_ message: NSString, block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessageForNil(String(message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+    public class func expectFailureMessageForNil(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
+        failsWithErrorMessageForNil(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
 

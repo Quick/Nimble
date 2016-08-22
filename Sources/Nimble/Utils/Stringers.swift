@@ -1,20 +1,18 @@
 import Foundation
 
 
-internal func identityAsString(_ value: AnyObject?) -> String {
-    if let value = value {
+internal func identityAsString(_ value: Any?) -> String {
+    let anyObject: AnyObject?
+#if os(Linux)
+    anyObject = value as? AnyObject
+#else
+    anyObject = value as AnyObject?
+#endif
+    if let value = anyObject {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
         return "nil"
     }
-}
-
-internal func classAsString(_ cls: AnyClass) -> String {
-#if _runtime(_ObjC)
-    return NSStringFromClass(cls)
-#else
-    return String(cls)
-#endif
 }
 
 internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
@@ -156,7 +154,7 @@ public func stringify<T>(_ value: T) -> String {
         return value.debugDescription
     }
     
-    return String(value)
+    return String(describing: value)
 }
 
 /// -SeeAlso: `stringify<T>(value: T)`
@@ -169,7 +167,7 @@ public func stringify<T>(_ value: T?) -> String {
 
 #if _runtime(_ObjC)
 @objc public class NMBStringer: NSObject {
-    @objc public class func stringify(_ obj: AnyObject?) -> String {
+    @objc public class func stringify(_ obj: Any?) -> String {
         return Nimble.stringify(obj)
     }
 }
@@ -192,15 +190,15 @@ public func stringify<T>(_ value: T?) -> String {
 public func prettyCollectionType<T>(_ value: T) -> String {
     switch value {
     case is NSArray:
-        return String(NSArray.self)
+        return String(describing: NSArray.self)
     case is NSDictionary:
-        return String(NSDictionary.self)
+        return String(describing: NSDictionary.self)
     case is NSSet:
-        return String(NSSet.self)
+        return String(describing: NSSet.self)
     case is NSIndexSet:
-        return String(NSIndexSet.self)
+        return String(describing: NSIndexSet.self)
     default:
-        return String(value)
+        return String(describing: value)
     }
 }
 
@@ -211,5 +209,5 @@ public func prettyCollectionType<T>(_ value: T) -> String {
 ///
 /// - returns: A string representing the `dynamicType` of the value.
 public func prettyCollectionType<T: Collection>(_ collection: T) -> String {
-    return String(collection.dynamicType)
+    return String(describing: type(of: collection))
 }

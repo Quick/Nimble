@@ -27,7 +27,7 @@ final class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
     }
     
     func testBeIdenticalToPositiveMessage() {
-        let message = String(NSString(format: "expected to be identical to <%p>, got <%p>",
+        let message = String(describing: NSString(format: "expected to be identical to <%p>, got <%p>",
             unsafeBitCast(testObjectB, to: Int.self), unsafeBitCast(testObjectA, to: Int.self)))
         failsWithErrorMessage(message) {
             expect(self.testObjectA).to(beIdenticalTo(self.testObjectB))
@@ -35,7 +35,7 @@ final class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
     }
     
     func testBeIdenticalToNegativeMessage() {
-        let message = String(NSString(format: "expected to not be identical to <%p>, got <%p>",
+        let message = String(describing: NSString(format: "expected to not be identical to <%p>, got <%p>",
             unsafeBitCast(testObjectA, to: Int.self), unsafeBitCast(testObjectA, to: Int.self)))
         failsWithErrorMessage(message) {
             expect(self.testObjectA).toNot(beIdenticalTo(self.testObjectA))
@@ -43,13 +43,13 @@ final class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testFailsOnNils() {
-        let message1 = String(NSString(format: "expected to be identical to <%p>, got nil",
+        let message1 = String(describing: NSString(format: "expected to be identical to <%p>, got nil",
             unsafeBitCast(testObjectA, to: Int.self)))
         failsWithErrorMessageForNil(message1) {
             expect(nil as BeIdenticalToObjectTester?).to(beIdenticalTo(self.testObjectA))
         }
 
-        let message2 = String(NSString(format: "expected to not be identical to <%p>, got nil",
+        let message2 = String(describing: NSString(format: "expected to not be identical to <%p>, got nil",
             unsafeBitCast(testObjectA, to: Int.self)))
         failsWithErrorMessageForNil(message2) {
             expect(nil as BeIdenticalToObjectTester?).toNot(beIdenticalTo(self.testObjectA))

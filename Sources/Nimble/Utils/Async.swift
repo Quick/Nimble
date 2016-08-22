@@ -269,7 +269,7 @@ internal class Awaiter {
     }
 
     func performBlock<T>(
-        _ closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
+        _ closure: @escaping (@escaping (T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
@@ -294,7 +294,7 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: TimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: TimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
@@ -331,7 +331,7 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: () throws -> Bool) -> AwaitResult<Bool> {
+    expression: @escaping () throws -> Bool) -> AwaitResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             do {

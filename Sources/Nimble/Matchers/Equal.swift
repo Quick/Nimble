@@ -100,7 +100,7 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> NonNilMatcherFunc<
     })
 }
 
-private func equal<T>(_ expectedValue: Set<T>?, stringify: (Set<T>?) -> String) -> NonNilMatcherFunc<Set<T>> {
+private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> NonNilMatcherFunc<Set<T>> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
 

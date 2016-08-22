@@ -2,11 +2,15 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers. 
-public func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(_ matchers: U...) -> NonNilMatcherFunc<T> {
+public func satisfyAnyOf<T,U>(_ matchers: U...) -> NonNilMatcherFunc<T>
+    where U: Matcher, U.ValueType == T
+{
     return satisfyAnyOf(matchers)
 }
 
-internal func satisfyAnyOf<T,U where U: Matcher, U.ValueType == T>(_ matchers: [U]) -> NonNilMatcherFunc<T> {
+internal func satisfyAnyOf<T,U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
+    where U: Matcher, U.ValueType == T
+{
     return NonNilMatcherFunc<T> { actualExpression, failureMessage in
         let postfixMessages = NSMutableArray()
         var matches = false

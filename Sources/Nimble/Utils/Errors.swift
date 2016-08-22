@@ -41,9 +41,11 @@ internal func errorMatchesExpectedError<T: Error>(
         && actualError._code   == expectedError._code
 }
 
-internal func errorMatchesExpectedError<T: Error where T: Equatable>(
+internal func errorMatchesExpectedError<T: Error>(
     _ actualError: Error,
-    expectedError: T) -> Bool {
+    expectedError: T) -> Bool
+    where T: Equatable
+{
     if let actualError = actualError as? T {
         return actualError == expectedError
     }

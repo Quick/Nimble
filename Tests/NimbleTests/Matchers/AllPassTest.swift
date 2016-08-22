@@ -1,6 +1,47 @@
 import XCTest
 import Nimble
 
+/// Add operators to `Optional` for conforming `Comparable` that removed in Swift 3.0
+extension Optional where Wrapped: Comparable {
+    static func < (lhs: Optional, rhs: Optional) -> Bool {
+        switch (lhs, rhs) {
+        case let (l?, r?):
+            return l < r
+        case (nil, _?):
+            return true
+        default:
+            return false
+        }
+    }
+
+    static func > (lhs: Optional, rhs: Optional) -> Bool {
+        switch (lhs, rhs) {
+        case let (l?, r?):
+            return l > r
+        default:
+            return rhs < lhs
+        }
+    }
+
+    static func <= (lhs: Optional, rhs: Optional) -> Bool {
+        switch (lhs, rhs) {
+        case let (l?, r?):
+            return l <= r
+        default:
+            return !(rhs < lhs)
+        }
+    }
+
+    static func >= (lhs: Optional, rhs: Optional) -> Bool {
+        switch (lhs, rhs) {
+        case let (l?, r?):
+            return l >= r
+        default:
+            return !(lhs < rhs)
+        }
+    }
+}
+
 final class AllPassTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (AllPassTest) -> () throws -> Void)] {
         return [
