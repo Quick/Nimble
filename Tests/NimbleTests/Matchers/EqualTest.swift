@@ -134,8 +134,8 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(actual).toNot(equal(unexpected))
 
 #if _runtime(_ObjC)
-        expect(NSDictionary(object: "bar", forKey: "foo")).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo") as? [String:String]).to(equal(expected))
+        expect(NSDictionary(object: "bar", forKey: "foo" as NSString)).to(equal(["foo": "bar"]))
+        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String:String]).to(equal(expected))
 #endif
     }
 

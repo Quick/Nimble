@@ -44,11 +44,21 @@ final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldMatchNonNilTypes() {
         expect(true as Bool?).to(beTruthy())
-        #if _runtime(_ObjC)
-            expect(1 as Int?).to(beTruthy())
-        #else
-            expect(1 as NSNumber?).to(beTruthy())
-        #endif
+
+        // Support types conforming to `ExpressibleByBooleanLiteral`
+        // Nimble extend following types as conforming to `ExpressibleByBooleanLiteral`
+        expect(1 as Int8?).to(beTruthy())
+        expect(1 as UInt8?).to(beTruthy())
+        expect(1 as Int16?).to(beTruthy())
+        expect(1 as UInt16?).to(beTruthy())
+        expect(1 as Int32?).to(beTruthy())
+        expect(1 as UInt32?).to(beTruthy())
+        expect(1 as Int64?).to(beTruthy())
+        expect(1 as UInt64?).to(beTruthy())
+        expect(1 as Float?).to(beTruthy())
+        expect(1 as Double?).to(beTruthy())
+        expect(1 as Int?).to(beTruthy())
+        expect(1 as UInt?).to(beTruthy())
     }
 
     func testShouldMatchTrue() {
@@ -61,12 +71,22 @@ final class BeTruthyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldNotMatchNilTypes() {
         expect(false as Bool?).toNot(beTruthy())
+
+        // Support types conforming to `ExpressibleByBooleanLiteral`
+        // Nimble extend following types as conforming to `ExpressibleByBooleanLiteral`
         expect(nil as Bool?).toNot(beTruthy())
-        #if _runtime(_ObjC)
-            expect(nil as Int?).toNot(beTruthy())
-        #else
-            expect(nil as NSNumber?).toNot(beTruthy())
-        #endif
+        expect(nil as Int8?).toNot(beTruthy())
+        expect(nil as UInt8?).toNot(beTruthy())
+        expect(nil as Int16?).toNot(beTruthy())
+        expect(nil as UInt16?).toNot(beTruthy())
+        expect(nil as Int32?).toNot(beTruthy())
+        expect(nil as UInt32?).toNot(beTruthy())
+        expect(nil as Int64?).toNot(beTruthy())
+        expect(nil as UInt64?).toNot(beTruthy())
+        expect(nil as Float?).toNot(beTruthy())
+        expect(nil as Double?).toNot(beTruthy())
+        expect(nil as Int?).toNot(beTruthy())
+        expect(nil as UInt?).toNot(beTruthy())
     }
 
     func testShouldNotMatchFalse() {
@@ -151,12 +171,22 @@ final class BeFalsyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldMatchNilTypes() {
         expect(false as Bool?).to(beFalsy())
+
+        // Support types conforming to `ExpressibleByBooleanLiteral`
+        // Nimble extend following types as conforming to `ExpressibleByBooleanLiteral`
         expect(nil as Bool?).to(beFalsy())
-        #if _runtime(_ObjC)
-            expect(nil as Int?).to(beFalsy())
-        #else
-            expect(nil as NSNumber?).to(beFalsy())
-        #endif
+        expect(nil as Int8?).to(beFalsy())
+        expect(nil as UInt8?).to(beFalsy())
+        expect(nil as Int16?).to(beFalsy())
+        expect(nil as UInt16?).to(beFalsy())
+        expect(nil as Int32?).to(beFalsy())
+        expect(nil as UInt32?).to(beFalsy())
+        expect(nil as Int64?).to(beFalsy())
+        expect(nil as UInt64?).to(beFalsy())
+        expect(nil as Float?).to(beFalsy())
+        expect(nil as Double?).to(beFalsy())
+        expect(nil as Int?).to(beFalsy())
+        expect(nil as UInt?).to(beFalsy())
     }
 
     func testShouldNotMatchTrue() {
@@ -169,11 +199,21 @@ final class BeFalsyTest : XCTestCase, XCTestCaseProvider {
 
     func testShouldNotMatchNonNilTypes() {
         expect(true as Bool?).toNot(beFalsy())
-        #if _runtime(_ObjC)
-            expect(1 as Int?).toNot(beFalsy())
-        #else
-            expect(1 as NSNumber?).toNot(beFalsy())
-        #endif
+
+        // Support types conforming to `ExpressibleByBooleanLiteral`
+        // Nimble extend following types as conforming to `ExpressibleByBooleanLiteral`
+        expect(1 as Int8?).toNot(beFalsy())
+        expect(1 as UInt8?).toNot(beFalsy())
+        expect(1 as Int16?).toNot(beFalsy())
+        expect(1 as UInt16?).toNot(beFalsy())
+        expect(1 as Int32?).toNot(beFalsy())
+        expect(1 as UInt32?).toNot(beFalsy())
+        expect(1 as Int64?).toNot(beFalsy())
+        expect(1 as UInt64?).toNot(beFalsy())
+        expect(1 as Float?).toNot(beFalsy())
+        expect(1 as Double?).toNot(beFalsy())
+        expect(1 as Int?).toNot(beFalsy())
+        expect(1 as UInt?).toNot(beFalsy())
     }
 
     func testShouldMatchFalse() {

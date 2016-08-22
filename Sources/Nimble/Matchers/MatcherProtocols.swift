@@ -26,7 +26,12 @@ public protocol Matcher {
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
-    func contains(_ anObject: Any) -> Bool
+    func contains(_ anObject: AnyObject) -> Bool
+}
+extension NMBContainer {
+    func contains(_ anObject: Any) -> Bool {
+        return contains(anObject as! AnyObject)
+    }
 }
 #endif
 
@@ -59,7 +64,12 @@ extension NSDictionary : NMBCollection {}
 }
 #else
 public protocol NMBOrderedCollection : NMBCollection {
-    func index(of anObject: Any) -> Int
+    func index(of anObject: AnyObject) -> Int
+}
+extension NMBOrderedCollection {
+    func index(of anObject: Any) -> Int {
+        return index(of: anObject as! AnyObject)
+    }
 }
 #endif
 

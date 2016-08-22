@@ -92,10 +92,7 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
 
 // MARK: - Operators
 
-infix operator ≈ {
-    associativity none
-    precedence 130
-}
+infix operator ≈ : ComparisonPrecedence
 
 public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
     lhs.to(beCloseTo(rhs))
@@ -115,7 +112,11 @@ public func ==(lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDouble
 
 // make this higher precedence than exponents so the Doubles either end aren't pulled in
 // unexpectantly
-infix operator ± { precedence 170 }
+precedencegroup PlusMinusOperatorPrecedence {
+    higherThan: BitwiseShiftPrecedence
+}
+
+infix operator ± : PlusMinusOperatorPrecedence
 public func ±(lhs: NMBDoubleConvertible, rhs: Double) -> (expected: NMBDoubleConvertible, delta: Double) {
     return (expected: lhs, delta: rhs)
 }

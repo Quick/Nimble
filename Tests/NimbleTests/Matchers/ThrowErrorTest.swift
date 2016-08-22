@@ -133,11 +133,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testNegativeMatchesWithClosure() {
-#if SWIFT_PACKAGE
-        let moduleName = "NimbleTestSuite"
-#else
         let moduleName = "NimbleTests"
-#endif
         let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).NimbleError>"
         let closure = { (error: Error) in
             print("** In closure! With domain \(error._domain)")

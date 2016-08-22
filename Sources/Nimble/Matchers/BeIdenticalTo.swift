@@ -5,10 +5,18 @@ import Foundation
 /// as the expected instance.
 public func beIdenticalTo(_ expected: Any?) -> NonNilMatcherFunc<Any> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
-        let actual = try actualExpression.evaluate() as AnyObject?
+        #if os(Linux)
+            let actual = try actualExpression.evaluate() as? AnyObject
+        #else
+            let actual = try actualExpression.evaluate() as AnyObject?
+        #endif
         failureMessage.actualValue = "\(identityAsString(actual))"
         failureMessage.postfixMessage = "be identical to \(identityAsString(expected))"
-        return actual === (expected as AnyObject?) && actual !== nil
+        #if os(Linux)
+            return actual === (expected as? AnyObject) && actual !== nil
+        #else
+            return actual === (expected as AnyObject?) && actual !== nil
+        #endif
     }
 }
 
