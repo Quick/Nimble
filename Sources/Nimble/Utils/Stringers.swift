@@ -2,7 +2,7 @@ import Foundation
 
 
 internal func identityAsString(_ value: Any?) -> String {
-    if let value = value {
+    if let value = value as AnyObject? {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
         return "nil"
