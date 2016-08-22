@@ -18,7 +18,7 @@ internal func identityAsString(_ value: Any?) -> String {
 }
 
 internal func classAsString(_ cls: AnyClass) -> String {
-    return NSStringFromClass(cls)
+    return String(describing: cls)
 }
 
 internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
