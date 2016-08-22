@@ -2,19 +2,17 @@ import Foundation
 
 
 internal func identityAsString(_ value: Any?) -> String {
+    let anyObject: AnyObject?
 #if os(Linux)
-    if let value = value as? AnyObject {
-        return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
-    } else {
-        return "nil"
-    }
+    anyObject = value as? AnyObject
 #else
-    if let value = value as AnyObject? {
+    anyObject = value as AnyObject?
+#endif
+    if let value = anyObject {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
         return "nil"
     }
-#endif
 }
 
 internal func classAsString(_ cls: AnyClass) -> String {
