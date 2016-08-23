@@ -1,4 +1,5 @@
 import Foundation
+import CoreGraphics
 
 /// Implement this protocol to implement a custom matcher for Swift
 public protocol Matcher {
@@ -88,6 +89,14 @@ extension Double : NMBDoubleConvertible {
 }
 
 extension Float : NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        get {
+            return CDouble(self)
+        }
+    }
+}
+
+extension CGFloat: NMBDoubleConvertible {
     public var doubleValue: CDouble {
         get {
             return CDouble(self)
