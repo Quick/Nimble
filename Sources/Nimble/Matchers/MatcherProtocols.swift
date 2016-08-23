@@ -1,4 +1,7 @@
 import Foundation
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    import CoreGraphics
+#endif
 
 /// Implement this protocol to implement a custom matcher for Swift
 public protocol Matcher {
@@ -95,6 +98,16 @@ extension Float : NMBDoubleConvertible {
     }
 }
 
+#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+    extension CGFloat: NMBDoubleConvertible {
+        public var doubleValue: CDouble {
+            get {
+                return CDouble(self)
+            }
+        }
+    }
+#endif
+    
 extension NSNumber : NMBDoubleConvertible {
 }
 
