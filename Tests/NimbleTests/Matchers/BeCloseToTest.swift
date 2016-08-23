@@ -23,6 +23,7 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(1.2).to(beCloseTo(1.2001))
         expect(1.2 as CDouble).to(beCloseTo(1.2001))
         expect(1.2 as Float).to(beCloseTo(1.2001))
+        expect(CGFloat(1.2)).to(beCloseTo(1.2001))
 
         failsWithErrorMessage("expected to not be close to <1.2001> (within 0.0001), got <1.2>") {
             expect(1.2).toNot(beCloseTo(1.2001))
