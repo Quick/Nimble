@@ -1,5 +1,6 @@
 import Foundation
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
+// `CGFloat` is in Foundation (swift-corelibs-foundation) on Linux.
+#if _runtime(_ObjC)
     import CoreGraphics
 #endif
 
@@ -84,30 +85,22 @@ public protocol NMBDoubleConvertible {
 
 extension Double : NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return self
-        }
+        return self
     }
 }
 
 extension Float : NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return CDouble(self)
-        }
+        return CDouble(self)
     }
 }
 
-#if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
-    extension CGFloat: NMBDoubleConvertible {
-        public var doubleValue: CDouble {
-            get {
-                return CDouble(self)
-            }
-        }
+extension CGFloat: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        return CDouble(self)
     }
-#endif
-    
+}
+
 extension NSNumber : NMBDoubleConvertible {
 }
 
