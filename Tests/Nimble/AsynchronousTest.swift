@@ -13,6 +13,8 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
             ("testWaitUntilPositiveMatches", testWaitUntilPositiveMatches),
             ("testToEventuallyWithCustomDefaultTimeout", testToEventuallyWithCustomDefaultTimeout),
+            ("testToAlwaysPositiveMatches", testToAlwaysPositiveMatches),
+            ("testToAlwaysNegativeMatches", testToAlwaysNegativeMatches),
             ("testWaitUntilTimesOutIfNotCalled", testWaitUntilTimesOutIfNotCalled),
             ("testWaitUntilTimesOutWhenExceedingItsTime", testWaitUntilTimesOutWhenExceedingItsTime),
             ("testWaitUntilNegativeMatches", testWaitUntilNegativeMatches),
@@ -74,6 +76,40 @@ class AsyncTest: XCTestCase, XCTestCaseProvider {
             value = 0
         }
         expect { value }.toEventuallyNot(equal(1))
+    }
+
+    func testToAlwaysPositiveMatches() {
+        let value = 0
+        expect { value }.toAlways(equal(0))
+
+        var otherValue = 0
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            NSThread.sleepForTimeInterval(0.2)
+            otherValue += 1
+        }
+
+        expect { otherValue }.toAlways(beLessThan(2))
+    }
+
+    func testToAlwaysNegativeMatches() {
+        failsWithErrorMessage("expected to always equal <0>, got <1>") {
+            var value = 0
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                NSThread.sleepForTimeInterval(0.2)
+                value = 1
+            }
+            expect { value }.toAlways(equal(0))
+        }
+
+        failsWithErrorMessage("expected to always be less than <1>, got <1>") {
+            var value = 0
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                NSThread.sleepForTimeInterval(0.2)
+                value += 1
+            }
+
+            expect { value }.toAlways(beLessThan(1))
+        }
     }
 
     func testWaitUntilPositiveMatches() {

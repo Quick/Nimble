@@ -32,6 +32,22 @@ internal func expressionDoesNotMatch<T, U where U: Matcher, U.ValueType == T>(ex
     }
 }
 
+internal func expressionAlwaysMatches<T, U where U: Matcher, U.ValueType == T>(expression: Expression<T>, matcher: U, to: String, description: String?) -> (Bool, FailureMessage) {
+    let msg = FailureMessage()
+    msg.userDescription = description
+    msg.to = to
+    do {
+        let pass = try matcher.alwaysMatches(expression, failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+        }
+        return (pass, msg)
+    } catch let error {
+        msg.actualValue = "an unexpected error thrown: <\(error)>"
+        return (false, msg)
+    }
+}
+
 public struct Expectation<T> {
 
     public let expression: Expression<T>
