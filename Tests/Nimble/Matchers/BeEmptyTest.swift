@@ -2,8 +2,8 @@ import Foundation
 import XCTest
 import Nimble
 
-class BeEmptyTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, BeEmptyTest -> () throws -> Void)] {
         return [
             ("testBeEmptyPositive", testBeEmptyPositive),
             ("testBeEmptyNegative", testBeEmptyNegative),

@@ -31,8 +31,8 @@ extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
     }
 }
 
-class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, ThrowErrorTest -> () throws -> Void)] {
         return [
             ("testPositiveMatches", testPositiveMatches),
             ("testPositiveMatchesWithClosures", testPositiveMatchesWithClosures),

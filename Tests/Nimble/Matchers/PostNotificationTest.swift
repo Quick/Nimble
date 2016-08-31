@@ -2,8 +2,8 @@ import XCTest
 import Nimble
 import Foundation
 
-class PostNotificationTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, PostNotificationTest -> () throws -> Void)] {
         return [
             ("testPassesWhenNoNotificationsArePosted", testPassesWhenNoNotificationsArePosted),
             ("testPassesWhenExpectedNotificationIsPosted", testPassesWhenExpectedNotificationIsPosted),
@@ -15,23 +15,7 @@ class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    var notificationCenter: NSNotificationCenter!
-
-    #if _runtime(_ObjC)
-    override func setUp() {
-        _setUp()
-        super.setUp()
-    }
-    #else
-    func setUp() {
-        _setUp()
-    }
-    #endif
-
-
-    func _setUp() {
-        notificationCenter = NSNotificationCenter()
-    }
+    let notificationCenter = NSNotificationCenter()
 
     func testPassesWhenNoNotificationsArePosted() {
         expect {

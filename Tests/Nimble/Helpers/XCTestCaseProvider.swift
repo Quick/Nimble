@@ -1,20 +1,40 @@
 import Foundation
 import XCTest
 
-// XCTestCaseProvider is defined in swift-corelibs-xctest, but is not available
-// in the XCTest that ships with Xcode. By defining this protocol on Apple platforms,
-// we ensure that the tests fail in Xcode if they haven't been configured properly to
-// be run with the open-source tools.
+// XCTestCaseProvider should be adopted by all XCTestCase subclasses. It provides a
+// mechanism for us to fail tests in Xcode which haven't been included in the `allTests`
+// list for swift-corelibs-xctest which is unable to dynamically discover tests. Note
+// that only `static var allTests` needs to be explicitly implemented, as `allTestNames`
+// has a default implementation provided by a protocol extension.
+
+// Implementation note: This is broken down into two separate protocols because we need a
+// protocol with no Self references to which we can cast XCTestCase instances in a non-generic context.
+
+public protocol XCTestCaseProviderStatic {
+    // This should be explicitly implemented by XCTestCase subclasses
+    static var allTests: [(String, Self -> () throws -> Void)] { get }
+}
+
+public protocol XCTestCaseNameProvider {
+    // This does not need to be explicitly implemented because of the protocol extension below
+    var allTestNames: [String] { get }
+}
+
+public protocol XCTestCaseProvider: XCTestCaseProviderStatic, XCTestCaseNameProvider {}
+
+extension XCTestCaseProvider where Self: XCTestCaseProviderStatic {
+    var allTestNames: [String] {
+        return self.dynamicType.allTests.map({ name, test in
+            return name
+        })
+    }
+}
 
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
 
-public protocol XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] { get }
-}
-
 extension XCTestCase {
     override public func tearDown() {
-        if let provider = self as? XCTestCaseProvider {
+        if let provider = self as? XCTestCaseNameProvider {
             provider.assertContainsTest(invocation!.selector.description)
         }
 
@@ -22,12 +42,9 @@ extension XCTestCase {
     }
 }
 
-extension XCTestCaseProvider {
+extension XCTestCaseNameProvider {
     private func assertContainsTest(name: String) {
-        let contains = self.allTests.contains({ test in
-            return test.0 == name
-        })
-
+        let contains = self.allTestNames.contains(name)
         XCTAssert(contains, "Test '\(name)' is missing from the allTests array")
     }
 }

@@ -1,8 +1,8 @@
 import XCTest
 import Nimble
 
-class AllPassTest: XCTestCase, XCTestCaseProvider {
-    var allTests: [(String, () throws -> Void)] {
+final class AllPassTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, AllPassTest -> () throws -> Void)] {
         return [
             ("testAllPassArray", testAllPassArray),
             ("testAllPassMatcher", testAllPassMatcher),
