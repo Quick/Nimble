@@ -6,11 +6,11 @@ matrix:
     #   sudo: required
     #   env: TYPE=podspec
     - os: osx
-      env: NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0 TYPE=ios
+      env: TYPE=ios NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0
     - os: osx
-      env: NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0 TYPE=tvos
+      env: TYPE=tvos NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0
     - os: osx
-      env: NIMBLE_RUNTIME_OSX_SDK_VERSION=10.10 TYPE=osx
+      env: TYPE=macos
     - os: osx
       env: TYPE=swiftpm
     - os: linux
