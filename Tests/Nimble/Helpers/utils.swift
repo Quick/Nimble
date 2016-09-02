@@ -45,7 +45,7 @@ func failsWithErrorMessage(messages: [String], file: FileString = #file, line: U
 }
 
 func failsWithErrorMessage(message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
-    return failsWithErrorMessage(
+    failsWithErrorMessage(
         [message],
         file: file,
         line: line,

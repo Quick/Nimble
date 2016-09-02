@@ -92,34 +92,14 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testDoesNotMatchNils() {
-        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
-            expect(nil as String?).to(equal(nil as String?))
-        }
-        failsWithErrorMessageForNil("expected to not equal <nil>, got <foo>") {
-            expect("foo").toNot(equal(nil as String?))
-        }
         failsWithErrorMessageForNil("expected to not equal <bar>, got <nil>") {
             expect(nil as String?).toNot(equal("bar"))
-        }
-
-        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
-            expect(nil as [Int]?).to(equal(nil as [Int]?))
         }
         failsWithErrorMessageForNil("expected to not equal <[1]>, got <nil>") {
             expect(nil as [Int]?).toNot(equal([1]))
         }
-        failsWithErrorMessageForNil("expected to not equal <nil>, got <[1]>") {
-            expect([1]).toNot(equal(nil as [Int]?))
-        }
-
-        failsWithErrorMessageForNil("expected to equal <nil>, got <nil>") {
-            expect(nil as [Int: Int]?).to(equal(nil as [Int: Int]?))
-        }
         failsWithErrorMessageForNil("expected to not equal <[1: 1]>, got <nil>") {
             expect(nil as [Int: Int]?).toNot(equal([1: 1]))
-        }
-        failsWithErrorMessageForNil("expected to not equal <nil>, got <[1: 1]>") {
-            expect([1: 1]).toNot(equal(nil as [Int: Int]?))
         }
     }
 
@@ -140,9 +120,9 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testDataEquality() {
-        let actual = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let expected = "foobar".dataUsingEncoding(NSUTF8StringEncoding)
-        let unexpected = "foobarfoo".dataUsingEncoding(NSUTF8StringEncoding)
+        let actual = "foobar".dataUsingEncoding(NSUTF8StringEncoding)!
+        let expected = "foobar".dataUsingEncoding(NSUTF8StringEncoding)!
+        let unexpected = "foobarfoo".dataUsingEncoding(NSUTF8StringEncoding)!
 
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
@@ -199,9 +179,11 @@ class EqualTest: XCTestCase, XCTestCaseProvider {
 
     func testOptionalEquality() {
         expect(1 as CInt?).to(equal(1))
-        expect(1 as CInt?).to(equal(1 as CInt?))
-
-        expect(1).toNot(equal(nil))
+        expect("One" as String?).to(equal("One"))
+        
+        failsWithErrorMessageForNil("expected to equal <Two>, got <nil>") {
+            expect(nil as String?).to(equal("Two"))
+        }
     }
     
     func testArrayOfOptionalsEquality() {
