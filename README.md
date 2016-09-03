@@ -649,13 +649,13 @@ expect(dolphin).to(beAKindOf([Mammal class]));
 // Passes if actual is not nil, true, or an object with a boolean value of true:
 expect(actual).to(beTruthy())
 
-// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+// Passes if actual is only true (not nil or an object conforming to Boolean true):
 expect(actual).to(beTrue())
 
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy())
 
-// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+// Passes if actual is only false (not nil or an object conforming to Boolean false):
 expect(actual).to(beFalse())
 
 // Passes if actual is nil:
@@ -668,13 +668,13 @@ expect(actual).to(beNil())
 // Passes if actual is not nil, true, or an object with a boolean value of true:
 expect(actual).to(beTruthy());
 
-// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+// Passes if actual is only true (not nil or an object conforming to Boolean true):
 expect(actual).to(beTrue());
 
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy());
 
-// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+// Passes if actual is only false (not nil or an object conforming to Boolean false):
 expect(actual).to(beFalse());
 
 // Passes if actual is nil:
@@ -688,11 +688,11 @@ If you're using Swift 2.0+, you can use the `throwError` matcher to check if an 
 ```swift
 // Swift
 
-// Passes if somethingThatThrows() throws an ErrorType:
+// Passes if somethingThatThrows() throws an ErrorProtocol:
 expect{ try somethingThatThrows() }.to(throwError())
 
 // Passes if somethingThatThrows() throws an error with a given domain:
-expect{ try somethingThatThrows() }.to(throwError { (error: ErrorType) in
+expect{ try somethingThatThrows() }.to(throwError { (error: ErrorProtocol) in
     expect(error._domain).to(equal(NSCocoaErrorDomain))
 })
 
@@ -700,21 +700,21 @@ expect{ try somethingThatThrows() }.to(throwError { (error: ErrorType) in
 expect{ try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadCorruptError))
 
 // Passes if somethingThatThrows() throws an error with a given type:
-expect{ try somethingThatThrows() }.to(throwError(errorType: MyError.self))
+expect{ try somethingThatThrows() }.to(throwError(errorType: NimbleError.self))
 ```
 
-If you are working directly with `ErrorType` values, as is sometimes the case when using `Result` or `Promise` types, you can use the `matchError` matcher to check if the error is the same error is is supposed to be, without requiring explicit casting.
+If you are working directly with `ErrorProtocol` values, as is sometimes the case when using `Result` or `Promise` types, you can use the `matchError` matcher to check if the error is the same error is is supposed to be, without requiring explicit casting.
 
 ```swift
 // Swift
 
-let actual: ErrorType = …
+let actual: ErrorProtocol = …
 
-// Passes if actual contains any error value from the MyErrorEnum type:
-expect(actual).to(matchError(MyErrorEnum))
+// Passes if actual contains any error value from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum))
 
-// Passes if actual contains the Timeout value from the MyErrorEnum type:
-expect(actual).to(matchError(MyErrorEnum.Timeout))
+// Passes if actual contains the Timeout value from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum.Timeout))
 
 // Passes if actual contains an NSError equal to the given one:
 expect(actual).to(matchError(NSError(domain: "err", code: 123, userInfo: nil)))
@@ -898,7 +898,7 @@ expect([1,2,3,4]).to(allPass(beLessThan(5)))
 expect(@[@1, @2, @3,@4]).to(allPass(beLessThan(@5)));
 ```
 
-For Swift the actual value has to be a SequenceType, e.g. an array, a set or a custom seqence type.
+For Swift the actual value has to be a Sequence, e.g. an array, a set or a custom seqence type.
 
 For Objective-C the actual value has to be a NSFastEnumeration, e.g. NSArray and NSSet, of NSObjects and only the variant which
 uses another matcher is available here.
@@ -921,7 +921,7 @@ expect(actual).to(haveCount(expected))
 expect(actual).notTo(haveCount(expected))
 ```
 
-For Swift the actual value must be a `CollectionType` such as array, dictionary or set.
+For Swift the actual value must be a `Collection` such as array, dictionary or set.
 
 For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
 
@@ -1131,11 +1131,11 @@ automatically generate expected value failure messages when they're nil.
 
 ```swift
 
-public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
+public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = actualExpression.evaluate() {
-            var actualGenerator = actualValue.generate()
+            var actualGenerator = actualValue.makeIterator()
             return actualGenerator.next() == startingElement
         }
         return false

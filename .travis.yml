@@ -1,33 +1,25 @@
-osx_image: xcode7.3
+osx_image: xcode8
 language: generic
 matrix:
   include:
+    # - os: osx
+    #   sudo: required
+    #   env: TYPE=podspec
     - os: osx
-      sudo: required
-      env: TYPE=podspec
+      env: TYPE=ios NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0
     - os: osx
-      env: TYPE=ios NIMBLE_XCODE_ACTION="build test" NIMBLE_RUNTIME_IOS_SDK_VERSION=9.0
+      env: TYPE=tvos NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0
     - os: osx
-      env: TYPE=tvos NIMBLE_XCODE_ACTION="build test" NIMBLE_RUNTIME_TVOS_SDK_VERSION=9.0
-    - os: osx
-      env: TYPE=macos NIMBLE_XCODE_ACTION="build test"
+      env: TYPE=macos
     - os: osx
       env: TYPE=swiftpm
-    - os: osx
-      env: TYPE=ios NIMBLE_XCODE_ACTION="build-for-testing test-without-building" NIMBLE_RUNTIME_IOS_SDK_VERSION=10.0
-      osx_image: xcode8
-    - os: osx
-      env: TYPE=tvos NIMBLE_XCODE_ACTION="build-for-testing test-without-building" NIMBLE_RUNTIME_TVOS_SDK_VERSION=10.0
-      osx_image: xcode8
-    - os: osx
-      env: TYPE=macos NIMBLE_XCODE_ACTION="build-for-testing test-without-building"
-      osx_image: xcode8
     - os: linux
       dist: trusty
       sudo: required
       env: TYPE=swiftpm
+      install:
+        - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
 install:
-  - if [[ "$TYPE" == "swiftpm" ]]; then eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"; fi
   - if [[ "$TYPE" == "podspec" ]]; then sudo gem install bundler; bundle install; fi
 script:
   - ./test $TYPE
