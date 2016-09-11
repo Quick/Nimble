@@ -52,13 +52,7 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(CGFloat(1.2)).to(beCloseTo(1.2001))
         expect(CGFloat(1.2)).to(beCloseTo(CGFloat(1.2001)))
 
-        let got: String
-        #if _runtime(_ObjC)
-            got = "1.2"
-        #else
-            got = "CGFloat(native: 1.2)"
-        #endif
-        failsWithErrorMessage("expected to be close to <1.2001> (within 1), got <\(got)>") {
+        failsWithErrorMessage("expected to be close to <1.2001> (within 1), got <1.2>") {
             expect(CGFloat(1.2)).to(beCloseTo(1.2001, within: 1.0))
         }
     }
