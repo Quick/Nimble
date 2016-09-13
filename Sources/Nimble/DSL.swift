@@ -40,7 +40,7 @@ internal func nimblePrecondition(
     _ name: @autoclosure() -> String,
     _ message: @autoclosure() -> String,
     file: StaticString = #file,
-    line: UInt = #line) -> Bool {
+    line: UInt = #line) {
         let result = expr()
         if !result {
 #if _runtime(_ObjC)
@@ -53,7 +53,6 @@ internal func nimblePrecondition(
             preconditionFailure("\(name()) - \(message())", file: file, line: line)
 #endif
         }
-        return result
 }
 
 internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) -> Never {

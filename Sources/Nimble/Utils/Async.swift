@@ -29,12 +29,12 @@ internal class AssertionWaitLock: WaitLock {
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        _ = nimblePrecondition(
+        nimblePrecondition(
             Thread.isMainThread,
             "InvalidNimbleAPIUsage",
             "\(fnName) can only run on the main thread."
         )
-        _ = nimblePrecondition(
+        nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
             "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
@@ -276,7 +276,7 @@ internal class Awaiter {
             let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure() {
                     completionCount += 1
-                    _ = nimblePrecondition(
+                    nimblePrecondition(
                         completionCount < 2,
                         "InvalidNimbleAPIUsage",
                         "Done closure's was called multiple times. waitUntil(..) expects its " +
