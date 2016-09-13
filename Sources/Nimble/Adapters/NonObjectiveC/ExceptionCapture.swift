@@ -14,11 +14,11 @@ class NSException {}
 internal class ExceptionCapture {
     let finally: (() -> Void)?
 
-    init(handler: ((NSException!) -> Void)?, finally: (() -> Void)?) {
+    init(handler: ((NSException) -> Void)?, finally: (() -> Void)?) {
         self.finally = finally
     }
 
-    func tryBlock(unsafeBlock: (() -> Void)) {
+    func tryBlock(_ unsafeBlock: (() -> Void)) {
         // We have no way of handling Objective C exceptions in Swift,
         // so we just go ahead and run the unsafeBlock as-is
         unsafeBlock()
