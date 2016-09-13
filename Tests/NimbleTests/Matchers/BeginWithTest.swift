@@ -17,6 +17,8 @@ final class BeginWithTest: XCTestCase, XCTestCaseProvider {
         expect("foobar").to(beginWith("foo"))
         expect("foobar").toNot(beginWith("oo"))
 
+        expect("foobarfoo").to(beginWith("foo"))
+
         expect(NSString(string: "foobar").description).to(beginWith("foo"))
         expect(NSString(string: "foobar").description).toNot(beginWith("oo"))
 

@@ -13,9 +13,12 @@ final class EndWithTest: XCTestCase, XCTestCaseProvider {
     func testEndWithPositives() {
         expect([1, 2, 3]).to(endWith(3))
         expect([1, 2, 3]).toNot(endWith(2))
+        expect([]).toNot(endWith(1))
+        expect(["a", "b", "a"]).to(endWith("a"))
 
         expect("foobar").to(endWith("bar"))
         expect("foobar").toNot(endWith("oo"))
+        expect("foobarfoo").to(endWith("foo"))
 
         expect(NSString(string: "foobar").description).to(endWith("bar"))
         expect(NSString(string: "foobar").description).toNot(endWith("oo"))
@@ -23,6 +26,8 @@ final class EndWithTest: XCTestCase, XCTestCaseProvider {
 #if _runtime(_ObjC)
         expect(NSArray(array: ["a", "b"])).to(endWith("b"))
         expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
+        expect(NSArray(array: [])).toNot(endWith("a"))
+        expect(NSArray(array: ["a", "b", "a"])).to(endWith("a"))
 #endif
     }
 

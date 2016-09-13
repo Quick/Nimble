@@ -21,8 +21,16 @@ public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> NonNil
 public func beginWith(_ startingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
-        let collection = try actualExpression.evaluate()
-        return collection != nil && collection!.index(of: startingElement) == 0
+        guard let collection = try actualExpression.evaluate() else { return false }
+        guard collection.count > 0 else { return false }
+        #if os(Linux)
+            guard let collectionValue = collection.object(at: 0) as? NSObject else {
+                return false
+            }
+        #else
+            let collectionValue = collection.object(at: 0) as AnyObject
+        #endif
+        return collectionValue.isEqual(startingElement)
     }
 }
 
