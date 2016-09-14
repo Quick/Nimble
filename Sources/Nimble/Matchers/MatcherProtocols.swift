@@ -122,7 +122,7 @@ extension Date: TestOutputStringConvertible {
 
 extension NSDate: TestOutputStringConvertible {
     public var testDescription: String {
-        return dateFormatter.string(from: self as Date)
+        return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
 
