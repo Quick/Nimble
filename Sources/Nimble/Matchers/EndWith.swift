@@ -29,8 +29,17 @@ public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> NonNilMatc
 public func endWith(_ endingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
-        let collection = try actualExpression.evaluate()
-        return collection != nil && collection!.index(of: endingElement) == collection!.count - 1
+        guard let collection = try actualExpression.evaluate() else { return false }
+        guard collection.count > 0 else { return false }
+        #if os(Linux)
+            guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
+                return false
+            }
+        #else
+            let collectionValue = collection.object(at: collection.count - 1) as AnyObject
+        #endif
+
+        return collectionValue.isEqual(endingElement)
     }
 }
 
@@ -42,8 +51,7 @@ public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
-            let range = collection.range(of: endingSubstring)
-            return range != nil && range!.upperBound == collection.endIndex
+            return collection.hasSuffix(endingSubstring)
         }
         return false
     }

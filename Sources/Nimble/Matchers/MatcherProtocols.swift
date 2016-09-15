@@ -58,12 +58,12 @@ extension NSDictionary : NMBCollection {}
 #if _runtime(_ObjC)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 @objc public protocol NMBOrderedCollection : NMBCollection {
-    @objc(indexOfObject:)
-    func index(of anObject: Any) -> Int
+    @objc(objectAtIndex:)
+    func object(at index: Int) -> Any
 }
 #else
 public protocol NMBOrderedCollection : NMBCollection {
-    func index(of anObject: Any) -> Int
+    func object(at index: Int) -> Any
 }
 #endif
 
