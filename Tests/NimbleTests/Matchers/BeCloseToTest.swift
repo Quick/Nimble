@@ -9,6 +9,7 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
             ("testBeCloseToWithin", testBeCloseToWithin),
             ("testBeCloseToWithNSNumber", testBeCloseToWithNSNumber),
             ("testBeCloseToWithDate", testBeCloseToWithDate),
+            ("testBeCloseToWithNSDate", testBeCloseToWithNSDate),
             ("testBeCloseToOperator", testBeCloseToOperator),
             ("testBeCloseToWithinOperator", testBeCloseToWithinOperator),
             ("testPlusMinusOperator", testPlusMinusOperator),
@@ -61,12 +62,20 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(Date(dateTimeString: "2015-08-26 11:43:00")).to(beCloseTo(Date(dateTimeString: "2015-08-26 11:43:05"), within: 10))
         
         failsWithErrorMessage("expected to not be close to <2015-08-26 11:43:00.0050> (within 0.004), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")).toNot(beCloseTo(expectedDate, within: 0.004))
         }
     }
-    
+
+    func testBeCloseToWithNSDate() {
+        expect(NSDate(dateTimeString: "2015-08-26 11:43:00")).to(beCloseTo(NSDate(dateTimeString: "2015-08-26 11:43:05"), within: 10))
+
+        failsWithErrorMessage("expected to not be close to <2015-08-26 11:43:00.0050> (within 0.004), got <2015-08-26 11:43:00.0000>") {
+            let expectedDate = NSDate(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
+            expect(NSDate(dateTimeString: "2015-08-26 11:43:00")).toNot(beCloseTo(expectedDate, within: 0.004))
+        }
+    }
+
     func testBeCloseToOperator() {
         expect(1.2) ≈ 1.2001
         expect(1.2 as CDouble) ≈ 1.2001
@@ -104,7 +113,6 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ Date(dateTimeString: "2015-08-26 11:43:00")
 
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.0001), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ expectedDate
         }
@@ -115,12 +123,10 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) == (Date(dateTimeString: "2015-08-26 11:43:05"), 10)
 
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ (expectedDate, 0.006)
         }
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) == (expectedDate, 0.006)
         }
@@ -131,12 +137,10 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
         expect(Date(dateTimeString: "2015-08-26 11:43:00")) == Date(dateTimeString: "2015-08-26 11:43:05") ± 10
 
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) ≈ expectedDate ± 0.006
         }
         failsWithErrorMessage("expected to be close to <2015-08-26 11:43:00.0050> (within 0.006), got <2015-08-26 11:43:00.0000>") {
-
             let expectedDate = Date(dateTimeString: "2015-08-26 11:43:00").addingTimeInterval(0.005)
             expect(Date(dateTimeString: "2015-08-26 11:43:00")) == expectedDate ± 0.006
         }

@@ -82,11 +82,18 @@ public class NimbleHelper : NSObject {
 }
 
 extension Date {
-    init(dateTimeString:String) {
+    init(dateTimeString: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let date = dateFormatter.date(from: dateTimeString)!
         self.init(timeInterval:0, since:date)
+    }
+}
+
+extension NSDate {
+    convenience init(dateTimeString: String) {
+        let date = Date(dateTimeString: dateTimeString)
+        self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
     }
 }

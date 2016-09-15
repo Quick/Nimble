@@ -104,15 +104,25 @@ private let dateFormatter: DateFormatter = {
 
 extension Date: NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return self.timeIntervalSinceReferenceDate
-        }
+        return self.timeIntervalSinceReferenceDate
+    }
+}
+
+extension NSDate: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        return self.timeIntervalSinceReferenceDate
     }
 }
 
 extension Date: TestOutputStringConvertible {
     public var testDescription: String {
-        return dateFormatter.string(from: self as Date)
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension NSDate: TestOutputStringConvertible {
+    public var testDescription: String {
+        return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
 
