@@ -6,7 +6,6 @@ or Objective-C expressions. Inspired by
 
 ```swift
 // Swift
-
 expect(1 + 1).to(equal(2))
 expect(1.2).to(beCloseTo(1.1, within: 0.1))
 expect(3) > 2
@@ -906,6 +905,8 @@ uses another matcher is available here.
 ## Verify collection count
 
 ```swift
+// Swift
+
 // passes if actual collection's count is equal to expected
 expect(actual).to(haveCount(expected))
 
@@ -914,6 +915,8 @@ expect(actual).notTo(haveCount(expected))
 ```
 
 ```objc
+// Objective-C
+
 // passes if actual collection's count is equal to expected
 expect(actual).to(haveCount(expected))
 
@@ -924,6 +927,30 @@ expect(actual).notTo(haveCount(expected))
 For Swift the actual value must be a `Collection` such as array, dictionary or set.
 
 For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
+
+## Foundation
+
+### Verifying a Notification was posted
+
+```swift
+// Swift
+let testNotification = Notification(name: "Foo", object: nil)
+
+// passes if the closure in expect { ... } posts a notification to the default
+// notification center.
+expect {
+    NotificationCenter.default.postNotification(testNotification)
+}.to(postNotifications(equal([testNotification]))
+
+// passes if the closure in expect { ... } posts a notification to a given
+// notification center
+let notificationCenter = NotificationCenter()
+expect {
+    notificationCenter.postNotification(testNotification)
+}.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
+```
+
+> This matcher is only available in Swift.
 
 ## Matching a value to any of a group of matchers
 
