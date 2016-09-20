@@ -71,7 +71,7 @@ fi
 
 if [ ! -f "$RELEASE_NOTES" ]; then
     echo " > Failed to find $RELEASE_NOTES. Prompting editor"
-    RELEASE_NOTES=.release-changes
+    RELEASE_NOTES=/tmp/nimble.release.notes
     LATEST_TAG=`git for-each-ref refs/tags --sort=-refname --format="%(refname:short)" | grep -E "^v\d+\.\d+\.\d+(-\w+(\.\d)?)?\$" | ruby -e 'puts STDIN.read.split("\n").sort { |a,b| Gem::Version.new(a.gsub(/^v/, "")) <=> Gem::Version.new(b.gsub(/^v/, "")) }.last'`
     echo " > Latest tag ${LATEST_TAG}"
     echo "${POD_NAME} v$VERSION" > $RELEASE_NOTES
