@@ -4,7 +4,7 @@ import XCTest
 // This is the entry point for NimbleTests on Linux
 
 XCTMain([
-    // testCase(AsynchronousTests.allTests),
+    testCase(AsyncTest.allTests),
     testCase(SynchronousTest.allTests),
     testCase(UserDescriptionTest.allTests),
 

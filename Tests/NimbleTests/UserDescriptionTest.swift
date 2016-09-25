@@ -38,33 +38,27 @@ final class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
     }
     
     func testToEventuallyMatch_CustomFailureMessage() {
-#if _runtime(_ObjC)
         failsWithErrorMessage(
             "These aren't eventually equal!\n" +
             "expected to eventually equal <1>, got <0>") {
                 expect { 0 }.toEventually(equal(1), description: "These aren't eventually equal!")
         }
-#endif
     }
     
     func testToEventuallyNotMatch_CustomFailureMessage() {
-#if _runtime(_ObjC)
         failsWithErrorMessage(
             "These are eventually equal!\n" +
             "expected to eventually not equal <1>, got <1>") {
                 expect { 1 }.toEventuallyNot(equal(1), description: "These are eventually equal!")
         }
-#endif
     }
     
     func testToNotEventuallyMatch_CustomFailureMessage() {
-#if _runtime(_ObjC)
         failsWithErrorMessage(
             "These are eventually equal!\n" +
             "expected to eventually not equal <1>, got <1>") {
                 expect { 1 }.toEventuallyNot(equal(1), description: "These are eventually equal!")
         }
-#endif
     }
 
 }
