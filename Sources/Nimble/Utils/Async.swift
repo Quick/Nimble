@@ -2,7 +2,7 @@ import CoreFoundation
 import Dispatch
 import Foundation
 
-#if os(Linux)
+#if !_runtime(_ObjC)
     private var NSEC_PER_SEC: CUnsignedLongLong = 1000000000
     private var NSEC_PER_MSEC: CUnsignedLongLong = 1000000
 #endif
