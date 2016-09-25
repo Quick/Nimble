@@ -21,7 +21,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    struct Error: Swift.Error {}
+    class Error: Swift.Error {}
     let errorToThrow = Error()
 
     private func doThrowError() throws -> Int {
