@@ -1,8 +1,6 @@
 import XCTest
 import Nimble
 
-#if _runtime(_ObjC)
-
 final class MatchTest:XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (MatchTest) -> () throws -> Void)] {
         return [
@@ -46,4 +44,3 @@ final class MatchTest:XCTestCase, XCTestCaseProvider {
         }
     }
 }
-#endif
