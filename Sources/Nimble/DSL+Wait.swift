@@ -1,6 +1,6 @@
+import Dispatch
 import Foundation
 
-#if _runtime(_ObjC)
 private enum ErrorResult {
     case exception(NSException)
     case error(Error)
@@ -70,10 +70,16 @@ internal class NMBWait: NSObject {
             }
     }
 
+    #if _runtime(_ObjC)
     @objc(untilFile:line:action:)
     internal class func until(_ file: FileString = #file, line: UInt = #line, action: @escaping (() -> Void) -> Void) -> Void {
         until(timeout: 1, file: file, line: line, action: action)
     }
+    #else
+    internal class func until(_ file: FileString = #file, line: UInt = #line, action: @escaping (() -> Void) -> Void) -> Void {
+        until(timeout: 1, file: file, line: line, action: action)
+    }
+    #endif
 }
 
 internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: TimeInterval) -> String {
@@ -90,4 +96,3 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: TimeInterv
 public func waitUntil(timeout: TimeInterval = 1, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) -> Void {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
-#endif

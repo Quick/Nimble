@@ -1,10 +1,7 @@
+import Dispatch
 import Foundation
 import XCTest
 import Nimble
-
-// These tests require the ObjC runtimes do not currently have the GCD and run loop facilities
-// required for working with Nimble's async matchers
-#if _runtime(_ObjC)
 
 final class AsyncTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (AsyncTest) -> () throws -> Void)] {
@@ -24,7 +21,8 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    let errorToThrow = NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 42, userInfo: nil)
+    class Error: Swift.Error {}
+    let errorToThrow = Error()
 
     private func doThrowError() throws -> Int {
         throw errorToThrow
@@ -222,5 +220,3 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 #endif
     }
 }
-#endif
-

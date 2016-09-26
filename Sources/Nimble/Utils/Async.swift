@@ -1,10 +1,13 @@
+import CoreFoundation
+import Dispatch
 import Foundation
 
-#if _runtime(_ObjC)
-import Dispatch
+#if !_runtime(_ObjC)
+    private let NSEC_PER_SEC: CUnsignedLongLong = 1000000000
+#endif
 
-private let timeoutLeeway = DispatchTimeInterval.nanoseconds(Int(NSEC_PER_MSEC))
-private let pollLeeway = DispatchTimeInterval.nanoseconds(Int(NSEC_PER_MSEC))
+private let timeoutLeeway = DispatchTimeInterval.milliseconds(1)
+private let pollLeeway = DispatchTimeInterval.milliseconds(1)
 
 /// Stores debugging information about callers
 internal struct WaitingInfo: CustomStringConvertible {
@@ -29,8 +32,13 @@ internal class AssertionWaitLock: WaitLock {
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        #if _runtime(_ObjC)
+            let isMainThread = Thread.isMainThread
+        #else
+            let isMainThread = _CFIsMainThread()
+        #endif
         nimblePrecondition(
-            Thread.isMainThread,
+            isMainThread,
             "InvalidNimbleAPIUsage",
             "\(fnName) can only run on the main thread."
         )
@@ -177,7 +185,12 @@ internal class AwaitPromiseBuilder<T> {
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
             let runLoop = CFRunLoopGetMain()
-            CFRunLoopPerformBlock(runLoop, CFRunLoopMode.defaultMode.rawValue) {
+            #if _runtime(_ObjC)
+                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
+            #else
+                let runLoopMode = kCFRunLoopDefaultMode
+            #endif
+            CFRunLoopPerformBlock(runLoop, runLoopMode) {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
@@ -237,7 +250,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger.timeoutSource.resume()
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
-                RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
+                _ = RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
             }
             self.trigger.timeoutSource.suspend()
             self.trigger.timeoutSource.cancel()
@@ -346,5 +359,3 @@ internal func pollBlock(
 
         return result
 }
-
-#endif

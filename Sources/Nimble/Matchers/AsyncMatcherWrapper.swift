@@ -1,7 +1,5 @@
 import Foundation
 
-#if _runtime(_ObjC)
-
 public struct AsyncDefaults {
     public static var Timeout: TimeInterval = 1
     public static var PollInterval: TimeInterval = 0.01
@@ -144,5 +142,3 @@ extension Expectation {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
-
-#endif
