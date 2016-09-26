@@ -3,8 +3,8 @@ import Dispatch
 import Foundation
 
 #if !_runtime(_ObjC)
-    private var NSEC_PER_SEC: CUnsignedLongLong = 1000000000
-    private var NSEC_PER_MSEC: CUnsignedLongLong = 1000000
+    private let NSEC_PER_SEC: CUnsignedLongLong = 1000000000
+    private let NSEC_PER_MSEC: CUnsignedLongLong = 1000000
 #endif
 
 private let timeoutLeeway = DispatchTimeInterval.nanoseconds(Int(NSEC_PER_MSEC))
