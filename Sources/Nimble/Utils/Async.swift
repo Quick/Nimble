@@ -3,7 +3,7 @@ import Dispatch
 import Foundation
 
 #if !_runtime(_ObjC)
-    private let NSEC_PER_SEC: CUnsignedLongLong = 1000000000
+    import CDispatch
 #endif
 
 private let timeoutLeeway = DispatchTimeInterval.milliseconds(1)
