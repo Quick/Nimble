@@ -1,7 +1,5 @@
 import Foundation
 
-#if _runtime(_ObjC)
-
 /// A Nimble matcher that succeeds when the actual string satisfies the regular expression
 /// described by the expected string.
 public func match(_ expectedValue: String?) -> NonNilMatcherFunc<String> {
@@ -17,6 +15,8 @@ public func match(_ expectedValue: String?) -> NonNilMatcherFunc<String> {
         return false
     }
 }
+
+#if _runtime(_ObjC)
 
 extension NMBObjCMatcher {
     public class func matchMatcher(_ expected: NSString) -> NMBMatcher {
