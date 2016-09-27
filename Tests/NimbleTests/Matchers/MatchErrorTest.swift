@@ -26,6 +26,7 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     func testMatchErrorNegative() {
         expect(NimbleError.laugh).toNot(matchError(NimbleError.cry))
         expect(NimbleError.laugh as Error).toNot(matchError(NimbleError.cry))
+        expect(NimbleError.laugh).toNot(matchError(EquatableError.self))
     }
 
     func testMatchNSErrorPositive() {
@@ -63,6 +64,10 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     func testMatchNegativeMessage() {
         failsWithErrorMessage("expected to not match error <laugh>, got <laugh>") {
             expect(NimbleError.laugh).toNot(matchError(NimbleError.laugh))
+        }
+
+        failsWithErrorMessage("expected to match error from type <EquatableError>, got <laugh>") {
+            expect(NimbleError.laugh).to(matchError(EquatableError.self))
         }
     }
 
