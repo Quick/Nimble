@@ -21,7 +21,9 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    let errorToThrow = NSError(domain: NSCocoaErrorDomain, code: 42, userInfo: nil)
+    class Error: Swift.Error {}
+    let errorToThrow = Error()
+
     private func doThrowError() throws -> Int {
         throw errorToThrow
     }
@@ -36,14 +38,12 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testUnexpectedErrorsThrownFails() {
-#if _runtime(_ObjC) // This test triggers a weird segfault on Linux currently
         failsWithErrorMessage("expected to equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.to(equal(1))
         }
         failsWithErrorMessage("expected to not equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toNot(equal(1))
         }
-#endif
     }
 
     func testToMatchesIfMatcherReturnsTrue() {
