@@ -117,7 +117,7 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
     return [NMBObjCMatcher endWithMatcher:itemElementOrSubstring];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_equal(id expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_equal(__nullable id expectedValue) {
     return [NMBObjCMatcher equalMatcher:expectedValue];
 }
 
