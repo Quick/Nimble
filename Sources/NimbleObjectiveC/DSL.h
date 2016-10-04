@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
     DEFINE_NMB_EXPECT_OVERLOAD(unsigned long long, @(actualBlock()))
     DEFINE_NMB_EXPECT_OVERLOAD(char, @(actualBlock()))
     DEFINE_NMB_EXPECT_OVERLOAD(unsigned char, @(actualBlock()))
+    // bool doesn't get the compiler to dispatch to BOOL types, but using BOOL here seems to allow
+    // the compiler to dispatch to bool.
+    DEFINE_NMB_EXPECT_OVERLOAD(BOOL, @(actualBlock()))
 
 #undef DEFINE_NMB_EXPECT_OVERLOAD
 

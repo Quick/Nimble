@@ -144,28 +144,28 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc
 extension NMBObjCMatcher {
     public class func beTruthyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
             return try! beTruthy().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beFalsyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
             return try! beFalsy().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beTrueMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
             return try! beTrue().matches(expr, failureMessage: failureMessage)
         }
     }
 
     public class func beFalseMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false as Bool? }
+            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
             return try! beFalse().matches(expr, failureMessage: failureMessage)
         }
     }
