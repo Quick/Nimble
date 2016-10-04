@@ -77,14 +77,21 @@ internal func errorMatchesNonNilFieldsOrClosure<T: Error>(
                     matches = false
                 }
             }
-        } else if errorType != nil && closure != nil {
+        } else if errorType != nil {
+            matches = (actualError is T)
             // The closure expects another ErrorProtocol as argument, so this
             // is _supposed_ to fail, so that it becomes more obvious.
-            let assertions = gatherExpectations {
-                expect(actualError is T).to(equal(true))
+            if let closure = closure {
+                let assertions = gatherExpectations {
+                    if let actual = actualError as? T {
+                        closure(actual)
+                    }
+                }
+                let messages = assertions.map { $0.message }
+                if messages.count > 0 {
+                    matches = false
+                }
             }
-            precondition(assertions.map { $0.message }.count > 0)
-            matches = false
         }
     }
 
