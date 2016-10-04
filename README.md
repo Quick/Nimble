@@ -406,7 +406,7 @@ to keep in mind when using Nimble in Objective-C:
 
 1. All parameters passed to the `expect` function, as well as matcher
    functions like `equal`, must be Objective-C objects or can be converted into
-   an NSObject equivalent:
+   an `NSObject` equivalent:
 
    ```objc
    // Objective-C
@@ -438,7 +438,7 @@ to keep in mind when using Nimble in Objective-C:
    expectAction(^{ [exception raise]; }).to(raiseException());
    ```
 
-The following types are currently boxed:
+The following types are currently converted to an `NSObject` type:
 
  - **C Numeric types** are converted to `NSNumber *`
  - `NSRange` is converted to `NSValue *`
