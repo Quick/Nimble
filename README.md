@@ -456,6 +456,7 @@ For the following matchers:
 - `beFalse`
 - `beTruthy`
 - `beFalsy`
+- `haveCount`
 
 If you would like to see more, [file an issue](https://github.com/Quick/Nimble/issues).
 
