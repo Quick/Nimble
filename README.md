@@ -327,6 +327,9 @@ cases, use the `timeout` parameter:
 
 // Waits three seconds for ocean to contain "starfish":
 expect(ocean).toEventually(contain("starfish"), timeout: 3)
+
+// Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.
+expect(someValue).toEventually(equal(100), timeout: 5.5, pollInterval: 0.2)
 ```
 
 ```objc
