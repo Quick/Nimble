@@ -72,5 +72,29 @@ private func raiseBadInstructionException() {
 		return KERN_SUCCESS
 	}
 }
+#else
+
+// Why is there here?
+//
+// Swift's Bridging Header is computed using an arbitrary architecture. This means we may or may
+// not have `BadInstructionException` defined if we only define it under x86. Instead, we define
+// a dummy class to make sure the bridging header is generated consistently.
+@objc public class BadInstructionException: NSException {
+    static var name: String = "com.cocoawithlove.BadInstruction"
+
+    init() {
+        super.init(name: NSExceptionName(rawValue: BadInstructionException.name), reason: nil, userInfo: nil)
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    /// An Objective-C callable function, invoked from the `mach_exc_server` callback function `catch_mach_exception_raise_state` to push the `raiseBadInstructionException` function onto the stack.
+    public class func catch_mach_exception_raise_state(_ exception_port: mach_port_t, exception: exception_type_t, code: UnsafePointer<mach_exception_data_type_t>, codeCnt: mach_msg_type_number_t, flavor: UnsafeMutablePointer<Int32>, old_state: UnsafePointer<natural_t>, old_stateCnt: mach_msg_type_number_t, new_state: thread_state_t, new_stateCnt: UnsafeMutablePointer<mach_msg_type_number_t>) -> kern_return_t {
+
+        fatalError("Unavailable for this CPU architecture")
+    }
+}
 
 #endif
