@@ -9,7 +9,11 @@ SWIFT_CLASS("_TtC6Nimble7NMBWait")
 
 @end
 
-NIMBLE_EXPORT NMBExpectation *NMB_expect(id(^actualBlock)(), NSString *file, NSUInteger line) {
+
+NS_ASSUME_NONNULL_BEGIN
+
+
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBExpectation *__nonnull NMB_expect(id __nullable(^actualBlock)(), NSString *__nonnull file, NSUInteger line) {
     return [[NMBExpectation alloc] initWithActualBlock:actualBlock
                                               negative:NO
                                                   file:file
@@ -35,7 +39,7 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beAKindOf(Class expectedClass) {
     return [NMBObjCMatcher beAKindOfMatcher:expectedClass];
 }
 
-NIMBLE_EXPORT NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue) {
     return [NMBObjCMatcher beCloseToMatcher:expectedValue within:0.001];
 }
 
@@ -43,11 +47,11 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring) {
     return [NMBObjCMatcher beginWithMatcher:itemElementOrSubstring];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThan(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beGreaterThan(NSNumber *expectedValue) {
     return [NMBObjCMatcher beGreaterThanMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
     return [NMBObjCMatcher beGreaterThanOrEqualToMatcher:expectedValue];
 }
 
@@ -59,11 +63,11 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_be(id expectedInstance) {
     return [NMBObjCMatcher beIdenticalToMatcher:expectedInstance];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue) {
     return [NMBObjCMatcher beLessThanMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue) {
     return [NMBObjCMatcher beLessThanOrEqualToMatcher:expectedValue];
 }
 
@@ -113,11 +117,11 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
     return [NMBObjCMatcher endWithMatcher:itemElementOrSubstring];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_equal(__nullable id expectedValue) {
     return [NMBObjCMatcher equalMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_haveCount(id expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_haveCount(id expectedValue) {
     return [NMBObjCMatcher haveCountMatcher:expectedValue];
 }
 
@@ -148,3 +152,5 @@ NIMBLE_EXPORT NMBWaitUntilBlock NMB_waitUntilBuilder(NSString *file, NSUInteger 
     [NMBWait untilFile:file line:line action:action];
   };
 }
+
+NS_ASSUME_NONNULL_END

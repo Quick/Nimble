@@ -11,6 +11,15 @@
     expect(@YES).to(beTruthy());
     expect(@NO).toNot(beTruthy());
     expect(nil).toNot(beTruthy());
+
+    expect(true).to(beTruthy());
+    expect(false).toNot(beTruthy());
+
+    expect(YES).to(beTruthy());
+    expect(NO).toNot(beTruthy());
+
+    expect(10).to(beTruthy());
+    expect(0).toNot(beTruthy());
 }
 
 - (void)testNegativeMatches {
@@ -22,6 +31,24 @@
     });
     expectFailureMessage(@"expected to be truthy, got <0>", ^{
         expect(@NO).to(beTruthy());
+    });
+    expectFailureMessage(@"expected to be truthy, got <0>", ^{
+        expect(false).to(beTruthy());
+    });
+    expectFailureMessage(@"expected to not be truthy, got <1>", ^{
+        expect(true).toNot(beTruthy());
+    });
+    expectFailureMessage(@"expected to be truthy, got <0>", ^{
+        expect(NO).to(beTruthy());
+    });
+    expectFailureMessage(@"expected to not be truthy, got <1>", ^{
+        expect(YES).toNot(beTruthy());
+    });
+    expectFailureMessage(@"expected to not be truthy, got <10>", ^{
+        expect(10).toNot(beTruthy());
+    });
+    expectFailureMessage(@"expected to be truthy, got <0>", ^{
+        expect(0).to(beTruthy());
     });
 }
 

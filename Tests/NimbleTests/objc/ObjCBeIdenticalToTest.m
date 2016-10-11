@@ -25,9 +25,12 @@
 
 - (void)testNilMatches {
     NSNull *obj = [NSNull null];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     expectNilFailureMessage(@"expected to be identical to nil, got nil", ^{
         expect(nil).to(beIdenticalTo(nil));
     });
+#pragma clang diagnostic pop
     expectNilFailureMessage(([NSString stringWithFormat:@"expected to not be identical to <%p>, got nil", obj]), ^{
         expect(nil).toNot(beIdenticalTo(obj));
     });
@@ -51,9 +54,12 @@
 
 - (void)testAliasNilMatches {
     NSNull *obj = [NSNull null];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     expectNilFailureMessage(@"expected to be identical to nil, got nil", ^{
         expect(nil).to(be(nil));
     });
+#pragma clang diagnostic pop
     expectNilFailureMessage(([NSString stringWithFormat:@"expected to not be identical to <%p>, got nil", obj]), ^{
         expect(nil).toNot(be(obj));
     });
