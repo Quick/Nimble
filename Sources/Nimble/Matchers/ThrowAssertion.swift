@@ -2,7 +2,7 @@ import Foundation
 
 public func throwAssertion() -> MatcherFunc<Void> {
     return MatcherFunc { actualExpression, failureMessage in
-    #if arch(x86_64) && _runtime(_ObjC) && !os(tvOS)
+    #if arch(x86_64) && _runtime(_ObjC)
         failureMessage.postfixMessage = "throw an assertion"
         failureMessage.actualValue = nil
         

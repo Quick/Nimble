@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-#if _runtime(_ObjC) && !os(tvOS)
+#if _runtime(_ObjC)
 
 final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (ThrowAssertionTest) -> () throws -> Void)] {
