@@ -8,12 +8,12 @@ if which xcodebuild > /dev/null; then
     BUILD_DIR=`pwd`/build
     LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_TVOS_SDK_VERSION=`xcodebuild -showsdks | grep appletvsimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
-    LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
     RUNTIME_TVOS_SDK_VERSION=${NIMBLE_RUNTIME_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
-    BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
+    BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
 fi
 
 set -e
@@ -40,9 +40,9 @@ function print_env {
     echo "   Building with tvOS SDK: `color_if_overridden $BUILD_TVOS_SDK_VERSION $NIMBLE_BUILD_TVOS_SDK_VERSION`"
     echo "   Running with tvOS SDK: `color_if_overridden $RUNTIME_TVOS_SDK_VERSION $NIMBLE_RUNTIME_TVOS_SDK_VERSION`"
     echo
-    echo " Mac OS X:"
-    echo "   Latest OS X SDK: $LATEST_OSX_SDK_VERSION"
-    echo "   Building with OS X SDK: `color_if_overridden $BUILD_OSX_SDK_VERSION $NIMBLE_BUILD_OSX_SDK_VERSION`"
+    echo " macOS:"
+    echo "   Latest macOS SDK: $LATEST_MACOS_SDK_VERSION"
+    echo "   Building with macOS SDK: `color_if_overridden $BUILD_MACOS_SDK_VERSION $NIMBLE_BUILD_MACOS_SDK_VERSION`"
     echo
     echo "======= END ======="
     echo
@@ -55,19 +55,19 @@ function run {
 
 function test_ios {
     run osascript -e 'tell app "Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Air,OS=$RUNTIME_IOS_SDK_VERSION" build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Air,OS=$RUNTIME_IOS_SDK_VERSION" build-for-testing test-without-building
 
     run osascript -e 'tell app "Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 5s,OS=$RUNTIME_IOS_SDK_VERSION" build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 5s,OS=$RUNTIME_IOS_SDK_VERSION" build-for-testing test-without-building
 }
 
 function test_tvos {
     run osascript -e 'tell app "Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV 1080p,OS=$RUNTIME_TVOS_SDK_VERSION" build test
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV 1080p,OS=$RUNTIME_TVOS_SDK_VERSION" build-for-testing test-without-building
 }
 
-function test_osx {
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx$BUILD_OSX_SDK_VERSION" build test
+function test_macos {
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-macOS" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" build-for-testing test-without-building
 }
 
 function test_podspec {
@@ -78,13 +78,16 @@ function test_podspec {
 }
 
 function test_swiftpm {
-    run swift build --clean && swift build && swift test
+    if [ -d .build ]; then
+        run swift build --clean
+    fi
+    run swift build && swift test
 }
 
 function test() {
     test_ios
     test_tvos
-    test_osx
+    test_macos
 
     if which swift-test; then
         test_swiftpm
@@ -104,9 +107,9 @@ function help {
     echo " clean        - Cleans the derived data directory of Xcode. Assumes default location"
     echo " ios          - Runs the tests as an iOS device"
     echo " tvos         - Runs the tests as an tvOS device"
-    echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
+    echo " macos        - Runs the tests on macOS 10.10 (Yosemite and newer only)"
     echo " podspec      - Runs pod lib lint against the podspec to detect breaking changes"
-    echo " all          - Runs the all tests of ios, tvos and osx"
+    echo " all          - Runs the all tests of macos, ios and tvos"
     echo " swiftpm      - Runs the tests built by the Swift Package Manager"
     echo " help         - Displays this help"
     echo
@@ -121,7 +124,7 @@ function main {
             clean) clean ;;
             ios) test_ios ;;
             tvos) test_tvos ;;
-            osx) test_osx ;;
+            macos) test_macos ;;
             podspec) test_podspec ;;
             test) test ;;
             all) test ;;
@@ -137,4 +140,3 @@ function main {
 }
 
 main $@
-
