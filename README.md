@@ -416,7 +416,7 @@ to keep in mind when using Nimble in Objective-C:
    expect(@(1 + 1)).to(equal(@2));
    expect(@"Hello world").to(contain(@"world"));
 
-   // Boxed as NSNumber*
+   // Boxed as NSNumber *
    expect(2).to(equal(2));
    expect(1.2).to(beLessThan(2.0));
    expect(true).to(beTruthy());
