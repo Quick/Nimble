@@ -136,7 +136,6 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         let moduleName = "NimbleTests"
         let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).NimbleError>"
         let closure = { (error: Error) in
-            print("** In closure! With domain \(error._domain)")
             expect(error._domain).to(equal("foo"))
         }
 
