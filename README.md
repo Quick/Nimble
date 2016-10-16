@@ -36,6 +36,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Comparisons](#comparisons)
   - [Types/Classes](#typesclasses)
   - [Truthiness](#truthiness)
+  - [Swift Assertions](#swift-assertions)
   - [Swift Error Handling](#swift-error-handling)
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
@@ -719,13 +720,29 @@ expect(actual).to(beNil());
 
 ## Swift Assertions
 
-If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library
+If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library.
 
 ```swift
 // Swift
 
-// Passes if somethingThatThrows() fails an assertion, such as calling fatalError():
-expect{ try somethingThatThrows() }.to(throwAssertion())
+// Passes if somethingThatThrows() throws an assertion, such as calling fatalError() or precondition fails:
+expect { () -> Void in fatalError() }.to(throwAssertion())
+expect { precondition(false) }.to(throwAssertion())
+
+// Passes if throwing a NSError is not equal to throwing an assertion:
+expect { throw NSError(domain: "test", code: 0, userInfo: nil) }.toNot(throwAssertion())
+
+// Passes if the post assertion code is not run:
+var reachedPoint1 = false
+var reachedPoint2 = false
+expect {
+    reachedPoint1 = true
+    precondition(false, "condition message")
+    reachedPoint2 = true
+}.to(throwAssertion())
+
+expect(reachedPoint1) == true
+expect(reachedPoint2) == false
 ```
 
 Notes:
