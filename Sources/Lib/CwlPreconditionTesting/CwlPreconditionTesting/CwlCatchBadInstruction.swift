@@ -189,6 +189,6 @@ import Foundation
 		}
 		return result
 	}
-	
+
 #endif
 

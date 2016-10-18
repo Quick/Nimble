@@ -41,22 +41,22 @@ private func triggerLongJmp() {
 }
 
 private func sigIllHandler(code: Int32, info: UnsafeMutablePointer<__siginfo>?, uap: UnsafeMutableRawPointer?) -> Void {
-	let context = uap!.assumingMemoryBound(to: ucontext64_t.self)
+	guard let context = uap?.assumingMemoryBound(to: ucontext64_t.self) else { return }
 
 	// 1. Decrement the stack pointer
 	context.pointee.uc_mcontext64.pointee.__ss.__rsp -= __uint64_t(MemoryLayout<Int>.size)
 
 	// 2. Save the old Instruction Pointer to the stack.
 	let rsp = context.pointee.uc_mcontext64.pointee.__ss.__rsp
-	UnsafeMutablePointer<__uint64_t>(bitPattern: UInt(rsp))?.pointee = rsp
+	if let ump = UnsafeMutablePointer<__uint64_t>(bitPattern: UInt(rsp)) {
+		ump.pointee = rsp
+	}
 
 	// 3. Set the Instruction Pointer to the new function's address
 	var f: @convention(c) () -> Void = triggerLongJmp
-    withUnsafePointer(to: &f) { ptr in
-        ptr.withMemoryRebound(to: __uint64_t.self, capacity: 1) { castedPtr in
-            context.pointee.uc_mcontext64.pointee.__ss.__rip = castedPtr.pointee
-        }
-    }
+	withUnsafePointer(to: &f) {	$0.withMemoryRebound(to: __uint64_t.self, capacity: 1) { ptr in
+		context.pointee.uc_mcontext64.pointee.__ss.__rip = ptr.pointee
+	} }
 }
 
 /// Without Mach exceptions or the Objective-C runtime, there's nothing to put in the exception object. It's really just a boolean – either a SIGILL was caught or not.
