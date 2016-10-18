@@ -26,6 +26,7 @@ internal class NimbleEnvironment {
         set { NimbleAssertionHandler = newValue }
     }
 
+    var suppressTVOSAssertionWarning: Bool = false
     var awaiter: Awaiter
 
     init() {

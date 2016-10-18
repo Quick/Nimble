@@ -36,6 +36,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Comparisons](#comparisons)
   - [Types/Classes](#typesclasses)
   - [Truthiness](#truthiness)
+  - [Swift Assertions](#swift-assertions)
   - [Swift Error Handling](#swift-error-handling)
   - [Exceptions](#exceptions)
   - [Collection Membership](#collection-membership)
@@ -718,6 +719,39 @@ expect(actual).to(beFalse());
 expect(actual).to(beNil());
 ```
 
+## Swift Assertions
+
+If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library.
+
+```swift
+// Swift
+
+// Passes if somethingThatThrows() throws an assertion, such as calling fatalError() or precondition fails:
+expect { () -> Void in fatalError() }.to(throwAssertion())
+expect { precondition(false) }.to(throwAssertion())
+
+// Passes if throwing a NSError is not equal to throwing an assertion:
+expect { throw NSError(domain: "test", code: 0, userInfo: nil) }.toNot(throwAssertion())
+
+// Passes if the post assertion code is not run:
+var reachedPoint1 = false
+var reachedPoint2 = false
+expect {
+    reachedPoint1 = true
+    precondition(false, "condition message")
+    reachedPoint2 = true
+}.to(throwAssertion())
+
+expect(reachedPoint1) == true
+expect(reachedPoint2) == false
+```
+
+Notes:
+
+* This feature is only available in Swift.
+* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices, only simulators_.
+* The tvOS simulator is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
+
 ## Swift Error Handling
 
 If you're using Swift 2.0+, you can use the `throwError` matcher to check if an error is thrown.
@@ -1013,10 +1047,10 @@ expect(actual).to(satisfyAnyOf(beLessThan(@10), beGreaterThan(@20)))
 expect(@6).to(satisfyAnyOf(equal(@2), equal(@3), equal(@4), equal(@5), equal(@6), equal(@7)))
 ```
 
-Note: This matcher allows you to chain any number of matchers together. This provides flexibility, 
-      but if you find yourself chaining many matchers together in one test, consider whether you  
-      could instead refactor that single test into multiple, more precisely focused tests for 
-      better coverage. 
+Note: This matcher allows you to chain any number of matchers together. This provides flexibility,
+      but if you find yourself chaining many matchers together in one test, consider whether you
+      could instead refactor that single test into multiple, more precisely focused tests for
+      better coverage.
 
 # Writing Your Own Matchers
 
