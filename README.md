@@ -1261,7 +1261,7 @@ extension NMBObjCMatcher {
 > Nimble can be used on its own, or in conjunction with its sister
   project, [Quick](https://github.com/Quick/Quick). To install both
   Quick and Nimble, follow [the installation instructions in the Quick
-  README](https://github.com/Quick/Quick#how-to-install-quick).
+  Documentation](https://github.com/Quick/Quick/blob/master/Documentation/en-us/InstallingQuick.md).
 
 Nimble can currently be installed in one of two ways: using CocoaPods, or with
 git submodules.
