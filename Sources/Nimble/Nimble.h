@@ -6,7 +6,7 @@
 #import "CwlCatchException.h"
 #import "CwlCatchBadInstruction.h"
 
-#if TARGET_OS_IPHONE && !TARGET_OS_TV
+#if !TARGET_OS_TV
     #import "mach_excServer.h"
 #endif
 

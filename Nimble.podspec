@@ -33,7 +33,6 @@ Pod::Spec.new do |s|
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
-  s.osx.private_header_files = "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.h"
   s.tvos.private_header_files = "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.h"
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"

@@ -56,6 +56,7 @@
 		1F43728D1A1B343D00EB80F8 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD271968AB07008ED995 /* SourceLocation.swift */; };
 		1F43728E1A1B343F00EB80F8 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD281968AB07008ED995 /* Stringers.swift */; };
 		1F43728F1A1B344000EB80F8 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD281968AB07008ED995 /* Stringers.swift */; };
+		1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4A56661A3B305F009E1637 /* ObjCAsyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56651A3B305F009E1637 /* ObjCAsyncTest.m */; };
 		1F4A56671A3B305F009E1637 /* ObjCAsyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56651A3B305F009E1637 /* ObjCAsyncTest.m */; };
 		1F4A566A1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56691A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m */; };
@@ -165,7 +166,6 @@
 		1F5DF1A91BDCA10200C3A531 /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
 		1F5DF1AA1BDCA10200C3A531 /* RaisesExceptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */; };
 		1F5DF1AB1BDCA10200C3A531 /* ThrowErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59621B551ED2002D767E /* ThrowErrorTest.swift */; };
-		1F5DF1AE1BDCA17600C3A531 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A742E1940169200FFFC47 /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F8A37B01B7C5042001C8357 /* ObjCSyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A37AF1B7C5042001C8357 /* ObjCSyncTest.m */; };
 		1F8A37B11B7C5042001C8357 /* ObjCSyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A37AF1B7C5042001C8357 /* ObjCSyncTest.m */; };
 		1F91DD2D1C74BF36002C309F /* BeVoidTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F91DD2C1C74BF36002C309F /* BeVoidTest.swift */; };
@@ -910,7 +910,7 @@
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
 				1F4BB8AB1DAC9DE50048464B /* CwlCatchBadInstruction.h in Headers */,
-				1F5DF1AE1BDCA17600C3A531 /* Nimble.h in Headers */,
+				1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
