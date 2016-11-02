@@ -286,6 +286,12 @@
 		6CAEDD0A1CAEA86F003F1584 /* LinuxSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */; };
 		6CAEDD0B1CAEA86F003F1584 /* LinuxSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */; };
 		6CAEDD0C1CAEA86F003F1584 /* LinuxSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */; };
+		7B0993201DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09931F1DCA192D00E058AF /* ContainObjectSatisfyingTest.swift */; };
+		7B0993211DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09931F1DCA192D00E058AF /* ContainObjectSatisfyingTest.swift */; };
+		7B0993221DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B09931F1DCA192D00E058AF /* ContainObjectSatisfyingTest.swift */; };
+		7B0993241DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0993231DCA1CC800E058AF /* ContainObjectSatisfying.swift */; };
+		7B0993251DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0993231DCA1CC800E058AF /* ContainObjectSatisfying.swift */; };
+		7B0993261DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0993231DCA1CC800E058AF /* ContainObjectSatisfying.swift */; };
 		7B5358BA1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */; };
 		7B5358BB1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */; };
 		7B5358BC1C3846C900A23FAA /* SatisfyAnyOfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */; };
@@ -543,6 +549,8 @@
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCount.m; sourceTree = "<group>"; };
 		6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxSupport.swift; sourceTree = "<group>"; };
+		7B09931F1DCA192D00E058AF /* ContainObjectSatisfyingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainObjectSatisfyingTest.swift; sourceTree = "<group>"; };
+		7B0993231DCA1CC800E058AF /* ContainObjectSatisfying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainObjectSatisfying.swift; sourceTree = "<group>"; };
 		7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOfTest.swift; sourceTree = "<group>"; };
 		7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOf.swift; sourceTree = "<group>"; };
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
@@ -746,6 +754,7 @@
 				1F925EF8195C175000ED456B /* BeNilTest.swift */,
 				1F91DD2C1C74BF36002C309F /* BeVoidTest.swift */,
 				1F925F01195C189500ED456B /* ContainTest.swift */,
+				7B09931F1DCA192D00E058AF /* ContainObjectSatisfyingTest.swift */,
 				1F925EFE195C187600ED456B /* EndWithTest.swift */,
 				1F925F04195C18B700ED456B /* EqualTest.swift */,
 				472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */,
@@ -794,6 +803,7 @@
 				1FD8CD181968AB07008ED995 /* BeNil.swift */,
 				1F91DD301C74BF61002C309F /* BeVoid.swift */,
 				1FD8CD1A1968AB07008ED995 /* Contain.swift */,
+				7B0993231DCA1CC800E058AF /* ContainObjectSatisfying.swift */,
 				1FD8CD1B1968AB07008ED995 /* EndWith.swift */,
 				1FD8CD1C1968AB07008ED995 /* Equal.swift */,
 				472FD1341B9E085700C7B8DA /* HaveCount.swift */,
@@ -1164,6 +1174,7 @@
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1FDBD8671AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				1F43728A1A1B343800EB80F8 /* Functional.swift in Sources */,
+				7B0993251DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */,
 				AE4BA9AD1C88DDB500B73906 /* Errors.swift in Sources */,
 				1FD8CD3C1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				1FD8CD501968AB07008ED995 /* BeLogical.swift in Sources */,
@@ -1242,6 +1253,7 @@
 				1F4A56761A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				1F925EF9195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F4A56701A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
+				7B0993211DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */,
 				1F4A56971A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567C1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0C1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
@@ -1298,6 +1310,7 @@
 				1F5DF1861BDCA0F500C3A531 /* HaveCount.swift in Sources */,
 				1F5DF1811BDCA0F500C3A531 /* BeLogical.swift in Sources */,
 				1F1871DB1CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
+				7B0993261DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */,
 				1F5DF1741BDCA0F500C3A531 /* Expression.swift in Sources */,
 				1F5DF1781BDCA0F500C3A531 /* BeAnInstanceOf.swift in Sources */,
 				1F5DF1771BDCA0F500C3A531 /* BeAKindOf.swift in Sources */,
@@ -1372,6 +1385,7 @@
 				CD79C9B51D2CC848004B6F9A /* ObjCUserDescriptionTest.m in Sources */,
 				1F5DF19C1BDCA10200C3A531 /* BeginWithTest.swift in Sources */,
 				1F5DF1A01BDCA10200C3A531 /* BeIdenticalToTest.swift in Sources */,
+				7B0993221DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */,
 				1F5DF19A1BDCA10200C3A531 /* BeCloseToTest.swift in Sources */,
 				1F5DF1A61BDCA10200C3A531 /* EndWithTest.swift in Sources */,
 				CD79C9A31D2CC841004B6F9A /* ObjCBeFalseTest.m in Sources */,
@@ -1415,6 +1429,7 @@
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1F1871E71CA8A18400A34BF2 /* AsyncMatcherWrapper.swift in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
+				7B0993241DCA1CC800E058AF /* ContainObjectSatisfying.swift in Sources */,
 				1F43728B1A1B343900EB80F8 /* Functional.swift in Sources */,
 				AE4BA9AE1C88DDB500B73906 /* Errors.swift in Sources */,
 				1FD8CD3D1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
@@ -1493,6 +1508,7 @@
 				1F4A56771A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
 				1F4A56711A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
+				7B0993201DCA192D00E058AF /* ContainObjectSatisfyingTest.swift in Sources */,
 				1F4A56981A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567D1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
