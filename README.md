@@ -911,6 +911,29 @@ expect(actual).to(endWith(expected));
   Like `contain`, in Objective-C `beginWith` and `endWith` only support
   a single argument [for now](https://github.com/Quick/Nimble/issues/27).
 
+For code that returns collections of complex objects without a strict
+ordering, there is the `containsObjectSatisfying` matcher:
+
+```swift
+struct Turtle {
+	var color: String!
+}
+
+var turtles = functionThatReturnsSomeTurtlesInAnyOrder()
+
+// This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
+// or [{color: "green"}, {color: "blue"}]
+expect(turtles).to(containObjectSatisfying({ turtle in
+	return turtle.color == "green"
+}))
+expect(turtles).to(containObjectSatisfying({ turtle in
+	return turtle.color == "blue"
+}, "that is a turtle with color 'blue'"))
+
+// The second matcher will incorporate the provided string in the error message
+// should it fail
+```
+
 ## Strings
 
 ```swift
