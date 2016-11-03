@@ -934,6 +934,24 @@ expect(turtles).to(containObjectSatisfying({ turtle in
 // should it fail
 ```
 
+```objc
+@interface Turtle: NSObject
+@property(nonatomic) NSString *color;
+@end
+@implementation Turtle @end
+
+NSArray *turtles = functionThatReturnsSomeTurtlesInAnyOrder();
+
+// This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
+// or [{color: "green"}, {color: "blue"}]
+expect(turtles).to(containObjectSatisfying(^BOOL(id object) {
+	return [turtle.color isEqualToString:@"green"];
+}));
+expect(turtles).to(containObjectSatisfying(^BOOL(id object) {
+	return [turtle.color isEqualToString:@"blue"];
+}));
+```
+
 ## Strings
 
 ```swift

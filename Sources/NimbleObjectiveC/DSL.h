@@ -322,6 +322,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, .
 #define contain(...) NMB_contain(__VA_ARGS__)
 #endif
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_containObjectSatisfying(BOOL(^predicate)(id));
+NIMBLE_SHORT(id<NMBMatcher> containObjectSatisfying(BOOL(^predicate)(id)),
+             NMB_containObjectSatisfying(predicate));
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring);
 NIMBLE_SHORT(id<NMBMatcher> endWith(id itemElementOrSubstring),
              NMB_endWith(itemElementOrSubstring));
