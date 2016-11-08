@@ -410,28 +410,28 @@
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F925EAC195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
+			remoteInfo = "Nimble-macOS";
 		};
 		1F9B7BFD1968AD760094EB8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F925EAC195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
+			remoteInfo = "Nimble-macOS";
 		};
 		1F9B7BFF1968AD760094EB8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F925EAC195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
+			remoteInfo = "Nimble-macOS";
 		};
 		1F9B7C011968AD820094EB8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F1A74201940169200FFFC47 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F925EAC195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
+			remoteInfo = "Nimble-macOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1020,7 +1020,7 @@
 			dependencies = (
 			);
 			name = "Nimble-macOS";
-			productName = "Nimble-OSX";
+			productName = "Nimble-macOS";
 			productReference = 1F925EAD195C0D6300ED456B /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
 		};
