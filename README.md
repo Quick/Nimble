@@ -23,7 +23,7 @@ expect(ocean.isClean).toEventually(beTruthy())
 - [Some Background: Expressing Outcomes Using Assertions in XCTest](#some-background-expressing-outcomes-using-assertions-in-xctest)
 - [Nimble: Expectations Using `expect(...).to`](#nimble-expectations-using-expectto)
   - [Custom Failure Messages](#custom-failure-messages)
-  - [Type Checking](#type-checking)
+  - [Type Safety](#type-safety)
   - [Operator Overloads](#operator-overloads)
   - [Lazily Computed Values](#lazily-computed-values)
   - [C Primitives](#c-primitives)
@@ -31,6 +31,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Objective-C Support](#objective-c-support)
   - [Disabling Objective-C Shorthand](#disabling-objective-c-shorthand)
 - [Built-in Matcher Functions](#built-in-matcher-functions)
+  - [Type Checking](#type-checking)
   - [Equivalence](#equivalence)
   - [Identity](#identity)
   - [Comparisons](#comparisons)
@@ -164,7 +165,7 @@ expect(@(1+1)).toWithDescription(equal(@3), @"Make sure libKindergartenMath is l
 // expected to equal <3.0000>, got <2.0000>
 ```
 
-## Type Checking
+## Type Safety
 
 Nimble makes sure you don't compare two types that don't match:
 
@@ -488,6 +489,42 @@ NMB_expect(^{ return seagull.squawk; }, __FILE__, __LINE__).to(NMB_equal(@"Squee
 # Built-in Matcher Functions
 
 Nimble includes a wide variety of matcher functions.
+
+## Type checking
+
+Nimble supports checking the type membership of any kind of object, whether
+Objective-C conformant or not:
+
+```swift
+// Swift 
+
+protocol SomeProtocol{}
+class SomeClassConformingToProtocol: SomeProtocol{}
+struct SomeStructConformingToProtocol: SomeProtocol{}
+
+// The following tests pass
+expect(1).to(beKindOf(Int.self))
+expect("turtle").to(beKindOf(String.self))
+
+let classObject = SomeClassConformingToProtocol()
+expect(classObject).to(beKindOf(SomeProtocol.self))
+expect(classObject).to(beKindOf(SomeClassConformingToProtocol.self))
+expect(classObject).toNot(beKindOf(SomeStructConformingToProtocol.self))
+
+let structObject = SomeStructConformingToProtocol()
+expect(structObject).to(beKindOf(SomeProtocol.self))
+expect(structObject).to(beKindOf(SomeStructConformingToProtocol.self))
+expect(structObject).toNot(beKindOf(SomeClassConformingToProtocol.self))
+```
+
+```objc
+// Objective-C
+
+// The following tests pass
+NSMutableArray *array = [NSMutableArray array];
+expect(array).to(beAKindOf([NSArray class]));
+expect(@1).toNot(beAKindOf([NSNull class]));
+```
 
 ## Equivalence
 
