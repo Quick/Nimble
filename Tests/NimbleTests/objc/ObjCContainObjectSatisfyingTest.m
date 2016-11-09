@@ -29,6 +29,11 @@
     expect(orderIndifferentArray).to(containObjectSatisfying(^BOOL(id object) {
         return [object isEqualToNumber:@3];
     }));
+
+    NSSet *orderIndifferentSet = [NSSet setWithObjects:@"turtle test", @"turtle assessment", nil];
+    expect(orderIndifferentSet).to(containObjectSatisfying(^BOOL(id object) {
+        return [object isEqualToString:@"turtle assessment"];
+    }));
 }
 
 - (void)testFailingMatches {
@@ -37,12 +42,12 @@
             return [object isEqualToNumber:@2];
         }));
     });
-    expectFailureMessage(@"containObjectSatisfying must be provided an NSArray", ^{
+    expectFailureMessage(@"containObjectSatisfying must be provided an NSFastEnumeration object", ^{
         expect((nil)).to(containObjectSatisfying(^BOOL(id object) {
             return [object isEqualToNumber:@3];
         }));
     });
-    expectFailureMessage(@"containObjectSatisfying must be provided an NSArray", ^{
+    expectFailureMessage(@"containObjectSatisfying must be provided an NSFastEnumeration object", ^{
         expect((@3)).to(containObjectSatisfying(^BOOL(id object) {
             return [object isEqualToNumber:@3];
         }));

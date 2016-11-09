@@ -30,15 +30,16 @@ public func containObjectSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) 
         public class func containObjectSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
             return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
                 let value = try! actualExpression.evaluate()
-                guard let collection = value as? NSArray else {
-                    failureMessage.postfixMessage = "containObjectSatisfying must be provided an NSArray"
+                guard let enumeration = value as? NSFastEnumeration else {
+                    failureMessage.postfixMessage = "containObjectSatisfying must be provided an NSFastEnumeration object"
                     failureMessage.actualValue = nil
                     failureMessage.expected = ""
                     failureMessage.to = ""
                     return false
                 }
 
-                for item in collection {
+                let iterator = NSFastEnumerationIterator(enumeration)
+                while let item = iterator.next() {
                     guard let object = item as? NSObject else {
                         continue
                     }
