@@ -923,10 +923,10 @@ var turtles = functionThatReturnsSomeTurtlesInAnyOrder()
 
 // This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
 // or [{color: "green"}, {color: "blue"}]
-expect(turtles).to(containObjectSatisfying({ turtle in
+expect(turtles).to(containElementSatisfying({ turtle in
 	return turtle.color == "green"
 }))
-expect(turtles).to(containObjectSatisfying({ turtle in
+expect(turtles).to(containElementSatisfying({ turtle in
 	return turtle.color == "blue"
 }, "that is a turtle with color 'blue'"))
 
@@ -944,10 +944,10 @@ NSArray *turtles = functionThatReturnsSomeTurtlesInAnyOrder();
 
 // This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
 // or [{color: "green"}, {color: "blue"}]
-expect(turtles).to(containObjectSatisfying(^BOOL(id object) {
+expect(turtles).to(containElementSatisfying(^BOOL(id object) {
 	return [turtle.color isEqualToString:@"green"];
 }));
-expect(turtles).to(containObjectSatisfying(^BOOL(id object) {
+expect(turtles).to(containElementSatisfying(^BOOL(id object) {
 	return [turtle.color isEqualToString:@"blue"];
 }));
 ```

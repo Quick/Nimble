@@ -113,8 +113,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, .
     return [NMBObjCMatcher containMatcher:itemOrSubstringArray];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_containObjectSatisfying(BOOL(^predicate)(id)) {
-    return [NMBObjCMatcher containObjectSatisfyingMatcher:predicate];
+NIMBLE_EXPORT id<NMBMatcher> NMB_containElementSatisfying(BOOL(^predicate)(id)) {
+    return [NMBObjCMatcher containElementSatisfyingMatcher:predicate];
 }
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {

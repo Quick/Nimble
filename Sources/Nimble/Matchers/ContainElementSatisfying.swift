@@ -1,6 +1,6 @@
 import Foundation
 
-public func containObjectSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) -> Bool), _ predicateDescription: String = "") -> NonNilMatcherFunc<S> where S.Iterator.Element == T {
+public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) -> Bool), _ predicateDescription: String = "") -> NonNilMatcherFunc<S> where S.Iterator.Element == T {
 
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
@@ -27,11 +27,11 @@ public func containObjectSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) 
 
 #if _runtime(_ObjC)
     extension NMBObjCMatcher {
-        public class func containObjectSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
+        public class func containElementSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
             return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
                 let value = try! actualExpression.evaluate()
                 guard let enumeration = value as? NSFastEnumeration else {
-                    failureMessage.postfixMessage = "containObjectSatisfying must be provided an NSFastEnumeration object"
+                    failureMessage.postfixMessage = "containElementSatisfying must be provided an NSFastEnumeration object"
                     failureMessage.actualValue = nil
                     failureMessage.expected = ""
                     failureMessage.to = ""
