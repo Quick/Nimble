@@ -7,7 +7,7 @@
 
 @implementation ObjCContainObjectSatisfyingTest
 
-- (void)testPositiveMatches {
+- (void)testPassingMatches {
     NSArray *orderIndifferentArray = @[@1, @2, @3];
     expect(orderIndifferentArray).to(containObjectSatisfying(^BOOL(id object) {
         return [object isEqualToNumber:@1];
@@ -31,7 +31,7 @@
     }));
 }
 
-- (void)testNegativeMatches {
+- (void)testFailingMatches {
     expectFailureMessage(@"expected to find object in collection that satisfies predicate", ^{
         expect(@[@1]).to(containObjectSatisfying(^BOOL(id object) {
             return [object isEqualToNumber:@2];
@@ -47,6 +47,13 @@
             return [object isEqualToNumber:@3];
         }));
     });
+}
+
+- (void)testNegativeCases {
+    NSArray *orderIndifferentArray = @[@"puppies", @"kittens", @"turtles"];
+    expect(orderIndifferentArray).toNot(containObjectSatisfying(^BOOL(id object) {
+        return [object isEqualToString:@"armadillos"];
+    }));
 }
 
 @end
