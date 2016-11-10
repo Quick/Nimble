@@ -3,10 +3,10 @@ import Nimble
 
 #if _runtime(_ObjC)
 
-class TestNull : NSNull {}
-protocol TestProtocol {}
-class TestClassConformingToProtocol: TestProtocol{}
-struct TestStructConformingToProtocol: TestProtocol{}
+class KindOfTestNull : NSNull {}
+protocol KindOfTestProtocol {}
+class KindOfTestClassConformingToProtocol: KindOfTestProtocol{}
+struct KindOfTestStructConformingToProtocol: KindOfTestProtocol{}
 
 final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAKindOfTest) -> () throws -> Void)] {
@@ -19,7 +19,7 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPositiveMatch() {
-        expect(TestNull()).to(beAKindOf(NSNull.self))
+        expect(KindOfTestNull()).to(beAKindOf(NSNull.self))
         expect(NSObject()).to(beAKindOf(NSObject.self))
         expect(NSNumber(value:1)).toNot(beAKindOf(NSDate.self))
     }
@@ -28,7 +28,7 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         expect(1).to(beAKindOf(Int.self))
         expect(1).toNot(beAKindOf(String.self))
         expect("turtle string").to(beAKindOf(String.self))
-        expect("turtle string").toNot(beAKindOf(TestClassConformingToProtocol.self))
+        expect("turtle string").toNot(beAKindOf(KindOfTestClassConformingToProtocol.self))
 
         enum TestEnum {
             case one, two
@@ -36,15 +36,15 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
 
         expect(TestEnum.one).to(beAKindOf(TestEnum.self))
 
-        let testProtocolClass = TestClassConformingToProtocol()
-        expect(testProtocolClass).to(beAKindOf(TestClassConformingToProtocol.self))
-        expect(testProtocolClass).to(beAKindOf(TestProtocol.self))
-        expect(testProtocolClass).toNot(beAKindOf(TestStructConformingToProtocol.self))
+        let testProtocolClass = KindOfTestClassConformingToProtocol()
+        expect(testProtocolClass).to(beAKindOf(KindOfTestClassConformingToProtocol.self))
+        expect(testProtocolClass).to(beAKindOf(KindOfTestProtocol.self))
+        expect(testProtocolClass).toNot(beAKindOf(KindOfTestStructConformingToProtocol.self))
 
-        let testProtocolStruct = TestStructConformingToProtocol()
-        expect(testProtocolStruct).to(beAKindOf(TestStructConformingToProtocol.self))
-        expect(testProtocolStruct).to(beAKindOf(TestProtocol.self))
-        expect(testProtocolStruct).toNot(beAKindOf(TestClassConformingToProtocol.self))
+        let testProtocolStruct = KindOfTestStructConformingToProtocol()
+        expect(testProtocolStruct).to(beAKindOf(KindOfTestStructConformingToProtocol.self))
+        expect(testProtocolStruct).to(beAKindOf(KindOfTestProtocol.self))
+        expect(testProtocolStruct).toNot(beAKindOf(KindOfTestClassConformingToProtocol.self))
     }
 
     func testFailureMessages() {
@@ -67,9 +67,9 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
             expect(1).toNot(beAKindOf(Int.self))
         }
 
-        let testClass = TestClassConformingToProtocol()
-        failsWithErrorMessage("expected to not be a kind of TestProtocol, got <TestClassConformingToProtocol instance>") {
-            expect(testClass).toNot(beAKindOf(TestProtocol.self))
+        let testClass = KindOfTestClassConformingToProtocol()
+        failsWithErrorMessage("expected to not be a kind of KindOfTestProtocol, got <KindOfTestClassConformingToProtocol instance>") {
+            expect(testClass).toNot(beAKindOf(KindOfTestProtocol.self))
         }
 
         failsWithErrorMessage("expected to be a kind of String, got <Int instance>") {
