@@ -1,8 +1,6 @@
 import XCTest
 import Nimble
 
-#if _runtime(_ObjC)
-
 fileprivate class TestNull : NSNull {}
 fileprivate protocol TestProtocol {}
 fileprivate class TestClassConformingToProtocol: TestProtocol{}
@@ -77,4 +75,3 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         }
     }
 }
-#endif

@@ -1,7 +1,5 @@
 import Foundation
 
-#if _runtime(_ObjC)
-
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 public func beAKindOf<T>(_ expectedType: T.Type) -> NonNilMatcherFunc<Any> {
     return NonNilMatcherFunc {actualExpression, failureMessage in
@@ -44,5 +42,3 @@ extension NMBObjCMatcher {
         }
     }
 }
-
-#endif
