@@ -35,6 +35,7 @@ public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> 
     }
 }
 
+#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beAKindOfMatcher(_ expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
@@ -42,3 +43,4 @@ extension NMBObjCMatcher {
         }
     }
 }
+#endif
