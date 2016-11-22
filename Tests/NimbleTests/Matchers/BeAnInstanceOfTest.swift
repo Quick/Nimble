@@ -2,9 +2,9 @@ import Foundation
 import XCTest
 import Nimble
 
-protocol InstanceOfTestProtocol {}
-class InstanceOfTestClassConformingToProtocol: InstanceOfTestProtocol{}
-struct InstanceOfTestStructConformingToProtocol: InstanceOfTestProtocol{}
+fileprivate protocol TestProtocol {}
+fileprivate class TestClassConformingToProtocol: TestProtocol{}
+fileprivate struct TestStructConformingToProtocol: TestProtocol{}
 
 final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAnInstanceOfTest) -> () throws -> Void)] {
@@ -31,15 +31,15 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
 
         expect(TestEnum.one).to(beAnInstanceOf(TestEnum.self))
 
-        let testProtocolClass = InstanceOfTestClassConformingToProtocol()
-        expect(testProtocolClass).to(beAnInstanceOf(InstanceOfTestClassConformingToProtocol.self))
-        expect(testProtocolClass).toNot(beAnInstanceOf(InstanceOfTestProtocol.self))
-        expect(testProtocolClass).toNot(beAnInstanceOf(InstanceOfTestStructConformingToProtocol.self))
+        let testProtocolClass = TestClassConformingToProtocol()
+        expect(testProtocolClass).to(beAnInstanceOf(TestClassConformingToProtocol.self))
+        expect(testProtocolClass).toNot(beAnInstanceOf(TestProtocol.self))
+        expect(testProtocolClass).toNot(beAnInstanceOf(TestStructConformingToProtocol.self))
 
-        let testProtocolStruct = InstanceOfTestStructConformingToProtocol()
-        expect(testProtocolStruct).to(beAnInstanceOf(InstanceOfTestStructConformingToProtocol.self))
-        expect(testProtocolStruct).toNot(beAnInstanceOf(InstanceOfTestProtocol.self))
-        expect(testProtocolStruct).toNot(beAnInstanceOf(InstanceOfTestClassConformingToProtocol.self))
+        let testProtocolStruct = TestStructConformingToProtocol()
+        expect(testProtocolStruct).to(beAnInstanceOf(TestStructConformingToProtocol.self))
+        expect(testProtocolStruct).toNot(beAnInstanceOf(TestProtocol.self))
+        expect(testProtocolStruct).toNot(beAnInstanceOf(TestClassConformingToProtocol.self))
     }
 
     func testFailureMessages() {
@@ -67,9 +67,9 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
             expect(1).toNot(beAnInstanceOf(Int.self))
         }
 
-        let testClass = InstanceOfTestClassConformingToProtocol()
-        failsWithErrorMessage("expected to be an instance of InstanceOfTestProtocol, got <InstanceOfTestClassConformingToProtocol instance>") {
-            expect(testClass).to(beAnInstanceOf(InstanceOfTestProtocol.self))
+        let testClass = TestClassConformingToProtocol()
+        failsWithErrorMessage("expected to be an instance of \(String(describing: TestProtocol.self)), got <\(String(describing: TestClassConformingToProtocol.self)) instance>") {
+            expect(testClass).to(beAnInstanceOf(TestProtocol.self))
         }
 
         failsWithErrorMessage("expected to be an instance of String, got <Int instance>") {
