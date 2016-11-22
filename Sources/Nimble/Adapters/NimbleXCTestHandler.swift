@@ -36,7 +36,16 @@ class NimbleXCTestUnavailableHandler : AssertionHandler {
 }
 
 #if _runtime(_ObjC)
-    /// Helper class providing access to the currently executing XCTestCase instance, if any
+
+#if SWIFT_PACKAGE
+    extension XCTestObservationCenter {
+        override open class func initialize() {
+            self.shared().addTestObserver(CurrentTestCaseTracker.sharedInstance)
+        }
+    }
+#endif
+
+/// Helper class providing access to the currently executing XCTestCase instance, if any
 @objc final internal class CurrentTestCaseTracker: NSObject, XCTestObservation {
     @objc static let sharedInstance = CurrentTestCaseTracker()
 
