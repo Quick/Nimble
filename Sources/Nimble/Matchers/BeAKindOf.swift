@@ -20,6 +20,8 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> NonNilMatcherFunc<Any> {
     }
 }
 
+#if _runtime(_ObjC)
+
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class
 public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
@@ -35,7 +37,6 @@ public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> 
     }
 }
 
-#if _runtime(_ObjC)
 extension NMBObjCMatcher {
     public class func beAKindOfMatcher(_ expected: AnyClass) -> NMBMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

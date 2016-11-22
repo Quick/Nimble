@@ -6,23 +6,15 @@ fileprivate protocol TestProtocol {}
 fileprivate class TestClassConformingToProtocol: TestProtocol{}
 fileprivate struct TestStructConformingToProtocol: TestProtocol{}
 
-final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (BeAKindOfTest) -> () throws -> Void)] {
+final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (BeAKindOfSwiftTest) -> () throws -> Void)] {
         return [
             ("testPositiveMatch", testPositiveMatch),
-            ("testPositiveMatchSwiftTypes", testPositiveMatchSwiftTypes),
             ("testFailureMessages", testFailureMessages),
-            ("testFailureMessagesSwiftTypes", testFailureMessagesSwiftTypes)
         ]
     }
 
     func testPositiveMatch() {
-        expect(TestNull()).to(beAKindOf(NSNull.self))
-        expect(NSObject()).to(beAKindOf(NSObject.self))
-        expect(NSNumber(value:1)).toNot(beAKindOf(NSDate.self))
-    }
-
-    func testPositiveMatchSwiftTypes() {
         expect(1).to(beAKindOf(Int.self))
         expect(1).toNot(beAKindOf(String.self))
         expect("turtle string").to(beAKindOf(String.self))
@@ -46,21 +38,6 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testFailureMessages() {
-        failsWithErrorMessageForNil("expected to not be a kind of NSNull, got <nil>") {
-            expect(nil as NSNull?).toNot(beAKindOf(NSNull.self))
-        }
-        failsWithErrorMessageForNil("expected to be a kind of NSString, got <nil>") {
-            expect(nil as NSString?).to(beAKindOf(NSString.self))
-        }
-        failsWithErrorMessage("expected to be a kind of NSString, got <__NSCFNumber instance>") {
-            expect(NSNumber(value:1)).to(beAKindOf(NSString.self))
-        }
-        failsWithErrorMessage("expected to not be a kind of NSNumber, got <__NSCFNumber instance>") {
-            expect(NSNumber(value:1)).toNot(beAKindOf(NSNumber.self))
-        }
-    }
-
-    func testFailureMessagesSwiftTypes() {
         failsWithErrorMessage("expected to not be a kind of Int, got <Int instance>") {
             expect(1).toNot(beAKindOf(Int.self))
         }
@@ -75,3 +52,35 @@ final class BeAKindOfTest: XCTestCase, XCTestCaseProvider {
         }
     }
 }
+
+#if _runtime(_ObjC)
+final class BeAKindOfObjCTest: XCTestCase, XCTestCaseProvider {
+    static var allTests: [(String, (BeAKindOfObjCTest) -> () throws -> Void)] {
+        return [
+            ("testPositiveMatch", testPositiveMatch),
+            ("testFailureMessages", testFailureMessages),
+        ]
+    }
+
+    func testPositiveMatch() {
+        expect(TestNull()).to(beAKindOf(NSNull.self))
+        expect(NSObject()).to(beAKindOf(NSObject.self))
+        expect(NSNumber(value:1)).toNot(beAKindOf(NSDate.self))
+    }
+
+    func testFailureMessages() {
+        failsWithErrorMessageForNil("expected to not be a kind of NSNull, got <nil>") {
+            expect(nil as NSNull?).toNot(beAKindOf(NSNull.self))
+        }
+        failsWithErrorMessageForNil("expected to be a kind of NSString, got <nil>") {
+            expect(nil as NSString?).to(beAKindOf(NSString.self))
+        }
+        failsWithErrorMessage("expected to be a kind of NSString, got <__NSCFNumber instance>") {
+            expect(NSNumber(value:1)).to(beAKindOf(NSString.self))
+        }
+        failsWithErrorMessage("expected to not be a kind of NSNumber, got <__NSCFNumber instance>") {
+            expect(NSNumber(value:1)).toNot(beAKindOf(NSNumber.self))
+        }
+    }
+}
+#endif
