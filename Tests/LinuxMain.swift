@@ -10,7 +10,7 @@ XCTMain([
 
     // Matchers
     testCase(AllPassTest.allTests),
-    // testCase(BeAKindOfTest.allTests),
+    testCase(BeAKindOfSwiftTest.allTests),
     testCase(BeAnInstanceOfTest.allTests),
     testCase(BeCloseToTest.allTests),
     testCase(BeginWithTest.allTests),
