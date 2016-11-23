@@ -1,10 +1,10 @@
 import XCTest
 import Nimble
 
-fileprivate class TestNull : NSNull {}
+fileprivate class TestNull: NSNull {}
 fileprivate protocol TestProtocol {}
-fileprivate class TestClassConformingToProtocol: TestProtocol{}
-fileprivate struct TestStructConformingToProtocol: TestProtocol{}
+fileprivate class TestClassConformingToProtocol: TestProtocol {}
+fileprivate struct TestStructConformingToProtocol: TestProtocol {}
 
 final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAKindOfSwiftTest) -> () throws -> Void)] {
@@ -54,6 +54,7 @@ final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
 }
 
 #if _runtime(_ObjC)
+
 final class BeAKindOfObjCTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAKindOfObjCTest) -> () throws -> Void)] {
         return [
@@ -83,4 +84,5 @@ final class BeAKindOfObjCTest: XCTestCase, XCTestCaseProvider {
         }
     }
 }
+
 #endif

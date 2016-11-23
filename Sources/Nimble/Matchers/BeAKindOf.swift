@@ -44,4 +44,5 @@ extension NMBObjCMatcher {
         }
     }
 }
+
 #endif
