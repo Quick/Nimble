@@ -974,7 +974,7 @@ expect(actual).to(endWith(expected));
   a single argument [for now](https://github.com/Quick/Nimble/issues/27).
 
 For code that returns collections of complex objects without a strict
-ordering, there is the `containsObjectSatisfying` matcher:
+ordering, there is the `containElementSatisfying` matcher:
 
 ```swift
 struct Turtle {
