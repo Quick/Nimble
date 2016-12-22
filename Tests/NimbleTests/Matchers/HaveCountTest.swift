@@ -24,7 +24,7 @@ final class HaveCountTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testHaveCountForDictionary() {
-        let dictionary = ["1":1, "2":2, "3":3]
+        let dictionary = ["1": 1, "2": 2, "3": 3]
         expect(dictionary).to(haveCount(3))
         expect(dictionary).notTo(haveCount(1))
 
