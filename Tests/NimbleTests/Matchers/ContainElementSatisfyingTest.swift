@@ -13,7 +13,7 @@ final class ContainElementSatisfyingTest: XCTestCase, XCTestCaseProvider {
             ("testContainElementSatisfyingNegativeCaseDefaultErrorMessage",
              testContainElementSatisfyingNegativeCaseDefaultErrorMessage),
             ("testContainElementSatisfyingNegativeCaseSpecificErrorMessage",
-             testContainElementSatisfyingNegativeCaseSpecificErrorMessage)
+             testContainElementSatisfyingNegativeCaseSpecificErrorMessage),
         ]
     }
 
