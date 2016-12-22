@@ -251,7 +251,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
             "the": 5, "best": 1, "but": 1, "essay": 1, "for": 1, "summer": 2,
             "your": 1, "grade": 1, "vary": 1, "pretty": 1, "at": 1, "rain.": 1,
             "about": 1, "allow": 1, "thought": 1, "in": 1, "sleep": 1, "a": 1,
-            "hot": 1, "really": 1, "beach": 1, "life.": 1, "we": 1, "although": 1,]
+            "hot": 1, "really": 1, "beach": 1, "life.": 1, "we": 1, "although": 1, ]
 
         let storyCount = ["The": 2, "summer": 2, "of": 3, "tenth": 2, "grade": 1,
             "was": 2, "the": 5, "best": 1, "my": 1, "life.": 1, "I": 4,
@@ -267,7 +267,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
             "whole": 1, "essay": 1, "just": 1, "about": 1, "in": 1,
             "grade.": 1, "kind": 1, "right": 1, "Youd": 1, "think": 1,
             "for": 1, "such": 1, "an": 1, "interesting": 1, "person": 1,
-            "might": 1, "more": 1, "say": 1, "but": 1, "you": 1, "be": 1, "wrong.": 1,]
+            "might": 1, "more": 1, "say": 1, "but": 1, "you": 1, "be": 1, "wrong.": 1, ]
 
         expect(result).to(equal(storyCount))
     }
