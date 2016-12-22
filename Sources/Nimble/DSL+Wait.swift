@@ -39,7 +39,7 @@ internal class NMBWait: NSObject {
                     )
                     capture.tryBlock {
                         do {
-                            try action() {
+                            try action {
                                 done(.none)
                             }
                         } catch let e {
