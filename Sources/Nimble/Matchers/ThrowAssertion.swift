@@ -10,7 +10,7 @@ public func throwAssertion() -> MatcherFunc<Void> {
 
         let caughtException: BadInstructionException? = catchBadInstruction {
             #if os(tvOS)
-                if (!NimbleEnvironment.activeInstance.suppressTVOSAssertionWarning) {
+                if !NimbleEnvironment.activeInstance.suppressTVOSAssertionWarning {
                     print()
                     print("[Nimble Warning]: If you're getting stuck on a debugger breakpoint for a " +
                         "fatal error while using throwAssertion(), please disable 'Debug Executable' " +

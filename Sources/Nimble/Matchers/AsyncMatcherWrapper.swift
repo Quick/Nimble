@@ -30,7 +30,7 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
             fnName: fnName) {
                 try self.fullMatcher.matches(uncachedExpression, failureMessage: failureMessage)
         }
-        switch (result) {
+        switch result {
         case let .completed(isSuccessful): return isSuccessful
         case .timedOut: return false
         case let .errorThrown(error):
@@ -57,7 +57,7 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
             fnName: "expect(...).toEventuallyNot(...)") {
                 try self.fullMatcher.doesNotMatch(uncachedExpression, failureMessage: failureMessage)
         }
-        switch (result) {
+        switch result {
         case let .completed(isSuccessful): return isSuccessful
         case .timedOut: return false
         case let .errorThrown(error):

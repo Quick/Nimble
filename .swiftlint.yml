@@ -6,7 +6,6 @@ disabled_rules:
   - nesting
   - variable_name
   - empty_parentheses_with_trailing_closure
-  - control_statement
   - force_try
   - function_parameter_count
   - closure_parameter_position
