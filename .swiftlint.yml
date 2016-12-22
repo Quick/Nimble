@@ -8,7 +8,6 @@ disabled_rules:
   - empty_parentheses_with_trailing_closure
   - force_try
   - function_parameter_count
-  - closure_parameter_position
   - force_cast
   - type_name
 

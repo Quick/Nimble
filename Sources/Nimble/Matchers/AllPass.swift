@@ -9,8 +9,7 @@ public func allPass<T, U>
 public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) -> Bool) -> NonNilMatcherFunc<U>
     where U: Sequence, U.Iterator.Element == T {
-    return createAllPassMatcher() {
-        expression, failureMessage in
+    return createAllPassMatcher() { expression, failureMessage in
         failureMessage.postfixMessage = passName
         return passFunc(try expression.evaluate())
     }
