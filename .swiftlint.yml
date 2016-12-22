@@ -1,7 +1,6 @@
 disabled_rules:
   - line_length
   - trailing_comma
-  - operator_whitespace
   - syntactic_sugar
   - todo
   - nesting

@@ -25,7 +25,7 @@ public func ><T: Comparable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(beGreaterThan(rhs))
 }
 
-public func >(lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
+public func > (lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
     lhs.to(beGreaterThan(rhs))
 }
 

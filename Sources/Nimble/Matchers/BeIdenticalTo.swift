@@ -19,10 +19,10 @@ public func beIdenticalTo(_ expected: Any?) -> NonNilMatcherFunc<Any> {
     }
 }
 
-public func ===(lhs: Expectation<Any>, rhs: Any?) {
+public func === (lhs: Expectation<Any>, rhs: Any?) {
     lhs.to(beIdenticalTo(rhs))
 }
-public func !==(lhs: Expectation<Any>, rhs: Any?) {
+public func !== (lhs: Expectation<Any>, rhs: Any?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 

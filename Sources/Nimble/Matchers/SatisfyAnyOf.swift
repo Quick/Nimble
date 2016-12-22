@@ -28,11 +28,11 @@ internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
     }
 }
 
-public func ||<T>(left: NonNilMatcherFunc<T>, right: NonNilMatcherFunc<T>) -> NonNilMatcherFunc<T> {
+public func || <T>(left: NonNilMatcherFunc<T>, right: NonNilMatcherFunc<T>) -> NonNilMatcherFunc<T> {
     return satisfyAnyOf(left, right)
 }
 
-public func ||<T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherFunc<T> {
+public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherFunc<T> {
     return satisfyAnyOf(left, right)
 }
 

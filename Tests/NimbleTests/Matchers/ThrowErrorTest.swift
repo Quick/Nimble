@@ -13,7 +13,7 @@ enum EquatableError: Error {
 extension EquatableError : Equatable {
 }
 
-func ==(lhs: EquatableError, rhs: EquatableError) -> Bool {
+func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
     switch (lhs, rhs) {
     case (.parameterized(let l), .parameterized(let r)):
         return l == r
