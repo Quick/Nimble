@@ -21,13 +21,13 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         expect(NSNumber(value:1)).toNot(beAnInstanceOf(NSDate.self))
     }
 
+    enum TestEnum {
+        case one, two
+    }
+
     func testPositiveMatchSwiftTypes() {
         expect(1).to(beAnInstanceOf(Int.self))
         expect("test").to(beAnInstanceOf(String.self))
-
-        enum TestEnum {
-            case one, two
-        }
 
         expect(TestEnum.one).to(beAnInstanceOf(TestEnum.self))
 
