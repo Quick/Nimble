@@ -29,7 +29,7 @@ public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Doubl
 }
 
 #if _runtime(_ObjC)
-public class NMBObjCBeCloseToMatcher : NSObject, NMBMatcher {
+public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
     var _expected: NSNumber
     var _delta: CDouble
     init(expected: NSNumber, within: CDouble) {

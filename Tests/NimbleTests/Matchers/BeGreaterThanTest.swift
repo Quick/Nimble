@@ -9,7 +9,7 @@ final class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
             ("testGreaterThanOperator", testGreaterThanOperator),
         ]
     }
-    
+
     func testGreaterThan() {
         expect(10).to(beGreaterThan(2))
         expect(1).toNot(beGreaterThan(2))

@@ -1,16 +1,14 @@
 import Foundation
 
-public func allPass<T,U>
+public func allPass<T, U>
     (_ passFunc: @escaping (T?) -> Bool) -> NonNilMatcherFunc<U>
-    where U: Sequence, U.Iterator.Element == T
-{
+    where U: Sequence, U.Iterator.Element == T {
     return allPass("pass a condition", passFunc)
 }
 
-public func allPass<T,U>
+public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) -> Bool) -> NonNilMatcherFunc<U>
-    where U: Sequence, U.Iterator.Element == T
-{
+    where U: Sequence, U.Iterator.Element == T {
     return createAllPassMatcher() {
         expression, failureMessage in
         failureMessage.postfixMessage = passName
@@ -18,19 +16,17 @@ public func allPass<T,U>
     }
 }
 
-public func allPass<U,V>
+public func allPass<U, V>
     (_ matcher: V) -> NonNilMatcherFunc<U>
-    where U: Sequence, V: Matcher, U.Iterator.Element == V.ValueType
-{
+    where U: Sequence, V: Matcher, U.Iterator.Element == V.ValueType {
     return createAllPassMatcher() {
         try matcher.matches($0, failureMessage: $1)
     }
 }
 
-private func createAllPassMatcher<T,U>
+private func createAllPassMatcher<T, U>
     (_ elementEvaluator: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> NonNilMatcherFunc<U>
-    where U: Sequence, U.Iterator.Element == T
-{
+    where U: Sequence, U.Iterator.Element == T {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.actualValue = nil
         if let actualValue = try actualExpression.evaluate() {
@@ -62,7 +58,7 @@ extension NMBObjCMatcher {
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
             var nsObjects = [NSObject]()
-            
+
             var collectionIsUsable = true
             if let value = actualValue as? NSFastEnumeration {
                 let generator = NSFastEnumerationIterator(value)
@@ -77,7 +73,7 @@ extension NMBObjCMatcher {
             } else {
                 collectionIsUsable = false
             }
-            
+
             if !collectionIsUsable {
                 failureMessage.postfixMessage =
                   "allPass only works with NSFastEnumeration (NSArray, NSSet, ...) of NSObjects"
@@ -85,12 +81,11 @@ extension NMBObjCMatcher {
                 failureMessage.to = ""
                 return false
             }
-            
+
             let expr = Expression(expression: ({ nsObjects }), location: location)
             let elementEvaluator: (Expression<NSObject>, FailureMessage) -> Bool = {
                 expression, failureMessage in
-                return matcher.matches(
-                    {try! expression.evaluate()}, failureMessage: failureMessage, location: expr.location)
+                return matcher.matches({try! expression.evaluate()}, failureMessage: failureMessage, location: expr.location)
             }
             return try! createAllPassMatcher(elementEvaluator).matches(
                 expr, failureMessage: failureMessage)

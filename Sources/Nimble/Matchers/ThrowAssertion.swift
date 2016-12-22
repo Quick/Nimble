@@ -5,9 +5,9 @@ public func throwAssertion() -> MatcherFunc<Void> {
     #if arch(x86_64) && _runtime(_ObjC) && !SWIFT_PACKAGE
         failureMessage.postfixMessage = "throw an assertion"
         failureMessage.actualValue = nil
-        
+
         var succeeded = true
-        
+
         let caughtException: BadInstructionException? = catchBadInstruction {
             #if os(tvOS)
                 if (!NimbleEnvironment.activeInstance.suppressTVOSAssertionWarning) {
@@ -36,11 +36,11 @@ public func throwAssertion() -> MatcherFunc<Void> {
         if !succeeded {
             return false
         }
-        
+
         if caughtException == nil {
             return false
         }
-        
+
         return true
     #elseif SWIFT_PACKAGE
         fatalError("The throwAssertion Nimble matcher does not currently support Swift CLI." +

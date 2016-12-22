@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
 public func beIdenticalTo(_ expected: Any?) -> NonNilMatcherFunc<Any> {

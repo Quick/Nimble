@@ -3,7 +3,7 @@ import XCTest
 
 /// Default handler for Nimble. This assertion handler passes failures along to
 /// XCTest.
-public class NimbleXCTestHandler : AssertionHandler {
+public class NimbleXCTestHandler: AssertionHandler {
     public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         if !assertion {
             recordFailure("\(message.stringValue)\n", location: location)
@@ -29,7 +29,7 @@ public class NimbleShortXCTestHandler: AssertionHandler {
 
 /// Fallback handler in case XCTest is unavailable. This assertion handler will abort
 /// the program if it is invoked.
-class NimbleXCTestUnavailableHandler : AssertionHandler {
+class NimbleXCTestUnavailableHandler: AssertionHandler {
     func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         fatalError("XCTest is not available and no custom assertion handler was configured. Aborting.")
     }
@@ -60,7 +60,6 @@ class NimbleXCTestUnavailableHandler : AssertionHandler {
     }
 }
 #endif
-
 
 func isXCTestAvailable() -> Bool {
 #if _runtime(_ObjC)
