@@ -22,7 +22,7 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         expect(NSDictionary(object: 1, forKey: 1 as NSNumber) as? [Int:Int]).toNot(beEmpty())
 #endif
 
-        expect(Dictionary<Int, Int>()).to(beEmpty())
+        expect([Int: Int]()).to(beEmpty())
         expect(["hi": 1]).toNot(beEmpty())
 
 #if _runtime(_ObjC)
