@@ -61,12 +61,12 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var value = 0
 
-        let sleepThenSetValueTo: (Int) -> () = { newValue in
+        let sleepThenSetValueTo: (Int) -> Void = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
             value = newValue
         }
 
-        var asyncOperation: () -> () = { sleepThenSetValueTo(1) }
+        var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
         if #available(OSX 10.10, *) {
             DispatchQueue.global().async(execute: asyncOperation)
@@ -98,7 +98,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
     func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
-            waitUntil(timeout: 1) { done in return }
+            waitUntil(timeout: 1) { _ in return }
         }
     }
 
@@ -106,7 +106,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         var waiting = true
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: 0.01) { done in
-                let asyncOperation: () -> () = {
+                let asyncOperation: () -> Void = {
                     Thread.sleep(forTimeInterval: 0.1)
                     done()
                     waiting = false
@@ -187,7 +187,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        let asyncOperation: () -> () = {
+        let asyncOperation: () -> Void = {
             expect {
                 waitUntil { done in done() }
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
@@ -205,7 +205,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testToEventuallyMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
-        let asyncOperation: () -> () = {
+        let asyncOperation: () -> Void = {
             expect {
                 expect(1).toEventually(equal(2))
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))

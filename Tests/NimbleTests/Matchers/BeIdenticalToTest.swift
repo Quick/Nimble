@@ -10,7 +10,7 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
             ("testBeIdenticalToPositiveMessage", testBeIdenticalToPositiveMessage),
             ("testBeIdenticalToNegativeMessage", testBeIdenticalToNegativeMessage),
             ("testOperators", testOperators),
-            ("testBeAlias", testBeAlias)
+            ("testBeAlias", testBeAlias),
         ]
     }
 

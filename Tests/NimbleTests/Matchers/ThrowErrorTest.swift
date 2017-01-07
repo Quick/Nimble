@@ -1,32 +1,32 @@
 import XCTest
 import Nimble
 
-enum NimbleError : Error {
+enum NimbleError: Error {
     case laugh
     case cry
 }
 
-enum EquatableError : Error {
+enum EquatableError: Error {
     case parameterized(x: Int)
 }
 
 extension EquatableError : Equatable {
 }
 
-func ==(lhs: EquatableError, rhs: EquatableError) -> Bool {
+func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
     switch (lhs, rhs) {
     case (.parameterized(let l), .parameterized(let r)):
         return l == r
     }
 }
 
-enum CustomDebugStringConvertibleError : Error {
+enum CustomDebugStringConvertibleError: Error {
     case a
     case b
 }
 
 extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
-    var debugDescription : String {
+    var debugDescription: String {
         return "code=\(_code)"
     }
 }
@@ -120,13 +120,13 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
 
     func testNegativeMatchesDoNotCallClosureWithoutError() {
         failsWithErrorMessage("expected to throw error that satisfies block, got no error") {
-            expect { return }.to(throwError { error in
+            expect { return }.to(throwError { _ in
                 fail()
             })
         }
-        
+
         failsWithErrorMessage("expected to throw error <laugh> that satisfies block, got no error") {
-            expect { return }.to(throwError(NimbleError.laugh) { error in
+            expect { return }.to(throwError(NimbleError.laugh) { _ in
                 fail()
             })
         }

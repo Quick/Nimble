@@ -34,7 +34,7 @@ import Foundation
 //  * Plus all of the same caveats as the Mach exceptions version (doesn't play well with other handlers, probably leaks ARC memory, etc)
 // Treat it like a loaded shotgun. Don't point it at your face.
 
-private var env = jmp_buf(0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0)
+private var env = jmp_buf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 private func triggerLongJmp() {
 	longjmp(&env.0, 1)
@@ -72,7 +72,7 @@ public func catchBadInstruction( block: () -> Void) -> BadInstructionException? 
 	var sigActionPrev = sigaction()
 	let action = __sigaction_u(__sa_sigaction: sigIllHandler)
 	var sigActionNew = sigaction(__sigaction_u: action, sa_mask: sigset_t(), sa_flags: SA_SIGINFO)
-	
+
 	// Install the signal action
 	if sigaction(SIGILL, &sigActionNew, &sigActionPrev) != 0 {
 		fatalError("Sigaction error: \(errno)")
@@ -93,7 +93,7 @@ public func catchBadInstruction( block: () -> Void) -> BadInstructionException? 
 
 	// Run the block
 	block()
-	
+
 	return nil
 }
 

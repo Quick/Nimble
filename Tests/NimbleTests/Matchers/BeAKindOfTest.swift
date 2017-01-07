@@ -15,15 +15,15 @@ final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
+    enum TestEnum {
+        case one, two
+    }
+
     func testPositiveMatch() {
         expect(1).to(beAKindOf(Int.self))
         expect(1).toNot(beAKindOf(String.self))
         expect("turtle string").to(beAKindOf(String.self))
         expect("turtle string").toNot(beAKindOf(TestClassConformingToProtocol.self))
-
-        enum TestEnum {
-            case one, two
-        }
 
         expect(TestEnum.one).to(beAKindOf(TestEnum.self))
 

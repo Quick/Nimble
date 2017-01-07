@@ -13,12 +13,12 @@ final class ContainElementSatisfyingTest: XCTestCase, XCTestCaseProvider {
             ("testContainElementSatisfyingNegativeCaseDefaultErrorMessage",
              testContainElementSatisfyingNegativeCaseDefaultErrorMessage),
             ("testContainElementSatisfyingNegativeCaseSpecificErrorMessage",
-             testContainElementSatisfyingNegativeCaseSpecificErrorMessage)
+             testContainElementSatisfyingNegativeCaseSpecificErrorMessage),
         ]
     }
 
     func testContainElementSatisfying() {
-        var orderIndifferentArray = [1,2,3]
+        var orderIndifferentArray = [1, 2, 3]
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
             return number == 1
         }))
@@ -29,7 +29,7 @@ final class ContainElementSatisfyingTest: XCTestCase, XCTestCaseProvider {
             return number == 3
         }))
 
-        orderIndifferentArray = [3,1,2]
+        orderIndifferentArray = [3, 1, 2]
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
             return number == 1
         }))
@@ -42,7 +42,7 @@ final class ContainElementSatisfyingTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testContainElementSatisfyingDefaultErrorMessage() {
-        let orderIndifferentArray = [1,2,3]
+        let orderIndifferentArray = [1, 2, 3]
         failsWithErrorMessage("expected to find object in collection that satisfies predicate") {
             expect(orderIndifferentArray).to(containElementSatisfying({ number in
                 return number == 4
@@ -51,7 +51,7 @@ final class ContainElementSatisfyingTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testContainElementSatisfyingSpecificErrorMessage() {
-        let orderIndifferentArray = [1,2,3]
+        let orderIndifferentArray = [1, 2, 3]
         failsWithErrorMessage("expected to find object in collection equal to 4") {
             expect(orderIndifferentArray).to(containElementSatisfying({ number in
                 return number == 4

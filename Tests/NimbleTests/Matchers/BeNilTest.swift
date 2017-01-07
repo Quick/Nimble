@@ -8,7 +8,7 @@ final class BeNilTest: XCTestCase, XCTestCaseProvider {
         ]
     }
 
-    func producesNil() -> Array<Int>? {
+    func producesNil() -> [Int]? {
         return nil
     }
 

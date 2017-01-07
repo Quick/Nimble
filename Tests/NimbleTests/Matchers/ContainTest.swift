@@ -16,7 +16,7 @@ final class ContainTest: XCTestCase, XCTestCaseProvider {
     func testContain() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3] as [CInt]).to(contain(1 as CInt))
-        expect([1, 2, 3] as Array<CInt>).to(contain(1 as CInt))
+        expect([1, 2, 3] as [CInt]).toNot(contain(4 as CInt))
         expect(["foo", "bar", "baz"]).to(contain("baz"))
         expect([1, 2, 3]).toNot(contain(4))
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))

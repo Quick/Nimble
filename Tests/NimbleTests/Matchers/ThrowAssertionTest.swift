@@ -42,7 +42,7 @@ final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
         var reachedPoint1 = false
 
         expect { reachedPoint1 = true }.toNot(throwAssertion())
-        
+
         expect(reachedPoint1) == true
     }
 
