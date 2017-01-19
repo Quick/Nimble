@@ -12,20 +12,20 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?, expectedValue: NMB
 /// point values which can have imprecise results when doing arithmetic on them.
 ///
 /// @see equal
-public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<Double> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDelta) -> Predicate<Double> {
+    return Predicate { actualExpression, failureMessage in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
-    }
+    }.requireNonNil
 }
 
 /// A Nimble matcher that succeeds when a value is close to another. This is used for floating
 /// point values which can have imprecise results when doing arithmetic on them.
 ///
 /// @see equal
-public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> NonNilMatcherFunc<NMBDoubleConvertible> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> Predicate<NMBDoubleConvertible> {
+    return Predicate { actualExpression, failureMessage in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
-    }
+    }.requireNonNil
 }
 
 #if _runtime(_ObjC)
@@ -69,8 +69,8 @@ extension NMBObjCMatcher {
 }
 #endif
 
-public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> NonNilMatcherFunc <[Double]> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> Predicate<[Double]> {
+    return Predicate { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = try actualExpression.evaluate() {
             failureMessage.actualValue = "<\(stringify(actual))>"
@@ -87,7 +87,7 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
             }
         }
         return false
-    }
+    }.requireNonNil
 }
 
 // MARK: - Operators

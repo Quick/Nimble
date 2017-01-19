@@ -72,10 +72,10 @@ extension UInt: ExpressibleByBooleanLiteral {
     }
 }
 
-internal func matcherWithFailureMessage<T>(_ matcher: NonNilMatcherFunc<T>, postprocessor: @escaping (FailureMessage) -> Void) -> NonNilMatcherFunc<T> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+internal func matcherWithFailureMessage<T>(_ matcher: Predicate<T>, postprocessor: @escaping (FailureMessage) -> Void) -> Predicate<T> {
+    return Predicate { actualExpression, failureMessage, expectMatch in
         defer { postprocessor(failureMessage) }
-        return try matcher.matcher(actualExpression, failureMessage)
+        return try matcher.satisfies(actualExpression, failureMessage, expectMatch: expectMatch)
     }
 }
 
@@ -83,7 +83,7 @@ internal func matcherWithFailureMessage<T>(_ matcher: NonNilMatcherFunc<T>, post
 
 /// A Nimble matcher that succeeds when the actual value is exactly true.
 /// This matcher will not match against nils.
-public func beTrue() -> NonNilMatcherFunc<Bool> {
+public func beTrue() -> Predicate<Bool> {
     return matcherWithFailureMessage(equal(true)) { failureMessage in
         failureMessage.postfixMessage = "be true"
     }
@@ -91,7 +91,7 @@ public func beTrue() -> NonNilMatcherFunc<Bool> {
 
 /// A Nimble matcher that succeeds when the actual value is exactly false.
 /// This matcher will not match against nils.
-public func beFalse() -> NonNilMatcherFunc<Bool> {
+public func beFalse() -> Predicate<Bool> {
     return matcherWithFailureMessage(equal(false)) { failureMessage in
         failureMessage.postfixMessage = "be false"
     }
@@ -100,8 +100,8 @@ public func beFalse() -> NonNilMatcherFunc<Bool> {
 // MARK: beTruthy() / beFalsy()
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
-public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc<T> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
+    return Predicate { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be truthy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
@@ -121,8 +121,8 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFun
 
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
-public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc<T> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
+    return Predicate { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be falsy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
@@ -137,7 +137,7 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> MatcherFunc
             return actualValue == (false as T)
         }
         return actualValue == nil
-    }
+    }.predicate
 }
 
 #if _runtime(_ObjC)

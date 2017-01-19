@@ -1,8 +1,8 @@
 import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
-public func beAKindOf<T>(_ expectedType: T.Type) -> NonNilMatcherFunc<Any> {
-    return NonNilMatcherFunc {actualExpression, failureMessage in
+public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
+    return Predicate {actualExpression, failureMessage in
         failureMessage.postfixMessage = "be a kind of \(String(describing: expectedType))"
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
@@ -17,15 +17,15 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> NonNilMatcherFunc<Any> {
         }
 
         return true
-    }
+    }.requireNonNil
 }
 
 #if _runtime(_ObjC)
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class
-public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
+    return Predicate { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
             failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
@@ -34,7 +34,7 @@ public func beAKindOf(_ expectedClass: AnyClass) -> NonNilMatcherFunc<NSObject> 
         }
         failureMessage.postfixMessage = "be a kind of \(String(describing: expectedClass))"
         return instance != nil && instance!.isKind(of: expectedClass)
-    }
+    }.requireNonNil
 }
 
 extension NMBObjCMatcher {

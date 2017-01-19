@@ -238,6 +238,9 @@
 		1F925F12195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */; };
 		1F9DB8FB1A74E793002E96AD /* ObjCBeEmptyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DB8FA1A74E793002E96AD /* ObjCBeEmptyTest.m */; };
 		1F9DB8FC1A74E793002E96AD /* ObjCBeEmptyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9DB8FA1A74E793002E96AD /* ObjCBeEmptyTest.m */; };
+		1FA0C3FF1E30B14500623165 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0C3FE1E30B14500623165 /* Predicate.swift */; };
+		1FA0C4001E30B14500623165 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0C3FE1E30B14500623165 /* Predicate.swift */; };
+		1FA0C4011E30B14500623165 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA0C3FE1E30B14500623165 /* Predicate.swift */; };
 		1FB90098195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
 		1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */; };
 		1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */; };
@@ -545,6 +548,7 @@
 		1F925F0D195C18F500ED456B /* BeLessThanOrEqualToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeLessThanOrEqualToTest.swift; sourceTree = "<group>"; };
 		1F925F10195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeGreaterThanOrEqualToTest.swift; sourceTree = "<group>"; };
 		1F9DB8FA1A74E793002E96AD /* ObjCBeEmptyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCBeEmptyTest.m; sourceTree = "<group>"; };
+		1FA0C3FE1E30B14500623165 /* Predicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
 		1FB90097195EC4B8001D7FAE /* BeIdenticalToTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToTest.swift; sourceTree = "<group>"; };
 		1FC494A91C29CBA40010975C /* NimbleEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleEnvironment.swift; sourceTree = "<group>"; };
 		1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostNotificationTest.swift; sourceTree = "<group>"; };
@@ -905,8 +909,8 @@
 				1FD8CD171968AB07008ED995 /* BeLogical.swift */,
 				1FD8CD181968AB07008ED995 /* BeNil.swift */,
 				1F91DD301C74BF61002C309F /* BeVoid.swift */,
-				7B13BA051DD360AA00C9098C /* ContainElementSatisfying.swift */,
 				1FD8CD1A1968AB07008ED995 /* Contain.swift */,
+				7B13BA051DD360AA00C9098C /* ContainElementSatisfying.swift */,
 				1FD8CD1B1968AB07008ED995 /* EndWith.swift */,
 				1FD8CD1C1968AB07008ED995 /* Equal.swift */,
 				472FD1341B9E085700C7B8DA /* HaveCount.swift */,
@@ -915,9 +919,10 @@
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				AE7ADE441C80BF8000B94CD3 /* MatchError.swift */,
 				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
+				1FA0C3FE1E30B14500623165 /* Predicate.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
-				964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */,
 				7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */,
+				964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */,
 				29EA59651B551EE6002D767E /* ThrowError.swift */,
 				7A0A26221E7F52360092A34E /* ToSucceed.swift */,
 			);
@@ -1341,6 +1346,13 @@
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
+				9630C0301C6D139F000693EE /* CwlDarwinDefinitions.swift in Sources */,
+				1FA0C4001E30B14500623165 /* Predicate.swift in Sources */,
+				9630C0231C6D0B82000693EE /* mach_excServer.c in Sources */,
+				9630C01F1C6D0B2F000693EE /* CwlCatchException.swift in Sources */,
+				9630C0131C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */,
+				9630C01C1C6D0B2F000693EE /* CwlCatchException.m in Sources */,
+				9630C02C1C6D125F000693EE /* CwlBadInstructionException.swift in Sources */,
 				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1445,6 +1457,7 @@
 				1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */,
 				1F1871DC1CA89EF100A34BF2 /* NMBObjCMatcher.swift in Sources */,
 				F8A1BE311CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
+				1FA0C4011E30B14500623165 /* Predicate.swift in Sources */,
 				1F5DF1711BDCA0F500C3A531 /* DSL+Wait.swift in Sources */,
 				1F1871D61CA89EEF00A34BF2 /* DSL.m in Sources */,
 				1F5DF17D1BDCA0F500C3A531 /* BeGreaterThanOrEqualTo.swift in Sources */,
@@ -1603,6 +1616,7 @@
 				1F12BE9B1E778F70006952EC /* CwlDarwinDefinitions.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
+				1FA0C3FF1E30B14500623165 /* Predicate.swift in Sources */,
 				472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,6 +23,10 @@ public struct MatcherFunc<T>: Matcher {
     public func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
         return try !matcher(actualExpression, failureMessage)
     }
+
+    public var predicate: Predicate<T> {
+        return Predicate(self)
+    }
 }
 
 /// A convenience API to build matchers that don't need special negation
@@ -65,5 +69,9 @@ public struct NonNilMatcherFunc<T>: Matcher {
             return true
         }
         return false
+    }
+
+    public var predicate: Predicate<T> {
+        return Predicate(self)
     }
 }

@@ -2,12 +2,12 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers. 
-public func satisfyAnyOf<T, U>(_ matchers: U...) -> NonNilMatcherFunc<T>
+public func satisfyAnyOf<T, U>(_ matchers: U...) -> Predicate<T>
     where U: Matcher, U.ValueType == T {
     return satisfyAnyOf(matchers)
 }
 
-internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
+internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> Predicate<T>
     where U: Matcher, U.ValueType == T {
     return NonNilMatcherFunc<T> { actualExpression, failureMessage in
         let postfixMessages = NSMutableArray()
@@ -25,14 +25,18 @@ internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> NonNilMatcherFunc<T>
         }
 
         return matches
-    }
+    }.predicate
 }
 
-public func || <T>(left: NonNilMatcherFunc<T>, right: NonNilMatcherFunc<T>) -> NonNilMatcherFunc<T> {
+public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
+        return satisfyAnyOf(left, right)
+}
+
+public func || <T>(left: NonNilMatcherFunc<T>, right: NonNilMatcherFunc<T>) -> Predicate<T> {
     return satisfyAnyOf(left, right)
 }
 
-public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> NonNilMatcherFunc<T> {
+public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> Predicate<T> {
     return satisfyAnyOf(left, right)
 }
 

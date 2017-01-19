@@ -16,8 +16,8 @@ public func raiseException(
     named: String? = nil,
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
-    closure: ((NSException) -> Void)? = nil) -> MatcherFunc<Any> {
-        return MatcherFunc { actualExpression, failureMessage in
+    closure: ((NSException) -> Void)? = nil) -> Predicate<Any> {
+        return Predicate { actualExpression, failureMessage in
 
             var exception: NSException?
             let capture = NMBExceptionCapture(handler: ({ e in
