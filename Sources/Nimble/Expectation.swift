@@ -34,6 +34,23 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
     }
 }
 
+internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?) -> (Bool, FailureMessage) {
+        let msg = FailureMessage()
+        msg.userDescription = description
+        msg.to = to
+        do {
+            let result = try predicate.satisfies(expression, style)
+            result.message.update(failureMessage: msg)
+            if msg.actualValue == "" {
+                msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+            }
+            return (result.toBoolean(expectation: style), msg)
+        } catch let error {
+            msg.actualValue = "an unexpected error thrown: <\(error)>"
+            return (false, msg)
+        }
+}
+
 public struct Expectation<T> {
 
     public let expression: Expression<T>
@@ -42,6 +59,8 @@ public struct Expectation<T> {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
     }
+
+    ////////////////// OLD API /////////////////////
 
     /// Tests the actual value using a matcher to match.
     public func to<U>(_ matcher: U, description: String? = nil)
@@ -63,6 +82,27 @@ public struct Expectation<T> {
     public func notTo<U>(_ matcher: U, description: String? = nil)
         where U: Matcher, U.ValueType == T {
         toNot(matcher, description: description)
+    }
+
+    ////////////////// NEW API /////////////////////
+
+    /// Tests the actual value using a matcher to match.
+    public func to(_ predicate: Predicate<T>, description: String? = nil) {
+        let (pass, msg) = execute(expression, .ToMatch, predicate, to: "to", description: description)
+        verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    public func toNot(_ predicate: Predicate<T>, description: String? = nil) {
+        let (pass, msg) = execute(expression, .ToNotMatch, predicate, to: "to not", description: description)
+        verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
+    public func notTo(_ predicate: Predicate<T>, description: String? = nil) {
+        toNot(predicate, description: description)
     }
 
     // see:

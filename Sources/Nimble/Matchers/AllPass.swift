@@ -3,7 +3,7 @@ import Foundation
 public func allPass<T, U>
     (_ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T> { actualExpression, failureMessage in
+        let matcher = Predicate<T> { actualExpression, failureMessage -> Bool in
             failureMessage.postfixMessage = "pass a condition"
             return try passFunc(try actualExpression.evaluate())
         }
@@ -13,7 +13,7 @@ public func allPass<T, U>
 public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T> { actualExpression, failureMessage in
+        let matcher = Predicate<T> { actualExpression, failureMessage -> Bool in
             failureMessage.postfixMessage = passName
             return try passFunc(try actualExpression.evaluate())
         }

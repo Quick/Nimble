@@ -1,7 +1,7 @@
 import Foundation
 
 public func throwAssertion() -> Predicate<Void> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
     #if arch(x86_64) && _runtime(_ObjC) && !SWIFT_PACKAGE
         failureMessage.postfixMessage = "throw an assertion"
         failureMessage.actualValue = nil

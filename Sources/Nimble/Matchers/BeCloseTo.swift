@@ -70,7 +70,7 @@ extension NMBObjCMatcher {
 #endif
 
 public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> Predicate<[Double]> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = try actualExpression.evaluate() {
             failureMessage.actualValue = "<\(stringify(actual))>"

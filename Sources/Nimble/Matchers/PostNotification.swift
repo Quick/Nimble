@@ -48,7 +48,7 @@ public func postNotifications<T>(
     let collector = NotificationCollector(notificationCenter: center)
     collector.startObserving()
     var once: Bool = false
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         let collectorNotificationsExpression = Expression(memoizedExpression: { _ in
             return collector.observedNotifications
             }, location: actualExpression.location, withoutCaching: true)

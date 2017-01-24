@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual value is greater than
 /// or equal to the expected value.
 public func beGreaterThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         failureMessage.postfixMessage = "be greater than or equal to <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
         if let actual = actualValue, let expected = expectedValue {
@@ -16,7 +16,7 @@ public func beGreaterThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predic
 /// A Nimble matcher that succeeds when the actual value is greater than
 /// or equal to the expected value.
 public func beGreaterThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         failureMessage.postfixMessage = "be greater than or equal to <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) != ComparisonResult.orderedAscending

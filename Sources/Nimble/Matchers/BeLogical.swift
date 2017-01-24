@@ -72,10 +72,10 @@ extension UInt: ExpressibleByBooleanLiteral {
     }
 }
 
-internal func matcherWithFailureMessage<T>(_ matcher: Predicate<T>, postprocessor: @escaping (FailureMessage) -> Void) -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage, expectMatch in
-        defer { postprocessor(failureMessage) }
-        return try matcher.satisfies(actualExpression, failureMessage, expectMatch: expectMatch)
+internal func rename<T>(_ matcher: Predicate<T>, failureMessage message: ExpectationMessage) -> Predicate<T> {
+    return Predicate { actualExpression, style -> PredicateResult in
+        let result = try matcher.satisfies(actualExpression, style)
+        return PredicateResult(status: result.status, message: message)
     }
 }
 
@@ -84,24 +84,20 @@ internal func matcherWithFailureMessage<T>(_ matcher: Predicate<T>, postprocesso
 /// A Nimble matcher that succeeds when the actual value is exactly true.
 /// This matcher will not match against nils.
 public func beTrue() -> Predicate<Bool> {
-    return matcherWithFailureMessage(equal(true)) { failureMessage in
-        failureMessage.postfixMessage = "be true"
-    }
+    return rename(equal(true), failureMessage: .ExpectedActualValueTo("be true"))
 }
 
 /// A Nimble matcher that succeeds when the actual value is exactly false.
 /// This matcher will not match against nils.
 public func beFalse() -> Predicate<Bool> {
-    return matcherWithFailureMessage(equal(false)) { failureMessage in
-        failureMessage.postfixMessage = "be false"
-    }
+    return rename(equal(false), failureMessage: .ExpectedActualValueTo("be false"))
 }
 
 // MARK: beTruthy() / beFalsy()
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
 public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         failureMessage.postfixMessage = "be truthy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
@@ -122,7 +118,7 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
 public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage in
+    return Predicate { actualExpression, failureMessage -> Bool in
         failureMessage.postfixMessage = "be falsy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
