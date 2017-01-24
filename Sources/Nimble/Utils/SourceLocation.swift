@@ -5,10 +5,10 @@ import Foundation
 // stdlib, and because recent versions of the XCTest overlay require `StaticString`
 // when calling `XCTFail`. Under the Objective-C runtime (i.e. building on Mac), we
 // have to use `String` instead because StaticString can't be generated from Objective-C
-#if _runtime(_ObjC)
-public typealias FileString = String
-#else
+#if SWIFT_PACKAGE
 public typealias FileString = StaticString
+#else
+public typealias FileString = String
 #endif
 
 public final class SourceLocation: NSObject {

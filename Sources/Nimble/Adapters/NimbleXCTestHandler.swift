@@ -35,16 +35,7 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
     }
 }
 
-#if _runtime(_ObjC)
-
-#if SWIFT_PACKAGE
-    extension XCTestObservationCenter {
-        override open class func initialize() {
-            self.shared().addTestObserver(CurrentTestCaseTracker.sharedInstance)
-        }
-    }
-#endif
-
+#if !SWIFT_PACKAGE
 /// Helper class providing access to the currently executing XCTestCase instance, if any
 @objc final internal class CurrentTestCaseTracker: NSObject, XCTestObservation {
     @objc static let sharedInstance = CurrentTestCaseTracker()
@@ -71,7 +62,9 @@ func isXCTestAvailable() -> Bool {
 }
 
 private func recordFailure(_ message: String, location: SourceLocation) {
-#if _runtime(_ObjC)
+#if SWIFT_PACKAGE
+    XCTFail("\(message)", file: location.file, line: location.line)
+#else
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: location.line, expected: true)
     } else {
@@ -79,7 +72,5 @@ private func recordFailure(_ message: String, location: SourceLocation) {
         "The failure was:\n\"\(message)\"\nIt occurred at: \(location.file):\(location.line)"
         NSException(name: .internalInconsistencyException, reason: msg, userInfo: nil).raise()
     }
-#else
-    XCTFail("\(message)\n", file: location.file, line: location.line)
 #endif
 }
