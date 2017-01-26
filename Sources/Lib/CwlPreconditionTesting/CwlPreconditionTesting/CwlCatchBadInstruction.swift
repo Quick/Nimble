@@ -71,7 +71,7 @@ import Foundation
 		var behaviors = execTypesCountTuple<exception_behavior_t>()
 		var flavors = execTypesCountTuple<thread_state_flavor_t>()
 		var currentExceptionPort: mach_port_t = 0
-		var handlerThread: pthread_t? = nil
+		var handlerThread: pthread_t?
 
 		mutating func withUnsafeMutablePointers<R>(in block: (UnsafeMutablePointer<exception_mask_t>, UnsafeMutablePointer<mach_port_t>, UnsafeMutablePointer<exception_behavior_t>, UnsafeMutablePointer<thread_state_flavor_t>) -> R) -> R {
 			return masks.pointer { masksPtr in
