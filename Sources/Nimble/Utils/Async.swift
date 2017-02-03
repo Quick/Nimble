@@ -27,7 +27,7 @@ internal protocol WaitLock {
 }
 
 internal class AssertionWaitLock: WaitLock {
-    private var currentWaiter: WaitingInfo? = nil
+    private var currentWaiter: WaitingInfo?
     init() { }
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {

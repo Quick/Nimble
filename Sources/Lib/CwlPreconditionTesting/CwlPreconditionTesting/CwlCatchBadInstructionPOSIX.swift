@@ -40,7 +40,7 @@ private func triggerLongJmp() {
 	longjmp(&env.0, 1)
 }
 
-private func sigIllHandler(code: Int32, info: UnsafeMutablePointer<__siginfo>?, uap: UnsafeMutableRawPointer?) -> Void {
+private func sigIllHandler(code: Int32, info: UnsafeMutablePointer<__siginfo>?, uap: UnsafeMutableRawPointer?) {
 	guard let context = uap?.assumingMemoryBound(to: ucontext64_t.self) else { return }
 
 	// 1. Decrement the stack pointer
