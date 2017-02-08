@@ -4,7 +4,7 @@
 #import "DSL.h"
 
 #import "CwlCatchException.h"
-#import "CwlCatchBadInstruction.h"
+#import "CwlMachBadInstructionHandler.h"
 
 #if !TARGET_OS_TV
     #import "mach_excServer.h"

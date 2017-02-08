@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		123E93B51E4B7646006431E4 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		123E93B61E4B7646006431E4 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
+		123E93B71E4B764B006431E4 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		123E93B81E4B764F006431E4 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
 		1F0648CC19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */; };
@@ -98,13 +102,10 @@
 		1F4A56A01A3B359E009E1637 /* ObjCRaiseExceptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A569F1A3B359E009E1637 /* ObjCRaiseExceptionTest.m */; };
 		1F4A56A11A3B359E009E1637 /* ObjCRaiseExceptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A569F1A3B359E009E1637 /* ObjCRaiseExceptionTest.m */; };
 		1F4BB8A41DAC9DC90048464B /* CwlCatchBadInstructionPOSIX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BB89D1DAC9D930048464B /* CwlCatchBadInstructionPOSIX.swift */; };
-		1F4BB8AB1DAC9DE50048464B /* CwlCatchBadInstruction.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C00A1C6D0B18000693EE /* CwlCatchBadInstruction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4BB8AE1DAC9DED0048464B /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0161C6D0B2F000693EE /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F4BB8B61DACA0E30048464B /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BB8B31DACA0D00048464B /* ThrowAssertionTest.swift */; };
 		1F4BB8B71DACA0E40048464B /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BB8B31DACA0D00048464B /* ThrowAssertionTest.swift */; };
 		1F4BB8B81DACAACF0048464B /* ThrowAssertionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4BB8B31DACA0D00048464B /* ThrowAssertionTest.swift */; };
-		1F4BB8BA1DACBFCF0048464B /* CwlCatchBadInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00B1C6D0B18000693EE /* CwlCatchBadInstruction.m */; };
-		1F4BB8BB1DACBFD00048464B /* CwlCatchBadInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00B1C6D0B18000693EE /* CwlCatchBadInstruction.m */; };
 		1F5DF15F1BDCA0CE00C3A531 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5DF1551BDCA0CE00C3A531 /* Nimble.framework */; };
 		1F5DF16C1BDCA0F500C3A531 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD051968AB07008ED995 /* AssertionRecorder.swift */; };
 		1F5DF16D1BDCA0F500C3A531 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD061968AB07008ED995 /* AdapterProtocols.swift */; };
@@ -301,8 +302,6 @@
 		7B5358BE1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
 		7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
 		7B5358C01C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
-		9630C00D1C6D0B18000693EE /* CwlCatchBadInstruction.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C00A1C6D0B18000693EE /* CwlCatchBadInstruction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9630C00E1C6D0B18000693EE /* CwlCatchBadInstruction.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C00A1C6D0B18000693EE /* CwlCatchBadInstruction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9630C0131C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */; };
 		9630C0141C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */; };
 		9630C0191C6D0B2F000693EE /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0161C6D0B2F000693EE /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -445,6 +444,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CwlMachBadInstructionHandler.h; path = CwlPreconditionTesting/CwlMachBadInstructionHandler.h; sourceTree = "<group>"; };
+		123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CwlMachBadInstructionHandler.m; path = CwlPreconditionTesting/CwlMachBadInstructionHandler.m; sourceTree = "<group>"; };
 		1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectWithLazyProperty.swift; sourceTree = "<group>"; };
 		1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronousTests.swift; sourceTree = "<group>"; };
 		1F14FB63194180C5009F2A08 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
@@ -559,8 +560,6 @@
 		7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOf.swift; sourceTree = "<group>"; };
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
 		8DF1C3F61C94FC75004B2D36 /* ObjcStringersTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcStringersTest.m; sourceTree = "<group>"; };
-		9630C00A1C6D0B18000693EE /* CwlCatchBadInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CwlCatchBadInstruction.h; path = CwlPreconditionTesting/CwlCatchBadInstruction.h; sourceTree = "<group>"; };
-		9630C00B1C6D0B18000693EE /* CwlCatchBadInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CwlCatchBadInstruction.m; path = CwlPreconditionTesting/CwlCatchBadInstruction.m; sourceTree = "<group>"; };
 		9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CwlCatchBadInstruction.swift; path = CwlPreconditionTesting/CwlCatchBadInstruction.swift; sourceTree = "<group>"; };
 		9630C0161C6D0B2F000693EE /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CwlCatchException.h; path = CwlCatchException/CwlCatchException/CwlCatchException.h; sourceTree = "<group>"; };
 		9630C0171C6D0B2F000693EE /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CwlCatchException.m; path = CwlCatchException/CwlCatchException/CwlCatchException.m; sourceTree = "<group>"; };
@@ -884,11 +883,11 @@
 		9630C0091C6D0ABA000693EE /* CwlPreconditionTesting */ = {
 			isa = PBXGroup;
 			children = (
+				123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */,
+				123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */,
 				1F4BB89D1DAC9D930048464B /* CwlCatchBadInstructionPOSIX.swift */,
 				9630C02B1C6D125F000693EE /* CwlBadInstructionException.swift */,
 				9630C00C1C6D0B18000693EE /* CwlCatchBadInstruction.swift */,
-				9630C00A1C6D0B18000693EE /* CwlCatchBadInstruction.h */,
-				9630C00B1C6D0B18000693EE /* CwlCatchBadInstruction.m */,
 				9630C0181C6D0B2F000693EE /* CwlCatchException.swift */,
 				9630C0161C6D0B2F000693EE /* CwlCatchException.h */,
 				9630C0171C6D0B2F000693EE /* CwlCatchException.m */,
@@ -906,8 +905,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9630C00D1C6D0B18000693EE /* CwlCatchBadInstruction.h in Headers */,
 				9630C0191C6D0B2F000693EE /* CwlCatchException.h in Headers */,
+				123E93B71E4B764B006431E4 /* CwlMachBadInstructionHandler.h in Headers */,
 				1F1871C91CA89EDB00A34BF2 /* NMBStringify.h in Headers */,
 				1F1871C51CA89EDB00A34BF2 /* DSL.h in Headers */,
 				1F1871C71CA89EDB00A34BF2 /* NMBExceptionCapture.h in Headers */,
@@ -924,7 +923,6 @@
 				1F1871E21CA89EF600A34BF2 /* NMBStringify.h in Headers */,
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
-				1F4BB8AB1DAC9DE50048464B /* CwlCatchBadInstruction.h in Headers */,
 				1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,8 +931,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9630C00E1C6D0B18000693EE /* CwlCatchBadInstruction.h in Headers */,
 				9630C01A1C6D0B2F000693EE /* CwlCatchException.h in Headers */,
+				123E93B51E4B7646006431E4 /* CwlMachBadInstructionHandler.h in Headers */,
 				1F2D175B1DB618ED00EE9C7A /* mach_excServer.h in Headers */,
 				1F1871DF1CA89EF500A34BF2 /* NMBStringify.h in Headers */,
 				1F1871DD1CA89EF500A34BF2 /* DSL.h in Headers */,
@@ -1222,6 +1220,7 @@
 				1F43728F1A1B344000EB80F8 /* Stringers.swift in Sources */,
 				1F43728D1A1B343D00EB80F8 /* SourceLocation.swift in Sources */,
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
+				123E93B81E4B764F006431E4 /* CwlMachBadInstructionHandler.m in Sources */,
 				1FDBD8671AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				1F43728A1A1B343800EB80F8 /* Functional.swift in Sources */,
 				AE4BA9AD1C88DDB500B73906 /* Errors.swift in Sources */,
@@ -1245,7 +1244,6 @@
 				1F1871C61CA89EDB00A34BF2 /* DSL.m in Sources */,
 				1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				AE7ADE451C80BF8000B94CD3 /* MatchError.swift in Sources */,
-				1F4BB8BA1DACBFCF0048464B /* CwlCatchBadInstruction.m in Sources */,
 				1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
 				1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1FD8CD561968AB07008ED995 /* Contain.swift in Sources */,
@@ -1479,6 +1477,7 @@
 				1F43728E1A1B343F00EB80F8 /* Stringers.swift in Sources */,
 				1F43728C1A1B343C00EB80F8 /* SourceLocation.swift in Sources */,
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
+				123E93B61E4B7646006431E4 /* CwlMachBadInstructionHandler.m in Sources */,
 				1F1871E71CA8A18400A34BF2 /* AsyncMatcherWrapper.swift in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				1F43728B1A1B343900EB80F8 /* Functional.swift in Sources */,
@@ -1503,7 +1502,6 @@
 				1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1F2D175C1DB618F000EE9C7A /* mach_excServer.c in Sources */,
 				1F1871D21CA89EEE00A34BF2 /* DSL.m in Sources */,
-				1F4BB8BB1DACBFD00048464B /* CwlCatchBadInstruction.m in Sources */,
 				AE7ADE461C80BF8000B94CD3 /* MatchError.swift in Sources */,
 				1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
 				1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */,
