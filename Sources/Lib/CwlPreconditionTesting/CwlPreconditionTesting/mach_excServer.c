@@ -7,6 +7,8 @@
 
 /* Module mach_exc */
 
+#if defined(__x86_64)
+
 #define	__MIG_check__Request__mach_exc_subsystem__ 1
 
 #include "mach_excServer.h"
@@ -531,3 +533,5 @@ mig_external mig_routine_t mach_exc_server_routine
 
 	return catch_mach_exc_subsystem.routine[msgh_id].stub_routine;
 }
+
+#endif
