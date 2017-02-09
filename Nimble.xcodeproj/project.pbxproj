@@ -11,6 +11,11 @@
 		123E93B61E4B7646006431E4 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
 		123E93B71E4B764B006431E4 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		123E93B81E4B764F006431E4 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
+		12C819C81E4CC9370082E120 /* mach_excServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9630C0261C6D0BB0000693EE /* mach_excServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12C819C91E4CC9370082E120 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9630C0221C6D0B82000693EE /* mach_excServer.c */; };
+		12C819CA1E4CC9400082E120 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = 9630C0171C6D0B2F000693EE /* CwlCatchException.m */; };
+		12C819CB1E4CC9530082E120 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
+		12C819CC1E4CC9560082E120 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0648CC19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648D41963AAB2001F9C46 /* SynchronousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */; };
@@ -924,6 +929,8 @@
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
 				1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */,
+				12C819CC1E4CC9560082E120 /* CwlMachBadInstructionHandler.h in Headers */,
+				12C819C81E4CC9370082E120 /* mach_excServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,10 +1375,13 @@
 				1F91DD331C74BF61002C309F /* BeVoid.swift in Sources */,
 				1FCF91551C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1F5DF1831BDCA0F500C3A531 /* Contain.swift in Sources */,
+				12C819CA1E4CC9400082E120 /* CwlCatchException.m in Sources */,
 				1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */,
 				1F1871DC1CA89EF100A34BF2 /* NMBObjCMatcher.swift in Sources */,
 				F8A1BE311CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F5DF1711BDCA0F500C3A531 /* DSL+Wait.swift in Sources */,
+				12C819CB1E4CC9530082E120 /* CwlMachBadInstructionHandler.m in Sources */,
+				12C819C91E4CC9370082E120 /* mach_excServer.c in Sources */,
 				1F1871D61CA89EEF00A34BF2 /* DSL.m in Sources */,
 				1F5DF17D1BDCA0F500C3A531 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				AE7ADE471C80BF8000B94CD3 /* MatchError.swift in Sources */,
