@@ -51,7 +51,7 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     func testBeAlias() {
         let value = NSDate()
         expect(value).to(be(value))
-        expect(NSNumber(value:1)).toNot(be(NSString(stringLiteral: "turtles")))
+        expect(NSNumber(value:1)).toNot(be(NSString(string: "turtles")))
         #if _runtime(_ObjC)
             expect([1]).toNot(be([1]))
         #else
