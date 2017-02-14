@@ -1,5 +1,5 @@
 //
-//  CwlCatchBadInstruction.h
+//  CwlMachBadExceptionHandler.h
 //  CwlPreconditionTesting
 //
 //  Created by Matt Gallagher on 2016/01/10.
@@ -23,7 +23,10 @@
 #import <Foundation/Foundation.h>
 #import <mach/mach.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+extern boolean_t mach_exc_server(mach_msg_header_t *InHeadP, mach_msg_header_t *OutHeadP);
 
 // The request_mach_exception_raise_t struct is passed to mach_msg which assumes its exact layout. To avoid problems with different layouts, we keep the definition in C rather than Swift.
 typedef struct
@@ -54,7 +57,18 @@ typedef struct
 	natural_t new_state[224];
 } reply_mach_exception_raise_state_t;
 
-extern boolean_t mach_exc_server(mach_msg_header_t *InHeadP, mach_msg_header_t *OutHeadP);
+typedef struct
+{
+	mach_port_t exception_port;
+	exception_type_t exception;
+	mach_exception_data_type_t const * _Nullable code;
+	mach_msg_type_number_t codeCnt;
+	int32_t * _Nullable flavor;
+	natural_t const * _Nullable old_state;
+	mach_msg_type_number_t old_stateCnt;
+	thread_state_t _Nullable new_state;
+	mach_msg_type_number_t * _Nullable new_stateCnt;
+} bad_instruction_exception_reply_t;
 
 NS_ASSUME_NONNULL_END
 
