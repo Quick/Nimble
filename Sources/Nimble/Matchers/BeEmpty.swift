@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
@@ -17,7 +17,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<String> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = try actualExpression.evaluate()
         return actualString == nil || NSString(string: actualString!).length  == 0
@@ -27,7 +27,7 @@ public func beEmpty() -> Predicate<String> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For NSString instances, it is an empty string.
 public func beEmpty() -> Predicate<NSString> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actualString = try actualExpression.evaluate()
         return actualString == nil || actualString!.length == 0
@@ -40,7 +40,7 @@ public func beEmpty() -> Predicate<NSString> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSDictionary> {
-	return Predicate { actualExpression, failureMessage -> Bool in
+	return Predicate.fromBool { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
 		let actualDictionary = try actualExpression.evaluate()
 		return actualDictionary == nil || actualDictionary!.count == 0
@@ -50,7 +50,7 @@ public func beEmpty() -> Predicate<NSDictionary> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSArray> {
-	return Predicate { actualExpression, failureMessage -> Bool in
+	return Predicate.fromBool { actualExpression, failureMessage in
 		failureMessage.postfixMessage = "be empty"
 		let actualArray = try actualExpression.evaluate()
 		return actualArray == nil || actualArray!.count == 0
@@ -60,7 +60,7 @@ public func beEmpty() -> Predicate<NSArray> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NMBCollection> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be empty"
         let actual = try actualExpression.evaluate()
         return actual == nil || actual!.count == 0

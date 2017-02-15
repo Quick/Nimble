@@ -13,7 +13,7 @@ public protocol Matcher {
 
 extension Matcher {
     var predicate: Predicate<ValueType> {
-        return Predicate(self)
+        return Predicate.fromMatcher(self)
     }
 
     var toClosure: (Expression<ValueType>, FailureMessage, Bool) throws -> Bool {

@@ -1,23 +1,29 @@
 import Foundation
 
+private func matcherMessage<T>(forType expectedType: T.Type) -> String {
+    return "be a kind of \(String(describing: expectedType))"
+}
+private func matcherMessage(forClass expectedClass: AnyClass) -> String {
+    return "be a kind of \(String(describing: expectedClass))"
+}
+
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
-    return Predicate {actualExpression, failureMessage -> Bool in
-        failureMessage.postfixMessage = "be a kind of \(String(describing: expectedType))"
+    return Predicate.define { actualExpression in
+        let message: ExpectationMessage
+
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
-            failureMessage.actualValue = "<nil>"
-            return false
+            message = .ExpectedValueTo(matcherMessage(forType: expectedType), "<nil>")
+            return (.Fail, message)
         }
+        message = .ExpectedValueTo(
+            "be a kind of \(String(describing: expectedType))",
+            "<\(String(describing: type(of: validInstance))) instance>"
+        )
 
-        failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
-
-        guard validInstance is T else {
-            return false
-        }
-
-        return true
-    }.requireNonNil
+        return (Satisfiability(bool: validInstance is T), message)
+    }
 }
 
 #if _runtime(_ObjC)
@@ -25,16 +31,27 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class
 public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.define { actualExpression in
+        let message: ExpectationMessage
+        let status: Satisfiability
+
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
+            status = Satisfiability(bool: instance != nil && instance!.isKind(of: expectedClass))
+            message = .ExpectedValueTo(
+                matcherMessage(forClass: expectedClass),
+                "<\(String(describing: type(of: validInstance))) instance>"
+            )
         } else {
-            failureMessage.actualValue = "<nil>"
+            status = .Fail
+            message = .ExpectedValueTo(
+                matcherMessage(forClass: expectedClass),
+                "<nil>"
+            )
         }
-        failureMessage.postfixMessage = "be a kind of \(String(describing: expectedClass))"
-        return instance != nil && instance!.isKind(of: expectedClass)
-    }.requireNonNil
+
+        return (status, message)
+    }
 }
 
 extension NMBObjCMatcher {

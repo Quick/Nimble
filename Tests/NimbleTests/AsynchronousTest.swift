@@ -173,14 +173,14 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
 #if !SWIFT_PACKAGE
-        waitUntil { done in
-            deferToMainQueue {
-                done()
-                expect {
+        expect {
+            waitUntil { done in
+                deferToMainQueue {
                     done()
-                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+                    done()
+                }
             }
-        }
+        }.to(raiseException(named: "InvalidNimbleAPIUsage"))
 #endif
     }
 

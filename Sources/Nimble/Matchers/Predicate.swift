@@ -27,17 +27,48 @@ public struct Predicate<T> {
     }
 }
 
+extension Predicate {
+    public static func define(matcher: @escaping (Expression<T>) throws -> (Satisfiability, ExpectationMessage)) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            let (satisfy, msg) = try matcher(actual)
+            return PredicateResult(status: satisfy, message: msg)
+        }.requireNonNil
+    }
+
+    public static func define(_ msg: ExpectationMessage, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            return PredicateResult(status: try matcher(actual), message: msg)
+        }.requireNonNil
+    }
+
+    public static func define(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T>.define(.ExpectedActualValueTo(msg), matcher: matcher)
+    }
+
+    public static func define(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            do {
+                return try matcher(actual, .ExpectedActualValueTo(msg))
+            } catch let error {
+                return PredicateResult(unexpectedError: error, message: msg)
+            }
+        }.requireNonNil
+    }
+}
+
 public enum ExpectationStyle {
     case ToMatch, ToNotMatch
 }
 
 public indirect enum ExpectationMessage {
     /// includes actual value in output ("expected to <string>, got <actual>")
-    case ExpectedActualValueTo(String)
+    case ExpectedValueTo(/* message: */ String, /* actual: */ String)
+    /// includes actual value in output ("expected to <string>, got <actual>")
+    case ExpectedActualValueTo(/* message: */ String)
     /// excludes actual value in output ("expected to <string>")
-    case ExpectedTo(String)
+    case ExpectedTo(/* message: */ String)
     /// allows any free-form message ("<string>")
-    case Fail(String)
+    case Fail(/* message: */ String)
 
     /// appends after an existing message ("<expectation> (use beNil() to match nils)")
     case Append(ExpectationMessage, String)
@@ -52,8 +83,10 @@ public indirect enum ExpectationMessage {
             return "\(expected) \(to) \(msg)"
         case let .ExpectedActualValueTo(msg):
             return "\(expected) \(to) \(msg), got \(actual)"
+        case let .ExpectedValueTo(msg, actual):
+            return "\(expected) \(to) \(msg), got \(actual)"
         case let .Append(expectation, msg):
-            return "\(expectation.toString(actual: actual, expected: expected, to: to)) \(msg)"
+            return "\(expectation.toString(actual: actual, expected: expected, to: to))\(msg)"
         case let .Details(expectation, msg):
             return "\(expectation.toString(actual: actual, expected: expected, to: to))\n\n\(msg)"
         }
@@ -68,27 +101,62 @@ public indirect enum ExpectationMessage {
             failureMessage.postfixMessage = msg
         case let .ExpectedActualValueTo(msg):
             failureMessage.postfixMessage = msg
+        case let .ExpectedValueTo(msg, actual):
+            failureMessage.postfixMessage = msg
+            failureMessage.actualValue = actual
         case let .Append(expectation, msg):
             expectation.update(failureMessage: failureMessage)
-            failureMessage.postfixActual = msg
+            failureMessage.postfixActual += msg
         case let .Details(expectation, msg):
             expectation.update(failureMessage: failureMessage)
             if let desc = failureMessage.userDescription {
-                failureMessage.userDescription = desc + msg
+                failureMessage.userDescription = desc
             }
+            failureMessage.extendedMessage = msg
         }
     }
 }
 
 extension FailureMessage {
     var toExpectationMessage: ExpectationMessage {
-        return .Fail("TODO")
+        let defaultMsg = FailureMessage()
+        if expected != defaultMsg.expected || _stringValueOverride != nil {
+            return .Fail(stringValue)
+        }
+
+        var msg: ExpectationMessage = .Fail(userDescription ?? "")
+        if actualValue != "" && actualValue != nil {
+            msg = .ExpectedValueTo(postfixMessage, actualValue ?? "")
+        } else if postfixMessage != defaultMsg.postfixMessage {
+            if actualValue == nil {
+                msg = .ExpectedTo(postfixMessage)
+            } else {
+                msg = .ExpectedActualValueTo(postfixMessage)
+            }
+        }
+        if postfixActual != defaultMsg.postfixActual {
+            msg = .Append(msg, postfixActual)
+        }
+        if let m = extendedMessage {
+            msg = .Details(msg, m)
+        }
+        return msg
     }
 }
 
 public struct PredicateResult {
     let status: Satisfiability
     let message: ExpectationMessage
+
+    public init(status: Satisfiability, message: ExpectationMessage) {
+        self.status = status
+        self.message = message
+    }
+
+    public init(unexpectedError: Error, message: String) {
+        self.status = .Fail
+        self.message = .ExpectedValueTo(message, "an unexpected error thrown: \(unexpectedError)")
+    }
 
     public func toBoolean(expectation style: ExpectationStyle) -> Bool {
         return status.toBoolean(expectation: style)
@@ -98,7 +166,15 @@ public struct PredicateResult {
 public enum Satisfiability {
     case Matches, DoesNotMatch, Fail
 
-    static internal func from(matches: Bool, expectation style: ExpectationStyle) -> Satisfiability {
+    public init(bool matches: Bool) {
+        if matches {
+            self = .Matches
+        } else {
+            self = .DoesNotMatch
+        }
+    }
+
+    internal static func from(matches: Bool, style: ExpectationStyle) -> Satisfiability {
         switch style {
         case .ToMatch:
             if matches {
@@ -140,39 +216,43 @@ public enum Satisfiability {
 
 // Backwards compatibility until Old Matcher API removal
 extension Predicate: Matcher {
-    public init(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) {
-        self.matcher = ({ actual, style in
+    public static func fromBool(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
+        return Predicate { actual, style in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, style == .ToMatch)
             return PredicateResult(
-                status: Satisfiability.from(matches: result, expectation: style),
+                status: Satisfiability.from(matches: result, style: style),
                 message: failureMessage.toExpectationMessage
             )
-        })
+        }
     }
 
-    public init(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) {
-        self.matcher = ({ actual, style in
+    public static func fromBool(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
+        return Predicate { actual, _ in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage)
             return PredicateResult(
-                status: Satisfiability.from(matches: result, expectation: style),
+                status: Satisfiability(bool: result),
                 message: failureMessage.toExpectationMessage
             )
-        })
+        }
 
     }
 
-    public init<M>(_ matcher: M) where M: Matcher, M.ValueType == T {
-        self.init(matcher.toClosure)
+    public static func fromMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
+        return self.fromBool(matcher.toClosure)
     }
 
     public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        return try satisfies(actualExpression, .ToMatch).toBoolean(expectation: .ToMatch)
+        let result = try satisfies(actualExpression, .ToMatch)
+        result.message.update(failureMessage: failureMessage)
+        return result.toBoolean(expectation: .ToMatch)
     }
 
     public func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        return try satisfies(actualExpression, .ToNotMatch).toBoolean(expectation: .ToNotMatch)
+        let result = try satisfies(actualExpression, .ToNotMatch)
+        result.message.update(failureMessage: failureMessage)
+        return result.toBoolean(expectation: .ToNotMatch)
     }
 }
 
@@ -194,7 +274,7 @@ extension Predicate {
             if try actual.evaluate() == nil {
                 return PredicateResult(
                     status: .Fail,
-                    message: .Append(result.message, "(use beNil() to match nils)")
+                    message: .Append(result.message, " (use beNil() to match nils)")
                 )
             }
             return result

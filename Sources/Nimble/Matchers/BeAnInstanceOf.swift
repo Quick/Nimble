@@ -2,7 +2,7 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is an _exact_ instance of the given class.
 public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
-    return Predicate {actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool {actualExpression, failureMessage in
         failureMessage.postfixMessage = "be an instance of \(String(describing: expectedType))"
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
@@ -23,7 +23,7 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAKindOf if you want to match against subclasses
 public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
             failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"

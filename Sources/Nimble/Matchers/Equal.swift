@@ -5,18 +5,20 @@ import Foundation
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage -> Bool in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue == expectedValue && expectedValue != nil
         if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
+            if expectedValue == nil && actualValue != nil {
+                return PredicateResult(
+                    status: .Fail,
+                    message: .Append(msg, " (use beNil() to match nils)")
+                )
             }
-            return false
+            return PredicateResult(status: .Fail, message: msg)
         }
-        return matches
-    }.requireNonNil
+        return PredicateResult(status: Satisfiability(bool: matches), message: msg)
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
@@ -24,11 +26,11 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predicate<[T: C]> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
+            if expectedValue == nil && actualValue != nil {
                 failureMessage.postfixActual = " (use beNil() to match nils)"
             }
             return false
@@ -40,11 +42,11 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
 /// A Nimble matcher that succeeds when the actual collection is equal to the expected collection.
 /// Items must implement the Equatable protocol.
 public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
+            if expectedValue == nil && actualValue != nil {
                 failureMessage.postfixActual = " (use beNil() to match nils)"
             }
             return false
@@ -55,7 +57,7 @@ public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
 
 /// A Nimble matcher allowing comparison of collection with optional type
 public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
         if let actualValue = try actualExpression.evaluate() {
             if expectedValue.count != actualValue.count {
@@ -101,7 +103,7 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> 
 }
 
 private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> Predicate<Set<T>> {
-    return Predicate { actualExpression, failureMessage, expectMatch in
+    return Predicate.fromBool { actualExpression, failureMessage, expectMatch in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
 
         if let expectedValue = expectedValue {

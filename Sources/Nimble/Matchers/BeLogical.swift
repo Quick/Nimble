@@ -76,7 +76,7 @@ internal func rename<T>(_ matcher: Predicate<T>, failureMessage message: Expecta
     return Predicate { actualExpression, style -> PredicateResult in
         let result = try matcher.satisfies(actualExpression, style)
         return PredicateResult(status: result.status, message: message)
-    }
+    }.requireNonNil
 }
 
 // MARK: beTrue() / beFalse()
@@ -97,7 +97,7 @@ public func beFalse() -> Predicate<Bool> {
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
 public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be truthy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
@@ -118,7 +118,7 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
 public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be falsy"
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {

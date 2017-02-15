@@ -8,7 +8,7 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual Collection's count equals
 /// the expected value
 public func haveCount<T: Collection>(_ expectedValue: T.IndexDistance) -> Predicate<T> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
             failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count
@@ -24,7 +24,7 @@ public func haveCount<T: Collection>(_ expectedValue: T.IndexDistance) -> Predic
 /// A Nimble matcher that succeeds when the actual collection's count equals
 /// the expected value
 public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
             failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count

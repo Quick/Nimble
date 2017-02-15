@@ -8,7 +8,7 @@ public func contain<S: Sequence, T: Equatable>(_ items: T...) -> Predicate<S>
 
 public func contain<S: Sequence, T: Equatable>(_ items: [T]) -> Predicate<S>
     where S.Iterator.Element == T {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         if let actual = try actualExpression.evaluate() {
             return items.all {
@@ -25,7 +25,7 @@ public func contain(_ substrings: String...) -> Predicate<String> {
 }
 
 public func contain(_ substrings: [String]) -> Predicate<String> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all {
@@ -43,7 +43,7 @@ public func contain(_ substrings: NSString...) -> Predicate<NSString> {
 }
 
 public func contain(_ substrings: [NSString]) -> Predicate<NSString> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all { actual.range(of: $0.description).length != 0 }
@@ -58,7 +58,7 @@ public func contain(_ items: Any?...) -> Predicate<NMBContainer> {
 }
 
 public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
-    return Predicate { actualExpression, failureMessage -> Bool in
+    return Predicate.fromBool { actualExpression, failureMessage in
         failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
         guard let actual = try actualExpression.evaluate() else { return false }
         return items.all { item in

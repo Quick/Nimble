@@ -35,6 +35,7 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
 }
 
 internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?) -> (Bool, FailureMessage) {
+    func run() -> (Bool, FailureMessage) {
         let msg = FailureMessage()
         msg.userDescription = description
         msg.to = to
@@ -49,6 +50,19 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
             msg.actualValue = "an unexpected error thrown: <\(error)>"
             return (false, msg)
         }
+    }
+
+    var result: (Bool, FailureMessage) = (false, FailureMessage())
+    let capture = NMBExceptionCapture(handler: ({ exception -> Void in
+        let msg = FailureMessage()
+        msg.stringValue = String(describing: exception)
+        result = (false, msg)
+    }), finally: nil)
+    capture.tryBlock {
+        result = run()
+    }
+
+    return result
 }
 
 public struct Expectation<T> {
