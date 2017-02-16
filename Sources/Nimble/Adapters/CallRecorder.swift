@@ -158,7 +158,6 @@ public protocol CallRecorder: class {
     // Used if you want to reset the called function/arguments lists
     func clearRecordedLists()
 
-
     // For Internal Use ONLY
     func didCall(function: String, withArguments arguments: Array<GloballyEquatable>, countSpecifier: CountSpecifier) -> DidCallResult
 }
@@ -319,6 +318,6 @@ private extension String {
 
 private extension Array {
     func stringRepresentation() -> String {
-        return self.map{ "\($0)" }.joined(separator: ", ")
+        return self.map { "\($0)" }.joined(separator: ", ")
     }
 }

@@ -21,7 +21,7 @@ private func descriptionOfAttemptedCall(object: CallRecorder, function: String, 
     var description = "call <\(function)> from \(type(of: object))"
 
     if !arguments.isEmpty {
-        let argumentsDescription = arguments.map{ "\($0)" }.joined(separator: ", ")
+        let argumentsDescription = arguments.map { "\($0)" }.joined(separator: ", ")
         description += " with \(argumentsDescription)"
     }
 
