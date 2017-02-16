@@ -19,11 +19,11 @@ public extension GloballyEquatable where Self : Equatable {
         if type(of: self) != type(of: other) {
             return false
         }
-        
+
         if let other = other as? Self {
             return self == other
         }
-        
+
         return false
     }
 }
@@ -33,10 +33,10 @@ public extension GloballyEquatable where Self : OptionalType {
         if type(of: self) != type(of: other) {
             return false
         }
-        
+
         let selfMirror = Mirror(reflecting: self)
         let otherMirror = Mirror(reflecting: other)
-        
+
         guard selfMirror.displayStyle == .optional else {
             assertionFailure("\(type(of: self)) should NOT conform to OptionalType, this is reserved for Optional<Wrapped>")
             return false
@@ -45,17 +45,17 @@ public extension GloballyEquatable where Self : OptionalType {
             assertionFailure("\(type(of: other)) should NOT conform to OptionalType, this is reserved for Optional<Wrapped>")
             return false
         }
-        
+
         let selfsWrappedValue = selfMirror.children.first?.value
         let othersWrappedValue = otherMirror.children.first?.value
-        
+
         if selfsWrappedValue == nil && othersWrappedValue == nil {
             return true
         }
         if selfsWrappedValue == nil || othersWrappedValue == nil {
             return false
         }
-        
+
         guard let selfsContainedValueAsGE = selfsWrappedValue as? GloballyEquatable else {
             assertionFailure("\(type(of: selfsWrappedValue)) does NOT conform to GloballyEquatable")
             return false
@@ -64,7 +64,7 @@ public extension GloballyEquatable where Self : OptionalType {
             assertionFailure("\(type(of: othersWrappedValue)) does NOT conform to GloballyEquatable")
             return false
         }
-        
+
         return selfsContainedValueAsGE.isEqualTo(othersContainedValueAsGE)
     }
 }
@@ -78,7 +78,7 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
     case InstanceOf(type: Any.Type)
     case InstanceOfWith(type: Any.Type, option: ArgumentOption)
     case KindOf(type: AnyClass)
-    
+
     public var description: String {
         switch self {
         case .Anything:
@@ -120,7 +120,7 @@ public enum ArgumentOption: CustomStringConvertible, GloballyEquatable {
     case Anything
     case NonOptional
     case Optional
-    
+
     public var description: String {
         switch self {
         case .Anything:
@@ -151,14 +151,14 @@ public protocol CallRecorder: class {
     // Implementation Example:
     // var called = (functionList: [String](), argumentsList: [[GloballyEquatable]]())
     var called: (functionList: [String], argumentsList: [[GloballyEquatable]]) {get set}
-    
+
     // **MUST** call in every method you want to spy
     func recordCall(function: String, arguments: GloballyEquatable...)
-    
+
     // Used if you want to reset the called function/arguments lists
     func clearRecordedLists()
-    
-    
+
+
     // For Internal Use ONLY
     func didCall(function: String, withArguments arguments: Array<GloballyEquatable>, countSpecifier: CountSpecifier) -> DidCallResult
 }
@@ -168,26 +168,26 @@ public extension CallRecorder {
         self.called.functionList.append(function)
         self.called.argumentsList.append(arguments)
     }
-    
+
     func clearRecordedLists() {
         self.called.functionList = Array<String>()
         self.called.argumentsList = Array<Array<GloballyEquatable>>()
     }
-    
+
     func didCall(function: String, withArguments arguments: Array<GloballyEquatable> = [GloballyEquatable](), countSpecifier: CountSpecifier = .AtLeast(1)) -> DidCallResult {
         let success: Bool
         switch countSpecifier {
-            case .Exactly(let count): success = timesCalled(function, with: arguments) == count
-            case .AtLeast(let count): success = timesCalled(function, with: arguments) >= count
-            case .AtMost(let count): success = timesCalled(function, with: arguments) <= count
+        case .Exactly(let count): success = timesCalled(function, with: arguments) == count
+        case .AtLeast(let count): success = timesCalled(function, with: arguments) >= count
+        case .AtMost(let count): success = timesCalled(function, with: arguments) <= count
         }
-        
+
         let recordedCallsDescription = descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
         return DidCallResult(success: success, recordedCallsDescription: recordedCallsDescription)
     }
-    
+
     // MARK: Protocol Extention Helper Functions
-    
+
     private func timesCalled(_ function: String, with arguments: Array<GloballyEquatable>) -> Int {
         return numberOfMatchingCalls(function: function, functions: self.called.functionList, argsList: arguments, argsLists: self.called.argumentsList)
     }
@@ -200,17 +200,17 @@ private func numberOfMatchingCalls(function: String, functions: Array<String>, a
     guard argsList.count != 0 else {
         return functions.reduce(0) { $1 == function ? $0 + 1 : $0 }
     }
-    
+
     let potentialMatchIndexes = matchingIndexesFor(functionName: function, functionList: functions)
     var correctCallsCount = 0
-    
+
     for index in potentialMatchIndexes {
         let recordedArgsList = argsLists[index]
         if isEqualArgsLists(passedArgs: argsList, recordedArgs: recordedArgsList) {
             correctCallsCount += 1
         }
     }
-    
+
     return correctCallsCount
 }
 
@@ -222,16 +222,16 @@ private func isEqualArgsLists(passedArgs: Array<GloballyEquatable>, recordedArgs
     if passedArgs.count != recordedArgs.count {
         return false
     }
-    
+
     for index in 0..<recordedArgs.count {
         let passedArg = passedArgs[index]
         let recordedArg = recordedArgs[index]
-        
+
         if !isEqualArgs(passedArg: passedArg, recordedArg: recordedArg) {
             return false
         }
     }
-    
+
     return true
 }
 
@@ -252,8 +252,8 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
         case .InstanceOfWith(let input):
             let isRecordedArgAnOptional = isOptional(recordedArg)
             let passesOptionCheck = (input.option == ArgumentOption.Anything) ||
-                                    (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
-                                    (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
+                (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
+                (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
 
             if !passesOptionCheck {
                 return false
@@ -268,7 +268,7 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
             if let recordedArgAsObject = recordedArg as? NSObject {
                 return recordedArgAsObject.isKind(of: type)
             }
-            
+
             assertionFailure("Arguments passed to .KindOf must inherit from NSObject. <\(recordedArg)> of type <\(type(of: recordedArg))> does NOT inherit from NSObject.")
             return false
         }
@@ -280,13 +280,13 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
 private func isNil(_ value: Any) -> Bool {
     let mirror = Mirror(reflecting: value)
     let hasAValue = mirror.children.first?.value != nil
-    
+
     return mirror.displayStyle == .optional && !hasAValue
 }
 
 private func isOptional(_ value: Any) -> Bool {
     let mirror = Mirror(reflecting: value)
-    
+
     return mirror.displayStyle == .optional
 }
 
@@ -294,16 +294,16 @@ private func descriptionOfCalls(functionList: Array<String>, argumentsList: Arra
     if functionList.isEmpty {
         return "<>"
     }
-    
+
     return zip(functionList, argumentsList).reduce("") { (concatenatedString, element: (function: String, argumentList: Array<GloballyEquatable>)) -> String in
         var entry = element.function
-        
+
         let parameterListStringRepresentation = element.argumentList.stringRepresentation()
         if !parameterListStringRepresentation.isEmpty {
             entry += " with " + parameterListStringRepresentation
         }
         entry = "<" + entry + ">"
-        
+
         return concatenatedString.isEmpty ? entry : concatenatedString + ", " + entry
     }
 }
