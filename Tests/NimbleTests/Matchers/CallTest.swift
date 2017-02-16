@@ -60,8 +60,8 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "string")
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .Exactly(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .Exactly(2)))
+        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .exactly(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .exactly(2)))
     }
 
     func testCallWithCountFailureMessage() {
@@ -70,10 +70,10 @@ class CallTest : XCTestCase {
         testClass.doStuff()
 
         // when
-        let toFailingTest1 = { expect(testClass).to(call("doDifferentStuff()", countSpecifier: .Exactly(1))) }
-        let toFailingTest2 = { expect(testClass).to(call("doStuff()", countSpecifier: .Exactly(2))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .Exactly(1))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .Exactly(1))) }
+        let toFailingTest1 = { expect(testClass).to(call("doDifferentStuff()", countSpecifier: .exactly(1))) }
+        let toFailingTest2 = { expect(testClass).to(call("doStuff()", countSpecifier: .exactly(2))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .exactly(1))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .exactly(1))) }
 
         // then
         let toExpectedMessage1 = "expected to call <doDifferentStuff()> from TestClass exactly 1 time, got <doStuff()>"
@@ -97,8 +97,8 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "string")
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .AtLeast(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .AtLeast(2)))
+        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .atLeast(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .atLeast(2)))
     }
 
     func testCallWithAtLeastFailureMessage() {
@@ -108,9 +108,9 @@ class CallTest : XCTestCase {
         testClass.doStuff()
 
         // when
-        let toFailingTest = { expect(testClass).to(call("doStuff()", countSpecifier: .AtLeast(3))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .AtLeast(2))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .AtLeast(2))) }
+        let toFailingTest = { expect(testClass).to(call("doStuff()", countSpecifier: .atLeast(3))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .atLeast(2))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .atLeast(2))) }
 
         // then
         let toExpectedMessage = "expected to call <doStuff()> from TestClass at least 3 times, got <doStuff()>, <doStuff()>"
@@ -131,8 +131,8 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "string")
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .AtMost(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .AtMost(0)))
+        expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .atMost(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", countSpecifier: .atMost(0)))
     }
 
     func testCallWithAtMostFailureMessage() {
@@ -145,10 +145,10 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "nimble")
 
         // when
-        let toFailingTest1 = { expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .AtMost(1))) }
-        let toFailingTest2 = { expect(testClass).to(call("doStuff()", countSpecifier: .AtMost(2))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .AtMost(4))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .AtMost(1))) }
+        let toFailingTest1 = { expect(testClass).to(call("doStuffWith(string:)", countSpecifier: .atMost(1))) }
+        let toFailingTest2 = { expect(testClass).to(call("doStuff()", countSpecifier: .atMost(2))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuff()", countSpecifier: .atMost(4))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuff()", countSpecifier: .atMost(1))) }
 
         // then
         let got = "got <doStuff()>, <doStuff()>, <doStuff()>, <doStuffWith(string:) with quick>, <doStuffWith(string:) with nimble>"
@@ -211,10 +211,10 @@ class CallTest : XCTestCase {
         testClass.doThingsWith(string: "nimble", int: 5)
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .Exactly(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .Exactly(2)))
-        expect(testClass).to(call("doThingsWith(string:int:)", withArguments: "nimble", 5, countSpecifier: .Exactly(1)))
-        expect(testClass).toNot(call("doThingsWith(string:int:)", withArguments: "nimble", 5, countSpecifier: .Exactly(2)))
+        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .exactly(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .exactly(2)))
+        expect(testClass).to(call("doThingsWith(string:int:)", withArguments: "nimble", 5, countSpecifier: .exactly(1)))
+        expect(testClass).toNot(call("doThingsWith(string:int:)", withArguments: "nimble", 5, countSpecifier: .exactly(2)))
     }
 
     func testCallWithArgumentsAndCountFailureMessage() {
@@ -224,10 +224,10 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "nimble")
 
         // when
-        let toFailingTest1 = { expect(testClass).to(call("doDifferentStuffWith(string:)", withArguments: "swift", countSpecifier: .Exactly(1))) }
-        let toFailingTest2 = { expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .Exactly(2))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .Exactly(1))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "call matcher", countSpecifier: .Exactly(1))) }
+        let toFailingTest1 = { expect(testClass).to(call("doDifferentStuffWith(string:)", withArguments: "swift", countSpecifier: .exactly(1))) }
+        let toFailingTest2 = { expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .exactly(2))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .exactly(1))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "call matcher", countSpecifier: .exactly(1))) }
 
         // then
         let got = "got <doStuffWith(string:) with quick>, <doStuffWith(string:) with nimble>"
@@ -254,8 +254,8 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "nimble")
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .AtLeast(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .AtLeast(2)))
+        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .atLeast(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .atLeast(2)))
     }
 
     func testCallWithArgumentsAndAtLeastFailureMessage() {
@@ -266,9 +266,9 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "nimble")
 
         // when
-        let toFailingTest = { expect(testClass).to(call("doDifferentStuffWith(string:)", withArguments: "quick", countSpecifier: .AtLeast(2))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .AtLeast(2))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "call matcher", countSpecifier: .AtLeast(2))) }
+        let toFailingTest = { expect(testClass).to(call("doDifferentStuffWith(string:)", withArguments: "quick", countSpecifier: .atLeast(2))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .atLeast(2))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "call matcher", countSpecifier: .atLeast(2))) }
 
         // then
         let got = "got <doStuffWith(string:) with quick>, <doStuffWith(string:) with nimble>, <doStuffWith(string:) with nimble>"
@@ -292,8 +292,8 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "nimble")
 
         // then
-        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .AtMost(1)))
-        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .AtMost(0)))
+        expect(testClass).to(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .atMost(1)))
+        expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "nimble", countSpecifier: .atMost(0)))
     }
 
     func testCallWithArgumentsAndAtMostFailureMessage() {
@@ -306,10 +306,10 @@ class CallTest : XCTestCase {
         testClass.doStuffWith(string: "swift")
 
         // when
-        let toFailingTest1 = { expect(testClass).to(call("doThingsWith(string:int:)", withArguments: "call matcher", 5, countSpecifier: .AtMost(1))) }
-        let toFailingTest2 = { expect(testClass).to(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .AtMost(2))) }
-        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .AtMost(4))) }
-        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .AtMost(1))) }
+        let toFailingTest1 = { expect(testClass).to(call("doThingsWith(string:int:)", withArguments: "call matcher", 5, countSpecifier: .atMost(1))) }
+        let toFailingTest2 = { expect(testClass).to(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .atMost(2))) }
+        let toNotFailingTest = { expect(testClass).toNot(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .atMost(4))) }
+        let nilFailingTest = { expect(nil as TestClass?).to(call("doStuffWith(string:)", withArguments: "swift", countSpecifier: .atMost(1))) }
 
         // then
         let got = "got <doThingsWith(string:int:) with call matcher, 5>, <doThingsWith(string:int:) with call matcher, 5>, <doStuffWith(string:) with swift>, <doStuffWith(string:) with swift>, <doStuffWith(string:) with swift>"

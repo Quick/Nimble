@@ -1,5 +1,5 @@
 
-public func call(_ function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
+public func call(_ function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .atLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
     return NonNilMatcherFunc { expression, failureMessage in
         guard let expressionValue = try expression.evaluate() else {
             failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)
@@ -29,13 +29,13 @@ private func descriptionOfAttemptedCall(object: CallRecorder, function: String, 
     let countDescription: String
     let count: Int
     switch countSpecifier {
-    case .Exactly(let _count):
+    case .exactly(let _count):
         countDescription = "exactly"
         count = _count
-    case .AtLeast(let _count) where _count != 1:
+    case .atLeast(let _count) where _count != 1:
         countDescription = "at least"
         count = _count
-    case .AtMost(let _count):
+    case .atMost(let _count):
         countDescription = "at most"
         count = _count
     default:
@@ -59,11 +59,11 @@ private func postfixMessageForNilCase(arguments: [GloballyEquatable], countSpeci
     }
 
     switch countSpecifier {
-    case .Exactly(_):
+    case .exactly(_):
         postfixMessage += " count times"
-    case .AtLeast(let count) where count != 1:
+    case .atLeast(let count) where count != 1:
         postfixMessage += " at least count times"
-    case .AtMost(_):
+    case .atMost(_):
         postfixMessage += " at most count times"
     default: break
     }

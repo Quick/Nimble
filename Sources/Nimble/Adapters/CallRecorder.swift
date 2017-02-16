@@ -72,63 +72,63 @@ public extension GloballyEquatable where Self : OptionalType {
 // MARK: Helper Objects
 
 public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
-    case Anything
-    case NonNil
-    case Nil
-    case InstanceOf(type: Any.Type)
-    case InstanceOfWith(type: Any.Type, option: ArgumentOption)
-    case KindOf(type: AnyClass)
+    case anything
+    case nonNil
+    case nil_
+    case instanceOf(type: Any.Type)
+    case instanceOfWith(type: Any.Type, option: ArgumentOption)
+    case kindOf(type: AnyClass)
 
     public var description: String {
         switch self {
-        case .Anything:
-            return "Argument.Anything"
-        case .NonNil:
-            return "Argument.NonNil"
-        case .Nil:
-            return "Argument.Nil"
-        case .InstanceOf(let type):
-            return "Argument.InstanceOf(\(type))"
-        case .InstanceOfWith(let input):
-            return "Argument.InstanceOfWith(\(input.type), \(input.option))"
-        case .KindOf(let type):
-            return "Argument.KindOf(\(type))"
+        case .anything:
+            return "Argument.anything"
+        case .nonNil:
+            return "Argument.nonNil"
+        case .nil_:
+            return "Argument.nil_"
+        case .instanceOf(let type):
+            return "Argument.instanceOf(\(type))"
+        case .instanceOfWith(let input):
+            return "Argument.instanceOfWith(\(input.type), \(input.option))"
+        case .kindOf(let type):
+            return "Argument.kindOf(\(type))"
+        }
+    }
+
+    public static func == (lhs: Argument, rhs: Argument) -> Bool {
+        switch (lhs, rhs) {
+        case (.anything, .anything):
+            return true
+        case (.nonNil, .nonNil):
+            return true
+        case (.nil_, .nil_):
+            return true
+        case (let .instanceOf(lhsType), let .instanceOf(rhsType)):
+            return lhsType == rhsType
+        case (let .instanceOfWith(lhsInput), let .instanceOfWith(rhsInput)):
+            return lhsInput.type == rhsInput.type && lhsInput.option == rhsInput.option
+        case (let .kindOf(lhsType), let .kindOf(rhsType)):
+            return lhsType == rhsType
+        default:
+            return false
         }
     }
 }
 
-public func == (lhs: Argument, rhs: Argument) -> Bool {
-    switch (lhs, rhs) {
-    case (.Anything, .Anything):
-        return true
-    case (.NonNil, .NonNil):
-        return true
-    case (.Nil, .Nil):
-        return true
-    case (let .InstanceOf(lhsType), let .InstanceOf(rhsType)):
-        return lhsType == rhsType
-    case (let .InstanceOfWith(lhsInput), let .InstanceOfWith(rhsInput)):
-        return lhsInput.type == rhsInput.type && lhsInput.option == rhsInput.option
-    case (let .KindOf(lhsType), let .KindOf(rhsType)):
-        return lhsType == rhsType
-    default:
-        return false
-    }
-}
-
 public enum ArgumentOption: CustomStringConvertible, GloballyEquatable {
-    case Anything
-    case NonOptional
-    case Optional
+    case anything
+    case nonOptional
+    case optional
 
     public var description: String {
         switch self {
-        case .Anything:
-            return "ArgumentOption.Anything"
-        case .NonOptional:
-            return "ArgumentOption.NonOptional"
-        case .Optional:
-            return "ArgumentOption.Optional"
+        case .anything:
+            return "ArgumentOption.anything"
+        case .nonOptional:
+            return "ArgumentOption.nonOptional"
+        case .optional:
+            return "ArgumentOption.optional"
         }
     }
 }
@@ -139,9 +139,9 @@ public struct DidCallResult {
 }
 
 public enum CountSpecifier {
-    case Exactly(Int)
-    case AtLeast(Int)
-    case AtMost(Int)
+    case exactly(Int)
+    case atLeast(Int)
+    case atMost(Int)
 }
 
 // MARK: CallRecorder Protocol
@@ -174,12 +174,12 @@ public extension CallRecorder {
         self.called.argumentsList = Array<Array<GloballyEquatable>>()
     }
 
-    func didCall(function: String, withArguments arguments: Array<GloballyEquatable> = [GloballyEquatable](), countSpecifier: CountSpecifier = .AtLeast(1)) -> DidCallResult {
+    func didCall(function: String, withArguments arguments: Array<GloballyEquatable> = [GloballyEquatable](), countSpecifier: CountSpecifier = .atLeast(1)) -> DidCallResult {
         let success: Bool
         switch countSpecifier {
-        case .Exactly(let count): success = timesCalled(function, with: arguments) == count
-        case .AtLeast(let count): success = timesCalled(function, with: arguments) >= count
-        case .AtMost(let count): success = timesCalled(function, with: arguments) <= count
+        case .exactly(let count): success = timesCalled(function, with: arguments) == count
+        case .atLeast(let count): success = timesCalled(function, with: arguments) >= count
+        case .atMost(let count): success = timesCalled(function, with: arguments) <= count
         }
 
         let recordedCallsDescription = descriptionOfCalls(functionList: self.called.functionList, argumentsList: self.called.argumentsList)
@@ -238,23 +238,24 @@ private func isEqualArgsLists(passedArgs: Array<GloballyEquatable>, recordedArgs
 private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEquatable) -> Bool {
     if let passedArgAsArgumentEnum = passedArg as? Argument {
         switch passedArgAsArgumentEnum {
-        case .Anything:
+        case .anything:
             return true
-        case .NonNil:
+        case .nonNil:
             return !isNil(recordedArg)
-        case .Nil:
+        case .nil_:
             return isNil(recordedArg)
-        case .InstanceOf(let type):
+        case .instanceOf(let type):
             let cleanedType = "\(type)".replaceMatching(regex: "\\.Type+$", withString: "")
             let cleanedRecordedArgType = "\(type(of: recordedArg))"
 
             return cleanedType == cleanedRecordedArgType
-        case .InstanceOfWith(let input):
+        case .instanceOfWith(let input):
             let isRecordedArgAnOptional = isOptional(recordedArg)
-            let passesOptionCheck = (input.option == ArgumentOption.Anything) ||
-                (input.option == ArgumentOption.NonOptional && !isRecordedArgAnOptional) ||
-                (input.option == ArgumentOption.Optional && isRecordedArgAnOptional)
+            let passesAnythingCheck = input.option == .anything
+            let passesNonOptionalCheck = input.option == .nonOptional && !isRecordedArgAnOptional
+            let passesOptionalCheck = input.option == .optional && isRecordedArgAnOptional
 
+            let passesOptionCheck = passesAnythingCheck || passesNonOptionalCheck || passesOptionalCheck
             if !passesOptionCheck {
                 return false
             }
@@ -264,7 +265,7 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
                 .replaceMatching(regex: ">+$", withString: "")
 
             return cleanedType == cleanedRecordedArgType
-        case .KindOf(let type):
+        case .kindOf(let type):
             if let recordedArgAsObject = recordedArg as? NSObject {
                 return recordedArgAsObject.isKind(of: type)
             }
