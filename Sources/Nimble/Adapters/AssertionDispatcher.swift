@@ -1,4 +1,3 @@
-
 /// AssertionDispatcher allows multiple AssertionHandlers to receive
 /// assertion messages.
 ///
@@ -12,7 +11,7 @@ public class AssertionDispatcher: AssertionHandler {
         self.handlers = handlers
     }
 
-    public func assert(assertion: Bool, message: FailureMessage, location: SourceLocation) {
+    public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         for handler in handlers {
             handler.assert(assertion, message: message, location: location)
         }

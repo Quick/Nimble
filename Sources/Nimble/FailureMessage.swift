@@ -12,8 +12,8 @@ public class FailureMessage: NSObject {
     /// An optional message that will be appended as a new line and provides additional details
     /// about the failure. This message will only be visible in the issue navigator / in logs but
     /// not directly in the source editor since only a single line is presented there.
-    public var extendedMessage: String? = nil
-    public var userDescription: String? = nil
+    public var extendedMessage: String?
+    public var userDescription: String?
 
     public var stringValue: String {
         get {
@@ -37,11 +37,12 @@ public class FailureMessage: NSObject {
         _stringValueOverride = stringValue
     }
 
-    internal func stripNewlines(str: String) -> String {
-        var lines: [String] = NSString(string: str).componentsSeparatedByString("\n") as [String]
-        let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        lines = lines.map { line in NSString(string: line).stringByTrimmingCharactersInSet(whitespace) }
-        return lines.joinWithSeparator("")
+    internal func stripNewlines(_ str: String) -> String {
+        let whitespaces = CharacterSet.whitespacesAndNewlines
+        return str
+            .components(separatedBy: "\n")
+            .map { line in line.trimmingCharacters(in: whitespaces) }
+            .joined(separator: "")
     }
 
     internal func computeStringValue() -> String {
@@ -58,7 +59,7 @@ public class FailureMessage: NSObject {
         if let userDescription = userDescription {
             return "\(userDescription)\n\(value)"
         }
-        
+
         return value
     }
 }
