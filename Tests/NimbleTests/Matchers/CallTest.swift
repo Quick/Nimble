@@ -1,9 +1,9 @@
 import XCTest
 import Nimble
 
-class CallTest : XCTestCase {
+class CallTest: XCTestCase {
 
-    class TestClass : CallRecorder {
+    class TestClass: CallRecorder {
         var called = (functionList: [String](), argumentsList: [[GloballyEquatable]]())
 
         func doStuff() {

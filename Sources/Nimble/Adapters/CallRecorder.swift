@@ -12,7 +12,7 @@ public protocol GloballyEquatable {
     func isEqualTo(_ other: GloballyEquatable) -> Bool
 }
 
-public extension GloballyEquatable where Self : Equatable {
+public extension GloballyEquatable where Self: Equatable {
     public func isEqualTo(_ other: GloballyEquatable) -> Bool {
         // if 'self' is non-optional and 'other' is optional and other's .Some's associated value's type equals self's type
         // then the if let below will auto unwrap 'other' to be the non-optional version of self's type
@@ -28,7 +28,7 @@ public extension GloballyEquatable where Self : Equatable {
     }
 }
 
-public extension GloballyEquatable where Self : OptionalType {
+public extension GloballyEquatable where Self: OptionalType {
     public func isEqualTo(_ other: GloballyEquatable) -> Bool {
         if type(of: self) != type(of: other) {
             return false

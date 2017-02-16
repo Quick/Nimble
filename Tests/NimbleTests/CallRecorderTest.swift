@@ -8,7 +8,7 @@ extension Optional: GloballyEquatable {}
 
 class CallRecorderTest: XCTestCase {
 
-    class TestClass : CallRecorder {
+    class TestClass: CallRecorder {
         var called = (functionList: [String](), argumentsList: [[GloballyEquatable]]())
 
         func doStuff() {
@@ -372,8 +372,8 @@ class CallRecorderTest: XCTestCase {
 
     func testKindOfClassArgument() {
         // given
-        class SubClass : NSObject {}
-        class SubSubClass : SubClass {}
+        class SubClass: NSObject {}
+        class SubSubClass: SubClass {}
         let testClass = TestClass()
 
         // when
