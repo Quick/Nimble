@@ -10,11 +10,11 @@ class CallTest : XCTestCase {
             self.recordCall()
         }
         
-        func doStuffWith(string string: String) {
+        func doStuffWith(string: String) {
             self.recordCall(arguments: string)
         }
         
-        func doThingsWith(string string: String, int: Int) {
+        func doThingsWith(string: String, int: Int) {
             self.recordCall(arguments: string, int)
         }
     }

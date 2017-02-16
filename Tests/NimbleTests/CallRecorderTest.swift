@@ -1,10 +1,10 @@
 import XCTest
 import Nimble
 
-extension String : GloballyEquatable {}
-extension Int : GloballyEquatable {}
-extension NSObject : GloballyEquatable {}
-extension Optional : GloballyEquatable {}
+extension String: GloballyEquatable {}
+extension Int: GloballyEquatable {}
+extension NSObject: GloballyEquatable {}
+extension Optional: GloballyEquatable {}
 
 class CallRecorderTest: XCTestCase {
     
@@ -15,19 +15,19 @@ class CallRecorderTest: XCTestCase {
             self.recordCall()
         }
         
-        func doStuffWith(string string: String) {
+        func doStuffWith(string: String) {
             self.recordCall(arguments: string)
         }
         
-        func doMoreStuffWith(int1 int1: Int, int2: Int) {
+        func doMoreStuffWith(int1: Int, int2: Int) {
             self.recordCall(arguments: int1, int2)
         }
         
-        func doWeirdStuffWith(string string: String?, int: Int?) {
+        func doWeirdStuffWith(string: String?, int: Int?) {
             self.recordCall(arguments: string, int)
         }
         
-        func doCrazyStuffWith(object object: NSObject) {
+        func doCrazyStuffWith(object: NSObject) {
             self.recordCall(arguments: object)
         }
     }
@@ -62,9 +62,9 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: expectedSet3Arg1)
         
         // then
-        func countFailureMessage(count count: Int, set: Int) -> String {return "should have \(count) argument(s) in set \(set)" }
-        func typeFailureMessage(set set: Int, arg: Int) -> String { return "should match type for set \(set), argument \(arg)" }
-        func descFailureMessage(set set: Int, arg: Int) -> String { return "should match string interpolation for set \(set), argument \(arg)" }
+        func countFailureMessage(count: Int, set: Int) -> String {return "should have \(count) argument(s) in set \(set)" }
+        func typeFailureMessage(set: Int, arg: Int) -> String { return "should match type for set \(set), argument \(arg)" }
+        func descFailureMessage(set: Int, arg: Int) -> String { return "should match string interpolation for set \(set), argument \(arg)" }
         
         let actualset1Arg1 = testClass.called.argumentsList[0][0]
         let actualset2Arg1 = testClass.called.argumentsList[1][0]
@@ -74,17 +74,17 @@ class CallRecorderTest: XCTestCase {
         expect(testClass.called.argumentsList.count).to(equal(3), description: "should have 3 sets of arguments")
         
         expect(testClass.called.argumentsList[0].count).to(equal(1), description: countFailureMessage(count: 1, set: 1))
-        expect("\(actualset1Arg1.dynamicType)").to(equal("\(expectedSet1Arg1.dynamicType)"), description: typeFailureMessage(set: 1, arg: 1))
+        expect("\(type(of: actualset1Arg1))").to(equal("\(type(of: expectedSet1Arg1))"), description: typeFailureMessage(set: 1, arg: 1))
         expect("\(actualset1Arg1)").to(equal("\(expectedSet1Arg1)"), description: descFailureMessage(set: 1, arg: 1))
         
         expect(testClass.called.argumentsList[1].count).to(equal(2), description: countFailureMessage(count: 2, set: 2))
-        expect("\(actualset2Arg1.dynamicType)").to(equal("\(expectedSet2Arg1.dynamicType)"), description: typeFailureMessage(set: 2, arg: 1))
+        expect("\(type(of: actualset2Arg1))").to(equal("\(type(of: expectedSet2Arg1))"), description: typeFailureMessage(set: 2, arg: 1))
         expect("\(actualset2Arg1)").to(equal("\(expectedSet2Arg1)"), description: descFailureMessage(set: 2, arg: 1))
-        expect("\(actualset2Arg2.dynamicType)").to(equal("\(expectedSet2Arg2.dynamicType)"), description: typeFailureMessage(set: 2, arg: 2))
+        expect("\(type(of: actualset2Arg2))").to(equal("\(type(of: expectedSet2Arg2))"), description: typeFailureMessage(set: 2, arg: 2))
         expect("\(actualset2Arg2)").to(equal("\(expectedSet2Arg2)"), description: descFailureMessage(set: 2, arg: 2))
 
         expect(testClass.called.argumentsList[2].count).to(equal(1), description: countFailureMessage(count: 1, set: 3))
-        expect("\(actualset3Arg1.dynamicType)").to(equal("\(expectedSet3Arg1.dynamicType)"), description: typeFailureMessage(set: 3, arg: 1))
+        expect("\(type(of: actualset3Arg1))").to(equal("\(type(of: expectedSet3Arg1))"), description: typeFailureMessage(set: 3, arg: 1))
         expect("\(actualset3Arg1)").to(equal("\(expectedSet3Arg1)"), description: descFailureMessage(set: 3, arg: 1))
     }
     
@@ -191,7 +191,7 @@ class CallRecorderTest: XCTestCase {
         
         // then
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello" as String?, nil as Int?]).success).to(beTrue(), description: "should SUCCEED to call correct function with correct Optional values")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello", Optional<Int>.None]).success).to(beFalse(), description: "should FAIL to call correct function with correct but Non-Optional values")
+        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: ["hello", Optional<Int>.none]).success).to(beFalse(), description: "should FAIL to call correct function with correct but Non-Optional values")
     }
     
     func testDidCallFunctionWithArgumentsANumberOfTimes() {

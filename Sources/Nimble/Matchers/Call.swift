@@ -1,5 +1,5 @@
 
-public func call(function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
+public func call(_ function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .AtLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
     return NonNilMatcherFunc { expression, failureMessage in
         guard let expressionValue = try expression.evaluate() else {
             failureMessage.postfixMessage = postfixMessageForNilCase(arguments: arguments, countSpecifier: countSpecifier)
@@ -18,11 +18,11 @@ public func call(function: String, withArguments arguments: GloballyEquatable...
 
 // MARK: Private
 
-private func descriptionOfAttemptedCall(object object: CallRecorder, function: String, arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
-    var description = "call <\(function)> from \(object.dynamicType)"
+private func descriptionOfAttemptedCall(object: CallRecorder, function: String, arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
+    var description = "call <\(function)> from \(type(of: object))"
     
     if !arguments.isEmpty {
-        let argumentsDescription = arguments.map{ "\($0)" }.joinWithSeparator(", ")
+        let argumentsDescription = arguments.map{ "\($0)" }.joined(separator: ", ")
         description += " with \(argumentsDescription)"
     }
     
@@ -51,7 +51,7 @@ private func descriptionOfAttemptedCall(object object: CallRecorder, function: S
     return description
 }
 
-private func postfixMessageForNilCase(arguments arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
+private func postfixMessageForNilCase(arguments: [GloballyEquatable], countSpecifier: CountSpecifier) -> String {
     var postfixMessage = "call function"
     
     if arguments.count != 0 {
