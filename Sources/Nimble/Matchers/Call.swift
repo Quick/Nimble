@@ -1,4 +1,3 @@
-
 public func call(_ function: String, withArguments arguments: GloballyEquatable..., countSpecifier: CountSpecifier = .atLeast(1)) -> NonNilMatcherFunc<CallRecorder> {
     return NonNilMatcherFunc { expression, failureMessage in
         guard let expressionValue = try expression.evaluate() else {

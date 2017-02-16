@@ -32,7 +32,7 @@ class CallRecorderTest: XCTestCase {
         }
     }
 
-    // Recording Tests
+    // MARK: Recording Tests
 
     func testRecordingFunctions() {
         // given
@@ -62,7 +62,7 @@ class CallRecorderTest: XCTestCase {
         testClass.doStuffWith(string: expectedSet3Arg1)
 
         // then
-        func countFailureMessage(count: Int, set: Int) -> String {return "should have \(count) argument(s) in set \(set)" }
+        func countFailureMessage(count: Int, set: Int) -> String { return "should have \(count) argument(s) in set \(set)" }
         func typeFailureMessage(set: Int, arg: Int) -> String { return "should match type for set \(set), argument \(arg)" }
         func descFailureMessage(set: Int, arg: Int) -> String { return "should match string interpolation for set \(set), argument \(arg)" }
 
@@ -405,35 +405,35 @@ class CallRecorderTest: XCTestCase {
         // given
         let testClass = TestClass()
         testClass.doStuff()
-        
+
         // when
         let result = testClass.didCall(function: "")
-        
+
         // then
         expect(result.recordedCallsDescription).to(equal("<doStuff()>"))
     }
-    
+
     func testRecordedCallsDescriptionSingleCallWithArguments() {
         // given
         let testClass = TestClass()
         testClass.doMoreStuffWith(int1: 5, int2: 10)
-        
+
         // when
         let result = testClass.didCall(function: "")
-        
+
         // then
         expect(result.recordedCallsDescription).to(equal("<doMoreStuffWith(int1:int2:) with 5, 10>"))
     }
-    
+
     func testRecordedCallsDescriptionMultipleCalls() {
         // given
         let testClass = TestClass()
         testClass.doStuff()
         testClass.doMoreStuffWith(int1: 5, int2: 10)
-        
+
         // when
         let result = testClass.didCall(function: "not a function")
-        
+
         // then
         expect(result.recordedCallsDescription).to(equal("<doStuff()>, <doMoreStuffWith(int1:int2:) with 5, 10>"))
     }
