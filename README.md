@@ -508,18 +508,18 @@ class SomeClassConformingToProtocol: SomeProtocol{}
 struct SomeStructConformingToProtocol: SomeProtocol{}
 
 // The following tests pass
-expect(1).to(beKindOf(Int.self))
-expect("turtle").to(beKindOf(String.self))
+expect(1).to(beAKindOf(Int.self))
+expect("turtle").to(beAKindOf(String.self))
 
 let classObject = SomeClassConformingToProtocol()
-expect(classObject).to(beKindOf(SomeProtocol.self))
-expect(classObject).to(beKindOf(SomeClassConformingToProtocol.self))
-expect(classObject).toNot(beKindOf(SomeStructConformingToProtocol.self))
+expect(classObject).to(beAKindOf(SomeProtocol.self))
+expect(classObject).to(beAKindOf(SomeClassConformingToProtocol.self))
+expect(classObject).toNot(beAKindOf(SomeStructConformingToProtocol.self))
 
 let structObject = SomeStructConformingToProtocol()
-expect(structObject).to(beKindOf(SomeProtocol.self))
-expect(structObject).to(beKindOf(SomeStructConformingToProtocol.self))
-expect(structObject).toNot(beKindOf(SomeClassConformingToProtocol.self))
+expect(structObject).to(beAKindOf(SomeProtocol.self))
+expect(structObject).to(beAKindOf(SomeStructConformingToProtocol.self))
+expect(structObject).toNot(beAKindOf(SomeClassConformingToProtocol.self))
 ```
 
 ```objc
