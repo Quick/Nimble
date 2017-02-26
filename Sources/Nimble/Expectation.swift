@@ -12,7 +12,7 @@ internal func expressionMatches<T, U>(_ expression: Expression<T>, matcher: U, t
         }
         return (pass, msg)
     } catch let error {
-        msg.actualValue = "an unexpected error thrown: <\(error)>"
+        msg.stringValue = "an unexpected error thrown: <\(error)>"
         return (false, msg)
     }
 }
@@ -29,7 +29,7 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
         }
         return (pass, msg)
     } catch let error {
-        msg.actualValue = "an unexpected error thrown: <\(error)>"
+        msg.stringValue = "an unexpected error thrown: <\(error)>"
         return (false, msg)
     }
 }
@@ -47,7 +47,7 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
             }
             return (result.toBoolean(expectation: style), msg)
         } catch let error {
-            msg.actualValue = "an unexpected error thrown: <\(error)>"
+            msg.stringValue = "an unexpected error thrown: <\(error)>"
             return (false, msg)
         }
     }

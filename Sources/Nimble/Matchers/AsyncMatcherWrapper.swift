@@ -34,10 +34,10 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
         case let .completed(isSuccessful): return isSuccessful
         case .timedOut: return false
         case let .errorThrown(error):
-            failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
+            failureMessage.stringValue = "an unexpected error thrown: <\(error)>"
             return false
         case let .raisedException(exception):
-            failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
+            failureMessage.stringValue = "an unexpected exception thrown: <\(exception)>"
             return false
         case .blockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
@@ -61,10 +61,10 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
         case let .completed(isSuccessful): return isSuccessful
         case .timedOut: return false
         case let .errorThrown(error):
-            failureMessage.actualValue = "an unexpected error thrown: <\(error)>"
+            failureMessage.stringValue = "an unexpected error thrown: <\(error)>"
             return false
         case let .raisedException(exception):
-            failureMessage.actualValue = "an unexpected exception thrown: <\(exception)>"
+            failureMessage.stringValue = "an unexpected exception thrown: <\(exception)>"
             return false
         case .blockedRunLoop:
             failureMessage.postfixMessage += " (timed out, but main thread was unresponsive)."
