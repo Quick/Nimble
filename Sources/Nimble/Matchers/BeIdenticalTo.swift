@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
 public func beIdenticalTo(_ expected: Any?) -> Predicate<Any> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         #if os(Linux)
             let actual = try actualExpression.evaluate() as? AnyObject
         #else

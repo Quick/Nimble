@@ -13,7 +13,7 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?, expectedValue: NMB
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDelta) -> Predicate<Double> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
     }.requireNonNil
 }
@@ -23,7 +23,7 @@ public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDel
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> Predicate<NMBDoubleConvertible> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta, failureMessage: failureMessage)
     }.requireNonNil
 }
@@ -70,7 +70,7 @@ extension NMBObjCMatcher {
 #endif
 
 public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> Predicate<[Double]> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
         if let actual = try actualExpression.evaluate() {
             failureMessage.actualValue = "<\(stringify(actual))>"

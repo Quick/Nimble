@@ -3,7 +3,7 @@ import Foundation
 public func allPass<T, U>
     (_ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T>.fromBool { actualExpression, failureMessage in
+        let matcher = Predicate<T>.fromBoolResult { actualExpression, failureMessage in
             failureMessage.postfixMessage = "pass a condition"
             return try passFunc(try actualExpression.evaluate())
         }
@@ -13,7 +13,7 @@ public func allPass<T, U>
 public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T>.fromBool { actualExpression, failureMessage in
+        let matcher = Predicate<T>.fromBoolResult { actualExpression, failureMessage in
             failureMessage.postfixMessage = passName
             return try passFunc(try actualExpression.evaluate())
         }
@@ -27,7 +27,7 @@ public func allPass<S, M>(_ elementMatcher: M) -> Predicate<S>
 
 private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>) -> Predicate<S>
     where S: Sequence {
-        return Predicate<S>.fromBool { actualExpression, failureMessage, expectMatch in
+        return Predicate<S>.fromBoolResult { actualExpression, failureMessage, expectMatch in
             failureMessage.actualValue = nil
             guard let actualValue = try actualExpression.evaluate() else {
                 failureMessage.postfixMessage = "all pass (use beNil() to match nils)"
@@ -86,7 +86,7 @@ extension NMBObjCMatcher {
             }
 
             let expr = Expression(expression: ({ nsObjects }), location: location)
-            let pred: Predicate<[NSObject]> = createPredicate(Predicate.fromBool { expr, failureMessage, expectMatch in
+            let pred: Predicate<[NSObject]> = createPredicate(Predicate.fromBoolResult { expr, failureMessage, expectMatch in
                 if expectMatch {
                     return matcher.matches({ try! expr.evaluate() }, failureMessage: failureMessage, location: expr.location)
                 } else {

@@ -12,7 +12,7 @@
 /// A matcher usually consists of two parts a constructor function and the Predicate.
 ///
 /// The Predicate provide the heavy lifting on how to assert against a given value. Internally,
-/// Predicates are simple wrappers around closures to provide static type information and
+/// predicates are simple wrappers around closures to provide static type information and
 /// allow composition and wrapping of existing behaviors.
 public struct Predicate<T> {
     fileprivate var matcher: (Expression<T>, ExpectationStyle) throws -> PredicateResult
@@ -216,7 +216,7 @@ public enum Satisfiability {
 
 // Backwards compatibility until Old Matcher API removal
 extension Predicate: Matcher {
-    public static func fromBool(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
+    public static func fromBoolResult(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
         return Predicate { actual, style in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, style == .ToMatch)
@@ -227,7 +227,7 @@ extension Predicate: Matcher {
         }
     }
 
-    public static func fromBool(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
+    public static func fromBoolResult(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
         return Predicate { actual, _ in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage)
@@ -240,7 +240,7 @@ extension Predicate: Matcher {
     }
 
     public static func fromMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
-        return self.fromBool(matcher.toClosure)
+        return self.fromBoolResult(matcher.toClosure)
     }
 
     public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {

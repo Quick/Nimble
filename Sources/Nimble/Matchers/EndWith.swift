@@ -4,7 +4,7 @@ import Foundation
 /// is equal to the expected value.
 public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> Predicate<S>
     where S.Iterator.Element == T {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
         if let actualValue = try actualExpression.evaluate() {
@@ -25,7 +25,7 @@ public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> Predicate<
 /// A Nimble matcher that succeeds when the actual collection's last element
 /// is equal to the expected object.
 public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
         guard let collection = try actualExpression.evaluate() else { return false }
         guard collection.count > 0 else { return false }
@@ -45,7 +45,7 @@ public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
 /// where the expected substring's location is the actual string's length minus the
 /// expected substring's length.
 public func endWith(_ endingSubstring: String) -> Predicate<String> {
-    return Predicate.fromBool { actualExpression, failureMessage in
+    return Predicate.fromBoolResult { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
             return collection.hasSuffix(endingSubstring)
