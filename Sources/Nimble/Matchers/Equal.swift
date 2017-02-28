@@ -26,17 +26,22 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predicate<[T: C]> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
+                return PredicateResult(
+                    status: .Fail,
+                    message: .Append(msg, " (use beNil() to match nils)")
+                )
             }
-            return false
+            return PredicateResult(status: .Fail, message: msg)
         }
-        return expectedValue! == actualValue!
-    }.requireNonNil
+        return PredicateResult(
+            status: Satisfiability(bool: expectedValue! == actualValue!),
+            message: msg
+        )
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual collection is equal to the expected collection.
