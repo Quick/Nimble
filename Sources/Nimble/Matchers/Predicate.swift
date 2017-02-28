@@ -54,94 +54,37 @@ extension Predicate {
             }
         }.requireNonNil
     }
+
+    public static func defineNilable(matcher: @escaping (Expression<T>) throws -> (Satisfiability, ExpectationMessage)) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            let (satisfy, msg) = try matcher(actual)
+            return PredicateResult(status: satisfy, message: msg)
+        }
+    }
+
+    public static func defineNilable(_ msg: ExpectationMessage, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            return PredicateResult(status: try matcher(actual), message: msg)
+        }
+    }
+
+    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T>.defineNilable(.ExpectedActualValueTo(msg), matcher: matcher)
+    }
+
+    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate<T> { actual, _ -> PredicateResult in
+            do {
+                return try matcher(actual, .ExpectedActualValueTo(msg))
+            } catch let error {
+                return PredicateResult(unexpectedError: error, message: msg)
+            }
+        }
+    }
 }
 
 public enum ExpectationStyle {
     case ToMatch, ToNotMatch
-}
-
-public indirect enum ExpectationMessage {
-    /// includes actual value in output ("expected to <string>, got <actual>")
-    case ExpectedValueTo(/* message: */ String, /* actual: */ String)
-    /// includes actual value in output ("expected to <string>, got <actual>")
-    case ExpectedActualValueTo(/* message: */ String)
-    /// excludes actual value in output ("expected to <string>")
-    case ExpectedTo(/* message: */ String)
-    /// allows any free-form message ("<string>")
-    case Fail(/* message: */ String)
-
-    /// appends after an existing message ("<expectation> (use beNil() to match nils)")
-    case Append(ExpectationMessage, String)
-    /// provides long-form multi-line explainations ("<expectation>\n\n<string>")
-    case Details(ExpectationMessage, String)
-
-    func toString(actual: String, expected: String = "expected", to: String = "to") -> String {
-        switch self {
-        case let .Fail(msg):
-            return msg
-        case let .ExpectedTo(msg):
-            return "\(expected) \(to) \(msg)"
-        case let .ExpectedActualValueTo(msg):
-            return "\(expected) \(to) \(msg), got \(actual)"
-        case let .ExpectedValueTo(msg, actual):
-            return "\(expected) \(to) \(msg), got \(actual)"
-        case let .Append(expectation, msg):
-            return "\(expectation.toString(actual: actual, expected: expected, to: to))\(msg)"
-        case let .Details(expectation, msg):
-            return "\(expectation.toString(actual: actual, expected: expected, to: to))\n\n\(msg)"
-        }
-    }
-
-    func update(failureMessage: FailureMessage) {
-        switch self {
-        case let .Fail(msg):
-            failureMessage.stringValue = msg
-        case let .ExpectedTo(msg):
-            failureMessage.actualValue = nil
-            failureMessage.postfixMessage = msg
-        case let .ExpectedActualValueTo(msg):
-            failureMessage.postfixMessage = msg
-        case let .ExpectedValueTo(msg, actual):
-            failureMessage.postfixMessage = msg
-            failureMessage.actualValue = actual
-        case let .Append(expectation, msg):
-            expectation.update(failureMessage: failureMessage)
-            failureMessage.postfixActual += msg
-        case let .Details(expectation, msg):
-            expectation.update(failureMessage: failureMessage)
-            if let desc = failureMessage.userDescription {
-                failureMessage.userDescription = desc
-            }
-            failureMessage.extendedMessage = msg
-        }
-    }
-}
-
-extension FailureMessage {
-    var toExpectationMessage: ExpectationMessage {
-        let defaultMsg = FailureMessage()
-        if expected != defaultMsg.expected || _stringValueOverride != nil {
-            return .Fail(stringValue)
-        }
-
-        var msg: ExpectationMessage = .Fail(userDescription ?? "")
-        if actualValue != "" && actualValue != nil {
-            msg = .ExpectedValueTo(postfixMessage, actualValue ?? "")
-        } else if postfixMessage != defaultMsg.postfixMessage {
-            if actualValue == nil {
-                msg = .ExpectedTo(postfixMessage)
-            } else {
-                msg = .ExpectedActualValueTo(postfixMessage)
-            }
-        }
-        if postfixActual != defaultMsg.postfixActual {
-            msg = .Append(msg, postfixActual)
-        }
-        if let m = extendedMessage {
-            msg = .Details(msg, m)
-        }
-        return msg
-    }
 }
 
 public struct PredicateResult {
@@ -163,6 +106,7 @@ public struct PredicateResult {
     }
 }
 
+/// Satisfiability is a trinary that indicates if a Predicate matches a given value or not
 public enum Satisfiability {
     case Matches, DoesNotMatch, Fail
 
