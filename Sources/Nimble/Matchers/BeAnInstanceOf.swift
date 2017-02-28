@@ -2,41 +2,41 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is an _exact_ instance of the given class.
 public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
-    return Predicate.fromBoolResult {actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be an instance of \(String(describing: expectedType))"
+    let errorMessage = "be an instance of \(String(describing: expectedType))"
+    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
-            failureMessage.actualValue = "<nil>"
-            return false
+            return (.DoesNotMatch, .ExpectedActualValueTo(errorMessage))
         }
 
-        failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
+        let actualString = "<\(String(describing: type(of: validInstance))) instance>"
 
-        if type(of: validInstance) == expectedType {
-            return true
-        }
-
-        return false
-    }.requireNonNil
+        return (
+            Satisfiability(bool: type(of: validInstance) == expectedType),
+            .ExpectedValueTo(errorMessage, actualString)
+        )
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAKindOf if you want to match against subclasses
 public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
+    let errorMessage = "be an instance of \(String(describing: expectedClass))"
+    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
         let instance = try actualExpression.evaluate()
+        let actualString: String
         if let validInstance = instance {
-            failureMessage.actualValue = "<\(String(describing: type(of: validInstance))) instance>"
+            actualString = "<\(String(describing: type(of: validInstance))) instance>"
         } else {
-            failureMessage.actualValue = "<nil>"
+            actualString = "<nil>"
         }
-        failureMessage.postfixMessage = "be an instance of \(String(describing: expectedClass))"
 #if _runtime(_ObjC)
-        return instance != nil && instance!.isMember(of: expectedClass)
+    let matches = instance != nil && instance!.isMember(of: expectedClass)
 #else
-        return instance != nil && type(of: instance!) == expectedClass
+    let matches = instance != nil && type(of: instance!) == expectedClass
 #endif
-    }.requireNonNil
+        return (Satisfiability(bool: matches), .ExpectedValueTo(errorMessage, actualString))
+    }
 }
 
 #if _runtime(_ObjC)
