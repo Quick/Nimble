@@ -2,13 +2,13 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is greater than the expected value.
 public func beGreaterThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be greater than <\(stringify(expectedValue))>"
+    let errorMessage = "be greater than <\(stringify(expectedValue))>"
+    return Predicate.define(errorMessage) { actualExpression -> Satisfiability in
         if let actual = try actualExpression.evaluate(), let expected = expectedValue {
-            return actual > expected
+            return Satisfiability(bool: actual > expected)
         }
-        return false
-    }.requireNonNil
+        return .Fail
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual value is greater than the expected value.
