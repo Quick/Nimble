@@ -3,35 +3,32 @@ import Foundation
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be empty"
+    return Predicate.define("be empty") { actualExpression -> Satisfiability in
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
-            return true
+            return .Fail
         }
         var generator = actualSeq!.makeIterator()
-        return generator.next() == nil
-    }.requireNonNil
+        return Satisfiability(bool: generator.next() == nil)
+    }
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<String> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be empty"
+    return Predicate.define("be empty") { actualExpression -> Satisfiability in
         let actualString = try actualExpression.evaluate()
-        return actualString == nil || NSString(string: actualString!).length  == 0
-    }.requireNonNil
+        return Satisfiability(bool: actualString == nil || NSString(string: actualString!).length  == 0)
+    }
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For NSString instances, it is an empty string.
 public func beEmpty() -> Predicate<NSString> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be empty"
+    return Predicate.define("be empty") { actualExpression -> Satisfiability in
         let actualString = try actualExpression.evaluate()
-        return actualString == nil || actualString!.length == 0
-    }.requireNonNil
+        return Satisfiability(bool: actualString == nil || actualString!.length == 0)
+    }
 }
 
 // Without specific overrides, beEmpty() is ambiguous for NSDictionary, NSArray,
@@ -40,31 +37,28 @@ public func beEmpty() -> Predicate<NSString> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSDictionary> {
-	return Predicate.fromBoolResult { actualExpression, failureMessage in
-		failureMessage.postfixMessage = "be empty"
+	return Predicate.define("be empty") { actualExpression -> Satisfiability in
 		let actualDictionary = try actualExpression.evaluate()
-		return actualDictionary == nil || actualDictionary!.count == 0
-	}.requireNonNil
+        return Satisfiability(bool: actualDictionary == nil || actualDictionary!.count == 0)
+	}
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSArray> {
-	return Predicate.fromBoolResult { actualExpression, failureMessage in
-		failureMessage.postfixMessage = "be empty"
+	return Predicate.define("be empty") { actualExpression -> Satisfiability in
 		let actualArray = try actualExpression.evaluate()
-		return actualArray == nil || actualArray!.count == 0
-	}.requireNonNil
+        return Satisfiability(bool: actualArray == nil || actualArray!.count == 0)
+	}
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NMBCollection> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be empty"
+    return Predicate.define("be empty") { actualExpression -> Satisfiability in
         let actual = try actualExpression.evaluate()
-        return actual == nil || actual!.count == 0
-    }.requireNonNil
+        return Satisfiability(bool: actual == nil || actual!.count == 0)
+    }
 }
 
 #if _runtime(_ObjC)
