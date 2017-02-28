@@ -97,8 +97,7 @@ public func beFalse() -> Predicate<Bool> {
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
 public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be truthy"
+    return Predicate.defineNilable("be truthy") { actualExpression -> Satisfiability in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
             // FIXME: This is a workaround to SR-2290.
@@ -106,20 +105,19 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
             // - https://bugs.swift.org/browse/SR-2290
             // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
             if let number = actualValue as? NSNumber {
-                return number.boolValue == true
+                return Satisfiability(bool: number.boolValue == true)
             }
 
-            return actualValue == (true as T)
+            return Satisfiability(bool: actualValue == (true as T))
         }
-        return actualValue != nil
+        return Satisfiability(bool: actualValue != nil)
     }
 }
 
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
 public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be falsy"
+    return Predicate.defineNilable("be falsy") { actualExpression -> Satisfiability in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
             // FIXME: This is a workaround to SR-2290.
@@ -127,13 +125,13 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
             // - https://bugs.swift.org/browse/SR-2290
             // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
             if let number = actualValue as? NSNumber {
-                return number.boolValue == false
+                return Satisfiability(bool: number.boolValue == false)
             }
 
-            return actualValue == (false as T)
+            return Satisfiability(bool: actualValue == (false as T))
         }
-        return actualValue == nil
-    }.predicate
+        return Satisfiability(bool: actualValue == nil)
+    }
 }
 
 #if _runtime(_ObjC)
