@@ -12,7 +12,7 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
                     status: .Fail,
-                    message: .Append(msg, " (use beNil() to match nils)")
+                    message: msg.appendBeNilHint()
                 )
             }
             return PredicateResult(status: .Fail, message: msg)
@@ -32,7 +32,7 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
                     status: .Fail,
-                    message: .Append(msg, " (use beNil() to match nils)")
+                    message: msg.appendBeNilHint()
                 )
             }
             return PredicateResult(status: .Fail, message: msg)
@@ -47,26 +47,38 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
 /// A Nimble matcher that succeeds when the actual collection is equal to the expected collection.
 /// Items must implement the Equatable protocol.
 public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
+                return PredicateResult(
+                    status: .Fail,
+                    message: msg.appendBeNilHint()
+                )
             }
-            return false
+            return PredicateResult(
+                status: .Fail,
+                message: msg
+            )
         }
-        return expectedValue! == actualValue!
-    }.requireNonNil
+        return PredicateResult(
+            status: Satisfiability(bool: expectedValue! == actualValue!),
+            message: msg
+        )
+    }
 }
 
 /// A Nimble matcher allowing comparison of collection with optional type
 public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         if let actualValue = try actualExpression.evaluate() {
+            let doesNotMatch = PredicateResult(
+                status: .DoesNotMatch,
+                message: msg
+            )
+
             if expectedValue.count != actualValue.count {
-                return false
+                return doesNotMatch
             }
 
             for (index, item) in actualValue.enumerated() {
@@ -74,21 +86,25 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
                 if item == nil && otherItem == nil {
                     continue
                 } else if item == nil && otherItem != nil {
-                    return false
+                    return doesNotMatch
                 } else if item != nil && otherItem == nil {
-                    return false
+                    return doesNotMatch
                 } else if item! != otherItem! {
-                    return false
+                    return doesNotMatch
                 }
             }
 
-            return true
+            return PredicateResult(
+                status: .Matches,
+                message: msg
+            )
         } else {
-            failureMessage.postfixActual = " (use beNil() to match nils)"
+            return PredicateResult(
+                status: .Fail,
+                message: msg.appendBeNilHint()
+            )
         }
-
-        return false
-    }.requireNonNil
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
@@ -108,34 +124,49 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> 
 }
 
 private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> Predicate<Set<T>> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage, expectMatch in
-        failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
+    return Predicate { actualExpression, _ in
+        var errorMessage: ExpectationMessage =
+            .ExpectedActualValueTo("equal <\(stringify(expectedValue))>")
 
         if let expectedValue = expectedValue {
             if let actualValue = try actualExpression.evaluate() {
-                failureMessage.actualValue = "<\(stringify(actualValue))>"
+                errorMessage = .ExpectedValueTo(
+                    "equal <\(stringify(expectedValue))>",
+                    "<\(stringify(actualValue))>"
+                )
 
                 if expectedValue == actualValue {
-                    return expectMatch
+                    return PredicateResult(
+                        status: .Matches,
+                        message: errorMessage
+                    )
                 }
 
                 let missing = expectedValue.subtracting(actualValue)
                 if missing.count > 0 {
-                    failureMessage.postfixActual += ", missing <\(stringify(missing))>"
+                    errorMessage = errorMessage.append(message: ", missing <\(stringify(missing))>")
                 }
 
                 let extra = actualValue.subtracting(expectedValue)
                 if extra.count > 0 {
-                    failureMessage.postfixActual += ", extra <\(stringify(extra))>"
+                    errorMessage = errorMessage.append(message: ", extra <\(stringify(extra))>")
                 }
-                return !expectMatch
+                return  PredicateResult(
+                    status: .DoesNotMatch,
+                    message: errorMessage
+                )
             }
+            return PredicateResult(
+                status: .Fail,
+                message: errorMessage.appendBeNilHint()
+            )
         } else {
-            failureMessage.postfixActual = " (use beNil() to match nils)"
+            return PredicateResult(
+                status: .Fail,
+                message: errorMessage.appendBeNilHint()
+            )
         }
-
-        return false
-    }.requireNonNil
+    }
 }
 
 public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {

@@ -3,9 +3,8 @@ import Foundation
 public func allPass<T, U>
     (_ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T>.fromBoolResult { actualExpression, failureMessage in
-            failureMessage.postfixMessage = "pass a condition"
-            return try passFunc(try actualExpression.evaluate())
+        let matcher = Predicate.defineNilable("pass a condition") { actualExpression -> Satisfiability in
+            return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
 }
@@ -13,9 +12,8 @@ public func allPass<T, U>
 public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate<T>.fromBoolResult { actualExpression, failureMessage in
-            failureMessage.postfixMessage = passName
-            return try passFunc(try actualExpression.evaluate())
+        let matcher = Predicate.defineNilable(passName) { actualExpression -> Satisfiability in
+            return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
 }
@@ -25,33 +23,44 @@ public func allPass<S, M>(_ elementMatcher: M) -> Predicate<S>
         return createPredicate(elementMatcher.predicate)
 }
 
+public func allPass<S>(_ elementPredicate: Predicate<S.Iterator.Element>) -> Predicate<S>
+    where S: Sequence {
+        return createPredicate(elementPredicate)
+}
+
 private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>) -> Predicate<S>
     where S: Sequence {
-        return Predicate<S>.fromBoolResult { actualExpression, failureMessage, expectMatch in
-            failureMessage.actualValue = nil
+        return Predicate { actualExpression, style in
             guard let actualValue = try actualExpression.evaluate() else {
-                failureMessage.postfixMessage = "all pass (use beNil() to match nils)"
-                return false
+                return PredicateResult(
+                    status: .Fail,
+                    message: .Append(.ExpectedTo("all pass"), " (use beNil() to match nils)")
+                )
             }
+
+            var failure: ExpectationMessage = .ExpectedTo("all pass")
             for currentElement in actualValue {
                 let exp = Expression(
                     expression: {currentElement}, location: actualExpression.location)
-                if try !elementMatcher.matches(exp, failureMessage: failureMessage) {
-                    if expectMatch {
-                        failureMessage.postfixMessage =
-                            "all \(failureMessage.postfixMessage),"
-                            + " but failed first at element <\(stringify(currentElement))>"
-                            + " in <\(stringify(actualValue))>"
-                    } else {
-                        failureMessage.postfixMessage = "all \(failureMessage.postfixMessage)"
-                    }
-                    return !expectMatch
+                let predicateResult = try elementMatcher.satisfies(exp, style)
+                if predicateResult.status == .Matches {
+                    failure = predicateResult.message.prepend(message: "all ")
+                } else {
+                    failure = predicateResult.message
+                        .replaceExpectation({ .ExpectedTo($0.message ?? "pass") })
+                        .wrapExpectation(
+                            before: "all ",
+                            after: ", but failed first at element <\(stringify(currentElement))>"
+                                + " in <\(stringify(actualValue))>"
+                    )
+                    return PredicateResult(status: .DoesNotMatch, message: failure)
                 }
             }
-
-            failureMessage.postfixMessage = "all \(failureMessage.postfixMessage)"
-            return expectMatch
-        }.requireNonNil
+            failure = failure.replaceExpectation({ expectation in
+                return .ExpectedTo(expectation.message ?? "pass")
+            })
+            return PredicateResult(status: .Matches, message: failure)
+        }
 }
 
 #if _runtime(_ObjC)

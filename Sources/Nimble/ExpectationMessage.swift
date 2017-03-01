@@ -1,3 +1,4 @@
+// TODO: rename all methods to swift immutable style (-ing)
 public indirect enum ExpectationMessage {
     /// includes actual value in output ("expected to <string>, got <actual>")
     case ExpectedValueTo(/* message: */ String, /* actual: */ String)
@@ -43,6 +44,10 @@ public indirect enum ExpectationMessage {
         case .Details:
             return visit { $0.append(message: message) }
         }
+    }
+
+    internal func appendBeNilHint() -> ExpectationMessage {
+        return append(message: " (use beNil() to match nils)")
     }
 
     internal func append(details: String) -> ExpectationMessage {

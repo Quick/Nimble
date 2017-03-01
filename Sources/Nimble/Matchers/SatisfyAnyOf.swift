@@ -7,25 +7,59 @@ public func satisfyAnyOf<T, U>(_ matchers: U...) -> Predicate<T>
     return satisfyAnyOf(matchers)
 }
 
+/// Deprecated. Please use `satisfyAnyOf<T>(_) -> Predicate<T>` instead.
 internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> Predicate<T>
     where U: Matcher, U.ValueType == T {
-    return NonNilMatcherFunc<T> { actualExpression, failureMessage in
-        let postfixMessages = NSMutableArray()
-        var matches = false
-        for matcher in matchers {
-            if try matcher.matches(actualExpression, failureMessage: failureMessage) {
-                matches = true
+        return NonNilMatcherFunc<T> { actualExpression, failureMessage in
+            let postfixMessages = NSMutableArray()
+            var matches = false
+            for matcher in matchers {
+                if try matcher.matches(actualExpression, failureMessage: failureMessage) {
+                    matches = true
+                }
+                postfixMessages.add(NSString(string: "{\(failureMessage.postfixMessage)}"))
             }
-            postfixMessages.add(NSString(string: "{\(failureMessage.postfixMessage)}"))
-        }
 
-        failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoined(by: ", or ")
-        if let actualValue = try actualExpression.evaluate() {
-            failureMessage.actualValue = "\(actualValue)"
-        }
+            failureMessage.postfixMessage = "match one of: " + postfixMessages.componentsJoined(by: ", or ")
+            if let actualValue = try actualExpression.evaluate() {
+                failureMessage.actualValue = "\(actualValue)"
+            }
 
-        return matches
-    }.predicate
+            return matches
+        }.predicate
+}
+
+internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
+        return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+            let postfixMessages = NSMutableArray()
+            var matches = false
+            for predicate in predicates {
+                let result = try predicate.satisfies(actualExpression, ExpectationStyle.ToMatch)
+                if result.toBoolean(expectation: .ToMatch) {
+                    matches = true
+                }
+                postfixMessages.add(
+                    NSString(string: result.message.toString(actual: "\(try? actualExpression.evaluate())"))
+                )
+            }
+
+            var msg: ExpectationMessage
+            if let actualValue = try actualExpression.evaluate() {
+                msg = .ExpectedValueTo(
+                    "match one of: " + postfixMessages.componentsJoined(by: ", or "),
+                    "\(actualValue)"
+                )
+            } else {
+                msg = .ExpectedActualValueTo(
+                    "match one of: " + postfixMessages.componentsJoined(by: ", or ")
+                )
+            }
+
+            return (
+                Satisfiability(bool: matches),
+                msg
+            )
+        }.requireNonNil
 }
 
 public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
