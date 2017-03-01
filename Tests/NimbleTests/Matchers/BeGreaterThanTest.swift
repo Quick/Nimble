@@ -42,6 +42,9 @@ final class BeGreaterThanTest: XCTestCase, XCTestCaseProvider {
 #else
         expect(NSNumber(value:1)) > 0 as NSNumber
 #endif
+        expect(2.5) > 1.5
+        expect(Float(2.5)) > Float(1.5)
+
         failsWithErrorMessage("expected to be greater than <2>, got <1>") {
             expect(1) > 2
             return
