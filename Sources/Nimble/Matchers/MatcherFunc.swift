@@ -1,4 +1,4 @@
-/// A convenience API to build matchers that don't need special negation
+/// DEPRECATED: A convenience API to build matchers that don't need special negation
 /// behavior. The toNot() behavior is the negation of to().
 ///
 /// @see NonNilMatcherFunc if you prefer to have this matcher fail when nil
@@ -24,12 +24,15 @@ public struct MatcherFunc<T>: Matcher {
         return try !matcher(actualExpression, failureMessage)
     }
 
+    /// Compatibility layer to new Matcher API. Converts an old-style matcher to a new one.
+    /// Note: You should definitely spend the time to convert to the new api as soon as possible
+    /// since this struct type is deprecated.
     public var predicate: Predicate<T> {
         return Predicate.fromDeprecatedMatcher(self)
     }
 }
 
-/// A convenience API to build matchers that don't need special negation
+/// DEPRECATED: A convenience API to build matchers that don't need special negation
 /// behavior. The toNot() behavior is the negation of to().
 ///
 /// Unlike MatcherFunc, this will always fail if an expectation contains nil.
@@ -71,6 +74,9 @@ public struct NonNilMatcherFunc<T>: Matcher {
         return false
     }
 
+    /// Compatibility layer to new Matcher API. Converts an old-style matcher to a new one.
+    /// Note: You should definitely spend the time to convert to the new api as soon as possible
+    /// since this struct type is deprecated.
     public var predicate: Predicate<T> {
         return Predicate.fromDeprecatedMatcher(self)
     }

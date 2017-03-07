@@ -124,7 +124,7 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> 
 }
 
 private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> Predicate<Set<T>> {
-    return Predicate { actualExpression, _ in
+    return Predicate { actualExpression in
         var errorMessage: ExpectationMessage =
             .ExpectedActualValueTo("equal <\(stringify(expectedValue))>")
 

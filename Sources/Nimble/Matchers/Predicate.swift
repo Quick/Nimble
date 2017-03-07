@@ -9,129 +9,135 @@
 ///                ^^^^^^^^
 ///            Called a "matcher"
 ///
-/// A matcher usually consists of two parts a constructor function and the Predicate.
+/// A matcher consists of two parts a constructor function and the Predicate. The term Predicate
+/// is used as a separate name from Matcher to help transition custom matchers to the new Nimble
+/// matcher API.
 ///
 /// The Predicate provide the heavy lifting on how to assert against a given value. Internally,
 /// predicates are simple wrappers around closures to provide static type information and
 /// allow composition and wrapping of existing behaviors.
 public struct Predicate<T> {
-    fileprivate var matcher: (Expression<T>, ExpectationStyle) throws -> PredicateResult
+    fileprivate var matcher: (Expression<T>) throws -> PredicateResult
 
     /// Constructs a predicate that knows how take a given value
-    public init(_ matcher: @escaping (Expression<T>, ExpectationStyle) throws -> PredicateResult) {
+    public init(_ matcher: @escaping (Expression<T>) throws -> PredicateResult) {
         self.matcher = matcher
     }
 
-    public func satisfies(_ expression: Expression<T>, _ style: ExpectationStyle) throws -> PredicateResult {
-        return try matcher(expression, style)
+    /// Uses a predicate on a given value to see if it passes the predicate.
+    ///
+    /// @param expression The value to run the predicate's logic against
+    /// @returns A predicate result indicate passing or failing and an associated error message.
+    public func satisfies(_ expression: Expression<T>) throws -> PredicateResult {
+        return try matcher(expression)
+    }
+}
+
+/// Provides convenience helpers to defining predicates
+extension Predicate {
+    /// Like Predicate() constructor, but automatically guard against nil (actual) values
+    public static func define(matcher: @escaping (Expression<T>) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate<T> { actual in
+            return try matcher(actual)
+        }.requireNonNil
+    }
+
+    /// Defines a predicate with a default message that can be returned in the closure
+    /// Also ensures the predicate's actual value cannot pass with `nil` given.
+    public static func define(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate<T> { actual in
+            return try matcher(actual, .ExpectedActualValueTo(msg))
+        }.requireNonNil
+    }
+
+    /// Defines a predicate with a default message that can be returned in the closure
+    /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
+    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate<T> { actual in
+            return try matcher(actual, .ExpectedActualValueTo(msg))
+        }
     }
 }
 
 extension Predicate {
-    public static func define(matcher: @escaping (Expression<T>) throws -> (Satisfiability, ExpectationMessage)) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            let (satisfy, msg) = try matcher(actual)
-            return PredicateResult(status: satisfy, message: msg)
-        }.requireNonNil
+    /// Provides a simple predicate definition that provides no control over the predefined
+    /// error message.
+    ///
+    /// Also ensures the predicate's actual value cannot pass with `nil` given.
+    public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T> { actual in
+            return PredicateResult(status: try matcher(actual), message: .ExpectedActualValueTo(msg))
+            }.requireNonNil
     }
 
-    public static func define(_ msg: ExpectationMessage, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            return PredicateResult(status: try matcher(actual), message: msg)
-        }.requireNonNil
-    }
-
-    public static func define(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
-        return Predicate<T>.define(.ExpectedActualValueTo(msg), matcher: matcher)
-    }
-
-    public static func define(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            do {
-                return try matcher(actual, .ExpectedActualValueTo(msg))
-            } catch let error {
-                return PredicateResult(unexpectedError: error, message: msg)
-            }
-        }.requireNonNil
-    }
-
-    public static func defineNilable(matcher: @escaping (Expression<T>) throws -> (Satisfiability, ExpectationMessage)) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            let (satisfy, msg) = try matcher(actual)
-            return PredicateResult(status: satisfy, message: msg)
-        }
-    }
-
-    public static func defineNilable(_ msg: ExpectationMessage, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            return PredicateResult(status: try matcher(actual), message: msg)
-        }
-    }
-
-    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
-        return Predicate<T>.defineNilable(.ExpectedActualValueTo(msg), matcher: matcher)
-    }
-
-    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
-        return Predicate<T> { actual, _ -> PredicateResult in
-            do {
-                return try matcher(actual, .ExpectedActualValueTo(msg))
-            } catch let error {
-                return PredicateResult(unexpectedError: error, message: msg)
-            }
+    /// Provides a simple predicate definition that provides no control over the predefined
+    /// error message.
+    ///
+    /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
+    public static func simpleNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+        return Predicate<T> { actual in
+            return PredicateResult(status: try matcher(actual), message: .ExpectedActualValueTo(msg))
         }
     }
 }
 
-public enum ExpectationStyle {
+// Question: Should this be exposed? It's safer to not for now and decide later.
+internal enum ExpectationStyle {
     case ToMatch, ToNotMatch
 }
 
+/// The value that a Predicates return to describe if the given (actual) value matches the
+/// predicate.
 public struct PredicateResult {
-    let status: Satisfiability
-    let message: ExpectationMessage
+    /// Status indicates if the predicate matches, does not match, or fails.
+    var status: Satisfiability
+    /// The error message that can be displayed if it does not match
+    var message: ExpectationMessage
 
+    /// Constructs a new PredicateResult with a given status and error message
     public init(status: Satisfiability, message: ExpectationMessage) {
         self.status = status
         self.message = message
     }
 
-    public init(unexpectedError: Error, message: String) {
-        self.status = .Fail
-        self.message = .ExpectedValueTo(message, "an unexpected error thrown: \(unexpectedError)")
+    /// Shorthand to PredicateResult(status: Satisfiability(bool: bool), message: message)
+    public init(bool: Bool, message: ExpectationMessage) {
+        self.status = Satisfiability(bool: bool)
+        self.message = message
     }
 
-    public func toBoolean(expectation style: ExpectationStyle) -> Bool {
+    /// Converts the result to a boolean based on what the expectation intended
+    internal func toBoolean(expectation style: ExpectationStyle) -> Bool {
         return status.toBoolean(expectation: style)
     }
 }
 
 /// Satisfiability is a trinary that indicates if a Predicate matches a given value or not
 public enum Satisfiability {
-    case Matches, DoesNotMatch, Fail
+    /// Matches indicates if the predicate / matcher passes with the given value
+    ///
+    /// For example, `equals(1)` returns `.Matches` for `expect(1).to(equal(1))`.
+    case Matches
+    /// DoesNotMatch indicates if the predicate / matcher fails with the given value, but *would*
+    /// succeed if the expectation was inverted.
+    ///
+    /// For example, `equals(2)` returns `.DoesNotMatch` for `expect(1).toNot(equal(2))`.
+    case DoesNotMatch
+    /// Fail indicates the predicate will never satisfy with the given value in any case.
+    /// A perfect example is that most matchers fail whenever given `nil`.
+    ///
+    /// Using `equal(1)` fails both `expect(nil).to(equal(1))` and `expect(nil).toNot(equal(1))`.
+    /// Note: Predicate's `requireNonNil` property will also provide this feature mostly for free.
+    ///       Your predicate will still need to guard against nils, but error messaging will be
+    ///       handled for you.
+    case Fail
 
+    /// Converts a boolean to either .Matches (if true) or .DoesNotMatch (if false).
     public init(bool matches: Bool) {
         if matches {
             self = .Matches
         } else {
             self = .DoesNotMatch
-        }
-    }
-
-    internal static func from(matches: Bool, style: ExpectationStyle) -> Satisfiability {
-        switch style {
-        case .ToMatch:
-            if matches {
-                return .Matches
-            } else {
-                return .DoesNotMatch
-            }
-        case .ToNotMatch:
-            if matches {
-                return .DoesNotMatch
-            } else {
-                return .Matches
-            }
         }
     }
 
@@ -149,7 +155,8 @@ public enum Satisfiability {
         }
     }
 
-    public func toBoolean(expectation style: ExpectationStyle) -> Bool {
+    /// Converts the satisfiability result to a boolean based on what the expectation intended
+    internal func toBoolean(expectation style: ExpectationStyle) -> Bool {
         if style == .ToMatch {
             return doesMatch()
         } else {
@@ -160,19 +167,22 @@ public enum Satisfiability {
 
 // Backwards compatibility until Old Matcher API removal
 extension Predicate: Matcher {
+    /// Compatibility layer for old Matcher API, deprecated
     public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
-        return Predicate { actual, style in
+        return Predicate { actual in
             let failureMessage = FailureMessage()
-            let result = try matcher(actual, failureMessage, style == .ToMatch)
+            let result = try matcher(actual, failureMessage, true)
             return PredicateResult(
-                status: Satisfiability.from(matches: result, style: style),
+                status: Satisfiability(bool: result),
                 message: failureMessage.toExpectationMessage
             )
         }
     }
 
+    /// Compatibility layer for old Matcher API, deprecated.
+    /// Emulates the MatcherFunc API
     public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
-        return Predicate { actual, _ in
+        return Predicate { actual in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage)
             return PredicateResult(
@@ -183,18 +193,22 @@ extension Predicate: Matcher {
 
     }
 
+    /// Compatibility layer for old Matcher API, deprecated.
+    /// Same as calling .predicate on a MatcherFunc or NonNilMatcherFunc type.
     public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
         return self.fromDeprecatedClosure(matcher.toClosure)
     }
 
+    /// Deprecated Matcher API, use satisfies(_:_) instead
     public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        let result = try satisfies(actualExpression, .ToMatch)
+        let result = try satisfies(actualExpression)
         result.message.update(failureMessage: failureMessage)
         return result.toBoolean(expectation: .ToMatch)
     }
 
+    /// Deprecated Matcher API, use satisfies(_:_) instead
     public func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        let result = try satisfies(actualExpression, .ToNotMatch)
+        let result = try satisfies(actualExpression)
         result.message.update(failureMessage: failureMessage)
         return result.toBoolean(expectation: .ToNotMatch)
     }
@@ -202,10 +216,10 @@ extension Predicate: Matcher {
 
 extension Predicate {
     // Someday, make this public? Needs documentation
-    internal func after(f: @escaping (Expression<T>, ExpectationStyle, PredicateResult) throws -> PredicateResult) -> Predicate<T> {
-        return Predicate { actual, style -> PredicateResult in
-            let result = try self.satisfies(actual, style)
-            return try f(actual, style, result)
+    internal func after(f: @escaping (Expression<T>, PredicateResult) throws -> PredicateResult) -> Predicate<T> {
+        return Predicate { actual -> PredicateResult in
+            let result = try self.satisfies(actual)
+            return try f(actual, result)
         }
     }
 
@@ -214,7 +228,7 @@ extension Predicate {
     ///
     /// This replaces `NonNilMatcherFunc`.
     public var requireNonNil: Predicate<T> {
-        return after { actual, _, result in
+        return after { actual, result in
             if try actual.evaluate() == nil {
                 return PredicateResult(
                     status: .Fail,

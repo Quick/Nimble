@@ -4,7 +4,7 @@ import Foundation
 /// is equal to the expected value.
 public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predicate<S>
     where S.Iterator.Element == T {
-    return Predicate.define("begin with <\(startingElement)>") { actualExpression -> Satisfiability in
+    return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
         if let actualValue = try actualExpression.evaluate() {
             var actualGenerator = actualValue.makeIterator()
             return Satisfiability(bool: actualGenerator.next() == startingElement)
@@ -16,7 +16,7 @@ public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predic
 /// A Nimble matcher that succeeds when the actual collection's first element
 /// is equal to the expected object.
 public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection> {
-    return Predicate.define("begin with <\(startingElement)>") { actualExpression -> Satisfiability in
+    return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
         guard let collection = try actualExpression.evaluate() else { return .Fail }
         guard collection.count > 0 else { return .DoesNotMatch }
         #if os(Linux)
@@ -33,7 +33,7 @@ public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection>
 /// A Nimble matcher that succeeds when the actual string contains expected substring
 /// where the expected substring's location is zero.
 public func beginWith(_ startingSubstring: String) -> Predicate<String> {
-    return Predicate.define("begin with <\(startingSubstring)>") { actualExpression -> Satisfiability in
+    return Predicate.simple("begin with <\(startingSubstring)>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
             let range = actual.range(of: startingSubstring)
             return Satisfiability(bool: range != nil && range!.lowerBound == actual.startIndex)

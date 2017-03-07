@@ -5,12 +5,12 @@ internal let DefaultDelta = 0.0001
 internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
                         expectedValue: NMBDoubleConvertible,
                         delta: Double)
-    -> (Satisfiability, ExpectationMessage) {
+    -> PredicateResult {
         let errorMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
-        return (
-            Satisfiability(bool: actualValue != nil &&
-                abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta),
-            .ExpectedValueTo(errorMessage, "<\(stringify(actualValue))>")
+        return PredicateResult(
+            bool: actualValue != nil &&
+                abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta,
+            message: .ExpectedValueTo(errorMessage, "<\(stringify(actualValue))>")
         )
 }
 
@@ -19,7 +19,7 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDelta) -> Predicate<Double> {
-    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+    return Predicate.define { actualExpression in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta)
     }
 }
@@ -29,7 +29,7 @@ public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDel
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> Predicate<NMBDoubleConvertible> {
-    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+    return Predicate.define { actualExpression in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta)
     }
 }
@@ -77,7 +77,7 @@ extension NMBObjCMatcher {
 
 public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> Predicate<[Double]> {
     let errorMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
-    return Predicate.define(errorMessage) { actualExpression -> Satisfiability in
+    return Predicate.simple(errorMessage) { actualExpression in
         if let actual = try actualExpression.evaluate() {
             if actual.count != expectedValues.count {
                 return .DoesNotMatch

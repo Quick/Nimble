@@ -30,11 +30,11 @@ internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> Predicate<T>
 }
 
 internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
-        return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+        return Predicate { actualExpression in
             let postfixMessages = NSMutableArray()
             var matches = false
             for predicate in predicates {
-                let result = try predicate.satisfies(actualExpression, ExpectationStyle.ToMatch)
+                let result = try predicate.satisfies(actualExpression)
                 if result.toBoolean(expectation: .ToMatch) {
                     matches = true
                 }
@@ -55,9 +55,9 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
                 )
             }
 
-            return (
-                Satisfiability(bool: matches),
-                msg
+            return PredicateResult(
+                status: Satisfiability(bool: matches),
+                message: msg
             )
         }.requireNonNil
 }

@@ -3,17 +3,20 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual value is an _exact_ instance of the given class.
 public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
     let errorMessage = "be an instance of \(String(describing: expectedType))"
-    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+    return Predicate.define { actualExpression in
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
-            return (.DoesNotMatch, .ExpectedActualValueTo(errorMessage))
+            return PredicateResult(
+                status: .DoesNotMatch,
+                message: .ExpectedActualValueTo(errorMessage)
+            )
         }
 
         let actualString = "<\(String(describing: type(of: validInstance))) instance>"
 
-        return (
-            Satisfiability(bool: type(of: validInstance) == expectedType),
-            .ExpectedValueTo(errorMessage, actualString)
+        return PredicateResult(
+            status: Satisfiability(bool: type(of: validInstance) == expectedType),
+            message: .ExpectedValueTo(errorMessage, actualString)
         )
     }
 }
@@ -22,7 +25,7 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 /// @see beAKindOf if you want to match against subclasses
 public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
     let errorMessage = "be an instance of \(String(describing: expectedClass))"
-    return Predicate.define { actualExpression -> (Satisfiability, ExpectationMessage) in
+    return Predicate.define { actualExpression in
         let instance = try actualExpression.evaluate()
         let actualString: String
         if let validInstance = instance {
@@ -35,7 +38,10 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
 #else
     let matches = instance != nil && type(of: instance!) == expectedClass
 #endif
-        return (Satisfiability(bool: matches), .ExpectedValueTo(errorMessage, actualString))
+        return PredicateResult(
+            status: Satisfiability(bool: matches),
+            message: .ExpectedValueTo(errorMessage, actualString)
+        )
     }
 }
 

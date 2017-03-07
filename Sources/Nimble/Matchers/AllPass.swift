@@ -3,7 +3,7 @@ import Foundation
 public func allPass<T, U>
     (_ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate.defineNilable("pass a condition") { actualExpression -> Satisfiability in
+        let matcher = Predicate.simpleNilable("pass a condition") { actualExpression in
             return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
@@ -12,7 +12,7 @@ public func allPass<T, U>
 public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
-        let matcher = Predicate.defineNilable(passName) { actualExpression -> Satisfiability in
+        let matcher = Predicate.simpleNilable(passName) { actualExpression in
             return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
@@ -30,7 +30,7 @@ public func allPass<S>(_ elementPredicate: Predicate<S.Iterator.Element>) -> Pre
 
 private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>) -> Predicate<S>
     where S: Sequence {
-        return Predicate { actualExpression, style in
+        return Predicate { actualExpression in
             guard let actualValue = try actualExpression.evaluate() else {
                 return PredicateResult(
                     status: .Fail,
@@ -42,7 +42,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
             for currentElement in actualValue {
                 let exp = Expression(
                     expression: {currentElement}, location: actualExpression.location)
-                let predicateResult = try elementMatcher.satisfies(exp, style)
+                let predicateResult = try elementMatcher.satisfies(exp)
                 if predicateResult.status == .Matches {
                     failure = predicateResult.message.prepend(message: "all ")
                 } else {

@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
-    return Predicate.define("be empty") { actualExpression -> Satisfiability in
+    return Predicate.simple("be empty") { actualExpression in
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
             return .Fail
@@ -16,7 +16,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<String> {
-    return Predicate.define("be empty") { actualExpression -> Satisfiability in
+    return Predicate.simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
         return Satisfiability(bool: actualString == nil || NSString(string: actualString!).length  == 0)
     }
@@ -25,7 +25,7 @@ public func beEmpty() -> Predicate<String> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For NSString instances, it is an empty string.
 public func beEmpty() -> Predicate<NSString> {
-    return Predicate.define("be empty") { actualExpression -> Satisfiability in
+    return Predicate.simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
         return Satisfiability(bool: actualString == nil || actualString!.length == 0)
     }
@@ -37,7 +37,7 @@ public func beEmpty() -> Predicate<NSString> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSDictionary> {
-	return Predicate.define("be empty") { actualExpression -> Satisfiability in
+	return Predicate.simple("be empty") { actualExpression in
 		let actualDictionary = try actualExpression.evaluate()
         return Satisfiability(bool: actualDictionary == nil || actualDictionary!.count == 0)
 	}
@@ -46,7 +46,7 @@ public func beEmpty() -> Predicate<NSDictionary> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSArray> {
-	return Predicate.define("be empty") { actualExpression -> Satisfiability in
+	return Predicate.simple("be empty") { actualExpression in
 		let actualArray = try actualExpression.evaluate()
         return Satisfiability(bool: actualArray == nil || actualArray!.count == 0)
 	}
@@ -55,7 +55,7 @@ public func beEmpty() -> Predicate<NSArray> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NMBCollection> {
-    return Predicate.define("be empty") { actualExpression -> Satisfiability in
+    return Predicate.simple("be empty") { actualExpression in
         let actual = try actualExpression.evaluate()
         return Satisfiability(bool: actual == nil || actual!.count == 0)
     }
