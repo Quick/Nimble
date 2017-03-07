@@ -15,7 +15,7 @@ public func throwError<T: Error>(
     _ error: T? = nil,
     errorType: T.Type? = nil,
     closure: ((T) -> Void)? = nil) -> Predicate<Any> {
-        return Predicate.fromBoolResult { actualExpression, failureMessage in
+        return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
 
             var actualError: Error?
             do {
@@ -38,7 +38,7 @@ public func throwError<T: Error>(
 /// The closure only gets called when an error was thrown.
 public func throwError(
     closure: ((Error) -> Void)? = nil) -> Predicate<Any> {
-        return Predicate.fromBoolResult { actualExpression, failureMessage in
+        return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
 
             var actualError: Error?
             do {

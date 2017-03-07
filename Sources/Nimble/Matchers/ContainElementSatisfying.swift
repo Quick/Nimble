@@ -2,7 +2,7 @@ import Foundation
 
 public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) -> Bool), _ predicateDescription: String = "") -> Predicate<S> where S.Iterator.Element == T {
 
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.actualValue = nil
 
         if predicateDescription == "" {

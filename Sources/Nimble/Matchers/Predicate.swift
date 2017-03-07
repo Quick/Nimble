@@ -160,7 +160,7 @@ public enum Satisfiability {
 
 // Backwards compatibility until Old Matcher API removal
 extension Predicate: Matcher {
-    public static func fromBoolResult(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
+    public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
         return Predicate { actual, style in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, style == .ToMatch)
@@ -171,7 +171,7 @@ extension Predicate: Matcher {
         }
     }
 
-    public static func fromBoolResult(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
+    public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
         return Predicate { actual, _ in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage)
@@ -183,8 +183,8 @@ extension Predicate: Matcher {
 
     }
 
-    public static func fromMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
-        return self.fromBoolResult(matcher.toClosure)
+    public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
+        return self.fromDeprecatedClosure(matcher.toClosure)
     }
 
     public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {

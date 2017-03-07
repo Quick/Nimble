@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when the actual string satisfies the regular expression
 /// described by the expected string.
 public func match(_ expectedValue: String?) -> Predicate<String> {
-    return Predicate.fromBoolResult { actualExpression, failureMessage in
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "match <\(stringify(expectedValue))>"
 
         if let actual = try actualExpression.evaluate() {

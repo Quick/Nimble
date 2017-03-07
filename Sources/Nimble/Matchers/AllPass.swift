@@ -95,7 +95,7 @@ extension NMBObjCMatcher {
             }
 
             let expr = Expression(expression: ({ nsObjects }), location: location)
-            let pred: Predicate<[NSObject]> = createPredicate(Predicate.fromBoolResult { expr, failureMessage, expectMatch in
+            let pred: Predicate<[NSObject]> = createPredicate(Predicate.fromDeprecatedClosure { expr, failureMessage, expectMatch in
                 if expectMatch {
                     return matcher.matches({ try! expr.evaluate() }, failureMessage: failureMessage, location: expr.location)
                 } else {

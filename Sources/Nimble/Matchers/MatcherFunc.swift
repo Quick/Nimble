@@ -25,7 +25,7 @@ public struct MatcherFunc<T>: Matcher {
     }
 
     public var predicate: Predicate<T> {
-        return Predicate.fromMatcher(self)
+        return Predicate.fromDeprecatedMatcher(self)
     }
 }
 
@@ -72,6 +72,6 @@ public struct NonNilMatcherFunc<T>: Matcher {
     }
 
     public var predicate: Predicate<T> {
-        return Predicate.fromMatcher(self)
+        return Predicate.fromDeprecatedMatcher(self)
     }
 }
