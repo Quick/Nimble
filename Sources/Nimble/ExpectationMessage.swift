@@ -77,7 +77,7 @@ public indirect enum ExpectationMessage {
 
     /// Replaces a primary expectation with one returned by f. Preserves all composite expectations
     /// that were built upon it.
-    public func replaceExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
+    public func replacedExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
             case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo:

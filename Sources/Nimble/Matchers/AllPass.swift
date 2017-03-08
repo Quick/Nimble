@@ -47,7 +47,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     failure = predicateResult.message.prepended(message: "all ")
                 } else {
                     failure = predicateResult.message
-                        .replaceExpectation({ .expectedTo($0.expectedMessage) })
+                        .replacedExpectation({ .expectedTo($0.expectedMessage) })
                         .wrappedExpectation(
                             before: "all ",
                             after: ", but failed first at element <\(stringify(currentElement))>"
@@ -56,7 +56,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     return PredicateResult(status: .doesNotMatch, message: failure)
                 }
             }
-            failure = failure.replaceExpectation({ expectation in
+            failure = failure.replacedExpectation({ expectation in
                 return .expectedTo(expectation.expectedMessage)
             })
             return PredicateResult(status: .matches, message: failure)
