@@ -1,9 +1,9 @@
 public indirect enum ExpectationMessage {
     // --- Primary Expectations ---
     /// includes actual value in output ("expected to <string>, got <actual>")
-    case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
-    /// includes actual value in output ("expected to <string>, got <actual>")
     case expectedActualValueTo(/* message: */ String)
+    /// uses a custom actual value string in output ("expected to <string>, got <actual>")
+    case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
     /// excludes actual value in output ("expected to <string>")
     case expectedTo(/* message: */ String)
     /// allows any free-form message ("<string>")
