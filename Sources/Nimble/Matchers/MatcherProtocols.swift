@@ -5,6 +5,7 @@ import Foundation
 #endif
 
 /// Implement this protocol to implement a custom matcher for Swift
+@available(*, deprecated, message: "Use to Predicate instead")
 public protocol Matcher {
     associatedtype ValueType
     func matches(_ actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool

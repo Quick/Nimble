@@ -31,27 +31,25 @@ internal func satisfyAnyOf<T, U>(_ matchers: [U]) -> Predicate<T>
 
 internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
         return Predicate { actualExpression in
-            let postfixMessages = NSMutableArray()
+            var postfixMessages = [String]()
             var matches = false
             for predicate in predicates {
                 let result = try predicate.satisfies(actualExpression)
                 if result.toBoolean(expectation: .toMatch) {
                     matches = true
                 }
-                postfixMessages.add(
-                    NSString(string: result.message.toString(actual: "\(try? actualExpression.evaluate())"))
-                )
+                postfixMessages.append(result.message.expectedMessage)
             }
 
             var msg: ExpectationMessage
             if let actualValue = try actualExpression.evaluate() {
                 msg = .expectedValueTo(
-                    "match one of: " + postfixMessages.componentsJoined(by: ", or "),
+                    "match one of: " + postfixMessages.joined(separator: ", or "),
                     "\(actualValue)"
                 )
             } else {
                 msg = .expectedActualValueTo(
-                    "match one of: " + postfixMessages.componentsJoined(by: ", or ")
+                    "match one of: " + postfixMessages.joined(separator: ", or ")
                 )
             }
 

@@ -1,5 +1,5 @@
-// TODO: rename all methods to swift immutable style (-ing)
 public indirect enum ExpectationMessage {
+    // --- Primary Expectations ---
     /// includes actual value in output ("expected to <string>, got <actual>")
     case expectedValueTo(/* message: */ String, /* actual: */ String)
     /// includes actual value in output ("expected to <string>, got <actual>")
@@ -9,6 +9,7 @@ public indirect enum ExpectationMessage {
     /// allows any free-form message ("<string>")
     case fail(/* message: */ String)
 
+    // --- Composite Expectations ---
     /// appends after an existing message ("<expectation> (use beNil() to match nils)")
     case appends(ExpectationMessage, /* Appended Message */ String)
 
@@ -22,47 +23,45 @@ public indirect enum ExpectationMessage {
         return "(toString(actual:expected:to:) -> \(asStr) || update(failureMessage:) -> \(asFailureMessage.stringValue))"
     }
 
-    internal var message: String? {
+    /// Returns the smallest message after the "expected to" string that summarizes the error.
+    ///
+    /// Returns the message part from ExpectationMessage, ignoring all .appends and .details.
+    public var expectedMessage: String {
         switch self {
-        case let .expectedValueTo(msg, _):
+        case let .fail(msg):
             return msg
         case let .expectedTo(msg):
             return msg
         case let .expectedActualValueTo(msg):
             return msg
-        case let .fail(msg):
+        case let .expectedValueTo(msg, _):
             return msg
-        default:
-            return nil
+        case let .appends(expectation, _):
+            return expectation.expectedMessage
+        case let .details(expectation, _):
+            return expectation.expectedMessage
         }
     }
 
-    internal func append(message: String) -> ExpectationMessage {
+    /// Appends a message after the primary expectation message
+    public func appended(message: String) -> ExpectationMessage {
         switch self {
         case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo, .appends:
             return .appends(self, message)
-        case .details:
-            return visit { $0.append(message: message) }
-        }
-    }
-
-    internal func appendBeNilHint() -> ExpectationMessage {
-        return append(message: " (use beNil() to match nils)")
-    }
-
-    internal func append(details: String) -> ExpectationMessage {
-        return .details(self, details)
-    }
-
-    internal func visit(_ f: (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
-        switch self {
-        case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo:
-            return f(self)
-        case let .appends(expectation, msg):
-            return f(.appends(expectation, msg))
         case let .details(expectation, msg):
-            return f(.details(expectation, msg))
+            return .details(expectation.appended(message: message), msg)
         }
+    }
+
+    /// Appends a message hinting to use beNil() for when the actual value given was nil.
+    public func appendedBeNilHint() -> ExpectationMessage {
+        return appended(message: " (use beNil() to match nils)")
+    }
+
+    /// Appends a detailed (aka - multiline) message after the primary expectation message
+    /// Detailed messages will be placed after .appended(message:) calls.
+    public func appended(details: String) -> ExpectationMessage {
+        return .details(self, details)
     }
 
     internal func visitLeafs(_ f: (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
@@ -76,7 +75,9 @@ public indirect enum ExpectationMessage {
         }
     }
 
-    internal func replaceExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
+    /// Replaces a primary expectation with one returned by f. Preserves all composite expectations
+    /// that were built upon it.
+    public func replaceExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
             case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo:
@@ -88,11 +89,14 @@ public indirect enum ExpectationMessage {
         return visitLeafs(walk)
     }
 
-    internal func wrapExpectation(before: String, after: String) -> ExpectationMessage {
-        return prepend(message: before).append(message: after)
+    /// Wraps a primary expectation with text before and after it.
+    /// Alias to prepended(message: before).appended(message: after)
+    public func wrapExpectation(before: String, after: String) -> ExpectationMessage {
+        return prepended(message: before).appended(message: after)
     }
 
-    internal func prepend(message: String) -> ExpectationMessage {
+    /// Prepends a message by modifying the primary expectation
+    public func prepended(message: String) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
             case let .expectedTo(msg):
@@ -108,7 +112,8 @@ public indirect enum ExpectationMessage {
         return visitLeafs(walk)
     }
 
-    internal func toString(actual: String, expected: String = "expected", to: String = "to") -> String {
+    /// Converts the tree of ExpectationMessages into a final built string.
+    public func toString(actual: String, expected: String = "expected", to: String = "to") -> String {
         switch self {
         case let .fail(msg):
             return msg
@@ -125,6 +130,7 @@ public indirect enum ExpectationMessage {
         }
     }
 
+    // Backwards compatibility: converts ExpectationMessage tree to FailureMessage
     internal func update(failureMessage: FailureMessage) {
         switch self {
         case let .fail(msg):

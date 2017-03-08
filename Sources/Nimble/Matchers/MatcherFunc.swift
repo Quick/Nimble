@@ -9,6 +9,7 @@
 /// Use the Matcher protocol instead of this type to accept custom matchers as
 /// input parameters.
 /// @see allPass for an example that uses accepts other matchers as input.
+@available(*, deprecated, message: "Use to Predicate instead")
 public struct MatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) throws -> Bool
 
@@ -43,6 +44,7 @@ public struct MatcherFunc<T>: Matcher {
 /// Use the Matcher protocol instead of this type to accept custom matchers as
 /// input parameters.
 /// @see allPass for an example that uses accepts other matchers as input.
+@available(*, deprecated, message: "Use to Predicate instead")
 public struct NonNilMatcherFunc<T>: Matcher {
     public let matcher: (Expression<T>, FailureMessage) throws -> Bool
 

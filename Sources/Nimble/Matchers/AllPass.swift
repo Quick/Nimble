@@ -44,10 +44,10 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     expression: {currentElement}, location: actualExpression.location)
                 let predicateResult = try elementMatcher.satisfies(exp)
                 if predicateResult.status == .matches {
-                    failure = predicateResult.message.prepend(message: "all ")
+                    failure = predicateResult.message.prepended(message: "all ")
                 } else {
                     failure = predicateResult.message
-                        .replaceExpectation({ .expectedTo($0.message ?? "pass") })
+                        .replaceExpectation({ .expectedTo($0.expectedMessage) })
                         .wrapExpectation(
                             before: "all ",
                             after: ", but failed first at element <\(stringify(currentElement))>"
@@ -57,7 +57,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                 }
             }
             failure = failure.replaceExpectation({ expectation in
-                return .expectedTo(expectation.message ?? "pass")
+                return .expectedTo(expectation.expectedMessage)
             })
             return PredicateResult(status: .matches, message: failure)
         }

@@ -12,7 +12,7 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
                     status: .fail,
-                    message: msg.appendBeNilHint()
+                    message: msg.appendedBeNilHint()
                 )
             }
             return PredicateResult(status: .fail, message: msg)
@@ -32,7 +32,7 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
                     status: .fail,
-                    message: msg.appendBeNilHint()
+                    message: msg.appendedBeNilHint()
                 )
             }
             return PredicateResult(status: .fail, message: msg)
@@ -53,7 +53,7 @@ public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
                     status: .fail,
-                    message: msg.appendBeNilHint()
+                    message: msg.appendedBeNilHint()
                 )
             }
             return PredicateResult(
@@ -101,7 +101,7 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
         } else {
             return PredicateResult(
                 status: .fail,
-                message: msg.appendBeNilHint()
+                message: msg.appendedBeNilHint()
             )
         }
     }
@@ -144,12 +144,12 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 
                 let missing = expectedValue.subtracting(actualValue)
                 if missing.count > 0 {
-                    errorMessage = errorMessage.append(message: ", missing <\(stringify(missing))>")
+                    errorMessage = errorMessage.appended(message: ", missing <\(stringify(missing))>")
                 }
 
                 let extra = actualValue.subtracting(expectedValue)
                 if extra.count > 0 {
-                    errorMessage = errorMessage.append(message: ", extra <\(stringify(extra))>")
+                    errorMessage = errorMessage.appended(message: ", extra <\(stringify(extra))>")
                 }
                 return  PredicateResult(
                     status: .doesNotMatch,
@@ -158,12 +158,12 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
             }
             return PredicateResult(
                 status: .fail,
-                message: errorMessage.appendBeNilHint()
+                message: errorMessage.appendedBeNilHint()
             )
         } else {
             return PredicateResult(
                 status: .fail,
-                message: errorMessage.appendBeNilHint()
+                message: errorMessage.appendedBeNilHint()
             )
         }
     }
