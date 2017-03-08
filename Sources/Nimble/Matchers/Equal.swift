@@ -130,7 +130,7 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 
         if let expectedValue = expectedValue {
             if let actualValue = try actualExpression.evaluate() {
-                errorMessage = .expectedValueTo(
+                errorMessage = .expectedCustomValueTo(
                     "equal <\(stringify(expectedValue))>",
                     "<\(stringify(actualValue))>"
                 )

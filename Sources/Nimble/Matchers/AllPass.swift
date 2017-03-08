@@ -48,7 +48,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                 } else {
                     failure = predicateResult.message
                         .replaceExpectation({ .expectedTo($0.expectedMessage) })
-                        .wrapExpectation(
+                        .wrappedExpectation(
                             before: "all ",
                             after: ", but failed first at element <\(stringify(currentElement))>"
                                 + " in <\(stringify(actualValue))>"

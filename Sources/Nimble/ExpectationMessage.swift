@@ -1,7 +1,7 @@
 public indirect enum ExpectationMessage {
     // --- Primary Expectations ---
     /// includes actual value in output ("expected to <string>, got <actual>")
-    case expectedValueTo(/* message: */ String, /* actual: */ String)
+    case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
     /// includes actual value in output ("expected to <string>, got <actual>")
     case expectedActualValueTo(/* message: */ String)
     /// excludes actual value in output ("expected to <string>")
@@ -34,7 +34,7 @@ public indirect enum ExpectationMessage {
             return msg
         case let .expectedActualValueTo(msg):
             return msg
-        case let .expectedValueTo(msg, _):
+        case let .expectedCustomValueTo(msg, _):
             return msg
         case let .appends(expectation, _):
             return expectation.expectedMessage
@@ -46,7 +46,7 @@ public indirect enum ExpectationMessage {
     /// Appends a message after the primary expectation message
     public func appended(message: String) -> ExpectationMessage {
         switch self {
-        case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo, .appends:
+        case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo, .appends:
             return .appends(self, message)
         case let .details(expectation, msg):
             return .details(expectation.appended(message: message), msg)
@@ -66,7 +66,7 @@ public indirect enum ExpectationMessage {
 
     internal func visitLeafs(_ f: (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
         switch self {
-        case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo:
+        case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo:
             return f(self)
         case let .appends(expectation, msg):
             return .appends(expectation.visitLeafs(f), msg)
@@ -80,7 +80,7 @@ public indirect enum ExpectationMessage {
     public func replaceExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
-            case .fail, .expectedTo, .expectedActualValueTo, .expectedValueTo:
+            case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo:
                 return f(msg)
             default:
                 return msg
@@ -91,7 +91,7 @@ public indirect enum ExpectationMessage {
 
     /// Wraps a primary expectation with text before and after it.
     /// Alias to prepended(message: before).appended(message: after)
-    public func wrapExpectation(before: String, after: String) -> ExpectationMessage {
+    public func wrappedExpectation(before: String, after: String) -> ExpectationMessage {
         return prepended(message: before).appended(message: after)
     }
 
@@ -103,8 +103,8 @@ public indirect enum ExpectationMessage {
                 return .expectedTo(message + msg)
             case let .expectedActualValueTo(msg):
                 return .expectedActualValueTo(message + msg)
-            case let .expectedValueTo(msg, actual):
-                return .expectedValueTo(message + msg, actual)
+            case let .expectedCustomValueTo(msg, actual):
+                return .expectedCustomValueTo(message + msg, actual)
             default:
                 return msg.visitLeafs(walk)
             }
@@ -121,7 +121,7 @@ public indirect enum ExpectationMessage {
             return "\(expected) \(to) \(msg)"
         case let .expectedActualValueTo(msg):
             return "\(expected) \(to) \(msg), got \(actual)"
-        case let .expectedValueTo(msg, actual):
+        case let .expectedCustomValueTo(msg, actual):
             return "\(expected) \(to) \(msg), got \(actual)"
         case let .appends(expectation, msg):
             return "\(expectation.toString(actual: actual, expected: expected, to: to))\(msg)"
@@ -140,7 +140,7 @@ public indirect enum ExpectationMessage {
             failureMessage.postfixMessage = msg
         case let .expectedActualValueTo(msg):
             failureMessage.postfixMessage = msg
-        case let .expectedValueTo(msg, actual):
+        case let .expectedCustomValueTo(msg, actual):
             failureMessage.postfixMessage = msg
             failureMessage.actualValue = actual
         case let .appends(expectation, msg):
@@ -169,7 +169,7 @@ extension FailureMessage {
 
         var msg: ExpectationMessage = .fail(userDescription ?? "")
         if actualValue != "" && actualValue != nil {
-            msg = .expectedValueTo(postfixMessage, actualValue ?? "")
+            msg = .expectedCustomValueTo(postfixMessage, actualValue ?? "")
         } else if postfixMessage != defaultMsg.postfixMessage {
             if actualValue == nil {
                 msg = .expectedTo(postfixMessage)

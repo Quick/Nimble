@@ -16,7 +16,7 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 
         return PredicateResult(
             status: Satisfiability(bool: type(of: validInstance) == expectedType),
-            message: .expectedValueTo(errorMessage, actualString)
+            message: .expectedCustomValueTo(errorMessage, actualString)
         )
     }
 }
@@ -40,7 +40,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
 #endif
         return PredicateResult(
             status: Satisfiability(bool: matches),
-            message: .expectedValueTo(errorMessage, actualString)
+            message: .expectedCustomValueTo(errorMessage, actualString)
         )
     }
 }

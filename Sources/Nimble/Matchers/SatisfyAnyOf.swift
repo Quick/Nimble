@@ -43,7 +43,7 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
 
             var msg: ExpectationMessage
             if let actualValue = try actualExpression.evaluate() {
-                msg = .expectedValueTo(
+                msg = .expectedCustomValueTo(
                     "match one of: " + postfixMessages.joined(separator: ", or "),
                     "\(actualValue)"
                 )

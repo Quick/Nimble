@@ -10,7 +10,7 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
         return PredicateResult(
             bool: actualValue != nil &&
                 abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta,
-            message: .expectedValueTo(errorMessage, "<\(stringify(actualValue))>")
+            message: .expectedCustomValueTo(errorMessage, "<\(stringify(actualValue))>")
         )
 }
 
