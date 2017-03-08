@@ -10,7 +10,7 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
         return PredicateResult(
             bool: actualValue != nil &&
                 abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta,
-            message: .ExpectedValueTo(errorMessage, "<\(stringify(actualValue))>")
+            message: .expectedValueTo(errorMessage, "<\(stringify(actualValue))>")
         )
 }
 
@@ -80,17 +80,17 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
     return Predicate.simple(errorMessage) { actualExpression in
         if let actual = try actualExpression.evaluate() {
             if actual.count != expectedValues.count {
-                return .DoesNotMatch
+                return .doesNotMatch
             } else {
                 for (index, actualItem) in actual.enumerated() {
                     if fabs(actualItem - expectedValues[index]) > delta {
-                        return .DoesNotMatch
+                        return .doesNotMatch
                     }
                 }
-                return .Matches
+                return .matches
             }
         }
-        return .DoesNotMatch
+        return .doesNotMatch
     }
 }
 

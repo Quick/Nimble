@@ -104,13 +104,13 @@ public struct Expectation<T> {
 
     /// Tests the actual value using a matcher to match.
     public func to(_ predicate: Predicate<T>, description: String? = nil) {
-        let (pass, msg) = execute(expression, .ToMatch, predicate, to: "to", description: description)
+        let (pass, msg) = execute(expression, .toMatch, predicate, to: "to", description: description)
         verify(pass, msg)
     }
 
     /// Tests the actual value using a matcher to not match.
     public func toNot(_ predicate: Predicate<T>, description: String? = nil) {
-        let (pass, msg) = execute(expression, .ToNotMatch, predicate, to: "to not", description: description)
+        let (pass, msg) = execute(expression, .toNotMatch, predicate, to: "to not", description: description)
         verify(pass, msg)
     }
 

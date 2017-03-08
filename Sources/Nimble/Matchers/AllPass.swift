@@ -33,33 +33,33 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
         return Predicate { actualExpression in
             guard let actualValue = try actualExpression.evaluate() else {
                 return PredicateResult(
-                    status: .Fail,
-                    message: .Append(.ExpectedTo("all pass"), " (use beNil() to match nils)")
+                    status: .fail,
+                    message: .appends(.expectedTo("all pass"), " (use beNil() to match nils)")
                 )
             }
 
-            var failure: ExpectationMessage = .ExpectedTo("all pass")
+            var failure: ExpectationMessage = .expectedTo("all pass")
             for currentElement in actualValue {
                 let exp = Expression(
                     expression: {currentElement}, location: actualExpression.location)
                 let predicateResult = try elementMatcher.satisfies(exp)
-                if predicateResult.status == .Matches {
+                if predicateResult.status == .matches {
                     failure = predicateResult.message.prepend(message: "all ")
                 } else {
                     failure = predicateResult.message
-                        .replaceExpectation({ .ExpectedTo($0.message ?? "pass") })
+                        .replaceExpectation({ .expectedTo($0.message ?? "pass") })
                         .wrapExpectation(
                             before: "all ",
                             after: ", but failed first at element <\(stringify(currentElement))>"
                                 + " in <\(stringify(actualValue))>"
                     )
-                    return PredicateResult(status: .DoesNotMatch, message: failure)
+                    return PredicateResult(status: .doesNotMatch, message: failure)
                 }
             }
             failure = failure.replaceExpectation({ expectation in
-                return .ExpectedTo(expectation.message ?? "pass")
+                return .expectedTo(expectation.message ?? "pass")
             })
-            return PredicateResult(status: .Matches, message: failure)
+            return PredicateResult(status: .matches, message: failure)
         }
 }
 

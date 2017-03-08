@@ -7,8 +7,8 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
             return PredicateResult(
-                status: .DoesNotMatch,
-                message: .ExpectedActualValueTo(errorMessage)
+                status: .doesNotMatch,
+                message: .expectedActualValueTo(errorMessage)
             )
         }
 
@@ -16,7 +16,7 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 
         return PredicateResult(
             status: Satisfiability(bool: type(of: validInstance) == expectedType),
-            message: .ExpectedValueTo(errorMessage, actualString)
+            message: .expectedValueTo(errorMessage, actualString)
         )
     }
 }
@@ -40,7 +40,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
 #endif
         return PredicateResult(
             status: Satisfiability(bool: matches),
-            message: .ExpectedValueTo(errorMessage, actualString)
+            message: .expectedValueTo(errorMessage, actualString)
         )
     }
 }

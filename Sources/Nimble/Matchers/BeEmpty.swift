@@ -6,7 +6,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
     return Predicate.simple("be empty") { actualExpression in
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
-            return .Fail
+            return .fail
         }
         var generator = actualSeq!.makeIterator()
         return Satisfiability(bool: generator.next() == nil)

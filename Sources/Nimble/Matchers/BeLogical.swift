@@ -84,13 +84,13 @@ internal func rename<T>(_ matcher: Predicate<T>, failureMessage message: Expecta
 /// A Nimble matcher that succeeds when the actual value is exactly true.
 /// This matcher will not match against nils.
 public func beTrue() -> Predicate<Bool> {
-    return rename(equal(true), failureMessage: .ExpectedActualValueTo("be true"))
+    return rename(equal(true), failureMessage: .expectedActualValueTo("be true"))
 }
 
 /// A Nimble matcher that succeeds when the actual value is exactly false.
 /// This matcher will not match against nils.
 public func beFalse() -> Predicate<Bool> {
-    return rename(equal(false), failureMessage: .ExpectedActualValueTo("be false"))
+    return rename(equal(false), failureMessage: .expectedActualValueTo("be false"))
 }
 
 // MARK: beTruthy() / beFalsy()

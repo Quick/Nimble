@@ -35,7 +35,7 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             var matches = false
             for predicate in predicates {
                 let result = try predicate.satisfies(actualExpression)
-                if result.toBoolean(expectation: .ToMatch) {
+                if result.toBoolean(expectation: .toMatch) {
                     matches = true
                 }
                 postfixMessages.add(
@@ -45,12 +45,12 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
 
             var msg: ExpectationMessage
             if let actualValue = try actualExpression.evaluate() {
-                msg = .ExpectedValueTo(
+                msg = .expectedValueTo(
                     "match one of: " + postfixMessages.componentsJoined(by: ", or "),
                     "\(actualValue)"
                 )
             } else {
-                msg = .ExpectedActualValueTo(
+                msg = .expectedActualValueTo(
                     "match one of: " + postfixMessages.componentsJoined(by: ", or ")
                 )
             }

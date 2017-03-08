@@ -11,11 +11,11 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
-                    status: .Fail,
+                    status: .fail,
                     message: msg.appendBeNilHint()
                 )
             }
-            return PredicateResult(status: .Fail, message: msg)
+            return PredicateResult(status: .fail, message: msg)
         }
         return PredicateResult(status: Satisfiability(bool: matches), message: msg)
     }
@@ -31,11 +31,11 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
-                    status: .Fail,
+                    status: .fail,
                     message: msg.appendBeNilHint()
                 )
             }
-            return PredicateResult(status: .Fail, message: msg)
+            return PredicateResult(status: .fail, message: msg)
         }
         return PredicateResult(
             status: Satisfiability(bool: expectedValue! == actualValue!),
@@ -52,12 +52,12 @@ public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
                 return PredicateResult(
-                    status: .Fail,
+                    status: .fail,
                     message: msg.appendBeNilHint()
                 )
             }
             return PredicateResult(
-                status: .Fail,
+                status: .fail,
                 message: msg
             )
         }
@@ -73,7 +73,7 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
     return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         if let actualValue = try actualExpression.evaluate() {
             let doesNotMatch = PredicateResult(
-                status: .DoesNotMatch,
+                status: .doesNotMatch,
                 message: msg
             )
 
@@ -95,12 +95,12 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
             }
 
             return PredicateResult(
-                status: .Matches,
+                status: .matches,
                 message: msg
             )
         } else {
             return PredicateResult(
-                status: .Fail,
+                status: .fail,
                 message: msg.appendBeNilHint()
             )
         }
@@ -126,18 +126,18 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> 
 private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> Predicate<Set<T>> {
     return Predicate { actualExpression in
         var errorMessage: ExpectationMessage =
-            .ExpectedActualValueTo("equal <\(stringify(expectedValue))>")
+            .expectedActualValueTo("equal <\(stringify(expectedValue))>")
 
         if let expectedValue = expectedValue {
             if let actualValue = try actualExpression.evaluate() {
-                errorMessage = .ExpectedValueTo(
+                errorMessage = .expectedValueTo(
                     "equal <\(stringify(expectedValue))>",
                     "<\(stringify(actualValue))>"
                 )
 
                 if expectedValue == actualValue {
                     return PredicateResult(
-                        status: .Matches,
+                        status: .matches,
                         message: errorMessage
                     )
                 }
@@ -152,17 +152,17 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
                     errorMessage = errorMessage.append(message: ", extra <\(stringify(extra))>")
                 }
                 return  PredicateResult(
-                    status: .DoesNotMatch,
+                    status: .doesNotMatch,
                     message: errorMessage
                 )
             }
             return PredicateResult(
-                status: .Fail,
+                status: .fail,
                 message: errorMessage.appendBeNilHint()
             )
         } else {
             return PredicateResult(
-                status: .Fail,
+                status: .fail,
                 message: errorMessage.appendBeNilHint()
             )
         }

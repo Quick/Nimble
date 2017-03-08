@@ -7,7 +7,7 @@ public func beGreaterThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
         if let actual = try actualExpression.evaluate(), let expected = expectedValue {
             return Satisfiability(bool: actual > expected)
         }
-        return .Fail
+        return .fail
     }
 }
 

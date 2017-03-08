@@ -46,7 +46,7 @@ extension Predicate {
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
     public static func define(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
-            return try matcher(actual, .ExpectedActualValueTo(msg))
+            return try matcher(actual, .expectedActualValueTo(msg))
         }.requireNonNil
     }
 
@@ -54,7 +54,7 @@ extension Predicate {
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
     public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
-            return try matcher(actual, .ExpectedActualValueTo(msg))
+            return try matcher(actual, .expectedActualValueTo(msg))
         }
     }
 }
@@ -66,7 +66,7 @@ extension Predicate {
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
     public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
         return Predicate<T> { actual in
-            return PredicateResult(status: try matcher(actual), message: .ExpectedActualValueTo(msg))
+            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
             }.requireNonNil
     }
 
@@ -76,14 +76,14 @@ extension Predicate {
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
     public static func simpleNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
         return Predicate<T> { actual in
-            return PredicateResult(status: try matcher(actual), message: .ExpectedActualValueTo(msg))
+            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
         }
     }
 }
 
 // Question: Should this be exposed? It's safer to not for now and decide later.
 internal enum ExpectationStyle {
-    case ToMatch, ToNotMatch
+    case toMatch, toNotMatch
 }
 
 /// The value that a Predicates return to describe if the given (actual) value matches the
@@ -116,13 +116,13 @@ public struct PredicateResult {
 public enum Satisfiability {
     /// Matches indicates if the predicate / matcher passes with the given value
     ///
-    /// For example, `equals(1)` returns `.Matches` for `expect(1).to(equal(1))`.
-    case Matches
+    /// For example, `equals(1)` returns `.matches` for `expect(1).to(equal(1))`.
+    case matches
     /// DoesNotMatch indicates if the predicate / matcher fails with the given value, but *would*
     /// succeed if the expectation was inverted.
     ///
-    /// For example, `equals(2)` returns `.DoesNotMatch` for `expect(1).toNot(equal(2))`.
-    case DoesNotMatch
+    /// For example, `equals(2)` returns `.doesNotMatch` for `expect(1).toNot(equal(2))`.
+    case doesNotMatch
     /// Fail indicates the predicate will never satisfy with the given value in any case.
     /// A perfect example is that most matchers fail whenever given `nil`.
     ///
@@ -130,37 +130,37 @@ public enum Satisfiability {
     /// Note: Predicate's `requireNonNil` property will also provide this feature mostly for free.
     ///       Your predicate will still need to guard against nils, but error messaging will be
     ///       handled for you.
-    case Fail
+    case fail
 
-    /// Converts a boolean to either .Matches (if true) or .DoesNotMatch (if false).
+    /// Converts a boolean to either .matches (if true) or .doesNotMatch (if false).
     public init(bool matches: Bool) {
         if matches {
-            self = .Matches
+            self = .matches
         } else {
-            self = .DoesNotMatch
+            self = .doesNotMatch
         }
     }
 
-    private func doesMatch() -> Bool {
+    private func shouldMatch() -> Bool {
         switch self {
-        case .Matches: return true
-        case .DoesNotMatch, .Fail: return false
+        case .matches: return true
+        case .doesNotMatch, .fail: return false
         }
     }
 
-    private func doesNotMatch() -> Bool {
+    private func shouldNotMatch() -> Bool {
         switch self {
-        case .DoesNotMatch: return true
-        case .Matches, .Fail: return false
+        case .doesNotMatch: return true
+        case .matches, .fail: return false
         }
     }
 
     /// Converts the satisfiability result to a boolean based on what the expectation intended
     internal func toBoolean(expectation style: ExpectationStyle) -> Bool {
-        if style == .ToMatch {
-            return doesMatch()
+        if style == .toMatch {
+            return shouldMatch()
         } else {
-            return doesNotMatch()
+            return shouldNotMatch()
         }
     }
 }
@@ -203,14 +203,14 @@ extension Predicate: Matcher {
     public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
         let result = try satisfies(actualExpression)
         result.message.update(failureMessage: failureMessage)
-        return result.toBoolean(expectation: .ToMatch)
+        return result.toBoolean(expectation: .toMatch)
     }
 
     /// Deprecated Matcher API, use satisfies(_:_) instead
     public func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
         let result = try satisfies(actualExpression)
         result.message.update(failureMessage: failureMessage)
-        return result.toBoolean(expectation: .ToNotMatch)
+        return result.toBoolean(expectation: .toNotMatch)
     }
 }
 
@@ -231,8 +231,8 @@ extension Predicate {
         return after { actual, result in
             if try actual.evaluate() == nil {
                 return PredicateResult(
-                    status: .Fail,
-                    message: .Append(result.message, " (use beNil() to match nils)")
+                    status: .fail,
+                    message: .appends(result.message, " (use beNil() to match nils)")
                 )
             }
             return result
