@@ -74,7 +74,8 @@ function test_podspec {
     echo "Gathering CocoaPods installation information..."
     run bundle exec pod --version
     echo "Linting podspec..."
-    run bundle exec pod lib lint Nimble.podspec
+    # Note: remove `--allow-warnings` once old Matcher API has been removed
+    run bundle exec pod lib lint Nimble.podspec --allow-warnings
 }
 
 function test_swiftpm {
