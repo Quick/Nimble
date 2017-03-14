@@ -33,7 +33,7 @@
 		1F12BEE01E7791B9006952EC /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F12BED91E7791B9006952EC /* CwlCatchException.m */; };
 		1F12BEE21E7791B9006952EC /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F12BEDB1E7791B9006952EC /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F12BEE31E7791B9006952EC /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F12BEDB1E7791B9006952EC /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F12BEE61E77922C006952EC /* mach_exc.defs in Sources */ = {isa = PBXBuildFile; fileRef = 1F12BEE51E77922C006952EC /* mach_exc.defs */; settings = {ATTRIBUTES = (Server, ); }; };
+		1F12BEE91E779784006952EC /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F12BE881E778F70006952EC /* mach_excServer.c */; };
 		1F14FB64194180C5009F2A08 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F1871C51CA89EDB00A34BF2 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1871BC1CA89EDB00A34BF2 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1871C61CA89EDB00A34BF2 /* DSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1871BD1CA89EDB00A34BF2 /* DSL.m */; };
@@ -460,7 +460,6 @@
 		1F12BED71E7791B9006952EC /* CwlCatchException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchException.swift; sourceTree = "<group>"; };
 		1F12BED91E7791B9006952EC /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlCatchException.m; sourceTree = "<group>"; };
 		1F12BEDB1E7791B9006952EC /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlCatchException.h; sourceTree = "<group>"; };
-		1F12BEE51E77922C006952EC /* mach_exc.defs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.mig; name = mach_exc.defs; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include/mach/mach_exc.defs; sourceTree = DEVELOPER_DIR; };
 		1F14FB63194180C5009F2A08 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		1F1871BC1CA89EDB00A34BF2 /* DSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSL.h; sourceTree = "<group>"; };
 		1F1871BD1CA89EDB00A34BF2 /* DSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSL.m; sourceTree = "<group>"; };
@@ -645,7 +644,6 @@
 				1F12BE861E778F70006952EC /* include */,
 				1F12BE881E778F70006952EC /* mach_excServer.c */,
 				1F12BE891E778F70006952EC /* mach_excServer.h */,
-				1F12BEE51E77922C006952EC /* mach_exc.defs */,
 			);
 			path = CwlMachBadInstructionHandler;
 			sourceTree = "<group>";
@@ -1570,8 +1568,8 @@
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
 				29EA59671B551EE6002D767E /* ThrowError.swift in Sources */,
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
+				1F12BEE91E779784006952EC /* mach_excServer.c in Sources */,
 				1FD8CD4D1968AB07008ED995 /* BeLessThan.swift in Sources */,
-				1F12BEE61E77922C006952EC /* mach_exc.defs in Sources */,
 				1FD8CD471968AB07008ED995 /* BeGreaterThan.swift in Sources */,
 				F8A1BE301CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F1871DA1CA89EF100A34BF2 /* NMBObjCMatcher.swift in Sources */,

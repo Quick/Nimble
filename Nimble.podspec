@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/**/*.{swift,h,m,c}"
 
   s.osx.exclude_files = [
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]
   s.ios.exclude_files = [
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
@@ -27,9 +27,11 @@ Pod::Spec.new do |s|
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/mach_excServer.{h,c}",
+    "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/mach_excServer.{h,c}",
+    "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.m",
+    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/CwlCatchException.m",
+    "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
