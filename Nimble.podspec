@@ -18,11 +18,14 @@ Pod::Spec.new do |s|
 
   s.osx.exclude_files = [
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
   ]
   s.ios.exclude_files = [
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstructionPOSIX.swift",
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Posix/CwlPreconditionTesting.h",
   ]
   s.tvos.exclude_files = [
+    "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
