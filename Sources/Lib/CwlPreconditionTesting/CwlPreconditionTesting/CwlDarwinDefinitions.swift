@@ -21,7 +21,7 @@
 import Darwin
 
 #if arch(x86_64)
-
+	
 	// From /usr/include/mach/message.h
 	// #define MACH_MSG_TYPE_MAKE_SEND		20	/* Must hold receive right */
 	// #define	MACH_MSGH_BITS_REMOTE(bits)				\
@@ -31,18 +31,18 @@ import Darwin
 	public let MACH_MSG_TYPE_MAKE_SEND: UInt32 = 20
 	public func MACH_MSGH_BITS_REMOTE(_ bits: UInt32) -> UInt32 { return bits & UInt32(MACH_MSGH_BITS_REMOTE_MASK) }
 	public func MACH_MSGH_BITS(_ remote: UInt32, _ local: UInt32) -> UInt32 { return ((remote) | ((local) << 8)) }
-
+	
 	// From /usr/include/mach/exception_types.h
 	// #define EXC_BAD_INSTRUCTION	2	/* Instruction failed */
 	// #define EXC_MASK_BAD_INSTRUCTION	(1 << EXC_BAD_INSTRUCTION)
 	public let EXC_BAD_INSTRUCTION: UInt32 = 2
 	public let EXC_MASK_BAD_INSTRUCTION: UInt32 = 1 << EXC_BAD_INSTRUCTION
-
+	
 	// From /usr/include/mach/i386/thread_status.h
 	// #define x86_THREAD_STATE64_COUNT	((mach_msg_type_number_t) \
 	//		( sizeof (x86_thread_state64_t) / sizeof (int) ))
 	public let x86_THREAD_STATE64_COUNT = UInt32(MemoryLayout<x86_thread_state64_t>.size / MemoryLayout<Int32>.size)
-
+	
 	public let EXC_TYPES_COUNT = 14
 	public struct execTypesCountTuple<T: ExpressibleByIntegerLiteral> {
 		// From /usr/include/mach/i386/exception.h
@@ -51,5 +51,5 @@ import Darwin
 		public init() {
 		}
 	}
-
+	
 #endif
