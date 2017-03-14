@@ -13,7 +13,7 @@ internal func expressionMatches<T, U>(_ expression: Expression<T>, matcher: U, t
         }
         return (pass, msg)
     } catch let error {
-        msg.stringValue = "an unexpected error thrown: <\(error)>"
+        msg.stringValue = "unexpected error thrown: <\(error)>"
         return (false, msg)
     }
 }
@@ -31,12 +31,12 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
         }
         return (pass, msg)
     } catch let error {
-        msg.stringValue = "an unexpected error thrown: <\(error)>"
+        msg.stringValue = "unexpected error thrown: <\(error)>"
         return (false, msg)
     }
 }
 
-internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?) -> (Bool, FailureMessage) {
+internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?, captureExceptions: Bool = true) -> (Bool, FailureMessage) {
     func run() -> (Bool, FailureMessage) {
         let msg = FailureMessage()
         msg.userDescription = description
@@ -49,18 +49,22 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
             }
             return (result.toBoolean(expectation: style), msg)
         } catch let error {
-            msg.stringValue = "an unexpected error thrown: <\(error)>"
+            msg.stringValue = "unexpected error thrown: <\(error)>"
             return (false, msg)
         }
     }
 
     var result: (Bool, FailureMessage) = (false, FailureMessage())
-    let capture = NMBExceptionCapture(handler: ({ exception -> Void in
-        let msg = FailureMessage()
-        msg.stringValue = String(describing: exception)
-        result = (false, msg)
-    }), finally: nil)
-    capture.tryBlock {
+    if captureExceptions {
+        let capture = NMBExceptionCapture(handler: ({ exception -> Void in
+            let msg = FailureMessage()
+            msg.stringValue = "unexpected exception raised: \(exception)"
+            result = (false, msg)
+        }), finally: nil)
+        capture.tryBlock {
+            result = run()
+        }
+    } else {
         result = run()
     }
 

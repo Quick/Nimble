@@ -45,10 +45,10 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             expect { value }.toEventually(equal(1))
         }
-        failsWithErrorMessage("an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventually(equal(1))
         }
-        failsWithErrorMessage("an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
     }
