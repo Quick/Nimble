@@ -34,6 +34,7 @@
 		1F12BEE21E7791B9006952EC /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F12BEDB1E7791B9006952EC /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F12BEE31E7791B9006952EC /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F12BEDB1E7791B9006952EC /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F12BEE91E779784006952EC /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F12BE881E778F70006952EC /* mach_excServer.c */; };
+		1F12BEEA1E77ABE3006952EC /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F12BE871E778F70006952EC /* CwlMachBadInstructionHandler.h */; };
 		1F14FB64194180C5009F2A08 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
 		1F1871C51CA89EDB00A34BF2 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1871BC1CA89EDB00A34BF2 /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1871C61CA89EDB00A34BF2 /* DSL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1871BD1CA89EDB00A34BF2 /* DSL.m */; };
@@ -992,6 +993,7 @@
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
 				1F12BEA81E77902A006952EC /* CwlPreconditionTesting.h in Headers */,
+				1F12BEEA1E77ABE3006952EC /* CwlMachBadInstructionHandler.h in Headers */,
 				1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

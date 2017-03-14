@@ -28,7 +28,6 @@ Pod::Spec.new do |s|
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/mach_excServer.{h,c}",
-    "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/CwlCatchException.m",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/include/CwlCatchException.h",
