@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A8F2B2541E79A4AB005BDD17 /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A8F2B2571E79A4AC005BDD17 /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+				A8F2B2581E79A4B0005BDD17 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+			productName = SwiftLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		123E93B51E4B7646006431E4 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 123E93B31E4B7646006431E4 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		123E93B61E4B7646006431E4 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 123E93B41E4B7646006431E4 /* CwlMachBadInstructionHandler.m */; };
@@ -956,7 +970,6 @@
 				1F1A74251940169200FFFC47 /* Frameworks */,
 				1F1A74261940169200FFFC47 /* Headers */,
 				1F1A74271940169200FFFC47 /* Resources */,
-				36D948361E0C6F4E0088F9E9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -996,7 +1009,6 @@
 				1F5DF1511BDCA0CE00C3A531 /* Frameworks */,
 				1F5DF1521BDCA0CE00C3A531 /* Headers */,
 				1F5DF1531BDCA0CE00C3A531 /* Resources */,
-				36D948371E0C6F590088F9E9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1033,7 +1045,6 @@
 				1F925EA9195C0D6300ED456B /* Frameworks */,
 				1F925EAA195C0D6300ED456B /* Headers */,
 				1F925EAB195C0D6300ED456B /* Resources */,
-				36D948351E0C6F420088F9E9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1101,6 +1112,10 @@
 						LastSwiftMigration = 0800;
 						TestTargetID = 1F925EAC195C0D6300ED456B;
 					};
+					A8F2B2541E79A4AB005BDD17 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 1F1A74231940169200FFFC47 /* Build configuration list for PBXProject "Nimble" */;
@@ -1121,6 +1136,7 @@
 				1F1A74331940169200FFFC47 /* Nimble-iOSTests */,
 				1F5DF1541BDCA0CE00C3A531 /* Nimble-tvOS */,
 				1F5DF15D1BDCA0CE00C3A531 /* Nimble-tvOSTests */,
+				A8F2B2541E79A4AB005BDD17 /* SwiftLint */,
 			);
 		};
 /* End PBXProject section */
@@ -1171,7 +1187,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36D948351E0C6F420088F9E9 /* ShellScript */ = {
+		A8F2B2581E79A4B0005BDD17 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1182,33 +1198,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nfi";
-		};
-		36D948361E0C6F4E0088F9E9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nfi";
-		};
-		36D948371E0C6F590088F9E9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2103,6 +2093,20 @@
 			};
 			name = Release;
 		};
+		A8F2B2551E79A4AB005BDD17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A8F2B2561E79A4AB005BDD17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2168,6 +2172,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A8F2B2571E79A4AC005BDD17 /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8F2B2551E79A4AB005BDD17 /* Debug */,
+				A8F2B2561E79A4AB005BDD17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
