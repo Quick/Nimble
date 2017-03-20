@@ -5,9 +5,9 @@
  * OPTIONS: 
  */
 
-/* Module mach_exc */
+#if defined(__x86_64__)
 
-#if defined(__x86_64)
+/* Module mach_exc */
 
 #define	__MIG_check__Request__mach_exc_subsystem__ 1
 

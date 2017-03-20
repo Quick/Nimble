@@ -13,6 +13,8 @@
     expect(2).to(beGreaterThanOrEqualTo(0));
     expect(2).to(beGreaterThanOrEqualTo(2));
     expect(2).toNot(beGreaterThanOrEqualTo(3));
+    expect(2.5).to(beGreaterThanOrEqualTo(2));
+    expect(2.5).to(beGreaterThanOrEqualTo(2.5));
 }
 
 - (void)testNegativeMatches {

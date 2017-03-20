@@ -41,6 +41,10 @@ final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
         expect(1) >= 0
         expect(NSNumber(value:1)) >= 1
         expect(NSNumber(value:1)) >= NSNumber(value:1)
+        expect(2.5) >= 2.5
+        expect(2.5) >= 2
+        expect(Float(2.5)) >= Float(2.5)
+        expect(Float(2.5)) >= 2
 
         failsWithErrorMessage("expected to be greater than or equal to <2>, got <1>") {
             expect(1) >= 2

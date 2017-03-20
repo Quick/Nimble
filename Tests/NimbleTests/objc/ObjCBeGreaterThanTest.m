@@ -12,6 +12,7 @@
     expect(@2).toNot(beGreaterThan(@2));
     expect(@2).to(beGreaterThan(0));
     expect(@2).toNot(beGreaterThan(2));
+    expect(2.5).to(beGreaterThan(1.5));
 }
 
 - (void)testNegativeMatches {

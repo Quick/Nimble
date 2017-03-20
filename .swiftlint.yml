@@ -12,5 +12,8 @@ included:
   - Sources
   - Tests
 
+excluded:
+  - Sources/Lib
+
 trailing_comma:
   mandatory_comma: true
