@@ -8,7 +8,6 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
     case nil_
     case instanceOf(type: Any.Type)
     case instanceOfWith(type: Any.Type, option: ArgumentOption)
-    case kindOf(type: AnyClass)
 
     public var description: String {
         switch self {
@@ -22,8 +21,6 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
             return "Argument.instanceOf(\(type))"
         case .instanceOfWith(let input):
             return "Argument.instanceOfWith(\(input.type), \(input.option))"
-        case .kindOf(let type):
-            return "Argument.kindOf(\(type))"
         }
     }
 
@@ -39,8 +36,6 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
             return lhsType == rhsType
         case (let .instanceOfWith(lhsInput), let .instanceOfWith(rhsInput)):
             return lhsInput.type == rhsInput.type && lhsInput.option == rhsInput.option
-        case (let .kindOf(lhsType), let .kindOf(rhsType)):
-            return lhsType == rhsType
         default:
             return false
         }
@@ -195,13 +190,6 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
                 .replaceMatching(regex: ">+$", withString: "")
 
             return cleanedType == cleanedRecordedArgType
-        case .kindOf(let type):
-            if let recordedArgAsObject = recordedArg as? NSObject {
-                return recordedArgAsObject.isKind(of: type)
-            }
-
-            assertionFailure("Arguments passed to .KindOf must inherit from NSObject. <\(recordedArg)> of type <\(type(of: recordedArg))> does NOT inherit from NSObject.")
-            return false
         }
     } else {
         return passedArg.isEqualTo(recordedArg)

@@ -26,10 +26,6 @@ class CallRecorderTest: XCTestCase {
         func doWeirdStuffWith(string: String?, int: Int?) {
             self.recordCall(arguments: string, int)
         }
-
-        func doCrazyStuffWith(object: NSObject) {
-            self.recordCall(arguments: object)
-        }
     }
 
     // MARK: Recording Tests
@@ -244,7 +240,6 @@ class CallRecorderTest: XCTestCase {
         let nilly = Argument.nil_
         let instanceOf = Argument.instanceOf(type: String.self)
         let instanceOfWith = Argument.instanceOfWith(type: String.self, option: .anything)
-        let kindOf = Argument.kindOf(type: NSObject.self)
 
         // then
         expect("\(anything)").to(equal("Argument.anything"))
@@ -252,7 +247,6 @@ class CallRecorderTest: XCTestCase {
         expect("\(nilly)").to(equal("Argument.nil_"))
         expect("\(instanceOf)").to(equal("Argument.instanceOf(String)"))
         expect("\(instanceOfWith)").to(equal("Argument.instanceOfWith(String, ArgumentOption.anything)"))
-        expect("\(kindOf)").to(equal("Argument.kindOf(NSObject)"))
     }
 
     func testArgumentOptionEnumDescription() {
@@ -368,24 +362,6 @@ class CallRecorderTest: XCTestCase {
         let expectedArgs2: Array<GloballyEquatable> = [Argument.anything, Argument.instanceOfWith(type: String.self, option: .optional)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2).success).to(beFalse(), description: "should FAIL to call function with 'anything' and 'instance of String?' arguments")
         expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: String.self, option: .optional)]).success).to(beFalse(), description: "should FAIL to call function with 'instance of String?' arguments")
-    }
-
-    func testKindOfClassArgument() {
-        // given
-        class SubClass: NSObject {}
-        class SubSubClass: SubClass {}
-        let testClass = TestClass()
-
-        // when
-        testClass.doCrazyStuffWith(object: SubClass())
-
-        // then
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.kindOf(type: NSObject.self)]).success)
-            .to(beTrue(), description: "should SUCCEED to call function with 'kind of NSObject' argument")
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.kindOf(type: SubClass.self)]).success)
-            .to(beTrue(), description: "should SUCCEED to call function with 'kind of SubClass' argument")
-        expect(testClass.didCall(function: "doCrazyStuffWith(object:)", withArguments: [Argument.kindOf(type: SubSubClass.self)]).success)
-            .to(beFalse(), description: "should FAIL to call function with 'kind of SubSubClass' argument")
     }
 
     // MARK: Did Call - Recorded Calls Description Tests
