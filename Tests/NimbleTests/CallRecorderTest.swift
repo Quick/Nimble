@@ -239,25 +239,12 @@ class CallRecorderTest: XCTestCase {
         let nonNil = Argument.nonNil
         let nilly = Argument.nil_
         let instanceOf = Argument.instanceOf(type: String.self)
-        let instanceOfWith = Argument.instanceOfWith(type: String.self, option: .anything)
 
         // then
         expect("\(anything)").to(equal("Argument.anything"))
         expect("\(nonNil)").to(equal("Argument.nonNil"))
         expect("\(nilly)").to(equal("Argument.nil_"))
         expect("\(instanceOf)").to(equal("Argument.instanceOf(String)"))
-        expect("\(instanceOfWith)").to(equal("Argument.instanceOfWith(String, ArgumentOption.anything)"))
-    }
-
-    func testArgumentOptionEnumDescription() {
-        let anything = ArgumentOption.anything
-        let nonOptional = ArgumentOption.nonOptional
-        let optional = ArgumentOption.optional
-
-        // then
-        expect("\(anything)").to(equal("ArgumentOption.anything"))
-        expect("\(nonOptional)").to(equal("ArgumentOption.nonOptional"))
-        expect("\(optional)").to(equal("ArgumentOption.optional"))
     }
 
     func testAnythingArgument() {
@@ -319,49 +306,6 @@ class CallRecorderTest: XCTestCase {
         let expectedArgs2: Array<GloballyEquatable> = [Argument.instanceOf(type: String.self), Argument.instanceOf(type: Int.self)]
         expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2).success)
             .to(beFalse(), description: "should FAIL to call function with 'instance of String' and 'instance of Int' arguments")
-    }
-
-    func testInstanceOfWithArgumentAnythingArgumentOption() {
-        // given
-        let testClass = TestClass()
-
-        // when
-        testClass.doStuffWith(string: "hello")
-        testClass.doWeirdStuffWith(string: "hi", int: 5)
-
-        // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: String.self, option: .anything)]).success).to(beTrue(), description: "should SUCCEED to call function with 'instance of String or String?' argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: Int.self, option: .anything)]).success).to(beFalse(), description: "should FAIL to call function with 'instance of Int or Int?' argument")
-    }
-
-    func testInstanceOfWithArgumentNonOptionalArgumentOption() {
-        // given
-        let testClass = TestClass()
-
-        // when
-        testClass.doStuffWith(string: "hello")
-        testClass.doWeirdStuffWith(string: "hi", int: 5)
-
-        // then
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: String.self, option: .nonOptional)]).success).to(beTrue(), description: "should SUCCEED to call function with 'instance of String' argument")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: Int.self, option: .nonOptional)]).success).to(beFalse(), description: "should FAIL to call function with 'instance of Int' argument")
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: [Argument.anything, Argument.instanceOfWith(type: Int.self, option: .nonOptional)]).success).to(beFalse(), description: "should FAIL to call function with 'anything' and 'instance of Int' arguments")
-    }
-
-    func testInstanceOfWithArgumentOptionalArgumentOption() {
-        // given
-        let testClass = TestClass()
-
-        // when
-        testClass.doStuffWith(string: "hello")
-        testClass.doWeirdStuffWith(string: "hi", int: 5)
-
-        // then
-        let expectedArgs1: Array<GloballyEquatable> = [Argument.anything, Argument.instanceOfWith(type: Int.self, option: .optional)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs1).success).to(beTrue(), description: "should SUCCEED to call function with 'anything' and 'instance of Int?' arguments")
-        let expectedArgs2: Array<GloballyEquatable> = [Argument.anything, Argument.instanceOfWith(type: String.self, option: .optional)]
-        expect(testClass.didCall(function: "doWeirdStuffWith(string:int:)", withArguments: expectedArgs2).success).to(beFalse(), description: "should FAIL to call function with 'anything' and 'instance of String?' arguments")
-        expect(testClass.didCall(function: "doStuffWith(string:)", withArguments: [Argument.instanceOfWith(type: String.self, option: .optional)]).success).to(beFalse(), description: "should FAIL to call function with 'instance of String?' arguments")
     }
 
     // MARK: Did Call - Recorded Calls Description Tests

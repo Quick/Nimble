@@ -7,7 +7,6 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
     case nonNil
     case nil_
     case instanceOf(type: Any.Type)
-    case instanceOfWith(type: Any.Type, option: ArgumentOption)
 
     public var description: String {
         switch self {
@@ -19,8 +18,6 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
             return "Argument.nil_"
         case .instanceOf(let type):
             return "Argument.instanceOf(\(type))"
-        case .instanceOfWith(let input):
-            return "Argument.instanceOfWith(\(input.type), \(input.option))"
         }
     }
 
@@ -34,27 +31,8 @@ public enum Argument: CustomStringConvertible, GloballyEquatable, Equatable {
             return true
         case (let .instanceOf(lhsType), let .instanceOf(rhsType)):
             return lhsType == rhsType
-        case (let .instanceOfWith(lhsInput), let .instanceOfWith(rhsInput)):
-            return lhsInput.type == rhsInput.type && lhsInput.option == rhsInput.option
         default:
             return false
-        }
-    }
-}
-
-public enum ArgumentOption: CustomStringConvertible, GloballyEquatable {
-    case anything
-    case nonOptional
-    case optional
-
-    public var description: String {
-        switch self {
-        case .anything:
-            return "ArgumentOption.anything"
-        case .nonOptional:
-            return "ArgumentOption.nonOptional"
-        case .optional:
-            return "ArgumentOption.optional"
         }
     }
 }
@@ -174,22 +152,6 @@ private func isEqualArgs(passedArg: GloballyEquatable, recordedArg: GloballyEqua
             let cleanedRecordedArgType = "\(type(of: recordedArg))"
 
             return cleanedType == cleanedRecordedArgType
-        case .instanceOfWith(let input):
-            let isRecordedArgAnOptional = isOptional(recordedArg)
-            let passesAnythingCheck = input.option == .anything
-            let passesNonOptionalCheck = input.option == .nonOptional && !isRecordedArgAnOptional
-            let passesOptionalCheck = input.option == .optional && isRecordedArgAnOptional
-
-            let passesOptionCheck = passesAnythingCheck || passesNonOptionalCheck || passesOptionalCheck
-            if !passesOptionCheck {
-                return false
-            }
-
-            let cleanedType = "\(input.type)".replaceMatching(regex: "\\.Type+$", withString: "")
-            let cleanedRecordedArgType = "\(type(of: recordedArg))".replaceMatching(regex: "^Optional<", withString: "")
-                .replaceMatching(regex: ">+$", withString: "")
-
-            return cleanedType == cleanedRecordedArgType
         }
     } else {
         return passedArg.isEqualTo(recordedArg)
@@ -201,12 +163,6 @@ private func isNil(_ value: Any) -> Bool {
     let hasAValue = mirror.children.first?.value != nil
 
     return mirror.displayStyle == .optional && !hasAValue
-}
-
-private func isOptional(_ value: Any) -> Bool {
-    let mirror = Mirror(reflecting: value)
-
-    return mirror.displayStyle == .optional
 }
 
 private func descriptionOfCalls(functionList: Array<String>, argumentsList: Array<Array<GloballyEquatable>>) -> String {
