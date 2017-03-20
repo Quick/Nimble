@@ -1,4 +1,3 @@
-
 // MARK: OptionalType
 
 public protocol OptionalType {}
