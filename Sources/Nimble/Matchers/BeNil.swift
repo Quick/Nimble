@@ -2,10 +2,9 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is nil.
 public func beNil<T>() -> Predicate<T> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be nil"
+    return Predicate.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        return actualValue == nil
+        return Satisfiability(bool: actualValue == nil)
     }
 }
 

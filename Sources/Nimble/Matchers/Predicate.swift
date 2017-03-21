@@ -67,7 +67,7 @@ extension Predicate {
     public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
         return Predicate<T> { actual in
             return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
-            }.requireNonNil
+        }.requireNonNil
     }
 
     /// Provides a simple predicate definition that provides no control over the predefined
@@ -168,7 +168,7 @@ public enum Satisfiability {
 // Backwards compatibility until Old Matcher API removal
 extension Predicate: Matcher {
     /// Compatibility layer for old Matcher API, deprecated
-    public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
+    public static func fromDeprecatedFullClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
         return Predicate { actual in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, true)
@@ -196,7 +196,7 @@ extension Predicate: Matcher {
     /// Compatibility layer for old Matcher API, deprecated.
     /// Same as calling .predicate on a MatcherFunc or NonNilMatcherFunc type.
     public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
-        return self.fromDeprecatedClosure(matcher.toClosure)
+        return self.fromDeprecatedFullClosure(matcher.toClosure)
     }
 
     /// Deprecated Matcher API, use satisfies(_:_) instead
