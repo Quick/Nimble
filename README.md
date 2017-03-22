@@ -1349,7 +1349,7 @@ public func haveDescription(description: String) -> Predicate<Printable?> {
 
 ## Customizing Failure Messages
 
-When using `Predicate.simple(..)` or `Predicate.simpleNilable(..), Nimble
+When using `Predicate.simple(..)` or `Predicate.simpleNilable(..)`, Nimble
 outputs the following failure message when an expectation fails:
 
 ```swift
@@ -1359,6 +1359,41 @@ outputs the following failure message when an expectation fails:
 ```
 
 You can customize this message by modifying the way you create a `Predicate`.
+
+### Basic Customication
+
+For slightly more complex error messaging, receive the created failure message
+with `Predicate.define(..)`:
+
+```swift
+// Swift
+public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
+    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+        let actualValue = try actualExpression.evaluate()
+        let matches = actualValue == expectedValue && expectedValue != nil
+        if expectedValue == nil || actualValue == nil {
+            if expectedValue == nil && actualValue != nil {
+                return PredicateResult(
+                    status: .fail,
+                    message: msg.appendedBeNilHint()
+                )
+            }
+            return PredicateResult(status: .fail, message: msg)
+        }
+        return PredicateResult(bool: matches, message: msg)
+    }
+}
+```
+
+In the example above, `msg` is defined based on the string given to
+`Predicate.define`. The code looks akin to:
+
+```swift
+// Swift
+let msg = ExpectationMessage.expectedActualValueTo("equal <\(stringify(expectedValue))>")
+```
+
+### Full Customization
 
 -- TODO: CONTINUE
 
