@@ -51,6 +51,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Verify collection count](#verify-collection-count)
   - [Verify a notification was posted](#verifying-a-notification-was-posted)
   - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
+  - [Called Functions (NEW)](#called-functions)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -1159,6 +1160,125 @@ Note: This matcher allows you to chain any number of matchers together. This pro
       but if you find yourself chaining many matchers together in one test, consider whether you
       could instead refactor that single test into multiple, more precisely focused tests for
       better coverage.
+
+## Called Functions
+
+- Test whether a function was called on an instance of a class
+- Rich Failure Messages that include entire list of called functions and arguments
+- All Call Matchers can be used with `to()` and `toNot()`
+- Easy to implement (especially if already using protocols!)
+  - Create a stub that conforms to `CallMatcher`
+  - Paste in one variable declaration with a default value to conform to `CallMatcher` Protocol
+  - In every function (the ones that should be recorded) call the `recordCall()` function passing in all arguments (if any)
+- Currently ONLY works in swift
+- Call matchers use `GloballyEquatable` protocol to equate arguments
+  - Make types conform to `GloballyEquatable` (without having to add any special implementation!)
+    - Compiler won't let you run tests until all arguments being passed in to `recordCall()` function and `call()` matcher function conform to `GloballyEquatable`
+  - Make types conform to `Equatable` protocol (for custom types you will have to create `==()` function with custom type as parameters)
+    - If you forget to conform to `Equatable`, the compiler will only tell you that you are not conforming to `GloballyEquatable`
+
+### Example GloballyEquatable Conformance
+```swift
+extension Int : GloballyEquatable {}
+extension String : GloballyEquatable {}
+extension Optional : GloballyEquatable {}
+```
+
+### Example Equatable Conformance
+```swift
+// declare Person as Equatable
+struct Person : Equatable {
+    var name : String
+    var age : Int
+}
+
+// determine how you want two Persons to equate to true/false
+func ==(lhs: Person, rhs: Person) -> Bool {
+    let namesMatch = lhs.name == rhs.name
+    let agesMatch = lhs.age == rhs.age
+    
+    return namesMatch && agesMatch
+}
+```
+
+### Example Tests
+```swift
+// Swift ONLY
+
+// passes if function was called
+expect(stub).to(call("functionNameWith(arg1:arg2:)"))
+
+// passes if function was called a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .Exactly(1)))
+
+// passes if function was called at least a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtLeast(2)))
+
+// passes if function was called at most a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", countSpecifier: .AtMost(1)))
+
+// passes if function was called with argument specifications
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.InstanceOf(type: String.self)))
+
+// passes if function was called with argument specifications a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.Anything, countSpecifier: .Exactly(2)))
+
+// passes if function was called with argument specifications at least a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.NonNil, countSpecifier: .AtLeast(2)))
+
+// passes if function was called with argument specifications at most a number of times
+expect(stub).to(call("functionNameWith(arg1:arg2:)", withArguments: "firstArg", Argument.KindOf(type: NSObject.self), countSpecifier: .AtMost(2)))
+```
+
+Argument enum options: (use when the exact comparison of the argument is not needed)
+- `case Anything`
+- `case NonNil`
+- `case Nil`
+- `case InstanceOf(type: Any.Type)`
+- `case InstanceOfWith(type: Any.Type, option: ArgumentOption)`
+- `case KindOf(type: AnyObject.Type)`
+
+ArgumentOption enum for Argument.InstanceOfWith(): (used to specify whether the type passed in is optional, non-optional, or anything)
+- `case Anything`
+- `case NonOptional`
+- `case Optional`
+
+### Example Stub
+```swift
+// The Protocol
+protocol StringService : class {
+    func giveMeAString() -> String
+    func hereAreTwoStrings(string1: String, string2: String)
+}
+
+// The Real Class
+class RealStringService : ApiService {
+    func giveMeAString() -> String {
+        return "a real string"
+    }
+
+    func hereAreTwoStrings(string1: String, string2: String) {
+        // do real stuff with string
+    }
+}
+
+// The Stub Class
+class StubStringService : ApiService, CallRecorder {
+    var called = (functionList: [String](), argumentsList: [[Any]]()) // <-- **REQUIRED**
+
+    func giveMeAString() -> String {
+        self.recordCall() // <-- **REQUIRED**
+        return "a stubbed value"
+    }
+
+    func hereAreTwoStrings(string1: String, string2: String) {
+        self.recordCall(arguments: string1, string2) // <-- **REQUIRED**
+    }
+}
+```
+
+> Could also use inheritance with the subclass overriding all functions and replacing implementation with `self.recordCall()` functions. However, this is unadvised as it could lead to forgotten functions when adding functionality to the base class in the future.
+
 
 # Writing Your Own Matchers
 
