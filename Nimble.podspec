@@ -30,14 +30,12 @@ Pod::Spec.new do |s|
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.m",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlBadInstructionException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/mach_excServer.{h,c}",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchException/CwlCatchException.swift",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/CwlCatchException.m",
     "Sources/Lib/CwlPreconditionTesting/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
-  s.tvos.private_header_files = "Sources/Lib/CwlPreconditionTesting/CwlMachBadInstructionHandler/mach_excServer.h",
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
