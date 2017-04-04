@@ -1395,26 +1395,33 @@ let msg = ExpectationMessage.expectedActualValueTo("equal <\(stringify(expectedV
 
 ### Full Customization
 
+To fully customize the behavior of the Predicate, use the overload that expects
+a `PredicateResult` to be returned.
+
+Along with `PredicateResult`, there are other `ExpectationMessage` enum values you can use:
+
+```swift
+public indirect enum ExpectationMessage {
+// Emits standard error message:
+// eg - "expected to <message>, got <actual>"
+case expectedActualValueTo(/* message: */ String)
+
+// Allows any free-form message
+// eg - "<message>"
+case fail(/* message: */ String)
+
+// Emits standard error message with a custom actual value instead of the default.
+// eg - "expected to <message>, got <actual>"
+case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
+
+// Emits standard error message without mentioning the actual value
+// eg - "expected to <message>"
+case expectedTo(/* message: */ String, /* actual: */ String)
+
+// ...
+}
+```
 -- TODO: CONTINUE
-
-```swift
-// Swift
-
-// Outputs: expected to be under the sea, got <\(actual)>
-failureMessage.postfixMessage = "be under the sea"
-```
-
-You can change how the `actual` value is displayed by updating
-`failureMessage.actualValue`. Or, to remove it altogether, set it to
-`nil`:
-
-```swift
-// Swift
-
-// Outputs: expected to be under the sea
-failureMessage.actualValue = nil
-failureMessage.postfixMessage = "be under the sea"
-```
 
 ## Supporting Objective-C
 
