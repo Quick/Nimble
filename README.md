@@ -51,6 +51,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Verify collection count](#verify-collection-count)
   - [Verify a notification was posted](#verifying-a-notification-was-posted)
   - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
+  - [Custom Validation](#custom-validation)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
@@ -1159,6 +1160,34 @@ Note: This matcher allows you to chain any number of matchers together. This pro
       but if you find yourself chaining many matchers together in one test, consider whether you
       could instead refactor that single test into multiple, more precisely focused tests for
       better coverage.
+
+## Custom Validation
+
+```swift
+// Swift
+
+// passes if .succeed is returned from the closure
+expect({
+    guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
+        return .failed("wrong enum case")
+    }
+
+    return .succeeded
+}).to(succeed())
+
+// passes if .failed is returned from the closure
+expect({
+    guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
+        return .failed("wrong enum case")
+    }
+
+    return .succeeded
+}).notTo(succeed())
+```
+
+The `String` provided with `.failed()` is shown when the test fails.
+
+When using `toEventually()` be careful not to make state changes or run process intensive code since this closure will be ran many times.
 
 # Writing Your Own Matchers
 
