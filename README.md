@@ -1421,7 +1421,26 @@ case expectedTo(/* message: */ String, /* actual: */ String)
 // ...
 }
 ```
--- TODO: CONTINUE
+
+For matchers that compose other matchers, there are a handful of helper
+functions to annotate messages.
+
+`appended(message: String)` is used to append to the original failure message:
+
+```swift
+// produces "expected to be true, got <actual> (use beFalse() for inverse)"
+// appended message do show up inline in Xcode.
+.expectedActualValueTo("be true").appended(message: " (use beFalse() for inverse)")
+```
+
+For a more comprehensive message that spans multiple lines, use
+`appended(details: String)` instead:
+
+```swift
+// produces "expected to be true, got <actual>\n\nuse beFalse() for inverse\nor use beNil()"
+// details do not show inline in Xcode, but do show up in test logs.
+.expectedActualValueTo("be true").appended(details: "use beFalse() for inverse\nor use beNil()")
+```
 
 ## Supporting Objective-C
 
@@ -1508,8 +1527,6 @@ extension NMBObjCMatcher {
     }
 }
 ```
-
--- TODO: END
 
 ## Migrating from the Old Matcher API
 

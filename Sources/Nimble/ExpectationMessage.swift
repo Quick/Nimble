@@ -10,6 +10,8 @@ public indirect enum ExpectationMessage {
     case fail(/* message: */ String)
 
     // --- Composite Expectations ---
+    // Generally, you'll want the methods, appended(message:) and appended(details:) instead.
+
     /// appends after an existing message ("<expectation> (use beNil() to match nils)")
     case appends(ExpectationMessage, /* Appended Message */ String)
 
@@ -76,7 +78,7 @@ public indirect enum ExpectationMessage {
     }
 
     /// Replaces a primary expectation with one returned by f. Preserves all composite expectations
-    /// that were built upon it.
+    /// that were built upon it (aka - all appended(message:) and appended(details:).
     public func replacedExpectation(_ f: @escaping (ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
