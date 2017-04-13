@@ -16,7 +16,7 @@ internal func setFailureMessageForError<T: Error>(
     } else if errorType != nil || closure != nil {
         failureMessage.postfixMessage += " from type <\(T.self)>"
     }
-    if let _ = closure {
+    if closure != nil {
         failureMessage.postfixMessage += " that satisfies block"
     }
     if error == nil && errorType == nil && closure == nil {
@@ -101,7 +101,7 @@ internal func setFailureMessageForError(
     closure: ((Error) -> Void)?) {
     failureMessage.postfixMessage = "throw error"
 
-    if let _ = closure {
+    if closure != nil {
         failureMessage.postfixMessage += " that satisfies block"
     } else {
         failureMessage.postfixMessage = "throw any error"

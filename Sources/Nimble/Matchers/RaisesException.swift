@@ -52,7 +52,7 @@ internal func setFailureMessageForException(
         if let userInfo = userInfo {
             failureMessage.postfixMessage += " with userInfo <\(userInfo)>"
         }
-        if let _ = closure {
+        if closure != nil {
             failureMessage.postfixMessage += " that satisfies block"
         }
         if named == nil && reason == nil && userInfo == nil && closure == nil {
