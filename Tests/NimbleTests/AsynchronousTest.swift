@@ -45,10 +45,10 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             expect { value }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventually(equal(1))
         }
-        failsWithErrorMessage("expected to eventually not equal <0>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
     }
@@ -172,16 +172,14 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
-#if !SWIFT_PACKAGE
-        waitUntil { done in
-            deferToMainQueue {
-                done()
-                expect {
+        failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+            waitUntil { done in
+                deferToMainQueue {
                     done()
-                }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+                    done()
+                }
             }
         }
-#endif
     }
 
     func testWaitUntilMustBeInMainThread() {

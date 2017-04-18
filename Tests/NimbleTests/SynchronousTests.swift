@@ -38,10 +38,10 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testUnexpectedErrorsThrownFails() {
-        failsWithErrorMessage("expected to equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.to(equal(1))
         }
-        failsWithErrorMessage("expected to not equal <1>, got an unexpected error thrown: <\(errorToThrow)>") {
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toNot(equal(1))
         }
     }
