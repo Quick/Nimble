@@ -50,7 +50,7 @@ extension NMBObjCMatcher {
     public class func beginWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = try! actualExpression.evaluate()
-            if let _ = actual as? String {
+            if (actual as? String) != nil {
                 let expr = actualExpression.cast { $0 as? String }
                 return try! beginWith(expected as! String).matches(expr, failureMessage: failureMessage)
             } else {
