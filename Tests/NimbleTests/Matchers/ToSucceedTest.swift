@@ -17,7 +17,7 @@ final class ToSucceedTest: XCTestCase, XCTestCaseProvider {
             return .failed(reason: "")
         }).toNot(succeed())
 
-        failsWithErrorMessage("expected a closure, got <nil> (use beNil() to match nils)") {
+        failsWithErrorMessageForNil("expected a closure, got <nil>") {
             expect(nil as (() -> ToSucceedResult)?).to(succeed())
         }
 

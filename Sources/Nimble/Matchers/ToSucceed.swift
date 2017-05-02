@@ -14,26 +14,24 @@ public enum ToSucceedResult {
  Return `.succeeded` when the validation succeeds.
  Return `.failed` with a failure reason when the validation fails.
  */
-public func succeed() -> NonNilMatcherFunc<() -> ToSucceedResult> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
+public func succeed() -> Predicate<() -> ToSucceedResult> {
+    return Predicate.define { actualExpression in
         let optActual = try actualExpression.evaluate()
-        guard let actual = optActual  else {
-            failureMessage.to = "a"
-            failureMessage.postfixMessage = "closure"
-            failureMessage.postfixActual = " (use beNil() to match nils)"
-            return false
+        guard let actual = optActual else {
+            return Satisfiability(status: .fail, message: .fail("expected a closure, got <nil>"))
         }
 
-        let result = actual()
-        failureMessage.postfixMessage = "succeed"
-
-        switch result {
+        switch actual() {
         case .succeeded:
-            failureMessage.actualValue = "<succeeded>"
-            return true
+            return Satisfiability(
+                bool: true,
+                message: .expectedCustomValueTo("succeed", "<succeeded>")
+            )
         case .failed(let reason):
-            failureMessage.actualValue = "<failed> because <\(reason)>"
-            return false
+            return Satisfiability(
+                bool: false,
+                message: .expectedCustomValueTo("succeed", "<failed> because <\(reason)>")
+            )
         }
     }
 }
