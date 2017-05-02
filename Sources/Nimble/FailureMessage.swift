@@ -29,6 +29,9 @@ public class FailureMessage: NSObject {
     }
 
     internal var _stringValueOverride: String?
+    internal var hasOverriddenStringValue: Bool {
+        return _stringValueOverride != nil
+    }
 
     public override init() {
     }

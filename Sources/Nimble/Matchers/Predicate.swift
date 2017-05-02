@@ -64,7 +64,7 @@ extension Predicate {
     /// error message.
     ///
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+    public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
             return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
         }.requireNonNil
@@ -74,7 +74,7 @@ extension Predicate {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> Satisfiability) -> Predicate<T> {
+    public static func simpleNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
             return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
         }
@@ -90,19 +90,19 @@ internal enum ExpectationStyle {
 /// predicate.
 public struct PredicateResult {
     /// Status indicates if the predicate matches, does not match, or fails.
-    var status: Satisfiability
+    var status: PredicateStatus
     /// The error message that can be displayed if it does not match
     var message: ExpectationMessage
 
     /// Constructs a new PredicateResult with a given status and error message
-    public init(status: Satisfiability, message: ExpectationMessage) {
+    public init(status: PredicateStatus, message: ExpectationMessage) {
         self.status = status
         self.message = message
     }
 
-    /// Shorthand to PredicateResult(status: Satisfiability(bool: bool), message: message)
+    /// Shorthand to PredicateResult(status: PredicateStatus(bool: bool), message: message)
     public init(bool: Bool, message: ExpectationMessage) {
-        self.status = Satisfiability(bool: bool)
+        self.status = PredicateStatus(bool: bool)
         self.message = message
     }
 
@@ -112,8 +112,8 @@ public struct PredicateResult {
     }
 }
 
-/// Satisfiability is a trinary that indicates if a Predicate matches a given value or not
-public enum Satisfiability {
+/// PredicateStatus is a trinary that indicates if a Predicate matches a given value or not
+public enum PredicateStatus {
     /// Matches indicates if the predicate / matcher passes with the given value
     ///
     /// For example, `equals(1)` returns `.matches` for `expect(1).to(equal(1))`.
@@ -155,7 +155,7 @@ public enum Satisfiability {
         }
     }
 
-    /// Converts the satisfiability result to a boolean based on what the expectation intended
+    /// Converts the PredicateStatus result to a boolean based on what the expectation intended
     internal func toBoolean(expectation style: ExpectationStyle) -> Bool {
         if style == .toMatch {
             return shouldMatch()
@@ -173,7 +173,7 @@ extension Predicate: Matcher {
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, true)
             return PredicateResult(
-                status: Satisfiability(bool: result),
+                status: PredicateStatus(bool: result),
                 message: failureMessage.toExpectationMessage
             )
         }
@@ -186,7 +186,7 @@ extension Predicate: Matcher {
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage)
             return PredicateResult(
-                status: Satisfiability(bool: result),
+                status: PredicateStatus(bool: result),
                 message: failureMessage.toExpectationMessage
             )
         }
@@ -232,7 +232,7 @@ extension Predicate {
             if try actual.evaluate() == nil {
                 return PredicateResult(
                     status: .fail,
-                    message: .appends(result.message, " (use beNil() to match nils)")
+                    message: result.message.appendedBeNilHint()
                 )
             }
             return result

@@ -4,7 +4,7 @@ public func allPass<T, U>
     (_ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
         let matcher = Predicate.simpleNilable("pass a condition") { actualExpression in
-            return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
+            return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
 }
@@ -13,7 +13,7 @@ public func allPass<T, U>
     (_ passName: String, _ passFunc: @escaping (T?) throws -> Bool) -> Predicate<U>
     where U: Sequence, T == U.Iterator.Element {
         let matcher = Predicate.simpleNilable(passName) { actualExpression in
-            return Satisfiability(bool: try passFunc(try actualExpression.evaluate()))
+            return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
         }
         return createPredicate(matcher)
 }

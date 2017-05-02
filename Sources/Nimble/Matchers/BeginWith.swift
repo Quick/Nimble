@@ -7,7 +7,7 @@ public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predic
     return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
         if let actualValue = try actualExpression.evaluate() {
             var actualGenerator = actualValue.makeIterator()
-            return Satisfiability(bool: actualGenerator.next() == startingElement)
+            return PredicateStatus(bool: actualGenerator.next() == startingElement)
         }
         return .fail
     }
@@ -26,7 +26,7 @@ public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection>
         #else
             let collectionValue = collection.object(at: 0) as AnyObject
         #endif
-        return Satisfiability(bool: collectionValue.isEqual(startingElement))
+        return PredicateStatus(bool: collectionValue.isEqual(startingElement))
     }
 }
 
@@ -36,7 +36,7 @@ public func beginWith(_ startingSubstring: String) -> Predicate<String> {
     return Predicate.simple("begin with <\(startingSubstring)>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
             let range = actual.range(of: startingSubstring)
-            return Satisfiability(bool: range != nil && range!.lowerBound == actual.startIndex)
+            return PredicateStatus(bool: range != nil && range!.lowerBound == actual.startIndex)
         }
         return .fail
     }

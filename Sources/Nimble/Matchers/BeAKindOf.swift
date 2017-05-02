@@ -36,11 +36,11 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
     return Predicate.define { actualExpression in
         let message: ExpectationMessage
-        let status: Satisfiability
+        let status: PredicateStatus
 
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
-            status = Satisfiability(bool: instance != nil && instance!.isKind(of: expectedClass))
+            status = PredicateStatus(bool: instance != nil && instance!.isKind(of: expectedClass))
             message = .expectedCustomValueTo(
                 matcherMessage(forClass: expectedClass),
                 "<\(String(describing: type(of: validInstance))) instance>"

@@ -17,7 +17,7 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
             }
             return PredicateResult(status: .fail, message: msg)
         }
-        return PredicateResult(status: Satisfiability(bool: matches), message: msg)
+        return PredicateResult(status: PredicateStatus(bool: matches), message: msg)
     }
 }
 
@@ -38,7 +38,7 @@ public func equal<T: Equatable, C: Equatable>(_ expectedValue: [T: C]?) -> Predi
             return PredicateResult(status: .fail, message: msg)
         }
         return PredicateResult(
-            status: Satisfiability(bool: expectedValue! == actualValue!),
+            status: PredicateStatus(bool: expectedValue! == actualValue!),
             message: msg
         )
     }

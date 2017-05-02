@@ -18,17 +18,17 @@ public func succeed() -> Predicate<() -> ToSucceedResult> {
     return Predicate.define { actualExpression in
         let optActual = try actualExpression.evaluate()
         guard let actual = optActual else {
-            return Satisfiability(status: .fail, message: .fail("expected a closure, got <nil>"))
+            return PredicateResult(status: .fail, message: .fail("expected a closure, got <nil>"))
         }
 
         switch actual() {
         case .succeeded:
-            return Satisfiability(
+            return PredicateResult(
                 bool: true,
                 message: .expectedCustomValueTo("succeed", "<succeeded>")
             )
         case .failed(let reason):
-            return Satisfiability(
+            return PredicateResult(
                 bool: false,
                 message: .expectedCustomValueTo("succeed", "<failed> because <\(reason)>")
             )

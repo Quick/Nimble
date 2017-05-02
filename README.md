@@ -1247,14 +1247,14 @@ also check out the tips below.
 
 `PredicateResult` is the return struct that `Predicate` return to indicate
 success and failure. A `PredicateResult` is made up of two values:
-`Satisfiability` and `ExpectationMessage`.
+`PredicateStatus` and `ExpectationMessage`.
 
-Instead of a boolean, `Satisfiability` captures a trinary set of values:
+Instead of a boolean, `PredicateStatus` captures a trinary set of values:
 
 ```swift
 // Swift
 
-public enum Satisfiability {
+public enum PredicateStatus {
 // The predicate "passes" with the given expression
 // eg - expect(1).to(equal(1))
 case matches
@@ -1314,11 +1314,11 @@ public func beNil<T>() -> Predicate<T> {
 	// Predicate.simpleNilable(..) automatically generates ExpectationMessage for
 	// us based on the string we provide to it. Also, the 'Nilable' postfix indicates
 	// that this Predicate supports matching against nil actualExpressions, instead of
-	// always resulting in a Satisfiability.fail result -- which is true for
+	// always resulting in a PredicateStatus.fail result -- which is true for
 	// Predicate.simple(..)
     return Predicate.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        return Satisfiability(bool: actualValue == nil)
+        return PredicateStatus(bool: actualValue == nil)
     }
 }
 ```
@@ -1342,7 +1342,7 @@ against the one provided to the matcher function, and passes if they are the sam
 
 public func haveDescription(description: String) -> Predicate<Printable?> {
   return Predicate.simple("have description") { actual in
-    return Satisfiability(bool: actual.evaluate().description == description)
+    return PredicateStatus(bool: actual.evaluate().description == description)
   }
 }
 ```

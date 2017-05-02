@@ -4,7 +4,7 @@ import Foundation
 public func beNil<T>() -> Predicate<T> {
     return Predicate.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        return Satisfiability(bool: actualValue == nil)
+        return PredicateStatus(bool: actualValue == nil)
     }
 }
 

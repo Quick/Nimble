@@ -54,7 +54,7 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             }
 
             return PredicateResult(
-                status: Satisfiability(bool: matches),
+                status: PredicateStatus(bool: matches),
                 message: msg
             )
         }.requireNonNil

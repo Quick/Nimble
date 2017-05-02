@@ -15,7 +15,7 @@ public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
         let actualString = "<\(String(describing: type(of: validInstance))) instance>"
 
         return PredicateResult(
-            status: Satisfiability(bool: type(of: validInstance) == expectedType),
+            status: PredicateStatus(bool: type(of: validInstance) == expectedType),
             message: .expectedCustomValueTo(errorMessage, actualString)
         )
     }
@@ -39,7 +39,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
     let matches = instance != nil && type(of: instance!) == expectedClass
 #endif
         return PredicateResult(
-            status: Satisfiability(bool: matches),
+            status: PredicateStatus(bool: matches),
             message: .expectedCustomValueTo(errorMessage, actualString)
         )
     }

@@ -105,12 +105,12 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
             // - https://bugs.swift.org/browse/SR-2290
             // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
             if let number = actualValue as? NSNumber {
-                return Satisfiability(bool: number.boolValue == true)
+                return PredicateStatus(bool: number.boolValue == true)
             }
 
-            return Satisfiability(bool: actualValue == (true as T))
+            return PredicateStatus(bool: actualValue == (true as T))
         }
-        return Satisfiability(bool: actualValue != nil)
+        return PredicateStatus(bool: actualValue != nil)
     }
 }
 
@@ -125,12 +125,12 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
             // - https://bugs.swift.org/browse/SR-2290
             // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
             if let number = actualValue as? NSNumber {
-                return Satisfiability(bool: number.boolValue == false)
+                return PredicateStatus(bool: number.boolValue == false)
             }
 
-            return Satisfiability(bool: actualValue == (false as T))
+            return PredicateStatus(bool: actualValue == (false as T))
         }
-        return Satisfiability(bool: actualValue == nil)
+        return PredicateStatus(bool: actualValue == nil)
     }
 }
 
