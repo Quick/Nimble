@@ -12,6 +12,9 @@ public indirect enum ExpectationMessage {
     // --- Composite Expectations ---
     // Generally, you'll want the methods, appended(message:) and appended(details:) instead.
 
+    /// Not Fully Implemented Yet.
+    case prepends(/* Prepended Message */ String, ExpectationMessage)
+
     /// appends after an existing message ("<expectation> (use beNil() to match nils)")
     case appends(ExpectationMessage, /* Appended Message */ String)
 
@@ -38,6 +41,8 @@ public indirect enum ExpectationMessage {
             return msg
         case let .expectedCustomValueTo(msg, _):
             return msg
+        case let .prepends(_, expectation):
+            return expectation.expectedMessage
         case let .appends(expectation, _):
             return expectation.expectedMessage
         case let .details(expectation, _):
@@ -48,7 +53,7 @@ public indirect enum ExpectationMessage {
     /// Appends a message after the primary expectation message
     public func appended(message: String) -> ExpectationMessage {
         switch self {
-        case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo, .appends:
+        case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo, .appends, .prepends:
             return .appends(self, message)
         case let .details(expectation, msg):
             return .details(expectation.appended(message: message), msg)
@@ -70,6 +75,8 @@ public indirect enum ExpectationMessage {
         switch self {
         case .fail, .expectedTo, .expectedActualValueTo, .expectedCustomValueTo:
             return f(self)
+        case let .prepends(msg, expectation):
+            return .prepends(msg, expectation.visitLeafs(f))
         case let .appends(expectation, msg):
             return .appends(expectation.visitLeafs(f), msg)
         case let .details(expectation, msg):
@@ -94,11 +101,11 @@ public indirect enum ExpectationMessage {
     /// Wraps a primary expectation with text before and after it.
     /// Alias to prepended(message: before).appended(message: after)
     public func wrappedExpectation(before: String, after: String) -> ExpectationMessage {
-        return prepended(message: before).appended(message: after)
+        return prepended(expectation: before).appended(message: after)
     }
 
     /// Prepends a message by modifying the primary expectation
-    public func prepended(message: String) -> ExpectationMessage {
+    public func prepended(expectation message: String) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
             case let .expectedTo(msg):
@@ -114,6 +121,11 @@ public indirect enum ExpectationMessage {
         return visitLeafs(walk)
     }
 
+    // TODO: test & verify correct behavior
+    internal func prepended(message: String) -> ExpectationMessage {
+        return .prepends(message, self)
+    }
+
     /// Converts the tree of ExpectationMessages into a final built string.
     public func toString(actual: String, expected: String = "expected", to: String = "to") -> String {
         switch self {
@@ -125,6 +137,8 @@ public indirect enum ExpectationMessage {
             return "\(expected) \(to) \(msg), got \(actual)"
         case let .expectedCustomValueTo(msg, actual):
             return "\(expected) \(to) \(msg), got \(actual)"
+        case let .prepends(msg, expectation):
+            return "\(msg)\(expectation.toString(actual: actual, expected: expected, to: to))"
         case let .appends(expectation, msg):
             return "\(expectation.toString(actual: actual, expected: expected, to: to))\(msg)"
         case let .details(expectation, msg):
@@ -145,19 +159,37 @@ public indirect enum ExpectationMessage {
         case let .expectedCustomValueTo(msg, actual):
             failureMessage.postfixMessage = msg
             failureMessage.actualValue = actual
+        case let .prepends(msg, expectation):
+            expectation.update(failureMessage: failureMessage)
+            if let desc = failureMessage.userDescription {
+                failureMessage.userDescription = "\(msg)\(desc)"
+            } else {
+                failureMessage.userDescription = msg
+            }
         case let .appends(expectation, msg):
             expectation.update(failureMessage: failureMessage)
-            if failureMessage.actualValue != nil {
-                failureMessage.postfixActual += msg
+            if failureMessage.hasOverriddenStringValue {
+                failureMessage.stringValue += "\(msg)"
             } else {
-                failureMessage.postfixMessage += msg
+                if failureMessage.actualValue != nil {
+                    failureMessage.postfixActual += msg
+                } else {
+                    failureMessage.postfixMessage += msg
+                }
             }
         case let .details(expectation, msg):
             expectation.update(failureMessage: failureMessage)
-            if let desc = failureMessage.userDescription {
-                failureMessage.userDescription = desc
+            if failureMessage.hasOverriddenStringValue {
+                if let desc = failureMessage.userDescription {
+                    failureMessage.stringValue = "\(desc)\n\(failureMessage.stringValue)"
+                }
+                failureMessage.stringValue += "\n\(msg)"
+            } else {
+                if let desc = failureMessage.userDescription {
+                    failureMessage.userDescription = desc
+                }
+                failureMessage.extendedMessage = msg
             }
-            failureMessage.extendedMessage = msg
         }
     }
 }

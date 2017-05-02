@@ -9,7 +9,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
             return .fail
         }
         var generator = actualSeq!.makeIterator()
-        return Satisfiability(bool: generator.next() == nil)
+        return PredicateStatus(bool: generator.next() == nil)
     }
 }
 
@@ -18,7 +18,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
 public func beEmpty() -> Predicate<String> {
     return Predicate.simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
-        return Satisfiability(bool: actualString == nil || NSString(string: actualString!).length  == 0)
+        return PredicateStatus(bool: actualString == nil || NSString(string: actualString!).length  == 0)
     }
 }
 
@@ -27,7 +27,7 @@ public func beEmpty() -> Predicate<String> {
 public func beEmpty() -> Predicate<NSString> {
     return Predicate.simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
-        return Satisfiability(bool: actualString == nil || actualString!.length == 0)
+        return PredicateStatus(bool: actualString == nil || actualString!.length == 0)
     }
 }
 
@@ -39,7 +39,7 @@ public func beEmpty() -> Predicate<NSString> {
 public func beEmpty() -> Predicate<NSDictionary> {
 	return Predicate.simple("be empty") { actualExpression in
 		let actualDictionary = try actualExpression.evaluate()
-        return Satisfiability(bool: actualDictionary == nil || actualDictionary!.count == 0)
+        return PredicateStatus(bool: actualDictionary == nil || actualDictionary!.count == 0)
 	}
 }
 
@@ -48,7 +48,7 @@ public func beEmpty() -> Predicate<NSDictionary> {
 public func beEmpty() -> Predicate<NSArray> {
 	return Predicate.simple("be empty") { actualExpression in
 		let actualArray = try actualExpression.evaluate()
-        return Satisfiability(bool: actualArray == nil || actualArray!.count == 0)
+        return PredicateStatus(bool: actualArray == nil || actualArray!.count == 0)
 	}
 }
 
@@ -57,7 +57,7 @@ public func beEmpty() -> Predicate<NSArray> {
 public func beEmpty() -> Predicate<NMBCollection> {
     return Predicate.simple("be empty") { actualExpression in
         let actual = try actualExpression.evaluate()
-        return Satisfiability(bool: actual == nil || actual!.count == 0)
+        return PredicateStatus(bool: actual == nil || actual!.count == 0)
     }
 }
 
