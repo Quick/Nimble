@@ -101,11 +101,11 @@ public indirect enum ExpectationMessage {
     /// Wraps a primary expectation with text before and after it.
     /// Alias to prepended(message: before).appended(message: after)
     public func wrappedExpectation(before: String, after: String) -> ExpectationMessage {
-        return prepended(message: before).appended(message: after)
+        return prepended(expectation: before).appended(message: after)
     }
 
     /// Prepends a message by modifying the primary expectation
-    public func prepended(expectation: String) -> ExpectationMessage {
+    public func prepended(expectation message: String) -> ExpectationMessage {
         func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
             switch msg {
             case let .expectedTo(msg):
@@ -123,15 +123,7 @@ public indirect enum ExpectationMessage {
 
     // TODO: test & verify correct behavior
     internal func prepended(message: String) -> ExpectationMessage {
-        func walk(_ msg: ExpectationMessage) -> ExpectationMessage {
-            switch msg {
-            case .expectedTo, .expectedActualValueTo, .expectedCustomValueTo:
-                return .prepends(message, msg)
-            default:
-                return msg.visitLeafs(walk)
-            }
-        }
-        return visitLeafs(walk)
+        return .prepends(message, self)
     }
 
     /// Converts the tree of ExpectationMessages into a final built string.
@@ -145,6 +137,8 @@ public indirect enum ExpectationMessage {
             return "\(expected) \(to) \(msg), got \(actual)"
         case let .expectedCustomValueTo(msg, actual):
             return "\(expected) \(to) \(msg), got \(actual)"
+        case let .prepends(msg, expectation):
+            return "\(msg)\(expectation.toString(actual: actual, expected: expected, to: to))"
         case let .appends(expectation, msg):
             return "\(expectation.toString(actual: actual, expected: expected, to: to))\(msg)"
         case let .details(expectation, msg):
@@ -165,6 +159,13 @@ public indirect enum ExpectationMessage {
         case let .expectedCustomValueTo(msg, actual):
             failureMessage.postfixMessage = msg
             failureMessage.actualValue = actual
+        case let .prepends(msg, expectation):
+            expectation.update(failureMessage: failureMessage)
+            if let desc = failureMessage.userDescription {
+                failureMessage.userDescription = "\(msg)\(desc)"
+            } else {
+                failureMessage.userDescription = msg
+            }
         case let .appends(expectation, msg):
             expectation.update(failureMessage: failureMessage)
             if failureMessage.hasOverriddenStringValue {

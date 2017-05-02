@@ -44,7 +44,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     expression: {currentElement}, location: actualExpression.location)
                 let predicateResult = try elementMatcher.satisfies(exp)
                 if predicateResult.status == .matches {
-                    failure = predicateResult.message.prepended(message: "all ")
+                    failure = predicateResult.message.prepended(expectation: "all ")
                 } else {
                     failure = predicateResult.message
                         .replacedExpectation({ .expectedTo($0.expectedMessage) })
