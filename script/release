@@ -172,7 +172,8 @@ echo
 echo
 echo "Pushing to pod trunk..."
 
-$POD trunk push "$PODSPEC"
+# NOTE: remove allow-warnings after v9.0.0 of Nimble
+$POD trunk push "$PODSPEC" --allow-warnings
 
 echo
 echo "================ Finalizing the Release ================"
