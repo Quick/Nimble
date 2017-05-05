@@ -310,6 +310,7 @@ expect(ocean).toEventually(contain("dolphins", "whales"))
 
 ```objc
 // Objective-C
+
 dispatch_async(dispatch_get_main_queue(), ^{
   [ocean add:@"dolphins"];
   [ocean add:@"whales"];
