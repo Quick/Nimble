@@ -817,6 +817,7 @@ If you're using Swift, you can use the `throwAssertion` matcher to check if an a
 
 // Passes if 'somethingThatThrows()' throws an assertion, 
 // such as by calling 'fatalError()' or if a precondition fails:
+expect { try somethingThatThrows() }.to(throwAssertion())
 expect { () -> Void in fatalError() }.to(throwAssertion())
 expect { precondition(false) }.to(throwAssertion())
 
