@@ -1121,38 +1121,45 @@ expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))
 expect(@[@1, @2, @3, @4]).to(allPass(beLessThan(@5)));
 ```
 
-For Swift, the actual value must be a type conforming to `Sequence`. 
+For Swift, the actual value must be an instance of a type conforming to `Sequence`. 
 For example, an array, a set, or a custom sequence type.
 
-For Objective-C, the actual value must implement the `NSFastEnumeration` protocol.
+For Objective-C, the actual value must be an instance of a type which implements 
+the `NSFastEnumeration` protocol.
 For example, `NSArray` and `NSSet`, of `NSObject`s and only the variant which
 uses another matcher is available here.
 
-## Verify collection count
+## Collection Count
 
 ```swift
 // Swift
 
-// passes if actual collection's count is equal to expected
+// Passes if 'actual' contains the 'expected' number of elements:
 expect(actual).to(haveCount(expected))
 
-// passes if actual collection's count is not equal to expected
+// Passes if 'actual' does _not_ contain the 'expected' number of elements:
 expect(actual).notTo(haveCount(expected))
 ```
 
 ```objc
 // Objective-C
 
-// passes if actual collection's count is equal to expected
+// Passes if 'actual' contains the 'expected' number of elements:
 expect(actual).to(haveCount(expected))
 
-// passes if actual collection's count is not equal to expected
+// Passes if 'actual' does _not_ contain the 'expected' number of elements:
 expect(actual).notTo(haveCount(expected))
 ```
 
-For Swift the actual value must be a `Collection` such as array, dictionary or set.
+For Swift, the actual value must be an instance of a type conforming to `Collection`.
+For example, instances of `Array`, `Dictionary`, or `Set`.
 
-For Objective-C the actual value has to be one of the following classes `NSArray`, `NSDictionary`, `NSSet`, `NSHashTable` or one of their subclasses.
+For Objective-C, the actual value must be one of the following classes, or their subclasses:
+
+ - `NSArray`,
+ - `NSDictionary`,
+ - `NSSet`, or
+ - `NSHashTable`.
 
 ## Foundation
 
