@@ -1251,11 +1251,11 @@ value and return a `Predicate` closure. Take `equal`, for example:
 ```swift
 // Swift
 
-public func equal<T: Equatable>(expectedValue: T?) -> MatcherFunc<T?> {
-  // Can be shorted to:
+public func equal<T: Equatable>(expectedValue: T?) -> Predicate<T> {
+  // Can be shortened to:
   //   Predicate { actual in  ... }
   //
-  // But shown with types here for clarity
+  // But shown with types here for clarity.
   return Predicate { (actual: Expression<T>) throws -> PredicateResult in
     let msg = ExpectationMessage.expectedActualValueTo("equal <\(expectedValue)>")
     if let actualValue = try actualExpression.evaluate() {
