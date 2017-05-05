@@ -301,8 +301,8 @@ asynchronously. Just use `toEventually` or `toEventuallyNot`:
 // Swift 3.0 and later
 
 DispatchQueue.main.async {
-  ocean.add("dolphins")
-  ocean.add("whales")
+    ocean.add("dolphins")
+    ocean.add("whales")
 }
 expect(ocean).toEventually(contain("dolphins", "whales"))
 ```
@@ -312,8 +312,8 @@ expect(ocean).toEventually(contain("dolphins", "whales"))
 // Swift 2.3 and earlier
 
 dispatch_async(dispatch_get_main_queue()) {
-  ocean.add("dolphins")
-  ocean.add("whales")
+    ocean.add("dolphins")
+    ocean.add("whales")
 }
 expect(ocean).toEventually(contain("dolphins", "whales"))
 ```
@@ -323,8 +323,8 @@ expect(ocean).toEventually(contain("dolphins", "whales"))
 // Objective-C
 
 dispatch_async(dispatch_get_main_queue(), ^{
-  [ocean add:@"dolphins"];
-  [ocean add:@"whales"];
+    [ocean add:@"dolphins"];
+    [ocean add:@"whales"];
 });
 expect(ocean).toEventually(contain(@"dolphins", @"whales"));
 ```
@@ -366,9 +366,9 @@ You can also provide a callback by using the `waitUntil` function:
 // Swift
 
 waitUntil { done in
-  // do some stuff that takes a while...
-  NSThread.sleepForTimeInterval(0.5)
-  done()
+    // do some stuff that takes a while...
+    NSThread.sleepForTimeInterval(0.5)
+    done()
 }
 ```
 
@@ -376,9 +376,9 @@ waitUntil { done in
 // Objective-C
 
 waitUntil(^(void (^done)(void)){
-  // do some stuff that takes a while...
-  [NSThread sleepForTimeInterval:0.5];
-  done();
+    // do some stuff that takes a while...
+    [NSThread sleepForTimeInterval:0.5];
+    done();
 });
 ```
 
@@ -388,9 +388,9 @@ waitUntil(^(void (^done)(void)){
 // Swift
 
 waitUntil(timeout: 10) { done in
-  // do some stuff that takes a while...
-  NSThread.sleepForTimeInterval(1)
-  done()
+    // do some stuff that takes a while...
+    NSThread.sleepForTimeInterval(1)
+    done()
 }
 ```
 
@@ -398,9 +398,9 @@ waitUntil(timeout: 10) { done in
 // Objective-C
 
 waitUntilTimeout(10, ^(void (^done)(void)){
-  // do some stuff that takes a while...
-  [NSThread sleepForTimeInterval:1];
-  done();
+    // do some stuff that takes a while...
+    [NSThread sleepForTimeInterval:1];
+    done();
 });
 ```
 
