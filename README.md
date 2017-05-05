@@ -611,14 +611,15 @@ expect(actual).toNot(beIdenticalTo(expected))
 expect(actual) !== expected
 ```
 
-Its important to remember that `beIdenticalTo` only makes sense when comparing
+It is important to remember that `beIdenticalTo` only makes sense when comparing
 types with reference semantics, which have a notion of identity. In Swift, 
-that means a `class`. 
+that means types that are defined as a `class`. 
 
-This matcher will not work with types with value semantics such as `struct` 
-or `enum`. If you need to compare two value types, you can either compare 
-individual properties or if it makes sense to do so, make your type 
-implement `Equatable` and use Nimble's equivalence matchers instead.
+This matcher will not work when comparing types with value semantics such as
+those defined as a `struct` or `enum`. If you need to compare two value types,
+consider what it means for instances of your type to be identical. This may mean
+comparing individual properties or, if it makes sense to do so, conforming your type 
+to `Equatable` and use Nimble's equivalence matchers instead.
 
 
 ```objc
