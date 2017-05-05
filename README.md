@@ -733,20 +733,20 @@ expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 ```swift
 // Swift
 
-// Passes if instance is an instance of aClass:
+// Passes if 'instance' is an instance of 'aClass':
 expect(instance).to(beAnInstanceOf(aClass))
 
-// Passes if instance is an instance of aClass or any of its subclasses:
+// Passes if 'instance' is an instance of 'aClass' or any of its subclasses:
 expect(instance).to(beAKindOf(aClass))
 ```
 
 ```objc
 // Objective-C
 
-// Passes if instance is an instance of aClass:
+// Passes if 'instance' is an instance of 'aClass':
 expect(instance).to(beAnInstanceOf(aClass));
 
-// Passes if instance is an instance of aClass or any of its subclasses:
+// Passes if 'instance' is an instance of 'aClass' or any of its subclasses:
 expect(instance).to(beAKindOf(aClass));
 ```
 
