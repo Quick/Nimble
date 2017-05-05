@@ -1417,6 +1417,7 @@ with `Predicate.define(..)`:
 
 ```swift
 // Swift
+
 public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
     return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
@@ -1440,6 +1441,7 @@ In the example above, `msg` is defined based on the string given to
 
 ```swift
 // Swift
+
 let msg = ExpectationMessage.expectedActualValueTo("equal <\(stringify(expectedValue))>")
 ```
 
