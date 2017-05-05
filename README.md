@@ -298,7 +298,18 @@ In Nimble, it's easy to make expectations on values that are updated
 asynchronously. Just use `toEventually` or `toEventuallyNot`:
 
 ```swift
-// Swift
+// Swift 3.0 and later
+
+DispatchQueue.main.async {
+  ocean.add("dolphins")
+  ocean.add("whales")
+}
+expect(ocean).toEventually(contain("dolphins", "whales"))
+```
+
+
+```swift
+// Swift 2.3 and earlier
 
 dispatch_async(dispatch_get_main_queue()) {
   ocean.add("dolphins")
