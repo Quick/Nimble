@@ -288,9 +288,9 @@ expect(1 as CInt).to(equal(1))
   make expectations on primitive C values, wrap then in an object
   literal:
 
-  ```objc
-  expect(@(1 + 1)).to(equal(@2));
-  ```
+```objc
+expect(@(1 + 1)).to(equal(@2));
+```
 
 ## Asynchronous Expectations
 
