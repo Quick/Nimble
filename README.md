@@ -575,11 +575,11 @@ expect(structObject).toNot(beAnInstanceOf(SomeClassConformingToProtocol.self))
 ```swift
 // Swift
 
-// Passes if actual is equivalent to expected:
+// Passes if 'actual' is equivalent to 'expected':
 expect(actual).to(equal(expected))
 expect(actual) == expected
 
-// Passes if actual is not equivalent to expected:
+// Passes if 'actual' is not equivalent to 'expected':
 expect(actual).toNot(equal(expected))
 expect(actual) != expected
 ```
@@ -587,10 +587,10 @@ expect(actual) != expected
 ```objc
 // Objective-C
 
-// Passes if actual is equivalent to expected:
+// Passes if 'actual' is equivalent to 'expected':
 expect(actual).to(equal(expected))
 
-// Passes if actual is not equivalent to expected:
+// Passes if 'actual' is not equivalent to 'expected':
 expect(actual).toNot(equal(expected))
 ```
 
@@ -602,11 +602,11 @@ Values must be `Equatable`, `Comparable`, or subclasses of `NSObject`.
 ```swift
 // Swift
 
-// Passes if actual has the same pointer address as expected:
+// Passes if 'actual' has the same pointer address as 'expected':
 expect(actual).to(beIdenticalTo(expected))
 expect(actual) === expected
 
-// Passes if actual does not have the same pointer address as expected:
+// Passes if 'actual' does not have the same pointer address as 'expected':
 expect(actual).toNot(beIdenticalTo(expected))
 expect(actual) !== expected
 ```
@@ -617,10 +617,10 @@ Its important to remember that `beIdenticalTo` only makes sense when comparing t
 ```objc
 // Objective-C
 
-// Passes if actual has the same pointer address as expected:
+// Passes if 'actual' has the same pointer address as 'expected':
 expect(actual).to(beIdenticalTo(expected));
 
-// Passes if actual does not have the same pointer address as expected:
+// Passes if 'actual' does not have the same pointer address as 'expected':
 expect(actual).toNot(beIdenticalTo(expected));
 ```
 
