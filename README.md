@@ -568,7 +568,7 @@ let structObject = SomeStructConformingToProtocol()
 expect(structObject).toNot(beAnInstanceOf(SomeProtocol.self))
 expect(structObject).to(beAnInstanceOf(SomeStructConformingToProtocol.self))
 expect(structObject).toNot(beAnInstanceOf(SomeClassConformingToProtocol.self))
-````
+```
 
 ## Equivalence
 
