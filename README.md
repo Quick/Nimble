@@ -1101,25 +1101,28 @@ expect(actual).to(beEmpty());
 expect(actual).to(match(expected))
 ```
 
-## Checking if all elements of a collection pass a condition
+## Collection Elements
+
+Nimble provides a means to check that all elements of a collection pass a given expectation.
 
 ```swift
 // Swift
 
-// with a custom function:
-expect([1,2,3,4]).to(allPass({$0 < 5}))
+// Providing a custom function:
+expect([1, 2, 3, 4]).to(allPass { $0! < 5 })
 
-// with another matcher:
-expect([1,2,3,4]).to(allPass(beLessThan(5)))
+// Composing the expectation with another matcher:
+expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))
 ```
 
 ```objc
 // Objective-C
 
-expect(@[@1, @2, @3,@4]).to(allPass(beLessThan(@5)));
+expect(@[@1, @2, @3, @4]).to(allPass(beLessThan(@5)));
 ```
 
-For Swift the actual value has to be a Sequence, e.g. an array, a set or a custom seqence type.
+For Swift, the actual value must be a type conforming to `Sequence`. 
+For example, an array, a set, or a custom sequence type.
 
 For Objective-C the actual value has to be a NSFastEnumeration, e.g. NSArray and NSSet, of NSObjects and only the variant which
 uses another matcher is available here.
