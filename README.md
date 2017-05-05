@@ -57,7 +57,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
   - [Customizing Failure Messages](#customizing-failure-messages)
-    - [Basic Customication](#basic-customication)
+    - [Basic Customization](#basic-customization)
     - [Full Customization](#full-customization)
   - [Supporting Objective-C](#supporting-objective-c)
     - [Properly Handling `nil` in Objective-C Matchers](#properly-handling-nil-in-objective-c-matchers)
@@ -1418,7 +1418,7 @@ outputs the following failure message when an expectation fails:
 
 You can customize this message by modifying the way you create a `Predicate`.
 
-### Basic Customication
+### Basic Customization
 
 For slightly more complex error messaging, receive the created failure message
 with `Predicate.define(..)`:
