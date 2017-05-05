@@ -815,14 +815,15 @@ If you're using Swift, you can use the `throwAssertion` matcher to check if an a
 ```swift
 // Swift
 
-// Passes if somethingThatThrows() throws an assertion, such as calling fatalError() or precondition fails:
+// Passes if 'somethingThatThrows()' throws an assertion, 
+// such as by calling 'fatalError()' or if a precondition fails:
 expect { () -> Void in fatalError() }.to(throwAssertion())
 expect { precondition(false) }.to(throwAssertion())
 
-// Passes if throwing a NSError is not equal to throwing an assertion:
+// Passes if throwing an NSError is not equal to throwing an assertion:
 expect { throw NSError(domain: "test", code: 0, userInfo: nil) }.toNot(throwAssertion())
 
-// Passes if the post assertion code is not run:
+// Passes if the code after the precondition check is not run:
 var reachedPoint1 = false
 var reachedPoint2 = false
 expect {
