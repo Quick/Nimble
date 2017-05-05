@@ -1066,38 +1066,38 @@ expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
 ```swift
 // Swift
 
-// Passes if actual contains substring expected:
-expect(actual).to(contain(expected))
+// Passes if 'actual' contains 'substring':
+expect(actual).to(contain(substring))
 
-// Passes if actual begins with substring:
-expect(actual).to(beginWith(expected))
+// Passes if 'actual' begins with 'prefix':
+expect(actual).to(beginWith(prefix))
 
-// Passes if actual ends with substring:
-expect(actual).to(endWith(expected))
+// Passes if 'actual' ends with 'suffix':
+expect(actual).to(endWith(suffix))
 
-// Passes if actual is an empty string, "":
+// Passes if 'actual' represents the empty string, "":
 expect(actual).to(beEmpty())
 
-// Passes if actual matches the regular expression defined in expected:
+// Passes if 'actual' matches the regular expression defined in 'expected':
 expect(actual).to(match(expected))
 ```
 
 ```objc
 // Objective-C
 
-// Passes if actual contains substring expected:
+// Passes if 'actual' contains 'substring':
 expect(actual).to(contain(expected));
 
-// Passes if actual begins with substring:
-expect(actual).to(beginWith(expected));
+// Passes if 'actual' begins with 'prefix':
+expect(actual).to(beginWith(prefix));
 
-// Passes if actual ends with substring:
-expect(actual).to(endWith(expected));
+// Passes if 'actual' ends with 'suffix':
+expect(actual).to(endWith(suffix));
 
-// Passes if actual is an empty string, "":
+// Passes if 'actual' represents the empty string, "":
 expect(actual).to(beEmpty());
 
-// Passes if actual matches the regular expression defined in expected:
+// Passes if 'actual' matches the regular expression defined in 'expected':
 expect(actual).to(match(expected))
 ```
 
