@@ -942,20 +942,20 @@ Only Objective-C code can raise exceptions that Nimble will catch.
 ```swift
 // Swift
 
-// Passes if all of the expected values are members of actual:
+// Passes if all of the expected values are members of 'actual':
 expect(actual).to(contain(expected...))
 
-// Passes if actual is an empty collection (it contains no elements):
+// Passes if 'actual' is empty (i.e. it contains no elements):
 expect(actual).to(beEmpty())
 ```
 
 ```objc
 // Objective-C
 
-// Passes if expected is a member of actual:
+// Passes if expected is a member of 'actual':
 expect(actual).to(contain(expected));
 
-// Passes if actual is an empty collection (it contains no elements):
+// Passes if 'actual' is empty (i.e. it contains no elements):
 expect(actual).to(beEmpty());
 ```
 
@@ -988,20 +988,20 @@ an ordered collection, use `beginWith` and `endWith`:
 ```swift
 // Swift
 
-// Passes if the elements in expected appear at the beginning of actual:
+// Passes if the elements in expected appear at the beginning of 'actual':
 expect(actual).to(beginWith(expected...))
 
-// Passes if the the elements in expected come at the end of actual:
+// Passes if the the elements in expected come at the end of 'actual':
 expect(actual).to(endWith(expected...))
 ```
 
 ```objc
 // Objective-C
 
-// Passes if the elements in expected appear at the beginning of actual:
+// Passes if the elements in expected appear at the beginning of 'actual':
 expect(actual).to(beginWith(expected));
 
-// Passes if the the elements in expected come at the end of actual:
+// Passes if the the elements in expected come at the end of 'actual':
 expect(actual).to(endWith(expected));
 ```
 
@@ -1016,14 +1016,17 @@ For code that returns collections of complex objects without a strict
 ordering, there is the `containElementSatisfying` matcher:
 
 ```swift
+// Swift
+
 struct Turtle {
-	var color: String!
+    let color: String
 }
 
-var turtles = functionThatReturnsSomeTurtlesInAnyOrder()
+let turtles: [Turtle] = functionThatReturnsSomeTurtlesInAnyOrder()
 
-// This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
-// or [{color: "green"}, {color: "blue"}]
+// This set of matchers passes regardless of whether the array is 
+// [{color: "blue"}, {color: "green"}] or [{color: "green"}, {color: "blue"}]:
+
 expect(turtles).to(containElementSatisfying({ turtle in
 	return turtle.color == "green"
 }))
@@ -1036,20 +1039,25 @@ expect(turtles).to(containElementSatisfying({ turtle in
 ```
 
 ```objc
-@interface Turtle: NSObject
-@property(nonatomic) NSString *color;
+// Objective-C
+
+@interface Turtle : NSObject
+@property (nonatomic, readonly, nonnull) NSString *color;
 @end
-@implementation Turtle @end
 
-NSArray *turtles = functionThatReturnsSomeTurtlesInAnyOrder();
+@implementation Turtle 
+@end
 
-// This set of matchers passes whether the array is [{color: "blue"}, {color: "green"}]
-// or [{color: "green"}, {color: "blue"}]
-expect(turtles).to(containElementSatisfying(^BOOL(id object) {
-	return [turtle.color isEqualToString:@"green"];
+NSArray<Turtle *> * __nonnull turtles = functionThatReturnsSomeTurtlesInAnyOrder();
+
+// This set of matchers passes regardless of whether the array is 
+// [{color: "blue"}, {color: "green"}] or [{color: "green"}, {color: "blue"}]:
+
+expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
+	return [[turtle color] isEqualToString:@"green"];
 }));
-expect(turtles).to(containElementSatisfying(^BOOL(id object) {
-	return [turtle.color isEqualToString:@"blue"];
+expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
+	return [[turtle color] isEqualToString:@"blue"];
 }));
 ```
 
