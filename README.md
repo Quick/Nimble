@@ -845,40 +845,50 @@ Notes:
 
 ## Swift Error Handling
 
-If you're using Swift 2.0+, you can use the `throwError` matcher to check if an error is thrown.
+If you're using Swift 2.0 or newer, you can use the `throwError` matcher to check if an error is thrown.
+
+Note:
+The following code sample references the `Swift.Error` protocol. 
+This is `Swift.ErrorProtocol` in versions of Swift prior to version 3.0.
 
 ```swift
 // Swift
 
-// Passes if somethingThatThrows() throws an ErrorProtocol:
-expect{ try somethingThatThrows() }.to(throwError())
+// Passes if 'somethingThatThrows()' throws an 'Error':
+expect { try somethingThatThrows() }.to(throwError())
 
-// Passes if somethingThatThrows() throws an error with a given domain:
-expect{ try somethingThatThrows() }.to(throwError { (error: ErrorProtocol) in
+// Passes if 'somethingThatThrows()' throws an error within a particular domain:
+expect { try somethingThatThrows() }.to(throwError { (error: Error) in
     expect(error._domain).to(equal(NSCocoaErrorDomain))
 })
 
-// Passes if somethingThatThrows() throws an error with a given case:
-expect{ try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadCorruptError))
+// Passes if 'somethingThatThrows()' throws a particular error enum case:
+expect { try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListReadCorruptError))
 
-// Passes if somethingThatThrows() throws an error with a given type:
-expect{ try somethingThatThrows() }.to(throwError(errorType: NimbleError.self))
+// Passes if 'somethingThatThrows()' throws an error of a particular type:
+expect { try somethingThatThrows() }.to(throwError(errorType: NimbleError.self))
 ```
 
-If you are working directly with `ErrorProtocol` values, as is sometimes the case when using `Result` or `Promise` types, you can use the `matchError` matcher to check if the error is the same error is is supposed to be, without requiring explicit casting.
+If you are working directly with `Error` values, without explicit casting, 
+you can use the `matchError` matcher to check whether or not the error:
+
+- is the same _type_ of error you are expecting.
+- represents a particular error value that you are expecting.
+
+This can be useful when using `Result` or `Promise` types, for example.
 
 ```swift
 // Swift
 
-let actual: ErrorProtocol = …
+let actual: Error = ...
 
-// Passes if actual contains any error value from the NimbleErrorEnum type:
-expect(actual).to(matchError(NimbleErrorEnum))
+// Passes if 'actual' represents any error value from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum.self))
 
-// Passes if actual contains the Timeout value from the NimbleErrorEnum type:
-expect(actual).to(matchError(NimbleErrorEnum.Timeout))
+// Passes if 'actual' represents the case 'timeout' from the NimbleErrorEnum type:
+expect(actual).to(matchError(NimbleErrorEnum.timeout))
 
-// Passes if actual contains an NSError equal to the given one:
+// Passes if 'actual' contains an NSError equal to the one provided:
 expect(actual).to(matchError(NSError(domain: "err", code: 123, userInfo: nil)))
 ```
 
