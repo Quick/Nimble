@@ -545,6 +545,7 @@ expect(@1).toNot(beAKindOf([NSNull class]));
 ```
 
 Objects can be tested for their exact types using the `beAnInstanceOf` matcher:
+
 ```swift
 // Swift
 
