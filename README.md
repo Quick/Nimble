@@ -1161,9 +1161,7 @@ For Objective-C, the actual value must be one of the following classes, or their
  - `NSSet`, or
  - `NSHashTable`.
 
-## Foundation
-
-### Verifying a Notification was posted
+## Notifications
 
 ```swift
 // Swift
