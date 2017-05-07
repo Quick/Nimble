@@ -877,8 +877,11 @@ expect { try somethingThatThrows() }.to(throwError(NSCocoaError.PropertyListRead
 expect { try somethingThatThrows() }.to(throwError(errorType: NimbleError.self))
 ```
 
-If you are working directly with `Error` values, without explicit casting, 
-you can use the `matchError` matcher to check whether or not the error:
+When working directly with `Error` values, using the `matchError` matcher
+allows you to perform certain checks on the error itself without having to
+explicitly cast the error.
+
+The `matchError` matcher allows you to check whether or not the error:
 
 - is the same _type_ of error you are expecting.
 - represents a particular error value that you are expecting.
