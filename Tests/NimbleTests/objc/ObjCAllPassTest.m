@@ -26,12 +26,12 @@
     expectFailureMessage(@"expected to not all be less than <5>", ^{
         expect([NSSet setWithArray:@[@1, @2, @3,@4]]).toNot(allPass(beLessThan(@5)));
     });
-    expectFailureMessage(@"allPass only works with NSFastEnumeration"
-                         " (NSArray, NSSet, ...) of NSObjects, got <3>", ^{
+    expectFailureMessage(@"allPass can only be used with types which implement NSFastEnumeration "
+                         "(NSArray, NSSet, ...), and whose elements subclass NSObject, got <3>", ^{
                              expect(@3).to(allPass(beLessThan(@5)));
                          });
-    expectFailureMessage(@"allPass only works with NSFastEnumeration"
-                         " (NSArray, NSSet, ...) of NSObjects, got <3>", ^{
+    expectFailureMessage(@"allPass can only be used with types which implement NSFastEnumeration "
+                         "(NSArray, NSSet, ...), and whose elements subclass NSObject, got <3>", ^{
                              expect(@3).toNot(allPass(beLessThan(@5)));
                          });
 }

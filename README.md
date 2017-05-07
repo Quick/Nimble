@@ -1135,10 +1135,12 @@ expect(@[@1, @2, @3, @4]).to(allPass(beLessThan(@5)));
 For Swift, the actual value must be an instance of a type conforming to `Sequence`. 
 For example, an array, a set, or a custom sequence type.
 
-For Objective-C, the actual value must be an instance of a type which implements 
-the `NSFastEnumeration` protocol.
-For example, `NSArray` and `NSSet`, of `NSObject`s and only the variant which
-uses another matcher is available here.
+For Objective-C, the actual value must be an instance of a type which
+implements the `NSFastEnumeration` protocol such as `NSArray` and `NSSet`,
+and whose elements are instances of a type which subclasses `NSObject`.
+
+Additionally, unlike in Swift, there is no override to specify a custom
+matcher function.
 
 ## Collection Count
 
