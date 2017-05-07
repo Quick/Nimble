@@ -627,7 +627,7 @@ This matcher will not work when comparing types with value semantics such as
 those defined as a `struct` or `enum`. If you need to compare two value types,
 consider what it means for instances of your type to be identical. This may mean
 comparing individual properties or, if it makes sense to do so, conforming your type 
-to `Equatable` and use Nimble's equivalence matchers instead.
+to `Equatable` and using Nimble's equivalence matchers instead.
 
 
 ```objc
