@@ -88,7 +88,8 @@ extension NMBObjCMatcher {
 
             if !collectionIsUsable {
                 failureMessage.postfixMessage =
-                  "allPass only works with NSFastEnumeration (NSArray, NSSet, ...) of NSObjects"
+                  "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...), " +
+                  "and whose elements subclass NSObject"
                 failureMessage.expected = ""
                 failureMessage.to = ""
                 return false
