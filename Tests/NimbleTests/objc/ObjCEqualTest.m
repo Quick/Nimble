@@ -46,8 +46,8 @@
     expectFailureMessage(@"expected to not equal <1>, got <1>", ^{
         expect(@1).toNot(equal(@1));
     });
-    expectFailureMessage(@"expected to not equal <foo>, got <bar>", ^{
-        expect("bar").toNot(equal("foo"));
+    expectFailureMessage(@"expected to not equal <bar>, got <bar>", ^{
+        expect("bar").toNot(equal("bar"));
     });
     expectFailureMessage(@"expected to equal <NSRange: {0, 5}>, got <NSRange: {0, 10}>", ^{
         expect(NSMakeRange(0, 10)).to(equal(NSMakeRange(0, 5)));

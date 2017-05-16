@@ -15,8 +15,8 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
         var foundFailureMessage = false
 
         for assertion in recorder.assertions {
-            lastFailure = assertion
-            if assertion.message.stringValue == msg {
+            if assertion.message.stringValue == msg && !assertion.success {
+                lastFailure = assertion
                 foundFailureMessage = true
                 break
             }

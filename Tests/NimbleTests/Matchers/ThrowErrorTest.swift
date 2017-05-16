@@ -49,6 +49,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh))
         expect { throw NimbleError.laugh }.to(throwError(errorType: NimbleError.self))
         expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 1)))
+        expect { throw EquatableError.parameterized(x: 1) }.toNot(throwError(EquatableError.parameterized(x: 2)))
     }
 
     func testPositiveMatchesWithClosures() {
