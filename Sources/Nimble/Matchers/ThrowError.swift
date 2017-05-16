@@ -4,7 +4,7 @@ import Foundation
 /// error of the specified type or from the specified case.
 ///
 /// Errors are tried to be compared by their implementation of Equatable,
-/// otherwise they fallback to comparision by _domain and _code.
+/// otherwise they fallback to comparison by _domain and _code.
 ///
 /// Alternatively, you can pass a closure to do any arbitrary custom matching
 /// to the thrown error. The closure only gets called when an error was thrown.

@@ -4,7 +4,7 @@ import Foundation
 /// error from the specified case.
 ///
 /// Errors are tried to be compared by their implementation of Equatable,
-/// otherwise they fallback to comparision by _domain and _code.
+/// otherwise they fallback to comparison by _domain and _code.
 public func matchError<T: Error>(_ error: T) -> Predicate<Error> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         let actualError: Error? = try actualExpression.evaluate()
