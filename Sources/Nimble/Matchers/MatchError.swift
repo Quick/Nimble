@@ -37,7 +37,6 @@ public func matchError<T: Error & Equatable>(_ error: T) -> Predicate<Error> {
     }.requireNonNil
 }
 
-
 /// A Nimble matcher that succeeds when the actual expression evaluates to an
 /// error of the specified type
 public func matchError<T: Error>(_ errorType: T.Type) -> Predicate<Error> {
@@ -46,7 +45,7 @@ public func matchError<T: Error>(_ errorType: T.Type) -> Predicate<Error> {
 
         setFailureMessageForError(failureMessage, postfixMessageVerb: "match", actualError: actualError, errorType: errorType)
         var matches = false
-        if let _ = actualError as? T {
+        if actualError as? T != nil {
             matches = true
         }
         return matches

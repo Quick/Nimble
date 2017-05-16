@@ -168,28 +168,10 @@ public indirect enum ExpectationMessage {
             }
         case let .appends(expectation, msg):
             expectation.update(failureMessage: failureMessage)
-            if failureMessage.hasOverriddenStringValue {
-                failureMessage.stringValue += "\(msg)"
-            } else {
-                if failureMessage.actualValue != nil {
-                    failureMessage.postfixActual += msg
-                } else {
-                    failureMessage.postfixMessage += msg
-                }
-            }
+            failureMessage.appendMessage(msg)
         case let .details(expectation, msg):
             expectation.update(failureMessage: failureMessage)
-            if failureMessage.hasOverriddenStringValue {
-                if let desc = failureMessage.userDescription {
-                    failureMessage.stringValue = "\(desc)\n\(failureMessage.stringValue)"
-                }
-                failureMessage.stringValue += "\n\(msg)"
-            } else {
-                if let desc = failureMessage.userDescription {
-                    failureMessage.userDescription = desc
-                }
-                failureMessage.extendedMessage = msg
-            }
+            failureMessage.appendDetails(msg)
         }
     }
 }

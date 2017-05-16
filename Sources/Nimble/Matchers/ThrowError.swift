@@ -31,7 +31,6 @@ public func throwError() -> Predicate<Any> {
     }
 }
 
-
 /// A Nimble matcher that succeeds when the actual expression throws an
 /// error of the specified type or from the specified case.
 ///
@@ -70,7 +69,6 @@ public func throwError<T: Error>(_ error: T, closure: ((Error) -> Void)? = nil) 
         return matches
     }
 }
-
 
 /// A Nimble matcher that succeeds when the actual expression throws an
 /// error of the specified type or from the specified case.
@@ -111,7 +109,6 @@ public func throwError<T: Error & Equatable>(_ error: T, closure: ((T) -> Void)?
         return matches
     }
 }
-
 
 /// A Nimble matcher that succeeds when the actual expression throws an
 /// error of the specified type or from the specified case.
@@ -171,7 +168,6 @@ public func throwError<T: Error>(
         return matches
     }
 }
-
 
 /// A Nimble matcher that succeeds when the actual expression throws any
 /// error or when the passed closures' arbitrary custom matching succeeds.
