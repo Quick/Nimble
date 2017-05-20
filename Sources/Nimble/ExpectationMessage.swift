@@ -202,3 +202,58 @@ extension FailureMessage {
         return msg
     }
 }
+
+#if _runtime(_ObjC)
+
+@objc public class NMBExpectationMessage: NSObject {
+    private let msg: ExpectationMessage
+
+    internal init(swift msg: ExpectationMessage) {
+        self.msg = msg
+    }
+
+    public init(expectedTo message: String) {
+        self.msg = .expectedTo(message)
+    }
+    public init(expectedActualValueTo message: String) {
+        self.msg = .expectedActualValueTo(message)
+    }
+
+    public init(expectedActualValueTo message: String, customActualValue actual: String) {
+        self.msg = .expectedCustomValueTo(message, actual)
+    }
+
+    public init(fail message: String) {
+        self.msg = .fail(message)
+    }
+
+    public init(prepend message: String, child: NMBExpectationMessage) {
+        self.msg = .prepends(message, child.msg)
+    }
+
+    public init(appendedMessage message: String, child: NMBExpectationMessage) {
+        self.msg = .appends(child.msg, message)
+    }
+
+    public init(prependedMessage message: String, child: NMBExpectationMessage) {
+        self.msg = .prepends(message, child.msg)
+    }
+
+    public init(details message: String, child: NMBExpectationMessage) {
+        self.msg = .details(child.msg, message)
+    }
+
+    public func appendedBeNilHint() -> NMBExpectationMessage {
+        return NMBExpectationMessage(swift: msg.appendedBeNilHint())
+    }
+
+    public func toSwift() -> ExpectationMessage { return self.msg }
+}
+
+extension ExpectationMessage {
+    func toObjectiveC() -> NMBExpectationMessage {
+        return NMBExpectationMessage(swift: self)
+    }
+}
+
+#endif

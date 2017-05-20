@@ -57,10 +57,10 @@
     expectFailureMessage(@"expected to not be empty, got <{}>", ^{
         expect(@{}).toNot(beEmpty());
     });
-    expectFailureMessage(@"expected to not be empty, got <{}>", ^{
+    expectFailureMessage(@"expected to not be empty, got <{()}>", ^{
         expect([NSSet set]).toNot(beEmpty());
     });
-    expectFailureMessage(@"expected to not be empty, got <(1)>", ^{
+    expectFailureMessage(@"expected to not be empty, got <()>", ^{
         expect([NSIndexSet indexSet]).toNot(beEmpty());
     });
     expectFailureMessage(@"expected to not be empty, got <NSHashTable {}>", ^{

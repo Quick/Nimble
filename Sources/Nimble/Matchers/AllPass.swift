@@ -65,8 +65,8 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func allPassMatcher(_ matcher: NMBObjCMatcher) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+    public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
+        return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
             var nsObjects = [NSObject]()
@@ -87,23 +87,33 @@ extension NMBObjCMatcher {
             }
 
             if !collectionIsUsable {
-                failureMessage.postfixMessage =
-                  "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...), " +
-                  "and whose elements subclass NSObject"
-                failureMessage.expected = ""
-                failureMessage.to = ""
-                return false
+                return NMBPredicateResult(
+                    status: NMBPredicateStatus.fail,
+                    message: NMBExpectationMessage(
+                        fail: "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...) of NSObjects, got <\(actualValue?.description ?? "nil")>"
+                    )
+                )
             }
 
             let expr = Expression(expression: ({ nsObjects }), location: location)
-            let pred: Predicate<[NSObject]> = createPredicate(Predicate.fromDeprecatedFullClosure { expr, failureMessage, expectMatch in
-                if expectMatch {
-                    return matcher.matches({ try! expr.evaluate() }, failureMessage: failureMessage, location: expr.location)
+            let pred: Predicate<[NSObject]> = createPredicate(Predicate { expr in
+                if let predicate = matcher as? NMBPredicate {
+                    return predicate.satisfies(({ try! expr.evaluate() }), location: expr.location).toSwift()
                 } else {
-                    return matcher.doesNotMatch({ try! expr.evaluate() }, failureMessage: failureMessage, location: expr.location)
+                    let failureMessage = FailureMessage()
+                    let result = matcher.matches(
+                        ({ try! expr.evaluate() }),
+                        failureMessage: failureMessage,
+                        location: expr.location
+                    )
+                    let expectationMsg = failureMessage.toExpectationMessage
+                    return PredicateResult(
+                        bool: result,
+                        message: expectationMsg
+                    )
                 }
             })
-            return try! pred.matches(expr, failureMessage: failureMessage)
+            return try! pred.satisfies(expr).toObjectiveC()
         }
     }
 }
