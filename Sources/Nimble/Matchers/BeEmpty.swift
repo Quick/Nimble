@@ -68,7 +68,6 @@ extension NMBObjCMatcher {
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
 
-
             if let value = actualValue as? NMBCollection {
                 let expr = Expression(expression: ({ value as NMBCollection }), location: location)
                 return try! beEmpty().satisfies(expr).toObjectiveC()
