@@ -37,7 +37,7 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
         } else {
             let knownFailures = recorder.assertions.filter { !$0.success }.map { $0.message.stringValue }
             let knownFailuresJoined = knownFailures.joined(separator: ", ")
-            message = "Did not get expected error message, got (\(knownFailuresJoined))"
+            message = "Expected error message (\(msg)), got (\(knownFailuresJoined))\n\nAssertions Received:\n\(recorder.assertions)"
         }
         NimbleAssertionHandler.assert(false,
                                       message: FailureMessage(stringValue: message),

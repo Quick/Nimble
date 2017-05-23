@@ -43,8 +43,8 @@ public indirect enum ExpectationMessage {
             return msg
         case let .prepends(_, expectation):
             return expectation.expectedMessage
-        case let .appends(expectation, _):
-            return expectation.expectedMessage
+        case let .appends(expectation, msg):
+            return "\(expectation.expectedMessage)\(msg)"
         case let .details(expectation, _):
             return expectation.expectedMessage
         }
@@ -177,7 +177,7 @@ public indirect enum ExpectationMessage {
 }
 
 extension FailureMessage {
-    var toExpectationMessage: ExpectationMessage {
+    internal func toExpectationMessage() -> ExpectationMessage {
         let defaultMsg = FailureMessage()
         if expected != defaultMsg.expected || _stringValueOverride != nil {
             return .fail(stringValue)

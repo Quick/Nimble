@@ -174,7 +174,7 @@ extension Predicate: Matcher {
             let result = try matcher(actual, failureMessage, true)
             return PredicateResult(
                 status: PredicateStatus(bool: result),
-                message: failureMessage.toExpectationMessage
+                message: failureMessage.toExpectationMessage()
             )
         }
     }
@@ -187,7 +187,7 @@ extension Predicate: Matcher {
             let result = try matcher(actual, failureMessage)
             return PredicateResult(
                 status: PredicateStatus(bool: result),
-                message: failureMessage.toExpectationMessage
+                message: failureMessage.toExpectationMessage()
             )
         }
 

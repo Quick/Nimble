@@ -33,7 +33,11 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
         } else {
             actualString = "<nil>"
         }
-        let matches = instance != nil && type(of: instance!) == expectedClass
+        #if _runtime(_ObjC)
+            let matches = instance != nil && instance!.isMember(of: expectedClass)
+        #else
+            let matches = instance != nil && type(of: instance!) == expectedClass
+        #endif
         return PredicateResult(
             status: PredicateStatus(bool: matches),
             message: .expectedCustomValueTo(errorMessage, actualString)

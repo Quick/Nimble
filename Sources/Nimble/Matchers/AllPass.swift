@@ -106,7 +106,7 @@ extension NMBObjCMatcher {
                         failureMessage: failureMessage,
                         location: expr.location
                     )
-                    let expectationMsg = failureMessage.toExpectationMessage
+                    let expectationMsg = failureMessage.toExpectationMessage()
                     return PredicateResult(
                         bool: result,
                         message: expectationMsg
