@@ -1,5 +1,6 @@
 // New Matcher API
 //
+import Foundation
 
 /// A Predicate is part of the new matcher API that provides assertions to expectations.
 ///
@@ -243,7 +244,7 @@ extension Predicate {
 #if _runtime(_ObjC)
 public typealias PredicateBlock = (_ actualExpression: Expression<NSObject>) -> NMBPredicateResult
 
-@objc public class NMBPredicate: NSObject {
+public class NMBPredicate: NSObject {
     private let predicate: PredicateBlock
 
     public init(predicate: @escaping PredicateBlock) {
@@ -270,7 +271,7 @@ extension NMBPredicate: NMBMatcher {
     }
 }
 
-@objc final public class NMBPredicateResult: NSObject {
+final public class NMBPredicateResult: NSObject {
     public var status: NMBPredicateStatus
     public var message: NMBExpectationMessage
 
@@ -296,7 +297,7 @@ extension PredicateResult {
     }
 }
 
-@objc final public class NMBPredicateStatus: NSObject {
+final public class NMBPredicateStatus: NSObject {
     private let status: Int
     private init(status: Int) {
         self.status = status

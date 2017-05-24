@@ -1,3 +1,5 @@
+import Foundation
+
 public indirect enum ExpectationMessage {
     // --- Primary Expectations ---
     /// includes actual value in output ("expected to <message>, got <actual>")
@@ -205,7 +207,7 @@ extension FailureMessage {
 
 #if _runtime(_ObjC)
 
-@objc public class NMBExpectationMessage: NSObject {
+public class NMBExpectationMessage: NSObject {
     private let msg: ExpectationMessage
 
     internal init(swift msg: ExpectationMessage) {
