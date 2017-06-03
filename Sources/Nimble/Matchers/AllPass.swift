@@ -90,7 +90,7 @@ extension NMBObjCMatcher {
                 return NMBPredicateResult(
                     status: NMBPredicateStatus.fail,
                     message: NMBExpectationMessage(
-                        fail: "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...) of NSObjects, got <\(actualValue?.description ?? "nil")>"
+                        fail: "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...), and whose elements subclass NSObject, got <\(actualValue?.description ?? "nil")>"
                     )
                 )
             }
