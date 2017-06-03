@@ -1352,13 +1352,7 @@
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
-				9630C0301C6D139F000693EE /* CwlDarwinDefinitions.swift in Sources */,
 				1FA0C4001E30B14500623165 /* Predicate.swift in Sources */,
-				9630C0231C6D0B82000693EE /* mach_excServer.c in Sources */,
-				9630C01F1C6D0B2F000693EE /* CwlCatchException.swift in Sources */,
-				9630C0131C6D0B18000693EE /* CwlCatchBadInstruction.swift in Sources */,
-				9630C01C1C6D0B2F000693EE /* CwlCatchException.m in Sources */,
-				9630C02C1C6D125F000693EE /* CwlBadInstructionException.swift in Sources */,
 				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1794,6 +1788,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -swift-version 3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1842,6 +1837,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				METAL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "$(inherited) -swift-version 3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
