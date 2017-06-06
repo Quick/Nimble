@@ -57,8 +57,8 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
             expect(NSNumber(value:1)).to(beAnInstanceOf(NSString.self))
         }
-        failsWithErrorMessage("expected to not be an instance of NSNumber, got <\(numberTypeName) instance>") {
-            expect(NSNumber(value:1)).toNot(beAnInstanceOf(NSNumber.self))
+        failsWithErrorMessage("expected to not be an instance of \(numberTypeName), got <\(numberTypeName) instance>") {
+            expect(NSNumber(value:1)).toNot(beAnInstanceOf(type(of: NSNumber(value:1))))
         }
     }
 

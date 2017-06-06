@@ -14,12 +14,10 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
         var lastFailure: AssertionRecord?
         var foundFailureMessage = false
 
-        for assertion in recorder.assertions {
+        for assertion in recorder.assertions where assertion.message.stringValue == msg && !assertion.success {
             lastFailure = assertion
-            if assertion.message.stringValue == msg {
-                foundFailureMessage = true
-                break
-            }
+            foundFailureMessage = true
+            break
         }
 
         if foundFailureMessage {
@@ -37,7 +35,9 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
         if let lastFailure = lastFailure {
             message = "Got failure message: \"\(lastFailure.message.stringValue)\", but expected \"\(msg)\""
         } else {
-            message = "expected failure message, but got none"
+            let knownFailures = recorder.assertions.filter { !$0.success }.map { $0.message.stringValue }
+            let knownFailuresJoined = knownFailures.joined(separator: ", ")
+            message = "Expected error message (\(msg)), got (\(knownFailuresJoined))\n\nAssertions Received:\n\(recorder.assertions)"
         }
         NimbleAssertionHandler.assert(false,
                                       message: FailureMessage(stringValue: message),
@@ -59,12 +59,12 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
-    func deferToMainQueue(action: @escaping () -> Void) {
-        DispatchQueue.main.async {
-            Thread.sleep(forTimeInterval: 0.01)
-            action()
-        }
+func deferToMainQueue(action: @escaping () -> Void) {
+    DispatchQueue.main.async {
+        Thread.sleep(forTimeInterval: 0.01)
+        action()
     }
+}
 
 public class NimbleHelper: NSObject {
     public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {

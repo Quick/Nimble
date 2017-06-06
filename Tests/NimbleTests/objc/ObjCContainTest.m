@@ -59,8 +59,8 @@
         expect(@[@"a", @"b", @"c"]).to(contain(@"a", @"bar"));
     });
 
-    expectFailureMessage(@"expected to not contain <Optional(bar), Optional(b)>, got <(a, b, c)>", ^{
-        expect(@[@"a", @"b", @"c"]).toNot(contain(@"bar", @"b"));
+    expectFailureMessage(@"expected to not contain <Optional(a), Optional(b)>, got <(a, b, c)>", ^{
+        expect(@[@"a", @"b", @"c"]).toNot(contain(@"a", @"b"));
     });
 }
 

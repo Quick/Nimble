@@ -100,7 +100,7 @@
     expectFailureMessages((@[outerFailureMessage]), ^{
         expectAction(^{ [exception raise]; }).to(raiseException().
                                                  satisfyingBlock(^(NSException *exception) {
-            expect(exception.name).to(equal(NSInvalidArgumentException));
+            expect(exception.name).toNot(equal(NSInvalidArgumentException));
         }));
     });
 

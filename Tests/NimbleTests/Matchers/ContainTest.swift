@@ -71,8 +71,8 @@ final class ContainTest: XCTestCase, XCTestCaseProvider {
             expect(["a", "b", "c"]).to(contain("a", "bar"))
         }
 
-        failsWithErrorMessage("expected to not contain <bar, b>, got <[a, b, c]>") {
-            expect(["a", "b", "c"]).toNot(contain("bar", "b"))
+        failsWithErrorMessage("expected to not contain <b, a>, got <[a, b, c]>") {
+            expect(["a", "b", "c"]).toNot(contain("b", "a"))
         }
     }
 
@@ -88,8 +88,8 @@ final class ContainTest: XCTestCase, XCTestCaseProvider {
             expect(["a", "b", "c"]).to(contain(["a", "bar"]))
         }
 
-        failsWithErrorMessage("expected to not contain <bar, b>, got <[a, b, c]>") {
-            expect(["a", "b", "c"]).toNot(contain(["bar", "b"]))
+        failsWithErrorMessage("expected to not contain <b, a>, got <[a, b, c]>") {
+            expect(["a", "b", "c"]).toNot(contain(["b", "a"]))
         }
     }
 }

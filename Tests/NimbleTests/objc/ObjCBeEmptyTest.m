@@ -57,11 +57,11 @@
     expectFailureMessage(@"expected to not be empty, got <{}>", ^{
         expect(@{}).toNot(beEmpty());
     });
-    expectFailureMessage(@"expected to not be empty, got <{(1)}>", ^{
-        expect([NSSet setWithObject:@1]).toNot(beEmpty());
+    expectFailureMessage(@"expected to not be empty, got <{()}>", ^{
+        expect([NSSet set]).toNot(beEmpty());
     });
-    expectFailureMessage(@"expected to not be empty, got <(1)>", ^{
-        expect([NSIndexSet indexSetWithIndex:1]).toNot(beEmpty());
+    expectFailureMessage(@"expected to not be empty, got <()>", ^{
+        expect([NSIndexSet indexSet]).toNot(beEmpty());
     });
     expectFailureMessage(@"expected to not be empty, got <NSHashTable {}>", ^{
         expect([NSHashTable hashTableWithOptions:NSPointerFunctionsStrongMemory]).toNot(beEmpty());
