@@ -374,9 +374,10 @@ You can also provide a callback by using the `waitUntil` function:
 // Swift
 
 waitUntil { done in
-    // do some stuff that takes a while...
-    NSThread.sleepForTimeInterval(0.5)
-    done()
+    ocean.goFish { success in
+        expect(success).to(beTrue())
+        done()
+    }
 }
 ```
 
@@ -384,9 +385,10 @@ waitUntil { done in
 // Objective-C
 
 waitUntil(^(void (^done)(void)){
-    // do some stuff that takes a while...
-    [NSThread sleepForTimeInterval:0.5];
-    done();
+    [ocean goFishWithHandler:^(BOOL success){
+        expect(success).to(beTrue());
+        done();
+    }];
 });
 ```
 
@@ -396,8 +398,10 @@ waitUntil(^(void (^done)(void)){
 // Swift
 
 waitUntil(timeout: 10) { done in
-    // do some stuff that takes a while...
-    NSThread.sleepForTimeInterval(1)
+    doSomethingAsync { success in
+        expect(success).to(beTrue())
+        done()
+    }
     done()
 }
 ```
@@ -406,13 +410,14 @@ waitUntil(timeout: 10) { done in
 // Objective-C
 
 waitUntilTimeout(10, ^(void (^done)(void)){
-    // do some stuff that takes a while...
-    [NSThread sleepForTimeInterval:1];
-    done();
+    [ocean goFishWithHandler:^(BOOL success){
+        expect(success).to(beTrue());
+        done();
+    }];
 });
 ```
 
-Note: waitUntil triggers its timeout code on the main thread. Blocking the main
+Note: `waitUntil` triggers its timeout code on the main thread. Blocking the main
 thread will cause Nimble to stop the run loop to continue. This can cause test
 pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
