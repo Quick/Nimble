@@ -63,7 +63,7 @@ public func beEmpty() -> Predicate<NMBCollection> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func beEmptyMatcher() -> NMBPredicate {
+    @objc public class func beEmptyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

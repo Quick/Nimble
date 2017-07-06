@@ -1,6 +1,6 @@
 import Foundation
 
-internal let DefaultDelta = 0.0001
+public let DefaultDelta = 0.0001
 
 internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
                         expectedValue: NMBDoubleConvertible,
@@ -69,7 +69,7 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
 }
 
 extension NMBObjCMatcher {
-    public class func beCloseToMatcher(_ expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
+    @objc public class func beCloseToMatcher(_ expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
         return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
 }

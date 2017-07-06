@@ -74,7 +74,7 @@ public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> Predicate<T> 
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func satisfyAnyOfMatcher(_ matchers: [NMBMatcher]) -> NMBPredicate {
+    @objc public class func satisfyAnyOfMatcher(_ matchers: [NMBMatcher]) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             if matchers.isEmpty {
                 return NMBPredicateResult(

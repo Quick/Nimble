@@ -69,7 +69,7 @@ public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func containMatcher(_ expected: [NSObject]) -> NMBObjCMatcher {
+    @objc public class func containMatcher(_ expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

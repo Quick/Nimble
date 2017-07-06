@@ -27,7 +27,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
 
 #if _runtime(_ObjC)
     extension NMBObjCMatcher {
-        public class func containElementSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
+        @objc public class func containElementSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
             return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
                 let value = try! actualExpression.evaluate()
                 guard let enumeration = value as? NSFastEnumeration else {

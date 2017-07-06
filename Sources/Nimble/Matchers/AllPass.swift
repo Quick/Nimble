@@ -65,7 +65,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
+    @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()

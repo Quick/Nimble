@@ -176,7 +176,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
 }
 
 extension NMBObjCMatcher {
-    public class func raiseExceptionMatcher() -> NMBObjCRaiseExceptionMatcher {
+    @objc public class func raiseExceptionMatcher() -> NMBObjCRaiseExceptionMatcher {
         return NMBObjCRaiseExceptionMatcher(name: nil, reason: nil, userInfo: nil, block: nil)
     }
 }
