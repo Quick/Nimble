@@ -205,7 +205,7 @@ extension FailureMessage {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 
 public class NMBExpectationMessage: NSObject {
     private let msg: ExpectationMessage

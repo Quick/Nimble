@@ -61,7 +61,7 @@ public func beEmpty() -> Predicate<NMBCollection> {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     public class func beEmptyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in

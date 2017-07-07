@@ -53,7 +53,7 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
 #endif
 
 func isXCTestAvailable() -> Bool {
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
     // XCTest is weakly linked and so may not be present
     return NSClassFromString("XCTestCase") != nil
 #else

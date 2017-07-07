@@ -1,6 +1,6 @@
 import Foundation
 
-#if !_runtime(_ObjC)
+#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
 // swift-corelibs-foundation doesn't provide NSException at all, so provide a dummy
 class NSException {}
 #endif

@@ -2,7 +2,7 @@ import CoreFoundation
 import Dispatch
 import Foundation
 
-#if !_runtime(_ObjC)
+#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
     import CDispatch
 #endif
 
@@ -32,7 +32,7 @@ internal class AssertionWaitLock: WaitLock {
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        #if _runtime(_ObjC)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
             let isMainThread = Thread.isMainThread
         #else
             let isMainThread = _CFIsMainThread()
@@ -185,7 +185,7 @@ internal class AwaitPromiseBuilder<T> {
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
             let runLoop = CFRunLoopGetMain()
-            #if _runtime(_ObjC)
+            #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
                 let runLoopMode = CFRunLoopMode.defaultMode.rawValue
             #else
                 let runLoopMode = kCFRunLoopDefaultMode

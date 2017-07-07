@@ -76,7 +76,7 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPassesWhenExpectedNotificationEventuallyIsPosted() {
-        #if _runtime(_ObjC)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
             let testNotification = Notification(name: Notification.Name("Foo"), object: nil)
             expect {
                 deferToMainQueue {
