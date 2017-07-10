@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
         }
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-NMBExpectation *NMB_expect(id(^actualBlock)(void), NSString *file, NSUInteger line);
+    NMBExpectation *NMB_expect(id(^actualBlock)(void), NSString *file, NSUInteger line);
 
     // overloaded dispatch for nils - expect(nil)
     DEFINE_NMB_EXPECT_OVERLOAD(void*, nil)
