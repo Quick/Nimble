@@ -105,6 +105,10 @@ internal class AwaitPromise<T> {
         signal = DispatchSemaphore(value: 1)
     }
 
+    deinit {
+        signal.signal()
+    }
+
     /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
     /// this method will resolve in a no-op.
     ///
@@ -252,7 +256,7 @@ internal class AwaitPromiseBuilder<T> {
                 // Stopping the run loop does not work unless we run only 1 mode
                 _ = RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
             }
-            self.trigger.timeoutSource.suspend()
+
             self.trigger.timeoutSource.cancel()
             if let asyncSource = self.trigger.actionSource {
                 asyncSource.cancel()
