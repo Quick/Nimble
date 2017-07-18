@@ -17,7 +17,7 @@ final class BeLessThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
 
         expect(NSNumber(value:2)).to(beLessThanOrEqualTo(10))
         expect(NSNumber(value:2)).toNot(beLessThanOrEqualTo(1))
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(2).to(beLessThanOrEqualTo(NSNumber(value:10)))
         expect(2).toNot(beLessThanOrEqualTo(NSNumber(value:1)))
 #endif

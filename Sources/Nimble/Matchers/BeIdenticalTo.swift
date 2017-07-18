@@ -34,7 +34,7 @@ public func be(_ expected: Any?) -> Predicate<Any> {
     return beIdenticalTo(expected)
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

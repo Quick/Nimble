@@ -37,7 +37,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     public class func haveCountMatcher(_ expected: NSNumber) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

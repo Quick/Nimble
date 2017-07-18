@@ -54,7 +54,7 @@ final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 
 final class BeAKindOfObjCTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAKindOfObjCTest) -> () throws -> Void)] {
