@@ -18,6 +18,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             ("testWaitUntilErrorsIfDoneIsCalledMultipleTimes", testWaitUntilErrorsIfDoneIsCalledMultipleTimes),
             ("testWaitUntilMustBeInMainThread", testWaitUntilMustBeInMainThread),
             ("testToEventuallyMustBeInMainThread", testToEventuallyMustBeInMainThread),
+            ("testSubjectUnderTestIsReleasedFromMemory", testSubjectUnderTestIsReleasedFromMemory),
         ]
     }
 
@@ -217,4 +218,28 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
     }
+
+    final class ClassUnderTest {
+        var deinitCalled: (() -> Void)?
+        var count = 0
+        deinit { deinitCalled?() }
+    }
+
+    func testSubjectUnderTestIsReleasedFromMemory() {
+        var subject: ClassUnderTest? = ClassUnderTest()
+
+        if let sub = subject {
+            expect(sub.count).toEventually(equal(0), timeout: 0.1)
+            expect(sub.count).toEventuallyNot(equal(1), timeout: 0.1)
+        }
+
+        waitUntil(timeout: 0.5) { done in
+            subject?.deinitCalled = {
+                done()
+            }
+
+            deferToMainQueue { subject = nil }
+        }
+    }
+
 }
