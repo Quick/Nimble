@@ -219,13 +219,13 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 #endif
     }
 
-    func testSubjectUnderTestIsReleasedFromMemory() {
-        final class ClassUnderTest {
-            var deinitCalled: (() -> Void)?
-            var count = 0
-            deinit { deinitCalled?() }
-        }
+    final class ClassUnderTest {
+        var deinitCalled: (() -> Void)?
+        var count = 0
+        deinit { deinitCalled?() }
+    }
 
+    func testSubjectUnderTestIsReleasedFromMemory() {
         var subject: ClassUnderTest? = ClassUnderTest()
 
         if let sub = subject {
