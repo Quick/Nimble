@@ -164,7 +164,6 @@
 		1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1C1968AB07008ED995 /* Equal.swift */; };
 		1F5DF1861BDCA0F500C3A531 /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1341B9E085700C7B8DA /* HaveCount.swift */; };
 		1F5DF1871BDCA0F500C3A531 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EC19FE43C200E9D9FE /* Match.swift */; };
-		1F5DF1881BDCA0F500C3A531 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		1F5DF1891BDCA0F500C3A531 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1F5DF18A1BDCA0F500C3A531 /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA59651B551EE6002D767E /* ThrowError.swift */; };
 		1F5DF18B1BDCA0F500C3A531 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD251968AB07008ED995 /* Functional.swift */; };
@@ -296,8 +295,6 @@
 		1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1B1968AB07008ED995 /* EndWith.swift */; };
 		1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1C1968AB07008ED995 /* Equal.swift */; };
 		1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1C1968AB07008ED995 /* Equal.swift */; };
-		1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
-        1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1E1968AB07008ED995 /* RaisesException.swift */; };
 		1FD8CD6A1968AB07008ED995 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD261968AB07008ED995 /* Async.swift */; };
@@ -386,6 +383,9 @@
 		CD79C9B51D2CC848004B6F9A /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		CD79C9B61D2CC848004B6F9A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 		CD79C9B71D2CC848004B6F9A /* ObjCSatisfyAnyOfTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */; };
+		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
+		CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
+		CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
@@ -1332,6 +1332,7 @@
 				1F12BEE01E7791B9006952EC /* CwlCatchException.m in Sources */,
 				AE7ADE451C80BF8000B94CD3 /* MatchError.swift in Sources */,
 				1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
+				CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */,
 				1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */,
 				1FD8CD561968AB07008ED995 /* Contain.swift in Sources */,
 				1FD8CD481968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
@@ -1345,7 +1346,6 @@
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6A1968AB07008ED995 /* Async.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
-				1FD8CD5C1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD341968AB07008ED995 /* DSL.swift in Sources */,
 				1F12BEDD1E7791B9006952EC /* CwlCatchException.swift in Sources */,
 				7B5358BE1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
@@ -1432,7 +1432,6 @@
 				1F5DF1791BDCA0F500C3A531 /* BeCloseTo.swift in Sources */,
 				1F5DF16C1BDCA0F500C3A531 /* AssertionRecorder.swift in Sources */,
 				1F1871D71CA89EEF00A34BF2 /* NMBExceptionCapture.m in Sources */,
-				1F5DF1881BDCA0F500C3A531 /* MatcherProtocols.swift in Sources */,
 				1F5DF16E1BDCA0F500C3A531 /* NimbleXCTestHandler.swift in Sources */,
 				7A6AB2C61E7F628A00A2F694 /* ToSucceed.swift in Sources */,
 				1F5DF1751BDCA0F500C3A531 /* FailureMessage.swift in Sources */,
@@ -1478,6 +1477,7 @@
 				1F5DF1841BDCA0F500C3A531 /* EndWith.swift in Sources */,
 				1F5DF18D1BDCA0F500C3A531 /* SourceLocation.swift in Sources */,
 				1F5DF1701BDCA0F500C3A531 /* DSL.swift in Sources */,
+				CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */,
 				1F5DF1721BDCA0F500C3A531 /* Expectation.swift in Sources */,
 				7B5358C01C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
 				7B13BA0C1DD361D300C9098C /* ContainElementSatisfying.swift in Sources */,
@@ -1598,6 +1598,7 @@
 				AE7ADE461C80BF8000B94CD3 /* MatchError.swift in Sources */,
 				1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
 				1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */,
+				CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */,
 				1FD8CD571968AB07008ED995 /* Contain.swift in Sources */,
 				7A0A26231E7F52360092A34E /* ToSucceed.swift in Sources */,
 				1FD8CD491968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
@@ -1612,7 +1613,6 @@
 				1FD8CD6B1968AB07008ED995 /* Async.swift in Sources */,
 				964CFEFE1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
-				1FD8CD5D1968AB07008ED995 /* MatcherProtocols.swift in Sources */,
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
 				7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
 				1F12BE9B1E778F70006952EC /* CwlDarwinDefinitions.swift in Sources */,
