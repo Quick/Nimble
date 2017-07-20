@@ -36,7 +36,7 @@ public class NMBExpectation: NSObject {
     internal let _line: UInt
     internal var _timeout: TimeInterval = 1.0
 
-    @objc public init(actualBlock: @escaping () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
+    public init(actualBlock: @escaping () -> NSObject!, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
@@ -175,7 +175,7 @@ public class NMBExpectation: NSObject {
 
     public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
 
-    @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
+    public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))
     }
 }
