@@ -16,7 +16,7 @@ public func match(_ expectedValue: String?) -> Predicate<String> {
     }.requireNonNil
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 
 extension NMBObjCMatcher {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBMatcher {

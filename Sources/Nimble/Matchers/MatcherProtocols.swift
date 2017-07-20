@@ -1,6 +1,6 @@
 import Foundation
 // `CGFloat` is in Foundation (swift-corelibs-foundation) on Linux.
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
     import CoreGraphics
 #endif
 
@@ -28,7 +28,7 @@ extension Matcher {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 /// Objective-C interface to the Swift variant of Matcher.
 @objc public protocol NMBMatcher {
     func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
@@ -36,53 +36,37 @@ extension Matcher {
 }
 #endif
 
-#if _runtime(_ObjC)
 /// Protocol for types that support contain() matcher.
-@objc public protocol NMBContainer {
-    @objc(containsObject:)
-    func contains(_ anObject: Any) -> Bool
-}
-
-// FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
-//extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
-#else
 public protocol NMBContainer {
     func contains(_ anObject: Any) -> Bool
 }
+
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+// FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
+//extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #endif
 
 extension NSArray : NMBContainer {}
 extension NSSet : NMBContainer {}
 
-#if _runtime(_ObjC)
 /// Protocol for types that support only beEmpty(), haveCount() matchers
-@objc public protocol NMBCollection {
-    var count: Int { get }
-}
-
-extension NSHashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
-extension NSMapTable : NMBCollection {}
-#else
 public protocol NMBCollection {
     var count: Int { get }
 }
+
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+extension NSHashTable : NMBCollection {} // Corelibs Foundation does not include these classes yet
+extension NSMapTable : NMBCollection {}
 #endif
 
 extension NSSet : NMBCollection {}
 extension NSIndexSet : NMBCollection {}
 extension NSDictionary : NMBCollection {}
 
-#if _runtime(_ObjC)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
-@objc public protocol NMBOrderedCollection: NMBCollection {
-    @objc(objectAtIndex:)
-    func object(at index: Int) -> Any
-}
-#else
 public protocol NMBOrderedCollection: NMBCollection {
     func object(at index: Int) -> Any
 }
-#endif
 
 extension NSArray : NMBOrderedCollection {}
 
@@ -147,7 +131,7 @@ extension NSDate: TestOutputStringConvertible {
 ///  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 ///
 /// Types that conform to Swift's Comparable protocol will work implicitly too
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 @objc public protocol NMBComparable {
     func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }

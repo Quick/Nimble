@@ -63,7 +63,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
         }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
         return NMBPredicate { actualExpression in

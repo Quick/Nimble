@@ -42,7 +42,7 @@ public func beginWith(_ startingSubstring: String) -> Predicate<String> {
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     @objc public class func beginWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

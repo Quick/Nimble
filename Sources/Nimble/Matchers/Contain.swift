@@ -67,7 +67,7 @@ public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
     }.requireNonNil
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     @objc public class func containMatcher(_ expected: [NSObject]) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

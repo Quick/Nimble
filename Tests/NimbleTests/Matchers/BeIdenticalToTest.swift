@@ -52,7 +52,7 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
         let value = NSDate()
         expect(value).to(be(value))
         expect(NSNumber(value:1)).toNot(be(NSString(string: "turtles")))
-        #if _runtime(_ObjC)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
             expect([1]).toNot(be([1]))
         #else
             expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))

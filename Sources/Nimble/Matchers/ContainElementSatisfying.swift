@@ -25,7 +25,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
     }.requireNonNil
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
     extension NMBObjCMatcher {
         @objc public class func containElementSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBObjCMatcher {
             return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

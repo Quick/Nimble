@@ -54,7 +54,7 @@ public func endWith(_ endingSubstring: String) -> Predicate<String> {
     }.requireNonNil
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     @objc public class func endWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in

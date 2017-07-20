@@ -134,7 +134,7 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
     }
 }
 
-#if _runtime(_ObjC)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
     @objc public class func beTruthyMatcher() -> NMBObjCMatcher {
         return NMBObjCMatcher { actualExpression, failureMessage in
