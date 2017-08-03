@@ -36,11 +36,9 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
-let notificationCenterDefault = NotificationCenter.default
-
 public func postNotifications<T>(
     _ notificationsMatcher: T,
-    fromNotificationCenter center: NotificationCenter = notificationCenterDefault)
+    fromNotificationCenter center: NotificationCenter = .default)
     -> Predicate<Any>
     where T: Matcher, T.ValueType == [Notification]
 {

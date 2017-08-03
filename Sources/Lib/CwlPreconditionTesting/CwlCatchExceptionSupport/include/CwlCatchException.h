@@ -29,4 +29,5 @@ FOUNDATION_EXPORT const unsigned char CwlCatchExceptionVersionString[];
 #if !SWIFT_PACKAGE && NON_SWIFT_PACKAGE
 __attribute__((visibility("hidden")))
 #endif
-NSException* __nullable catchExceptionOfKind(Class __nonnull type, __attribute__((noescape)) void (^ __nonnull inBlock)());
+NSException* __nullable catchExceptionOfKind(Class __nonnull type, __attribute__((noescape)) void (^ __nonnull inBlock)(void));
+
