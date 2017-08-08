@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
+#if !SWIFT_PACKAGE
 
 final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (ThrowAssertionTest) -> () throws -> Void)] {

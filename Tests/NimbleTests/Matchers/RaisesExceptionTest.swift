@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 
-#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
+#if !SWIFT_PACKAGE
 
 final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (RaisesExceptionTest) -> () throws -> Void)] {
