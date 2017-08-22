@@ -83,7 +83,7 @@ extension Predicate {
 }
 
 // Question: Should this be exposed? It's safer to not for now and decide later.
-internal enum ExpectationStyle {
+public enum ExpectationStyle {
     case toMatch, toNotMatch
 }
 
@@ -108,7 +108,7 @@ public struct PredicateResult {
     }
 
     /// Converts the result to a boolean based on what the expectation intended
-    internal func toBoolean(expectation style: ExpectationStyle) -> Bool {
+    public func toBoolean(expectation style: ExpectationStyle) -> Bool {
         return status.toBoolean(expectation: style)
     }
 }
