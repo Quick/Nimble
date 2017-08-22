@@ -91,9 +91,9 @@ internal enum ExpectationStyle {
 /// predicate.
 public struct PredicateResult {
     /// Status indicates if the predicate matches, does not match, or fails.
-    var status: PredicateStatus
+    public var status: PredicateStatus
     /// The error message that can be displayed if it does not match
-    var message: ExpectationMessage
+    public var message: ExpectationMessage
 
     /// Constructs a new PredicateResult with a given status and error message
     public init(status: PredicateStatus, message: ExpectationMessage) {
