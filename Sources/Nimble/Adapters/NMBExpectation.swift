@@ -1,6 +1,6 @@
 import Foundation
 
-#if !SWIFT_PACKAGE
+#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
 
 fileprivate func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     return Predicate { actualExpression in
