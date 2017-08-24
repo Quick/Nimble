@@ -82,7 +82,7 @@ extension Predicate {
     }
 }
 
-// Question: Should this be exposed? It's safer to not for now and decide later.
+// The Expectation style intended for comparison to a PredicateStatus.
 public enum ExpectationStyle {
     case toMatch, toNotMatch
 }
