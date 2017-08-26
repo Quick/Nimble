@@ -11,6 +11,8 @@ private enum ErrorResult {
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
 internal class NMBWait: NSObject {
+#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
+    @objc
     internal class func until(
         timeout: TimeInterval,
         file: FileString = #file,
@@ -20,6 +22,17 @@ internal class NMBWait: NSObject {
                 action(done)
             }
     }
+#else
+    internal class func until(
+        timeout: TimeInterval,
+        file: FileString = #file,
+        line: UInt = #line,
+        action: @escaping (@escaping () -> Void) -> Void) {
+            return throwableUntil(timeout: timeout, file: file, line: line) { done in
+                action(done)
+            }
+    }
+#endif
 
     // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
@@ -70,16 +83,16 @@ internal class NMBWait: NSObject {
             }
     }
 
-    #if SWIFT_PACKAGE
-    internal class func until(_ file: FileString = #file, line: UInt = #line, action: @escaping (() -> Void) -> Void) {
-        until(timeout: 1, file: file, line: line, action: action)
-    }
-    #else
+#if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
     @objc(untilFile:line:action:)
     internal class func until(_ file: FileString = #file, line: UInt = #line, action: @escaping (() -> Void) -> Void) {
         until(timeout: 1, file: file, line: line, action: action)
     }
-    #endif
+#else
+    internal class func until(_ file: FileString = #file, line: UInt = #line, action: @escaping (() -> Void) -> Void) {
+        until(timeout: 1, file: file, line: line, action: action)
+    }
+#endif
 }
 
 internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: TimeInterval) -> String {
