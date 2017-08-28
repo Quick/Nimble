@@ -398,11 +398,10 @@ waitUntil(^(void (^done)(void)){
 // Swift
 
 waitUntil(timeout: 10) { done in
-    doSomethingAsync { success in
+    ocean.goFish { success in
         expect(success).to(beTrue())
         done()
     }
-    done()
 }
 ```
 
