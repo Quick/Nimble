@@ -11,6 +11,9 @@ private enum ErrorResult {
 /// bridges to Objective-C via the @objc keyword. This class encapsulates callback-style
 /// asynchronous waiting logic so that it may be called from Objective-C and Swift.
 internal class NMBWait: NSObject {
+// About these kind of lines, `@objc` attributes are only required for Objective-C
+// support, so that should be conditional on Darwin platforms and normal Xcode builds
+// (non-SwiftPM builds).
 #if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
     @objc
     internal class func until(
