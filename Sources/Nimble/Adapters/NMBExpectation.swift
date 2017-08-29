@@ -49,13 +49,13 @@ public class NMBExpectation: NSObject {
         }
     }
 
-    public var withTimeout: (TimeInterval) -> NMBExpectation {
+    @objc public var withTimeout: (TimeInterval) -> NMBExpectation {
         return ({ timeout in self._timeout = timeout
             return self
         })
     }
 
-    public var to: (NMBMatcher) -> Void {
+    @objc public var to: (NMBMatcher) -> Void {
         return ({ matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred))
@@ -65,7 +65,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred), description: description)
@@ -75,7 +75,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toNot: (NMBMatcher) -> Void {
+    @objc public var toNot: (NMBMatcher) -> Void {
         return ({ matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred))
@@ -85,7 +85,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toNotWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toNotWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred), description: description)
@@ -95,11 +95,11 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var notTo: (NMBMatcher) -> Void { return toNot }
+    @objc public var notTo: (NMBMatcher) -> Void { return toNot }
 
-    public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
+    @objc public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
 
-    public var toEventually: (NMBMatcher) -> Void {
+    @objc public var toEventually: (NMBMatcher) -> Void {
         return ({ matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toEventually(
@@ -117,7 +117,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toEventually(
@@ -135,7 +135,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toEventuallyNot: (NMBMatcher) -> Void {
+    @objc public var toEventuallyNot: (NMBMatcher) -> Void {
         return ({ matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toEventuallyNot(
@@ -153,7 +153,7 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
         return ({ matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toEventuallyNot(
@@ -171,9 +171,9 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
+    @objc public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
 
-    public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
+    @objc public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
 
     @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))

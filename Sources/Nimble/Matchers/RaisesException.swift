@@ -114,7 +114,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         _block = block
     }
 
-    public func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    @objc public func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let block: () -> Any? = ({ _ = actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
 
@@ -126,11 +126,11 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         ).matches(expr, failureMessage: failureMessage)
     }
 
-    public func doesNotMatch(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
+    @objc public func doesNotMatch(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         return !matches(actualBlock, failureMessage: failureMessage, location: location)
     }
 
-    public var named: (_ name: String) -> NMBObjCRaiseExceptionMatcher {
+    @objc public var named: (_ name: String) -> NMBObjCRaiseExceptionMatcher {
         return ({ name in
             return NMBObjCRaiseExceptionMatcher(
                 name: name,
@@ -141,7 +141,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         })
     }
 
-    public var reason: (_ reason: String?) -> NMBObjCRaiseExceptionMatcher {
+    @objc public var reason: (_ reason: String?) -> NMBObjCRaiseExceptionMatcher {
         return ({ reason in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,
@@ -152,7 +152,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         })
     }
 
-    public var userInfo: (_ userInfo: NSDictionary?) -> NMBObjCRaiseExceptionMatcher {
+    @objc public var userInfo: (_ userInfo: NSDictionary?) -> NMBObjCRaiseExceptionMatcher {
         return ({ userInfo in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,
@@ -163,7 +163,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         })
     }
 
-    public var satisfyingBlock: (_ block: ((NSException) -> Void)?) -> NMBObjCRaiseExceptionMatcher {
+    @objc public var satisfyingBlock: (_ block: ((NSException) -> Void)?) -> NMBObjCRaiseExceptionMatcher {
         return ({ block in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,

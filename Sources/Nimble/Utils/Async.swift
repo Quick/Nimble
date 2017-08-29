@@ -180,9 +180,18 @@ internal class AwaitPromiseBuilder<T> {
         // checked.
         //
         // In addition, stopping the run loop is used to halt code executed on the main run loop.
+        #if swift(>=4.0)
+        trigger.timeoutSource.schedule(
+            deadline: DispatchTime.now() + timeoutInterval,
+            repeating: .never,
+            leeway: timeoutLeeway
+        )
+        #else
         trigger.timeoutSource.scheduleOneshot(
             deadline: DispatchTime.now() + timeoutInterval,
-            leeway: timeoutLeeway)
+            leeway: timeoutLeeway
+        )
+        #endif
         trigger.timeoutSource.setEventHandler {
             guard self.promise.asyncResult.isIncomplete() else { return }
             let timedOutSem = DispatchSemaphore(value: 0)
@@ -320,7 +329,11 @@ internal class Awaiter {
         let asyncSource = createTimerSource(asyncQueue)
         let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
             let interval = DispatchTimeInterval.nanoseconds(Int(pollInterval * TimeInterval(NSEC_PER_SEC)))
+            #if swift(>=4.0)
+            asyncSource.schedule(deadline: .now(), repeating: interval, leeway: pollLeeway)
+            #else
             asyncSource.scheduleRepeating(deadline: .now(), interval: interval, leeway: pollLeeway)
+            #endif
             asyncSource.setEventHandler {
                 do {
                     if let result = try closure() {
