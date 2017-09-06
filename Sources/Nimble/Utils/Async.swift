@@ -89,7 +89,7 @@ internal enum AwaitResult<T> {
 
     func isCompleted() -> Bool {
         switch self {
-        case .completed(_): return true
+        case .completed: return true
         default: return false
         }
     }
