@@ -2,7 +2,7 @@ import Foundation
 
 #if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
 
-fileprivate func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
+private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     return Predicate { actualExpression in
         let result = objcPredicate.satisfies(({ try! actualExpression.evaluate() }),
                                              location: actualExpression.location)

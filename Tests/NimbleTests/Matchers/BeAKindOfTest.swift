@@ -2,10 +2,10 @@ import Foundation
 import XCTest
 import Nimble
 
-fileprivate class TestNull: NSNull {}
-fileprivate protocol TestProtocol {}
-fileprivate class TestClassConformingToProtocol: TestProtocol {}
-fileprivate struct TestStructConformingToProtocol: TestProtocol {}
+private class TestNull: NSNull {}
+private protocol TestProtocol {}
+private class TestClassConformingToProtocol: TestProtocol {}
+private struct TestStructConformingToProtocol: TestProtocol {}
 
 final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAKindOfSwiftTest) -> () throws -> Void)] {

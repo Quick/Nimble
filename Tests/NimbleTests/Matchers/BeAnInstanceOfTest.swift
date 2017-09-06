@@ -2,9 +2,9 @@ import Foundation
 import XCTest
 import Nimble
 
-fileprivate protocol TestProtocol {}
-fileprivate class TestClassConformingToProtocol: TestProtocol {}
-fileprivate struct TestStructConformingToProtocol: TestProtocol {}
+private protocol TestProtocol {}
+private class TestClassConformingToProtocol: TestProtocol {}
+private struct TestStructConformingToProtocol: TestProtocol {}
 
 final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
     static var allTests: [(String, (BeAnInstanceOfTest) -> () throws -> Void)] {
