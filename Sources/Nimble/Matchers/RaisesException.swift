@@ -34,6 +34,7 @@ public func raiseException(
         }
 }
 
+// swiftlint:disable:next function_parameter_count
 internal func setFailureMessageForException(
     _ failureMessage: FailureMessage,
     exception: NSException?,
