@@ -6,7 +6,6 @@ disabled_rules:
   - function_parameter_count
   - force_cast
   - type_name
-  - large_tuple
 
 included:
   - Sources
