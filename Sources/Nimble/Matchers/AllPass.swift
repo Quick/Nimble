@@ -90,6 +90,7 @@ extension NMBObjCMatcher {
                 return NMBPredicateResult(
                     status: NMBPredicateStatus.fail,
                     message: NMBExpectationMessage(
+                        // swiftlint:disable:next line_length
                         fail: "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...), and whose elements subclass NSObject, got <\(actualValue?.description ?? "nil")>"
                     )
                 )

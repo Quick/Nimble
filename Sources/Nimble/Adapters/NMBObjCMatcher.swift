@@ -2,8 +2,10 @@ import Foundation
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 
+// swiftlint:disable line_length
 public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>, _ failureMessage: FailureMessage) -> Bool
 public typealias FullMatcherBlock = (_ actualExpression: Expression<NSObject>, _ failureMessage: FailureMessage, _ shouldNotMatch: Bool) -> Bool
+// swiftlint:enable line_length
 
 public class NMBObjCMatcher: NSObject, NMBMatcher {
     let _match: MatcherBlock

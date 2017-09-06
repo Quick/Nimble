@@ -75,11 +75,14 @@ extension NMBObjCMatcher {
                 let expr = Expression(expression: ({ value as String }), location: location)
                 return try! beEmpty().satisfies(expr).toObjectiveC()
             } else if let actualValue = actualValue {
+                // swiftlint:disable:next line_length
                 let badTypeErrorMsg = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"
                 return NMBPredicateResult(
                     status: NMBPredicateStatus.fail,
-                    message: NMBExpectationMessage(expectedActualValueTo: badTypeErrorMsg,
-                                                   customActualValue: "\(String(describing: type(of: actualValue))) type")
+                    message: NMBExpectationMessage(
+                        expectedActualValueTo: badTypeErrorMsg,
+                        customActualValue: "\(String(describing: type(of: actualValue))) type"
+                    )
                 )
             }
             return NMBPredicateResult(

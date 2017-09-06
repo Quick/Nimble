@@ -29,8 +29,21 @@ public func raiseException(
                 return
             }
 
-            setFailureMessageForException(failureMessage, exception: exception, named: named, reason: reason, userInfo: userInfo, closure: closure)
-            return exceptionMatchesNonNilFieldsOrClosure(exception, named: named, reason: reason, userInfo: userInfo, closure: closure)
+            setFailureMessageForException(
+                failureMessage,
+                exception: exception,
+                named: named,
+                reason: reason,
+                userInfo: userInfo,
+                closure: closure
+            )
+            return exceptionMatchesNonNilFieldsOrClosure(
+                exception,
+                named: named,
+                reason: reason,
+                userInfo: userInfo,
+                closure: closure
+            )
         }
 }
 
@@ -61,6 +74,7 @@ internal func setFailureMessageForException(
         }
 
         if let exception = exception {
+            // swiftlint:disable:next line_length
             failureMessage.actualValue = "\(String(describing: type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
         } else {
             failureMessage.actualValue = "no exception"
