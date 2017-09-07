@@ -10,6 +10,7 @@ import Foundation
 public func haveCount<T: Collection>(_ expectedValue: T.IndexDistance) -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
+            // swiftlint:disable:next line_length
             failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count
             failureMessage.actualValue = "\(actualValue.count)"
@@ -26,6 +27,7 @@ public func haveCount<T: Collection>(_ expectedValue: T.IndexDistance) -> Predic
 public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         if let actualValue = try actualExpression.evaluate() {
+            // swiftlint:disable:next line_length
             failureMessage.postfixMessage = "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))"
             let result = expectedValue == actualValue.count
             failureMessage.actualValue = "\(actualValue.count)"

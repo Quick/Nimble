@@ -2,7 +2,7 @@ import Foundation
 
 #if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
 
-fileprivate func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
+private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     return Predicate { actualExpression in
         let result = objcPredicate.satisfies(({ try! actualExpression.evaluate() }),
                                              location: actualExpression.location)
@@ -171,9 +171,13 @@ public class NMBExpectation: NSObject {
         })
     }
 
-    @objc public var toNotEventually: (NMBMatcher) -> Void { return toEventuallyNot }
+    @objc public var toNotEventually: (NMBMatcher) -> Void {
+        return toEventuallyNot
+    }
 
-    @objc public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void { return toEventuallyNotWithDescription }
+    @objc public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void {
+        return toEventuallyNotWithDescription
+    }
 
     @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))

@@ -83,6 +83,7 @@ extension NMBObjCMatcher {
                 let expr = Expression(expression: ({ value as String }), location: location)
                 return try! contain(expected as! [String]).matches(expr, failureMessage: failureMessage)
             } else if actualValue != nil {
+                // swiftlint:disable:next line_length
                 failureMessage.postfixMessage = "contain <\(arrayAsString(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
             } else {
                 failureMessage.postfixMessage = "contain <\(arrayAsString(expected))>"

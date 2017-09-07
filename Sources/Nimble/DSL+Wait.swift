@@ -45,7 +45,8 @@ internal class NMBWait: NSObject {
         action: @escaping (@escaping () -> Void) throws -> Void) {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
             let leeway = timeout / 2.0
-        let result = awaiter.performBlock(file: file, line: line) { (done: @escaping (ErrorResult) -> Void) throws -> Void in
+            // swiftlint:disable:next line_length
+            let result = awaiter.performBlock(file: file, line: line) { (done: @escaping (ErrorResult) -> Void) throws -> Void in
                 DispatchQueue.main.async {
                     let capture = NMBExceptionCapture(
                         handler: ({ exception in
@@ -99,6 +100,7 @@ internal class NMBWait: NSObject {
 }
 
 internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: TimeInterval) -> String {
+    // swiftlint:disable:next line_length
     return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive (\(leeway) seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
 }
 

@@ -1,12 +1,8 @@
 disabled_rules:
-  - line_length
   - todo
   - variable_name
   - force_try
-  - function_parameter_count
   - force_cast
-  - type_name
-  - large_tuple
 
 included:
   - Sources
@@ -17,3 +13,7 @@ excluded:
 
 trailing_comma:
   mandatory_comma: true
+
+line_length:
+  ignores_comments: true
+  ignores_function_declarations: true
