@@ -169,12 +169,14 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
     }
 }
 
-public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
-    lhs.to(equal(rhs))
-}
+extension Expectation where T: Equatable {
+    public static func == (lhs: Expectation, rhs: T?) {
+        lhs.to(equal(rhs))
+    }
 
-public func !=<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
-    lhs.toNot(equal(rhs))
+    public static func != (lhs: Expectation, rhs: T?) {
+        lhs.toNot(equal(rhs))
+    }
 }
 
 public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
