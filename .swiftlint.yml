@@ -9,7 +9,7 @@ included:
   - Tests
 
 excluded:
-  - Sources/Lib
+  - Carthage/Checkouts
 
 trailing_comma:
   mandatory_comma: true
