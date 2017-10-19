@@ -77,7 +77,7 @@ extension NMBObjCMatcher {
 
 public func beCloseTo(_ expectedValues: [Double], within delta: Double = DefaultDelta) -> Predicate<[Double]> {
     let errorMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
-    return Predicate.simple(errorMessage) { actualExpression in
+    return .simple(errorMessage) { actualExpression in
         if let actual = try actualExpression.evaluate() {
             if actual.count != expectedValues.count {
                 return .doesNotMatch

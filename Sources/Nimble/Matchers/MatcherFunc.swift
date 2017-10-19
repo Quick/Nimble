@@ -29,7 +29,7 @@ public struct MatcherFunc<T>: Matcher {
     /// Note: You should definitely spend the time to convert to the new api as soon as possible
     /// since this struct type is deprecated.
     public var predicate: Predicate<T> {
-        return Predicate.fromDeprecatedMatcher(self)
+        return .fromDeprecatedMatcher(self)
     }
 }
 
@@ -80,6 +80,6 @@ public struct NonNilMatcherFunc<T>: Matcher {
     /// Note: You should definitely spend the time to convert to the new api as soon as possible
     /// since this struct type is deprecated.
     public var predicate: Predicate<T> {
-        return Predicate.fromDeprecatedMatcher(self)
+        return .fromDeprecatedMatcher(self)
     }
 }

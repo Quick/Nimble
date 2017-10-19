@@ -97,7 +97,7 @@ public func beFalse() -> Predicate<Bool> {
 
 /// A Nimble matcher that succeeds when the actual value is not logically false.
 public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate.simpleNilable("be truthy") { actualExpression in
+    return .simpleNilable("be truthy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
             // FIXME: This is a workaround to SR-2290.
@@ -117,7 +117,7 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
 /// A Nimble matcher that succeeds when the actual value is logically false.
 /// This matcher will match against nils.
 public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
-    return Predicate.simpleNilable("be falsy") { actualExpression in
+    return .simpleNilable("be falsy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
             // FIXME: This is a workaround to SR-2290.
