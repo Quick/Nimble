@@ -25,11 +25,7 @@ public class FailureMessage: NSObject {
 
     public var stringValue: String {
         get {
-            if let value = _stringValueOverride {
-                return value
-            } else {
-                return computeStringValue()
-            }
+            return _stringValueOverride ?? computeStringValue()
         }
         set {
             _stringValueOverride = newValue
