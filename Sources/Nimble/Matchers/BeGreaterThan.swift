@@ -16,9 +16,7 @@ public func beGreaterThan(_ expectedValue: NMBComparable?) -> Predicate<NMBCompa
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be greater than <\(stringify(expectedValue))>"
         let actualValue = try actualExpression.evaluate()
-        let matches = actualValue != nil
-            && actualValue!.NMB_compare(expectedValue) == ComparisonResult.orderedDescending
-        return matches
+        return actualValue?.NMB_compare(expectedValue) == .orderedDescending
     }.requireNonNil
 }
 
