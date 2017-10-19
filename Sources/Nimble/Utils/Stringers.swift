@@ -83,32 +83,21 @@ extension Array: TestOutputStringConvertible {
 
 extension AnySequence: TestOutputStringConvertible {
     public var testDescription: String {
-        let generator = self.makeIterator()
-        var strings = [String]()
-        var value: AnySequence.Iterator.Element?
-
-        repeat {
-            value = generator.next()
-            if let value = value {
-                strings.append(stringify(value))
-            }
-        } while value != nil
-
-        let list = strings.joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }
 
 extension NSIndexSet: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }
