@@ -69,7 +69,7 @@ public protocol NMBOrderedCollection: NMBCollection {
 }
 
 extension NMBOrderedCollection {
-    var first : Any? {
+    var first: Any? {
         return object(at: 0)
     }
 }

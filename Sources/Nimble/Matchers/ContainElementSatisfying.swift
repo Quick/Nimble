@@ -12,7 +12,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
         }
 
         guard let sequence = try actualExpression.evaluate() else { return false }
-        return sequence.contains(where : predicate)
+        return sequence.contains(where: predicate)
 
     }.requireNonNil
 }
