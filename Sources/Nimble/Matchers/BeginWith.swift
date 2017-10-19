@@ -16,13 +16,11 @@ public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predic
 public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection> {
     return .simple("begin with <\(startingElement)>") { actualExpression in
         guard let collection = try actualExpression.evaluate() else { return .fail }
-        guard collection.count > 0 else { return .doesNotMatch }
+        guard let first = collection.first else { return .doesNotMatch }
         #if os(Linux)
-            guard let collectionValue = collection.object(at: 0) as? NSObject else {
-                return .fail
-            }
+            guard let collectionValue = first as? NSObject else { return .fail }
         #else
-            let collectionValue = collection.object(at: 0) as AnyObject
+            let collectionValue = first as AnyObject
         #endif
         return PredicateStatus(bool: collectionValue.isEqual(startingElement))
     }

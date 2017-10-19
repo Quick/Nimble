@@ -18,13 +18,13 @@ extension Matcher {
     }
 
     var toClosure: (Expression<ValueType>, FailureMessage, Bool) throws -> Bool {
-        return ({ expr, msg, expectedResult in
+        return { expr, msg, expectedResult in
             if expectedResult {
                 return try self.matches(expr, failureMessage: msg)
             } else {
                 return try self.doesNotMatch(expr, failureMessage: msg)
             }
-        })
+        }
     }
 }
 
@@ -66,6 +66,12 @@ extension NSDictionary : NMBCollection {}
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 public protocol NMBOrderedCollection: NMBCollection {
     func object(at index: Int) -> Any
+}
+
+extension NMBOrderedCollection {
+    var first : Any? {
+        return object(at: 0)
+    }
 }
 
 extension NSArray : NMBOrderedCollection {}
