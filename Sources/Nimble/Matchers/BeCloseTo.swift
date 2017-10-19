@@ -44,27 +44,25 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
     }
 
     @objc public func matches(_ actualExpression: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let actualBlock: () -> NMBDoubleConvertible? = ({
-            return actualExpression() as? NMBDoubleConvertible
-        })
+        let actualBlock: () -> NMBDoubleConvertible? = { actualExpression() as? NMBDoubleConvertible }
         let expr = Expression(expression: actualBlock, location: location)
         let matcher = beCloseTo(self._expected, within: self._delta)
         return try! matcher.matches(expr, failureMessage: failureMessage)
     }
 
     @objc public func doesNotMatch(_ actualExpression: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let actualBlock: () -> NMBDoubleConvertible? = ({
+        let actualBlock: () -> NMBDoubleConvertible? = {
             return actualExpression() as? NMBDoubleConvertible
-        })
+        }
         let expr = Expression(expression: actualBlock, location: location)
         let matcher = beCloseTo(self._expected, within: self._delta)
         return try! matcher.doesNotMatch(expr, failureMessage: failureMessage)
     }
 
     @objc public var within: (CDouble) -> NMBObjCBeCloseToMatcher {
-        return ({ delta in
-            return NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
-        })
+        return { delta in
+            NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
+        }
     }
 }
 

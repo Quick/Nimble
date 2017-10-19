@@ -66,10 +66,10 @@ extension NMBObjCMatcher {
             let actualValue = try! actualExpression.evaluate()
 
             if let value = actualValue as? NMBCollection {
-                let expr = Expression(expression: ({ value as NMBCollection }), location: location)
+                let expr = Expression(expression: { value as NMBCollection }, location: location)
                 return try! beEmpty().satisfies(expr).toObjectiveC()
             } else if let value = actualValue as? NSString {
-                let expr = Expression(expression: ({ value as String }), location: location)
+                let expr = Expression(expression: { value as String }, location: location)
                 return try! beEmpty().satisfies(expr).toObjectiveC()
             } else if let actualValue = actualValue {
                 // swiftlint:disable:next line_length

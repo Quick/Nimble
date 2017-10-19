@@ -49,10 +49,10 @@ internal class NMBWait: NSObject {
             let result = awaiter.performBlock(file: file, line: line) { (done: @escaping (ErrorResult) -> Void) throws -> Void in
                 DispatchQueue.main.async {
                     let capture = NMBExceptionCapture(
-                        handler: ({ exception in
+                        handler: { exception in
                             done(.exception(exception))
-                        }),
-                        finally: ({ })
+                        },
+                        finally: { }
                     )
                     capture.tryBlock {
                         do {

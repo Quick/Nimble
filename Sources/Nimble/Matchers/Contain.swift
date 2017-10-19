@@ -74,13 +74,13 @@ extension NMBObjCMatcher {
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
             if let value = actualValue as? NMBContainer {
-                let expr = Expression(expression: ({ value as NMBContainer }), location: location)
+                let expr = Expression(expression: { value as NMBContainer }, location: location)
 
                 // A straightforward cast on the array causes this to crash, so we have to cast the individual items
-                let expectedOptionals: [Any?] = expected.map({ $0 as Any? })
+                let expectedOptionals: [Any?] = expected.map { $0 as Any? }
                 return try! contain(expectedOptionals).matches(expr, failureMessage: failureMessage)
             } else if let value = actualValue as? NSString {
-                let expr = Expression(expression: ({ value as String }), location: location)
+                let expr = Expression(expression: { value as String }, location: location)
                 return try! contain(expected as! [String]).matches(expr, failureMessage: failureMessage)
             } else if actualValue != nil {
                 // swiftlint:disable:next line_length

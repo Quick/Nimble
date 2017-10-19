@@ -23,9 +23,9 @@ public class NMBObjCMatcher: NSObject, NMBMatcher {
     }
 
     public convenience init(canMatchNil: Bool, matcher: @escaping MatcherBlock) {
-        self.init(canMatchNil: canMatchNil, matcher: matcher, notMatcher: ({ actualExpression, failureMessage in
-            return !matcher(actualExpression, failureMessage)
-        }))
+        self.init(canMatchNil: canMatchNil, matcher: matcher, notMatcher: { actualExpression, failureMessage in
+            !matcher(actualExpression, failureMessage)
+        })
     }
 
     public convenience init(matcher: @escaping FullMatcherBlock) {
@@ -33,11 +33,11 @@ public class NMBObjCMatcher: NSObject, NMBMatcher {
     }
 
     public convenience init(canMatchNil: Bool, matcher: @escaping FullMatcherBlock) {
-        self.init(canMatchNil: canMatchNil, matcher: ({ actualExpression, failureMessage in
+        self.init(canMatchNil: canMatchNil, matcher: { actualExpression, failureMessage in
             return matcher(actualExpression, failureMessage, false)
-        }), notMatcher: ({ actualExpression, failureMessage in
+        }, notMatcher: { actualExpression, failureMessage in
             return matcher(actualExpression, failureMessage, true)
-        }))
+        })
     }
 
     private func canMatch(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {

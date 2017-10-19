@@ -47,7 +47,7 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     failure = predicateResult.message.prepended(expectation: "all ")
                 } else {
                     failure = predicateResult.message
-                        .replacedExpectation({ .expectedTo($0.expectedMessage) })
+                        .replacedExpectation { .expectedTo($0.expectedMessage) }
                         .wrappedExpectation(
                             before: "all ",
                             after: ", but failed first at element <\(stringify(currentElement))>"
@@ -56,9 +56,9 @@ private func createPredicate<S>(_ elementMatcher: Predicate<S.Iterator.Element>)
                     return PredicateResult(status: .doesNotMatch, message: failure)
                 }
             }
-            failure = failure.replacedExpectation({ expectation in
+            failure = failure.replacedExpectation { expectation in
                 return .expectedTo(expectation.expectedMessage)
-            })
+            }
             return PredicateResult(status: .matches, message: failure)
         }
 }
@@ -96,14 +96,14 @@ extension NMBObjCMatcher {
                 )
             }
 
-            let expr = Expression(expression: ({ nsObjects }), location: location)
+            let expr = Expression(expression: { nsObjects }, location: location)
             let pred: Predicate<[NSObject]> = createPredicate(Predicate { expr in
                 if let predicate = matcher as? NMBPredicate {
-                    return predicate.satisfies(({ try! expr.evaluate() }), location: expr.location).toSwift()
+                    return predicate.satisfies({ try! expr.evaluate() }, location: expr.location).toSwift()
                 } else {
                     let failureMessage = FailureMessage()
                     let result = matcher.matches(
-                        ({ try! expr.evaluate() }),
+                        { try! expr.evaluate() },
                         failureMessage: failureMessage,
                         location: expr.location
                     )
