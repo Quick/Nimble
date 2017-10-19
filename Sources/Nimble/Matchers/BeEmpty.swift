@@ -4,11 +4,8 @@ import Foundation
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
     return .simple("be empty") { actualExpression in
-        let actualSeq = try actualExpression.evaluate()
-        if actualSeq == nil {
-            return .fail
-        }
-        var generator = actualSeq!.makeIterator()
+        guard let actualSeq = try actualExpression.evaluate() else { return .fail }
+        var generator = actualSeq.makeIterator()
         return PredicateStatus(bool: generator.next() == nil)
     }
 }
