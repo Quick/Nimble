@@ -1,12 +1,6 @@
-import Foundation
 
 extension Sequence {
-    internal func all(_ fn: (Iterator.Element) -> Bool) -> Bool {
-        for item in self {
-            if !fn(item) {
-                return false
-            }
-        }
-        return true
+    internal func all(predicate: (Iterator.Element) -> Bool) -> Bool {
+        return !contains { !predicate($0) }
     }
 }
