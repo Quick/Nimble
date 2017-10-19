@@ -19,7 +19,7 @@ internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDelta) -> Predicate<Double> {
-    return Predicate.define { actualExpression in
+    return .define { actualExpression in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta)
     }
 }
@@ -29,7 +29,7 @@ public func beCloseTo(_ expectedValue: Double, within delta: Double = DefaultDel
 ///
 /// @see equal
 public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Double = DefaultDelta) -> Predicate<NMBDoubleConvertible> {
-    return Predicate.define { actualExpression in
+    return .define { actualExpression in
         return isCloseTo(try actualExpression.evaluate(), expectedValue: expectedValue, delta: delta)
     }
 }
