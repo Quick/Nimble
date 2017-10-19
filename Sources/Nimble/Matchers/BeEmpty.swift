@@ -3,7 +3,7 @@ import Foundation
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty<S: Sequence>() -> Predicate<S> {
-    return Predicate.simple("be empty") { actualExpression in
+    return .simple("be empty") { actualExpression in
         let actualSeq = try actualExpression.evaluate()
         if actualSeq == nil {
             return .fail
@@ -16,18 +16,18 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<String> {
-    return Predicate.simple("be empty") { actualExpression in
+    return .simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
-        return PredicateStatus(bool: actualString == nil || NSString(string: actualString!).length  == 0)
+        return PredicateStatus(bool: actualString?.count == 0)
     }
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For NSString instances, it is an empty string.
 public func beEmpty() -> Predicate<NSString> {
-    return Predicate.simple("be empty") { actualExpression in
+    return .simple("be empty") { actualExpression in
         let actualString = try actualExpression.evaluate()
-        return PredicateStatus(bool: actualString == nil || actualString!.length == 0)
+        return PredicateStatus(bool: actualString?.length == 0)
     }
 }
 
@@ -37,27 +37,27 @@ public func beEmpty() -> Predicate<NSString> {
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSDictionary> {
-	return Predicate.simple("be empty") { actualExpression in
+	return .simple("be empty") { actualExpression in
 		let actualDictionary = try actualExpression.evaluate()
-        return PredicateStatus(bool: actualDictionary == nil || actualDictionary!.count == 0)
+        return PredicateStatus(bool: actualDictionary?.count == 0)
 	}
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NSArray> {
-	return Predicate.simple("be empty") { actualExpression in
+	return .simple("be empty") { actualExpression in
 		let actualArray = try actualExpression.evaluate()
-        return PredicateStatus(bool: actualArray == nil || actualArray!.count == 0)
+        return PredicateStatus(bool: actualArray?.count == 0)
 	}
 }
 
 /// A Nimble matcher that succeeds when a value is "empty". For collections, this
 /// means the are no items in that collection. For strings, it is an empty string.
 public func beEmpty() -> Predicate<NMBCollection> {
-    return Predicate.simple("be empty") { actualExpression in
+    return .simple("be empty") { actualExpression in
         let actual = try actualExpression.evaluate()
-        return PredicateStatus(bool: actual == nil || actual!.count == 0)
+        return PredicateStatus(bool: actual?.count == 0)
     }
 }
 
@@ -78,7 +78,7 @@ extension NMBObjCMatcher {
                 // swiftlint:disable:next line_length
                 let badTypeErrorMsg = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"
                 return NMBPredicateResult(
-                    status: NMBPredicateStatus.fail,
+                    status: .fail,
                     message: NMBExpectationMessage(
                         expectedActualValueTo: badTypeErrorMsg,
                         customActualValue: "\(String(describing: type(of: actualValue))) type"
@@ -86,7 +86,7 @@ extension NMBObjCMatcher {
                 )
             }
             return NMBPredicateResult(
-                status: NMBPredicateStatus.fail,
+                status: .fail,
                 message: NMBExpectationMessage(expectedActualValueTo: "be empty").appendedBeNilHint()
             )
         }
