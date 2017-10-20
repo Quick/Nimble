@@ -134,23 +134,19 @@ extension Data: TestOutputStringConvertible {
 ///
 /// - SeeAlso: `TestOutputStringConvertible`
 public func stringify<T>(_ value: T) -> String {
-    if let value = value as? TestOutputStringConvertible {
-        return value.testDescription
+    switch value {
+    case let v as TestOutputStringConvertible:
+        return v.testDescription
+    case let v as CustomDebugStringConvertible:
+        return v.debugDescription
+    default:
+        return "\(value)"
     }
-
-    if let value = value as? CustomDebugStringConvertible {
-        return value.debugDescription
-    }
-
-    return String(describing: value)
 }
 
 /// -SeeAlso: `stringify<T>(value: T)`
 public func stringify<T>(_ value: T?) -> String {
-    if let unboxed = value {
-        return stringify(unboxed)
-    }
-    return "nil"
+    return value.map(stringify) ?? "nil"
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
