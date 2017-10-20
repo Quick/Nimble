@@ -14,10 +14,9 @@ internal func identityAsString(_ value: Any?) -> String {
     }
 }
 
-internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
-    return items.reduce("") { accum, item in
-        let prefix = (accum.isEmpty ? "" : joiner)
-        return accum + prefix + "\(stringify(item))"
+extension Sequence {
+    func stringify(separator : String = ", ") -> String {
+        return map(Nimble.stringify).joined(separator: separator)
     }
 }
 

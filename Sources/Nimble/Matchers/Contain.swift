@@ -9,7 +9,7 @@ public func contain<S: Sequence, T: Equatable>(_ items: T...) -> Predicate<S>
 public func contain<S: Sequence, T: Equatable>(_ items: [T]) -> Predicate<S>
     where S.Iterator.Element == T {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
+        failureMessage.postfixMessage = "contain <\(items.stringify())>"
         if let actual = try actualExpression.evaluate() {
             return items.all {
                 return actual.contains($0)
@@ -26,7 +26,7 @@ public func contain(_ substrings: String...) -> Predicate<String> {
 
 public func contain(_ substrings: [String]) -> Predicate<String> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
+        failureMessage.postfixMessage = "contain <\(substrings.stringify())>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all {
                 let range = actual.range(of: $0)
@@ -44,7 +44,7 @@ public func contain(_ substrings: NSString...) -> Predicate<NSString> {
 
 public func contain(_ substrings: [NSString]) -> Predicate<NSString> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(arrayAsString(substrings))>"
+        failureMessage.postfixMessage = "contain <\(substrings.stringify())>"
         if let actual = try actualExpression.evaluate() {
             return substrings.all { actual.range(of: $0.description).length != 0 }
         }
@@ -59,7 +59,7 @@ public func contain(_ items: Any?...) -> Predicate<NMBContainer> {
 
 public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "contain <\(arrayAsString(items))>"
+        failureMessage.postfixMessage = "contain <\(items.stringify())>"
         guard let actual = try actualExpression.evaluate() else { return false }
         return items.all { item in
             return item != nil && actual.contains(item!)
@@ -84,9 +84,9 @@ extension NMBObjCMatcher {
                 return try! contain(expected as! [String]).matches(expr, failureMessage: failureMessage)
             } else if actualValue != nil {
                 // swiftlint:disable:next line_length
-                failureMessage.postfixMessage = "contain <\(arrayAsString(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
+                failureMessage.postfixMessage = "contain <\(expected.stringify())> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
             } else {
-                failureMessage.postfixMessage = "contain <\(arrayAsString(expected))>"
+                failureMessage.postfixMessage = "contain <\(expected.stringify())>"
             }
             return false
         }
