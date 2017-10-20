@@ -113,7 +113,7 @@ extension Data: TestOutputStringConvertible {
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11-16)
             return "Data<length=\(count)>"
         #else
-            return "Data<hash=\((self as NSData).hash),length=\(count)>"
+            return "Data<hash=\(self.hashValue),length=\(count)>"
         #endif
     }
 }

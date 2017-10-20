@@ -10,11 +10,7 @@ public func matchError<T: Error>(_ error: T) -> Predicate<Error> {
         let actualError: Error? = try actualExpression.evaluate()
 
         setFailureMessageForError(failureMessage, postfixMessageVerb: "match", actualError: actualError, error: error)
-        var matches = false
-        if let actualError = actualError, errorMatchesExpectedError(actualError, expectedError: error) {
-            matches = true
-        }
-        return matches
+        return actualError.map { errorMatchesExpectedError($0, expectedError: error) } ?? false
     }.requireNonNil
 }
 
@@ -29,11 +25,7 @@ public func matchError<T: Error & Equatable>(_ error: T) -> Predicate<Error> {
 
         setFailureMessageForError(failureMessage, postfixMessageVerb: "match", actualError: actualError, error: error)
 
-        var matches = false
-        if let actualError = actualError as? T, error == actualError {
-            matches = true
-        }
-        return matches
+        return (actualError as? T) == error
     }.requireNonNil
 }
 
@@ -49,10 +41,6 @@ public func matchError<T: Error>(_ errorType: T.Type) -> Predicate<Error> {
             actualError: actualError,
             errorType: errorType
         )
-        var matches = false
-        if actualError as? T != nil {
-            matches = true
-        }
-        return matches
+        return actualError is T
     }.requireNonNil
 }
