@@ -68,7 +68,7 @@ final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
         }
 
         let testClass = TestClassConformingToProtocol()
-        failsWithErrorMessage("expected to be an instance of \(String(describing: TestProtocol.self)), got <\(String(describing: TestClassConformingToProtocol.self)) instance>") {
+        failsWithErrorMessage("expected to be an instance of \(TestProtocol.self), got <\(TestClassConformingToProtocol.self) instance>") {
             expect(testClass).to(beAnInstanceOf(TestProtocol.self))
         }
 

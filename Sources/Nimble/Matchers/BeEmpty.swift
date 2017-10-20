@@ -78,7 +78,7 @@ extension NMBObjCMatcher {
                     status: .fail,
                     message: NMBExpectationMessage(
                         expectedActualValueTo: badTypeErrorMsg,
-                        customActualValue: "\(String(describing: type(of: actualValue))) type"
+                        customActualValue: "\(type(of: actualValue)) type"
                     )
                 )
             }
