@@ -602,7 +602,6 @@
 		CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstruction.swift; sourceTree = "<group>"; };
 		CDFB6A2C1F7E082400AD8CC7 /* CwlCatchBadInstructionPosix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstructionPosix.swift; sourceTree = "<group>"; };
 		CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlDarwinDefinitions.swift; sourceTree = "<group>"; };
-		CDFB6A2E1F7E082400AD8CC7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDFB6A301F7E082400AD8CC7 /* CwlPreconditionTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlPreconditionTesting.h; sourceTree = "<group>"; };
 		CDFB6A321F7E082400AD8CC7 /* CwlPreconditionTesting_POSIX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlPreconditionTesting_POSIX.h; sourceTree = "<group>"; };
 		CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlMachBadInstructionHandler.m; sourceTree = "<group>"; };
@@ -972,7 +971,6 @@
 				CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */,
 				CDFB6A2C1F7E082400AD8CC7 /* CwlCatchBadInstructionPosix.swift */,
 				CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */,
-				CDFB6A2E1F7E082400AD8CC7 /* Info.plist */,
 				CDFB6A2F1F7E082400AD8CC7 /* Mach */,
 				CDFB6A311F7E082400AD8CC7 /* Posix */,
 			);
