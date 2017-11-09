@@ -7,7 +7,7 @@ public struct AsyncDefaults {
     public static var PollInterval: TimeInterval = 0.01
 }
 
-private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout: TimeInterval, poll: TimeInterval, fnName: String) -> Predicate<T> {
+internal func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout: TimeInterval, poll: TimeInterval, fnName: String) -> Predicate<T> {
     return Predicate { actualExpression in
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).\(fnName)(...)"
@@ -106,7 +106,7 @@ internal struct AsyncMatcherWrapper<T, U>: Matcher
     }
 }
 
-private let toEventuallyRequiresClosureError = FailureMessage(
+internal let toEventuallyRequiresClosureError = FailureMessage(
     // swiftlint:disable:next line_length
     stringValue: "expect(...).toEventually(...) requires an explicit closure (eg - expect { ... }.toEventually(...) )\nSwift 1.2 @autoclosure behavior has changed in an incompatible way for Nimble to function"
 )
