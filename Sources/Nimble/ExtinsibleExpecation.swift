@@ -22,13 +22,18 @@ public struct ExtensibleExpecation<Type> {
     private let style: ExpectationStyle
     
     private let isAsync: Bool
+    private let timeout: TimeInterval
+    private let pollInterval: TimeInterval
     init(base: Expectation<T>, style: ExpectationStyle,
-         isAsync: Bool = false
+         isAsync: Bool = false,
+         timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval
         ) {
         self.base = base
         self.style = style
         
         self.isAsync = isAsync
+        self.timeout = timeout
+        self.pollInterval = pollInterval
     }
     
     public func match(description: String? = nil, _ predicateFactory: @escaping () -> Predicate<T>) {
@@ -41,8 +46,8 @@ public struct ExtensibleExpecation<Type> {
             predicateFactory() :
             async(style: style,
                   predicate: predicateFactory(),
-                  timeout: AsyncDefaults.Timeout,
-                  poll: AsyncDefaults.PollInterval,
+                  timeout: timeout,
+                  poll: pollInterval,
                   fnName: style == .toMatch ? "toEventually" : "toEventuallyNot")
         
         let (pass, msg) = execute(base.expression,
@@ -76,7 +81,6 @@ extension Expectation {
 
 //MARK: Async Expectation Extensions
 extension Expectation {
-    
     /// Expectation extension to test the actual value using a matcher to match by checking continously at default poll interval until the default timeout is reached.
     public var toEventually: ExtensibleExpecation<T> {
         return ExtensibleExpecation(base: self,
@@ -96,5 +100,22 @@ extension Expectation {
     /// Alias to `toEventuallyNot`
     public var toNotEventually: ExtensibleExpecation<T> {
         return toEventuallyNot
+    }
+    
+    /// Expectation extension to test the actual value using a matcher to match by checking continously at pollInterval until the timeout is reached.
+    public func toEventually(timeout: TimeInterval, pollInterval: TimeInterval) -> ExtensibleExpecation<T> {
+        return ExtensibleExpecation(base: self, style: .toMatch, isAsync: true, timeout: timeout, pollInterval: pollInterval)
+    }
+    
+    /// Expectation extension to test the actual value using a matcher to not match by checking continously at pollInterval until the timeout is reached.
+    public func toEventuallyNot(timeout: TimeInterval, pollInterval: TimeInterval) -> ExtensibleExpecation<T> {
+        return ExtensibleExpecation(base: self, style: .toNotMatch, isAsync: true, timeout: timeout, pollInterval: pollInterval)
+    }
+    
+    /// Expectation extension to test the actual value using a matcher to not match by checking continously at pollInterval until the timeout is reached.
+    ///
+    /// Alias to `toEventuallyNot()`
+    public func toNotEventually(timeout: TimeInterval, pollInterval: TimeInterval) -> ExtensibleExpecation<T> {
+        return toEventuallyNot(timeout: timeout, pollInterval: pollInterval)
     }
 }
