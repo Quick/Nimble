@@ -15,10 +15,46 @@ internal class NotificationCollector {
     }
 
     func startObserving() {
-        self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] n in
-            // linux-swift gets confused by .append(n)
-            self?.observedNotifications.append(n)
-        }
+        // A workaround to SR-6419.
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+            self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] n in
+                // linux-swift gets confused by .append(n)
+                self?.observedNotifications.append(n)
+            }
+        #elseif swift(>=4.0)
+            #if swift(>=4.0.2)
+                // swiftlint:disable:next line_length
+                self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil, using: { [weak self] n in
+                    // linux-swift gets confused by .append(n)
+                    self?.observedNotifications.append(n)
+                })
+            #else
+                // swiftlint:disable:next line_length
+                self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] n in
+                    // linux-swift gets confused by .append(n)
+                    self?.observedNotifications.append(n)
+                }
+            #endif
+        #elseif swift(>=3.2)
+            #if swift(>=3.2.2)
+                // swiftlint:disable:next line_length
+                self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil, using: { [weak self] n in
+                    // linux-swift gets confused by .append(n)
+                    self?.observedNotifications.append(n)
+                })
+            #else
+                // swiftlint:disable:next line_length
+                self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] n in
+                    // linux-swift gets confused by .append(n)
+                    self?.observedNotifications.append(n)
+                }
+            #endif
+        #else
+            self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] n in
+                // linux-swift gets confused by .append(n)
+                self?.observedNotifications.append(n)
+            }
+        #endif
     }
 
     deinit {
