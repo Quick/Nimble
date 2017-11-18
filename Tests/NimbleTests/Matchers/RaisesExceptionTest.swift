@@ -90,7 +90,7 @@ final class RaisesExceptionTest: XCTestCase, XCTestCaseProvider {
     func testNegativeMatchesDoNotCallClosureWithoutException() {
         failsWithErrorMessage("expected to raise exception that satisfies block, got no exception") {
             expect { self.anException }.to(raiseException { (exception: NSException) in
-                expect(exception.name).to(equal(NSExceptionName(rawValue:"foo")))
+                expect(exception.name).to(equal(NSExceptionName(rawValue: "foo")))
             })
         }
 

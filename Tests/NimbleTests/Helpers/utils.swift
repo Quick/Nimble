@@ -88,7 +88,7 @@ extension Date {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let date = dateFormatter.date(from: dateTimeString)!
-        self.init(timeInterval:0, since:date)
+        self.init(timeInterval: 0, since: date)
     }
 }
 
