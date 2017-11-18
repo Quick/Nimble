@@ -19,7 +19,7 @@ extension NotificationCenter {
             }
         #endif
     #else
-    	// swiftlint:disable:next line_length
+        // swiftlint:disable:next line_length
         func addObserver(forName name: Notification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
             return addObserver(forName: name, object: obj, queue: queue, usingBlock: block)
         }
