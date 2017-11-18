@@ -21,7 +21,7 @@
 #import <Foundation/Foundation.h>
 
 //! Project version number for CwlUtils.
-FOUNDATION_EXPORT double CwlPreconditionTestingVersionNumber;
+FOUNDATION_EXPORT double CwlPreconditionTesting_POSIXVersionNumber;
 
 //! Project version string for CwlUtils.
-FOUNDATION_EXPORT const unsigned char CwlAssertingTestingVersionString[];
+FOUNDATION_EXPORT const unsigned char CwlAssertingTesting_POSIXVersionString[];

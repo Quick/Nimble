@@ -11,7 +11,15 @@ Nimble.framework.zip
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
-
+Carthage/Checkouts/**/*.*
+Carthage/Checkouts/**/Cart*
+Carthage/Checkouts/**/Tests
+!Carthage/Checkouts/**/LICENSE.*
+!Carthage/Checkouts/**/*.md
+!Carthage/Checkouts/**/*.swift
+!Carthage/Checkouts/**/*.h
+!Carthage/Checkouts/**/*.m
+!Carthage/Checkouts/**/*.c
 Carthage/Build
 
 # Swift Package Manager
