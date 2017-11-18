@@ -44,7 +44,7 @@ final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
         }
 
         let testClass = TestClassConformingToProtocol()
-        failsWithErrorMessage("expected to not be a kind of \(String(describing: TestProtocol.self)), got <\(String(describing: TestClassConformingToProtocol.self)) instance>") {
+        failsWithErrorMessage("expected to not be a kind of \(TestProtocol.self), got <\(String(describing: TestClassConformingToProtocol.self)) instance>") {
             expect(testClass).toNot(beAKindOf(TestProtocol.self))
         }
 

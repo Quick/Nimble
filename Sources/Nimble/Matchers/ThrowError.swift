@@ -12,7 +12,7 @@ import Foundation
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func throwError() -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {
@@ -43,7 +43,7 @@ public func throwError() -> Predicate<Any> {
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func throwError<T: Error>(_ error: T, closure: ((Error) -> Void)? = nil) -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {
@@ -88,7 +88,7 @@ public func throwError<T: Error>(_ error: T, closure: ((Error) -> Void)? = nil) 
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func throwError<T: Error & Equatable>(_ error: T, closure: ((T) -> Void)? = nil) -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {
@@ -136,7 +136,7 @@ public func throwError<T: Error & Equatable>(_ error: T, closure: ((T) -> Void)?
 public func throwError<T: Error>(
     errorType: T.Type,
     closure: ((T) -> Void)? = nil) -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {
@@ -195,7 +195,7 @@ public func throwError<T: Error>(
 ///
 /// The closure only gets called when an error was thrown.
 public func throwError(closure: @escaping ((Error) -> Void)) -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {
@@ -230,7 +230,7 @@ public func throwError(closure: @escaping ((Error) -> Void)) -> Predicate<Any> {
 ///
 /// The closure only gets called when an error was thrown.
 public func throwError<T: Error>(closure: @escaping ((T) -> Void)) -> Predicate<Any> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
 
         var actualError: Error?
         do {

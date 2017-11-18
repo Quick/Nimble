@@ -5,7 +5,7 @@ import Foundation
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    return .define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue == expectedValue && expectedValue != nil
         if expectedValue == nil || actualValue == nil {
@@ -26,7 +26,7 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T, C: Equatable>(_ expectedValue: [T: C]?) -> Predicate<[T: C]> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    return .define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
@@ -47,7 +47,7 @@ public func equal<T, C: Equatable>(_ expectedValue: [T: C]?) -> Predicate<[T: C]
 /// A Nimble matcher that succeeds when the actual collection is equal to the expected collection.
 /// Items must implement the Equatable protocol.
 public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    return .define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
@@ -70,7 +70,7 @@ public func equal<T: Equatable>(_ expectedValue: [T]?) -> Predicate<[T]> {
 
 /// A Nimble matcher allowing comparison of collection with optional type
 public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    return .define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         if let actualValue = try actualExpression.evaluate() {
             let doesNotMatch = PredicateResult(
                 status: .doesNotMatch,

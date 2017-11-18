@@ -17,12 +17,12 @@ public func raiseException(
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
     closure: ((NSException) -> Void)? = nil) -> Predicate<Any> {
-        return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+        return .fromDeprecatedClosure { actualExpression, failureMessage in
 
             var exception: NSException?
-            let capture = NMBExceptionCapture(handler: ({ e in
+            let capture = NMBExceptionCapture(handler: { e in
                 exception = e
-            }), finally: nil)
+            }, finally: nil)
 
             capture.tryBlock {
                 _ = try! actualExpression.evaluate()
@@ -75,7 +75,7 @@ internal func setFailureMessageForException(
 
         if let exception = exception {
             // swiftlint:disable:next line_length
-            failureMessage.actualValue = "\(String(describing: type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
+            failureMessage.actualValue = "\(type(of: exception)) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
         } else {
             failureMessage.actualValue = "no exception"
         }
@@ -130,7 +130,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
     }
 
     @objc public func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
-        let block: () -> Any? = ({ _ = actualBlock(); return nil })
+        let block: () -> Any? = { _ = actualBlock(); return nil }
         let expr = Expression(expression: block, location: location)
 
         return try! raiseException(
@@ -146,47 +146,47 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
     }
 
     @objc public var named: (_ name: String) -> NMBObjCRaiseExceptionMatcher {
-        return ({ name in
-            return NMBObjCRaiseExceptionMatcher(
+        return { name in
+            NMBObjCRaiseExceptionMatcher(
                 name: name,
                 reason: self._reason,
                 userInfo: self._userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var reason: (_ reason: String?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ reason in
-            return NMBObjCRaiseExceptionMatcher(
+        return { reason in
+            NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: reason,
                 userInfo: self._userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var userInfo: (_ userInfo: NSDictionary?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ userInfo in
-            return NMBObjCRaiseExceptionMatcher(
+        return { userInfo in
+            NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: self._reason,
                 userInfo: userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var satisfyingBlock: (_ block: ((NSException) -> Void)?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ block in
-            return NMBObjCRaiseExceptionMatcher(
+        return { block in
+            NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: self._reason,
                 userInfo: self._userInfo,
                 block: block
             )
-        })
+        }
     }
 }
 

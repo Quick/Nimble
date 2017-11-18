@@ -46,11 +46,11 @@ extension NMBObjCMatcher {
             let location = actualExpression.location
             let actualValue = try! actualExpression.evaluate()
             if let value = actualValue as? NMBCollection {
-                let expr = Expression(expression: ({ value as NMBCollection}), location: location)
+                let expr = Expression(expression: { value as NMBCollection}, location: location)
                 return try! haveCount(expected.intValue).matches(expr, failureMessage: failureMessage)
             } else if let actualValue = actualValue {
                 failureMessage.postfixMessage = "get type of NSArray, NSSet, NSDictionary, or NSHashTable"
-                failureMessage.actualValue = "\(String(describing: type(of: actualValue)))"
+                failureMessage.actualValue = "\(type(of: actualValue))"
             }
             return false
         }

@@ -27,8 +27,8 @@ final class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeIdenticalToPositiveMessage() {
-        let message = String(describing: NSString(format: "expected to be identical to <%p>, got <%p>",
-            unsafeBitCast(testObjectB, to: Int.self), unsafeBitCast(testObjectA, to: Int.self)))
+        let message = NSString(format: "expected to be identical to <%p>, got <%p>",
+            unsafeBitCast(testObjectB, to: Int.self), unsafeBitCast(testObjectA, to: Int.self))
         failsWithErrorMessage(message) {
             expect(self.testObjectA).to(beIdenticalTo(self.testObjectB))
         }
@@ -43,14 +43,14 @@ final class BeIdenticalToObjectTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testFailsOnNils() {
-        let message1 = String(describing: NSString(format: "expected to be identical to <%p>, got nil",
-            unsafeBitCast(testObjectA, to: Int.self)))
+        let message1 =  NSString(format: "expected to be identical to <%p>, got nil",
+            unsafeBitCast(testObjectA, to: Int.self))
         failsWithErrorMessageForNil(message1) {
             expect(nil as BeIdenticalToObjectTester?).to(beIdenticalTo(self.testObjectA))
         }
 
-        let message2 = String(describing: NSString(format: "expected to not be identical to <%p>, got nil",
-            unsafeBitCast(testObjectA, to: Int.self)))
+        let message2 = NSString(format: "expected to not be identical to <%p>, got nil",
+            unsafeBitCast(testObjectA, to: Int.self))
         failsWithErrorMessageForNil(message2) {
             expect(nil as BeIdenticalToObjectTester?).toNot(beIdenticalTo(self.testObjectA))
         }

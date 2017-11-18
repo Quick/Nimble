@@ -1,15 +1,15 @@
 import Foundation
 
 private func matcherMessage<T>(forType expectedType: T.Type) -> String {
-    return "be a kind of \(String(describing: expectedType))"
+    return "be a kind of \(expectedType)"
 }
 private func matcherMessage(forClass expectedClass: AnyClass) -> String {
-    return "be a kind of \(String(describing: expectedClass))"
+    return "be a kind of \(expectedClass)"
 }
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
-    return Predicate.define { actualExpression in
+    return .define { actualExpression in
         let message: ExpectationMessage
 
         let instance = try actualExpression.evaluate()
@@ -18,8 +18,8 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
             return PredicateResult(status: .fail, message: message)
         }
         message = .expectedCustomValueTo(
-            "be a kind of \(String(describing: expectedType))",
-            "<\(String(describing: type(of: validInstance))) instance>"
+            "be a kind of \(expectedType)",
+            "<\(type(of: validInstance)) instance>"
         )
 
         return PredicateResult(
@@ -34,7 +34,7 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class
 public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
-    return Predicate.define { actualExpression in
+    return .define { actualExpression in
         let message: ExpectationMessage
         let status: PredicateStatus
 
@@ -43,7 +43,7 @@ public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
             status = PredicateStatus(bool: instance != nil && instance!.isKind(of: expectedClass))
             message = .expectedCustomValueTo(
                 matcherMessage(forClass: expectedClass),
-                "<\(String(describing: type(of: validInstance))) instance>"
+                "<\(type(of: validInstance)) instance>"
             )
         } else {
             status = .fail

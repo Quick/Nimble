@@ -69,15 +69,15 @@ func deferToMainQueue(action: @escaping () -> Void) {
 #if (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
 public class NimbleHelper: NSObject {
     @objc public class func expectFailureMessage(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(message, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     @objc public class func expectFailureMessages(_ messages: [NSString], block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(messages.map({String(describing: $0)}), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(messages.map { $0.description }, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 
     @objc public class func expectFailureMessageForNil(_ message: NSString, block: @escaping () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessageForNil(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessageForNil(message, file: file, line: line, preferOriginalSourceLocation: true, closure: block)
     }
 }
 #endif

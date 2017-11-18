@@ -1,5 +1,13 @@
 import Foundation
 
+extension String {
+    func stripNewLines() -> String {
+        return components(separatedBy: "\n")
+               .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+               .joined(separator: "")
+    }
+}
+
 /// Encapsulates the failure message that matchers can report to the end user.
 ///
 /// This is shared state between Nimble and matchers that mutate this value.
@@ -17,11 +25,7 @@ public class FailureMessage: NSObject {
 
     public var stringValue: String {
         get {
-            if let value = _stringValueOverride {
-                return value
-            } else {
-                return computeStringValue()
-            }
+            return _stringValueOverride ?? computeStringValue()
         }
         set {
             _stringValueOverride = newValue
@@ -40,23 +44,15 @@ public class FailureMessage: NSObject {
         _stringValueOverride = stringValue
     }
 
-    internal func stripNewlines(_ str: String) -> String {
-        let whitespaces = CharacterSet.whitespacesAndNewlines
-        return str
-            .components(separatedBy: "\n")
-            .map { line in line.trimmingCharacters(in: whitespaces) }
-            .joined(separator: "")
-    }
-
     internal func computeStringValue() -> String {
         var value = "\(expected) \(to) \(postfixMessage)"
         if let actualValue = actualValue {
             value = "\(expected) \(to) \(postfixMessage), got \(actualValue)\(postfixActual)"
         }
-        value = stripNewlines(value)
+        value = value.stripNewLines()
 
         if let extendedMessage = extendedMessage {
-            value += "\n\(stripNewlines(extendedMessage))"
+            value += "\n\(extendedMessage.stripNewLines())"
         }
 
         if let userDescription = userDescription {

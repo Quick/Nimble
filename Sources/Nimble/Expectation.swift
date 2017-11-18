@@ -56,11 +56,11 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
 
     var result: (Bool, FailureMessage) = (false, FailureMessage())
     if captureExceptions {
-        let capture = NMBExceptionCapture(handler: ({ exception -> Void in
+        let capture = NMBExceptionCapture(handler: { exception -> Void in
             let msg = FailureMessage()
             msg.stringValue = "unexpected exception raised: \(exception)"
             result = (false, msg)
-        }), finally: nil)
+        }, finally: nil)
         capture.tryBlock {
             result = run()
         }

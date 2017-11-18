@@ -11,17 +11,9 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
             failureMessage.postfixMessage = "find object in collection \(predicateDescription)"
         }
 
-        if let sequence = try actualExpression.evaluate() {
-            for object in sequence {
-                if predicate(object) {
-                    return true
-                }
-            }
+        guard let sequence = try actualExpression.evaluate() else { return false }
+        return sequence.contains(where: predicate)
 
-            return false
-        }
-
-        return false
     }.requireNonNil
 }
 
@@ -41,11 +33,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
 
                 var iterator = NSFastEnumerationIterator(enumeration)
                 while let item = iterator.next() {
-                    guard let object = item as? NSObject else {
-                        continue
-                    }
-
-                    if predicate(object) {
+                    if let object = item as? NSObject, predicate(object) {
                         return true
                     }
                 }

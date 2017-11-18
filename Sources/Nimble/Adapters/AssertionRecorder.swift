@@ -46,9 +46,9 @@ public class AssertionRecorder: AssertionHandler {
 public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler, closure: () throws -> Void) {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
-    let capturer = NMBExceptionCapture(handler: nil, finally: ({
+    let capturer = NMBExceptionCapture(handler: nil, finally: {
         environment.assertionHandler = oldRecorder
-    }))
+    })
     environment.assertionHandler = tempAssertionHandler
     capturer.tryBlock {
         try! closure()

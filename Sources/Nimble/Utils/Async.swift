@@ -249,11 +249,11 @@ internal class AwaitPromiseBuilder<T> {
             file: file,
             line: line)
 
-        let capture = NMBExceptionCapture(handler: ({ exception in
+        let capture = NMBExceptionCapture(handler: { exception in
             _ = self.promise.resolveResult(.raisedException(exception))
-        }), finally: ({
+        }, finally: {
             self.waitLock.releaseWaitingLock()
-        }))
+        })
         capture.tryBlock {
             do {
                 try self.trigger.start()

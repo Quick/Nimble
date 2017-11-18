@@ -14,10 +14,9 @@ internal func identityAsString(_ value: Any?) -> String {
     }
 }
 
-internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
-    return items.reduce("") { accum, item in
-        let prefix = (accum.isEmpty ? "" : joiner)
-        return accum + prefix + "\(stringify(item))"
+extension Sequence {
+    func stringify(separator : String = ", ") -> String {
+        return map(Nimble.stringify).joined(separator: separator)
     }
 }
 
@@ -83,32 +82,21 @@ extension Array: TestOutputStringConvertible {
 
 extension AnySequence: TestOutputStringConvertible {
     public var testDescription: String {
-        let generator = self.makeIterator()
-        var strings = [String]()
-        var value: AnySequence.Iterator.Element?
-
-        repeat {
-            value = generator.next()
-            if let value = value {
-                strings.append(stringify(value))
-            }
-        } while value != nil
-
-        let list = strings.joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "[\(list)]"
     }
 }
 
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }
 
 extension NSIndexSet: TestOutputStringConvertible {
     public var testDescription: String {
-        let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        let list = map(Nimble.stringify).joined(separator: ", ")
         return "(\(list))"
     }
 }
@@ -125,7 +113,7 @@ extension Data: TestOutputStringConvertible {
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11-16)
             return "Data<length=\(count)>"
         #else
-            return "Data<hash=\((self as NSData).hash),length=\(count)>"
+            return "Data<hash=\(self.hashValue),length=\(count)>"
         #endif
     }
 }
@@ -145,23 +133,19 @@ extension Data: TestOutputStringConvertible {
 ///
 /// - SeeAlso: `TestOutputStringConvertible`
 public func stringify<T>(_ value: T) -> String {
-    if let value = value as? TestOutputStringConvertible {
-        return value.testDescription
+    switch value {
+    case let v as TestOutputStringConvertible:
+        return v.testDescription
+    case let v as CustomDebugStringConvertible:
+        return v.debugDescription
+    default:
+        return "\(value)"
     }
-
-    if let value = value as? CustomDebugStringConvertible {
-        return value.debugDescription
-    }
-
-    return String(describing: value)
 }
 
 /// -SeeAlso: `stringify<T>(value: T)`
 public func stringify<T>(_ value: T?) -> String {
-    if let unboxed = value {
-        return stringify(unboxed)
-    }
-    return "nil"
+    return value.map(stringify) ?? "nil"
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)

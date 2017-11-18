@@ -74,7 +74,7 @@ public func postNotifications<T>(
     let collector = NotificationCollector(notificationCenter: center)
     collector.startObserving()
     var once: Bool = false
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+    return .fromDeprecatedClosure { actualExpression, failureMessage in
         let collectorNotificationsExpression = Expression(memoizedExpression: { _ in
             return collector.observedNotifications
             }, location: actualExpression.location, withoutCaching: true)
