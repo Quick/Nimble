@@ -10,7 +10,7 @@ enum EquatableError: Error {
     case parameterized(x: Int)
 }
 
-extension EquatableError : Equatable {
+extension EquatableError: Equatable {
 }
 
 func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
@@ -25,7 +25,7 @@ enum CustomDebugStringConvertibleError: Error {
     case b
 }
 
-extension CustomDebugStringConvertibleError : CustomDebugStringConvertible {
+extension CustomDebugStringConvertibleError: CustomDebugStringConvertible {
     var debugDescription: String {
         return "code=\(_code)"
     }

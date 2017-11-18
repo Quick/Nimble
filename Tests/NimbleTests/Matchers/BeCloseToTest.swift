@@ -40,12 +40,12 @@ final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeCloseToWithNSNumber() {
-        expect(NSNumber(value:1.2)).to(beCloseTo(9.300, within: 10))
-        expect(NSNumber(value:1.2)).to(beCloseTo(NSNumber(value:9.300), within: 10))
-        expect(1.2).to(beCloseTo(NSNumber(value:9.300), within: 10))
+        expect(NSNumber(value: 1.2)).to(beCloseTo(9.300, within: 10))
+        expect(NSNumber(value: 1.2)).to(beCloseTo(NSNumber(value: 9.300), within: 10))
+        expect(1.2).to(beCloseTo(NSNumber(value: 9.300), within: 10))
 
         failsWithErrorMessage("expected to not be close to <1.2001> (within 1), got <1.2>") {
-            expect(NSNumber(value:1.2)).toNot(beCloseTo(1.2001, within: 1.0))
+            expect(NSNumber(value: 1.2)).toNot(beCloseTo(1.2001, within: 1.0))
         }
     }
 

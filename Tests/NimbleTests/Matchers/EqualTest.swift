@@ -139,7 +139,7 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(NSDictionary(object: "bar", forKey: "foo" as NSString)).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String:String]).to(equal(expected))
+        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String: String]).to(equal(expected))
 #endif
     }
 
@@ -165,10 +165,10 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber(value:1)).to(equal(NSNumber(value:1)))
-        expect(NSNumber(value:1)) == NSNumber(value:1)
-        expect(NSNumber(value:1)) != NSNumber(value:2)
-        expect { NSNumber(value:1) }.to(equal(1))
+        expect(NSNumber(value: 1)).to(equal(NSNumber(value: 1)))
+        expect(NSNumber(value: 1)) == NSNumber(value: 1)
+        expect(NSNumber(value: 1)) != NSNumber(value: 2)
+        expect { NSNumber(value: 1) }.to(equal(1))
     }
 
     func testOperatorEquality() {

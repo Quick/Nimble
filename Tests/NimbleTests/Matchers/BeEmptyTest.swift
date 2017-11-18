@@ -18,8 +18,8 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         expect([1] as [CInt]).toNot(beEmpty())
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-        expect(NSDictionary() as? [Int:Int]).to(beEmpty())
-        expect(NSDictionary(object: 1, forKey: 1 as NSNumber) as? [Int:Int]).toNot(beEmpty())
+        expect(NSDictionary() as? [Int: Int]).to(beEmpty())
+        expect(NSDictionary(object: 1, forKey: 1 as NSNumber) as? [Int: Int]).toNot(beEmpty())
 #endif
 
         expect([Int: Int]()).to(beEmpty())

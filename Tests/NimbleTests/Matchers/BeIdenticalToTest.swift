@@ -20,13 +20,13 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testBeIdenticalToNegative() {
-        expect(NSNumber(value:1)).toNot(beIdenticalTo(NSString(string: "yo")))
+        expect(NSNumber(value: 1)).toNot(beIdenticalTo(NSString(string: "yo")))
         expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
     }
 
     func testBeIdenticalToPositiveMessage() {
-        let num1 = NSNumber(value:1)
-        let num2 = NSNumber(value:2)
+        let num1 = NSNumber(value: 1)
+        let num2 = NSNumber(value: 2)
         let message = "expected to be identical to \(identityAsString(num2)), got \(identityAsString(num1))"
         failsWithErrorMessage(message) {
             expect(num1).to(beIdenticalTo(num2))
@@ -45,13 +45,13 @@ final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
     func testOperators() {
         let value = NSDate()
         expect(value) === value
-        expect(NSNumber(value:1)) !== NSNumber(value:2)
+        expect(NSNumber(value: 1)) !== NSNumber(value: 2)
     }
 
     func testBeAlias() {
         let value = NSDate()
         expect(value).to(be(value))
-        expect(NSNumber(value:1)).toNot(be(NSString(string: "turtles")))
+        expect(NSNumber(value: 1)).toNot(be(NSString(string: "turtles")))
         #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
             expect([1]).toNot(be([1]))
         #else

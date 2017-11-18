@@ -22,7 +22,7 @@ final class ContainTest: XCTestCase, XCTestCaseProvider {
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(NSArray(array: ["a"])).to(contain(NSString(string: "a")))
-        expect(NSArray(array: ["a"])).toNot(contain(NSString(string:"b")))
+        expect(NSArray(array: ["a"])).toNot(contain(NSString(string: "b")))
         expect(NSArray(object: 1) as NSArray?).to(contain(1))
 #endif
 
