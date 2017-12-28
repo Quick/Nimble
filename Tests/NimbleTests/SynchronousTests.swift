@@ -18,6 +18,8 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
             ("testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
             ("testToNotNegativeMatches", testToNotNegativeMatches),
             ("testNotToMatchesLikeToNot", testNotToMatchesLikeToNot),
+            ("testChainExpectation", testChainExpectation),
+            ("testChainFailOnFirstError", testChainFailOnFirstError)
         ]
     }
 
@@ -125,4 +127,15 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
     func testNotToMatchesLikeToNot() {
         expect(1).notTo(MatcherFunc { _, _ in false })
     }
+    
+    func testChainExpectation() {
+        expect(2).toNot(equal(1)).to(equal(2)).notTo(equal(3))
+    }
+
+    func testChainFailOnFirstError() {
+        failsWithErrorMessage("expected to not equal <2>, got <2>") {
+            expect(2).toNot(equal(1)).toNot(equal(2)).to(equal(3))
+        }
+    }
+
 }
