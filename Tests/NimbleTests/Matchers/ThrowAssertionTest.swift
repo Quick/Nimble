@@ -58,7 +58,7 @@ final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
             expect { () -> Void in fatalError() }.toNot(throwAssertion())
         }
     }
-    
+
     func testChainOnThrowAssertion() {
         expect { () -> Int in return 5 }.toNot(throwAssertion()).to(equal(5))
     }

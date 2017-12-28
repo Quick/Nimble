@@ -153,7 +153,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh, closure: closure))
         }
     }
-    
+
     func testChainOnThrowError() {
         let closure = { () throws -> Int in
             return 5
