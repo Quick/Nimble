@@ -41,6 +41,7 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
             ("testNegativeNegatedMatches", testNegativeNegatedMatches),
             ("testNegativeMatchesDoNotCallClosureWithoutError", testNegativeMatchesDoNotCallClosureWithoutError),
             ("testNegativeMatchesWithClosure", testNegativeMatchesWithClosure),
+            ("testChainOnThrowError", testChainOnThrowError),
         ]
     }
 
@@ -151,5 +152,13 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage([innerFailureMessage, "expected to throw error <laugh> that satisfies block, got <laugh>"]) {
             expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh, closure: closure))
         }
+    }
+    
+    func testChainOnThrowError() {
+        let closure = { () throws -> Int in
+            return 5
+        }
+
+        expect(try closure()).toNot(throwError()).to(equal(5))
     }
 }

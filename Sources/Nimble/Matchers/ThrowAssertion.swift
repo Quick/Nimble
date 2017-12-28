@@ -1,6 +1,6 @@
 import Foundation
 
-public func throwAssertion() -> Predicate<Void> {
+public func throwAssertion<T>() -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
     #if arch(x86_64) && (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
         failureMessage.postfixMessage = "throw an assertion"

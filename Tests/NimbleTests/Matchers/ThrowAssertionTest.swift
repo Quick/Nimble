@@ -13,6 +13,7 @@ final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
             ("testNegativeMatch", testNegativeMatch),
             ("testPositiveMessage", testPositiveMessage),
             ("testNegativeMessage", testNegativeMessage),
+            ("testChainOnThrowAssertion", testChainOnThrowAssertion),
         ]
     }
 
@@ -56,6 +57,10 @@ final class ThrowAssertionTest: XCTestCase, XCTestCaseProvider {
         failsWithErrorMessage("expected to not throw an assertion") {
             expect { () -> Void in fatalError() }.toNot(throwAssertion())
         }
+    }
+    
+    func testChainOnThrowAssertion() {
+        expect { () -> Int in return 5 }.toNot(throwAssertion()).to(equal(5))
     }
 }
 
