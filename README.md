@@ -1489,7 +1489,7 @@ case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
 
 // Emits standard error message without mentioning the actual value
 // eg - "expected to <message>"
-case expectedTo(/* message: */ String, /* actual: */ String)
+case expectedTo(/* message: */ String)
 
 // ...
 }
