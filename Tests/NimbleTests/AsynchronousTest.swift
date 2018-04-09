@@ -86,13 +86,13 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         }
         expect { value }.toEventuallyNot(equal(1))
     }
-    
+
     func testWaitUntilWithCustomDefaultsTimeout() {
         AsyncDefaults.Timeout = 5
         defer {
             AsyncDefaults.Timeout = 1
         }
-        waitUntil() { done in
+        waitUntil { done in
             Thread.sleep(forTimeInterval: 4.8)
             done()
         }
