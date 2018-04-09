@@ -8,6 +8,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         return [
             ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
             ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
+            ("testWaitUntilWithCustomDefaultsTimeout", testWaitUntilWithCustomDefaultsTimeout),
             ("testWaitUntilPositiveMatches", testWaitUntilPositiveMatches),
             ("testToEventuallyWithCustomDefaultTimeout", testToEventuallyWithCustomDefaultTimeout),
             ("testWaitUntilTimesOutIfNotCalled", testWaitUntilTimesOutIfNotCalled),
@@ -84,6 +85,17 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             DispatchQueue.global(priority: .default).async(execute: asyncOperation)
         }
         expect { value }.toEventuallyNot(equal(1))
+    }
+
+    func testWaitUntilWithCustomDefaultsTimeout() {
+        AsyncDefaults.Timeout = 5
+        defer {
+            AsyncDefaults.Timeout = 1
+        }
+        waitUntil { done in
+            Thread.sleep(forTimeInterval: 4.8)
+            done()
+        }
     }
 
     func testWaitUntilPositiveMatches() {
