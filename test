@@ -63,7 +63,7 @@ function test_ios {
 
 function test_tvos {
     run osascript -e 'tell app "Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV 1080p,OS=$RUNTIME_TVOS_SDK_VERSION" build-for-testing test-without-building
+    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_SDK_VERSION" build-for-testing test-without-building
 }
 
 function test_macos {
