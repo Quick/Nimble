@@ -1,32 +1,5 @@
 import Foundation
 
-// A workaround to SR-6419.
-extension NotificationCenter {
-#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-    #if swift(>=4.0)
-        #if swift(>=4.0.2)
-        #else
-            func addObserver(forName name: Notification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
-                return addObserver(forName: name, object: obj, queue: queue, usingBlock: block)
-            }
-        #endif
-    #elseif swift(>=3.2)
-        #if swift(>=3.2.2)
-        #else
-            // swiftlint:disable:next line_length
-            func addObserver(forName name: Notification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
-                return addObserver(forName: name, object: obj, queue: queue, usingBlock: block)
-            }
-        #endif
-    #else
-        // swiftlint:disable:next line_length
-        func addObserver(forName name: Notification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
-            return addObserver(forName: name, object: obj, queue: queue, usingBlock: block)
-        }
-    #endif
-#endif
-}
-
 internal class NotificationCollector {
     private(set) var observedNotifications: [Notification]
     private let notificationCenter: NotificationCenter
