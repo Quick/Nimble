@@ -3,24 +3,6 @@ import XCTest
 import Nimble
 
 final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (BeCloseToTest) -> () throws -> Void)] {
-        return [
-            ("testBeCloseTo", testBeCloseTo),
-            ("testBeCloseToWithin", testBeCloseToWithin),
-            ("testBeCloseToWithNSNumber", testBeCloseToWithNSNumber),
-            ("testBeCloseToWithDate", testBeCloseToWithDate),
-            ("testBeCloseToWithNSDate", testBeCloseToWithNSDate),
-            ("testBeCloseToOperator", testBeCloseToOperator),
-            ("testBeCloseToWithinOperator", testBeCloseToWithinOperator),
-            ("testPlusMinusOperator", testPlusMinusOperator),
-            ("testBeCloseToOperatorWithDate", testBeCloseToOperatorWithDate),
-            ("testBeCloseToWithinOperatorWithDate", testBeCloseToWithinOperatorWithDate),
-            ("testPlusMinusOperatorWithDate", testPlusMinusOperatorWithDate),
-            ("testBeCloseToArray", testBeCloseToArray),
-            ("testBeCloseToWithCGFloat", testBeCloseToWithCGFloat),
-        ]
-    }
-
     func testBeCloseTo() {
         expect(1.2).to(beCloseTo(1.2001))
         expect(1.2 as CDouble).to(beCloseTo(1.2001))

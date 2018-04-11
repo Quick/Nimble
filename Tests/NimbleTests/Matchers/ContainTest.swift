@@ -3,16 +3,6 @@ import XCTest
 import Nimble
 
 final class ContainTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (ContainTest) -> () throws -> Void)] {
-        return [
-            ("testContain", testContain),
-            ("testContainSubstring", testContainSubstring),
-            ("testContainObjCSubstring", testContainObjCSubstring),
-            ("testVariadicArguments", testVariadicArguments),
-            ("testCollectionArguments", testCollectionArguments),
-        ]
-    }
-
     func testContain() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3] as [CInt]).to(contain(1 as CInt))

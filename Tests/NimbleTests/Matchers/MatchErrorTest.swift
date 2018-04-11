@@ -3,18 +3,6 @@ import XCTest
 import Nimble
 
 final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (MatchErrorTest) -> () throws -> Void)] {
-        return [
-            ("testMatchErrorPositive", testMatchErrorPositive),
-            ("testMatchErrorNegative", testMatchErrorNegative),
-            ("testMatchNSErrorPositive", testMatchNSErrorPositive),
-            ("testMatchNSErrorNegative", testMatchNSErrorNegative),
-            ("testMatchPositiveMessage", testMatchPositiveMessage),
-            ("testMatchNegativeMessage", testMatchNegativeMessage),
-            ("testDoesNotMatchNils", testDoesNotMatchNils),
-        ]
-    }
-
     func testMatchErrorPositive() {
         expect(NimbleError.laugh).to(matchError(NimbleError.laugh))
         expect(NimbleError.laugh).to(matchError(NimbleError.self))

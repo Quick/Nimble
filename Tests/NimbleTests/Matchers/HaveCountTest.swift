@@ -2,14 +2,6 @@ import XCTest
 import Nimble
 
 final class HaveCountTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (HaveCountTest) -> () throws -> Void)] {
-        return [
-            ("testHaveCountForArray", testHaveCountForArray),
-            ("testHaveCountForDictionary", testHaveCountForDictionary),
-            ("testHaveCountForSet", testHaveCountForSet),
-        ]
-    }
-
     func testHaveCountForArray() {
         expect([1, 2, 3]).to(haveCount(3))
         expect([1, 2, 3]).notTo(haveCount(1))
