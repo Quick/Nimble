@@ -51,12 +51,14 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
             expect([1]).to(beEmpty())
         }
 
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         failsWithErrorMessage("expected to not be empty, got <{()}>") {
             expect(NSSet()).toNot(beEmpty())
         }
         failsWithErrorMessage("expected to be empty, got <{(1)}>") {
             expect(NSSet(object: NSNumber(value: 1))).to(beEmpty())
         }
+#endif
 
         failsWithErrorMessage("expected to not be empty, got <()>") {
             expect(NSIndexSet()).toNot(beEmpty())
