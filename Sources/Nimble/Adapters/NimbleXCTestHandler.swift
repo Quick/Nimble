@@ -66,11 +66,7 @@ private func recordFailure(_ message: String, location: SourceLocation) {
     XCTFail("\(message)", file: location.file, line: location.line)
 #else
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
-        #if swift(>=4)
         let line = Int(location.line)
-        #else
-        let line = location.line
-        #endif
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: line, expected: true)
     } else {
         let msg = "Attempted to report a test failure to XCTest while no test case was running. " +
