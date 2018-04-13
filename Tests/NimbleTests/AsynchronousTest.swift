@@ -4,25 +4,6 @@ import XCTest
 import Nimble
 
 final class AsyncTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (AsyncTest) -> () throws -> Void)] {
-        return [
-            ("testToEventuallyPositiveMatches", testToEventuallyPositiveMatches),
-            ("testToEventuallyNegativeMatches", testToEventuallyNegativeMatches),
-            ("testWaitUntilWithCustomDefaultsTimeout", testWaitUntilWithCustomDefaultsTimeout),
-            ("testWaitUntilPositiveMatches", testWaitUntilPositiveMatches),
-            ("testToEventuallyWithCustomDefaultTimeout", testToEventuallyWithCustomDefaultTimeout),
-            ("testWaitUntilTimesOutIfNotCalled", testWaitUntilTimesOutIfNotCalled),
-            ("testWaitUntilTimesOutWhenExceedingItsTime", testWaitUntilTimesOutWhenExceedingItsTime),
-            ("testWaitUntilNegativeMatches", testWaitUntilNegativeMatches),
-            ("testWaitUntilDetectsStalledMainThreadActivity", testWaitUntilDetectsStalledMainThreadActivity),
-            ("testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed", testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed),
-            ("testWaitUntilErrorsIfDoneIsCalledMultipleTimes", testWaitUntilErrorsIfDoneIsCalledMultipleTimes),
-            ("testWaitUntilMustBeInMainThread", testWaitUntilMustBeInMainThread),
-            ("testToEventuallyMustBeInMainThread", testToEventuallyMustBeInMainThread),
-            ("testSubjectUnderTestIsReleasedFromMemory", testSubjectUnderTestIsReleasedFromMemory),
-        ]
-    }
-
     class Error: Swift.Error {}
     let errorToThrow = Error()
 

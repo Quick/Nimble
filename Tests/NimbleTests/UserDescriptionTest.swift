@@ -2,17 +2,6 @@ import XCTest
 import Nimble
 
 final class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (UserDescriptionTest) -> () throws -> Void)] {
-        return [
-            ("testToMatcher_CustomFailureMessage", testToMatcher_CustomFailureMessage),
-            ("testNotToMatcher_CustomFailureMessage", testNotToMatcher_CustomFailureMessage),
-            ("testToNotMatcher_CustomFailureMessage", testToNotMatcher_CustomFailureMessage),
-            ("testToEventuallyMatch_CustomFailureMessage", testToEventuallyMatch_CustomFailureMessage),
-            ("testToEventuallyNotMatch_CustomFailureMessage", testToEventuallyNotMatch_CustomFailureMessage),
-            ("testToNotEventuallyMatch_CustomFailureMessage", testToNotEventuallyMatch_CustomFailureMessage),
-        ]
-    }
-
     func testToMatcher_CustomFailureMessage() {
         failsWithErrorMessage(
             "These aren't equal!\n" +

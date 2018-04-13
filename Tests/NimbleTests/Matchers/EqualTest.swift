@@ -3,24 +3,6 @@ import XCTest
 import Nimble
 
 final class EqualTest: XCTestCase, XCTestCaseProvider {
-    static var allTests: [(String, (EqualTest) -> () throws -> Void)] {
-        return [
-            ("testEquality", testEquality),
-            ("testArrayEquality", testArrayEquality),
-            ("testSetEquality", testSetEquality),
-            ("testDoesNotMatchNils", testDoesNotMatchNils),
-            ("testDictionaryEquality", testDictionaryEquality),
-            ("testDataEquality", testDataEquality),
-            ("testNSObjectEquality", testNSObjectEquality),
-            ("testOperatorEquality", testOperatorEquality),
-            ("testOperatorEqualityWithArrays", testOperatorEqualityWithArrays),
-            ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
-            ("testOptionalEquality", testOptionalEquality),
-            ("testArrayOfOptionalsEquality", testArrayOfOptionalsEquality),
-            ("testDictionariesWithDifferentSequences", testDictionariesWithDifferentSequences),
-        ]
-    }
-
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))

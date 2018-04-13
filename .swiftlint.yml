@@ -10,6 +10,8 @@ included:
 
 excluded:
   - Carthage/Checkouts
+  - Tests/NimbleTests/XCTestManifests.swift
+  - Tests/NimbleTests/Helpers/XCTestCaseProvider.swift
 
 trailing_comma:
   mandatory_comma: true
