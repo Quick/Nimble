@@ -38,13 +38,12 @@ Pod::Spec.new do |s|
     "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
-  s.private_header_files = "Sources/NimbleObjectiveC/CurrentTestCaseTracker.h"
-
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
   s.requires_arc = true
   s.compiler_flags = '-DPRODUCT_NAME=Nimble/Nimble'
   s.pod_target_xcconfig = {
+    'APPLICATION_EXTENSION_API_ONLY' => 'YES',
     'ENABLE_BITCODE' => 'NO',
     'OTHER_LDFLAGS' => '-weak-lswiftXCTest',
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
