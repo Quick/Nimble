@@ -29,32 +29,8 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
             )
         }
 
-        let doesNotMatch = PredicateResult(
-            status: .doesNotMatch,
-            message: msg
-        )
-
-        if expectedValue.count != actualValue.count {
-            return doesNotMatch
-        }
-
-        for (index, item) in actualValue.enumerated() {
-            let otherItem = expectedValue[index]
-            if item == nil && otherItem == nil {
-                continue
-            } else if item == nil && otherItem != nil {
-                return doesNotMatch
-            } else if item != nil && otherItem == nil {
-                return doesNotMatch
-            } else if item! != otherItem! {
-                return doesNotMatch
-            }
-        }
-
-        return PredicateResult(
-            status: .matches,
-            message: msg
-        )
+        let matches = expectedValue == actualValue
+        return PredicateResult(bool: matches, message: msg)
     }
 }
 
