@@ -51,20 +51,12 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
 
         var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
-        if #available(OSX 10.10, *) {
-            DispatchQueue.global().async(execute: asyncOperation)
-        } else {
-            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
-        }
+        DispatchQueue.global().async(execute: asyncOperation)
         expect { value }.toEventually(equal(1))
 
         asyncOperation = { sleepThenSetValueTo(0) }
 
-        if #available(OSX 10.10, *) {
-            DispatchQueue.global().async(execute: asyncOperation)
-        } else {
-            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
-        }
+        DispatchQueue.global().async(execute: asyncOperation)
         expect { value }.toEventuallyNot(equal(1))
     }
 
@@ -105,11 +97,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
                     done()
                     waiting = false
                 }
-                if #available(OSX 10.10, *) {
-                    DispatchQueue.global().async(execute: asyncOperation)
-                } else {
-                    DispatchQueue.global(priority: .default).async(execute: asyncOperation)
-                }
+                DispatchQueue.global().async(execute: asyncOperation)
             }
         }
 
@@ -185,11 +173,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
         }
-        if #available(OSX 10.10, *) {
-            DispatchQueue.global().async(execute: asyncOperation)
-        } else {
-            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
-        }
+        DispatchQueue.global().async(execute: asyncOperation)
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
     }
@@ -203,11 +187,7 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
             }.to(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
         }
-        if #available(OSX 10.10, *) {
-            DispatchQueue.global().async(execute: asyncOperation)
-        } else {
-            DispatchQueue.global(priority: .default).async(execute: asyncOperation)
-        }
+        DispatchQueue.global().async(execute: asyncOperation)
         expect(executedAsyncBlock).toEventually(beTruthy())
 #endif
     }
