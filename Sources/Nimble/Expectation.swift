@@ -75,6 +75,10 @@ public struct Expectation<T> {
 
     public let expression: Expression<T>
 
+    public init(expression: Expression<T>) {
+        self.expression = expression
+    }
+
     public func verify(_ pass: Bool, _ message: FailureMessage) {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
