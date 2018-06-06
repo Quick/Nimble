@@ -42,8 +42,11 @@ public class AssertionRecorder: AssertionHandler {
 ///
 /// Once the closure finishes, then the original Nimble assertion handler is restored.
 ///
+/// TEMP: @escaping annotation to closure param is workaround to Radar 40857699
+/// https://openradar.appspot.com/radar?id=5595735974215680
+///
 /// @see AssertionHandler
-public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler, closure: () throws -> Void) {
+public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler, closure: @escaping () throws -> Void) {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({
