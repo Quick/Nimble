@@ -45,7 +45,7 @@ final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testMatchPositiveMessage() {
-        failsWithErrorMessage("expected to match error <parameterized(2)>, got <parameterized(1)>") {
+        failsWithErrorMessage("expected to match error <parameterized(x: 2)>, got <parameterized(x: 1)>") {
             expect(EquatableError.parameterized(x: 1)).to(matchError(EquatableError.parameterized(x: 2)))
         }
         failsWithErrorMessage("expected to match error <cry>, got <laugh>") {

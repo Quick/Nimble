@@ -10,6 +10,15 @@ enum EquatableError: Error {
     case parameterized(x: Int)
 }
 
+extension EquatableError: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .parameterized(let x):
+            return "parameterized(x: \(x))"
+        }
+    }
+}
+
 extension EquatableError: Equatable {
 }
 
@@ -80,11 +89,11 @@ final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
 
     func testNegativeMatches() {
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <parameterized(2)>, got <parameterized(1)>") {
+        failsWithErrorMessage("expected to throw error <parameterized(x: 2)>, got <parameterized(x: 1)>") {
             expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 2)))
         }
         // Same case, different arguments
-        failsWithErrorMessage("expected to throw error <parameterized(2)>, got <parameterized(1)>") {
+        failsWithErrorMessage("expected to throw error <parameterized(x: 2)>, got <parameterized(x: 1)>") {
             expect { throw EquatableError.parameterized(x: 1) }.to(throwError(EquatableError.parameterized(x: 2)))
         }
         // Different case
