@@ -50,8 +50,12 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler, closu
         environment.assertionHandler = oldRecorder
     }))
     environment.assertionHandler = tempAssertionHandler
-    capturer.tryBlock {
-        try! closure()
+    // TEMP: withoutActuallyEscaping is workaround to Radar 40857699
+    // https://openradar.appspot.com/radar?id=5595735974215680
+    withoutActuallyEscaping(closure) { escapable in
+        capturer.tryBlock {
+            try! escapable()
+        }
     }
 }
 
