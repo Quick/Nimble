@@ -43,10 +43,10 @@ public func be(_ expected: Any?) -> Predicate<Any> {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+    @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBPredicate {
+        return NMBPredicate { actualExpression in
             let aExpr = actualExpression.cast { $0 as Any? }
-            return try! beIdenticalTo(expected).matches(aExpr, failureMessage: failureMessage)
+            return try! beIdenticalTo(expected).satisfies(aExpr).toObjectiveC()
         }
     }
 }

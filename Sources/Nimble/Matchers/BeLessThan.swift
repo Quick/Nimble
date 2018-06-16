@@ -31,10 +31,10 @@ public func < (lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func beLessThanMatcher(_ expected: NMBComparable?) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+    @objc public class func beLessThanMatcher(_ expected: NMBComparable?) -> NMBPredicate {
+        return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { $0 as? NMBComparable }
-            return try! beLessThan(expected).matches(expr, failureMessage: failureMessage)
+            return try! beLessThan(expected).satisfies(expr).toObjectiveC()
         }
     }
 }
