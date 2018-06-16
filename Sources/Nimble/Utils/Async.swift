@@ -45,10 +45,15 @@ internal class AssertionWaitLock: WaitLock {
         nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
-            "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
-            "The call to\n\t\(info)\n" +
-            "triggered this exception because\n\t\(currentWaiter!)\n" +
-            "is currently managing the main run loop."
+            """
+            Nested async expectations are not allowed to avoid creating flaky tests.
+
+            The call to
+            \t\(info)
+            triggered this exception because
+            \t\(currentWaiter!)
+            is currently managing the main run loop.
+            """
         )
         currentWaiter = info
     }
