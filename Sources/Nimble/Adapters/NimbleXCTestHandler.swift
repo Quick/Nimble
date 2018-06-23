@@ -69,8 +69,11 @@ public func recordFailure(_ message: String, location: SourceLocation) {
         let line = Int(location.line)
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: line, expected: true)
     } else {
-        let msg = "Attempted to report a test failure to XCTest while no test case was running. " +
-        "The failure was:\n\"\(message)\"\nIt occurred at: \(location.file):\(location.line)"
+        let msg = """
+            Attempted to report a test failure to XCTest while no test case was running. The failure was:
+            \"\(message)\"
+            It occurred at: \(location.file):\(location.line)
+            """
         NSException(name: .internalInconsistencyException, reason: msg, userInfo: nil).raise()
     }
 #endif

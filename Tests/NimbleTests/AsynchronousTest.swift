@@ -130,15 +130,16 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
         // Currently we are unable to catch Objective-C exceptions when built by the Swift Package Manager
 #if !SWIFT_PACKAGE
-        let referenceLine = #line + 9
-        var msg = "Unexpected exception raised: Nested async expectations are not allowed "
-        msg += "to avoid creating flaky tests."
-        msg += "\n\n"
-        msg += "The call to\n\t"
-        msg += "expect(...).toEventually(...) at \(#file):\(referenceLine + 7)\n"
-        msg += "triggered this exception because\n\t"
-        msg += "waitUntil(...) at \(#file):\(referenceLine + 1)\n"
-        msg += "is currently managing the main run loop."
+        let referenceLine = #line + 10
+        let msg = """
+            Unexpected exception raised: Nested async expectations are not allowed to avoid creating flaky tests.
+
+            The call to
+            \texpect(...).toEventually(...) at \(#file):\(referenceLine + 7)
+            triggered this exception because
+            \twaitUntil(...) at \(#file):\(referenceLine + 1)
+            is currently managing the main run loop.
+            """
         failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: 2.0) { done in
                 var protected: Int = 0
