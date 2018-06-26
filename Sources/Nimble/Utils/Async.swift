@@ -261,7 +261,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger.timeoutSource.resume()
             while self.promise.asyncResult.isIncomplete() {
                 // Stopping the run loop does not work unless we run only 1 mode
-                _ = RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
+                _ = RunLoop.current.run(mode: .default, before: .distantFuture)
             }
 
             self.trigger.timeoutSource.cancel()
