@@ -211,7 +211,7 @@ public func !=<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func equalMatcher(_ expected: NSObject) -> NMBPredicate {
+    @objc public class func equalMatcher(_ expected: NSObject) -> NMBMatcher {
         return NMBPredicate { actualExpression in
             return try! equal(expected).satisfies(actualExpression).toObjectiveC()
         }
