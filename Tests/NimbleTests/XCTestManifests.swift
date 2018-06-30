@@ -228,6 +228,7 @@ extension EqualTest {
         ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
         ("testOptionalEquality", testOptionalEquality),
         ("testSetEquality", testSetEquality),
+        ("testSequenceElementsEqual", testSequenceElementsEqual),
     ]
 }
 
