@@ -99,6 +99,7 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 
 /// A Nimble matcher that succeeds when the actual sequence contain the same elements in the same order to the exepected sequence.
 public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> where S.Element: Equatable {
+    // A matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2949668-elementsequal
     return Predicate.define("elementsEqual <\(stringify(expectedValue))>", matcher: { (actualExpression, msg) in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
@@ -112,7 +113,6 @@ public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> wher
         }
     })
 }
-
 
 public func ==<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.to(equal(rhs))
