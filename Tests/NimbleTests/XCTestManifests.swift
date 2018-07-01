@@ -228,6 +228,11 @@ extension EqualTest {
         ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
         ("testOptionalEquality", testOptionalEquality),
         ("testSetEquality", testSetEquality),
+    ]
+}
+
+extension ElementsEqualTest {
+    static var __allTests = [
         ("testSequenceElementsEqual", testSequenceElementsEqual),
     ]
 }
