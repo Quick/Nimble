@@ -1,6 +1,6 @@
 //
 //  ElementsEqual.swift
-//  Nimble-macOS
+//  Nimble
 //
 //  Created by Luciano Almeida on 7/1/18.
 //  Copyright © 2018 Jeff Hui. All rights reserved.
