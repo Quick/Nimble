@@ -7,14 +7,12 @@
 //
 
 import Foundation
-
-import Foundation
 import XCTest
 import Nimble
 
 final class ElementsEqualTest: XCTestCase, XCTestCaseProvider {
 
-    func testSequenceElementsEqual() {
+    func testSequenceElementsEquality() {
         failsWithErrorMessageForNil("expected to elementsEqual <nil>, got <nil>") {
             expect(nil as [Int]?).to(elementsEqual(nil as [Int]?))
         }

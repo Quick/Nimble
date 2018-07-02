@@ -206,6 +206,12 @@ extension ContainTest {
     ]
 }
 
+extension ElementsEqualTest {
+    static let __allTests = [
+        ("testSequenceElementsEquality", testSequenceElementsEquality),
+    ]
+}
+
 extension EndWithTest {
     static let __allTests = [
         ("testEndWithNegatives", testEndWithNegatives),
@@ -228,12 +234,6 @@ extension EqualTest {
         ("testOperatorEqualityWithDictionaries", testOperatorEqualityWithDictionaries),
         ("testOptionalEquality", testOptionalEquality),
         ("testSetEquality", testSetEquality),
-    ]
-}
-
-extension ElementsEqualTest {
-    static var __allTests = [
-        ("testSequenceElementsEqual", testSequenceElementsEqual),
     ]
 }
 
@@ -365,6 +365,7 @@ public func __allTests() -> [XCTestCaseEntry] {
         testCase(BeginWithTest.__allTests),
         testCase(ContainElementSatisfyingTest.__allTests),
         testCase(ContainTest.__allTests),
+        testCase(ElementsEqualTest.__allTests),
         testCase(EndWithTest.__allTests),
         testCase(EqualTest.__allTests),
         testCase(HaveCountTest.__allTests),
