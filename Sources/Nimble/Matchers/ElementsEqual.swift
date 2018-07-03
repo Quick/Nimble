@@ -1,15 +1,8 @@
-//
-//  ElementsEqual.swift
-//  Nimble
-//
-//  Created by Luciano Almeida on 7/1/18.
-//  Copyright © 2018 Jeff Hui. All rights reserved.
-//
 
 /// A Nimble matcher that succeeds when the actual sequence contain the same elements in the same order to the exepected sequence.
 public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> where S.Element: Equatable {
     // A matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2949668-elementsequal
-    return Predicate.define("elementsEqual <\(stringify(expectedValue))>", matcher: { (actualExpression, msg) in
+    return Predicate.define("elementsEqual <\(stringify(expectedValue))>") { (actualExpression, msg) in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
         case (nil, _?):
@@ -20,5 +13,5 @@ public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> wher
             let matches = expected.elementsEqual(actual)
             return PredicateResult(bool: matches, message: msg)
         }
-    })
+    }
 }
