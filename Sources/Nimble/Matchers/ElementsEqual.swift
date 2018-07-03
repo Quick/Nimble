@@ -1,4 +1,3 @@
-
 /// A Nimble matcher that succeeds when the actual sequence contain the same elements in the same order to the exepected sequence.
 public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> where S.Element: Equatable {
     // A matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2949668-elementsequal
