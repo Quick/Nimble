@@ -20,9 +20,9 @@ public func match(_ expectedValue: String?) -> Predicate<String> {
 
 extension NMBObjCMatcher {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+        return NMBPredicate { actualExpression in
             let actual = actualExpression.cast { $0 as? String }
-            return try! match(expected.description).matches(actual, failureMessage: failureMessage)
+            return try! match(expected.description).satisfies(actual).toObjectiveC()
         }
     }
 }
