@@ -2,7 +2,6 @@ disabled_rules:
   - todo
   - variable_name
   - force_try
-  - force_cast
 
 included:
   - Sources

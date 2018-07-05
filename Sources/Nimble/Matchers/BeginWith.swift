@@ -49,6 +49,7 @@ extension NMBObjCMatcher {
             let actual = try! actualExpression.evaluate()
             if (actual as? String) != nil {
                 let expr = actualExpression.cast { $0 as? String }
+                // swiftlint:disable:next force_cast
                 return try! beginWith(expected as! String).matches(expr, failureMessage: failureMessage)
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
