@@ -81,6 +81,7 @@ extension NMBObjCMatcher {
                 return try! contain(expectedOptionals).matches(expr, failureMessage: failureMessage)
             } else if let value = actualValue as? NSString {
                 let expr = Expression(expression: ({ value as String }), location: location)
+                // swiftlint:disable:next force_cast
                 return try! contain(expected as! [String]).matches(expr, failureMessage: failureMessage)
             } else if actualValue != nil {
                 // swiftlint:disable:next line_length

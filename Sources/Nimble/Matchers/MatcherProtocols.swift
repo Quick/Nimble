@@ -144,11 +144,13 @@ public protocol NMBComparable {
 
 extension NSNumber: NMBComparable {
     public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
+        // swiftlint:disable:next force_cast
         return compare(otherObject as! NSNumber)
     }
 }
 extension NSString: NMBComparable {
     public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
+        // swiftlint:disable:next force_cast
         return compare(otherObject as! String)
     }
 }
