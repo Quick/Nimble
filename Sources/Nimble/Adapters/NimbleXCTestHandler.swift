@@ -42,7 +42,6 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
 
     private(set) var currentTestCase: XCTestCase?
 
-    // swiftlint:disable:next identifier_name
     private var stashed_swift_reportFatalErrorsToDebugger: Bool = false
 
     @objc func testCaseWillStart(_ testCase: XCTestCase) {

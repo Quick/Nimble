@@ -19,6 +19,7 @@ line_length:
   ignores_function_declarations: true
 
 identifier_name:
+  max_length: 50
   excluded:
     - x
     - l
@@ -27,3 +28,5 @@ identifier_name:
     - n1
     - n2
     - to
+  allowed_symbols:
+      - _
