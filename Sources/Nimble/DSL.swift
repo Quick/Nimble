@@ -44,11 +44,12 @@ internal func nimblePrecondition(
         let result = expr()
         if !result {
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-            let e = NSException(
+            let exception = NSException(
                 name: NSExceptionName(name()),
                 reason: message(),
-                userInfo: nil)
-            e.raise()
+                userInfo: nil
+            )
+            exception.raise()
 #else
             preconditionFailure("\(name()) - \(message())", file: file, line: line)
 #endif

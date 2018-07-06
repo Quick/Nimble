@@ -1,5 +1,6 @@
 import Foundation
 
+// swiftlint:disable:next identifier_name
 public let DefaultDelta = 0.0001
 
 internal func isCloseTo(_ actualValue: NMBDoubleConvertible?,
@@ -36,8 +37,10 @@ public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Doubl
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
+    // swiftlint:disable identifier_name
     var _expected: NSNumber
     var _delta: CDouble
+    // swiftlint:enable identifier_name
     init(expected: NSNumber, within: CDouble) {
         _expected = expected
         _delta = within
@@ -98,14 +101,17 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
 
 infix operator ≈ : ComparisonPrecedence
 
+// swiftlint:disable:next identifier_name
 public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
     lhs.to(beCloseTo(rhs))
 }
 
+// swiftlint:disable:next identifier_name
 public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: NMBDoubleConvertible) {
     lhs.to(beCloseTo(rhs))
 }
 
+// swiftlint:disable:next identifier_name
 public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
@@ -121,6 +127,7 @@ precedencegroup PlusMinusOperatorPrecedence {
 }
 
 infix operator ± : PlusMinusOperatorPrecedence
+// swiftlint:disable:next identifier_name
 public func ±(lhs: NMBDoubleConvertible, rhs: Double) -> (expected: NMBDoubleConvertible, delta: Double) {
     return (expected: lhs, delta: rhs)
 }

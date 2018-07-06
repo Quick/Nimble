@@ -1,6 +1,5 @@
 disabled_rules:
   - todo
-  - variable_name
   - force_try
 
 included:
@@ -18,3 +17,13 @@ trailing_comma:
 line_length:
   ignores_comments: true
   ignores_function_declarations: true
+
+identifier_name:
+  excluded:
+    - x
+    - l
+    - r
+    - e
+    - n1
+    - n2
+    - to
