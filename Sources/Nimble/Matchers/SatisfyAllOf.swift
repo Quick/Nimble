@@ -4,33 +4,11 @@ import Foundation
 /// provided in the variable list of matchers.
 public func satisfyAllOf<T, U>(_ matchers: U...) -> Predicate<T>
     where U: Matcher, U.ValueType == T {
-        return satisfyAllOf(matchers)
-}
-
-/// Deprecated. Please use `satisfyAnyOf<T>(_) -> Predicate<T>` instead.
-internal func satisfyAllOf<T, U>(_ matchers: [U]) -> Predicate<T>
-    where U: Matcher, U.ValueType == T {
-        return NonNilMatcherFunc<T> { actualExpression, failureMessage in
-            let postfixMessages = NSMutableArray()
-            var matches = true
-            for matcher in matchers {
-                if try matcher.doesNotMatch(actualExpression, failureMessage: failureMessage) {
-                    matches = false
-                }
-                postfixMessages.add(NSString(string: "{\(failureMessage.postfixMessage)}"))
-            }
-
-            failureMessage.postfixMessage = "match all of: " + postfixMessages.componentsJoined(by: ", and ")
-            if let actualValue = try actualExpression.evaluate() {
-                failureMessage.actualValue = "\(actualValue)"
-            }
-
-            return matches
-        }.predicate
+        return satisfyAllOf(matchers.map { $0.predicate })
 }
 
 internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
-	return Predicate { actualExpression in
+	return Predicate.define { actualExpression in
         var postfixMessages = [String]()
         var matches = true
         for predicate in predicates {
@@ -53,11 +31,8 @@ internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             )
         }
 
-        return PredicateResult(
-            bool: matches,
-            message: msg
-        )
-    }.requireNonNil
+        return PredicateResult(bool: matches, message: msg)
+    }
 }
 
 public func && <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
