@@ -2,23 +2,23 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be less than <\(stringify(expectedValue))>"
+    let message = "be less than <\(stringify(expectedValue))>"
+    return Predicate.simple(message) { actualExpression in
         if let actual = try actualExpression.evaluate(), let expected = expectedValue {
-            return actual < expected
+            return PredicateStatus(bool: actual < expected)
         }
-        return false
-    }.requireNonNil
+        return .fail
+    }
 }
 
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan(_ expectedValue: NMBComparable?) -> Predicate<NMBComparable> {
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be less than <\(stringify(expectedValue))>"
+    let message = "be less than <\(stringify(expectedValue))>"
+    return Predicate.simple(message) { actualExpression in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == ComparisonResult.orderedAscending
-        return matches
-    }.requireNonNil
+        return PredicateStatus(bool: matches)
+    }
 }
 
 public func <<T: Comparable>(lhs: Expectation<T>, rhs: T) {
