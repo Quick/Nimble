@@ -30,8 +30,10 @@ func == (lhs: EquatableError, rhs: EquatableError) -> Bool {
 }
 
 enum CustomDebugStringConvertibleError: Error {
+    // swiftlint:disable identifier_name
     case a
     case b
+    // swiftlint:enable identifier_name
 }
 
 extension CustomDebugStringConvertibleError: CustomDebugStringConvertible {

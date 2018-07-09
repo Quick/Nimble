@@ -218,6 +218,7 @@ extension Predicate: Matcher {
 extension Predicate {
     // Someday, make this public? Needs documentation
     internal func after(f: @escaping (Expression<T>, PredicateResult) throws -> PredicateResult) -> Predicate<T> {
+        // swiftlint:disable:previous identifier_name
         return Predicate { actual -> PredicateResult in
             let result = try self.satisfies(actual)
             return try f(actual, result)

@@ -8,8 +8,10 @@ public typealias FullMatcherBlock = (_ actualExpression: Expression<NSObject>, _
 // swiftlint:enable line_length
 
 public class NMBObjCMatcher: NSObject, NMBMatcher {
+    // swiftlint:disable identifier_name
     let _match: MatcherBlock
     let _doesNotMatch: MatcherBlock
+    // swiftlint:enable identifier_name
     let canMatchNil: Bool
 
     public init(canMatchNil: Bool, matcher: @escaping MatcherBlock, notMatcher: @escaping MatcherBlock) {

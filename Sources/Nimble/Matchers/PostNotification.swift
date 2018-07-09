@@ -16,10 +16,10 @@ internal class NotificationCollector {
 
     func startObserving() {
         // swiftlint:disable:next line_length
-        self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil, using: { [weak self] n in
+        self.token = self.notificationCenter.addObserver(forName: nil, object: nil, queue: nil) { [weak self] notification in
             // linux-swift gets confused by .append(n)
-            self?.observedNotifications.append(n)
-        })
+            self?.observedNotifications.append(notification)
+        }
     }
 
     deinit {

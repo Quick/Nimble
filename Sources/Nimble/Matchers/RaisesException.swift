@@ -117,10 +117,12 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
 }
 
 public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
+    // swiftlint:disable identifier_name
     internal var _name: String?
     internal var _reason: String?
     internal var _userInfo: NSDictionary?
     internal var _block: ((NSException) -> Void)?
+    // swiftlint:enable identifier_name
 
     internal init(name: String?, reason: String?, userInfo: NSDictionary?, block: ((NSException) -> Void)?) {
         _name = name
