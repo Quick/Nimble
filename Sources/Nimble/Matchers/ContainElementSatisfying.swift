@@ -2,27 +2,26 @@ import Foundation
 
 public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T) -> Bool), _ predicateDescription: String = "") -> Predicate<S> where S.Iterator.Element == T {
 
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-        failureMessage.actualValue = nil
-
+    return Predicate.define { actualExpression in
+        let message: ExpectationMessage
         if predicateDescription == "" {
-            failureMessage.postfixMessage = "find object in collection that satisfies predicate"
+            message = .expectedTo("find object in collection that satisfies predicate")
         } else {
-            failureMessage.postfixMessage = "find object in collection \(predicateDescription)"
+            message = .expectedTo("find object in collection \(predicateDescription)")
         }
 
         if let sequence = try actualExpression.evaluate() {
             for object in sequence {
                 if predicate(object) {
-                    return true
+                    return PredicateResult(bool: true, message: message)
                 }
             }
 
-            return false
+            return PredicateResult(bool: false, message: message)
         }
 
-        return false
-    }.requireNonNil
+        return PredicateResult(status: .fail, message: message)
+    }
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
