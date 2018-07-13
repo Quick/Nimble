@@ -90,7 +90,7 @@ extension NMBObjCMatcher {
                 let elementEvaluator = Predicate<NSObject> { expression in
                     if let predicate = matcher as? NMBPredicate {
                         // swiftlint:disable:next line_length
-                        return predicate.satisfies({ try! expression.evaluate() }, location: actualExpression.location).toSwift()
+                        return predicate.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
                     } else {
                         let failureMessage = FailureMessage()
                         // swiftlint:disable:next line_length
@@ -102,7 +102,7 @@ extension NMBObjCMatcher {
                 elementEvaluators.append(elementEvaluator)
             }
 
-            return try! satisfyAnyOf(elementEvaluators).satisfies(actualExpression).toObjectiveC()
+            return try satisfyAnyOf(elementEvaluators).satisfies(actualExpression).toObjectiveC()
         }
     }
 }

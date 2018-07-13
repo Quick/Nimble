@@ -133,12 +133,17 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         let block: () -> Any? = ({ _ = actualBlock(); return nil })
         let expr = Expression(expression: block, location: location)
 
-        return try! raiseException(
-            named: _name,
-            reason: _reason,
-            userInfo: _userInfo,
-            closure: _block
-        ).matches(expr, failureMessage: failureMessage)
+        do {
+            return try raiseException(
+                named: _name,
+                reason: _reason,
+                userInfo: _userInfo,
+                closure: _block
+            ).matches(expr, failureMessage: failureMessage)
+        } catch let error {
+            failureMessage.stringValue = "unexpected error thrown: <\(error)>"
+            return false
+        }
     }
 
     @objc public func doesNotMatch(_ actualBlock: @escaping () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {

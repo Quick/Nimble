@@ -58,13 +58,13 @@ public func endWith(_ endingSubstring: String) -> Predicate<String> {
 extension NMBObjCMatcher {
     @objc public class func endWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
-            let actual = try! actualExpression.evaluate()
+            let actual = try actualExpression.evaluate()
             if (actual as? String) != nil {
                 let expr = actualExpression.cast { $0 as? String }
-                return try! endWith(expected as! String).matches(expr, failureMessage: failureMessage)
+                return try endWith(expected as! String).matches(expr, failureMessage: failureMessage)
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
-                return try! endWith(expected).matches(expr, failureMessage: failureMessage)
+                return try endWith(expected).matches(expr, failureMessage: failureMessage)
             }
         }
     }
