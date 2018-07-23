@@ -8,7 +8,7 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
     var lineNumber = line
 
     let recorder = AssertionRecorder()
-    withAssertionHandler(recorder, closure: closure)
+    withAssertionHandler(recorder, file: file, line: line, closure: closure)
 
     for msg in messages {
         var lastFailure: AssertionRecord?

@@ -103,6 +103,7 @@ extension NMBObjCMatcher {
                 } else {
                     let failureMessage = FailureMessage()
                     let result = matcher.matches(
+                        // swiftlint:disable:next force_try
                         ({ try! expr.evaluate() }),
                         failureMessage: failureMessage,
                         location: expr.location

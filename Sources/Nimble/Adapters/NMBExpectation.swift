@@ -15,6 +15,7 @@ internal struct ObjCMatcherWrapper: Matcher {
 
     func matches(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.matches(
+            // swiftlint:disable:next force_try
             ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
@@ -22,6 +23,7 @@ internal struct ObjCMatcherWrapper: Matcher {
 
     func doesNotMatch(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
         return matcher.doesNotMatch(
+            // swiftlint:disable:next force_try
             ({ try! actualExpression.evaluate() }),
             failureMessage: failureMessage,
             location: actualExpression.location)
