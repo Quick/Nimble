@@ -24,9 +24,13 @@ public func raiseException(
                 exception = e
             }), finally: nil)
 
-            capture.tryBlock {
-                _ = try! actualExpression.evaluate()
-                return
+            do {
+                try capture.tryBlockThrows {
+                    _ = try actualExpression.evaluate()
+                }
+            } catch {
+                failureMessage.stringValue = "unexpected error thrown: <\(error)>"
+                return false
             }
 
             setFailureMessageForException(

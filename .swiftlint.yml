@@ -1,6 +1,5 @@
 disabled_rules:
   - todo
-  - force_try
 
 included:
   - Sources
