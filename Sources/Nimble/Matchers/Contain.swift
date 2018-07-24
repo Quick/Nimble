@@ -10,7 +10,7 @@ public func contain<S: Sequence, T: Equatable>(_ items: [T]) -> Predicate<S>
     where S.Iterator.Element == T {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            let matches = items.all {
+            let matches = items.allSatisfy {
                 return actual.contains($0)
             }
             return PredicateStatus(bool: matches)
@@ -27,7 +27,7 @@ public func contain(_ substrings: String...) -> Predicate<String> {
 public func contain(_ substrings: [String]) -> Predicate<String> {
     return Predicate.simple("contain <\(arrayAsString(substrings))>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            let matches = substrings.all {
+            let matches = substrings.allSatisfy {
                 let range = actual.range(of: $0)
                 return range != nil && !range!.isEmpty
             }
@@ -45,7 +45,7 @@ public func contain(_ substrings: NSString...) -> Predicate<NSString> {
 public func contain(_ substrings: [NSString]) -> Predicate<NSString> {
     return Predicate.simple("contain <\(arrayAsString(substrings))>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            let matches = substrings.all { actual.range(of: $0.description).length != 0 }
+            let matches = substrings.allSatisfy { actual.range(of: $0.description).length != 0 }
             return PredicateStatus(bool: matches)
         }
         return .fail
@@ -60,7 +60,7 @@ public func contain(_ items: Any?...) -> Predicate<NMBContainer> {
 public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-        let matches = items.all { item in
+        let matches = items.allSatisfy { item in
             return item.map { actual.contains($0) } ?? false
         }
         return PredicateStatus(bool: matches)
