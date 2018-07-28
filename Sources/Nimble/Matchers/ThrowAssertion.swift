@@ -5,7 +5,7 @@ public func throwAssertion() -> Predicate<Void> {
     #if arch(x86_64) && (os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !SWIFT_PACKAGE
         let message = ExpectationMessage.expectedTo("throw an assertion")
 
-        var actualError: Error? = nil
+        var actualError: Error?
         let caughtException: BadInstructionException? = catchBadInstruction {
             #if os(tvOS)
                 if !NimbleEnvironment.activeInstance.suppressTVOSAssertionWarning {
