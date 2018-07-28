@@ -35,9 +35,9 @@ public func throwAssertion() -> Predicate<Void> {
                 bool: false,
                 message: message.appended(message: "; threw error instead <\(actualError)>")
             )
+        } else {
+            return PredicateResult(bool: caughtException != nil, message: message)
         }
-
-        return PredicateResult(bool: caughtException != nil, message: message)
     #elseif SWIFT_PACKAGE
         fatalError("The throwAssertion Nimble matcher does not currently support Swift CLI." +
             " You can silence this error by placing the test case inside an #if !SWIFT_PACKAGE" +
