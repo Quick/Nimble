@@ -17,8 +17,7 @@ public func raiseException(
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
     closure: ((NSException) -> Void)? = nil) -> Predicate<Any> {
-        return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
-
+        return Predicate { actualExpression in
             var exception: NSException?
             let capture = NMBExceptionCapture(handler: ({ e in
                 exception = e
@@ -26,9 +25,9 @@ public func raiseException(
 
             capture.tryBlock {
                 _ = try! actualExpression.evaluate()
-                return
             }
 
+            let failureMessage = FailureMessage()
             setFailureMessageForException(
                 failureMessage,
                 exception: exception,
@@ -37,13 +36,15 @@ public func raiseException(
                 userInfo: userInfo,
                 closure: closure
             )
-            return exceptionMatchesNonNilFieldsOrClosure(
+
+            let matches = exceptionMatchesNonNilFieldsOrClosure(
                 exception,
                 named: named,
                 reason: reason,
                 userInfo: userInfo,
                 closure: closure
             )
+            return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
         }
 }
 
