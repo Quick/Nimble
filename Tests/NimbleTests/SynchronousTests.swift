@@ -16,6 +16,7 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
             ("testToNotProvidesActualValueExpression", testToNotProvidesActualValueExpression),
             ("testToNotProvidesAMemoizedActualValueExpression", testToNotProvidesAMemoizedActualValueExpression),
             ("testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl", testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl),
+            ("testToNegativeMatches", testToNegativeMatches),
             ("testToNotNegativeMatches", testToNotNegativeMatches),
             ("testNotToMatchesLikeToNot", testNotToMatchesLikeToNot),
         ]
@@ -114,6 +115,15 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
             return false
         })
         expect(callCount).to(equal(1))
+    }
+
+    func testToNegativeMatches() {
+        failsWithErrorMessage("expected to match, got <1>") {
+            expect(1).to(MatcherFunc { _, _ in false })
+        }
+        failsWithErrorMessage("expected to match, got <1>") {
+            expect(1).to(MatcherFunc { _, _ in false }.predicate)
+        }
     }
 
     func testToNotNegativeMatches() {
