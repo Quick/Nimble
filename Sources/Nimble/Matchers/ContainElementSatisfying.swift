@@ -50,8 +50,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
                 }
 
                 failureMessage.actualValue = nil
-                failureMessage.postfixMessage = ""
-                failureMessage.to = "to find object in collection that satisfies predicate"
+                failureMessage.postfixMessage = "find object in collection that satisfies predicate"
                 return false
             }
         }
