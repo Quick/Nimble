@@ -373,6 +373,9 @@
 		CD79C9B51D2CC848004B6F9A /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		CD79C9B61D2CC848004B6F9A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 		CD79C9B71D2CC848004B6F9A /* ObjCSatisfyAnyOfTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */; };
+		CDCA595B211AA911004A1D4C /* Issue388Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCA595A211AA911004A1D4C /* Issue388Test.swift */; };
+		CDCA595C211AA911004A1D4C /* Issue388Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCA595A211AA911004A1D4C /* Issue388Test.swift */; };
+		CDCA595D211AA911004A1D4C /* Issue388Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCA595A211AA911004A1D4C /* Issue388Test.swift */; };
 		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
@@ -612,6 +615,7 @@
 		AE4BA9AC1C88DDB500B73906 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		AE7ADE441C80BF8000B94CD3 /* MatchError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchError.swift; sourceTree = "<group>"; };
 		AE7ADE481C80C00D00B94CD3 /* MatchErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchErrorTest.swift; sourceTree = "<group>"; };
+		CDCA595A211AA911004A1D4C /* Issue388Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue388Test.swift; sourceTree = "<group>"; };
 		CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchException.swift; sourceTree = "<group>"; };
 		CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlCatchException.m; sourceTree = "<group>"; };
 		CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlCatchException.h; sourceTree = "<group>"; };
@@ -770,6 +774,7 @@
 				1F925EE5195C121200ED456B /* AsynchronousTest.swift */,
 				1F0648D31963AAB2001F9C46 /* SynchronousTests.swift */,
 				965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */,
+				CDCA595A211AA911004A1D4C /* Issue388Test.swift */,
 				6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */,
 				1FFD729A1963FC8200CD29A2 /* objc */,
 				1F14FB61194180A7009F2A08 /* Helpers */,
@@ -1405,6 +1410,7 @@
 				1F925F02195C189500ED456B /* ContainTest.swift in Sources */,
 				A8A3B6FC2073644600E25A08 /* ObjcStringersTest.m in Sources */,
 				1F4A56881A3B33CB009E1637 /* ObjCBeFalsyTest.m in Sources */,
+				CDCA595C211AA911004A1D4C /* Issue388Test.swift in Sources */,
 				1F4A568E1A3B342B009E1637 /* ObjCBeFalseTest.m in Sources */,
 				1F925F11195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F925EEF195C136500ED456B /* BeLogicalTest.swift in Sources */,
@@ -1540,6 +1546,7 @@
 				1F5DF1AB1BDCA10200C3A531 /* ThrowErrorTest.swift in Sources */,
 				A8A3B6FB2073644500E25A08 /* ObjcStringersTest.m in Sources */,
 				CD79C9A91D2CC848004B6F9A /* ObjCBeKindOfTest.m in Sources */,
+				CDCA595D211AA911004A1D4C /* Issue388Test.swift in Sources */,
 				1F5DF1A51BDCA10200C3A531 /* ContainTest.swift in Sources */,
 				7B13BA121DD361EB00C9098C /* ObjCContainElementSatisfyingTest.m in Sources */,
 				AE7ADE4B1C80C00D00B94CD3 /* MatchErrorTest.swift in Sources */,
@@ -1680,6 +1687,7 @@
 				1F925F03195C189500ED456B /* ContainTest.swift in Sources */,
 				A8A3B6FD2073644700E25A08 /* ObjcStringersTest.m in Sources */,
 				1F4A56891A3B33CB009E1637 /* ObjCBeFalsyTest.m in Sources */,
+				CDCA595B211AA911004A1D4C /* Issue388Test.swift in Sources */,
 				1F4A568F1A3B342B009E1637 /* ObjCBeFalseTest.m in Sources */,
 				1F925F12195C190B00ED456B /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				1F925EF0195C136500ED456B /* BeLogicalTest.swift in Sources */,
