@@ -299,6 +299,7 @@ extension SynchronousTest {
         ("testNotToMatchesLikeToNot", testNotToMatchesLikeToNot),
         ("testToMatchAgainstLazyProperties", testToMatchAgainstLazyProperties),
         ("testToMatchesIfMatcherReturnsTrue", testToMatchesIfMatcherReturnsTrue),
+        ("testToNegativeMatches", testToNegativeMatches),
         ("testToNotMatchesIfMatcherReturnsTrue", testToNotMatchesIfMatcherReturnsTrue),
         ("testToNotNegativeMatches", testToNotNegativeMatches),
         ("testToNotProvidesActualValueExpression", testToNotProvidesActualValueExpression),

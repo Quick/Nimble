@@ -47,7 +47,8 @@ public func postNotifications<T>(
     let collector = NotificationCollector(notificationCenter: center)
     collector.startObserving()
     var once: Bool = false
-    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
+
+    return Predicate { actualExpression in
         let collectorNotificationsExpression = Expression(memoizedExpression: { _ in
             return collector.observedNotifications
             }, location: actualExpression.location, withoutCaching: true)
@@ -58,12 +59,13 @@ public func postNotifications<T>(
             _ = try actualExpression.evaluate()
         }
 
+        let failureMessage = FailureMessage()
         let match = try notificationsMatcher.matches(collectorNotificationsExpression, failureMessage: failureMessage)
         if collector.observedNotifications.isEmpty {
             failureMessage.actualValue = "no notifications"
         } else {
             failureMessage.actualValue = "<\(stringify(collector.observedNotifications))>"
         }
-        return match
+        return PredicateResult(bool: match, message: failureMessage.toExpectationMessage())
     }
 }

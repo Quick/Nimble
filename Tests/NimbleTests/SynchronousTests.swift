@@ -98,9 +98,21 @@ final class SynchronousTest: XCTestCase, XCTestCaseProvider {
         expect(callCount).to(equal(1))
     }
 
+    func testToNegativeMatches() {
+        failsWithErrorMessage("expected to match, got <1>") {
+            expect(1).to(MatcherFunc { _, _ in false })
+        }
+        failsWithErrorMessage("expected to match, got <1>") {
+            expect(1).to(MatcherFunc { _, _ in false }.predicate)
+        }
+    }
+
     func testToNotNegativeMatches() {
         failsWithErrorMessage("expected to not match, got <1>") {
             expect(1).toNot(MatcherFunc { _, _ in true })
+        }
+        failsWithErrorMessage("expected to not match, got <1>") {
+            expect(1).toNot(MatcherFunc { _, _ in true }.predicate)
         }
     }
 
