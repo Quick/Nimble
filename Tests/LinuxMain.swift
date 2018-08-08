@@ -29,6 +29,7 @@ XCTMain([
     testCase(EndWithTest.allTests),
     testCase(EqualTest.allTests),
     testCase(HaveCountTest.allTests),
+    testCase(Issue388Test.allTests),
     testCase(MatchTest.allTests),
     // testCase(RaisesExceptionTest.allTests),
     testCase(ThrowErrorTest.allTests),
