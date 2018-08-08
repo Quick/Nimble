@@ -44,16 +44,16 @@ public func beginWith(_ startingSubstring: String) -> Predicate<String> {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func beginWithMatcher(_ expected: Any) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+    @objc public class func beginWithMatcher(_ expected: Any) -> NMBMatcher {
+        return NMBPredicate { actualExpression in
             let actual = try actualExpression.evaluate()
-            if (actual as? String) != nil {
+            if actual is String {
                 let expr = actualExpression.cast { $0 as? String }
                 // swiftlint:disable:next force_cast
-                return try beginWith(expected as! String).matches(expr, failureMessage: failureMessage)
+                return try beginWith(expected as! String).satisfies(expr).toObjectiveC()
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
-                return try beginWith(expected).matches(expr, failureMessage: failureMessage)
+                return try beginWith(expected).satisfies(expr).toObjectiveC()
             }
         }
     }
