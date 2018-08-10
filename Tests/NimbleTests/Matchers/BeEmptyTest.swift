@@ -34,16 +34,12 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
 
         expect("").to(beEmpty())
         expect("foo").toNot(beEmpty())
+
+        expect([] as NSSortOptions).to(beEmpty())
+        expect(NSSortOptions.concurrent).toNot(beEmpty())
     }
 
     func testBeEmptyNegative() {
-        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
-            expect(nil as NSString?).to(beEmpty())
-        }
-        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
-            expect(nil as [CInt]?).toNot(beEmpty())
-        }
-
         failsWithErrorMessage("expected to not be empty, got <()>") {
             expect(NSArray()).toNot(beEmpty())
         }
@@ -72,6 +68,36 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("expected to be empty, got <foo>") {
             expect("foo").to(beEmpty())
+        }
+
+        failsWithErrorMessage("expected to not be empty, got <NSSortOptions(rawValue: 0)>") {
+            expect([] as NSSortOptions).toNot(beEmpty())
+        }
+        failsWithErrorMessage("expected to be empty, got <NSSortOptions(rawValue: 1)>") {
+            expect(NSSortOptions.concurrent).to(beEmpty())
+        }
+    }
+
+    func testNilMatches() {
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as NSString?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as NSString?).toNot(beEmpty())
+        }
+
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as [CInt]?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as [CInt]?).toNot(beEmpty())
+        }
+
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as NSSortOptions?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as NSSortOptions?).toNot(beEmpty())
         }
     }
 }

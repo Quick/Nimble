@@ -75,6 +75,7 @@ extension BeEmptyTest {
     static let __allTests = [
         ("testBeEmptyNegative", testBeEmptyNegative),
         ("testBeEmptyPositive", testBeEmptyPositive),
+        ("testNilMatches", testNilMatches),
     ]
 }
 
