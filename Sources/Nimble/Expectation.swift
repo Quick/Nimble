@@ -131,6 +131,6 @@ public struct Expectation<T> {
     }
 
     // see:
-    // - AsyncMatcherWrapper for extension
+    // - `async` for extension
     // - NMBExpectation for Objective-C interface
 }
