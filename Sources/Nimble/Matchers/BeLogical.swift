@@ -100,14 +100,6 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
     return Predicate.simpleNilable("be truthy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
-            // FIXME: This is a workaround to SR-2290.
-            // See:
-            // - https://bugs.swift.org/browse/SR-2290
-            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
-            if let number = actualValue as? NSNumber {
-                return PredicateStatus(bool: number.boolValue == true)
-            }
-
             return PredicateStatus(bool: actualValue == (true as T))
         }
         return PredicateStatus(bool: actualValue != nil)
@@ -120,14 +112,6 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
     return Predicate.simpleNilable("be falsy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         if let actualValue = actualValue {
-            // FIXME: This is a workaround to SR-2290.
-            // See:
-            // - https://bugs.swift.org/browse/SR-2290
-            // - https://github.com/norio-nomura/Nimble/pull/5#issuecomment-237835873
-            if let number = actualValue as? NSNumber {
-                return PredicateStatus(bool: number.boolValue == false)
-            }
-
             return PredicateStatus(bool: actualValue == (false as T))
         }
         return PredicateStatus(bool: actualValue == nil)
