@@ -113,9 +113,10 @@ extension Expectation {
     public func toEventually<U>(_ matcher: U, timeout: TimeInterval = AsyncDefaults.Timeout, pollInterval: TimeInterval = AsyncDefaults.PollInterval, description: String? = nil)
         where U: Matcher, U.ValueType == T {
         if expression.isClosure {
-            let (pass, msg) = expressionMatches(
+            let (pass, msg) = execute(
                 expression,
-                matcher: async(
+                .toMatch,
+                async(
                     style: .toMatch,
                     predicate: matcher.predicate,
                     timeout: timeout,
@@ -123,7 +124,8 @@ extension Expectation {
                     fnName: "toEventually"
                 ),
                 to: "to eventually",
-                description: description
+                description: description,
+                captureExceptions: false
             )
             verify(pass, msg)
         } else {
