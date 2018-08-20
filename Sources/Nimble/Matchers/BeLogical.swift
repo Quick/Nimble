@@ -120,24 +120,24 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func beTruthyMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage in
+    @objc public class func beTruthyMatcher() -> NMBMatcher {
+        return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
-            return try beTruthy().matches(expr, failureMessage: failureMessage)
+            return try beTruthy().satisfies(expr).toObjectiveC()
         }
     }
 
-    @objc public class func beFalsyMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage in
+    @objc public class func beFalsyMatcher() -> NMBMatcher {
+        return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
-            return try beFalsy().matches(expr, failureMessage: failureMessage)
+            return try beFalsy().satisfies(expr).toObjectiveC()
         }
     }
 
-    @objc public class func beTrueMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualExpression, failureMessage in
+    @objc public class func beTrueMatcher() -> NMBMatcher {
+        return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
-            return try beTrue().matches(expr, failureMessage: failureMessage)
+            return try beTrue().satisfies(expr).toObjectiveC()
         }
     }
 
