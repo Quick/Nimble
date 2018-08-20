@@ -35,8 +35,8 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         expect("").to(beEmpty())
         expect("foo").toNot(beEmpty())
 
-        expect([] as NSSortOptions).to(beEmpty())
-        expect(NSSortOptions.concurrent).toNot(beEmpty())
+        expect([] as TestOptionSet).to(beEmpty())
+        expect(TestOptionSet.one).toNot(beEmpty())
     }
 
     func testBeEmptyNegative() {
@@ -70,11 +70,11 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
             expect("foo").to(beEmpty())
         }
 
-        failsWithErrorMessage("expected to not be empty, got <NSSortOptions(rawValue: 0)>") {
-            expect([] as NSSortOptions).toNot(beEmpty())
+        failsWithErrorMessage("expected to not be empty, got <TestOptionSet(rawValue: 0)>") {
+            expect([] as TestOptionSet).toNot(beEmpty())
         }
-        failsWithErrorMessage("expected to be empty, got <NSSortOptions(rawValue: 1)>") {
-            expect(NSSortOptions.concurrent).to(beEmpty())
+        failsWithErrorMessage("expected to be empty, got <TestOptionSet(rawValue: 1)>") {
+            expect(TestOptionSet.one).to(beEmpty())
         }
     }
 
@@ -94,10 +94,24 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         }
 
         failsWithErrorMessageForNil("expected to be empty, got <nil>") {
-            expect(nil as NSSortOptions?).to(beEmpty())
+            expect(nil as TestOptionSet?).to(beEmpty())
         }
         failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
-            expect(nil as NSSortOptions?).toNot(beEmpty())
+            expect(nil as TestOptionSet?).toNot(beEmpty())
         }
+    }
+}
+
+private struct TestOptionSet: OptionSet, CustomStringConvertible {
+    let rawValue: Int
+
+    static let one = TestOptionSet(rawValue: 1 << 0)
+
+    init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+
+    var description: String {
+        return "TestOptionSet(rawValue: \(rawValue))"
     }
 }
