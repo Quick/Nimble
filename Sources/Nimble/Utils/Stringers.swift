@@ -122,6 +122,7 @@ extension String: TestOutputStringConvertible {
 extension Data: TestOutputStringConvertible {
     public var testDescription: String {
         #if os(Linux)
+            // swiftlint:disable:next todo
             // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11-16)
             return "Data<length=\(count)>"
         #else

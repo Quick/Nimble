@@ -126,6 +126,7 @@ public indirect enum ExpectationMessage {
         return visitLeafs(walk)
     }
 
+    // swiftlint:disable:next todo
     // TODO: test & verify correct behavior
     internal func prepended(message: String) -> ExpectationMessage {
         return .prepends(message, self)
