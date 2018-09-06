@@ -141,10 +141,13 @@ extension NMBObjCMatcher {
         }
     }
 
-    @objc public class func beFalseMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
-            let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
-            return try beFalse().matches(expr, failureMessage: failureMessage)
+    @objc public class func beFalseMatcher() -> NMBMatcher {
+        return NMBPredicate { actualExpression in
+            let expr = actualExpression.cast { value -> Bool? in
+                guard let value = value else { return nil }
+                return (value as? NSNumber)?.boolValue ?? false
+            }
+            return try beFalse().satisfies(expr).toObjectiveC()
         }
     }
 }
