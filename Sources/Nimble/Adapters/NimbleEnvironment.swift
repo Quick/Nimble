@@ -20,6 +20,7 @@ internal class NimbleEnvironment {
         }
     }
 
+    // swiftlint:disable:next todo
     // TODO: eventually migrate the global to this environment value
     var assertionHandler: AssertionHandler {
         get { return NimbleAssertionHandler }

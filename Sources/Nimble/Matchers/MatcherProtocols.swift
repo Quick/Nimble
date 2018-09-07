@@ -42,6 +42,7 @@ public protocol NMBContainer {
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+// swiftlint:disable:next todo
 // FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #endif
