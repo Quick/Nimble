@@ -7,7 +7,7 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual Collection's count equals
 /// the expected value
-public func haveCount<T: Collection>(_ expectedValue: T.IndexDistance) -> Predicate<T> {
+public func haveCount<T: Collection>(_ expectedValue: Int) -> Predicate<T> {
     return Predicate.define { actualExpression in
         if let actualValue = try actualExpression.evaluate() {
             let message = ExpectationMessage
