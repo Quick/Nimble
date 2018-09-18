@@ -69,8 +69,8 @@ public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 extension NMBObjCMatcher {
-    @objc public class func containMatcher(_ expected: [NSObject]) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
+    @objc public class func containMatcher(_ expected: [NSObject]) -> NMBMatcher {
+        return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try actualExpression.evaluate()
             if let value = actualValue as? NMBContainer {
@@ -78,18 +78,25 @@ extension NMBObjCMatcher {
 
                 // A straightforward cast on the array causes this to crash, so we have to cast the individual items
                 let expectedOptionals: [Any?] = expected.map({ $0 as Any? })
-                return try contain(expectedOptionals).matches(expr, failureMessage: failureMessage)
+                return try contain(expectedOptionals).satisfies(expr).toObjectiveC()
             } else if let value = actualValue as? NSString {
                 let expr = Expression(expression: ({ value as String }), location: location)
                 // swiftlint:disable:next force_cast
-                return try contain(expected as! [String]).matches(expr, failureMessage: failureMessage)
-            } else if actualValue != nil {
-                // swiftlint:disable:next line_length
-                failureMessage.postfixMessage = "contain <\(arrayAsString(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
-            } else {
-                failureMessage.postfixMessage = "contain <\(arrayAsString(expected))>"
+                return try contain(expected as! [String]).satisfies(expr).toObjectiveC()
             }
-            return false
+
+            let message: ExpectationMessage
+            if actualValue != nil {
+                message = ExpectationMessage.expectedActualValueTo(
+                    // swiftlint:disable:next line_length
+                    "contain <\(arrayAsString(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
+                )
+            } else {
+                message = ExpectationMessage
+                    .expectedActualValueTo("contain <\(arrayAsString(expected))>")
+                    .appendedBeNilHint()
+            }
+            return NMBPredicateResult(status: .fail, message: message.toObjectiveC())
         }
     }
 }
