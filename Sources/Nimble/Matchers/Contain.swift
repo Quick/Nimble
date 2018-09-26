@@ -1,13 +1,14 @@
 import Foundation
 
-/// A Nimble matcher that succeeds when the actual sequence contains the expected value.
+/// A Nimble matcher that succeeds when the actual sequence contains the expected values.
 public func contain<S: Sequence, T: Equatable>(_ items: T...) -> Predicate<S>
-    where S.Iterator.Element == T {
+    where S.Element == T {
     return contain(items)
 }
 
+/// A Nimble matcher that succeeds when the actual sequence contains the expected values.
 public func contain<S: Sequence, T: Equatable>(_ items: [T]) -> Predicate<S>
-    where S.Iterator.Element == T {
+    where S.Element == T {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
             let matches = items.allSatisfy {
@@ -17,6 +18,26 @@ public func contain<S: Sequence, T: Equatable>(_ items: [T]) -> Predicate<S>
         }
         return .fail
     }
+}
+
+/// A Nimble matcher that succeeds when the actual set contains the expected values.
+public func contain<S: SetAlgebra, T: Equatable>(_ items: T...) -> Predicate<S>
+    where S.Element == T {
+        return contain(items)
+}
+
+/// A Nimble matcher that succeeds when the actual set contains the expected values.
+public func contain<S: SetAlgebra, T: Equatable>(_ items: [T]) -> Predicate<S>
+    where S.Element == T {
+        return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
+            if let actual = try actualExpression.evaluate() {
+                let matches = items.allSatisfy {
+                    return actual.contains($0)
+                }
+                return PredicateStatus(bool: matches)
+            }
+            return .fail
+        }
 }
 
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
