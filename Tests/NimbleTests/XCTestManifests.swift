@@ -200,8 +200,9 @@ extension ContainElementSatisfyingTest {
 extension ContainTest {
     static let __allTests = [
         ("testCollectionArguments", testCollectionArguments),
-        ("testContain", testContain),
         ("testContainObjCSubstring", testContainObjCSubstring),
+        ("testContainSequence", testContainSequence),
+        ("testContainSetAlgebra", testContainSetAlgebra),
         ("testContainSubstring", testContainSubstring),
         ("testVariadicArguments", testVariadicArguments),
     ]
