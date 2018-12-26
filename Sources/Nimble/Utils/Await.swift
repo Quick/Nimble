@@ -264,7 +264,7 @@ internal class AwaitPromiseBuilder<T> {
                 #if swift(>=4.2)
                 _ = RunLoop.current.run(mode: .default, before: .distantFuture)
                 #else
-                _ = RunLoop.current.run(mode: .defaultRunLoopMode, before: .distantFuture)
+                _ = RunLoop.current.run(mode: RunLoop.Mode.default, before: .distantFuture)
                 #endif
             }
 
