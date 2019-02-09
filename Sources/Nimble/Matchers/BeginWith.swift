@@ -35,8 +35,7 @@ public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection>
 public func beginWith(_ startingSubstring: String) -> Predicate<String> {
     return Predicate.simple("begin with <\(startingSubstring)>") { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            let range = actual.range(of: startingSubstring)
-            return PredicateStatus(bool: range != nil && range!.lowerBound == actual.startIndex)
+            return PredicateStatus(bool: actual.hasPrefix(startingSubstring))
         }
         return .fail
     }
