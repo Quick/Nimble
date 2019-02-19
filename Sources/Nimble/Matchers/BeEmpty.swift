@@ -72,7 +72,7 @@ public func beEmpty() -> Predicate<NMBCollection> {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func beEmptyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in

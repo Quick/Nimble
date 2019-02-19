@@ -45,7 +45,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func haveCountMatcher(_ expected: NSNumber) -> NMBMatcher {
         return NMBPredicate { actualExpression in

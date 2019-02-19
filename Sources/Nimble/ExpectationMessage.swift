@@ -211,7 +211,7 @@ extension FailureMessage {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 public class NMBExpectationMessage: NSObject {
     private let msg: ExpectationMessage

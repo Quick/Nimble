@@ -35,7 +35,7 @@ public func beCloseTo(_ expectedValue: NMBDoubleConvertible, within delta: Doubl
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
     // swiftlint:disable identifier_name
     var _expected: NSNumber

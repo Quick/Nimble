@@ -41,7 +41,7 @@ public func beginWith(_ startingSubstring: String) -> Predicate<String> {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func beginWithMatcher(_ expected: Any) -> NMBMatcher {
         return NMBPredicate { actualExpression in

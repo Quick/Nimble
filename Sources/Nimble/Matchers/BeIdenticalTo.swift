@@ -41,7 +41,7 @@ public func be(_ expected: Any?) -> Predicate<Any> {
     return beIdenticalTo(expected)
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBMatcher {
         return NMBPredicate { actualExpression in

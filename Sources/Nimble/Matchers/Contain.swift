@@ -88,7 +88,7 @@ public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func containMatcher(_ expected: [NSObject]) -> NMBMatcher {
         return NMBPredicate { actualExpression in
