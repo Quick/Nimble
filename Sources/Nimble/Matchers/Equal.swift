@@ -137,7 +137,7 @@ public func !=<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func equalMatcher(_ expected: NSObject) -> NMBMatcher {
         return NMBPredicate { actualExpression in

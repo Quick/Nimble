@@ -39,7 +39,7 @@ public func && <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
     return satisfyAllOf(left, right)
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 extension NMBObjCMatcher {
     @objc public class func satisfyAllOfMatcher(_ matchers: [NMBMatcher]) -> NMBPredicate {
         return NMBPredicate { actualExpression in

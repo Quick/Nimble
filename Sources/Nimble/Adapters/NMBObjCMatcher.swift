@@ -1,6 +1,6 @@
 import Foundation
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 
 // swiftlint:disable line_length
 public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>, _ failureMessage: FailureMessage) throws -> Bool

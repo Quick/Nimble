@@ -242,7 +242,7 @@ extension Predicate {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
 public typealias PredicateBlock = (_ actualExpression: Expression<NSObject>) throws -> NMBPredicateResult
 
 public class NMBPredicate: NSObject {

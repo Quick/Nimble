@@ -24,7 +24,7 @@ public func containElementSatisfying<S: Sequence, T>(_ predicate: @escaping ((T)
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
     extension NMBObjCMatcher {
         @objc public class func containElementSatisfyingMatcher(_ predicate: @escaping ((NSObject) -> Bool)) -> NMBMatcher {
             return NMBPredicate { actualExpression in

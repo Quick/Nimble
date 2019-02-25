@@ -3,7 +3,7 @@ import Foundation
 internal class NotificationCollector {
     private(set) var observedNotifications: [Notification]
     private let notificationCenter: NotificationCenter
-    #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+    #if canImport(Darwin)
     private var token: AnyObject?
     #else
     private var token: NSObjectProtocol?
@@ -23,7 +23,7 @@ internal class NotificationCollector {
     }
 
     deinit {
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if canImport(Darwin)
             if let token = self.token {
                 self.notificationCenter.removeObserver(token)
             }
