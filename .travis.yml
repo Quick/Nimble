@@ -17,8 +17,16 @@ matrix:
       env: TYPE=macos
       name: macOS / Swift 4.2.1
     - os: osx
+      env: TYPE=macos
+      osx_image: xcode10.2
+      name: macOS / Swift 5.0
+    - os: osx
       env:
         - TYPE=swiftpm
+    - os: osx
+      env:
+        - TYPE=swiftpm
+      osx_image: xcode10.2
     - &linux
       name: Linux / Swift 4.2.1
       os: linux
