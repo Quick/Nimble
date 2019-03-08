@@ -50,6 +50,27 @@ final class ContainTest: XCTestCase, XCTestCaseProvider {
         }
     }
 
+    func testContainSequenceAndSetAlgebra() {
+        let set = [1, 2, 3] as Set<Int>
+
+        expect(set).to(contain(1))
+        expect(set).toNot(contain(4))
+
+        failsWithErrorMessage("expected to contain <4>, got <\(set.debugDescription)>") {
+            expect(set).to(contain(4))
+        }
+        failsWithErrorMessage("expected to not contain <2>, got <\(set.debugDescription)>") {
+            expect(set).toNot(contain(2))
+        }
+
+        failsWithErrorMessageForNil("expected to contain <1>, got <nil>") {
+            expect(nil as Set<Int>?).to(contain(1))
+        }
+        failsWithErrorMessageForNil("expected to not contain <1>, got <nil>") {
+            expect(nil as Set<Int>?).toNot(contain(1))
+        }
+    }
+
     func testContainSubstring() {
         expect("foo").to(contain("o"))
         expect("foo").to(contain("oo"))

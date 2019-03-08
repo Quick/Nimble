@@ -10,6 +10,9 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         expect([] as [CInt]).to(beEmpty())
         expect([1] as [CInt]).toNot(beEmpty())
 
+        expect([] as Set<Int>).to(beEmpty())
+        expect([1] as Set<Int>).toNot(beEmpty())
+
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
         expect(NSDictionary() as? [Int: Int]).to(beEmpty())
         expect(NSDictionary(object: 1, forKey: 1 as NSNumber) as? [Int: Int]).toNot(beEmpty())
@@ -45,6 +48,13 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessage("expected to be empty, got <[1]>") {
             expect([1]).to(beEmpty())
+        }
+
+        failsWithErrorMessage("expected to not be empty, got <Set([])>") {
+            expect([] as Set<Int>).toNot(beEmpty())
+        }
+        failsWithErrorMessage("expected to be empty, got <Set([1])>") {
+            expect([1] as Set<Int>).to(beEmpty())
         }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
@@ -91,6 +101,13 @@ final class BeEmptyTest: XCTestCase, XCTestCaseProvider {
         }
         failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
             expect(nil as [CInt]?).toNot(beEmpty())
+        }
+
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as Set<Int>?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as Set<Int>?).toNot(beEmpty())
         }
 
         failsWithErrorMessageForNil("expected to be empty, got <nil>") {
