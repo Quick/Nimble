@@ -1715,8 +1715,6 @@ Finally run `pod install`.
 
 ## Installing Nimble via Accio
 
-## Accio
-
 Add the following to your Package.swift:
 
 ```swift
