@@ -9,7 +9,7 @@ final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
         expect(1).toNot(beGreaterThanOrEqualTo(2))
         expect(NSNumber(value: 1)).toNot(beGreaterThanOrEqualTo(2))
         expect(NSNumber(value: 2)).to(beGreaterThanOrEqualTo(NSNumber(value: 2)))
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
         expect(1).to(beGreaterThanOrEqualTo(NSNumber(value: 0)))
 #endif
 

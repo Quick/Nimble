@@ -15,7 +15,7 @@ final class BeginWithTest: XCTestCase, XCTestCaseProvider {
         expect(NSString(string: "foobar").description).to(beginWith("foo"))
         expect(NSString(string: "foobar").description).toNot(beginWith("oo"))
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(Darwin)
         expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
         expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
 #endif
