@@ -64,7 +64,7 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
     }
 
     func testPassesWhenExpectedNotificationEventuallyIsPosted() {
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if canImport(Darwin)
             let testNotification = Notification(name: Notification.Name("Foo"), object: nil)
             expect {
                 deferToMainQueue {
