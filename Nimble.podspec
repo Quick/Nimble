@@ -51,5 +51,5 @@ Pod::Spec.new do |s|
   }
 
   s.cocoapods_version = '>= 1.4.0'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 end
