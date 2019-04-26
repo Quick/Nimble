@@ -1,12 +1,7 @@
 import Foundation
 
 internal func identityAsString(_ value: Any?) -> String {
-    let anyObject: AnyObject?
-#if os(Linux) && !swift(>=4.1.50)
-    anyObject = value as? AnyObject
-#else
-    anyObject = value as AnyObject?
-#endif
+    let anyObject = value as AnyObject?
     if let value = anyObject {
         return NSString(format: "<%p>", unsafeBitCast(value, to: Int.self)).description
     } else {
