@@ -133,14 +133,8 @@ final class EqualTest: XCTestCase, XCTestCaseProvider {
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
-        #if os(Linux)
-            // swiftlint:disable:next todo
-            // FIXME: Swift on Linux triggers a segfault when calling NSData's hash() (last checked on 03-11)
-            let expectedErrorMessage = "expected to equal <Data<length=9>>, got <Data<length=6>>"
-        #else
-            let expectedErrorMessage = "expected to equal <Data<hash=92856895,length=9>>,"
+        let expectedErrorMessage = "expected to equal <Data<hash=92856895,length=9>>,"
                 + " got <Data<hash=114710658,length=6>>"
-        #endif
 
         failsWithErrorMessage(expectedErrorMessage) {
             expect(actual).to(equal(unexpected))
