@@ -3,11 +3,7 @@ import Foundation
 internal class NotificationCollector {
     private(set) var observedNotifications: [Notification]
     private let notificationCenter: NotificationCenter
-    #if canImport(Darwin)
-    private var token: AnyObject?
-    #else
     private var token: NSObjectProtocol?
-    #endif
 
     required init(notificationCenter: NotificationCenter) {
         self.notificationCenter = notificationCenter
@@ -23,15 +19,9 @@ internal class NotificationCollector {
     }
 
     deinit {
-        #if canImport(Darwin)
-            if let token = self.token {
-                self.notificationCenter.removeObserver(token)
-            }
-        #else
-            if let token = self.token as? AnyObject {
-                self.notificationCenter.removeObserver(token)
-            }
-        #endif
+        if let token = self.token {
+            self.notificationCenter.removeObserver(token)
+        }
     }
 }
 
