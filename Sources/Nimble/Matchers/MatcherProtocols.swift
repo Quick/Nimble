@@ -12,6 +12,7 @@ public protocol Matcher {
     func doesNotMatch(_ actualExpression: Expression<ValueType>, failureMessage: FailureMessage) throws -> Bool
 }
 
+@available(*, deprecated, message: "Use Predicate instead")
 extension Matcher {
     var predicate: Predicate<ValueType> {
         return Predicate.fromDeprecatedMatcher(self)

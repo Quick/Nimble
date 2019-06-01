@@ -1,6 +1,7 @@
 import Foundation
 
 // Deprecated
+@available(*, deprecated)
 internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher: U, toNot: String, description: String?) -> (Bool, FailureMessage)
     where U: Matcher, U.ValueType == T {
     let msg = FailureMessage()
@@ -69,6 +70,7 @@ public struct Expectation<T> {
     ////////////////// OLD API /////////////////////
 
     /// DEPRECATED: Tests the actual value using a matcher to match.
+    @available(*, deprecated)
     public func to<U>(_ matcher: U, description: String? = nil)
         where U: Matcher, U.ValueType == T {
             let (pass, msg) = execute(
@@ -83,6 +85,7 @@ public struct Expectation<T> {
     }
 
     /// DEPRECATED: Tests the actual value using a matcher to not match.
+    @available(*, deprecated)
     public func toNot<U>(_ matcher: U, description: String? = nil)
         where U: Matcher, U.ValueType == T {
         // swiftlint:disable:next line_length
@@ -93,6 +96,7 @@ public struct Expectation<T> {
     /// DEPRECATED: Tests the actual value using a matcher to not match.
     ///
     /// Alias to toNot().
+    @available(*, deprecated)
     public func notTo<U>(_ matcher: U, description: String? = nil)
         where U: Matcher, U.ValueType == T {
         toNot(matcher, description: description)

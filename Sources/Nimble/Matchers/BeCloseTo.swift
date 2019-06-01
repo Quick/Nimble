@@ -46,6 +46,7 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
         _delta = within
     }
 
+    @available(*, deprecated)
     @objc public func matches(_ actualExpression: @escaping () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let actualBlock: () -> NMBDoubleConvertible? = ({
             return actualExpression() as? NMBDoubleConvertible
@@ -61,6 +62,7 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
         }
     }
 
+    @available(*, deprecated)
     @objc public func doesNotMatch(_ actualExpression: @escaping () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let actualBlock: () -> NMBDoubleConvertible? = ({
             return actualExpression() as? NMBDoubleConvertible

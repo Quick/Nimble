@@ -167,6 +167,7 @@ public enum PredicateStatus {
 }
 
 // Backwards compatibility until Old Matcher API removal
+@available(*, deprecated)
 extension Predicate: Matcher {
     /// Compatibility layer for old Matcher API, deprecated
     public static func fromDeprecatedFullClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
@@ -196,6 +197,7 @@ extension Predicate: Matcher {
 
     /// Compatibility layer for old Matcher API, deprecated.
     /// Same as calling .predicate on a MatcherFunc or NonNilMatcherFunc type.
+    @available(*, deprecated)
     public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
         return self.fromDeprecatedFullClosure(matcher.toClosure)
     }
