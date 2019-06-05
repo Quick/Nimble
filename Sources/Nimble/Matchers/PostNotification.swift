@@ -51,14 +51,18 @@ public func postNotifications(
             _ = try actualExpression.evaluate()
         }
 
-        let failureMessage = FailureMessage()
-        let match = try predicate.matches(collectorNotificationsExpression, failureMessage: failureMessage)
+        let actualValue: String
         if collector.observedNotifications.isEmpty {
-            failureMessage.actualValue = "no notifications"
+            actualValue = "no notifications"
         } else {
-            failureMessage.actualValue = "<\(stringify(collector.observedNotifications))>"
+            actualValue = "<\(stringify(collector.observedNotifications))>"
         }
-        return PredicateResult(bool: match, message: failureMessage.toExpectationMessage())
+
+        var result = try predicate.satisfies(collectorNotificationsExpression)
+        result.message = result.message.replacedExpectation { message in
+            return .expectedCustomValueTo(message.expectedMessage, actualValue)
+        }
+        return result
     }
 }
 
