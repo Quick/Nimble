@@ -141,12 +141,15 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         let expr = Expression(expression: block, location: location)
 
         do {
-            return try raiseException(
+            let predicate = raiseException(
                 named: _name,
                 reason: _reason,
                 userInfo: _userInfo,
                 closure: _block
-            ).matches(expr, failureMessage: failureMessage)
+            )
+            let result = try predicate.satisfies(expr)
+            result.message.update(failureMessage: failureMessage)
+            return result.toBoolean(expectation: .toMatch)
         } catch let error {
             failureMessage.stringValue = "unexpected error thrown: <\(error)>"
             return false
