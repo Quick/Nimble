@@ -18,13 +18,13 @@ extension Matcher {
     }
 
     var toClosure: (Expression<ValueType>, FailureMessage, Bool) throws -> Bool {
-        return ({ expr, msg, expectedResult in
+        return { expr, msg, expectedResult in
             if expectedResult {
                 return try self.matches(expr, failureMessage: msg)
             } else {
                 return try self.doesNotMatch(expr, failureMessage: msg)
             }
-        })
+        }
     }
 }
 
