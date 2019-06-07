@@ -161,47 +161,47 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
     }
 
     @objc public var named: (_ name: String) -> NMBObjCRaiseExceptionMatcher {
-        return ({ name in
+        return { name in
             return NMBObjCRaiseExceptionMatcher(
                 name: name,
                 reason: self._reason,
                 userInfo: self._userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var reason: (_ reason: String?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ reason in
+        return { reason in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: reason,
                 userInfo: self._userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var userInfo: (_ userInfo: NSDictionary?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ userInfo in
+        return { userInfo in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: self._reason,
                 userInfo: userInfo,
                 block: self._block
             )
-        })
+        }
     }
 
     @objc public var satisfyingBlock: (_ block: ((NSException) -> Void)?) -> NMBObjCRaiseExceptionMatcher {
-        return ({ block in
+        return { block in
             return NMBObjCRaiseExceptionMatcher(
                 name: self._name,
                 reason: self._reason,
                 userInfo: self._userInfo,
                 block: block
             )
-        })
+        }
     }
 }
 

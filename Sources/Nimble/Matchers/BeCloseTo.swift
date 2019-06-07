@@ -81,9 +81,9 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
     }
 
     @objc public var within: (CDouble) -> NMBObjCBeCloseToMatcher {
-        return ({ delta in
+        return { delta in
             return NMBObjCBeCloseToMatcher(expected: self._expected, within: delta)
-        })
+        }
     }
 }
 
