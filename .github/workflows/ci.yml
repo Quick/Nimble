@@ -50,3 +50,21 @@ jobs:
         ruby-version: '2.x'
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
     - run: ./test swiftpm
+
+  swiftpm_linux:
+    name: SwiftPM, Linux, Swift ${{ matrix.swift }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        swift: [4.2.4, 5.0.3, 5.1-DEVELOPMENT-SNAPSHOT-2019-09-05-a]
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-ruby@v1
+      with:
+        ruby-version: '2.x'
+    - name: Run tests
+      run: |
+        eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+        ./test swiftpm
+      env:
+        SWIFT_VERSION: ${{ matrix.swift }}
