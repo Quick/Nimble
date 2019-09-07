@@ -17,13 +17,13 @@ matrix:
       script:
         - ./test swiftpm
     - <<: *swiftpm_linux
-      name: SwiftPM / Linux / Swift 5.0
+      name: SwiftPM / Linux / Swift 5.0.3
       env:
-        - SWIFT_VERSION=5.0
+        - SWIFT_VERSION=5.0.3
     - <<: *swiftpm_linux
       name: SwiftPM / Linux / Swift 5.1 Development
       env:
-        - SWIFT_VERSION=5.1-DEVELOPMENT-SNAPSHOT-2019-05-29-a
+        - SWIFT_VERSION=5.1-DEVELOPMENT-SNAPSHOT-2019-09-05-a
 install: true
 script:
   - ./test $TYPE
