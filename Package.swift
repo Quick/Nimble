@@ -9,10 +9,19 @@ let package = Package(
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .exact("1.2.0")),
+    ],
     targets: [
         .target(
             name: "Nimble", 
-            dependencies: []
+            dependencies: {
+                #if os(macOS)
+                return ["CwlPreconditionTesting"]
+                #else
+                return []
+                #endif
+            }()
         ),
         .testTarget(
             name: "NimbleTests", 
