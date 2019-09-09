@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-#if canImport(Darwin) && !SWIFT_PACKAGE
+#if canImport(Darwin)
 
 private let error: Error = NSError(domain: "test", code: 0, userInfo: nil)
 
