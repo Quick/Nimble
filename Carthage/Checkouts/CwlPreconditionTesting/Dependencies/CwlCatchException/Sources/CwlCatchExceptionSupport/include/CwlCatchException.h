@@ -26,7 +26,4 @@ FOUNDATION_EXPORT double CwlCatchExceptionVersionNumber;
 //! Project version string for CwlCatchException.
 FOUNDATION_EXPORT const unsigned char CwlCatchExceptionVersionString[];
 
-#if !SWIFT_PACKAGE
-__attribute__((visibility("hidden")))
-#endif
 NSException* __nullable catchExceptionOfKind(Class __nonnull type, void (^ __nonnull inBlock)(void));

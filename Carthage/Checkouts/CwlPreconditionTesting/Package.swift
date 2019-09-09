@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
 	name: "CwlPreconditionTesting",
 	products: [
-		.library(name: "CwlPreconditionTesting", type: .dynamic, targets: ["CwlPreconditionTesting", "CwlMachBadInstructionHandler"])
+		.library(name: "CwlPreconditionTesting", targets: ["CwlPreconditionTesting", "CwlMachBadInstructionHandler"])
 	],
 	dependencies: [
 		.package(url: "https://github.com/mattgallagher/CwlCatchException.git", from: "1.2.0")
