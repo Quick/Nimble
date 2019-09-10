@@ -42,6 +42,7 @@ Pod::Spec.new do |s|
   s.compiler_flags = '-DPRODUCT_NAME=Nimble/Nimble'
   s.pod_target_xcconfig = {
     'APPLICATION_EXTENSION_API_ONLY' => 'YES',
+    'DEFINES_MODULE' => 'YES',
     'ENABLE_BITCODE' => 'NO',
     'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest -Xlinker -no_application_extension',
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
