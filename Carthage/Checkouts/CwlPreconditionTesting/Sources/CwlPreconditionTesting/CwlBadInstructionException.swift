@@ -18,7 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#if os(macOS) || os(iOS)
+#if (os(macOS) || os(iOS)) && arch(x86_64)
 
 import Foundation
 
