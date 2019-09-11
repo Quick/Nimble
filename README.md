@@ -1660,11 +1660,11 @@ backported.
 The deprecating plan is a 3 major versions removal. Which is as follows:
 
  1. Introduce new `Predicate` API, deprecation warning for old matcher APIs.
-    (Nimble `v7.x.x` and `v8.x.x`)
+    (Nimble `v7.x.x`, `v8.x.x` and `v9.x.x`)
  2. Introduce warnings on migration-path features (`.predicate`,
     `Predicate`-constructors with similar arguments to old API). (Nimble
-    `v9.x.x`)
- 3. Remove old API. (Nimble `v10.x.x`)
+    `v10.x.x`)
+ 3. Remove old API. (Nimble `v11.x.x`)
 
 
 # Installing Nimble
