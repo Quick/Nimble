@@ -16,24 +16,23 @@ Pod::Spec.new do |s|
 
   s.source_files = [
     "Sources/**/*.{swift,h,m,c}",
-    "Carthage/Checkouts/CwlPreconditionTesting/Dependencies/CwlCatchException/Sources/**/*.{swift,h,m,c}",
+    "Carthage/Checkouts/CwlCatchException/Sources/**/*.{swift,h,m,c}",
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/**/*.{swift,h,m,c}",
   ]
 
   s.osx.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]
   s.ios.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]
   s.tvos.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/Mach/CwlPreconditionTesting.h",
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Dependencies/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Dependencies/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
-    "Carthage/Checkouts/CwlPreconditionTesting/Dependencies/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
+    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
   ]
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
