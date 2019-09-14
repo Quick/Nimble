@@ -1,7 +1,9 @@
 import Foundation
 
-#if canImport(CwlPreconditionTesting)
+#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
 import CwlPreconditionTesting
+#elseif canImport(CwlPosixPreconditionTesting)
+import CwlPosixPreconditionTesting
 #endif
 
 public func throwAssertion() -> Predicate<Void> {

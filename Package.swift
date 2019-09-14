@@ -10,14 +10,14 @@ let package = Package(
         .library(name: "Nimble", targets: ["Nimble"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .exact("1.2.0")),
+        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .exact("2.0.0-beta.1")),
     ],
     targets: [
         .target(
             name: "Nimble", 
             dependencies: {
                 #if os(macOS)
-                return ["CwlPreconditionTesting"]
+                return ["CwlPreconditionTesting", "CwlPosixPreconditionTesting"]
                 #else
                 return []
                 #endif

@@ -18,7 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#if os(tvOS) && targetEnvironment(simulator)
+#if arch(x86_64)
 
 import Foundation
 
