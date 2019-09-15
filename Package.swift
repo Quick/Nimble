@@ -4,24 +4,18 @@ import PackageDescription
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_10), .iOS(.v8), .tvOS(.v9)
+      .macOS(.v10_12), .iOS(.v10), .tvOS(.v10)
     ],
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .exact("2.0.0-beta.1")),
+        .package(url: "https://github.com/norio-nomura/XCTAssertCrash.git", .exact("0.1.0")),
     ],
     targets: [
         .target(
             name: "Nimble", 
-            dependencies: {
-                #if os(macOS)
-                return ["CwlPreconditionTesting", "CwlPosixPreconditionTesting"]
-                #else
-                return []
-                #endif
-            }()
+            dependencies: ["XCTAssertCrash"]
         ),
         .testTarget(
             name: "NimbleTests", 

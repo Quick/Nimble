@@ -1,2 +1,1 @@
-github "mattgallagher/CwlCatchException" == 2.0.0-beta.1
-github "mattgallagher/CwlPreconditionTesting" == 2.0.0-beta.1
+github "norio-nomura/XCTAssertCrash" == 0.1.0

@@ -347,8 +347,6 @@
 		B20058C520E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		B20058C620E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		B20058C720E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
-		CD3D9A79232647BC00802581 /* CwlCatchBadInstructionPosix.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */; };
-		CD3D9A7A232648E600802581 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD79C99E1D2CC832004B6F9A /* ObjCAsyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56651A3B305F009E1637 /* ObjCAsyncTest.m */; };
 		CD79C99F1D2CC835004B6F9A /* ObjCSyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A37AF1B7C5042001C8357 /* ObjCSyncTest.m */; };
 		CD79C9A01D2CC839004B6F9A /* ObjCBeAnInstanceOfTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56691A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m */; };
@@ -375,29 +373,33 @@
 		CD79C9B51D2CC848004B6F9A /* ObjCUserDescriptionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */; };
 		CD79C9B61D2CC848004B6F9A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 		CD79C9B71D2CC848004B6F9A /* ObjCSatisfyAnyOfTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */; };
+		CDCB87C6232CE77300870A97 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87BE232CE71400870A97 /* mach_excServer.c */; };
+		CDCB87C7232CE77300870A97 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87BE232CE71400870A97 /* mach_excServer.c */; };
+		CDCB87C9232CE77900870A97 /* CMachExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDCB87BC232CE71400870A97 /* CMachExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDCB87CA232CE77900870A97 /* CMachExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDCB87BC232CE71400870A97 /* CMachExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDCB87CC232CE78100870A97 /* mach_excServer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDCB87BD232CE71400870A97 /* mach_excServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDCB87CD232CE78300870A97 /* mach_excServer.h in Headers */ = {isa = PBXBuildFile; fileRef = CDCB87BD232CE71400870A97 /* mach_excServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDCB87CE232CE79900870A97 /* CMachExceptionHandler.c in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87BA232CE71400870A97 /* CMachExceptionHandler.c */; };
+		CDCB87CF232CE79A00870A97 /* CMachExceptionHandler.c in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87BA232CE71400870A97 /* CMachExceptionHandler.c */; };
+		CDCB87D0232CE7B200870A97 /* PosixSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C1232CE71400870A97 /* PosixSignal.swift */; };
+		CDCB87D1232CE7B200870A97 /* MachException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C2232CE71400870A97 /* MachException.swift */; };
+		CDCB87D2232CE7B200870A97 /* XCTAssertCrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C3232CE71400870A97 /* XCTAssertCrash.swift */; };
+		CDCB87D3232CE7B200870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C4232CE71400870A97 /* SwiftReportFatalErrorsToDebugger.swift */; };
+		CDCB87D4232CE7B200870A97 /* ThreadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C5232CE71400870A97 /* ThreadState.swift */; };
+		CDCB87D5232CE7B300870A97 /* PosixSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C1232CE71400870A97 /* PosixSignal.swift */; };
+		CDCB87D6232CE7B300870A97 /* MachException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C2232CE71400870A97 /* MachException.swift */; };
+		CDCB87D7232CE7B300870A97 /* XCTAssertCrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C3232CE71400870A97 /* XCTAssertCrash.swift */; };
+		CDCB87D8232CE7B300870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C4232CE71400870A97 /* SwiftReportFatalErrorsToDebugger.swift */; };
+		CDCB87D9232CE7B300870A97 /* ThreadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C5232CE71400870A97 /* ThreadState.swift */; };
+		CDCB87DA232CE7B400870A97 /* PosixSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C1232CE71400870A97 /* PosixSignal.swift */; };
+		CDCB87DB232CE7B400870A97 /* MachException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C2232CE71400870A97 /* MachException.swift */; };
+		CDCB87DC232CE7B400870A97 /* XCTAssertCrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C3232CE71400870A97 /* XCTAssertCrash.swift */; };
+		CDCB87DD232CE7B400870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C4232CE71400870A97 /* SwiftReportFatalErrorsToDebugger.swift */; };
+		CDCB87DE232CE7B400870A97 /* ThreadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCB87C5232CE71400870A97 /* ThreadState.swift */; };
+		CDCF7DC42338E67C00E7E75E /* CMachExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDCB87BC232CE71400870A97 /* CMachExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
-		CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */; };
-		CDFB6A241F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */; };
-		CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */; };
-		CDFB6A261F7E07C700AD8CC7 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */; };
-		CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A281F7E07C700AD8CC7 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */; };
-		CDFB6A3A1F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */; };
-		CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */; };
-		CDFB6A3C1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */; };
-		CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */; };
-		CDFB6A401F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */; };
-		CDFB6A471F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */; };
-		CDFB6A481F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */; };
-		CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A4A1F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */; };
-		CDFB6A4C1F7E082500AD8CC7 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */; };
-		CDFB6A4F1F7E084600AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */; };
-		CDFB6A501F7E085600AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC641A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
@@ -610,17 +612,16 @@
 		AE7ADE481C80C00D00B94CD3 /* MatchErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchErrorTest.swift; sourceTree = "<group>"; };
 		B20058C020E92C7500C1264D /* ElementsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqual.swift; sourceTree = "<group>"; };
 		B20058C420E92CE400C1264D /* ElementsEqualTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqualTest.swift; sourceTree = "<group>"; };
-		CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstructionPosix.swift; sourceTree = "<group>"; };
-		CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchException.swift; sourceTree = "<group>"; };
-		CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlCatchException.m; sourceTree = "<group>"; };
-		CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlCatchException.h; sourceTree = "<group>"; };
-		CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlBadInstructionException.swift; sourceTree = "<group>"; };
-		CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstruction.swift; sourceTree = "<group>"; };
-		CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlDarwinDefinitions.swift; sourceTree = "<group>"; };
-		CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlMachBadInstructionHandler.m; sourceTree = "<group>"; };
-		CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlMachBadInstructionHandler.h; sourceTree = "<group>"; };
-		CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_excServer.c; sourceTree = "<group>"; };
-		CDFB6A381F7E082400AD8CC7 /* mach_excServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_excServer.h; sourceTree = "<group>"; };
+		CDCB87BA232CE71400870A97 /* CMachExceptionHandler.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = CMachExceptionHandler.c; sourceTree = "<group>"; };
+		CDCB87BC232CE71400870A97 /* CMachExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMachExceptionHandler.h; sourceTree = "<group>"; };
+		CDCB87BD232CE71400870A97 /* mach_excServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mach_excServer.h; sourceTree = "<group>"; };
+		CDCB87BE232CE71400870A97 /* mach_excServer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mach_excServer.c; sourceTree = "<group>"; };
+		CDCB87BF232CE71400870A97 /* generate_mach_excServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generate_mach_excServer.sh; sourceTree = "<group>"; };
+		CDCB87C1232CE71400870A97 /* PosixSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosixSignal.swift; sourceTree = "<group>"; };
+		CDCB87C2232CE71400870A97 /* MachException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachException.swift; sourceTree = "<group>"; };
+		CDCB87C3232CE71400870A97 /* XCTAssertCrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAssertCrash.swift; sourceTree = "<group>"; };
+		CDCB87C4232CE71400870A97 /* SwiftReportFatalErrorsToDebugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftReportFatalErrorsToDebugger.swift; sourceTree = "<group>"; };
+		CDCB87C5232CE71400870A97 /* ThreadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadState.swift; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
@@ -923,97 +924,55 @@
 			path = objc;
 			sourceTree = "<group>";
 		};
-		CD3D9A77232647BC00802581 /* CwlPosixPreconditionTesting */ = {
+		CDCB87B8232CE6CD00870A97 /* XCTAssertCrash */ = {
 			isa = PBXGroup;
 			children = (
-				CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */,
+				CDCB87B9232CE71400870A97 /* CMachExceptionHandler */,
+				CDCB87C0232CE71400870A97 /* XCTAssertCrash */,
 			);
-			path = CwlPosixPreconditionTesting;
+			name = XCTAssertCrash;
+			path = XCTAssertCrash/Sources;
+			sourceTree = "<group>";
+		};
+		CDCB87B9232CE71400870A97 /* CMachExceptionHandler */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB87BA232CE71400870A97 /* CMachExceptionHandler.c */,
+				CDCB87BB232CE71400870A97 /* include */,
+				CDCB87BE232CE71400870A97 /* mach_excServer.c */,
+				CDCB87BF232CE71400870A97 /* generate_mach_excServer.sh */,
+			);
+			path = CMachExceptionHandler;
+			sourceTree = "<group>";
+		};
+		CDCB87BB232CE71400870A97 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB87BC232CE71400870A97 /* CMachExceptionHandler.h */,
+				CDCB87BD232CE71400870A97 /* mach_excServer.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		CDCB87C0232CE71400870A97 /* XCTAssertCrash */ = {
+			isa = PBXGroup;
+			children = (
+				CDCB87C1232CE71400870A97 /* PosixSignal.swift */,
+				CDCB87C2232CE71400870A97 /* MachException.swift */,
+				CDCB87C3232CE71400870A97 /* XCTAssertCrash.swift */,
+				CDCB87C4232CE71400870A97 /* SwiftReportFatalErrorsToDebugger.swift */,
+				CDCB87C5232CE71400870A97 /* ThreadState.swift */,
+			);
+			path = XCTAssertCrash;
 			sourceTree = "<group>";
 		};
 		CDFB69521F7E06E600AD8CC7 /* Carthage-Checkouts */ = {
 			isa = PBXGroup;
 			children = (
-				CDFB69551F7E076F00AD8CC7 /* CwlCatchException */,
-				CDFB69741F7E076F00AD8CC7 /* CwlPreconditionTesting */,
+				CDCB87B8232CE6CD00870A97 /* XCTAssertCrash */,
 			);
 			name = "Carthage-Checkouts";
 			path = Carthage/Checkouts;
-			sourceTree = "<group>";
-		};
-		CDFB69551F7E076F00AD8CC7 /* CwlCatchException */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A1D1F7E07C600AD8CC7 /* CwlCatchException */,
-				CDFB6A1F1F7E07C600AD8CC7 /* CwlCatchExceptionSupport */,
-			);
-			name = CwlCatchException;
-			path = CwlCatchException/Sources;
-			sourceTree = "<group>";
-		};
-		CDFB69741F7E076F00AD8CC7 /* CwlPreconditionTesting */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A331F7E082400AD8CC7 /* CwlMachBadInstructionHandler */,
-				CDFB6A291F7E082400AD8CC7 /* CwlPreconditionTesting */,
-				CD3D9A77232647BC00802581 /* CwlPosixPreconditionTesting */,
-			);
-			name = CwlPreconditionTesting;
-			path = CwlPreconditionTesting/Sources;
-			sourceTree = "<group>";
-		};
-		CDFB6A1D1F7E07C600AD8CC7 /* CwlCatchException */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */,
-			);
-			path = CwlCatchException;
-			sourceTree = "<group>";
-		};
-		CDFB6A1F1F7E07C600AD8CC7 /* CwlCatchExceptionSupport */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */,
-				CDFB6A211F7E07C600AD8CC7 /* include */,
-			);
-			path = CwlCatchExceptionSupport;
-			sourceTree = "<group>";
-		};
-		CDFB6A211F7E07C600AD8CC7 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		CDFB6A291F7E082400AD8CC7 /* CwlPreconditionTesting */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */,
-				CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */,
-				CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */,
-			);
-			path = CwlPreconditionTesting;
-			sourceTree = "<group>";
-		};
-		CDFB6A331F7E082400AD8CC7 /* CwlMachBadInstructionHandler */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */,
-				CDFB6A351F7E082400AD8CC7 /* include */,
-				CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */,
-				CDFB6A381F7E082400AD8CC7 /* mach_excServer.h */,
-			);
-			path = CwlMachBadInstructionHandler;
-			sourceTree = "<group>";
-		};
-		CDFB6A351F7E082400AD8CC7 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1023,12 +982,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A4A1F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */,
-				CDFB6A281F7E07C700AD8CC7 /* CwlCatchException.h in Headers */,
 				1F1871C91CA89EDB00A34BF2 /* NMBStringify.h in Headers */,
 				1F1871C51CA89EDB00A34BF2 /* DSL.h in Headers */,
+				CDCB87CA232CE77900870A97 /* CMachExceptionHandler.h in Headers */,
 				1F1871C71CA89EDB00A34BF2 /* NMBExceptionCapture.h in Headers */,
 				1F1A742F1940169200FFFC47 /* Nimble.h in Headers */,
+				CDCB87CD232CE78300870A97 /* mach_excServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,10 +996,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1871E21CA89EF600A34BF2 /* NMBStringify.h in Headers */,
-				CD3D9A7A232648E600802581 /* CwlCatchException.h in Headers */,
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
+				CDCF7DC42338E67C00E7E75E /* CMachExceptionHandler.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
-				CDFB6A501F7E085600AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */,
 				1F4999A61DBF2DD100BF8877 /* Nimble.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,12 +1007,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */,
-				CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */,
 				1F1871DF1CA89EF500A34BF2 /* NMBStringify.h in Headers */,
 				1F1871DD1CA89EF500A34BF2 /* DSL.h in Headers */,
+				CDCB87C9232CE77900870A97 /* CMachExceptionHandler.h in Headers */,
 				1F1871DE1CA89EF500A34BF2 /* NMBExceptionCapture.h in Headers */,
 				1F925EC7195C0DD100ED456B /* Nimble.h in Headers */,
+				CDCB87CC232CE78100870A97 /* mach_excServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,19 +1265,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A401F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */,
 				1FD8CD401968AB07008ED995 /* BeCloseTo.swift in Sources */,
+				CDCB87CF232CE79A00870A97 /* CMachExceptionHandler.c in Sources */,
 				1F1871C81CA89EDB00A34BF2 /* NMBExceptionCapture.m in Sources */,
 				1FD8CD361968AB07008ED995 /* Expectation.swift in Sources */,
 				1FD8CD321968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */,
 				1F43728F1A1B344000EB80F8 /* Stringers.swift in Sources */,
 				1F43728D1A1B343D00EB80F8 /* SourceLocation.swift in Sources */,
+				CDCB87D7232CE7B300870A97 /* XCTAssertCrash.swift in Sources */,
+				CDCB87C7232CE77300870A97 /* mach_excServer.c in Sources */,
 				1FD8CD4E1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1FDBD8671AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				AE4BA9AD1C88DDB500B73906 /* Errors.swift in Sources */,
 				1FD8CD3C1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				7A6AB2C51E7F628900A2F694 /* ToSucceed.swift in Sources */,
 				1FD8CD501968AB07008ED995 /* BeLogical.swift in Sources */,
+				CDCB87D9232CE7B300870A97 /* ThreadState.swift in Sources */,
 				1F1871CB1CA89EDB00A34BF2 /* NMBExpectation.swift in Sources */,
 				DA9E8C821A414BB9002633C2 /* DSL+Wait.swift in Sources */,
 				DDB1BC791A92235600F743C3 /* AllPass.swift in Sources */,
@@ -1328,9 +1289,11 @@
 				1F91DD311C74BF61002C309F /* BeVoid.swift in Sources */,
 				7B13BA0B1DD361D200C9098C /* ContainElementSatisfying.swift in Sources */,
 				B20058C220E92CA900C1264D /* ElementsEqual.swift in Sources */,
+				CDCB87D6232CE7B300870A97 /* MachException.swift in Sources */,
 				1FCF91531C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				1FD8CD2E1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				29EA59661B551EE6002D767E /* ThrowError.swift in Sources */,
+				CDCB87D5232CE7B300870A97 /* PosixSignal.swift in Sources */,
 				1FD8CD5A1968AB07008ED995 /* Equal.swift in Sources */,
 				1FD8CD4C1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1F1871CC1CA89EDB00A34BF2 /* NMBObjCMatcher.swift in Sources */,
@@ -1342,9 +1305,8 @@
 				1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
 				CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */,
 				1FD8CD5E1968AB07008ED995 /* RaisesException.swift in Sources */,
+				CDCB87D8232CE7B300870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */,
 				1FD8CD561968AB07008ED995 /* Contain.swift in Sources */,
-				CDFB6A481F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */,
-				CDFB6A3C1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */,
 				1FD8CD481968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1FD8CD441968AB07008ED995 /* BeginWith.swift in Sources */,
 				1FD8CD4A1968AB07008ED995 /* BeIdenticalTo.swift in Sources */,
@@ -1356,15 +1318,11 @@
 				A8A3B6EB2071487E00E25A08 /* SatisfyAllOf.swift in Sources */,
 				1FD8CD521968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6A1968AB07008ED995 /* Await.swift in Sources */,
-				CDFB6A241F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */,
 				1FD8CD581968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD341968AB07008ED995 /* DSL.swift in Sources */,
-				CDFB6A3A1F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */,
 				7B5358BE1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
-				CDFB6A261F7E07C700AD8CC7 /* CwlCatchException.m in Sources */,
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
-				CDFB6A4C1F7E082500AD8CC7 /* mach_excServer.c in Sources */,
 				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
 				1FA0C4001E30B14500623165 /* Predicate.swift in Sources */,
 				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
@@ -1454,17 +1412,16 @@
 				7A6AB2C61E7F628A00A2F694 /* ToSucceed.swift in Sources */,
 				1F5DF1751BDCA0F500C3A531 /* FailureMessage.swift in Sources */,
 				A8A3B6EC2071487F00E25A08 /* SatisfyAllOf.swift in Sources */,
-				CD3D9A79232647BC00802581 /* CwlCatchBadInstructionPosix.swift in Sources */,
 				1F5DF1801BDCA0F500C3A531 /* BeLessThanOrEqual.swift in Sources */,
 				1F1871E81CA8A18400A34BF2 /* Async.swift in Sources */,
 				1F5DF18A1BDCA0F500C3A531 /* ThrowError.swift in Sources */,
+				CDCB87DC232CE7B400870A97 /* XCTAssertCrash.swift in Sources */,
 				1F5DF1891BDCA0F500C3A531 /* RaisesException.swift in Sources */,
 				1F5DF1761BDCA0F500C3A531 /* AllPass.swift in Sources */,
 				AE4BA9AF1C88DDB500B73906 /* Errors.swift in Sources */,
 				1F5DF1861BDCA0F500C3A531 /* HaveCount.swift in Sources */,
 				1F5DF1811BDCA0F500C3A531 /* BeLogical.swift in Sources */,
 				1F1871DB1CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
-				CDFB6A4F1F7E084600AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */,
 				1F5DF1741BDCA0F500C3A531 /* Expression.swift in Sources */,
 				1F5DF1781BDCA0F500C3A531 /* BeAnInstanceOf.swift in Sources */,
 				1F5DF1771BDCA0F500C3A531 /* BeAKindOf.swift in Sources */,
@@ -1479,6 +1436,9 @@
 				1FE661591E6574E30035F243 /* ExpectationMessage.swift in Sources */,
 				1FA0C4011E30B14500623165 /* Predicate.swift in Sources */,
 				1F5DF1711BDCA0F500C3A531 /* DSL+Wait.swift in Sources */,
+				CDCB87DD232CE7B400870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */,
+				CDCB87DB232CE7B400870A97 /* MachException.swift in Sources */,
+				CDCB87DA232CE7B400870A97 /* PosixSignal.swift in Sources */,
 				1F1871D61CA89EEF00A34BF2 /* DSL.m in Sources */,
 				1F5DF17D1BDCA0F500C3A531 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				AE7ADE471C80BF8000B94CD3 /* MatchError.swift in Sources */,
@@ -1494,6 +1454,7 @@
 				1F5DF1821BDCA0F500C3A531 /* BeNil.swift in Sources */,
 				1F5DF16F1BDCA0F500C3A531 /* AssertionDispatcher.swift in Sources */,
 				964CFEFF1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
+				CDCB87DE232CE7B400870A97 /* ThreadState.swift in Sources */,
 				1F5DF1841BDCA0F500C3A531 /* EndWith.swift in Sources */,
 				B20058C320E92CA900C1264D /* ElementsEqual.swift in Sources */,
 				1F5DF18D1BDCA0F500C3A531 /* SourceLocation.swift in Sources */,
@@ -1582,19 +1543,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */,
 				1FD8CD411968AB07008ED995 /* BeCloseTo.swift in Sources */,
+				CDCB87CE232CE79900870A97 /* CMachExceptionHandler.c in Sources */,
 				1F1871D31CA89EEE00A34BF2 /* NMBExceptionCapture.m in Sources */,
 				1FD8CD371968AB07008ED995 /* Expectation.swift in Sources */,
 				1FD8CD331968AB07008ED995 /* NimbleXCTestHandler.swift in Sources */,
 				1F43728E1A1B343F00EB80F8 /* Stringers.swift in Sources */,
 				1F43728C1A1B343C00EB80F8 /* SourceLocation.swift in Sources */,
+				CDCB87D2232CE7B200870A97 /* XCTAssertCrash.swift in Sources */,
+				CDCB87C6232CE77300870A97 /* mach_excServer.c in Sources */,
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1F1871E71CA8A18400A34BF2 /* Async.swift in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				AE4BA9AE1C88DDB500B73906 /* Errors.swift in Sources */,
 				1FD8CD3D1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				1FD8CD511968AB07008ED995 /* BeLogical.swift in Sources */,
+				CDCB87D4232CE7B200870A97 /* ThreadState.swift in Sources */,
 				1F1871D91CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
 				DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */,
 				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
@@ -1603,9 +1567,11 @@
 				7B13BA061DD360AA00C9098C /* ContainElementSatisfying.swift in Sources */,
 				1F91DD321C74BF61002C309F /* BeVoid.swift in Sources */,
 				B20058C120E92C7500C1264D /* ElementsEqual.swift in Sources */,
+				CDCB87D1232CE7B200870A97 /* MachException.swift in Sources */,
 				1FCF91541C61C8A400B15DCB /* PostNotification.swift in Sources */,
 				DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */,
 				29EA59671B551EE6002D767E /* ThrowError.swift in Sources */,
+				CDCB87D0232CE7B200870A97 /* PosixSignal.swift in Sources */,
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
 				1FD8CD4D1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1FD8CD471968AB07008ED995 /* BeGreaterThan.swift in Sources */,
@@ -1617,10 +1583,9 @@
 				1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
 				1FD8CD5F1968AB07008ED995 /* RaisesException.swift in Sources */,
 				CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */,
+				CDCB87D3232CE7B200870A97 /* SwiftReportFatalErrorsToDebugger.swift in Sources */,
 				1FD8CD571968AB07008ED995 /* Contain.swift in Sources */,
 				7A0A26231E7F52360092A34E /* ToSucceed.swift in Sources */,
-				CDFB6A471F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */,
-				CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */,
 				1FD8CD491968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1FE661571E6574E30035F243 /* ExpectationMessage.swift in Sources */,
 				1FD8CD451968AB07008ED995 /* BeginWith.swift in Sources */,
@@ -1631,15 +1596,11 @@
 				A8F6B5BD2070186D00FCB5ED /* SatisfyAllOf.swift in Sources */,
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
 				1FD8CD6B1968AB07008ED995 /* Await.swift in Sources */,
-				CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */,
 				964CFEFE1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
-				CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */,
 				7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
-				CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
-				CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				1FA0C3FF1E30B14500623165 /* Predicate.swift in Sources */,
 				472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */,
@@ -1909,7 +1870,6 @@
 					"PRODUCT_NAME=$(PRODUCT_NAME)/$(PRODUCT_NAME)",
 					"$(inherited)",
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1949,7 +1909,6 @@
 					"PRODUCT_NAME=$(PRODUCT_NAME)/$(PRODUCT_NAME)",
 					"$(inherited)",
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2161,7 +2120,6 @@
 					"PRODUCT_NAME=$(PRODUCT_NAME)/$(PRODUCT_NAME)",
 					"$(inherited)",
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -2202,7 +2160,6 @@
 					"PRODUCT_NAME=$(PRODUCT_NAME)/$(PRODUCT_NAME)",
 					"$(inherited)",
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Sources/Nimble/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";

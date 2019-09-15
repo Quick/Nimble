@@ -813,7 +813,7 @@ expect(actual).to(beNil());
 
 ## Swift Assertions
 
-If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@mattgallagher](https://github.com/mattgallagher)'s [CwlPreconditionTesting](https://github.com/mattgallagher/CwlPreconditionTesting) library.
+If you're using Swift, you can use the `throwAssertion` matcher to check if an assertion is thrown (e.g. `fatalError()`). This is made possible by [@norio-nomura](https://github.com/norio-nomura)'s [XCTAssertCrash](https://github.com/norio-nomura/XCTAssertCrash) library.
 
 ```swift
 // Swift
@@ -843,8 +843,7 @@ expect(reachedPoint2) == false
 Notes:
 
 * This feature is only available in Swift.
-* It is only supported for `x86_64` binaries, meaning _you cannot run this matcher on iOS devices, only simulators_.
-* The tvOS simulator is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
+* tvOS is supported, but using a different mechanism, requiring you to turn off the `Debug executable` scheme setting for your tvOS scheme's Test configuration.
 
 ## Swift Error Handling
 

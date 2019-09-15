@@ -2,21 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "CwlCatchException",
-        "repositoryURL": "https://github.com/mattgallagher/CwlCatchException.git",
+        "package": "XCTAssertCrash",
+        "repositoryURL": "https://github.com/norio-nomura/XCTAssertCrash.git",
         "state": {
           "branch": null,
-          "revision": "f809deb30dc5c9d9b78c872e553261a61177721a",
-          "version": "2.0.0-beta.1"
-        }
-      },
-      {
-        "package": "CwlPreconditionTesting",
-        "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
-        "state": {
-          "branch": null,
-          "revision": "ea422878db4e680069af320ac444183628360ab1",
-          "version": "2.0.0-beta.1"
+          "revision": "add867b3ec7713fa5eb23bda291f180858f9f5a6",
+          "version": "0.1.0"
         }
       }
     ]

@@ -8,7 +8,6 @@
 /* Module mach_exc */
 
 #include <string.h>
-
 #include <mach/ndr.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
@@ -91,6 +90,10 @@ typedef function_table_entry   *function_table_t;
 __BeforeMigServerHeader
 #endif /* __BeforeMigServerHeader */
 
+#ifndef MIG_SERVER_ROUTINE
+#define MIG_SERVER_ROUTINE
+#endif
+
 
 /* Routine mach_exception_raise */
 #ifdef	mig_external
@@ -98,6 +101,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_mach_exception_raise
 (
 	mach_port_t exception_port,
@@ -114,6 +118,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_mach_exception_raise_state
 (
 	mach_port_t exception_port,
@@ -133,6 +138,7 @@ mig_external
 #else
 extern
 #endif	/* mig_external */
+MIG_SERVER_ROUTINE
 kern_return_t catch_mach_exception_raise_state_identity
 (
 	mach_port_t exception_port,
@@ -183,7 +189,7 @@ extern const struct catch_mach_exc_subsystem {
 #define __Request__mach_exc_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -198,11 +204,11 @@ extern const struct catch_mach_exc_subsystem {
 		int64_t code[2];
 	} __Request__mach_exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -212,14 +218,14 @@ extern const struct catch_mach_exc_subsystem {
 		int64_t code[2];
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[224];
+		natural_t old_state[614];
 	} __Request__mach_exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -234,10 +240,10 @@ extern const struct catch_mach_exc_subsystem {
 		int64_t code[2];
 		int flavor;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[224];
+		natural_t old_state[614];
 	} __Request__mach_exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Request__mach_exc_subsystem__defined */
 
@@ -258,7 +264,7 @@ union __RequestUnion__catch_mach_exc_subsystem {
 #define __Reply__mach_exc_subsystem__defined
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -266,11 +272,11 @@ union __RequestUnion__catch_mach_exc_subsystem {
 		kern_return_t RetCode;
 	} __Reply__mach_exception_raise_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -278,14 +284,14 @@ union __RequestUnion__catch_mach_exc_subsystem {
 		kern_return_t RetCode;
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[224];
+		natural_t new_state[614];
 	} __Reply__mach_exception_raise_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 
 #ifdef  __MigPackStructs
-#pragma pack(4)
+#pragma pack(push, 4)
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
@@ -293,10 +299,10 @@ union __RequestUnion__catch_mach_exc_subsystem {
 		kern_return_t RetCode;
 		int flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[224];
+		natural_t new_state[614];
 	} __Reply__mach_exception_raise_state_identity_t __attribute__((unused));
 #ifdef  __MigPackStructs
-#pragma pack()
+#pragma pack(pop)
 #endif
 #endif /* !__Reply__mach_exc_subsystem__defined */
 
@@ -310,7 +316,7 @@ union __ReplyUnion__catch_mach_exc_subsystem {
 	__Reply__mach_exception_raise_state_t Reply_mach_exception_raise_state;
 	__Reply__mach_exception_raise_state_identity_t Reply_mach_exception_raise_state_identity;
 };
-#endif /* __RequestUnion__catch_mach_exc_subsystem__defined */
+#endif /* __ReplyUnion__catch_mach_exc_subsystem__defined */
 
 #ifndef subsystem_to_name_map_mach_exc
 #define subsystem_to_name_map_mach_exc \
