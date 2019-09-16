@@ -1,5 +1,7 @@
 /// A Nimble matcher that succeeds when the actual sequence contain the same elements in the same order to the exepected sequence.
-public func elementsEqual<S: Sequence>(_ expectedValue: S?) -> Predicate<S> where S.Element: Equatable {
+public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(_ expectedValue: Seq2?)
+    -> Predicate<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element
+{ //swiftlint:disable:this opening_brace
     // A matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2949668-elementsequal
     return Predicate.define("elementsEqual <\(stringify(expectedValue))>") { (actualExpression, msg) in
         let actualValue = try actualExpression.evaluate()

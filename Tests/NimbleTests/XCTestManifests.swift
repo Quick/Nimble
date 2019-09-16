@@ -281,6 +281,7 @@ extension ElementsEqualTest {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__ElementsEqualTest = [
+        ("testElementsEqualDifferentSequenceTypes", testElementsEqualDifferentSequenceTypes),
         ("testSequenceElementsEquality", testSequenceElementsEquality),
     ]
 }
