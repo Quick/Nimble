@@ -22,6 +22,11 @@ final class ElementsEqualTest: XCTestCase {
         expect(sequence1).toNot(elementsEqual(sequence2))
         expect(sequence1).toNot(elementsEqual([3, 2, 1]))
         expect(sequence1).to(elementsEqual([1, 2, 3]))
+    }
 
+    func testElementsEqualDifferentSequenceTypes() {
+        expect(1...3).to(elementsEqual([1, 2, 3]))
+        expect(1...3).toNot(elementsEqual([1, 2, 3, 4, 5]))
+        expect(1...3).toNot(elementsEqual([3, 2, 1]))
     }
 }
