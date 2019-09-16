@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class MatchErrorTest: XCTestCase, XCTestCaseProvider {
+final class MatchErrorTest: XCTestCase {
     func testMatchErrorPositive() {
         expect(NimbleError.laugh).to(matchError(NimbleError.laugh))
         expect(NimbleError.laugh).to(matchError(NimbleError.self))

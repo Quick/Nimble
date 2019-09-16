@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class EqualTest: XCTestCase, XCTestCaseProvider {
+final class EqualTest: XCTestCase {
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))

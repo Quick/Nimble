@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class EndWithTest: XCTestCase, XCTestCaseProvider {
+final class EndWithTest: XCTestCase {
     func testEndWithPositives() {
         expect([1, 2, 3]).to(endWith(3))
         expect([1, 2, 3]).toNot(endWith(2))

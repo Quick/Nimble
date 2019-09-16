@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 @testable import Nimble
 
-final class BeIdenticalToTest: XCTestCase, XCTestCaseProvider {
+final class BeIdenticalToTest: XCTestCase {
     func testBeIdenticalToPositive() {
         let value = NSDate()
         expect(value).to(beIdenticalTo(value))

@@ -42,7 +42,7 @@ extension CustomDebugStringConvertibleError: CustomDebugStringConvertible {
     }
 }
 
-final class ThrowErrorTest: XCTestCase, XCTestCaseProvider {
+final class ThrowErrorTest: XCTestCase {
     func testPositiveMatches() {
         expect { throw NimbleError.laugh }.to(throwError())
         expect { throw NimbleError.laugh }.to(throwError(NimbleError.laugh))

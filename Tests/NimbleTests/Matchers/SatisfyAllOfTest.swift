@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 import Foundation
 
-final class SatisfyAllOfTest: XCTestCase, XCTestCaseProvider {
+final class SatisfyAllOfTest: XCTestCase {
     func testSatisfyAllOf() {
         expect(2).to(satisfyAllOf(equal(2), beLessThan(3)))
 #if SUPPORT_IMPLICIT_BRIDGING_CONVERSION
