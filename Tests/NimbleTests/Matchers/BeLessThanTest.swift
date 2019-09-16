@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class BeLessThanTest: XCTestCase, XCTestCaseProvider {
+final class BeLessThanTest: XCTestCase {
     func testLessThan() {
         expect(2).to(beLessThan(10))
         expect(2).toNot(beLessThan(1))

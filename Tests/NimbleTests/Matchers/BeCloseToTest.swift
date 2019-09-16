@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class BeCloseToTest: XCTestCase, XCTestCaseProvider {
+final class BeCloseToTest: XCTestCase {
     func testBeCloseTo() {
         expect(1.2).to(beCloseTo(1.2001))
         expect(1.2 as CDouble).to(beCloseTo(1.2001))

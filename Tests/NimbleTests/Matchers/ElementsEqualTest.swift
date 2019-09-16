@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class ElementsEqualTest: XCTestCase, XCTestCaseProvider {
+final class ElementsEqualTest: XCTestCase {
 
     func testSequenceElementsEquality() {
         failsWithErrorMessageForNil("expected to elementsEqual <nil>, got <nil>") {

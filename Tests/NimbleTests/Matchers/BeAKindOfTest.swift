@@ -7,7 +7,7 @@ private protocol TestProtocol {}
 private class TestClassConformingToProtocol: TestProtocol {}
 private struct TestStructConformingToProtocol: TestProtocol {}
 
-final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
+final class BeAKindOfSwiftTest: XCTestCase {
     enum TestEnum {
         case one, two
     }
@@ -47,7 +47,7 @@ final class BeAKindOfSwiftTest: XCTestCase, XCTestCaseProvider {
     }
 }
 
-final class BeAKindOfObjCTest: XCTestCase, XCTestCaseProvider {
+final class BeAKindOfObjCTest: XCTestCase {
     func testPositiveMatch() {
 #if canImport(Darwin)
         expect(TestNull()).to(beAKindOf(NSNull.self))

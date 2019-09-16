@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class BeGreaterThanOrEqualToTest: XCTestCase, XCTestCaseProvider {
+final class BeGreaterThanOrEqualToTest: XCTestCase {
     func testGreaterThanOrEqualTo() {
         expect(10).to(beGreaterThanOrEqualTo(10))
         expect(10).to(beGreaterThanOrEqualTo(2))

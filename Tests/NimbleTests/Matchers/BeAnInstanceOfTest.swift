@@ -6,7 +6,7 @@ private protocol TestProtocol {}
 private class TestClassConformingToProtocol: TestProtocol {}
 private struct TestStructConformingToProtocol: TestProtocol {}
 
-final class BeAnInstanceOfTest: XCTestCase, XCTestCaseProvider {
+final class BeAnInstanceOfTest: XCTestCase {
     func testPositiveMatch() {
         expect(NSNull()).to(beAnInstanceOf(NSNull.self))
         expect(NSNumber(value: 1)).toNot(beAnInstanceOf(NSDate.self))

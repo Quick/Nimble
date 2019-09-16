@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 import Foundation
 
-final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
+final class PostNotificationTest: XCTestCase {
     let notificationCenter = NotificationCenter()
 
     func testPassesWhenNoNotificationsArePosted() {

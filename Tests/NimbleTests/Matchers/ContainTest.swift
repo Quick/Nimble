@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class ContainTest: XCTestCase, XCTestCaseProvider {
+final class ContainTest: XCTestCase {
     func testContainSequence() {
         expect([1, 2, 3]).to(contain(1))
         expect([1, 2, 3]).toNot(contain(4))

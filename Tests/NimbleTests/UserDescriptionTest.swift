@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 
-final class UserDescriptionTest: XCTestCase, XCTestCaseProvider {
+final class UserDescriptionTest: XCTestCase {
     func testToMatcher_CustomFailureMessage() {
         failsWithErrorMessage(
             """

@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class SynchronousTest: XCTestCase, XCTestCaseProvider {
+final class SynchronousTest: XCTestCase {
     class Error: Swift.Error {}
     let errorToThrow = Error()
 
