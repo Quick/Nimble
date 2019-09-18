@@ -283,6 +283,7 @@ extension ElementsEqualTest {
     static let __allTests__ElementsEqualTest = [
         ("testElementsEqualDifferentSequenceTypes", testElementsEqualDifferentSequenceTypes),
         ("testSequenceElementsEquality", testSequenceElementsEquality),
+        ("testSequenceElementsEqualityUsingPredicateClosure", testSequenceElementsEqualityUsingPredicateClosure),
     ]
 }
 
