@@ -4,13 +4,13 @@ import PackageDescription
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_12), .iOS(.v10), .tvOS(.v10)
+      .macOS(.v10_10), .iOS(.v8), .tvOS(.v9)
     ],
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/norio-nomura/XCTAssertCrash.git", .exact("0.1.0")),
+        .package(url: "https://github.com/norio-nomura/XCTAssertCrash.git", .exact("0.2.0")),
     ],
     targets: [
         .target(

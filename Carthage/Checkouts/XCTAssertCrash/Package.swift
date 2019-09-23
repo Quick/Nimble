@@ -6,7 +6,7 @@ import PackageDescription
 var package = Package(
     name: "XCTAssertCrash",
     platforms: [
-        .macOS(.v10_12), .iOS(.v10), .tvOS(.v10)
+        .macOS(.v10_10), .iOS(.v8), .tvOS(.v9)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.

@@ -4,7 +4,9 @@ Asserts that an expression crashes by using Mach Exception Handler or POSIX Sign
 On Apple Platforms except tvOS, it uses Mach Exception Handler.  
 On other Platforms like Linux or tvOS, it uses POSIX Signal Handler. 
 
-[![Build Status](https://dev.azure.com/norio-nomura/XCTAssertCrash/_apis/build/status/norio-nomura.XCTAssertCrash?branchName=master)](https://dev.azure.com/norio-nomura/XCTAssertCrash/_build/latest?definitionId=8&branchName=master)
+[![SwiftPM](https://github.com/norio-nomura/XCTAssertCrash/workflows/SwiftPM/badge.svg)](https://launch-editor.github.com/actions?workflowID=SwiftPM&event=pull_request&nwo=norio-nomura%2FXCTAssertCrash)
+[![xcodebuild](https://github.com/norio-nomura/XCTAssertCrash/workflows/xcodebuild/badge.svg)](https://launch-editor.github.com/actions?workflowID=xcodebuild&event=pull_request&nwo=norio-nomura%2FXCTAssertCrash)
+[![Nightly](https://github.com/norio-nomura/XCTAssertCrash/workflows/Nightly/badge.svg)](https://launch-editor.github.com/actions?workflowID=Nightly&event=pull_request&nwo=norio-nomura%2FXCTAssertCrash)
 
 ## Usage
 
@@ -42,11 +44,11 @@ public func XCTAssertCrash<T>(
 
 ### Mach Exception Handler
 - `XCTAssertCrash` can not handle crashes caused by `abort()`.
-- `XCTAssertCrash` can not handle the breakpoint set in expression. On detecting a stop at a breakpoint set by the debugger, `XCTAssertCrash` generates `assertionFailure()`.
+- `XCTAssertCrash` can not handle a breakpoint set in expression. On detecting a stop at a breakpoint set by the debugger, `XCTAssertCrash` generates `assertionFailure()`.
 
 ### POSIX Signal Handler
--  `lldb` will catch the signal and stopp on crash before `XCTAssertCrash` detects them.
-- **So, if process is beingd debugged, `XCTAssertCrash` will skip evaluation the expression by default.**  
+-  `lldb` will catch the signal and stop on crash before `XCTAssertCrash` detects it.
+- **So, if the process is being debugged, `XCTAssertCrash` will skip the evaluation of the expression by default.**  
     To avoid this behavior,
     - Set `skipXCTAssertCrashIfIsBeingDebugged` to `false`.  
     or  
