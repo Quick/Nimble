@@ -117,23 +117,27 @@ public func beCloseTo(_ expectedValues: [Double], within delta: Double = Default
 
 infix operator ≈ : ComparisonPrecedence
 
-// swiftlint:disable:next identifier_name
-public func ≈(lhs: Expectation<[Double]>, rhs: [Double]) {
-    lhs.to(beCloseTo(rhs))
+extension Expectation where T == [Double] {
+    // swiftlint:disable:next identifier_name
+    public static func ≈(lhs: Expectation, rhs: [Double]) {
+        lhs.to(beCloseTo(rhs))
+    }
 }
 
-// swiftlint:disable:next identifier_name
-public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: NMBDoubleConvertible) {
-    lhs.to(beCloseTo(rhs))
-}
+extension Expectation where T == NMBDoubleConvertible {
+    // swiftlint:disable:next identifier_name
+    public static func ≈(lhs: Expectation, rhs: NMBDoubleConvertible) {
+        lhs.to(beCloseTo(rhs))
+    }
 
-// swiftlint:disable:next identifier_name
-public func ≈(lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
-    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-}
+    // swiftlint:disable:next identifier_name
+    public static func ≈(lhs: Expectation, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
+        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+    }
 
-public func == (lhs: Expectation<NMBDoubleConvertible>, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
-    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+    public static func == (lhs: Expectation, rhs: (expected: NMBDoubleConvertible, delta: Double)) {
+        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+    }
 }
 
 // make this higher precedence than exponents so the Doubles either end aren't pulled in
