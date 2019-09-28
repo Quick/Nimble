@@ -11,7 +11,7 @@ import Foundation
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError() -> Predicate<Any> {
+public func throwError<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
@@ -39,7 +39,7 @@ public func throwError() -> Predicate<Any> {
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error>(_ error: T, closure: ((Error) -> Void)? = nil) -> Predicate<Any> {
+public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = nil) -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
@@ -87,7 +87,7 @@ public func throwError<T: Error>(_ error: T, closure: ((Error) -> Void)? = nil) 
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error & Equatable>(_ error: T, closure: ((T) -> Void)? = nil) -> Predicate<Any> {
+public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> Void)? = nil) -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
@@ -135,9 +135,10 @@ public func throwError<T: Error & Equatable>(_ error: T, closure: ((T) -> Void)?
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error>(
+public func throwError<T: Error, Out>(
     errorType: T.Type,
-    closure: ((T) -> Void)? = nil) -> Predicate<Any> {
+    closure: ((T) -> Void)? = nil
+) -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
@@ -198,7 +199,7 @@ public func throwError<T: Error>(
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError(closure: @escaping ((Error) -> Void)) -> Predicate<Any> {
+public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
@@ -234,7 +235,7 @@ public func throwError(closure: @escaping ((Error) -> Void)) -> Predicate<Any> {
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError<T: Error>(closure: @escaping ((T) -> Void)) -> Predicate<Any> {
+public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Predicate<Out> {
     return Predicate { actualExpression in
         var actualError: Error?
         do {
