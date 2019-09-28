@@ -6,7 +6,7 @@ import CwlPreconditionTesting
 import CwlPosixPreconditionTesting
 #endif
 
-public func throwAssertion() -> Predicate<Void> {
+public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
     #if arch(x86_64) && canImport(Darwin)
         let message = ExpectationMessage.expectedTo("throw an assertion")
@@ -30,7 +30,7 @@ public func throwAssertion() -> Predicate<Void> {
                 }
             #endif
             do {
-                try actualExpression.evaluate()
+                _ = try actualExpression.evaluate()
             } catch {
                 actualError = error
             }

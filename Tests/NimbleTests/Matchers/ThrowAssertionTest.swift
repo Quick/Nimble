@@ -62,4 +62,10 @@ final class ThrowAssertionTest: XCTestCase {
         }
         #endif
     }
+
+    func testNonVoidClosure() {
+        #if canImport(Darwin)
+        expect { () -> Int in fatalError() }.to(throwAssertion())
+        #endif
+    }
 }
