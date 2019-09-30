@@ -123,12 +123,12 @@ function help {
     echo " all             - Runs the all tests of macos, ios and tvos"
     echo " clean           - Cleans the derived data directory of Xcode. Assumes default location"
     echo " help            - Displays this help"
-    echo " ios             - Runs the tests as an iOS device"
     echo " macos           - Runs the tests on macOS 10.10 (Yosemite and newer only)"
+    echo " ios             - Runs the tests as an iOS device"
+    echo " tvos            - Runs the tests as an tvOS device"
     echo " podspec         - Runs pod lib lint against the podspec to detect breaking changes"
     echo " swiftpm         - Runs the tests built by the Swift Package Manager"
     echo " swiftpm_docker  - Runs the tests built by the Swift Package Manager in a docker linux container"
-    echo " tvos            - Runs the tests as an tvOS device"
     echo
     exit 1
 }
