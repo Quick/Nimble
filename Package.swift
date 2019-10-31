@@ -22,7 +22,9 @@ let package = Package(
                     .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting")
                 ]
                 #else
-                return []
+                return [
+                    .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting")
+                ]
                 #endif
             }()
         ),
