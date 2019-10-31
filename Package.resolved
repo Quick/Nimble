@@ -7,7 +7,7 @@
         "state": {
           "branch": null,
           "revision": "f809deb30dc5c9d9b78c872e553261a61177721a",
-          "version": "2.0.0-beta.1"
+          "version": "2.0.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/mattgallagher/CwlPreconditionTesting.git",
         "state": {
           "branch": null,
-          "revision": "ea422878db4e680069af320ac444183628360ab1",
-          "version": "2.0.0-beta.1"
+          "revision": "02b7a39a99c4da27abe03cab2053a9034379639f",
+          "version": "2.0.0"
         }
       }
     ]
