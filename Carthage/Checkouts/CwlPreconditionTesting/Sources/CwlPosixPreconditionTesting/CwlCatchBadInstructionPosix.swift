@@ -104,5 +104,5 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 	
 	return caught ? BadInstructionException() : nil
 }
-	
+
 #endif
