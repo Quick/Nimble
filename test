@@ -74,6 +74,19 @@ function test_macos {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-macOS" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
+function test_xcode_spm_macos {
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak    
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_xcode_spm_ios {
+    run osascript -e 'tell app "Simulator" to quit'
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
 function test_podspec {
     echo "Gathering CocoaPods installation information..."
     run bundle exec pod --version
@@ -98,6 +111,13 @@ function test() {
     test_ios
     test_tvos
     test_macos
+
+    if xcodebuild --help 2>&1 | grep xcframework > /dev/null; then
+        test_xcode_spm_ios
+        test_xcode_spm_macos
+    else
+        echo "Not testing with Swift Package Manager version of Xcode because it requires at least Xcode 11"
+    fi
 
     if which swift-test; then
         test_swiftpm
@@ -124,7 +144,9 @@ function help {
     echo " clean           - Cleans the derived data directory of Xcode. Assumes default location"
     echo " help            - Displays this help"
     echo " macos           - Runs the tests on macOS 10.10 (Yosemite and newer only)"
+    echo " macos_xcodespm  - Runs the tests on macOS using the Swift Package Manager version of Xcode"
     echo " ios             - Runs the tests as an iOS device"
+    echo " ios_xcodespm    - Runs the tests as an iOS device using the Swift Package Manager version of Xcode"
     echo " tvos            - Runs the tests as an tvOS device"
     echo " podspec         - Runs pod lib lint against the podspec to detect breaking changes"
     echo " swiftpm         - Runs the tests built by the Swift Package Manager"
@@ -140,8 +162,10 @@ function main {
         case "$arg" in
             clean) clean ;;
             ios) test_ios ;;
+            ios_xcodespm) test_xcode_spm_ios ;;
             tvos) test_tvos ;;
             macos) test_macos ;;
+            macos_xcodespm) test_xcode_spm_macos ;;
             podspec) test_podspec ;;
             test) test ;;
             all) test ;;
