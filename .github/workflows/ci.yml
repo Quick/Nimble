@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         xcode: [11, 11.1, 11.2]
-        platform: [macos, ios, tvos]
+        platform: [macos, ios, tvos, macos_xcodespm, ios_xcodespm]
     steps:
     - uses: actions/checkout@v1
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
