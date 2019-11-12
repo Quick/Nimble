@@ -1,10 +1,36 @@
 branches:
   only:
     - master
+    - 8.x-branch
 
 language: generic
 matrix:
   include:
+    - &cocoapods
+      name: CocoaPods Lint
+      os: osx
+      osx_image: xcode10.3
+      install: bundle install
+      script: ./test podspec
+    - &xcode
+      name: Xcode 10.1 / Swift 4.2
+      os: osx
+      osx_image: xcode10.1
+      script:
+        - ./test macos
+        - ./test ios
+        - ./test tvos
+    - <<: *xcode
+      name: Xcode 10.3 / Swift 5.0
+      osx_image: xcode10.3
+    - &swiftpm_darwin
+      name: SwiftPM / Darwin / Swift 4.2
+      os: osx
+      osx_image: xcode10.1
+      script: ./test swiftpm
+    - <<: *swiftpm_darwin
+      name: SwiftPM / Darwin / Swift 5.0
+      osx_image: xcode10.3
     - &swiftpm_linux
       name: SwiftPM / Linux / Swift 4.2.4
       os: linux
