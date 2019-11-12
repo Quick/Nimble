@@ -79,7 +79,7 @@ function test_podspec {
     run bundle exec pod --version
     echo "Linting podspec..."
     # Note: remove `--allow-warnings` once old Matcher API has been removed
-    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation
+    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation --verbose
 }
 
 function test_swiftpm {
