@@ -5,6 +5,31 @@ branches:
 language: generic
 matrix:
   include:
+    - &cocoapods
+      name: CocoaPods Lint
+      os: osx
+      osx_image: xcode11.2
+      install: bundle install
+      script: ./test podspec
+    - &xcode
+      name: Xcode 10.3 / Swift 5.0
+      os: osx
+      osx_image: xcode10.3
+      script:
+        - ./test macos
+        - ./test ios
+        - ./test tvos
+    - <<: *xcode
+      name: Xcode 11.2 / Swift 5.1
+      osx_image: xcode11.2
+    - &swiftpm_darwin
+      name: SwiftPM / Darwin / Swift 5.0
+      os: osx
+      osx_image: xcode10.3
+      script: ./test swiftpm
+    - <<: *swiftpm_darwin
+      name: SwiftPM / Darwin / Swift 5.1
+      osx_image: xcode11.2
     - &swiftpm_linux
       name: SwiftPM / Linux / Swift 5.0.3
       os: linux
