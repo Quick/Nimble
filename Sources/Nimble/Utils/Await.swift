@@ -152,7 +152,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(_ timeoutInterval: TimeInterval, forcefullyAbortTimeout: TimeInterval) -> Self {
+    func timeout(_ timeoutInterval: DispatchTimeInterval, forcefullyAbortTimeout: DispatchTimeInterval) -> Self {
         // = Discussion =
         //
         // There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -325,12 +325,12 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: TimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
         let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
-            let interval = DispatchTimeInterval.nanoseconds(Int(pollInterval * TimeInterval(NSEC_PER_SEC)))
+            let interval = pollInterval
             asyncSource.schedule(deadline: .now(), repeating: interval, leeway: pollLeeway)
             asyncSource.setEventHandler {
                 do {
@@ -357,8 +357,8 @@ internal class Awaiter {
 }
 
 internal func pollBlock(
-    pollInterval: TimeInterval,
-    timeoutInterval: TimeInterval,
+    pollInterval: DispatchTimeInterval,
+    timeoutInterval: DispatchTimeInterval,
     file: FileString,
     line: UInt,
     fnName: String = #function,
@@ -369,7 +369,7 @@ internal func pollBlock(
                 return true
             }
             return nil
-        }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval / 2.0).wait(fnName, file: file, line: line)
+        }.timeout(timeoutInterval, forcefullyAbortTimeout: AsyncDefaults.Timeout).wait(fnName, file: file, line: line)
 
         return result
 }

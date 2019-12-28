@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 #if canImport(Darwin) && !SWIFT_PACKAGE
 
@@ -37,7 +38,7 @@ public class NMBExpectation: NSObject {
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: TimeInterval = 1.0
+    internal var _timeout: DispatchTimeInterval = DispatchTimeInterval.seconds(1)
     // swiftlint:enable identifier_name
 
     @objc public init(actualBlock: @escaping () -> NSObject?, negative: Bool, file: FileString, line: UInt) {
@@ -54,7 +55,7 @@ public class NMBExpectation: NSObject {
     }
 
     @objc public var withTimeout: (TimeInterval) -> NMBExpectation {
-        return { timeout in self._timeout = timeout
+        return { timeout in self._timeout = timeout.dispatchInterval
             return self
         }
     }

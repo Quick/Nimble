@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0477153523B740AD00402D4E /* DispatchTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477153423B740AD00402D4E /* DispatchTimeInterval.swift */; };
+		0477153623B740B700402D4E /* DispatchTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477153423B740AD00402D4E /* DispatchTimeInterval.swift */; };
+		0477153723B740B800402D4E /* DispatchTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0477153423B740AD00402D4E /* DispatchTimeInterval.swift */; };
 		1F0648CC19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */; };
 		1F0648D41963AAB2001F9C46 /* SynchronousTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0648D31963AAB2001F9C46 /* SynchronousTest.swift */; };
@@ -484,6 +487,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0477153423B740AD00402D4E /* DispatchTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTimeInterval.swift; sourceTree = "<group>"; };
 		1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectWithLazyProperty.swift; sourceTree = "<group>"; };
 		1F0648D31963AAB2001F9C46 /* SynchronousTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronousTest.swift; sourceTree = "<group>"; };
 		1F14FB63194180C5009F2A08 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
@@ -882,6 +886,7 @@
 				1FD8CD271968AB07008ED995 /* SourceLocation.swift */,
 				1FD8CD281968AB07008ED995 /* Stringers.swift */,
 				AE4BA9AC1C88DDB500B73906 /* Errors.swift */,
+				0477153423B740AD00402D4E /* DispatchTimeInterval.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1318,6 +1323,7 @@
 				1FDBD8671AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				AE4BA9AD1C88DDB500B73906 /* Errors.swift in Sources */,
 				1FD8CD3C1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
+				0477153623B740B700402D4E /* DispatchTimeInterval.swift in Sources */,
 				7A6AB2C51E7F628900A2F694 /* ToSucceed.swift in Sources */,
 				1FD8CD501968AB07008ED995 /* BeLogical.swift in Sources */,
 				1F1871CB1CA89EDB00A34BF2 /* NMBExpectation.swift in Sources */,
@@ -1501,6 +1507,7 @@
 				CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */,
 				1F5DF1721BDCA0F500C3A531 /* Expectation.swift in Sources */,
 				7B5358C01C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
+				0477153723B740B800402D4E /* DispatchTimeInterval.swift in Sources */,
 				7B13BA0C1DD361D300C9098C /* ContainElementSatisfying.swift in Sources */,
 				1F5DF1871BDCA0F500C3A531 /* Match.swift in Sources */,
 			);
@@ -1593,6 +1600,7 @@
 				1F1871E71CA8A18400A34BF2 /* Async.swift in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				AE4BA9AE1C88DDB500B73906 /* Errors.swift in Sources */,
+				0477153523B740AD00402D4E /* DispatchTimeInterval.swift in Sources */,
 				1FD8CD3D1968AB07008ED995 /* BeAnInstanceOf.swift in Sources */,
 				1FD8CD511968AB07008ED995 /* BeLogical.swift in Sources */,
 				1F1871D91CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
