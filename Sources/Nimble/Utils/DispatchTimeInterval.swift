@@ -1,4 +1,5 @@
 import Dispatch
+import Foundation
 
 extension DispatchTimeInterval {
     // ** Note: We cannot simply divide the timeinterval because DispatchTimeInterval associated value type is Int
