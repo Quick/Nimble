@@ -165,6 +165,40 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         }
     }
 
+    func testWaitUntilDoesNotCompleteBeforeRunLoopIsWaiting() {
+        // This verifies the fix for a race condition in which `done()` is
+        // called asynchronously on a background thread after the main thread checks
+        // for completion, but prior to `RunLoop.current.run(mode:before:)` being called.
+        // This race condition resulted in the RunLoop locking up.
+        var failed = false
+
+        let timeoutQueue = DispatchQueue(label: "Nimble.waitUntilTest.timeout", qos: .background)
+        let timer = DispatchSource.makeTimerSource(flags: .strict, queue: timeoutQueue)
+        timer.schedule(
+            deadline: DispatchTime.now() + 5,
+            repeating: .never,
+            leeway: DispatchTimeInterval.milliseconds(1)
+        )
+        timer.setEventHandler {
+            failed = true
+            fail("Timed out: Main RunLoop stalled.")
+            CFRunLoopStop(CFRunLoopGetMain())
+        }
+        timer.resume()
+
+        for i in 0..<100 {
+            if !failed {
+                waitUntil(line: UInt(i)) { done in
+                    DispatchQueue(label: "Nimble.waitUntilTest.\(i)").async {
+                        done()
+                    }
+                }
+            }
+        }
+
+        timer.cancel()
+    }    
+
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
