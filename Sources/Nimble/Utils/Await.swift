@@ -300,7 +300,7 @@ internal class Awaiter {
                 try closure { result in
                     completionCount += 1
                     if completionCount < 2 {
-                        func completeBlock(){
+                        func completeBlock() {
                             if promise.resolveResult(.completed(result)) {
                                 CFRunLoopStop(CFRunLoopGetMain())
                             }
