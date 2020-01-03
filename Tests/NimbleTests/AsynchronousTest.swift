@@ -186,18 +186,17 @@ final class AsyncTest: XCTestCase, XCTestCaseProvider {
         }
         timer.resume()
 
-        for i in 0..<100 {
-            if !failed {
-                waitUntil(line: UInt(i)) { done in
-                    DispatchQueue(label: "Nimble.waitUntilTest.\(i)").async {
-                        done()
-                    }
+        for index in 0..<100 {
+            if failed { break }
+            waitUntil(line: UInt(index)) { done in
+                DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
+                    done()
                 }
             }
         }
 
         timer.cancel()
-    }    
+    }
 
     func testWaitUntilMustBeInMainThread() {
 #if !SWIFT_PACKAGE
