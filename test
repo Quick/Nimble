@@ -1,16 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
-BUILD_DIR=`pwd`/build
-LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
-LATEST_OSX_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
-BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
-RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
-BUILD_OSX_SDK_VERSION=${NIMBLE_BUILD_OSX_SDK_VERSION:-$LATEST_OSX_SDK_VERSION}
+GREEN="\033[0;32m"
+CLEAR="\033[0m"
+
+if which xcodebuild > /dev/null; then
+    echo -e "Gathering ${GREEN}xcodebuild sdk versions${CLEAR}..."
+    BUILD_DIR=`pwd`/build
+    LATEST_IOS_SDK_VERSION=`xcodebuild -showsdks | grep iphonesimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_TVOS_SDK_VERSION=`xcodebuild -showsdks | grep appletvsimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 3 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+    RUNTIME_IOS_SDK_VERSION=${NIMBLE_RUNTIME_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
+    BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
+    RUNTIME_TVOS_SDK_VERSION=${NIMBLE_RUNTIME_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
+    BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
+fi
 
 set -e
-
-GREEN="\x1B[01;92m"
-CLEAR="\x1B[0m"
 
 function color_if_overridden {
     local actual=$1
@@ -29,34 +35,101 @@ function print_env {
     echo "   Building with iOS SDK: `color_if_overridden $BUILD_IOS_SDK_VERSION $NIMBLE_BUILD_IOS_SDK_VERSION`"
     echo "   Running with iOS SDK: `color_if_overridden $RUNTIME_IOS_SDK_VERSION $NIMBLE_RUNTIME_IOS_SDK_VERSION`"
     echo
-    echo " Mac OS X:"
-    echo "   Latest OS X SDK: $LATEST_OSX_SDK_VERSION"
-    echo "   Building with OS X SDK: `color_if_overridden $BUILD_OSX_SDK_VERSION $NIMBLE_BUILD_OSX_SDK_VERSION`"
+    echo " tvOS:"
+    echo "   Latest tvOS SDK: $LATEST_TVOS_SDK_VERSION"
+    echo "   Building with tvOS SDK: `color_if_overridden $BUILD_TVOS_SDK_VERSION $NIMBLE_BUILD_TVOS_SDK_VERSION`"
+    echo "   Running with tvOS SDK: `color_if_overridden $RUNTIME_TVOS_SDK_VERSION $NIMBLE_RUNTIME_TVOS_SDK_VERSION`"
+    echo
+    echo " macOS:"
+    echo "   Latest macOS SDK: $LATEST_MACOS_SDK_VERSION"
+    echo "   Building with macOS SDK: `color_if_overridden $BUILD_MACOS_SDK_VERSION $NIMBLE_BUILD_MACOS_SDK_VERSION`"
     echo
     echo "======= END ======="
     echo
 }
 
 function run {
-    echo "$GREEN==>$CLEAR $@"
+    echo -e "$GREEN==>$CLEAR $@"
     "$@"
 }
 
 function test_ios {
-    run osascript -e 'tell app "iOS Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Air,OS=$RUNTIME_IOS_SDK_VERSION" build test
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
-    run osascript -e 'tell app "iOS Simulator" to quit'
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 5s,OS=$RUNTIME_IOS_SDK_VERSION" build test
+    run osascript -e 'tell app "Simulator" to quit'
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Pro (11-inch),OS=$RUNTIME_IOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+
+    run osascript -e 'tell app "Simulator" to quit'
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
-function test_osx {
-    run xcodebuild -project Nimble.xcodeproj -scheme "Nimble-OSX" -configuration "Debug" -sdk "macosx$BUILD_OSX_SDK_VERSION" build test
+function test_tvos {
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -destination "generic/platform=tvOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+
+    run osascript -e 'tell app "Simulator" to quit'
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_macos {
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-macOS" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_xcode_spm_macos {
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak    
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_xcode_spm_ios {
+    run osascript -e 'tell app "Simulator" to quit'
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_podspec {
+    echo "Gathering CocoaPods installation information..."
+    run bundle exec pod --version
+    echo "Linting podspec..."
+    # Note: remove `--allow-warnings` once old Matcher API has been removed
+    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation --verbose
+}
+
+function test_swiftpm {
+    if [ -d .build ]; then
+        run swift package clean
+    fi
+    run swift build -Xswiftc -suppress-warnings && swift test -Xswiftc -suppress-warnings
+}
+
+function test_swiftpm_docker {
+    run docker build -t nimble-tests -f Dockerfile.test --no-cache .
+    run docker run -it --privileged=true nimble-tests
 }
 
 function test() {
     test_ios
-    test_osx
+    test_tvos
+    test_macos
+
+    if xcodebuild --help 2>&1 | grep xcframework > /dev/null; then
+        test_xcode_spm_ios
+        test_xcode_spm_macos
+    else
+        echo "Not testing with Swift Package Manager version of Xcode because it requires at least Xcode 11"
+    fi
+
+    if which swift-test; then
+        test_swiftpm
+    else
+        echo "Not testing with the Swift Package Manager because swift-test is not installed"
+    fi
+
+    if which docker; then
+        test_swiftpm_docker
+    else
+        echo "Not testing linux in docker container since docker is not in PATH!"
+    fi
 }
 
 function clean {
@@ -67,11 +140,17 @@ function help {
     echo "Usage: $0 COMMANDS"
     echo
     echo "COMMANDS:"
-    echo " clean        - Cleans the derived data directory of Xcode. Assumes default location"
-    echo " ios          - Runs the tests as an iOS device"
-    echo " osx          - Runs the tests on Mac OS X 10.10 (Yosemite and newer only)"
-    echo " all          - Runs both ios and osx tests"
-    echo " help         - Displays this help"
+    echo " all             - Runs the all tests of macos, ios and tvos"
+    echo " clean           - Cleans the derived data directory of Xcode. Assumes default location"
+    echo " help            - Displays this help"
+    echo " macos           - Runs the tests on macOS 10.10 (Yosemite and newer only)"
+    echo " macos_xcodespm  - Runs the tests on macOS using the Swift Package Manager version of Xcode"
+    echo " ios             - Runs the tests as an iOS device"
+    echo " ios_xcodespm    - Runs the tests as an iOS device using the Swift Package Manager version of Xcode"
+    echo " tvos            - Runs the tests as an tvOS device"
+    echo " podspec         - Runs pod lib lint against the podspec to detect breaking changes"
+    echo " swiftpm         - Runs the tests built by the Swift Package Manager"
+    echo " swiftpm_docker  - Runs the tests built by the Swift Package Manager in a docker linux container"
     echo
     exit 1
 }
@@ -83,9 +162,15 @@ function main {
         case "$arg" in
             clean) clean ;;
             ios) test_ios ;;
-            osx) test_osx ;;
+            ios_xcodespm) test_xcode_spm_ios ;;
+            tvos) test_tvos ;;
+            macos) test_macos ;;
+            macos_xcodespm) test_xcode_spm_macos ;;
+            podspec) test_podspec ;;
             test) test ;;
             all) test ;;
+            swiftpm) test_swiftpm ;;
+            swiftpm_docker) test_swiftpm_docker ;;
             help) help ;;
         esac
     done
@@ -97,4 +182,3 @@ function main {
 }
 
 main $@
-

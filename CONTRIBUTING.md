@@ -33,9 +33,26 @@ it.
 - Went to the kitchen, only to forget why you went in the first place?
   Better submit an issue.
 
+Be sure to include in your issue:
+
+- Your Xcode version (eg - Xcode 7.0.1 7A1001)
+- Your version of Nimble (eg - v2.0.0 or git sha `20a3f3b4e63cc8d97c92c4164bf36f2a2c9a6e1b`)
+- What are the steps to reproduce this issue?
+- What platform are you using? (eg - OS X, iOS, watchOS, tvOS)
+- If the problem is on a UI Testing Bundle, Unit Testing Bundle, or some other target configuration
+- Are you using carthage or cocoapods?
+
 ## Building the Project
 
-- Use `Nimble.xcproj` to work on Nimble.
+- Use `Nimble.xcodeproj` to work on Nimble.
+
+## Running the Swift Package Manager tests
+
+1. Install `swiftenv` by running a line from the build script (`.travis.yml`):
+
+    eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
+
+2. Run `./test swiftpm`
 
 ## Pull Requests
 
@@ -51,10 +68,8 @@ it.
   tests using `./test`.
 - If you've added a file to the project, make sure it's included in both
   the OS X and iOS targets.
-- To make minor updates to old versions of Nimble that support Swift
-  1.1, issue a pull request against the `swift-1.1` branch. The master
-  branch supports Swift 1.2. Travis CI will only pass for pull requests
-  issued against the `swift-1.1` branch.
+- The `master` branch will always support the stable Xcode version. Other
+  branches will point to their corresponding versions they support.
 - If you're making a configuration change, make sure to edit both the xcode
   project and the podspec file.
 
@@ -95,9 +110,11 @@ some "ground rules":
 
 The process is relatively straight forward, but here's is a useful checklist for tagging:
 
-- Look a changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
+- Look at changes from the previously tagged release and write release notes: `git log v0.4.0...HEAD`
 - Run the release script: `./script/release A.B.C release-notes-file`
-- Go to [github releases](https://github.com/Quick/Nimble/releases) and mark the tagged commit as a release.
-  - Use the same release notes you created for the tag, but tweak up formatting for github.
-  - Attach the carthage release `Nimble.framework.zip` to the release.
+- The script will prompt you to create a new [GitHub release](https://github.com/Quick/Nimble/releases).
+  - Use the same release notes you created for the tag, but tweak up formatting for GitHub.
+- Update [Quick](https://github.com/Quick/Quick)
+  - Update Quick's submodule reference to the newly released Nimble version
+  - Update Nimble version in `README.md` and Documentation in [Quick](https://github.com/Quick/Quick) if it's not a patch version update.
 - Announce!
