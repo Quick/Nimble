@@ -1,4 +1,5 @@
 import Dispatch
+import CoreFoundation
 import Foundation
 import XCTest
 import Nimble
