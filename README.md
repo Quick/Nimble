@@ -1173,19 +1173,19 @@ For Objective-C, the actual value must be one of the following classes, or their
 
 ```swift
 // Swift
-let testNotification = Notification(name: "Foo", object: nil)
+let testNotification = Notification(name: Notification.Name("Foo"), object: nil)
 
 // passes if the closure in expect { ... } posts a notification to the default
 // notification center.
 expect {
-    NotificationCenter.default.postNotification(testNotification)
-}.to(postNotifications(equal([testNotification]))
+    NotificationCenter.default.post(testNotification)
+}.to(postNotifications(equal([testNotification])))
 
 // passes if the closure in expect { ... } posts a notification to a given
 // notification center
 let notificationCenter = NotificationCenter()
 expect {
-    notificationCenter.postNotification(testNotification)
+    notificationCenter.post(testNotification)
 }.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
 ```
 
