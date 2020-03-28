@@ -3,46 +3,38 @@ branches:
     - master
 
 language: generic
-matrix:
+jobs:
   include:
-    - &cocoapods
-      name: CocoaPods Lint
-      os: osx
-      osx_image: xcode10.3
-      install: bundle install
-      script: ./test podspec
-    - &xcode
-      name: Xcode 10.3 / Swift 5.0
-      os: osx
-      osx_image: xcode10.3
-      script:
-        - ./test macos
-        - ./test ios
-        - ./test tvos
-    - &swiftpm_darwin
-      name: SwiftPM / Darwin / Swift 5.0
-      os: osx
-      osx_image: xcode10.3
-      script: ./test swiftpm
+    # - &xcode
+    #   name: Xcode 10.3 / Swift 5.0
+    #   os: osx
+    #   osx_image: xcode10.3
+    #   script:
+    #     - ./test macos
+    #     - ./test ios
+    #     - ./test tvos
+    # - &swiftpm_darwin
+    #   name: SwiftPM / Darwin / Swift 5.0
+    #   os: osx
+    #   osx_image: xcode10.3
+    #   script: ./test swiftpm
     - &swiftpm_linux
-      name: SwiftPM / Linux / Swift 5.0.3
+      name: SwiftPM / Linux / Swift 5.2
       os: linux
-      dist: trusty
-      sudo: required
       env:
-        - SWIFT_VERSION=5.0.3
+        - SWIFT_VERSION=5.2
       install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
       script:
         - ./test swiftpm
-    - <<: *swiftpm_linux
-      name: SwiftPM / Linux / Swift 5.1
-      env:
-        - SWIFT_VERSION=5.1
-    - <<: *swiftpm_linux
-      name: SwiftPM / Linux / Swift Development
-      env:
-        - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2019-09-26-a
+    # - <<: *swiftpm_linux
+    #   name: SwiftPM / Linux / Swift 5.3
+    #   env:
+    #     - SWIFT_VERSION=5.3
+    # - <<: *swiftpm_linux
+    #   name: SwiftPM / Linux / Swift Development
+    #   env:
+    #     - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2020-02-21-a
 install: true
 script:
   - ./test $TYPE

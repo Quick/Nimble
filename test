@@ -99,7 +99,7 @@ function test_swiftpm {
     if [ -d .build ]; then
         run swift package clean
     fi
-    run swift build -Xswiftc -suppress-warnings && swift test -Xswiftc -suppress-warnings
+    run swift build -Xswiftc -suppress-warnings && swift test -Xswiftc -suppress-warnings --enable-test-discovery
 }
 
 function test_swiftpm_docker {
