@@ -301,11 +301,19 @@ internal class Awaiter {
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
             let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
-                try closure {
+                try closure { result in
                     completionCount += 1
                     if completionCount < 2 {
-                        if promise.resolveResult(.completed($0)) {
-                            CFRunLoopStop(CFRunLoopGetMain())
+                        func completeBlock() {
+                            if promise.resolveResult(.completed(result)) {
+                                CFRunLoopStop(CFRunLoopGetMain())
+                            }
+                        }
+
+                        if Thread.isMainThread {
+                            completeBlock()
+                        } else {
+                            DispatchQueue.main.async { completeBlock() }
                         }
                     } else {
                         fail("waitUntil(..) expects its completion closure to be only called once",
