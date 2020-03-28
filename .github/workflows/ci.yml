@@ -9,15 +9,24 @@ on:
       - '*'
 
 jobs:
+  cocoapods:
+    name: CocoaPods Lint
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo xcode-select -s '/Applications/Xcode_11.4.app'
+      - run: gem install bundler:1.17.3 && bundle install
+      - run: ./test podspec
+  
   xcode:
     name: Xcode ${{ matrix.xcode }} - ${{ matrix.platform }}
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: [11, 11.1, 11.2]
+        xcode: [11.4]
         platform: [macos, ios, tvos, macos_xcodespm, ios_xcodespm]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
     - run: ./test ${{ matrix.platform }}
 
@@ -26,8 +35,8 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        xcode: [11, 11.1, 11.2]
+        xcode: [11.4]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
     - run: ./test swiftpm
