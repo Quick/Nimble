@@ -3,7 +3,7 @@ import Foundation
 
 extension DispatchTimeInterval {
     // ** Note: We cannot simply divide the time interval because DispatchTimeInterval associated value type is Int
-    public var divided: DispatchTimeInterval {
+    var divided: DispatchTimeInterval {
         switch self {
         case let .seconds(val): return val < 2 ? .milliseconds(Int(Float(val)/2*1000)) : .seconds(val/2)
         case let .milliseconds(val): return .milliseconds(val/2)
@@ -27,7 +27,7 @@ extension DispatchTimeInterval {
 
 extension TimeInterval {
     // swiftlint:disable line_length
-    public var dispatchInterval: DispatchTimeInterval {
+    var dispatchInterval: DispatchTimeInterval {
         let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
         // perhaps use nanoseconds, though would more often be > Int.max
         return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
