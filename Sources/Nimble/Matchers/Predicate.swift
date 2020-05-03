@@ -166,55 +166,6 @@ public enum PredicateStatus {
     }
 }
 
-// Backwards compatibility until Old Matcher API removal
-extension Predicate: Matcher {
-    /// Compatibility layer for old Matcher API, deprecated
-    public static func fromDeprecatedFullClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
-        return Predicate { actual in
-            let failureMessage = FailureMessage()
-            let result = try matcher(actual, failureMessage, true)
-            return PredicateResult(
-                status: PredicateStatus(bool: result),
-                message: failureMessage.toExpectationMessage()
-            )
-        }
-    }
-
-    /// Compatibility layer for old Matcher API, deprecated.
-    /// Emulates the MatcherFunc API
-    public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
-        return Predicate { actual in
-            let failureMessage = FailureMessage()
-            let result = try matcher(actual, failureMessage)
-            return PredicateResult(
-                status: PredicateStatus(bool: result),
-                message: failureMessage.toExpectationMessage()
-            )
-        }
-
-    }
-
-    /// Compatibility layer for old Matcher API, deprecated.
-    /// Same as calling .predicate on a MatcherFunc or NonNilMatcherFunc type.
-    public static func fromDeprecatedMatcher<M>(_ matcher: M) -> Predicate where M: Matcher, M.ValueType == T {
-        return self.fromDeprecatedFullClosure(matcher.toClosure)
-    }
-
-    /// Deprecated Matcher API, use satisfies(_:_) instead
-    public func matches(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        let result = try satisfies(actualExpression)
-        result.message.update(failureMessage: failureMessage)
-        return result.toBoolean(expectation: .toMatch)
-    }
-
-    /// Deprecated Matcher API, use satisfies(_:_) instead
-    public func doesNotMatch(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
-        let result = try satisfies(actualExpression)
-        result.message.update(failureMessage: failureMessage)
-        return result.toBoolean(expectation: .toNotMatch)
-    }
-}
-
 extension Predicate {
     // Someday, make this public? Needs documentation
     internal func after(f: @escaping (Expression<T>, PredicateResult) throws -> PredicateResult) -> Predicate<T> {

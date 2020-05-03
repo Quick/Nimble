@@ -1,23 +1,5 @@
 import Foundation
 
-// Deprecated
-internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher: U, toNot: String, description: String?) -> (Bool, FailureMessage)
-    where U: Matcher, U.ValueType == T {
-    let msg = FailureMessage()
-    msg.userDescription = description
-    msg.to = toNot
-    do {
-        let pass = try matcher.doesNotMatch(expression, failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try expression.evaluate()))>"
-        }
-        return (pass, msg)
-    } catch let error {
-        msg.stringValue = "unexpected error thrown: <\(error)>"
-        return (false, msg)
-    }
-}
-
 internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?, captureExceptions: Bool = true) -> (Bool, FailureMessage) {
     func run() -> (Bool, FailureMessage) {
         let msg = FailureMessage()
@@ -65,40 +47,6 @@ public struct Expectation<T> {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
     }
-
-    ////////////////// OLD API /////////////////////
-
-    /// DEPRECATED: Tests the actual value using a matcher to match.
-    public func to<U>(_ matcher: U, description: String? = nil)
-        where U: Matcher, U.ValueType == T {
-            let (pass, msg) = execute(
-                expression,
-                .toMatch,
-                matcher.predicate,
-                to: "to",
-                description: description,
-                captureExceptions: false
-            )
-            verify(pass, msg)
-    }
-
-    /// DEPRECATED: Tests the actual value using a matcher to not match.
-    public func toNot<U>(_ matcher: U, description: String? = nil)
-        where U: Matcher, U.ValueType == T {
-        // swiftlint:disable:next line_length
-        let (pass, msg) = expressionDoesNotMatch(expression, matcher: matcher, toNot: "to not", description: description)
-        verify(pass, msg)
-    }
-
-    /// DEPRECATED: Tests the actual value using a matcher to not match.
-    ///
-    /// Alias to toNot().
-    public func notTo<U>(_ matcher: U, description: String? = nil)
-        where U: Matcher, U.ValueType == T {
-        toNot(matcher, description: description)
-    }
-
-    ////////////////// NEW API /////////////////////
 
     /// Tests the actual value using a matcher to match.
     public func to(_ predicate: Predicate<T>, description: String? = nil) {

@@ -65,35 +65,3 @@ public func postNotifications(
         return result
     }
 }
-
-public func postNotifications<T>(
-    _ notificationsMatcher: T,
-    fromNotificationCenter center: NotificationCenter = .default)
-    -> Predicate<Any>
-    where T: Matcher, T.ValueType == [Notification] {
-    _ = mainThread // Force lazy-loading of this value
-    let collector = NotificationCollector(notificationCenter: center)
-    collector.startObserving()
-    var once: Bool = false
-
-    return Predicate { actualExpression in
-        let collectorNotificationsExpression = Expression(memoizedExpression: { _ in
-            return collector.observedNotifications
-            }, location: actualExpression.location, withoutCaching: true)
-
-        assert(pthread_equal(mainThread, pthread_self()) != 0, "Only expecting closure to be evaluated on main thread.")
-        if !once {
-            once = true
-            _ = try actualExpression.evaluate()
-        }
-
-        let failureMessage = FailureMessage()
-        let match = try notificationsMatcher.matches(collectorNotificationsExpression, failureMessage: failureMessage)
-        if collector.observedNotifications.isEmpty {
-            failureMessage.actualValue = "no notifications"
-        } else {
-            failureMessage.actualValue = "<\(stringify(collector.observedNotifications))>"
-        }
-        return PredicateResult(bool: match, message: failureMessage.toExpectationMessage())
-    }
-}

@@ -11,26 +11,6 @@ private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     }
 }
 
-internal struct ObjCMatcherWrapper: Matcher {
-    let matcher: NMBMatcher
-
-    func matches(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
-        return matcher.matches(
-            // swiftlint:disable:next force_try
-            ({ try! actualExpression.evaluate() }),
-            failureMessage: failureMessage,
-            location: actualExpression.location)
-    }
-
-    func doesNotMatch(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
-        return matcher.doesNotMatch(
-            // swiftlint:disable:next force_try
-            ({ try! actualExpression.evaluate() }),
-            failureMessage: failureMessage,
-            location: actualExpression.location)
-    }
-}
-
 // Equivalent to Expectation, but for Nimble's Objective-C interface
 public class NMBExpectation: NSObject {
     // swiftlint:disable identifier_name
@@ -60,127 +40,79 @@ public class NMBExpectation: NSObject {
         }
     }
 
-    @objc public var to: (NMBMatcher) -> Void {
-        return { matcher in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.to(from(objcPredicate: pred))
-            } else {
-                self.expectValue.to(ObjCMatcherWrapper(matcher: matcher))
-            }
+    @objc public var to: (NMBPredicate) -> Void {
+        return { pred in
+            self.expectValue.to(from(objcPredicate: pred))
         }
     }
 
-    @objc public var toWithDescription: (NMBMatcher, String) -> Void {
-        return { matcher, description in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.to(from(objcPredicate: pred), description: description)
-            } else {
-                self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
-            }
+    @objc public var toWithDescription: (NMBPredicate, String) -> Void {
+        return { pred, description in
+            self.expectValue.to(from(objcPredicate: pred), description: description)
         }
     }
 
-    @objc public var toNot: (NMBMatcher) -> Void {
-        return { matcher in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toNot(from(objcPredicate: pred))
-            } else {
-                self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher))
-            }
+    @objc public var toNot: (NMBPredicate) -> Void {
+        return { pred in
+            self.expectValue.toNot(from(objcPredicate: pred))
         }
     }
 
-    @objc public var toNotWithDescription: (NMBMatcher, String) -> Void {
-        return { matcher, description in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toNot(from(objcPredicate: pred), description: description)
-            } else {
-                self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher), description: description)
-            }
+    @objc public var toNotWithDescription: (NMBPredicate, String) -> Void {
+        return { pred, description in
+            self.expectValue.toNot(from(objcPredicate: pred), description: description)
         }
     }
 
-    @objc public var notTo: (NMBMatcher) -> Void { return toNot }
+    @objc public var notTo: (NMBPredicate) -> Void { return toNot }
 
-    @objc public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
+    @objc public var notToWithDescription: (NMBPredicate, String) -> Void { return toNotWithDescription }
 
-    @objc public var toEventually: (NMBMatcher) -> Void {
-        return { matcher in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toEventually(
-                    from(objcPredicate: pred),
-                    timeout: self._timeout,
-                    description: nil
-                )
-            } else {
-                self.expectValue.toEventually(
-                    ObjCMatcherWrapper(matcher: matcher),
-                    timeout: self._timeout,
-                    description: nil
-                )
-            }
+    @objc public var toEventually: (NMBPredicate) -> Void {
+        return { pred in
+            self.expectValue.toEventually(
+                from(objcPredicate: pred),
+                timeout: self._timeout,
+                description: nil
+            )
         }
     }
 
-    @objc public var toEventuallyWithDescription: (NMBMatcher, String) -> Void {
-        return { matcher, description in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toEventually(
-                    from(objcPredicate: pred),
-                    timeout: self._timeout,
-                    description: description
-                )
-            } else {
-                self.expectValue.toEventually(
-                    ObjCMatcherWrapper(matcher: matcher),
-                    timeout: self._timeout,
-                    description: description
-                )
-            }
+    @objc public var toEventuallyWithDescription: (NMBPredicate, String) -> Void {
+        return { pred, description in
+            self.expectValue.toEventually(
+                from(objcPredicate: pred),
+                timeout: self._timeout,
+                description: description
+            )
         }
     }
 
-    @objc public var toEventuallyNot: (NMBMatcher) -> Void {
-        return { matcher in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toEventuallyNot(
-                    from(objcPredicate: pred),
-                    timeout: self._timeout,
-                    description: nil
-                )
-            } else {
-                self.expectValue.toEventuallyNot(
-                    ObjCMatcherWrapper(matcher: matcher),
-                    timeout: self._timeout,
-                    description: nil
-                )
-            }
+    @objc public var toEventuallyNot: (NMBPredicate) -> Void {
+        return { pred in
+            self.expectValue.toEventuallyNot(
+                from(objcPredicate: pred),
+                timeout: self._timeout,
+                description: nil
+            )
         }
     }
 
-    @objc public var toEventuallyNotWithDescription: (NMBMatcher, String) -> Void {
-        return { matcher, description in
-            if let pred = matcher as? NMBPredicate {
-                self.expectValue.toEventuallyNot(
-                    from(objcPredicate: pred),
-                    timeout: self._timeout,
-                    description: description
-                )
-            } else {
-                self.expectValue.toEventuallyNot(
-                    ObjCMatcherWrapper(matcher: matcher),
-                    timeout: self._timeout,
-                    description: description
-                )
-            }
+    @objc public var toEventuallyNotWithDescription: (NMBPredicate, String) -> Void {
+        return { pred, description in
+            self.expectValue.toEventuallyNot(
+                from(objcPredicate: pred),
+                timeout: self._timeout,
+                description: description
+            )
         }
     }
 
-    @objc public var toNotEventually: (NMBMatcher) -> Void {
+    @objc public var toNotEventually: (NMBPredicate) -> Void {
         return toEventuallyNot
     }
 
-    @objc public var toNotEventuallyWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toNotEventuallyWithDescription: (NMBPredicate, String) -> Void {
         return toEventuallyNotWithDescription
     }
 
