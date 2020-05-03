@@ -17,9 +17,9 @@ extension DispatchTimeInterval {
     var description: String {
         switch self {
         case let .seconds(val): return val == 1 ? "\(Float(val)) second" : "\(Float(val)) seconds"
-        case let .milliseconds(val): return "\(Float(val)/1000) seconds"
-        case let .microseconds(val): return "\(Float(val)/1000000) seconds"
-        case let .nanoseconds(val): return "\(Float(val)/1000000000) seconds"
+        case let .milliseconds(val): return "\(Float(val)/1_000) seconds"
+        case let .microseconds(val): return "\(Float(val)/1_000_000) seconds"
+        case let .nanoseconds(val): return "\(Float(val)/1_000_000_000) seconds"
         default: fatalError("Unknown DispatchTimeInterval value")
         }
     }
