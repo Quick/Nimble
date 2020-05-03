@@ -30,6 +30,6 @@ extension TimeInterval {
     public var dispatchInterval: DispatchTimeInterval {
         let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
         // perhaps use nanoseconds, though would more often be > Int.max
-        return microseconds < Int.max ? DispatchTimeInterval.microseconds(Int(microseconds)) : DispatchTimeInterval.seconds(Int(self))
+        return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
     }
 }

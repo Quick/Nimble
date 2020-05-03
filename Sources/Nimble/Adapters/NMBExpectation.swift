@@ -38,7 +38,7 @@ public class NMBExpectation: NSObject {
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: DispatchTimeInterval = DispatchTimeInterval.seconds(1)
+    internal var _timeout: DispatchTimeInterval = .seconds(1)
     // swiftlint:enable identifier_name
 
     @objc public init(actualBlock: @escaping () -> NSObject?, negative: Bool, file: FileString, line: UInt) {

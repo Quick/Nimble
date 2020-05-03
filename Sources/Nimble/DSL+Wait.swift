@@ -104,14 +104,14 @@ internal class NMBWait: NSObject {
         _ file: FileString = #file,
         line: UInt = #line,
         action: @escaping (@escaping () -> Void) -> Void) {
-        until(timeout: DispatchTimeInterval.seconds(1), file: file, line: line, action: action)
+        until(timeout: .seconds(1), file: file, line: line, action: action)
     }
 #else
     internal class func until(
         _ file: FileString = #file,
         line: UInt = #line,
         action: @escaping (@escaping () -> Void) -> Void) {
-        until(timeout: DispatchTimeInterval.seconds(1), file: file, line: line, action: action)
+        until(timeout: .seconds(1), file: file, line: line, action: action)
     }
 #endif
 }

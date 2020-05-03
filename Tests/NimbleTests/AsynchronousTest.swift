@@ -38,9 +38,9 @@ final class AsyncTest: XCTestCase {
     }
 
     func testToEventuallyWithCustomDefaultTimeout() {
-        AsyncDefaults.Timeout = DispatchTimeInterval.seconds(2)
+        AsyncDefaults.Timeout = .seconds(2)
         defer {
-            AsyncDefaults.Timeout = DispatchTimeInterval.seconds(1)
+            AsyncDefaults.Timeout = .seconds(1)
         }
 
         var value = 0
@@ -62,9 +62,9 @@ final class AsyncTest: XCTestCase {
     }
 
     func testWaitUntilWithCustomDefaultsTimeout() {
-        AsyncDefaults.Timeout = DispatchTimeInterval.seconds(3)
+        AsyncDefaults.Timeout = .seconds(3)
         defer {
-            AsyncDefaults.Timeout = DispatchTimeInterval.seconds(1)
+            AsyncDefaults.Timeout = .seconds(1)
         }
         waitUntil { done in
             Thread.sleep(forTimeInterval: 2.8)
@@ -85,7 +85,7 @@ final class AsyncTest: XCTestCase {
 
     func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
-            waitUntil(timeout: DispatchTimeInterval.seconds(1)) { _ in return }
+            waitUntil(timeout: .seconds(1)) { _ in return }
         }
     }
 
@@ -121,7 +121,7 @@ final class AsyncTest: XCTestCase {
     func testWaitUntilDetectsStalledMainThreadActivity() {
         let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
         failsWithErrorMessage(msg) {
-            waitUntil(timeout: DispatchTimeInterval.seconds(1)) { done in
+            waitUntil(timeout: .seconds(1)) { done in
                 Thread.sleep(forTimeInterval: 3.0)
                 done()
             }
@@ -142,7 +142,7 @@ final class AsyncTest: XCTestCase {
             is currently managing the main run loop.
             """
         failsWithErrorMessage(msg) { // reference line
-            waitUntil(timeout: DispatchTimeInterval.seconds(2)) { done in
+            waitUntil(timeout: .seconds(2)) { done in
                 var protected: Int = 0
                 DispatchQueue.main.async {
                     protected = 1
@@ -178,7 +178,7 @@ final class AsyncTest: XCTestCase {
         timer.schedule(
             deadline: DispatchTime.now() + 5,
             repeating: .never,
-            leeway: DispatchTimeInterval.milliseconds(1)
+            leeway: .milliseconds(1)
         )
         timer.setEventHandler {
             failed = true
