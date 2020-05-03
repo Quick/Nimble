@@ -2,7 +2,7 @@ import Dispatch
 import Foundation
 
 extension DispatchTimeInterval {
-    // ** Note: We cannot simply divide the timeinterval because DispatchTimeInterval associated value type is Int
+    // ** Note: We cannot simply divide the time interval because DispatchTimeInterval associated value type is Int
     public var divided: DispatchTimeInterval {
         switch self {
         case let .seconds(val): return val < 2 ? .milliseconds(Int(Float(val)/2*1000)) : .seconds(val/2)
@@ -10,7 +10,7 @@ extension DispatchTimeInterval {
         case let .microseconds(val): return .microseconds(val/2)
         case let .nanoseconds(val): return .nanoseconds(val/2)
         case .never: return .never
-        @unknown default: fatalError("Unknow DispatchTimeInterval value")
+        @unknown default: fatalError("Unknown DispatchTimeInterval value")
         }
     }
 
@@ -20,7 +20,7 @@ extension DispatchTimeInterval {
         case let .milliseconds(val): return "\(Float(val)/1000) seconds"
         case let .microseconds(val): return "\(Float(val)/1000000) seconds"
         case let .nanoseconds(val): return "\(Float(val)/1000000000) seconds"
-        default: fatalError("Unknow DispatchTimeInterval value")
+        default: fatalError("Unknown DispatchTimeInterval value")
         }
     }
 }
