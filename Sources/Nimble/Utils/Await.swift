@@ -2,10 +2,6 @@ import CoreFoundation
 import Dispatch
 import Foundation
 
-#if canImport(CDispatch)
-    import CDispatch
-#endif
-
 private let timeoutLeeway = DispatchTimeInterval.milliseconds(1)
 private let pollLeeway = DispatchTimeInterval.milliseconds(1)
 

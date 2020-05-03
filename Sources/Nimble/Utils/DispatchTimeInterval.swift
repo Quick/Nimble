@@ -1,6 +1,10 @@
 import Dispatch
 import Foundation
 
+#if canImport(CDispatch)
+    import CDispatch
+#endif
+
 extension DispatchTimeInterval {
     // ** Note: We cannot simply divide the time interval because DispatchTimeInterval associated value type is Int
     var divided: DispatchTimeInterval {
