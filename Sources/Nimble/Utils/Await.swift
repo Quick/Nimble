@@ -369,7 +369,7 @@ internal func pollBlock(
                 return true
             }
             return nil
-        }.timeout(timeoutInterval, forcefullyAbortTimeout: AsyncDefaults.Timeout).wait(fnName, file: file, line: line)
+        }.timeout(timeoutInterval, forcefullyAbortTimeout: AsyncDefaults.timeout).wait(fnName, file: file, line: line)
 
         return result
 }
