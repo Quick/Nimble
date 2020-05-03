@@ -26,7 +26,6 @@ extension DispatchTimeInterval {
 }
 
 extension TimeInterval {
-    // swiftlint:disable line_length
     var dispatchInterval: DispatchTimeInterval {
         let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
         // perhaps use nanoseconds, though would more often be > Int.max
