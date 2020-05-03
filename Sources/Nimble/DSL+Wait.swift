@@ -22,11 +22,9 @@ internal class NMBWait: NSObject {
         line: UInt = #line,
         action: @escaping (@escaping () -> Void) -> Void) {
             // Convert TimeInterval to DispatchTimeInterval
-            let dispatchTimeout: DispatchTimeInterval = timeout.dispatchInterval
-            return throwableUntil(timeout: dispatchTimeout, file: file, line: line) { done in
-                action(done)
-            }
+            until(timeout: timeout.dispatchInterval, file: file, line: line, action: action)
     }
+#endif
 
     internal class func until(
         timeout: DispatchTimeInterval,
@@ -37,17 +35,6 @@ internal class NMBWait: NSObject {
                 action(done)
             }
     }
-#else
-    internal class func until(
-        timeout: DispatchTimeInterval,
-        file: FileString = #file,
-        line: UInt = #line,
-        action: @escaping (@escaping () -> Void) -> Void) {
-            return throwableUntil(timeout: timeout, file: file, line: line) { done in
-                action(done)
-            }
-    }
-#endif
 
     // Using a throwable closure makes this method not objc compatible.
     internal class func throwableUntil(
