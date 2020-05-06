@@ -45,17 +45,17 @@ extension Predicate {
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func define(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+    public static func define(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
-            return try matcher(actual, .expectedActualValueTo(msg))
+            return try matcher(actual, .expectedActualValueTo(message))
         }.requireNonNil
     }
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
-    public static func defineNilable(_ msg: String, matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+    public static func defineNilable(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
-            return try matcher(actual, .expectedActualValueTo(msg))
+            return try matcher(actual, .expectedActualValueTo(message))
         }
     }
 }
@@ -65,9 +65,9 @@ extension Predicate {
     /// error message.
     ///
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func simple(_ msg: String, matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
+    public static func simple(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
-            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
+            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }.requireNonNil
     }
 
@@ -75,9 +75,9 @@ extension Predicate {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ msg: String, matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
+    public static func simpleNilable(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
-            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(msg))
+            return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }
     }
 }
