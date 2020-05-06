@@ -139,4 +139,16 @@ final class SynchronousTest: XCTestCase {
         expect(1).notTo(MatcherFunc { _, _ in false }.predicate)
         expect(1).notTo(Predicate.simple("match") { _ in .doesNotMatch })
     }
+
+    // MARK: Assertion chaining
+
+    func testChain() {
+        expect(2).toNot(equal(1)).to(equal(2)).notTo(equal(3))
+    }
+
+    func testChainFailOnFirstError() {
+        failsWithErrorMessage("expected to not equal <2>, got <2>") {
+            expect(2).toNot(equal(1)).toNot(equal(2)).to(equal(3))
+        }
+    }
 }

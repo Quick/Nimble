@@ -125,7 +125,7 @@ final class ThrowErrorTest: XCTestCase {
     func testNegativeMatchesWithClosure() {
         let moduleName = "NimbleTests"
         let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).NimbleError>"
-        let closure = { (error: Error) in
+        let closure = { (error: Error) -> Void in
             expect(error._domain).to(equal("foo"))
         }
 
@@ -163,5 +163,9 @@ final class ThrowErrorTest: XCTestCase {
         expect { return "5" }.toNot(throwError(NimbleError.laugh) { (error: Error) in })
 
         // swiftlint:enable unused_closure_parameter
+    }
+
+    func testChainOnThrowError() {
+        expect { () throws -> Int in return 5 }.toNot(throwError()).to(equal(5))
     }
 }

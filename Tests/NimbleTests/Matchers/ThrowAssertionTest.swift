@@ -68,4 +68,10 @@ final class ThrowAssertionTest: XCTestCase {
         expect { () -> Int in fatalError() }.to(throwAssertion())
         #endif
     }
+
+    func testChainOnThrowAssertion() {
+        #if canImport(Darwin)
+        expect { () -> Int in return 5 }.toNot(throwAssertion()).to(equal(5))
+        #endif
+    }
 }
