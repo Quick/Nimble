@@ -101,22 +101,27 @@ public struct Expectation<T> {
     ////////////////// NEW API /////////////////////
 
     /// Tests the actual value using a matcher to match.
-    public func to(_ predicate: Predicate<T>, description: String? = nil) {
+    @discardableResult
+    public func to(_ predicate: Predicate<T>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toMatch, predicate, to: "to", description: description)
         verify(pass, msg)
+        return self
     }
 
     /// Tests the actual value using a matcher to not match.
-    public func toNot(_ predicate: Predicate<T>, description: String? = nil) {
+    @discardableResult
+    public func toNot(_ predicate: Predicate<T>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toNotMatch, predicate, to: "to not", description: description)
         verify(pass, msg)
+        return self
     }
 
     /// Tests the actual value using a matcher to not match.
     ///
     /// Alias to toNot().
-    public func notTo(_ predicate: Predicate<T>, description: String? = nil) {
-        toNot(predicate, description: description)
+    @discardableResult
+    public func notTo(_ predicate: Predicate<T>, description: String? = nil) -> Self {
+        return toNot(predicate, description: description)
     }
 
     // see:
