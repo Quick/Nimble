@@ -11,7 +11,7 @@ private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     }
 }
 
-internal struct ObjCMatcherWrapper: Matcher {
+private struct ObjCMatcherWrapper: Matcher {
     let matcher: NMBMatcher
 
     func matches(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {

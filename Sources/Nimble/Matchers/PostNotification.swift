@@ -66,6 +66,7 @@ public func postNotifications(
     }
 }
 
+@available(*, deprecated, message: "Use Predicate instead")
 public func postNotifications<T>(
     _ notificationsMatcher: T,
     fromNotificationCenter center: NotificationCenter = .default)
