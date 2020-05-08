@@ -152,5 +152,17 @@ final class RaisesExceptionTest: XCTestCase {
             })
         }
     }
+
+    func testNonVoidClosure() {
+        expect { return 1 }.toNot(raiseException())
+        expect { return 2 }.toNot(raiseException(named: "laugh"))
+        expect { return 3 }.toNot(raiseException(named: "laugh", reason: "Lulz"))
+        expect { return 4 }.toNot(raiseException(named: "laugh", reason: "Lulz", userInfo: ["key": "value"]))
+        expect { return 5 }.toNot(raiseException(named: "laugh", reason: "Lulz", userInfo: ["key": "value"]) { _ in })
+    }
+
+    func testChainOnRaiseException() {
+        expect { () -> Int in return 5 }.toNot(raiseException()).to(equal(5))
+    }
 }
 #endif
