@@ -29,7 +29,7 @@ internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
         if let actualValue = try actualExpression.evaluate() {
             msg = .expectedCustomValueTo(
                 "match all of: " + postfixMessages.joined(separator: ", and "),
-                "\(actualValue)"
+                actual: "\(actualValue)"
             )
         } else {
             msg = .expectedActualValueTo(

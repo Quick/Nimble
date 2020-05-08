@@ -29,7 +29,7 @@ internal func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             if let actualValue = try actualExpression.evaluate() {
                 msg = .expectedCustomValueTo(
                     "match one of: " + postfixMessages.joined(separator: ", or "),
-                    "\(actualValue)"
+                    actual: "\(actualValue)"
                 )
             } else {
                 msg = .expectedActualValueTo(

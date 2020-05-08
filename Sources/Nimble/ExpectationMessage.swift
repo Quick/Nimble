@@ -5,7 +5,7 @@ public indirect enum ExpectationMessage {
     /// includes actual value in output ("expected to <message>, got <actual>")
     case expectedActualValueTo(/* message: */ String)
     /// uses a custom actual value string in output ("expected to <message>, got <actual>")
-    case expectedCustomValueTo(/* message: */ String, /* actual: */ String)
+    case expectedCustomValueTo(/* message: */ String, actual: String)
     /// excludes actual value in output ("expected to <message>")
     case expectedTo(/* message: */ String)
     /// allows any free-form message ("<message>")
@@ -118,7 +118,7 @@ public indirect enum ExpectationMessage {
             case let .expectedActualValueTo(msg):
                 return .expectedActualValueTo(message + msg)
             case let .expectedCustomValueTo(msg, actual):
-                return .expectedCustomValueTo(message + msg, actual)
+                return .expectedCustomValueTo(message + msg, actual: actual)
             default:
                 return msg.visitLeafs(walk)
             }
@@ -193,7 +193,7 @@ extension FailureMessage {
 
         var message: ExpectationMessage = .fail(userDescription ?? "")
         if actualValue != "" && actualValue != nil {
-            message = .expectedCustomValueTo(postfixMessage, actualValue ?? "")
+            message = .expectedCustomValueTo(postfixMessage, actual: actualValue ?? "")
         } else if postfixMessage != defaultMessage.postfixMessage {
             if actualValue == nil {
                 message = .expectedTo(postfixMessage)
@@ -228,7 +228,7 @@ public class NMBExpectationMessage: NSObject {
     }
 
     public init(expectedActualValueTo message: String, customActualValue actual: String) {
-        self.msg = .expectedCustomValueTo(message, actual)
+        self.msg = .expectedCustomValueTo(message, actual: actual)
     }
 
     public init(fail message: String) {

@@ -60,7 +60,7 @@ public func postNotifications(
 
         var result = try predicate.satisfies(collectorNotificationsExpression)
         result.message = result.message.replacedExpectation { message in
-            return .expectedCustomValueTo(message.expectedMessage, actualValue)
+            return .expectedCustomValueTo(message.expectedMessage, actual: actualValue)
         }
         return result
     }
