@@ -12,11 +12,11 @@ import Foundation
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func raiseException(
+public func raiseException<Out>(
     named: String? = nil,
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
-    closure: ((NSException) -> Void)? = nil) -> Predicate<Any> {
+    closure: ((NSException) -> Void)? = nil) -> Predicate<Out> {
         return Predicate { actualExpression in
             var exception: NSException?
             let capture = NMBExceptionCapture(handler: ({ e in
@@ -141,7 +141,7 @@ public class NMBObjCRaiseExceptionMatcher: NSObject, NMBMatcher {
         let expr = Expression(expression: block, location: location)
 
         do {
-            let predicate = raiseException(
+            let predicate: Predicate<Any> = raiseException(
                 named: _name,
                 reason: _reason,
                 userInfo: _userInfo,
