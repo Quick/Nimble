@@ -60,49 +60,53 @@ public class NMBExpectation: NSObject {
         }
     }
 
-    @objc public var to: (NMBMatcher) -> Void {
+    @objc public var to: (NMBMatcher) -> NMBExpectation {
         return { matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred))
             } else {
                 self.expectValue.to(ObjCMatcherWrapper(matcher: matcher))
             }
+            return self
         }
     }
 
-    @objc public var toWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toWithDescription: (NMBMatcher, String) -> NMBExpectation {
         return { matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred), description: description)
             } else {
                 self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
             }
+            return self
         }
     }
 
-    @objc public var toNot: (NMBMatcher) -> Void {
+    @objc public var toNot: (NMBMatcher) -> NMBExpectation {
         return { matcher in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred))
             } else {
                 self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher))
             }
+            return self
         }
     }
 
-    @objc public var toNotWithDescription: (NMBMatcher, String) -> Void {
+    @objc public var toNotWithDescription: (NMBMatcher, String) -> NMBExpectation {
         return { matcher, description in
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred), description: description)
             } else {
                 self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher), description: description)
             }
+            return self
         }
     }
 
-    @objc public var notTo: (NMBMatcher) -> Void { return toNot }
+    @objc public var notTo: (NMBMatcher) -> NMBExpectation { return toNot }
 
-    @objc public var notToWithDescription: (NMBMatcher, String) -> Void { return toNotWithDescription }
+    @objc public var notToWithDescription: (NMBMatcher, String) -> NMBExpectation { return toNotWithDescription }
 
     @objc public var toEventually: (NMBMatcher) -> Void {
         return { matcher in

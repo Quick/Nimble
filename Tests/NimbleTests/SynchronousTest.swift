@@ -120,8 +120,8 @@ final class SynchronousTest: XCTestCase {
         expect(2).toNot(equal(1)).to(equal(2)).notTo(equal(3))
     }
 
-    func testChainFailOnFirstError() {
-        failsWithErrorMessage("expected to not equal <2>, got <2>") {
+    func testChainFail() {
+        failsWithErrorMessage(["expected to not equal <2>, got <2>", "expected to equal <3>, got <2>"]) {
             expect(2).toNot(equal(1)).toNot(equal(2)).to(equal(3))
         }
     }
