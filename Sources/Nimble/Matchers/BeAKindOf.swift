@@ -14,12 +14,12 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
-            message = .expectedCustomValueTo(matcherMessage(forType: expectedType), "<nil>")
+            message = .expectedCustomValueTo(matcherMessage(forType: expectedType), actual: "<nil>")
             return PredicateResult(status: .fail, message: message)
         }
         message = .expectedCustomValueTo(
             "be a kind of \(String(describing: expectedType))",
-            "<\(String(describing: type(of: validInstance))) instance>"
+            actual: "<\(String(describing: type(of: validInstance))) instance>"
         )
 
         return PredicateResult(
@@ -43,13 +43,13 @@ public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
             status = PredicateStatus(bool: instance != nil && instance!.isKind(of: expectedClass))
             message = .expectedCustomValueTo(
                 matcherMessage(forClass: expectedClass),
-                "<\(String(describing: type(of: validInstance))) instance>"
+                actual: "<\(String(describing: type(of: validInstance))) instance>"
             )
         } else {
             status = .fail
             message = .expectedCustomValueTo(
                 matcherMessage(forClass: expectedClass),
-                "<nil>"
+                actual: "<nil>"
             )
         }
 

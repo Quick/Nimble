@@ -71,7 +71,7 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 
         errorMessage = .expectedCustomValueTo(
             "equal <\(stringify(expectedValue))>",
-            "<\(stringify(actualValue))>"
+            actual: "<\(stringify(actualValue))>"
         )
 
         if expectedValue == actualValue {

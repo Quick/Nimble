@@ -11,7 +11,7 @@ public func beIdenticalTo(_ expected: Any?) -> Predicate<Any> {
             bool: bool,
             message: .expectedCustomValueTo(
                 "be identical to \(identityAsString(expected))",
-                "\(identityAsString(actual))"
+                actual: "\(identityAsString(actual))"
             )
         )
     }

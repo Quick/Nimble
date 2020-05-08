@@ -13,7 +13,7 @@ public func haveCount<T: Collection>(_ expectedValue: Int) -> Predicate<T> {
             let message = ExpectationMessage
                 .expectedCustomValueTo(
                     "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))",
-                    "\(actualValue.count)"
+                    actual: "\(actualValue.count)"
                 )
                 .appended(details: "Actual Value: \(stringify(actualValue))")
 
@@ -33,7 +33,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
             let message = ExpectationMessage
                 .expectedCustomValueTo(
                     "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))",
-                    "\(actualValue.count)"
+                    actual: "\(actualValue.count)"
                 )
                 .appended(details: "Actual Value: \(stringify(actualValue))")
 
@@ -60,7 +60,7 @@ extension NMBObjCMatcher {
             if let actualValue = actualValue {
                 message = ExpectationMessage.expectedCustomValueTo(
                     "get type of NSArray, NSSet, NSDictionary, or NSHashTable",
-                    "\(String(describing: type(of: actualValue)))"
+                    actual: "\(String(describing: type(of: actualValue)))"
                 )
             } else {
                 message = ExpectationMessage
