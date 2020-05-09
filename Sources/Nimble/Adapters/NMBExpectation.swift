@@ -11,24 +11,27 @@ private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     }
 }
 
-private struct ObjCMatcherWrapper: Matcher {
-    let matcher: NMBMatcher
-
-    func matches(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
-        return matcher.matches(
-            // swiftlint:disable:next force_try
-            ({ try! actualExpression.evaluate() }),
-            failureMessage: failureMessage,
-            location: actualExpression.location)
+private func from(matcher: NMBMatcher, style: ExpectationStyle) -> Predicate<NSObject> {
+    // Almost same as `Matcher.toClosure`
+    let closure: (Expression<NSObject>, FailureMessage) throws -> Bool = { expr, msg in
+        switch style {
+        case .toMatch:
+            return matcher.matches(
+                // swiftlint:disable:next force_try
+                ({ try! expr.evaluate() }),
+                failureMessage: msg,
+                location: expr.location
+            )
+        case .toNotMatch:
+            return !matcher.doesNotMatch(
+                // swiftlint:disable:next force_try
+                ({ try! expr.evaluate() }),
+                failureMessage: msg,
+                location: expr.location
+            )
+        }
     }
-
-    func doesNotMatch(_ actualExpression: Expression<NSObject>, failureMessage: FailureMessage) -> Bool {
-        return matcher.doesNotMatch(
-            // swiftlint:disable:next force_try
-            ({ try! actualExpression.evaluate() }),
-            failureMessage: failureMessage,
-            location: actualExpression.location)
-    }
+    return Predicate._fromDeprecatedClosure(closure)
 }
 
 // Equivalent to Expectation, but for Nimble's Objective-C interface
@@ -65,7 +68,7 @@ public class NMBExpectation: NSObject {
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred))
             } else {
-                self.expectValue.to(ObjCMatcherWrapper(matcher: matcher))
+                self.expectValue.to(from(matcher: matcher, style: .toMatch))
             }
             return self
         }
@@ -76,7 +79,7 @@ public class NMBExpectation: NSObject {
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.to(from(objcPredicate: pred), description: description)
             } else {
-                self.expectValue.to(ObjCMatcherWrapper(matcher: matcher), description: description)
+                self.expectValue.to(from(matcher: matcher, style: .toMatch), description: description)
             }
             return self
         }
@@ -87,7 +90,7 @@ public class NMBExpectation: NSObject {
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred))
             } else {
-                self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher))
+                self.expectValue.toNot(from(matcher: matcher, style: .toNotMatch))
             }
             return self
         }
@@ -98,7 +101,7 @@ public class NMBExpectation: NSObject {
             if let pred = matcher as? NMBPredicate {
                 self.expectValue.toNot(from(objcPredicate: pred), description: description)
             } else {
-                self.expectValue.toNot(ObjCMatcherWrapper(matcher: matcher), description: description)
+                self.expectValue.toNot(from(matcher: matcher, style: .toNotMatch), description: description)
             }
             return self
         }
@@ -118,7 +121,7 @@ public class NMBExpectation: NSObject {
                 )
             } else {
                 self.expectValue.toEventually(
-                    ObjCMatcherWrapper(matcher: matcher),
+                    from(matcher: matcher, style: .toMatch),
                     timeout: self._timeout,
                     description: nil
                 )
@@ -136,7 +139,7 @@ public class NMBExpectation: NSObject {
                 )
             } else {
                 self.expectValue.toEventually(
-                    ObjCMatcherWrapper(matcher: matcher),
+                    from(matcher: matcher, style: .toMatch),
                     timeout: self._timeout,
                     description: description
                 )
@@ -154,7 +157,7 @@ public class NMBExpectation: NSObject {
                 )
             } else {
                 self.expectValue.toEventuallyNot(
-                    ObjCMatcherWrapper(matcher: matcher),
+                    from(matcher: matcher, style: .toNotMatch),
                     timeout: self._timeout,
                     description: nil
                 )
@@ -172,7 +175,7 @@ public class NMBExpectation: NSObject {
                 )
             } else {
                 self.expectValue.toEventuallyNot(
-                    ObjCMatcherWrapper(matcher: matcher),
+                    from(matcher: matcher, style: .toNotMatch),
                     timeout: self._timeout,
                     description: description
                 )
