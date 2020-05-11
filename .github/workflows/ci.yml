@@ -16,7 +16,7 @@ jobs:
       matrix:
         xcode: [11, 11.1, 11.2]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
     - run: ./test macos
     - run: ./test ios
@@ -29,6 +29,6 @@ jobs:
       matrix:
         xcode: [11, 11.1, 11.2]
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: sudo xcode-select -s '/Applications/Xcode_${{ matrix.xcode }}.app'
     - run: ./test swiftpm
