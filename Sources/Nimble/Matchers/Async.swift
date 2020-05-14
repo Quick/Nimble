@@ -116,7 +116,7 @@ extension Expectation {
     }
 }
 
-// Deprecated
+@available(*, deprecated, message: "Use Predicate instead")
 extension Expectation {
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.

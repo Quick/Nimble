@@ -166,7 +166,24 @@ public enum PredicateStatus {
     }
 }
 
+extension Predicate {
+    /// Compatibility layer for old Matcher API, deprecated.
+    /// Emulates the MatcherFunc API
+    internal static func _fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
+        // swiftlint:disable:previous identifier_name
+        return Predicate { actual in
+            let failureMessage = FailureMessage()
+            let result = try matcher(actual, failureMessage)
+            return PredicateResult(
+                status: PredicateStatus(bool: result),
+                message: failureMessage.toExpectationMessage()
+            )
+        }
+    }
+}
+
 // Backwards compatibility until Old Matcher API removal
+@available(*, deprecated, message: "Use Predicate directly instead")
 extension Predicate: Matcher {
     /// Compatibility layer for old Matcher API, deprecated
     public static func fromDeprecatedFullClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
@@ -183,15 +200,7 @@ extension Predicate: Matcher {
     /// Compatibility layer for old Matcher API, deprecated.
     /// Emulates the MatcherFunc API
     public static func fromDeprecatedClosure(_ matcher: @escaping (Expression<T>, FailureMessage) throws -> Bool) -> Predicate {
-        return Predicate { actual in
-            let failureMessage = FailureMessage()
-            let result = try matcher(actual, failureMessage)
-            return PredicateResult(
-                status: PredicateStatus(bool: result),
-                message: failureMessage.toExpectationMessage()
-            )
-        }
-
+        return _fromDeprecatedClosure(matcher)
     }
 
     /// Compatibility layer for old Matcher API, deprecated.
