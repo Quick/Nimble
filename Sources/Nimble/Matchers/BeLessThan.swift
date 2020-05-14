@@ -33,7 +33,7 @@ public func < (lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
 
 #if canImport(Darwin)
 extension NMBObjCMatcher {
-    @objc public class func beLessThanMatcher(_ expected: NMBComparable?) -> NMBMatcher {
+    @objc public class func beLessThanMatcher(_ expected: NMBComparable?) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { $0 as? NMBComparable }
             return try beLessThan(expected).satisfies(expr).toObjectiveC()

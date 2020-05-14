@@ -47,7 +47,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
 
 #if canImport(Darwin)
 extension NMBObjCMatcher {
-    @objc public class func haveCountMatcher(_ expected: NSNumber) -> NMBMatcher {
+    @objc public class func haveCountMatcher(_ expected: NSNumber) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try actualExpression.evaluate()
