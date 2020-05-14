@@ -1512,11 +1512,9 @@ custom matcher. The example below defines the class method
 // Swift
 
 extension NMBObjCMatcher {
-    public class func beNilMatcher() -> NMBObjCMatcher {
-        return NMBObjCMatcher { actualBlock, failureMessage, location in
-            let block = ({ actualBlock() as NSObject? })
-            let expr = Expression(expression: block, location: location)
-            return beNil().matches(expr, failureMessage: failureMessage)
+    @objc public class func beNilMatcher() -> NMBPredicate {
+        return NMBPredicate { actualExpression in
+            return try beNil().satisfies(actualExpression).toObjectiveC()
         }
     }
 }
@@ -1559,29 +1557,28 @@ expect(nil).to(equal(nil)); // fails
 expect(nil).to(beNil());    // passes
 ```
 
-If your matcher does not want to match with nil, you use `NonNilMatcherFunc`
-and the `canMatchNil` constructor on `NMBObjCMatcher`. Using both types will
-automatically generate expected value failure messages when they're nil.
+If your matcher does not want to match with nil, you use `Predicate.define` or `Predicate.simple`. 
+Using those factory methods will automatically generate expected value failure messages when they're nil.
 
 ```swift
 
-public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
-    return NonNilMatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "begin with <\(startingElement)>"
-        if let actualValue = actualExpression.evaluate() {
+public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predicate<S>
+    where S.Iterator.Element == T {
+    return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
+        if let actualValue = try actualExpression.evaluate() {
             var actualGenerator = actualValue.makeIterator()
-            return actualGenerator.next() == startingElement
+            return PredicateStatus(bool: actualGenerator.next() == startingElement)
         }
-        return false
+        return .fail
     }
 }
 
 extension NMBObjCMatcher {
-    public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
-        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
-            let actual = actualExpression.evaluate()
+    @objc public class func beginWithMatcher(_ expected: Any) -> NMBPredicate {
+        return NMBPredicate { actualExpression in
+            let actual = try actualExpression.evaluate()
             let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
-            return beginWith(expected).matches(expr, failureMessage: failureMessage)
+            return try beginWith(expected).satisfies(expr).toObjectiveC()
         }
     }
 }
