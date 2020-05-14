@@ -52,7 +52,7 @@ public func endWith(_ endingSubstring: String) -> Predicate<String> {
 
 #if canImport(Darwin)
 extension NMBObjCMatcher {
-    @objc public class func endWithMatcher(_ expected: Any) -> NMBMatcher {
+    @objc public class func endWithMatcher(_ expected: Any) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = try actualExpression.evaluate()
             if actual is String {
