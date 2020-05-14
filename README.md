@@ -345,10 +345,10 @@ cases, use the `timeout` parameter:
 // Swift
 
 // Waits three seconds for ocean to contain "starfish":
-expect(ocean).toEventually(contain("starfish"), timeout: 3)
+expect(ocean).toEventually(contain("starfish"), timeout: .seconds(3))
 
 // Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.
-expect(someValue).toEventually(equal(100), timeout: 5.5, pollInterval: 0.2)
+expect(someValue).toEventually(equal(100), timeout: .milliseconds(5500), pollInterval: .milliseconds(200))
 ```
 
 ```objc
@@ -387,7 +387,7 @@ waitUntil(^(void (^done)(void)){
 ```swift
 // Swift
 
-waitUntil(timeout: 10) { done in
+waitUntil(timeout: .seconds(10)) { done in
     ocean.goFish { success in
         expect(success).to(beTrue())
         done()
@@ -419,10 +419,10 @@ the default timeout and poll interval values. This can be done as follows:
 // Swift
 
 // Increase the global timeout to 5 seconds:
-Nimble.AsyncDefaults.Timeout = 5
+Nimble.AsyncDefaults.timeout = .seconds(1)
 
 // Slow the polling interval to 0.1 seconds:
-Nimble.AsyncDefaults.PollInterval = 0.1
+Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
 ```
 
 ## Objective-C Support
