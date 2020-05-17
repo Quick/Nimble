@@ -109,7 +109,7 @@ public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func containMatcher(_ expected: [NSObject]) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location

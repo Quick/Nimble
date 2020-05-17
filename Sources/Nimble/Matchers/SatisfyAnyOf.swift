@@ -57,7 +57,7 @@ public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> Predicate<T> 
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func satisfyAnyOfMatcher(_ matchers: [NMBMatcher]) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             if matchers.isEmpty {

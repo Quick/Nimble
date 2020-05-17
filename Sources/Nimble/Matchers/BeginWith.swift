@@ -42,7 +42,7 @@ public func beginWith(_ startingSubstring: String) -> Predicate<String> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beginWithMatcher(_ expected: Any) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = try actualExpression.evaluate()

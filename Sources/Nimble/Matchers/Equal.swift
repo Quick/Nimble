@@ -138,7 +138,7 @@ public func !=<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func equalMatcher(_ expected: NSObject) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             return try equal(expected).satisfies(actualExpression).toObjectiveC()

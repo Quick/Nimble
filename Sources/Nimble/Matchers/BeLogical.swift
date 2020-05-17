@@ -119,7 +119,7 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beTruthyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }

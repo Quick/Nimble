@@ -1504,14 +1504,14 @@ For a more comprehensive message that spans multiple lines, use
 ## Supporting Objective-C
 
 To use a custom matcher written in Swift from Objective-C, you'll have
-to extend the `NMBObjCMatcher` class, adding a new class method for your
+to extend the `NMBPredicate` class, adding a new class method for your
 custom matcher. The example below defines the class method
-`+[NMBObjCMatcher beNilMatcher]`:
+`+[NMBPredicate beNilMatcher]`:
 
 ```swift
 // Swift
 
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beNilMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             return try beNil().satisfies(actualExpression).toObjectiveC()
@@ -1525,7 +1525,7 @@ The above allows you to use the matcher from Objective-C:
 ```objc
 // Objective-C
 
-expect(actual).to([NMBObjCMatcher beNilMatcher]());
+expect(actual).to([NMBPredicate beNilMatcher]());
 ```
 
 To make the syntax easier to use, define a C function that calls the
@@ -1535,7 +1535,7 @@ class method:
 // Objective-C
 
 FOUNDATION_EXPORT id<NMBMatcher> beNil() {
-    return [NMBObjCMatcher beNilMatcher];
+    return [NMBPredicate beNilMatcher];
 }
 ```
 
@@ -1573,7 +1573,7 @@ public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predic
     }
 }
 
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beginWithMatcher(_ expected: Any) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = try actualExpression.evaluate()

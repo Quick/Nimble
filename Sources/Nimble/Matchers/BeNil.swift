@@ -9,7 +9,7 @@ public func beNil<T>() -> Predicate<T> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beNilMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             return try beNil().satisfies(actualExpression).toObjectiveC()

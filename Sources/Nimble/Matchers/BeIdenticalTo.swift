@@ -36,7 +36,7 @@ public func be(_ expected: Any?) -> Predicate<Any> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let aExpr = actualExpression.cast { $0 as Any? }

@@ -51,7 +51,7 @@ public func endWith(_ endingSubstring: String) -> Predicate<String> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func endWithMatcher(_ expected: Any) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = try actualExpression.evaluate()
