@@ -351,7 +351,6 @@
 		B20058C620E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		B20058C720E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		CD3D9A79232647BC00802581 /* CwlCatchBadInstructionPosix.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */; };
-		CD3D9A7A232648E600802581 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD4C8F092464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C8F082464365300A7BDE0 /* SynchronousDeprecatedTest.swift */; };
 		CD4C8F0A2464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C8F082464365300A7BDE0 /* SynchronousDeprecatedTest.swift */; };
 		CD4C8F0B2464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4C8F082464365300A7BDE0 /* SynchronousDeprecatedTest.swift */; };
@@ -1052,7 +1051,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1871E21CA89EF600A34BF2 /* NMBStringify.h in Headers */,
-				CD3D9A7A232648E600802581 /* CwlCatchException.h in Headers */,
 				1F1871E01CA89EF600A34BF2 /* DSL.h in Headers */,
 				1F1871E11CA89EF600A34BF2 /* NMBExceptionCapture.h in Headers */,
 				CDFB6A501F7E085600AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */,
