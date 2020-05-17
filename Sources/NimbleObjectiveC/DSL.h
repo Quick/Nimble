@@ -2,7 +2,7 @@
 
 @class NMBExpectation;
 @class NMBObjCBeCloseToMatcher;
-@class NMBObjCRaiseExceptionMatcher;
+@class NMBObjCRaiseExceptionPredicate;
 @protocol NMBMatcher;
 
 
@@ -332,8 +332,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring);
 NIMBLE_SHORT(id<NMBMatcher> endWith(id itemElementOrSubstring),
              NMB_endWith(itemElementOrSubstring));
 
-NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException(void);
-NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(void),
+NIMBLE_EXPORT NMBObjCRaiseExceptionPredicate *NMB_raiseException(void);
+NIMBLE_SHORT(NMBObjCRaiseExceptionPredicate *raiseException(void),
              NMB_raiseException());
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue);
