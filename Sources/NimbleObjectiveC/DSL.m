@@ -142,8 +142,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAllOfWithMatchers(id matchers) {
     return [NMBPredicate satisfyAllOfMatcher:matchers];
 }
 
-NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {
-    return [NMBObjCMatcher raiseExceptionMatcher];
+NIMBLE_EXPORT NMBObjCRaiseExceptionPredicate *NMB_raiseException() {
+    return [NMBPredicate raiseExceptionMatcher];
 }
 
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock NMB_waitUntilTimeoutBuilder(NSString *file, NSUInteger line) {
