@@ -17,7 +17,7 @@ public func match(_ expectedValue: String?) -> Predicate<String> {
 
 #if canImport(Darwin)
 
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = actualExpression.cast { $0 as? String }

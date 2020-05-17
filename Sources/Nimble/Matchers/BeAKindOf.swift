@@ -57,7 +57,7 @@ public func beAKindOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
     }
 }
 
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beAKindOfMatcher(_ expected: AnyClass) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             return try beAKindOf(expected).satisfies(actualExpression).toObjectiveC()

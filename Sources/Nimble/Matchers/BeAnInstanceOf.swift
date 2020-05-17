@@ -46,7 +46,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beAnInstanceOfMatcher(_ expected: AnyClass) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             return try beAnInstanceOf(expected).satisfies(actualExpression).toObjectiveC()

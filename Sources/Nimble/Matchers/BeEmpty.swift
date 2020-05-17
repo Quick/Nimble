@@ -83,7 +83,7 @@ public func beEmpty() -> Predicate<NMBCollection> {
 }
 
 #if canImport(Darwin)
-extension NMBObjCMatcher {
+extension NMBPredicate {
     @objc public class func beEmptyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location
