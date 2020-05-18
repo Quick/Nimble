@@ -4,10 +4,9 @@ import Foundation
 public func beGreaterThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     let errorMessage = "be greater than <\(stringify(expectedValue))>"
     return Predicate.simple(errorMessage) { actualExpression in
-        if let actual = try actualExpression.evaluate(), let expected = expectedValue {
-            return PredicateStatus(bool: actual > expected)
-        }
-        return .fail
+        guard let actual = try actualExpression.evaluate(), let expected = expectedValue else { return .fail }
+
+        return PredicateStatus(bool: actual > expected)
     }
 }
 

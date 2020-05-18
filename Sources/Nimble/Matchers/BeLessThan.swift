@@ -4,10 +4,9 @@ import Foundation
 public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     let message = "be less than <\(stringify(expectedValue))>"
     return Predicate.simple(message) { actualExpression in
-        if let actual = try actualExpression.evaluate(), let expected = expectedValue {
-            return PredicateStatus(bool: actual < expected)
-        }
-        return .fail
+        guard let actual = try actualExpression.evaluate(), let expected = expectedValue else { return .fail }
+
+        return PredicateStatus(bool: actual < expected)
     }
 }
 

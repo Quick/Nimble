@@ -5,18 +5,17 @@ import Foundation
 public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> Predicate<S>
     where S.Iterator.Element == T {
     return Predicate.simple("end with <\(endingElement)>") { actualExpression in
-        if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.makeIterator()
-            var lastItem: T?
-            var item: T?
-            repeat {
-                lastItem = item
-                item = actualGenerator.next()
-            } while(item != nil)
+        guard let actualValue = try actualExpression.evaluate() else { return .fail }
 
-            return PredicateStatus(bool: lastItem == endingElement)
-        }
-        return .fail
+        var actualGenerator = actualValue.makeIterator()
+        var lastItem: T?
+        var item: T?
+        repeat {
+            lastItem = item
+            item = actualGenerator.next()
+        } while(item != nil)
+
+        return PredicateStatus(bool: lastItem == endingElement)
     }
 }
 
@@ -25,6 +24,7 @@ public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> Predicate<
 public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
     return Predicate.simple("end with <\(endingElement)>") { actualExpression in
         guard let collection = try actualExpression.evaluate() else { return .fail }
+
         guard collection.count > 0 else { return PredicateStatus(bool: false) }
         #if os(Linux)
             guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
@@ -43,10 +43,9 @@ public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
 /// expected substring's length.
 public func endWith(_ endingSubstring: String) -> Predicate<String> {
     return Predicate.simple("end with <\(endingSubstring)>") { actualExpression in
-        if let collection = try actualExpression.evaluate() {
-            return PredicateStatus(bool: collection.hasSuffix(endingSubstring))
-        }
-        return .fail
+        guard let collection = try actualExpression.evaluate() else { return .fail }
+
+        return PredicateStatus(bool: collection.hasSuffix(endingSubstring))
     }
 }
 
