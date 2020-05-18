@@ -1534,7 +1534,7 @@ class method:
 ```objc
 // Objective-C
 
-FOUNDATION_EXPORT id<NMBMatcher> beNil() {
+FOUNDATION_EXPORT NMBPredicate *beNil() {
     return [NMBPredicate beNilMatcher];
 }
 ```

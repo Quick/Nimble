@@ -28,11 +28,11 @@ NIMBLE_EXPORT void NMB_failWithMessage(NSString *msg, NSString *file, NSUInteger
     return [NMBExpectation failWithMessage:msg file:file line:line];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beAnInstanceOf(Class expectedClass) {
+NIMBLE_EXPORT NMBPredicate *NMB_beAnInstanceOf(Class expectedClass) {
     return [NMBPredicate beAnInstanceOfMatcher:expectedClass];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beAKindOf(Class expectedClass) {
+NIMBLE_EXPORT NMBPredicate *NMB_beAKindOf(Class expectedClass) {
     return [NMBPredicate beAKindOfMatcher:expectedClass];
 }
 
@@ -40,59 +40,59 @@ NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToPredicate *NMB_beCloseTo(NSNum
     return [NMBPredicate beCloseToMatcher:expectedValue within:0.001];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring) {
+NIMBLE_EXPORT NMBPredicate *NMB_beginWith(id itemElementOrSubstring) {
     return [NMBPredicate beginWithMatcher:itemElementOrSubstring];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beGreaterThan(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_beGreaterThan(NSNumber *expectedValue) {
     return [NMBPredicate beGreaterThanMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue) {
     return [NMBPredicate beGreaterThanOrEqualToMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beIdenticalTo(id expectedInstance) {
+NIMBLE_EXPORT NMBPredicate *NMB_beIdenticalTo(id expectedInstance) {
     return [NMBPredicate beIdenticalToMatcher:expectedInstance];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_be(id expectedInstance) {
+NIMBLE_EXPORT NMBPredicate *NMB_be(id expectedInstance) {
     return [NMBPredicate beIdenticalToMatcher:expectedInstance];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beLessThan(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_beLessThan(NSNumber *expectedValue) {
     return [NMBPredicate beLessThanMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_beLessThanOrEqualTo(NSNumber *expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_beLessThanOrEqualTo(NSNumber *expectedValue) {
     return [NMBPredicate beLessThanOrEqualToMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beTruthy() {
+NIMBLE_EXPORT NMBPredicate *NMB_beTruthy() {
     return [NMBPredicate beTruthyMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy() {
+NIMBLE_EXPORT NMBPredicate *NMB_beFalsy() {
     return [NMBPredicate beFalsyMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beTrue() {
+NIMBLE_EXPORT NMBPredicate *NMB_beTrue() {
     return [NMBPredicate beTrueMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beFalse() {
+NIMBLE_EXPORT NMBPredicate *NMB_beFalse() {
     return [NMBPredicate beFalseMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beNil() {
+NIMBLE_EXPORT NMBPredicate *NMB_beNil() {
     return [NMBPredicate beNilMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_beEmpty() {
+NIMBLE_EXPORT NMBPredicate *NMB_beEmpty() {
     return [NMBPredicate beEmptyMatcher];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, ...) {
+NIMBLE_EXPORT NMBPredicate *NMB_containWithNilTermination(id itemOrSubstring, ...) {
     NSMutableArray *itemOrSubstringArray = [NSMutableArray array];
 
     if (itemOrSubstring) {
@@ -110,35 +110,35 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_containWithNilTermination(id itemOrSubstring, .
     return [NMBPredicate containMatcher:itemOrSubstringArray];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_containElementSatisfying(BOOL(^predicate)(id)) {
+NIMBLE_EXPORT NMBPredicate *NMB_containElementSatisfying(BOOL(^predicate)(id)) {
     return [NMBPredicate containElementSatisfyingMatcher:predicate];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
+NIMBLE_EXPORT NMBPredicate *NMB_endWith(id itemElementOrSubstring) {
     return [NMBPredicate endWithMatcher:itemElementOrSubstring];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_equal(__nullable id expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_equal(__nullable id expectedValue) {
     return [NMBPredicate equalMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE id<NMBMatcher> NMB_haveCount(id expectedValue) {
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBPredicate *NMB_haveCount(id expectedValue) {
     return [NMBPredicate haveCountMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue) {
+NIMBLE_EXPORT NMBPredicate *NMB_match(id expectedValue) {
     return [NMBPredicate matchMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_allPass(id expectedValue) {
+NIMBLE_EXPORT NMBPredicate *NMB_allPass(id expectedValue) {
     return [NMBPredicate allPassMatcher:expectedValue];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAnyOfWithMatchers(id matchers) {
+NIMBLE_EXPORT NMBPredicate *NMB_satisfyAnyOfWithMatchers(id matchers) {
     return [NMBPredicate satisfyAnyOfMatcher:matchers];
 }
 
-NIMBLE_EXPORT id<NMBMatcher> NMB_satisfyAllOfWithMatchers(id matchers) {
+NIMBLE_EXPORT NMBPredicate *NMB_satisfyAllOfWithMatchers(id matchers) {
     return [NMBPredicate satisfyAllOfMatcher:matchers];
 }
 
