@@ -1565,11 +1565,10 @@ Using those factory methods will automatically generate expected value failure m
 public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predicate<S>
     where S.Iterator.Element == T {
     return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
-        if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.makeIterator()
-            return PredicateStatus(bool: actualGenerator.next() == startingElement)
-        }
-        return .fail
+        guard let actualValue = try actualExpression.evaluate() else { return .fail }
+        
+        var actualGenerator = actualValue.makeIterator()
+        return PredicateStatus(bool: actualGenerator.next() == startingElement)
     }
 }
 

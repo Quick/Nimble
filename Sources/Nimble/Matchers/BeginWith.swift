@@ -5,11 +5,10 @@ import Foundation
 public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predicate<S>
     where S.Iterator.Element == T {
     return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
-        if let actualValue = try actualExpression.evaluate() {
-            var actualGenerator = actualValue.makeIterator()
-            return PredicateStatus(bool: actualGenerator.next() == startingElement)
-        }
-        return .fail
+        guard let actualValue = try actualExpression.evaluate() else { return .fail }
+
+        var actualGenerator = actualValue.makeIterator()
+        return PredicateStatus(bool: actualGenerator.next() == startingElement)
     }
 }
 
@@ -34,10 +33,9 @@ public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection>
 /// where the expected substring's location is zero.
 public func beginWith(_ startingSubstring: String) -> Predicate<String> {
     return Predicate.simple("begin with <\(startingSubstring)>") { actualExpression in
-        if let actual = try actualExpression.evaluate() {
-            return PredicateStatus(bool: actual.hasPrefix(startingSubstring))
-        }
-        return .fail
+        guard let actual = try actualExpression.evaluate() else { return .fail }
+
+        return PredicateStatus(bool: actual.hasPrefix(startingSubstring))
     }
 }
 

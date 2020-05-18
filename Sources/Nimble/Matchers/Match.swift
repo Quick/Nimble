@@ -4,14 +4,10 @@ import Foundation
 /// described by the expected string.
 public func match(_ expectedValue: String?) -> Predicate<String> {
     return Predicate.simple("match <\(stringify(expectedValue))>") { actualExpression in
-        if let actual = try actualExpression.evaluate() {
-            if let regexp = expectedValue {
-                let bool = actual.range(of: regexp, options: .regularExpression) != nil
-                return PredicateStatus(bool: bool)
-            }
-        }
+        guard let actual = try actualExpression.evaluate(), let regexp = expectedValue else { return .fail }
 
-        return .fail
+        let bool = actual.range(of: regexp, options: .regularExpression) != nil
+        return PredicateStatus(bool: bool)
     }
 }
 

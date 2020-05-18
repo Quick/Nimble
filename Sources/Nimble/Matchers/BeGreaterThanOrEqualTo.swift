@@ -5,11 +5,9 @@ import Foundation
 public func beGreaterThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     let message = "be greater than or equal to <\(stringify(expectedValue))>"
     return Predicate.simple(message) { actualExpression in
-        let actualValue = try actualExpression.evaluate()
-        if let actual = actualValue, let expected = expectedValue {
-            return PredicateStatus(bool: actual >= expected)
-        }
-        return .fail
+        guard let actual = try actualExpression.evaluate(), let expected = expectedValue else { return .fail }
+
+        return PredicateStatus(bool: actual >= expected)
     }
 }
 
