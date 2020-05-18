@@ -7,6 +7,7 @@ public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>, _ fai
 public typealias FullMatcherBlock = (_ actualExpression: Expression<NSObject>, _ failureMessage: FailureMessage, _ shouldNotMatch: Bool) throws -> Bool
 // swiftlint:enable line_length
 
+@available(*, deprecated, message: "Use NMBPredicate instead")
 public class NMBObjCMatcher: NSObject, NMBMatcher {
     // swiftlint:disable identifier_name
     let _match: MatcherBlock
