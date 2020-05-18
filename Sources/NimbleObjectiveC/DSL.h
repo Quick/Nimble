@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 @class NMBExpectation;
-@class NMBObjCBeCloseToMatcher;
+@class NMBObjCBeCloseToPredicate;
 @class NMBObjCRaiseExceptionPredicate;
 @protocol NMBMatcher;
 
@@ -127,14 +127,14 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(void), NSStrin
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBObjCBeCloseToMatcher *NMB_beCloseTo(TYPE expectedValue) { \
+        NMBObjCBeCloseToPredicate *NMB_beCloseTo(TYPE expectedValue) { \
             return NMB_beCloseTo((NSNumber *)(EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToMatcher *beCloseTo(TYPE expectedValue), \
+        NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToPredicate *beCloseTo(TYPE expectedValue), \
             NMB_beCloseTo(expectedValue));
 
-    NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue);
-    NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToMatcher *beCloseTo(NSNumber *expectedValue),
+    NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToPredicate *NMB_beCloseTo(NSNumber *expectedValue);
+    NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToPredicate *beCloseTo(NSNumber *expectedValue),
                             NMB_beCloseTo(expectedValue));
 
     // it would be better to only overload float & double, but zero becomes ambigious

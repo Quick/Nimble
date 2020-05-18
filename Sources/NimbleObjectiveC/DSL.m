@@ -36,8 +36,8 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beAKindOf(Class expectedClass) {
     return [NMBPredicate beAKindOfMatcher:expectedClass];
 }
 
-NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue) {
-    return [NMBObjCMatcher beCloseToMatcher:expectedValue within:0.001];
+NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToPredicate *NMB_beCloseTo(NSNumber *expectedValue) {
+    return [NMBPredicate beCloseToMatcher:expectedValue within:0.001];
 }
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_beginWith(id itemElementOrSubstring) {
