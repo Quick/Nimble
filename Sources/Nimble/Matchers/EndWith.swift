@@ -2,14 +2,13 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
-public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> Predicate<S>
-    where S.Iterator.Element == T {
+public func endWith<S: Sequence>(_ endingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("end with <\(endingElement)>") { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else { return .fail }
 
         var actualGenerator = actualValue.makeIterator()
-        var lastItem: T?
-        var item: T?
+        var lastItem: S.Element?
+        var item: S.Element?
         repeat {
             lastItem = item
             item = actualGenerator.next()

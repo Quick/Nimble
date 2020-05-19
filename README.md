@@ -1561,12 +1561,10 @@ If your matcher does not want to match with nil, you use `Predicate.define` or `
 Using those factory methods will automatically generate expected value failure messages when they're nil.
 
 ```swift
-
-public func beginWith<S: Sequence, T: Equatable>(_ startingElement: T) -> Predicate<S>
-    where S.Iterator.Element == T {
+public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else { return .fail }
-        
+
         var actualGenerator = actualValue.makeIterator()
         return PredicateStatus(bool: actualGenerator.next() == startingElement)
     }
@@ -1602,7 +1600,7 @@ converts those types to the newer `Predicate`.
 
 ```swift
 // Swift
-public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(startingElement: T) -> Predicate<S> {
+public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = actualExpression.evaluate() {
@@ -1625,7 +1623,7 @@ matcher types.
 
 ```swift
 // Swift
-public func beginWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(startingElement: T) -> Predicate<S> {
+public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "begin with <\(startingElement)>"
         if let actualValue = actualExpression.evaluate() {

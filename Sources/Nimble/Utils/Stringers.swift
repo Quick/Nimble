@@ -80,7 +80,7 @@ extension AnySequence: TestOutputStringConvertible {
     public var testDescription: String {
         let generator = self.makeIterator()
         var strings = [String]()
-        var value: AnySequence.Iterator.Element?
+        var value: AnySequence.Element?
 
         repeat {
             value = generator.next()
