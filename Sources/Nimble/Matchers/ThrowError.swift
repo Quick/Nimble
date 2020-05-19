@@ -54,9 +54,7 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
             actualError = error
         }
 
-        let failureMessage = FailureMessage()
-        setFailureMessageForError(
-            failureMessage,
+        let message = messageForError(
             actualError: actualError,
             error: error,
             errorType: nil,
@@ -78,7 +76,7 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
             }
         }
 
-        return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+        return PredicateResult(bool: matches, message: message)
     }
 }
 
@@ -102,9 +100,7 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
             actualError = error
         }
 
-        let failureMessage = FailureMessage()
-        setFailureMessageForError(
-            failureMessage,
+        let message = messageForError(
             actualError: actualError,
             error: error,
             errorType: nil,
@@ -126,7 +122,7 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
             }
         }
 
-        return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+        return PredicateResult(bool: matches, message: message)
     }
 }
 
@@ -153,9 +149,7 @@ public func throwError<T: Error, Out>(
             actualError = error
         }
 
-        let failureMessage = FailureMessage()
-        setFailureMessageForError(
-            failureMessage,
+        let message = messageForError(
             actualError: actualError,
             error: nil,
             errorType: errorType,
@@ -194,7 +188,7 @@ public func throwError<T: Error, Out>(
             }
         }
 
-        return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+        return PredicateResult(bool: matches, message: message)
     }
 }
 
@@ -214,8 +208,7 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<O
             actualError = error
         }
 
-        let failureMessage = FailureMessage()
-        setFailureMessageForError(failureMessage, actualError: actualError, closure: closure)
+        let message = messageForError(actualError: actualError, closure: closure)
 
         var matches = false
         if let actualError = actualError {
@@ -230,7 +223,7 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<O
             }
         }
 
-        return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+        return PredicateResult(bool: matches, message: message)
     }
 }
 
@@ -250,8 +243,7 @@ public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Predi
             actualError = error
         }
 
-        let failureMessage = FailureMessage()
-        setFailureMessageForError(failureMessage, actualError: actualError, closure: closure)
+        let message = messageForError(actualError: actualError, closure: closure)
 
         var matches = false
         if let actualError = actualError as? T {
@@ -266,6 +258,6 @@ public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Predi
             }
         }
 
-        return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+        return PredicateResult(bool: matches, message: message)
     }
 }

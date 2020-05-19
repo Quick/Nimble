@@ -31,9 +31,7 @@ public func raiseException<Out>(
                 return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
             }
 
-            let failureMessage = FailureMessage()
-            setFailureMessageForException(
-                failureMessage,
+            let message = messageForException(
                 exception: exception,
                 named: named,
                 reason: reason,
@@ -48,42 +46,44 @@ public func raiseException<Out>(
                 userInfo: userInfo,
                 closure: closure
             )
-            return PredicateResult(bool: matches, message: failureMessage.toExpectationMessage())
+            return PredicateResult(bool: matches, message: message)
         }
 }
 
-// swiftlint:disable:next function_parameter_count
-internal func setFailureMessageForException(
-    _ failureMessage: FailureMessage,
+internal func messageForException(
     exception: NSException?,
     named: String?,
     reason: String?,
     userInfo: NSDictionary?,
-    closure: ((NSException) -> Void)?) {
-        failureMessage.postfixMessage = "raise exception"
+    closure: ((NSException) -> Void)?
+) -> ExpectationMessage {
+    var rawMessage: String = "raise exception"
 
-        if let named = named {
-            failureMessage.postfixMessage += " with name <\(named)>"
-        }
-        if let reason = reason {
-            failureMessage.postfixMessage += " with reason <\(reason)>"
-        }
-        if let userInfo = userInfo {
-            failureMessage.postfixMessage += " with userInfo <\(userInfo)>"
-        }
-        if closure != nil {
-            failureMessage.postfixMessage += " that satisfies block"
-        }
-        if named == nil && reason == nil && userInfo == nil && closure == nil {
-            failureMessage.postfixMessage = "raise any exception"
-        }
+    if let named = named {
+        rawMessage += " with name <\(named)>"
+    }
+    if let reason = reason {
+        rawMessage += " with reason <\(reason)>"
+    }
+    if let userInfo = userInfo {
+        rawMessage += " with userInfo <\(userInfo)>"
+    }
+    if closure != nil {
+        rawMessage += " that satisfies block"
+    }
+    if named == nil && reason == nil && userInfo == nil && closure == nil {
+        rawMessage = "raise any exception"
+    }
 
-        if let exception = exception {
-            // swiftlint:disable:next line_length
-            failureMessage.actualValue = "\(String(describing: type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
-        } else {
-            failureMessage.actualValue = "no exception"
-        }
+    let actual: String
+    if let exception = exception {
+        // swiftlint:disable:next line_length
+        actual = "\(String(describing: type(of: exception))) { name=\(exception.name), reason='\(stringify(exception.reason))', userInfo=\(stringify(exception.userInfo)) }"
+    } else {
+        actual = "no exception"
+    }
+
+    return .expectedCustomValueTo(rawMessage, actual: actual)
 }
 
 internal func exceptionMatchesNonNilFieldsOrClosure(
