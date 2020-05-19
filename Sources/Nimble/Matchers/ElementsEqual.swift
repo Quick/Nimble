@@ -2,9 +2,9 @@
 /// the same order.
 ///
 /// This is a matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2854213-elementsequal
-public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(_ expectedValue: Seq2?)
-    -> Predicate<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element
-{ //swiftlint:disable:this opening_brace
+public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(
+    _ expectedValue: Seq2?
+) -> Predicate<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element {
     return Predicate.define("elementsEqual <\(stringify(expectedValue))>") { (actualExpression, msg) in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
