@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value is greater than
 /// or equal to the expected value.
 public func beGreaterThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
@@ -16,6 +14,8 @@ public func >=<T: Comparable>(lhs: Expectation<T>, rhs: T) {
 }
 
 #if canImport(Darwin)
+import enum Foundation.ComparisonResult
+
 /// A Nimble matcher that succeeds when the actual value is greater than
 /// or equal to the expected value.
 public func beGreaterThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
@@ -30,9 +30,7 @@ public func beGreaterThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Pre
 public func >=<T: NMBComparable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(beGreaterThanOrEqualTo(rhs))
 }
-#endif
 
-#if canImport(Darwin)
 extension NMBPredicate {
     @objc public class func beGreaterThanOrEqualToMatcher(_ expected: NMBComparable?) -> NMBPredicate {
         return NMBPredicate { actualExpression in
