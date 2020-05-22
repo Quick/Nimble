@@ -16,7 +16,7 @@ public func <<T: Comparable>(lhs: Expectation<T>, rhs: T) {
     lhs.to(beLessThan(rhs))
 }
 
-#if canImport(Darwin) || !compiler(>=5.1)
+#if canImport(Darwin)
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan(_ expectedValue: NMBComparable?) -> Predicate<NMBComparable> {
     let message = "be less than <\(stringify(expectedValue))>"

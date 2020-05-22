@@ -137,14 +137,9 @@ extension NSDate: TestOutputStringConvertible {
 @objc public protocol NMBComparable {
     func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }
-#elseif !compiler(>=5.1)
-// This should become obsolete once Corelibs Foundation adds Comparable conformance to NSNumber
-public protocol NMBComparable {
-    func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
-}
 #endif
 
-#if canImport(Darwin) || !compiler(>=5.1)
+#if canImport(Darwin)
 extension NSNumber: NMBComparable {
     public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
         // swiftlint:disable:next force_cast
