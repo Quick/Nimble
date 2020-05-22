@@ -129,17 +129,15 @@ extension NSDate: TestOutputStringConvertible {
     }
 }
 
+#if canImport(Darwin)
 /// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),
 ///  beGreaterThan(), beGreaterThanOrEqualTo(), and equal() matchers.
 ///
 /// Types that conform to Swift's Comparable protocol will work implicitly too
-#if canImport(Darwin)
 @objc public protocol NMBComparable {
     func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }
-#endif
 
-#if canImport(Darwin)
 extension NSNumber: NMBComparable {
     public func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult {
         // swiftlint:disable:next force_cast
