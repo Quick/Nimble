@@ -1,5 +1,3 @@
-import Foundation
-
 @available(*, deprecated)
 internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher: U, toNot: String, description: String?) -> (Bool, FailureMessage)
     where U: Matcher, U.ValueType == T {

@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual string satisfies the regular expression
 /// described by the expected string.
 public func match(_ expectedValue: String?) -> Predicate<String> {
@@ -12,6 +10,7 @@ public func match(_ expectedValue: String?) -> Predicate<String> {
 }
 
 #if canImport(Darwin)
+import class Foundation.NSString
 
 extension NMBPredicate {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBPredicate {
@@ -21,5 +20,4 @@ extension NMBPredicate {
         }
     }
 }
-
 #endif

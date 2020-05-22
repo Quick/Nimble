@@ -1,3 +1,4 @@
+#if canImport(Foundation)
 import Foundation
 
 internal class NotificationCollector {
@@ -98,3 +99,4 @@ public func postNotifications<T>(
         return PredicateResult(bool: match, message: failureMessage.toExpectationMessage())
     }
 }
+#endif

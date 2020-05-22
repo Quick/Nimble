@@ -1,4 +1,6 @@
+#if canImport(Foundation)
 import Foundation
+#endif
 
 /// A Nimble matcher that succeeds when the actual sequence contains the expected values.
 public func contain<S: Sequence>(_ items: S.Element...) -> Predicate<S> where S.Element: Equatable {
@@ -68,6 +70,7 @@ public func contain(_ substrings: [String]) -> Predicate<String> {
     }
 }
 
+#if canImport(Foundation)
 /// A Nimble matcher that succeeds when the actual string contains the expected substring.
 public func contain(_ substrings: NSString...) -> Predicate<NSString> {
     return contain(substrings)
@@ -81,6 +84,7 @@ public func contain(_ substrings: [NSString]) -> Predicate<NSString> {
         return PredicateStatus(bool: matches)
     }
 }
+#endif
 
 /// A Nimble matcher that succeeds when the actual collection contains the expected object.
 public func contain(_ items: Any?...) -> Predicate<NMBContainer> {

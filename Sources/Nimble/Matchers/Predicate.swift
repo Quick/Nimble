@@ -1,6 +1,5 @@
 // New Matcher API
 //
-import Foundation
 
 /// A Predicate is part of the new matcher API that provides assertions to expectations.
 ///
@@ -252,6 +251,8 @@ extension Predicate {
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
+
 public typealias PredicateBlock = (_ actualExpression: Expression<NSObject>) throws -> NMBPredicateResult
 
 public class NMBPredicate: NSObject {

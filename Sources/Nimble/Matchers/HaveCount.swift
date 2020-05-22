@@ -1,5 +1,3 @@
-import Foundation
-
 // The `haveCount` matchers do not print the full string representation of the collection value,
 // instead they only print the type name and the expected count. This makes it easier to understand
 // the reason for failed expectations. See: https://github.com/Quick/Nimble/issues/308.
@@ -46,6 +44,8 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
 }
 
 #if canImport(Darwin)
+import Foundation
+
 extension NMBPredicate {
     @objc public class func haveCountMatcher(_ expected: NSNumber) -> NMBPredicate {
         return NMBPredicate { actualExpression in

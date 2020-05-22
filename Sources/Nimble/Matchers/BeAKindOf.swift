@@ -1,5 +1,3 @@
-import Foundation
-
 private func matcherMessage<T>(forType expectedType: T.Type) -> String {
     return "be a kind of \(String(describing: expectedType))"
 }
@@ -30,6 +28,7 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class

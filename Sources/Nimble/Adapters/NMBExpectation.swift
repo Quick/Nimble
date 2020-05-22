@@ -1,7 +1,7 @@
-import Foundation
-import Dispatch
-
 #if canImport(Darwin) && !SWIFT_PACKAGE
+import class Foundation.NSObject
+import typealias Foundation.TimeInterval
+import enum Dispatch.DispatchTimeInterval
 
 private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     return Predicate { actualExpression in

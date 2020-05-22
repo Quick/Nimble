@@ -1,8 +1,7 @@
 import Dispatch
-import Foundation
 
 #if canImport(CDispatch)
-    import CDispatch
+import CDispatch
 #endif
 
 extension DispatchTimeInterval {
@@ -29,6 +28,9 @@ extension DispatchTimeInterval {
     }
 }
 
+#if canImport(Foundation)
+import typealias Foundation.TimeInterval
+
 extension TimeInterval {
     var dispatchInterval: DispatchTimeInterval {
         let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
@@ -36,3 +38,4 @@ extension TimeInterval {
         return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
     }
 }
+#endif

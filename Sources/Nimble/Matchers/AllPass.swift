@@ -1,5 +1,3 @@
-import Foundation
-
 public func allPass<S: Sequence>(
     _ passFunc: @escaping (S.Element?) throws -> Bool
 ) -> Predicate<S> {
@@ -63,6 +61,10 @@ private func createPredicate<S: Sequence>(_ elementMatcher: Predicate<S.Element>
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
+import struct Foundation.NSFastEnumerationIterator
+import protocol Foundation.NSFastEnumeration
+
 extension NMBPredicate {
     @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
         return NMBPredicate { actualExpression in
