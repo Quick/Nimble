@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
 public func beIdenticalTo(_ expected: Any?) -> Predicate<Any> {
@@ -36,6 +34,8 @@ public func be(_ expected: Any?) -> Predicate<Any> {
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
+
 extension NMBPredicate {
     @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBPredicate {
         return NMBPredicate { actualExpression in

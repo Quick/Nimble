@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual expression throws an
 /// error of the specified type or from the specified case.
 ///

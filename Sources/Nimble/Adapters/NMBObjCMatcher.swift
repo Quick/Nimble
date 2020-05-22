@@ -1,6 +1,5 @@
-import Foundation
-
 #if canImport(Darwin)
+import class Foundation.NSObject
 
 // swiftlint:disable line_length
 public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>, _ failureMessage: FailureMessage) throws -> Bool

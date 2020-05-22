@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers.
 public func satisfyAnyOf<T>(_ predicates: Predicate<T>...) -> Predicate<T> {
@@ -57,6 +55,8 @@ public func || <T>(left: MatcherFunc<T>, right: MatcherFunc<T>) -> Predicate<T> 
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
+
 extension NMBPredicate {
     @objc public class func satisfyAnyOfMatcher(_ matchers: [NMBMatcher]) -> NMBPredicate {
         return NMBPredicate { actualExpression in

@@ -1,4 +1,6 @@
-import Foundation
+#if canImport(Foundation)
+import enum Foundation.ComparisonResult
+#endif
 
 /// A Nimble matcher that succeeds when the actual value is less than
 /// or equal to the expected value.

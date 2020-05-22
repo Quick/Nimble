@@ -1,5 +1,3 @@
-import Foundation
-
 #if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
 import CwlPreconditionTesting
 #elseif canImport(CwlPosixPreconditionTesting)

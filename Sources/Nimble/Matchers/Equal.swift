@@ -1,5 +1,3 @@
-import Foundation
-
 /// A Nimble matcher that succeeds when the actual value is equal to the expected value.
 /// Values can support equal by supporting the Equatable protocol.
 ///
@@ -138,6 +136,8 @@ public func !=<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
 }
 
 #if canImport(Darwin)
+import class Foundation.NSObject
+
 extension NMBPredicate {
     @objc public class func equalMatcher(_ expected: NSObject) -> NMBPredicate {
         return NMBPredicate { actualExpression in

@@ -1,5 +1,3 @@
-import Foundation
-
 // Generic
 
 internal func messageForError<T: Error>(
