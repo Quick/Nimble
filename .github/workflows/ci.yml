@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: gem install bundler:1.17.3 && bundle install
+      - run: bundle install
       - run: ./test podspec
 
   xcode:
