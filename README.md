@@ -789,6 +789,9 @@ expect(actual).to(beFalse())
 
 // Passes if 'actual' is nil:
 expect(actual).to(beNil())
+
+// Passes if `actual` is not nil:
+expect(actual).to(bePresent())
 ```
 
 ```objc
@@ -808,6 +811,9 @@ expect(actual).to(beFalse());
 
 // Passes if 'actual' is nil:
 expect(actual).to(beNil());
+
+// Passes if `actual` is not nil:
+expect(actual).to(bePresent());
 ```
 
 ## Swift Assertions
