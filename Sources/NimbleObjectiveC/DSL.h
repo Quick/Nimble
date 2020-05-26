@@ -314,6 +314,10 @@ NIMBLE_EXPORT NMBPredicate *NMB_beNil(void);
 NIMBLE_SHORT(NMBPredicate *beNil(void),
              NMB_beNil());
 
+NIMBLE_EXPORT NMBPredicate *NMB_bePresent(void);
+NIMBLE_SHORT(NMBPredicate *bePresent(void),
+             NMB_bePresent());
+
 NIMBLE_EXPORT NMBPredicate *NMB_beEmpty(void);
 NIMBLE_SHORT(NMBPredicate *beEmpty(void),
              NMB_beEmpty());

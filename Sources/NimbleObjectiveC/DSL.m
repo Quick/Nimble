@@ -88,6 +88,10 @@ NIMBLE_EXPORT NMBPredicate *NMB_beNil() {
     return [NMBPredicate beNilMatcher];
 }
 
+NIMBLE_EXPORT NMBPredicate *NMB_bePresent() {
+    return [NMBPredicate bePresentMatcher];
+}
+
 NIMBLE_EXPORT NMBPredicate *NMB_beEmpty() {
     return [NMBPredicate beEmptyMatcher];
 }
