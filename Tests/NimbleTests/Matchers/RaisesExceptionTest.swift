@@ -153,6 +153,11 @@ final class RaisesExceptionTest: XCTestCase {
         }
     }
 
+    func testNSExceptionName() {
+        let exception = NSException(name: .genericException, reason: nil, userInfo: nil)
+        expect { exception.raise() }.to(raiseException(named: .genericException))
+    }
+
     func testNonVoidClosure() {
         expect { return 1 }.toNot(raiseException())
         expect { return 2 }.toNot(raiseException(named: "laugh"))

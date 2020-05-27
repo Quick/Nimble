@@ -14,41 +14,60 @@ import class Foundation.NSException
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
 public func raiseException<Out>(
-    named: String? = nil,
+    named: NSExceptionName? = nil,
     reason: String? = nil,
     userInfo: NSDictionary? = nil,
-    closure: ((NSException) -> Void)? = nil) -> Predicate<Out> {
-        return Predicate { actualExpression in
-            var exception: NSException?
-            let capture = NMBExceptionCapture(handler: ({ e in
-                exception = e
-            }), finally: nil)
+    closure: ((NSException) -> Void)? = nil
+) -> Predicate<Out> {
+    return raiseException(named: named?.rawValue, reason: reason, userInfo: userInfo, closure: closure)
+}
 
-            do {
-                try capture.tryBlockThrows {
-                    _ = try actualExpression.evaluate()
-                }
-            } catch {
-                return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
+/// A Nimble matcher that succeeds when the actual expression raises an
+/// exception with the specified name, reason, and/or userInfo.
+///
+/// Alternatively, you can pass a closure to do any arbitrary custom matching
+/// to the raised exception. The closure only gets called when an exception
+/// is raised.
+///
+/// nil arguments indicates that the matcher should not attempt to match against
+/// that parameter.
+public func raiseException<Out>(
+    named: String?,
+    reason: String? = nil,
+    userInfo: NSDictionary? = nil,
+    closure: ((NSException) -> Void)? = nil
+) -> Predicate<Out> {
+    return Predicate { actualExpression in
+        var exception: NSException?
+        let capture = NMBExceptionCapture(handler: ({ e in
+            exception = e
+        }), finally: nil)
+
+        do {
+            try capture.tryBlockThrows {
+                _ = try actualExpression.evaluate()
             }
-
-            let message = messageForException(
-                exception: exception,
-                named: named,
-                reason: reason,
-                userInfo: userInfo,
-                closure: closure
-            )
-
-            let matches = exceptionMatchesNonNilFieldsOrClosure(
-                exception,
-                named: named,
-                reason: reason,
-                userInfo: userInfo,
-                closure: closure
-            )
-            return PredicateResult(bool: matches, message: message)
+        } catch {
+            return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
         }
+
+        let message = messageForException(
+            exception: exception,
+            named: named,
+            reason: reason,
+            userInfo: userInfo,
+            closure: closure
+        )
+
+        let matches = exceptionMatchesNonNilFieldsOrClosure(
+            exception,
+            named: named,
+            reason: reason,
+            userInfo: userInfo,
+            closure: closure
+        )
+        return PredicateResult(bool: matches, message: message)
+    }
 }
 
 internal func messageForException(
