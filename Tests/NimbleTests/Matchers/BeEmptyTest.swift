@@ -33,7 +33,7 @@ final class BeEmptyTest: XCTestCase {
         expect(NSIndexSet(index: 1)).toNot(beEmpty())
 
         expect(NSString()).to(beEmpty())
-        expect(NSString(string: "hello")).toNot(beEmpty())
+        expect("hello" as NSString).toNot(beEmpty())
 
         expect("").to(beEmpty())
         expect("foo").toNot(beEmpty())
@@ -89,6 +89,13 @@ final class BeEmptyTest: XCTestCase {
     }
 
     func testNilMatches() {
+        failsWithErrorMessageForNil("expected to be empty, got <nil>") {
+            expect(nil as String?).to(beEmpty())
+        }
+        failsWithErrorMessageForNil("expected to not be empty, got <nil>") {
+            expect(nil as String?).toNot(beEmpty())
+        }
+
         failsWithErrorMessageForNil("expected to be empty, got <nil>") {
             expect(nil as NSString?).to(beEmpty())
         }

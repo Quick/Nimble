@@ -9,7 +9,7 @@ final class BeIdenticalToTest: XCTestCase {
     }
 
     func testBeIdenticalToNegative() {
-        expect(NSNumber(value: 1)).toNot(beIdenticalTo(NSString(string: "yo")))
+        expect(NSNumber(value: 1)).toNot(beIdenticalTo("yo" as NSString))
         expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
     }
 
@@ -40,7 +40,7 @@ final class BeIdenticalToTest: XCTestCase {
     func testBeAlias() {
         let value = NSDate()
         expect(value).to(be(value))
-        expect(NSNumber(value: 1)).toNot(be(NSString(string: "turtles")))
+        expect(NSNumber(value: 1)).toNot(be("turtles" as NSString))
         #if canImport(Darwin)
             expect([1]).toNot(be([1]))
         #else

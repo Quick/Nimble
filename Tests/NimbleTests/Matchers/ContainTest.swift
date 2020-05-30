@@ -11,8 +11,8 @@ final class ContainTest: XCTestCase {
         expect(["foo", "bar", "baz"]).to(contain("baz"))
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))
 #if canImport(Darwin)
-        expect(NSArray(array: ["a"])).to(contain(NSString(string: "a")))
-        expect(NSArray(array: ["a"])).toNot(contain(NSString(string: "b")))
+        expect(NSArray(array: ["a"])).to(contain("a" as NSString))
+        expect(NSArray(array: ["a"])).toNot(contain("b" as NSString))
         expect(NSArray(object: 1) as NSArray?).to(contain(1))
 #endif
 
@@ -85,12 +85,12 @@ final class ContainTest: XCTestCase {
         }
     }
 
-    func testContainObjCSubstring() {
-        let str = NSString(string: "foo")
-        expect(str).to(contain(NSString(string: "o")))
-        expect(str).to(contain(NSString(string: "oo")))
-        expect(str).toNot(contain(NSString(string: "z")))
-        expect(str).toNot(contain(NSString(string: "zz")))
+    func testContainNSStringSubstring() {
+        let str = "foo" as NSString
+        expect(str).to(contain("o" as NSString))
+        expect(str).to(contain("oo" as NSString))
+        expect(str).toNot(contain("z" as NSString))
+        expect(str).toNot(contain("zz" as NSString))
     }
 
     func testVariadicArguments() {

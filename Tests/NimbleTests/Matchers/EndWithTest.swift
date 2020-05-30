@@ -13,8 +13,8 @@ final class EndWithTest: XCTestCase {
         expect("foobar").toNot(endWith("oo"))
         expect("foobarfoo").to(endWith("foo"))
 
-        expect(NSString(string: "foobar").description).to(endWith("bar"))
-        expect(NSString(string: "foobar").description).toNot(endWith("oo"))
+        expect(("foobar" as NSString).description).to(endWith("bar"))
+        expect(("foobar" as NSString).description).toNot(endWith("oo"))
 
         expect(NSArray(array: ["a", "b"])).to(endWith("b"))
         expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
