@@ -12,8 +12,8 @@ final class BeginWithTest: XCTestCase {
 
         expect("foobarfoo").to(beginWith("foo"))
 
-        expect(NSString(string: "foobar").description).to(beginWith("foo"))
-        expect(NSString(string: "foobar").description).toNot(beginWith("oo"))
+        expect(("foobar" as NSString).description).to(beginWith("foo"))
+        expect(("foobar" as NSString).description).toNot(beginWith("oo"))
 
         expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
         expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
@@ -21,10 +21,10 @@ final class BeginWithTest: XCTestCase {
 
     func testNegativeMatches() {
         failsWithErrorMessageForNil("expected to begin with <b>, got <nil>") {
-            expect(nil as NSArray?).to(beginWith(NSString(string: "b")))
+            expect(nil as NSArray?).to(beginWith("b" as NSString))
         }
         failsWithErrorMessageForNil("expected to not begin with <b>, got <nil>") {
-            expect(nil as NSArray?).toNot(beginWith(NSString(string: "b")))
+            expect(nil as NSArray?).toNot(beginWith("b" as NSString))
         }
 
         failsWithErrorMessage("expected to begin with <2>, got <[1, 2, 3]>") {
