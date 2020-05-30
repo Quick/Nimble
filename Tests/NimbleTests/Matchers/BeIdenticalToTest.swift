@@ -41,11 +41,8 @@ final class BeIdenticalToTest: XCTestCase {
         let value = NSDate()
         expect(value).to(be(value))
         expect(NSNumber(value: 1)).toNot(be("turtles" as NSString))
-        #if canImport(Darwin)
-            expect([1]).toNot(be([1]))
-        #else
-            expect([NSNumber(value: 1)] as NSArray).toNot(beIdenticalTo([NSNumber(value: 1)] as NSArray))
-        #endif
+        expect([1]).toNot(be([1]))
+        expect([NSNumber(value: 1)] as NSArray).toNot(be([NSNumber(value: 1)] as NSArray))
 
         let value1 = NSArray()
         let value2 = value1

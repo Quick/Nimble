@@ -40,11 +40,12 @@ final class BeAnInstanceOfTest: XCTestCase {
         failsWithErrorMessageForNil("expected to be an instance of NSString, got <nil>") {
             expect(nil as NSString?).to(beAnInstanceOf(NSString.self))
         }
-#if canImport(Darwin)
+
+        #if canImport(Darwin)
         let numberTypeName = "__NSCFNumber"
-#else
+        #else
         let numberTypeName = "NSNumber"
-#endif
+        #endif
         failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
             expect(NSNumber(value: 1)).to(beAnInstanceOf(NSString.self))
         }
