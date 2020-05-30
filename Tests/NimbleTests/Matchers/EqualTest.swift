@@ -117,8 +117,8 @@ final class EqualTest: XCTestCase {
         expect(actual).to(equal(expected))
         expect(actual).toNot(equal(unexpected))
 
-        expect(NSDictionary(object: "bar", forKey: "foo" as NSString)).to(equal(["foo": "bar"]))
-        expect(NSDictionary(object: "bar", forKey: "foo" as NSString) as? [String: String]).to(equal(expected))
+        expect(["foo": "bar"] as NSDictionary).to(equal(["foo": "bar"]))
+        expect((["foo": "bar"] as NSDictionary) as? [String: String]).to(equal(expected))
     }
 
     func testDataEquality() {

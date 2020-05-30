@@ -15,7 +15,7 @@ final class BeEmptyTest: XCTestCase {
 
 #if canImport(Darwin)
         expect(NSDictionary() as? [Int: Int]).to(beEmpty())
-        expect(NSDictionary(object: 1, forKey: 1 as NSNumber) as? [Int: Int]).toNot(beEmpty())
+        expect(([1: 1] as NSDictionary) as? [Int: Int]).toNot(beEmpty())
 #endif
 
         expect([Int: Int]()).to(beEmpty())
