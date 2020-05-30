@@ -23,7 +23,7 @@ final class BeEmptyTest: XCTestCase {
 
 #if canImport(Darwin)
         expect(NSArray() as? [Int]).to(beEmpty())
-        expect(NSArray(array: [1]) as? [Int]).toNot(beEmpty())
+        expect(([1] as NSArray) as? [Int]).toNot(beEmpty())
 #endif
 
         expect(NSSet()).to(beEmpty())

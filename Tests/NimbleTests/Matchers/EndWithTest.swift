@@ -16,10 +16,10 @@ final class EndWithTest: XCTestCase {
         expect(("foobar" as NSString).description).to(endWith("bar"))
         expect(("foobar" as NSString).description).toNot(endWith("oo"))
 
-        expect(NSArray(array: ["a", "b"])).to(endWith("b"))
-        expect(NSArray(array: ["a", "b"])).toNot(endWith("a"))
-        expect(NSArray(array: [])).toNot(endWith("a"))
-        expect(NSArray(array: ["a", "b", "a"])).to(endWith("a"))
+        expect(["a", "b"] as NSArray).to(endWith("b"))
+        expect(["a", "b"] as NSArray).toNot(endWith("a"))
+        expect([] as NSArray).toNot(endWith("a"))
+        expect(["a", "b", "a"] as NSArray).to(endWith("a"))
     }
 
     func testEndWithNegatives() {

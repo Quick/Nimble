@@ -33,7 +33,7 @@ final class EqualTest: XCTestCase {
         expect(array1).to(equal([1, 2, 3]))
         expect(array1).toNot(equal([1, 2] as [Int]))
 
-        expect(NSArray(array: [1, 2, 3])).to(equal(NSArray(array: [1, 2, 3])))
+        expect([1, 2, 3] as NSArray).to(equal([1, 2, 3] as NSArray))
 
         failsWithErrorMessage("expected to equal <[1, 2]>, got <[1, 2, 3]>") {
             expect([1, 2, 3]).to(equal([1, 2]))
