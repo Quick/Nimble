@@ -6,11 +6,8 @@ final class BeLessThanTest: XCTestCase {
     func testLessThan() {
         expect(2).to(beLessThan(10))
         expect(2).toNot(beLessThan(1))
-        expect(NSNumber(value: 2)).to(beLessThan(10 as NSNumber))
-        expect(NSNumber(value: 2)).toNot(beLessThan(1 as NSNumber))
-
-        expect(2 as NSNumber).to(beLessThan(NSNumber(value: 10)))
-        expect(2 as NSNumber).toNot(beLessThan(NSNumber(value: 1)))
+        expect(2 as NSNumber).to(beLessThan(10 as NSNumber))
+        expect(2 as NSNumber).toNot(beLessThan(1 as NSNumber))
 
         failsWithErrorMessage("expected to be less than <0>, got <2>") {
             expect(2).to(beLessThan(0))
@@ -29,7 +26,7 @@ final class BeLessThanTest: XCTestCase {
 
     func testLessThanOperator() {
         expect(0) < 1
-        expect(NSNumber(value: 0)) < 1 as NSNumber
+        expect(0 as NSNumber) < 1 as NSNumber
         failsWithErrorMessage("expected to be less than <1>, got <2>") {
             expect(2) < 1
             return

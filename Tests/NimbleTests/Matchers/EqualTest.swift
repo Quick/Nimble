@@ -138,10 +138,10 @@ final class EqualTest: XCTestCase {
     }
 
     func testNSObjectEquality() {
-        expect(NSNumber(value: 1)).to(equal(NSNumber(value: 1)))
-        expect(NSNumber(value: 1)) == NSNumber(value: 1)
-        expect(NSNumber(value: 1)) != NSNumber(value: 2)
-        expect { NSNumber(value: 1) }.to(equal(1))
+        expect(1 as NSNumber).to(equal(1 as NSNumber))
+        expect(1 as NSNumber) == 1 as NSNumber
+        expect(1 as NSNumber) != 2 as NSNumber
+        expect { 1 as NSNumber }.to(equal(1))
     }
 
     func testOperatorEquality() {
