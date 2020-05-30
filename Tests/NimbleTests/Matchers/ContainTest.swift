@@ -11,9 +11,9 @@ final class ContainTest: XCTestCase {
         expect(["foo", "bar", "baz"]).to(contain("baz"))
         expect(["foo", "bar", "baz"]).toNot(contain("ba"))
 #if canImport(Darwin)
-        expect(NSArray(array: ["a"])).to(contain("a" as NSString))
-        expect(NSArray(array: ["a"])).toNot(contain("b" as NSString))
-        expect(NSArray(object: 1) as NSArray?).to(contain(1))
+        expect(["a"] as NSArray).to(contain("a" as NSString))
+        expect(["a"] as NSArray).toNot(contain("b" as NSString))
+        expect([1] as NSArray?).to(contain(1))
 #endif
 
         failsWithErrorMessage("expected to contain <bar>, got <[a, b, c]>") {

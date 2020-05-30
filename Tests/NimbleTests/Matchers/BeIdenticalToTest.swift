@@ -10,7 +10,7 @@ final class BeIdenticalToTest: XCTestCase {
 
     func testBeIdenticalToNegative() {
         expect(NSNumber(value: 1)).toNot(beIdenticalTo("yo" as NSString))
-        expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
+        expect([NSNumber(value: 1)] as NSArray).toNot(beIdenticalTo([NSNumber(value: 1)] as NSArray))
     }
 
     func testBeIdenticalToPositiveMessage() {
@@ -23,7 +23,7 @@ final class BeIdenticalToTest: XCTestCase {
     }
 
     func testBeIdenticalToNegativeMessage() {
-        let value1 = NSArray(array: [])
+        let value1 = NSArray()
         let value2 = value1
         let message = "expected to not be identical to \(identityAsString(value2)), got \(identityAsString(value1))"
         failsWithErrorMessage(message) {
@@ -44,10 +44,10 @@ final class BeIdenticalToTest: XCTestCase {
         #if canImport(Darwin)
             expect([1]).toNot(be([1]))
         #else
-            expect(NSArray(array: [NSNumber(value: 1)])).toNot(beIdenticalTo(NSArray(array: [NSNumber(value: 1)])))
+            expect([NSNumber(value: 1)] as NSArray).toNot(beIdenticalTo([NSNumber(value: 1)] as NSArray))
         #endif
 
-        let value1 = NSArray(array: [])
+        let value1 = NSArray()
         let value2 = value1
         let message = "expected to not be identical to \(identityAsString(value1)), got \(identityAsString(value2))"
         failsWithErrorMessage(message) {

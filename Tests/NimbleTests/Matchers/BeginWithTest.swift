@@ -15,8 +15,8 @@ final class BeginWithTest: XCTestCase {
         expect(("foobar" as NSString).description).to(beginWith("foo"))
         expect(("foobar" as NSString).description).toNot(beginWith("oo"))
 
-        expect(NSArray(array: ["a", "b"])).to(beginWith("a"))
-        expect(NSArray(array: ["a", "b"])).toNot(beginWith("b"))
+        expect(["a", "b"] as NSArray).to(beginWith("a"))
+        expect(["a", "b"] as NSArray).toNot(beginWith("b"))
     }
 
     func testNegativeMatches() {
