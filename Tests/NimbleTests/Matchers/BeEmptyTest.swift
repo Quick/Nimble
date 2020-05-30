@@ -23,7 +23,7 @@ final class BeEmptyTest: XCTestCase {
         expect(([1] as NSArray) as? [Int]).toNot(beEmpty())
 
         expect(NSSet()).to(beEmpty())
-        expect(NSSet(array: [NSNumber(value: 1)])).toNot(beEmpty())
+        expect(NSSet(array: [1 as NSNumber])).toNot(beEmpty())
 
         expect(NSIndexSet()).to(beEmpty())
         expect(NSIndexSet(index: 1)).toNot(beEmpty())
@@ -57,7 +57,7 @@ final class BeEmptyTest: XCTestCase {
             expect(NSSet()).toNot(beEmpty())
         }
         failsWithErrorMessage("expected to be empty, got <{(1)}>") {
-            expect(NSSet(object: NSNumber(value: 1))).to(beEmpty())
+            expect(NSSet(object: 1 as NSNumber)).to(beEmpty())
         }
 
         failsWithErrorMessage("expected to not be empty, got <()>") {

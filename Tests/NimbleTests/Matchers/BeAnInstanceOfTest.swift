@@ -9,7 +9,7 @@ private struct TestStructConformingToProtocol: TestProtocol {}
 final class BeAnInstanceOfTest: XCTestCase {
     func testPositiveMatch() {
         expect(NSNull()).to(beAnInstanceOf(NSNull.self))
-        expect(NSNumber(value: 1)).toNot(beAnInstanceOf(NSDate.self))
+        expect(1 as NSNumber).toNot(beAnInstanceOf(NSDate.self))
     }
 
     enum TestEnum {
@@ -47,10 +47,10 @@ final class BeAnInstanceOfTest: XCTestCase {
         let numberTypeName = "NSNumber"
         #endif
         failsWithErrorMessage("expected to be an instance of NSString, got <\(numberTypeName) instance>") {
-            expect(NSNumber(value: 1)).to(beAnInstanceOf(NSString.self))
+            expect(1 as NSNumber).to(beAnInstanceOf(NSString.self))
         }
         failsWithErrorMessage("expected to not be an instance of \(numberTypeName), got <\(numberTypeName) instance>") {
-            expect(NSNumber(value: 1)).toNot(beAnInstanceOf(type(of: NSNumber(value: 1))))
+            expect(1 as NSNumber).toNot(beAnInstanceOf(type(of: 1 as NSNumber)))
         }
     }
 
