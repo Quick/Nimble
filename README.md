@@ -1189,13 +1189,14 @@ expect {
 
 // Passes if the closure in expect { ... } posts a notification with the provided names to a given
 // notification center. Make sure to use this when running tests on Catalina, 
-// as there is currently no way of observing notifications without providing specific names.
-let notificationCenter = NotificationCenter()
+// using DistributedNotificationCenter as there is currently no way 
+// of observing notifications without providing specific names.
+let distributedNotificationCenter = DistributedNotificationCenter()
 expect {
-    notificationCenter.post(testNotification)
-}.to(postNotifications(equal([testNotification]), 
-                       fromNotificationCenter: notificationCenter, 
-                       names: [testNotification.name]))
+    distributedNotificationCenter.post(testNotification)
+}.toEventually(postDistributedNotifications(equal([testNotification]), 
+                                  fromNotificationCenter: distributedNotificationCenter, 
+                                  names: [testNotification.name]))
 ```
 
 > This matcher is only available in Swift.

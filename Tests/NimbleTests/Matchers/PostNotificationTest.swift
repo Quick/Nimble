@@ -73,18 +73,16 @@ final class PostNotificationTest: XCTestCase {
         }.toEventually(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
     }
     
-    func testPassesWhenOnlySubscribedNotificationsArePosted() {
-        let foo = 1 as NSNumber
-        let bar = 2 as NSNumber
-        let baz = 3 as NSNumber
-        let n1 = Notification(name: Notification.Name("Foo"), object: foo)
-        let n2 = Notification(name: Notification.Name("Bar"), object: bar)
-        let n3 = Notification(name: Notification.Name("Baz"), object: baz)
+    #if os(OSX)
+    func testPassesWhenAllExpectedNotificationsarePostedInDistributedNotificationCenter() {
+        let center = DistributedNotificationCenter()
+        let n1 = Notification(name: Notification.Name("Foo"), object: "1")
+        let n2 = Notification(name: Notification.Name("Bar"), object: "2")
         expect {
-            self.notificationCenter.post(n1)
-            self.notificationCenter.post(n2)
-            self.notificationCenter.post(n3)
+            center.post(n1)
+            center.post(n2)
             return nil
-        }.to(postNotifications(equal([n1, n3]), fromNotificationCenter: notificationCenter, names: [n1.name, n3.name]))
+        }.toEventually(postDistributedNotifications(equal([n1, n2]), fromNotificationCenter: center, names: [n1.name, n2.name]))
     }
+    #endif
 }

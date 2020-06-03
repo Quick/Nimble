@@ -42,8 +42,15 @@ private let mainThread = pthread_self()
 
 public func postNotifications(
     _ predicate: Predicate<[Notification]>,
-    fromNotificationCenter center: NotificationCenter = .default,
-    names: Set<Notification.Name>? = nil
+    fromNotificationCenter center: NotificationCenter = .default
+) -> Predicate<Any> {
+    _postNotifications(predicate, fromNotificationCenter: center, names: nil)
+}
+
+private func _postNotifications(
+    _ predicate: Predicate<[Notification]>,
+    fromNotificationCenter center: NotificationCenter,
+    names: Set<Notification.Name>?
 ) -> Predicate<Any> {
     _ = mainThread // Force lazy-loading of this value
     let collector = NotificationCollector(notificationCenter: center, names: names)
@@ -80,15 +87,24 @@ public func postNotifications(
     }
 }
 
+#if os(OSX)
+public func postDistributedNotifications(
+    _ predicate: Predicate<[Notification]>,
+    fromNotificationCenter center: DistributedNotificationCenter = .default(),
+    names: Set<Notification.Name>
+) -> Predicate<Any> {
+    _postNotifications(predicate, fromNotificationCenter: center, names: names)
+}
+#endif
+
 @available(*, deprecated, message: "Use Predicate instead")
 public func postNotifications<T>(
     _ notificationsMatcher: T,
-    fromNotificationCenter center: NotificationCenter = .default,
-    names: Set<Notification.Name>? = nil)
+    fromNotificationCenter center: NotificationCenter = .default)
     -> Predicate<Any>
     where T: Matcher, T.ValueType == [Notification] {
     _ = mainThread // Force lazy-loading of this value
-        let collector = NotificationCollector(notificationCenter: center, names: names)
+        let collector = NotificationCollector(notificationCenter: center, names: nil)
     collector.startObserving()
     var once: Bool = false
 
