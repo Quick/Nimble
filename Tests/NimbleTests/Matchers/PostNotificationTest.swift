@@ -72,16 +72,15 @@ final class PostNotificationTest: XCTestCase {
             return nil
         }.toEventually(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
     }
-    
-    #if os(OSX)
+
+    #if os(macOS)
     func testPassesWhenAllExpectedNotificationsarePostedInDistributedNotificationCenter() {
         let center = DistributedNotificationCenter()
         let n1 = Notification(name: Notification.Name("Foo"), object: "1")
         let n2 = Notification(name: Notification.Name("Bar"), object: "2")
-        expect {
+        expect { () -> Void in
             center.post(n1)
             center.post(n2)
-            return nil
         }.toEventually(postDistributedNotifications(equal([n1, n2]), fromNotificationCenter: center, names: [n1.name, n2.name]))
     }
     #endif
