@@ -1185,7 +1185,7 @@ expect {
 let notificationCenter = NotificationCenter()
 expect {
     notificationCenter.post(testNotification)
-}.to(postNotifications(equal([testNotification]), fromNotificationCenter: notificationCenter))
+}.to(postNotifications(equal([testNotification]), from: notificationCenter))
 
 // Passes if the closure in expect { ... } posts a notification with the provided names to a given
 // notification center. Make sure to use this when running tests on Catalina, 
@@ -1194,8 +1194,8 @@ expect {
 let distributedNotificationCenter = DistributedNotificationCenter()
 expect {
     distributedNotificationCenter.post(testNotification)
-}.toEventually(postDistributedNotifications(equal([testNotification]), 
-                                  fromNotificationCenter: distributedNotificationCenter, 
+}.toEventually(postDistributedNotifications(equal([testNotification]),
+                                  from: distributedNotificationCenter,
                                   names: [testNotification.name]))
 ```
 
