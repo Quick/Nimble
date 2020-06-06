@@ -9,12 +9,20 @@ on:
       - "*"
 
 jobs:
+  cocoapods:
+    name: CocoaPods Lint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: bundle install
+      - run: ./test podspec
+
   xcode:
     name: Xcode ${{ matrix.xcode }}
     runs-on: macos-latest
     strategy:
       matrix:
-        xcode: [11, 11.1, 11.2]
+        xcode: [10.3, 11, 11.1, 11.2]
       fail-fast: false
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app
