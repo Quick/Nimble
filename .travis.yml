@@ -49,13 +49,17 @@ jobs:
       env:
         - SWIFT_VERSION=5.1.5
     - <<: *swiftpm_linux
-      name: SwiftPM / Linux / Swift 5.2.2
+      name: SwiftPM / Linux / Swift 5.2.4
       env:
-        - SWIFT_VERSION=5.2.2
+        - SWIFT_VERSION=5.2.4
+    - <<: *swiftpm_linux
+      name: SwiftPM / Linux / Swift 5.3 Development
+      env:
+        - SWIFT_VERSION=5.3-DEVELOPMENT-SNAPSHOT-2020-05-19-a
     - <<: *swiftpm_linux
       name: SwiftPM / Linux / Swift Development
       env:
-        - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2020-04-17-a
+        - SWIFT_VERSION=DEVELOPMENT-SNAPSHOT-2020-05-26-a
 install: true
 script:
   - ./test $TYPE
