@@ -9,7 +9,7 @@ final class PostNotificationTest: XCTestCase, XCTestCaseProvider {
         expect {
             // no notifications here!
             return nil
-        }.to(postNotifications(beEmpty(), from: notificationCenter))
+        }.to(postNotifications(beEmpty()))
     }
 
     func testPassesWhenExpectedNotificationIsPosted() {

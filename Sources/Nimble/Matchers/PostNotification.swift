@@ -69,7 +69,7 @@ public func postNotifications(
 @available(*, deprecated, renamed: "postNotifications(_:from:)")
 public func postNotifications(
     _ predicate: Predicate<[Notification]>,
-    fromNotificationCenter center: NotificationCenter = .default
+    fromNotificationCenter center: NotificationCenter
 ) -> Predicate<Any> {
     return postNotifications(predicate, from: center)
 }
@@ -108,7 +108,7 @@ public func postNotifications<T>(
 @available(*, deprecated, renamed: "postNotifications(_:from:)")
 public func postNotifications<T>(
     _ notificationsMatcher: T,
-    fromNotificationCenter center: NotificationCenter = .default
+    fromNotificationCenter center: NotificationCenter
 )-> Predicate<Any> where T: Matcher, T.ValueType == [Notification] {
     return postNotifications(notificationsMatcher, from: center)
 }
