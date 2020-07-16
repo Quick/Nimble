@@ -76,7 +76,8 @@ public func recordFailure(_ message: String, location: SourceLocation) {
 #if SWIFT_PACKAGE
     XCTFail("\(message)", file: location.file, line: location.line)
 #else
-    if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
+    if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase,
+       #available(OSXApplicationExtension 10.13, *) {
         let line = Int(location.line)
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: line, expected: true)
     } else {
