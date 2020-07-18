@@ -250,4 +250,38 @@ final class AsyncTest: XCTestCase {
         }
     }
 
+    func testToNeverPositiveMatches() {
+
+        var value = 0
+        deferToMainQueue { value = 1 }
+        expect { value }.toNever(beGreaterThan(1))
+
+        deferToMainQueue { value = 0 }
+        expect { value }.neverTo(beGreaterThan(1))
+    }
+
+    func testToNeverNegativeMatches() {
+
+        var value = 0
+        failsWithErrorMessage("expected to never equal <0>, got <0>") {
+            expect { value }.toNever(equal(0))
+        }
+        failsWithErrorMessage("expected to never equal <0>, got <0>") {
+            expect { value }.neverTo(equal(0))
+        }
+        failsWithErrorMessage("expected to never equal <1>, got <1>") {
+            deferToMainQueue { value = 1 }
+            expect { value }.toNever(equal(1))
+        }
+        failsWithErrorMessage("expected to never equal <1>, got <1>") {
+            deferToMainQueue { value = 1 }
+            expect { value }.neverTo(equal(1))
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.toNever(equal(0))
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.neverTo(equal(0))
+        }
+    }
 }
