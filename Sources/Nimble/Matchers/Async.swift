@@ -151,6 +151,12 @@ extension Expectation {
         return toEventuallyNot(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
+    /// Tests the actual value using a matcher to never match by checking
+    /// continuously at each pollInterval until the timeout is reached.
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toNever(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
@@ -166,6 +172,14 @@ extension Expectation {
         verify(pass, msg)
     }
 
+    /// Tests the actual value using a matcher to never match by checking
+    /// continuously at each pollInterval until the timeout is reached.
+    ///
+    /// Alias of toNever()
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func neverTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
