@@ -63,24 +63,23 @@ private func toNeverPredicate<T>(predicate: Predicate<T>, timeout: DispatchTimeI
                 return lastPredicateResult!.toBoolean(expectation: .toMatch)
         }
         switch result {
-            case .completed:
-                return PredicateResult(
-                    status: .fail,
-                    message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
-                )
-            case .timedOut:
-                return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
-            case let .errorThrown(error):
-                return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
-            case let .raisedException(exception):
-                return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
-            case .blockedRunLoop:
-                // swiftlint:disable:next line_length
-                let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
-                    .fail("main run loop was unresponsive")
-                return PredicateResult(status: .fail, message: message)
-            case .incomplete:
-                internalError("Reached .incomplete state for \(fnName)(...).")
+        case .completed:
+            return PredicateResult(
+                status: .fail,
+                message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
+            )
+        case .timedOut:
+            return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
+        case let .errorThrown(error):
+            return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
+        case let .raisedException(exception):
+            return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
+        case .blockedRunLoop:
+            let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
+                .fail("main run loop was unresponsive")
+            return PredicateResult(status: .fail, message: message)
+        case .incomplete:
+            internalError("Reached .incomplete state for \(fnName)(...).")
         }
     }
 }
@@ -159,7 +158,6 @@ extension Expectation {
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toNever(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
-
 
         let (pass, msg) = execute(
             expression,
