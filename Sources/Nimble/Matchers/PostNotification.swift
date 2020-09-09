@@ -40,11 +40,11 @@ internal class NotificationCollector {
 
 private let mainThread = pthread_self()
 
-private func _postNotifications(
+private func _postNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
     from center: NotificationCenter,
     names: Set<Notification.Name> = []
-) -> Predicate<Any> {
+) -> Predicate<Out> {
     _ = mainThread // Force lazy-loading of this value
     let collector = NotificationCollector(notificationCenter: center, names: names)
     collector.startObserving()
@@ -80,27 +80,27 @@ private func _postNotifications(
     }
 }
 
-public func postNotifications(
+public func postNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
     from center: NotificationCenter = .default
-) -> Predicate<Any> {
+) -> Predicate<Out> {
     _postNotifications(predicate, from: center)
 }
 
 @available(*, deprecated, renamed: "postNotifications(_:from:)")
-public func postNotifications(
+public func postNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
     fromNotificationCenter center: NotificationCenter
-) -> Predicate<Any> {
+) -> Predicate<Out> {
     postNotifications(predicate, from: center)
 }
 
 #if os(macOS)
-public func postDistributedNotifications(
+public func postDistributedNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
     from center: DistributedNotificationCenter = .default(),
     names: Set<Notification.Name>
-) -> Predicate<Any> {
+) -> Predicate<Out> {
     _postNotifications(predicate, from: center, names: names)
 }
 #endif

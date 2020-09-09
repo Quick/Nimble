@@ -8,7 +8,6 @@ final class PostNotificationTest: XCTestCase {
     func testPassesWhenNoNotificationsArePosted() {
         expect {
             // no notifications here!
-            return nil
         }.to(postNotifications(beEmpty()))
     }
 
@@ -24,10 +23,9 @@ final class PostNotificationTest: XCTestCase {
         let bar = 2 as NSNumber
         let n1 = Notification(name: Notification.Name("Foo"), object: foo)
         let n2 = Notification(name: Notification.Name("Bar"), object: bar)
-        expect {
+        expect { () -> Void in
             self.notificationCenter.post(n1)
             self.notificationCenter.post(n2)
-            return nil
         }.to(postNotifications(equal([n1, n2]), from: notificationCenter))
     }
 
@@ -36,7 +34,6 @@ final class PostNotificationTest: XCTestCase {
         failsWithErrorMessage("expected to equal <[\(testNotification)]>, got no notifications") {
             expect {
                 // no notifications here!
-                return nil
             }.to(postNotifications(equal([testNotification]), from: self.notificationCenter))
         }
     }
@@ -47,7 +44,6 @@ final class PostNotificationTest: XCTestCase {
         failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect {
                 self.notificationCenter.post(n2)
-                return nil
             }.to(postNotifications(equal([n1]), from: self.notificationCenter))
         }
     }
@@ -58,7 +54,6 @@ final class PostNotificationTest: XCTestCase {
         failsWithErrorMessage("expected to equal <[\(n1)]>, got <[\(n2)]>") {
             expect {
                 self.notificationCenter.post(n2)
-                return nil
             }.to(postNotifications(equal([n1]), from: self.notificationCenter))
         }
     }
@@ -69,7 +64,6 @@ final class PostNotificationTest: XCTestCase {
             deferToMainQueue {
                 self.notificationCenter.post(testNotification)
             }
-            return nil
         }.toEventually(postNotifications(equal([testNotification]), from: notificationCenter))
     }
 
