@@ -389,6 +389,9 @@
 		CDBC39B92462EA7D00069677 /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC39B82462EA7D00069677 /* PredicateTest.swift */; };
 		CDBC39BA2462EA7D00069677 /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC39B82462EA7D00069677 /* PredicateTest.swift */; };
 		CDBC39BB2462EA7D00069677 /* PredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC39B82462EA7D00069677 /* PredicateTest.swift */; };
+		CDC157912511957100EAA480 /* DSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC157902511957100EAA480 /* DSLTest.swift */; };
+		CDC157922511957100EAA480 /* DSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC157902511957100EAA480 /* DSLTest.swift */; };
+		CDC157932511957100EAA480 /* DSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC157902511957100EAA480 /* DSLTest.swift */; };
 		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B841F20307A0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
@@ -629,6 +632,7 @@
 		CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstructionPosix.swift; sourceTree = "<group>"; };
 		CD4C8F082464365300A7BDE0 /* SynchronousDeprecatedTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronousDeprecatedTest.swift; sourceTree = "<group>"; };
 		CDBC39B82462EA7D00069677 /* PredicateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
+		CDC157902511957100EAA480 /* DSLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLTest.swift; sourceTree = "<group>"; };
 		CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchException.swift; sourceTree = "<group>"; };
 		CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlCatchException.m; sourceTree = "<group>"; };
 		CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlCatchException.h; sourceTree = "<group>"; };
@@ -780,6 +784,7 @@
 		1F1A74381940169200FFFC47 /* NimbleTests */ = {
 			isa = PBXGroup;
 			children = (
+				CDC157902511957100EAA480 /* DSLTest.swift */,
 				CDBC39B82462EA7D00069677 /* PredicateTest.swift */,
 				1F0648D31963AAB2001F9C46 /* SynchronousTest.swift */,
 				CD4C8F082464365300A7BDE0 /* SynchronousDeprecatedTest.swift */,
@@ -1426,6 +1431,7 @@
 				1F91DD2D1C74BF36002C309F /* BeVoidTest.swift in Sources */,
 				1F4A56761A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				1F925EF9195C175000ED456B /* BeNilTest.swift in Sources */,
+				CDC157922511957100EAA480 /* DSLTest.swift in Sources */,
 				7A6AB2C31E7F547E00A2F694 /* ToSucceedTest.swift in Sources */,
 				CD4C8F0A2464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */,
 				A8A3B707207368F000E25A08 /* ObjCSatisfyAllOfTest.m in Sources */,
@@ -1566,6 +1572,7 @@
 				CD79C9A81D2CC848004B6F9A /* ObjCBeIdenticalToTest.m in Sources */,
 				CD79C9AE1D2CC848004B6F9A /* ObjCBeTruthyTest.m in Sources */,
 				1F5DF1921BDCA10200C3A531 /* AsynchronousTest.swift in Sources */,
+				CDC157932511957100EAA480 /* DSLTest.swift in Sources */,
 				1F5DF1A91BDCA10200C3A531 /* MatchTest.swift in Sources */,
 				CD4C8F0B2464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */,
 				A8A3B708207368F100E25A08 /* ObjCSatisfyAllOfTest.m in Sources */,
@@ -1711,6 +1718,7 @@
 				1FB90099195EC4B8001D7FAE /* BeIdenticalToTest.swift in Sources */,
 				1F91DD2E1C74BF36002C309F /* BeVoidTest.swift in Sources */,
 				1F4A56771A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
+				CDC157912511957100EAA480 /* DSLTest.swift in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
 				CD4C8F092464365300A7BDE0 /* SynchronousDeprecatedTest.swift in Sources */,
 				7A6AB2C21E7F547E00A2F694 /* ToSucceedTest.swift in Sources */,
