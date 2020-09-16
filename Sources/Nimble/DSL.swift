@@ -1,5 +1,5 @@
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-public func expect<T>(_ expression: @autoclosure @escaping () -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
+public func expect<T>(_ expression: @autoclosure @escaping () throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
