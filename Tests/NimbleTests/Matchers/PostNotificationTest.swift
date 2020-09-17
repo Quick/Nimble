@@ -23,7 +23,7 @@ final class PostNotificationTest: XCTestCase {
         let bar = 2 as NSNumber
         let n1 = Notification(name: Notification.Name("Foo"), object: foo)
         let n2 = Notification(name: Notification.Name("Bar"), object: bar)
-        expect { () -> Void in
+        expect {
             self.notificationCenter.post(n1)
             self.notificationCenter.post(n2)
         }.to(postNotifications(equal([n1, n2]), from: notificationCenter))
@@ -72,7 +72,7 @@ final class PostNotificationTest: XCTestCase {
         let center = DistributedNotificationCenter()
         let n1 = Notification(name: Notification.Name("Foo"), object: "1")
         let n2 = Notification(name: Notification.Name("Bar"), object: "2")
-        expect { () -> Void in
+        expect {
             center.post(n1)
             center.post(n2)
         }.toEventually(postDistributedNotifications(equal([n1, n2]), from: center, names: [n1.name, n2.name]))
