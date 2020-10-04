@@ -81,9 +81,7 @@ public func recordFailure(_ message: String, location: SourceLocation) {
 #if swift(>=5.3)
         let location = XCTSourceCodeLocation(filePath: location.file, lineNumber: line)
         let sourceCodeContext = XCTSourceCodeContext(location: location)
-        let issue = XCTIssue(type: .assertionFailure, compactDescription: message,
-                             detailedDescription: message, sourceCodeContext: sourceCodeContext,
-                             associatedError: nil, attachments: [])
+        let issue = XCTIssue(type: .assertionFailure, compactDescription: message, sourceCodeContext: sourceCodeContext)
         testCase.record(issue)
 #else
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: line, expected: true)
