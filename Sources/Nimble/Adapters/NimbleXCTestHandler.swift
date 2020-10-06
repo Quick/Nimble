@@ -78,7 +78,14 @@ public func recordFailure(_ message: String, location: SourceLocation) {
 #else
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
         let line = Int(location.line)
+#if swift(>=5.3)
+        let location = XCTSourceCodeLocation(filePath: location.file, lineNumber: line)
+        let sourceCodeContext = XCTSourceCodeContext(location: location)
+        let issue = XCTIssue(type: .assertionFailure, compactDescription: message, sourceCodeContext: sourceCodeContext)
+        testCase.record(issue)
+#else
         testCase.recordFailure(withDescription: message, inFile: location.file, atLine: line, expected: true)
+#endif
     } else {
         let msg = """
             Attempted to report a test failure to XCTest while no test case was running. The failure was:
