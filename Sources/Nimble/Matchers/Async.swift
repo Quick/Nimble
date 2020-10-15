@@ -156,17 +156,19 @@ extension Expectation {
     public func toEventuallyNot<U>(_ matcher: U, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil)
         where U: Matcher, U.ValueType == T {
         if expression.isClosure {
-            let (pass, msg) = expressionDoesNotMatch(
+            let (pass, msg) = execute(
                 expression,
-                matcher: async(
+                .toNotMatch,
+                async(
                     style: .toNotMatch,
                     predicate: matcher.predicate,
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot"
                 ),
-                toNot: "to eventually not",
-                description: description
+                to: "to eventually not",
+                description: description,
+                captureExceptions: false
             )
             verify(pass, msg)
         } else {

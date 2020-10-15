@@ -183,7 +183,7 @@ extension Predicate {
 
 // Backwards compatibility until Old Matcher API removal
 @available(*, deprecated, message: "Use Predicate directly instead")
-extension Predicate: Matcher {
+extension Predicate {
     /// Compatibility layer for old Matcher API, deprecated
     public static func fromDeprecatedFullClosure(_ matcher: @escaping (Expression<T>, FailureMessage, Bool) throws -> Bool) -> Predicate {
         return Predicate { actual in
