@@ -1,21 +1,3 @@
-@available(*, deprecated)
-internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher: U, toNot: String, description: String?) -> (Bool, FailureMessage)
-    where U: Matcher, U.ValueType == T {
-    let msg = FailureMessage()
-    msg.userDescription = description
-    msg.to = toNot
-    do {
-        let pass = try matcher.doesNotMatch(expression, failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try expression.evaluate()))>"
-        }
-        return (pass, msg)
-    } catch let error {
-        msg.stringValue = "unexpected error thrown: <\(error)>"
-        return (false, msg)
-    }
-}
-
 internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ predicate: Predicate<T>, to: String, description: String?, captureExceptions: Bool = true) -> (Bool, FailureMessage) {
     func run() -> (Bool, FailureMessage) {
         let msg = FailureMessage()
@@ -89,7 +71,14 @@ public struct Expectation<T> {
     public func toNot<U>(_ matcher: U, description: String? = nil) -> Self
         where U: Matcher, U.ValueType == T {
         // swiftlint:disable:next line_length
-        let (pass, msg) = expressionDoesNotMatch(expression, matcher: matcher, toNot: "to not", description: description)
+        let (pass, msg) = execute(
+            expression,
+            .toNotMatch,
+            matcher.predicate,
+            to: "to not",
+            description: description,
+            captureExceptions: false
+        )
         verify(pass, msg)
         return self
     }
