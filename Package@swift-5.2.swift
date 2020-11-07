@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
@@ -15,12 +15,16 @@ let package = Package(
     targets: [
         .target(
             name: "Nimble", 
-            dependencies: [
-                .product(name: "CwlPreconditionTesting", package: "CwlPreconditionTesting",
-                         condition: .when(platforms: [.macOS])),
-                .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
-                         condition: .when(platforms: [.macOS]))
-            ]
+            dependencies: {
+                #if os(macOS)
+                return [
+                    "CwlPreconditionTesting",
+                    .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting")
+                ]
+                #else
+                return []
+                #endif
+            }()
         ),
         .testTarget(
             name: "NimbleTests", 
