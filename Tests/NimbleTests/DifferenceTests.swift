@@ -6,9 +6,9 @@
 //  Copyright © 2017 Krzysztof Zablocki. All rights reserved.
 //
 
+import Nimble
 import Foundation
 import XCTest
-import Difference
 
 typealias IndentationType = Difference.IndentationType
 
