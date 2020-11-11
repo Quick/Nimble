@@ -170,8 +170,8 @@ private struct Differ {
         _ indentationLevel: Int
     ) -> [Line] {
         return [
-            Line(contents: "Received: \(received)", indentationLevel: indentationLevel, canBeOrdered: false),
-            Line(contents: "Expected: \(expected)", indentationLevel: indentationLevel, canBeOrdered: false)
+            Line(contents: "Expected: \(expected)", indentationLevel: indentationLevel, canBeOrdered: false),
+            Line(contents: "Actual\t: \(received)", indentationLevel: indentationLevel, canBeOrdered: false)
         ]
     }
 
