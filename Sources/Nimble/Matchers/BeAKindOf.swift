@@ -13,6 +13,7 @@ public func beAKindOf<T>(_ expectedType: T.Type) -> Predicate<Any> {
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
             message = .expectedCustomValueTo(matcherMessage(forType: expectedType), actual: "<nil>")
+            
             return PredicateResult(status: .fail, message: message)
         }
         message = .expectedCustomValueTo(

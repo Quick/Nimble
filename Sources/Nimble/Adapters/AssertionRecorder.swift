@@ -103,6 +103,7 @@ public func gatherExpectations(silently: Bool = false, closure: () -> Void) -> [
 
     let dispatcher = AssertionDispatcher(handlers: handlers)
     withAssertionHandler(dispatcher, closure: closure)
+    
     return recorder.assertions
 }
 
@@ -119,6 +120,7 @@ public func gatherExpectations(silently: Bool = false, closure: () -> Void) -> [
 /// @see raiseException source for an example use case.
 public func gatherFailingExpectations(silently: Bool = false, closure: () -> Void) -> [AssertionRecord] {
     let assertions = gatherExpectations(silently: silently, closure: closure)
+    
     return assertions.filter { assertion in
         !assertion.success
     }

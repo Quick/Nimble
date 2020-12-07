@@ -13,6 +13,7 @@ internal class NimbleEnvironment: NSObject {
             } else {
                 let newEnv = NimbleEnvironment()
                 self.activeInstance = newEnv
+                
                 return newEnv
             }
         }

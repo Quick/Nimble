@@ -12,6 +12,7 @@ public func beginWith<Seq1: Sequence, Seq2: Sequence>(prefix expectedPrefix: Seq
             return PredicateResult(status: .fail, message: msg)
         case (let expected?, let actual?):
             let matches = actual.starts(with: expected)
+            
             return PredicateResult(bool: matches, message: msg)
         }
     }
@@ -33,6 +34,7 @@ public func beginWith<Seq1: Sequence, Seq2: Sequence>(
             return PredicateResult(status: .fail, message: msg)
         case (let expected?, let actual?):
             let matches = actual.starts(with: expected, by: areEquivalent)
+            
             return PredicateResult(bool: matches, message: msg)
         }
     }

@@ -68,6 +68,7 @@ public class NMBExpectation: NSObject {
             } else {
                 self.expectValue.to(from(matcher: matcher, style: .toMatch))
             }
+            
             return self
         }
     }
@@ -79,6 +80,7 @@ public class NMBExpectation: NSObject {
             } else {
                 self.expectValue.to(from(matcher: matcher, style: .toMatch), description: description)
             }
+            
             return self
         }
     }
@@ -90,6 +92,7 @@ public class NMBExpectation: NSObject {
             } else {
                 self.expectValue.toNot(from(matcher: matcher, style: .toNotMatch))
             }
+            
             return self
         }
     }
@@ -101,6 +104,7 @@ public class NMBExpectation: NSObject {
             } else {
                 self.expectValue.toNot(from(matcher: matcher, style: .toNotMatch), description: description)
             }
+            
             return self
         }
     }

@@ -5,8 +5,8 @@ import Foundation
 public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else { return .fail }
-
         var actualGenerator = actualValue.makeIterator()
+        
         return PredicateStatus(bool: actualGenerator.next() == startingElement)
     }
 }
@@ -24,6 +24,7 @@ public func beginWith(_ startingElement: Any) -> Predicate<NMBOrderedCollection>
         #else
             let collectionValue = collection.object(at: 0) as AnyObject
         #endif
+        
         return PredicateStatus(bool: collectionValue.isEqual(startingElement))
     }
 }
@@ -49,6 +50,7 @@ extension NMBPredicate {
                 return try beginWith(expected as! String).satisfies(expr).toObjectiveC()
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
+                
                 return try beginWith(expected).satisfies(expr).toObjectiveC()
             }
         }

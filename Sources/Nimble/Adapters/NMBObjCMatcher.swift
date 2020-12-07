@@ -47,13 +47,16 @@ public class NMBObjCMatcher: NSObject, NMBMatcher {
             if !canMatchNil {
                 if try actualExpression.evaluate() == nil {
                     failureMessage.postfixActual = " (use beNil() to match nils)"
+                    
                     return false
                 }
             }
         } catch let error {
             failureMessage.actualValue = "an unexpected error thrown: \(error)"
+            
             return false
         }
+        
         return true
     }
 
@@ -64,6 +67,7 @@ public class NMBObjCMatcher: NSObject, NMBMatcher {
             result = try _match(expr, failureMessage)
         } catch let error {
             failureMessage.stringValue = "unexpected error thrown: <\(error)>"
+            
             return false
         }
 
@@ -81,6 +85,7 @@ public class NMBObjCMatcher: NSObject, NMBMatcher {
             result = try _doesNotMatch(expr, failureMessage)
         } catch let error {
             failureMessage.stringValue = "unexpected error thrown: <\(error)>"
+            
             return false
         }
 

@@ -16,6 +16,7 @@ public func haveCount<T: Collection>(_ expectedValue: Int) -> Predicate<T> {
                 .appended(details: "Actual Value: \(stringify(actualValue))")
 
             let result = expectedValue == actualValue.count
+            
             return PredicateResult(bool: result, message: message)
         } else {
             return PredicateResult(status: .fail, message: .fail(""))
@@ -36,6 +37,7 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
                 .appended(details: "Actual Value: \(stringify(actualValue))")
 
             let result = expectedValue == actualValue.count
+            
             return PredicateResult(bool: result, message: message)
         } else {
             return PredicateResult(status: .fail, message: .fail(""))
@@ -53,6 +55,7 @@ extension NMBPredicate {
             let actualValue = try actualExpression.evaluate()
             if let value = actualValue as? NMBCollection {
                 let expr = Expression(expression: ({ value as NMBCollection}), location: location)
+                
                 return try haveCount(expected.intValue).satisfies(expr).toObjectiveC()
             }
 
@@ -67,6 +70,7 @@ extension NMBPredicate {
                     .expectedActualValueTo("have a collection with count \(stringify(expected.intValue))")
                     .appendedBeNilHint()
             }
+            
             return NMBPredicateResult(status: .fail, message: message.toObjectiveC())
         }
     }

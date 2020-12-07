@@ -6,6 +6,7 @@ internal func memoizedClosure<T>(_ closure: @escaping () throws -> T) -> (Bool) 
         if withoutCaching || cache == nil {
             cache = try closure()
         }
+        
         return cache!
     }
 }

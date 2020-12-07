@@ -11,10 +11,10 @@ public func contain<S: Sequence>(_ items: S.Element...) -> Predicate<S> where S.
 public func contain<S: Sequence>(_ items: [S.Element]) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = items.allSatisfy {
             return actual.contains($0)
         }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -28,10 +28,10 @@ public func contain<S: SetAlgebra>(_ items: S.Element...) -> Predicate<S> where 
 public func contain<S: SetAlgebra>(_ items: [S.Element]) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = items.allSatisfy {
             return actual.contains($0)
         }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -45,10 +45,10 @@ public func contain<S: Sequence & SetAlgebra>(_ items: S.Element...) -> Predicat
 public func contain<S: Sequence & SetAlgebra>(_ items: [S.Element]) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = items.allSatisfy {
             return actual.contains($0)
         }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -61,11 +61,12 @@ public func contain(_ substrings: String...) -> Predicate<String> {
 public func contain(_ substrings: [String]) -> Predicate<String> {
     return Predicate.simple("contain <\(arrayAsString(substrings))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = substrings.allSatisfy {
             let range = actual.range(of: $0)
+            
             return range != nil && !range!.isEmpty
         }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -79,8 +80,8 @@ public func contain(_ substrings: NSString...) -> Predicate<NSString> {
 public func contain(_ substrings: [NSString]) -> Predicate<NSString> {
     return Predicate.simple("contain <\(arrayAsString(substrings))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = substrings.allSatisfy { actual.range(of: $0.description).length != 0 }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -94,10 +95,10 @@ public func contain(_ items: Any?...) -> Predicate<NMBContainer> {
 public func contain(_ items: [Any?]) -> Predicate<NMBContainer> {
     return Predicate.simple("contain <\(arrayAsString(items))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         let matches = items.allSatisfy { item in
             return item.map { actual.contains($0) } ?? false
         }
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -131,6 +132,7 @@ extension NMBPredicate {
                     .expectedActualValueTo("contain <\(arrayAsString(expected))>")
                     .appendedBeNilHint()
             }
+            
             return NMBPredicateResult(status: .fail, message: message.toObjectiveC())
         }
     }

@@ -30,7 +30,8 @@ private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout:
                 return lastPredicateResult!.toBoolean(expectation: style)
         }
         switch result {
-        case .completed: return lastPredicateResult!
+        case .completed:
+            return lastPredicateResult!
         case .timedOut:
             let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
             return PredicateResult(status: .fail, message: message)

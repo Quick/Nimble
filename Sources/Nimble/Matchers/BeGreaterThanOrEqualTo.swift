@@ -20,9 +20,11 @@ import enum Foundation.ComparisonResult
 /// or equal to the expected value.
 public func beGreaterThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
     let message = "be greater than or equal to <\(stringify(expectedValue))>"
+    
     return Predicate.simple(message) { actualExpression in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) != ComparisonResult.orderedAscending
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -35,6 +37,7 @@ extension NMBPredicate {
     @objc public class func beGreaterThanOrEqualToMatcher(_ expected: NMBComparable?) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { $0 as? NMBComparable }
+            
             return try beGreaterThanOrEqualTo(expected).satisfies(expr).toObjectiveC()
         }
     }

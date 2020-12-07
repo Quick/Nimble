@@ -5,6 +5,7 @@ public func match(_ expectedValue: String?) -> Predicate<String> {
         guard let actual = try actualExpression.evaluate(), let regexp = expectedValue else { return .fail }
 
         let bool = actual.range(of: regexp, options: .regularExpression) != nil
+        
         return PredicateStatus(bool: bool)
     }
 }
@@ -16,6 +17,7 @@ extension NMBPredicate {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let actual = actualExpression.cast { $0 as? String }
+            
             return try match(expected.description).satisfies(actual).toObjectiveC()
         }
     }

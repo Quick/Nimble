@@ -43,6 +43,7 @@ public class FailureMessage: NSObject {
 
     internal func stripNewlines(_ str: String) -> String {
         let whitespaces = CharacterSet.whitespacesAndNewlines
+        
         return str
             .components(separatedBy: "\n")
             .map { line in line.trimmingCharacters(in: whitespaces) }

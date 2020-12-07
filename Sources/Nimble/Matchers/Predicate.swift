@@ -189,6 +189,7 @@ extension Predicate: Matcher {
         return Predicate { actual in
             let failureMessage = FailureMessage()
             let result = try matcher(actual, failureMessage, true)
+            
             return PredicateResult(
                 status: PredicateStatus(bool: result),
                 message: failureMessage.toExpectationMessage()
@@ -245,6 +246,7 @@ extension Predicate {
                     message: result.message.appendedBeNilHint()
                 )
             }
+            
             return result
         }
     }
@@ -276,12 +278,14 @@ extension NMBPredicate: NMBMatcher {
     public func matches(_ actualBlock: @escaping () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let result = satisfies(actualBlock, location: location).toSwift()
         result.message.update(failureMessage: failureMessage)
+        
         return result.status.toBoolean(expectation: .toMatch)
     }
 
     public func doesNotMatch(_ actualBlock: @escaping () -> NSObject?, failureMessage: FailureMessage, location: SourceLocation) -> Bool {
         let result = satisfies(actualBlock, location: location).toSwift()
         result.message.update(failureMessage: failureMessage)
+        
         return result.status.toBoolean(expectation: .toNotMatch)
     }
 }
@@ -333,9 +337,12 @@ final public class NMBPredicateStatus: NSObject {
 
     public static func from(status: PredicateStatus) -> NMBPredicateStatus {
         switch status {
-        case .matches: return self.matches
-        case .doesNotMatch: return self.doesNotMatch
-        case .fail: return self.fail
+        case .matches:
+            return self.matches
+        case .doesNotMatch:
+            return self.doesNotMatch
+        case .fail:
+            return self.fail
         }
     }
 
@@ -345,9 +352,12 @@ final public class NMBPredicateStatus: NSObject {
 
     public func toSwift() -> PredicateStatus {
         switch status {
-        case NMBPredicateStatus.matches.status: return .matches
-        case NMBPredicateStatus.doesNotMatch.status: return .doesNotMatch
-        case NMBPredicateStatus.fail.status: return .fail
+        case NMBPredicateStatus.matches.status:
+            return .matches
+        case NMBPredicateStatus.doesNotMatch.status:
+            return .doesNotMatch
+        case NMBPredicateStatus.fail.status:
+            return .fail
         default:
             internalError("Unhandle status for NMBPredicateStatus")
         }

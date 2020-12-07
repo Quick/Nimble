@@ -72,8 +72,10 @@ public struct NonNilMatcherFunc<T>: Matcher {
     internal func attachNilErrorIfNeeded(_ actualExpression: Expression<T>, failureMessage: FailureMessage) throws -> Bool {
         if try actualExpression.evaluate() == nil {
             failureMessage.postfixActual = " (use beNil() to match nils)"
+            
             return true
         }
+        
         return false
     }
 

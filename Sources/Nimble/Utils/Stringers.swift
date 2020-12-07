@@ -12,6 +12,7 @@ internal func identityAsString(_ value: Any?) -> String {
 internal func arrayAsString<T>(_ items: [T], joiner: String = ", ") -> String {
     return items.reduce("") { accum, item in
         let prefix = (accum.isEmpty ? "" : joiner)
+        
         return accum + prefix + "\(stringify(item))"
     }
 }
@@ -64,6 +65,7 @@ extension NSNumber: TestOutputStringConvertible {
 extension Array: TestOutputStringConvertible {
     public var testDescription: String {
         let list = self.map(Nimble.stringify).joined(separator: ", ")
+        
         return "[\(list)]"
     }
 }
@@ -82,6 +84,7 @@ extension AnySequence: TestOutputStringConvertible {
         } while value != nil
 
         let list = strings.joined(separator: ", ")
+        
         return "[\(list)]"
     }
 }
@@ -89,6 +92,7 @@ extension AnySequence: TestOutputStringConvertible {
 extension NSArray: TestOutputStringConvertible {
     public var testDescription: String {
         let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        
         return "(\(list))"
     }
 }
@@ -96,6 +100,7 @@ extension NSArray: TestOutputStringConvertible {
 extension NSIndexSet: TestOutputStringConvertible {
     public var testDescription: String {
         let list = Array(self).map(Nimble.stringify).joined(separator: ", ")
+        
         return "(\(list))"
     }
 }

@@ -79,15 +79,19 @@ internal enum AwaitResult<T> {
 
     func isIncomplete() -> Bool {
         switch self {
-        case .incomplete: return true
-        default: return false
+        case .incomplete:
+            return true
+        default:
+            return false
         }
     }
 
     func isCompleted() -> Bool {
         switch self {
-        case .completed: return true
-        default: return false
+        case .completed:
+            return true
+        default:
+            return false
         }
     }
 }
@@ -114,6 +118,7 @@ internal final class AwaitPromise<T> {
     func resolveResult(_ result: AwaitResult<T>) -> Bool {
         if signal.wait(timeout: .now()) == .success {
             self.asyncResult = result
+            
             return true
         } else {
             return false
@@ -364,6 +369,7 @@ internal func pollBlock(
             if try expression() {
                 return true
             }
+            
             return nil
         }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided).wait(fnName, file: file, line: line)
 

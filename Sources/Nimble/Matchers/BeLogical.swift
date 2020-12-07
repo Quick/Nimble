@@ -75,6 +75,7 @@ extension UInt: ExpressibleByBooleanLiteral {
 internal func rename<T>(_ matcher: Predicate<T>, failureMessage message: ExpectationMessage) -> Predicate<T> {
     return Predicate { actualExpression in
         let result = try matcher.satisfies(actualExpression)
+        
         return PredicateResult(status: result.status, message: message)
     }.requireNonNil
 }
@@ -102,6 +103,7 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
         if let actualValue = actualValue {
             return PredicateStatus(bool: actualValue == (true as T))
         }
+        
         return PredicateStatus(bool: actualValue != nil)
     }
 }
@@ -114,6 +116,7 @@ public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T
         if let actualValue = actualValue {
             return PredicateStatus(bool: actualValue == (false as T))
         }
+        
         return PredicateStatus(bool: actualValue == nil)
     }
 }
@@ -123,6 +126,7 @@ extension NMBPredicate {
     @objc public class func beTruthyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
+            
             return try beTruthy().satisfies(expr).toObjectiveC()
         }
     }
@@ -130,6 +134,7 @@ extension NMBPredicate {
     @objc public class func beFalsyMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
+            
             return try beFalsy().satisfies(expr).toObjectiveC()
         }
     }
@@ -137,6 +142,7 @@ extension NMBPredicate {
     @objc public class func beTrueMatcher() -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { ($0 as? NSNumber)?.boolValue ?? false }
+            
             return try beTrue().satisfies(expr).toObjectiveC()
         }
     }
@@ -145,8 +151,10 @@ extension NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { value -> Bool? in
                 guard let value = value else { return nil }
+                
                 return (value as? NSNumber)?.boolValue ?? false
             }
+            
             return try beFalse().satisfies(expr).toObjectiveC()
         }
     }

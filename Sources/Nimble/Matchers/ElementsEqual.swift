@@ -14,6 +14,7 @@ public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(
             return PredicateResult(status: .fail, message: msg)
         case (let expected?, let actual?):
             let matches = expected.elementsEqual(actual)
+            
             return PredicateResult(bool: matches, message: msg)
         }
     }
@@ -36,6 +37,7 @@ public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(
             return PredicateResult(status: .fail, message: msg)
         case (let expected?, let actual?):
             let matches = actual.elementsEqual(expected, by: areEquivalent)
+            
             return PredicateResult(bool: matches, message: msg)
         }
     }

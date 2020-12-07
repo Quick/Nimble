@@ -28,6 +28,7 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
         }
 
         let matches = expectedValue == actualValue
+        
         return PredicateResult(bool: matches, message: msg)
     }
 }
@@ -88,6 +89,7 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
         if extra.count > 0 {
             errorMessage = errorMessage.appended(message: ", extra <\(stringify(extra))>")
         }
+        
         return  PredicateResult(
             status: .doesNotMatch,
             message: errorMessage

@@ -76,6 +76,7 @@ private func _postNotifications<Out>(
         result.message = result.message.replacedExpectation { message in
             return .expectedCustomValueTo(message.expectedMessage, actual: actualValue)
         }
+        
         return result
     }
 }
@@ -133,6 +134,7 @@ public func postNotifications<T>(
         } else {
             failureMessage.actualValue = "<\(stringify(collector.observedNotifications))>"
         }
+        
         return PredicateResult(bool: match, message: failureMessage.toExpectationMessage())
     }
 }

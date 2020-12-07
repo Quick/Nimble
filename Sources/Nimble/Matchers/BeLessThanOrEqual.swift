@@ -21,6 +21,7 @@ public func beLessThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predic
     return Predicate.simple("be less than or equal to <\(stringify(expectedValue))>") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue.map { $0.NMB_compare(expectedValue) != .orderedDescending } ?? false
+        
         return PredicateStatus(bool: matches)
     }
 }
@@ -33,6 +34,7 @@ extension NMBPredicate {
     @objc public class func beLessThanOrEqualToMatcher(_ expected: NMBComparable?) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let expr = actualExpression.cast { $0 as? NMBComparable }
+            
             return try beLessThanOrEqualTo(expected).satisfies(expr).toObjectiveC()
         }
     }

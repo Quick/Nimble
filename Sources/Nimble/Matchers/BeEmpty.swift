@@ -5,8 +5,8 @@ import Foundation
 public func beEmpty<S: Sequence>() -> Predicate<S> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
-
         var generator = actual.makeIterator()
+        
         return PredicateStatus(bool: generator.next() == nil)
     }
 }
@@ -16,6 +16,7 @@ public func beEmpty<S: Sequence>() -> Predicate<S> {
 public func beEmpty<S: SetAlgebra>() -> Predicate<S> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.isEmpty)
     }
 }
@@ -25,6 +26,7 @@ public func beEmpty<S: SetAlgebra>() -> Predicate<S> {
 public func beEmpty<S: Sequence & SetAlgebra>() -> Predicate<S> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.isEmpty)
     }
 }
@@ -34,6 +36,7 @@ public func beEmpty<S: Sequence & SetAlgebra>() -> Predicate<S> {
 public func beEmpty() -> Predicate<String> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.isEmpty)
     }
 }
@@ -43,6 +46,7 @@ public func beEmpty() -> Predicate<String> {
 public func beEmpty() -> Predicate<NSString> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.length == 0)
     }
 }
@@ -55,6 +59,7 @@ public func beEmpty() -> Predicate<NSString> {
 public func beEmpty() -> Predicate<NSDictionary> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.count == 0)
     }
 }
@@ -64,6 +69,7 @@ public func beEmpty() -> Predicate<NSDictionary> {
 public func beEmpty() -> Predicate<NSArray> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.count == 0)
     }
 }
@@ -73,6 +79,7 @@ public func beEmpty() -> Predicate<NSArray> {
 public func beEmpty() -> Predicate<NMBCollection> {
     return Predicate.simple("be empty") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        
         return PredicateStatus(bool: actual.count == 0)
     }
 }
@@ -86,13 +93,16 @@ extension NMBPredicate {
 
             if let value = actualValue as? NMBCollection {
                 let expr = Expression(expression: ({ value }), location: location)
+                
                 return try beEmpty().satisfies(expr).toObjectiveC()
             } else if let value = actualValue as? NSString {
                 let expr = Expression(expression: ({ value }), location: location)
+                
                 return try beEmpty().satisfies(expr).toObjectiveC()
             } else if let actualValue = actualValue {
                 // swiftlint:disable:next line_length
                 let badTypeErrorMsg = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"
+                
                 return NMBPredicateResult(
                     status: NMBPredicateStatus.fail,
                     message: NMBExpectationMessage(
@@ -101,6 +111,7 @@ extension NMBPredicate {
                     )
                 )
             }
+            
             return NMBPredicateResult(
                 status: NMBPredicateStatus.fail,
                 message: NMBExpectationMessage(expectedActualValueTo: "be empty").appendedBeNilHint()

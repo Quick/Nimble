@@ -2,6 +2,7 @@
 public func beNil<T>() -> Predicate<T> {
     return Predicate.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
+        
         return PredicateStatus(bool: actualValue == nil)
     }
 }

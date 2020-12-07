@@ -36,6 +36,7 @@ extension NMBPredicate {
                 let message = ExpectationMessage.fail(
                     "containElementSatisfying must be provided an NSFastEnumeration object"
                 )
+                
                 return NMBPredicateResult(status: .fail, message: message.toObjectiveC())
             }
 

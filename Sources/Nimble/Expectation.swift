@@ -9,9 +9,11 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
         if msg.actualValue == "" {
             msg.actualValue = "<\(stringify(try expression.evaluate()))>"
         }
+        
         return (pass, msg)
     } catch let error {
         msg.stringValue = "unexpected error thrown: <\(error)>"
+        
         return (false, msg)
     }
 }
@@ -27,9 +29,11 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
             if msg.actualValue == "" {
                 msg.actualValue = "<\(stringify(try expression.evaluate()))>"
             }
+            
             return (result.toBoolean(expectation: style), msg)
         } catch let error {
             msg.stringValue = "unexpected error thrown: <\(error)>"
+            
             return (false, msg)
         }
     }
@@ -80,6 +84,7 @@ public struct Expectation<T> {
                 captureExceptions: false
             )
             verify(pass, msg)
+        
             return self
     }
 
@@ -91,6 +96,7 @@ public struct Expectation<T> {
         // swiftlint:disable:next line_length
         let (pass, msg) = expressionDoesNotMatch(expression, matcher: matcher, toNot: "to not", description: description)
         verify(pass, msg)
+        
         return self
     }
 
@@ -111,6 +117,7 @@ public struct Expectation<T> {
     public func to(_ predicate: Predicate<T>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toMatch, predicate, to: "to", description: description)
         verify(pass, msg)
+        
         return self
     }
 
@@ -119,6 +126,7 @@ public struct Expectation<T> {
     public func toNot(_ predicate: Predicate<T>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toNotMatch, predicate, to: "to not", description: description)
         verify(pass, msg)
+        
         return self
     }
 

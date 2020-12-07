@@ -66,6 +66,7 @@ public func raiseException<Out>(
             userInfo: userInfo,
             closure: closure
         )
+        
         return PredicateResult(bool: matches, message: message)
     }
 }
@@ -162,6 +163,7 @@ public class NMBObjCRaiseExceptionPredicate: NMBPredicate {
         let predicateBlock: PredicateBlock = { actualExpression in
             return try predicate.satisfies(actualExpression).toObjectiveC()
         }
+        
         super.init(predicate: predicateBlock)
     }
 

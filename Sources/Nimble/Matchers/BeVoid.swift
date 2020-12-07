@@ -2,6 +2,7 @@
 public func beVoid() -> Predicate<()> {
     return Predicate.simpleNilable("be void") { actualExpression in
         let actualValue: ()? = try actualExpression.evaluate()
+        
         return PredicateStatus(bool: actualValue != nil)
     }
 }

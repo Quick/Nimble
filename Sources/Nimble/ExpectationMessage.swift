@@ -90,6 +90,7 @@ public indirect enum ExpectationMessage {
                 return msg
             }
         }
+        
         return visitLeafs(walk)
     }
 
@@ -113,6 +114,7 @@ public indirect enum ExpectationMessage {
                 return msg.visitLeafs(walk)
             }
         }
+        
         return visitLeafs(walk)
     }
 
@@ -197,6 +199,7 @@ extension FailureMessage {
         if let extended = extendedMessage {
             message = .details(message, extended)
         }
+        
         return message
     }
 }

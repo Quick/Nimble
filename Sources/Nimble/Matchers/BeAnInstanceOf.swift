@@ -38,6 +38,7 @@ public func beAnInstanceOf(_ expectedClass: AnyClass) -> Predicate<NSObject> {
         #else
             let matches = instance != nil && type(of: instance!) == expectedClass
         #endif
+        
         return PredicateResult(
             status: PredicateStatus(bool: matches),
             message: .expectedCustomValueTo(errorMessage, actual: actualString)

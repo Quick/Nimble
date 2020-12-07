@@ -5,7 +5,6 @@ import Foundation
 public func endWith<S: Sequence>(_ endingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
     return Predicate.simple("end with <\(endingElement)>") { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else { return .fail }
-
         var actualGenerator = actualValue.makeIterator()
         var lastItem: S.Element?
         var item: S.Element?
@@ -59,6 +58,7 @@ extension NMBPredicate {
                 return try endWith(expected as! String).satisfies(expr).toObjectiveC()
             } else {
                 let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
+                
                 return try endWith(expected).satisfies(expr).toObjectiveC()
             }
         }

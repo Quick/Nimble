@@ -4,6 +4,7 @@ public func allPass<S: Sequence>(
     let matcher = Predicate.simpleNilable("pass a condition") { actualExpression in
         return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
     }
+    
     return createPredicate(matcher)
 }
 
@@ -14,6 +15,7 @@ public func allPass<S: Sequence>(
     let matcher = Predicate.simpleNilable(passName) { actualExpression in
         return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
     }
+    
     return createPredicate(matcher)
 }
 
@@ -50,12 +52,14 @@ private func createPredicate<S: Sequence>(_ elementMatcher: Predicate<S.Element>
                         after: ", but failed first at element <\(stringify(currentElement))>"
                             + " in <\(stringify(actualValue))>"
                 )
+                
                 return PredicateResult(status: .doesNotMatch, message: failure)
             }
         }
         failure = failure.replacedExpectation({ expectation in
             return .expectedTo(expectation.expectedMessage)
         })
+        
         return PredicateResult(status: .matches, message: failure)
     }
 }
@@ -110,12 +114,14 @@ extension NMBPredicate {
                         location: expr.location
                     )
                     let expectationMsg = failureMessage.toExpectationMessage()
+                    
                     return PredicateResult(
                         bool: result,
                         message: expectationMsg
                     )
                 }
             })
+            
             return try pred.satisfies(expr).toObjectiveC()
         }
     }
