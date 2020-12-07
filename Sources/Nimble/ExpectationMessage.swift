@@ -182,10 +182,10 @@ extension FailureMessage {
         }
 
         var message: ExpectationMessage = .fail(userDescription ?? "")
-        if actualValue != "" && actualValue != nil {
+        if "" != actualValue && nil != actualValue {
             message = .expectedCustomValueTo(postfixMessage, actual: actualValue ?? "")
         } else if postfixMessage != defaultMessage.postfixMessage {
-            if actualValue == nil {
+            if nil == actualValue {
                 message = .expectedTo(postfixMessage)
             } else {
                 message = .expectedActualValueTo(postfixMessage)

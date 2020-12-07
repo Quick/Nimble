@@ -3,7 +3,7 @@ public func containElementSatisfying<S: Sequence>(
 ) -> Predicate<S> {
     return Predicate.define { actualExpression in
         let message: ExpectationMessage
-        if predicateDescription == "" {
+        if "" == predicateDescription {
             message = .expectedTo("find object in collection that satisfies predicate")
         } else {
             message = .expectedTo("find object in collection \(predicateDescription)")

@@ -6,7 +6,7 @@ internal func expressionDoesNotMatch<T, U>(_ expression: Expression<T>, matcher:
     msg.to = toNot
     do {
         let pass = try matcher.doesNotMatch(expression, failureMessage: msg)
-        if msg.actualValue == "" {
+        if "" == msg.actualValue {
             msg.actualValue = "<\(stringify(try expression.evaluate()))>"
         }
         return (pass, msg)
@@ -24,7 +24,7 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
         do {
             let result = try predicate.satisfies(expression)
             result.message.update(failureMessage: msg)
-            if msg.actualValue == "" {
+            if "" == msg.actualValue {
                 msg.actualValue = "<\(stringify(try expression.evaluate()))>"
             }
             return (result.toBoolean(expectation: style), msg)
