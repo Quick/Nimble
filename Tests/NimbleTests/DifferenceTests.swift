@@ -233,6 +233,14 @@ class DifferenceTests: XCTestCase {
         )
     }
 
+    func test_canFindDictionaryKeyDifference() {
+        runTest(
+            expected: Person(petAges: ["Haddie": 4, "Jethro": 6]),
+            received: Person(petAges: ["Henny": 1, "Jethro": 2]),
+            expectedResults: ["petAges:\n|\tKey Jethro:\n|\t|\tExpected: 6\n|\t|\tActual\t: 2\n|\tMissing key: value pairs;\n|\t|\tHaddie: Optional(4)\n|\tExtra key: value pairs;\n|\t|\tHenny: Optional(1)\n"]
+        )
+    }
+
     // MARK: Sets
 
     func test_canFindSetCountDifference() {
@@ -276,6 +284,7 @@ extension DifferenceTests {
         ("test_canFindDictionaryCountDifference", test_canFindDictionaryCountDifference),
         ("test_canFindOptionalDifferenceBetweenSomeAndNone", test_canFindOptionalDifferenceBetweenSomeAndNone),
         ("test_canFindDictionaryDifference", test_canFindDictionaryDifference),
+        ("test_canFindDictionaryKeyDifference", test_canFindDictionaryKeyDifference),
         ("test_canFindSetCountDifference", test_canFindSetCountDifference),
         ("test_canFindOptionalSetDifferenceBetweenSomeAndNone", test_canFindOptionalSetDifferenceBetweenSomeAndNone),
         ("test_canFindSetDifference", test_canFindSetDifference)
