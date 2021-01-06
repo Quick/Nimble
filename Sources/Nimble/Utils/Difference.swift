@@ -60,10 +60,15 @@ private struct Differ {
         case (.set?, .set?):
             if let expectedSet = expected as? Set<AnyHashable>,
                 let receivedSet = received as? Set<AnyHashable> {
-                return expectedSet.subtracting(receivedSet)
+                let missing = expectedSet.subtracting(receivedSet)
                     .map { unique in
                         Line(contents: "Missing: \(unique.description)", indentationLevel: level, canBeOrdered: true)
                     }
+                let extras = receivedSet.subtracting(expectedSet)
+                    .map { unique in
+                        Line(contents: "Extra: \(unique.description)", indentationLevel: level, canBeOrdered: true)
+                    }
+                return missing + extras
             }
         // Handles different enum cases that have children to prevent printing entire object
         case (.enum?, .enum?) where expectedMirror.children.first?.label != receivedMirror.children.first?.label:

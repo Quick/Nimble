@@ -255,7 +255,7 @@ class DifferenceTests: XCTestCase {
         runTest(
             expected: Person(favoriteFoods: ["Sushi", "Pizza"]),
             received: Person(favoriteFoods: ["Oysters", "Crab"]),
-            expectedResults: ["favoriteFoods:\n|\tMissing: Pizza\n|\tMissing: Sushi\n"]
+            expectedResults: ["favoriteFoods:\n|\tExtra: Crab\n|\tExtra: Oysters\n|\tMissing: Pizza\n|\tMissing: Sushi\n"]
         )
     }
 }
