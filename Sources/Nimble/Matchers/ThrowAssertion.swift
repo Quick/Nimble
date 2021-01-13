@@ -6,7 +6,7 @@ import CwlPosixPreconditionTesting
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if arch(x86_64) && canImport(Darwin)
+    #if canImport(Darwin)
         let message = ExpectationMessage.expectedTo("throw an assertion")
 
         var actualError: Error?
