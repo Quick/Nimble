@@ -45,7 +45,7 @@ public protocol NMBContainer {
 #if canImport(Darwin)
 // swiftlint:disable:next todo
 // FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
-//extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
+// extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #endif
 
 extension NSArray: NMBContainer {}

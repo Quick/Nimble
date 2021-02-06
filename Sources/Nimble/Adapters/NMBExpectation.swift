@@ -36,13 +36,11 @@ private func from(matcher: NMBMatcher, style: ExpectationStyle) -> Predicate<NSO
 
 // Equivalent to Expectation, but for Nimble's Objective-C interface
 public class NMBExpectation: NSObject {
-    // swiftlint:disable identifier_name
     internal let _actualBlock: () -> NSObject?
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
     internal var _timeout: DispatchTimeInterval = .seconds(1)
-    // swiftlint:enable identifier_name
 
     @objc public init(actualBlock: @escaping () -> NSObject?, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock

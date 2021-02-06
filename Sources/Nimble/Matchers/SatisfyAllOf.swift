@@ -63,7 +63,6 @@ extension NMBPredicate {
             for matcher in matchers {
                 let elementEvaluator = Predicate<NSObject> { expression in
                     if let predicate = matcher as? NMBPredicate {
-                        // swiftlint:disable:next line_length
                         return predicate.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
                     } else {
                         let failureMessage = FailureMessage()

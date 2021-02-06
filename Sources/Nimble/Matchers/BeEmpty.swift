@@ -91,7 +91,6 @@ extension NMBPredicate {
                 let expr = Expression(expression: ({ value }), location: location)
                 return try beEmpty().satisfies(expr).toObjectiveC()
             } else if let actualValue = actualValue {
-                // swiftlint:disable:next line_length
                 let badTypeErrorMsg = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"
                 return NMBPredicateResult(
                     status: NMBPredicateStatus.fail,

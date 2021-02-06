@@ -123,7 +123,6 @@ extension NMBPredicate {
             let message: ExpectationMessage
             if actualValue != nil {
                 message = ExpectationMessage.expectedActualValueTo(
-                    // swiftlint:disable:next line_length
                     "contain <\(arrayAsString(expected))> (only works for NSArrays, NSSets, NSHashTables, and NSStrings)"
                 )
             } else {

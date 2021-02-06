@@ -88,7 +88,6 @@ public struct Expectation<T> {
     @discardableResult
     public func toNot<U>(_ matcher: U, description: String? = nil) -> Self
         where U: Matcher, U.ValueType == T {
-        // swiftlint:disable:next line_length
         let (pass, msg) = expressionDoesNotMatch(expression, matcher: matcher, toNot: "to not", description: description)
         verify(pass, msg)
         return self
