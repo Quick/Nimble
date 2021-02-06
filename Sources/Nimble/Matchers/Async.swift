@@ -39,7 +39,6 @@ private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout:
         case let .raisedException(exception):
             return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
         case .blockedRunLoop:
-            // swiftlint:disable:next line_length
             let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
                 .fail("main run loop was unresponsive")
             return PredicateResult(status: .fail, message: message)
