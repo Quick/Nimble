@@ -43,3 +43,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./test swiftpm
+
+  swiftpm_linux:
+    name: SwiftPM, Linux
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        swift_version: [5.2, 5.3]
+      fail-fast: false
+    container: norionomura/swift:${{ matrix.swift_version }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: swift build -Xswiftc -suppress-warnings
+      - run: swift test -Xswiftc -suppress-warnings --enable-test-discovery
