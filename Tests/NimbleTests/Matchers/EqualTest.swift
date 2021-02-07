@@ -141,7 +141,7 @@ final class EqualTest: XCTestCase {
         expect(1 as NSNumber).to(equal(1 as NSNumber))
         expect(1 as NSNumber) == 1 as NSNumber
         expect(1 as NSNumber) != 2 as NSNumber
-        expect { 1 as NSNumber }.to(equal(1))
+        expect { 1 as NSNumber }.to(equal(1 as NSNumber))
     }
 
     func testOperatorEquality() {

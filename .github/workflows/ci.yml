@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        swift_version: [5.2, 5.3]
+        swift_version: [5.2, 5.3, swift-5.4-branch, nightly]
       fail-fast: false
     container: norionomura/swift:${{ matrix.swift_version }}
     steps:
