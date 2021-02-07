@@ -1,4 +1,7 @@
-#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
+#if SWIFT_PACKAGE
+import Fortify
+import Foundation
+#elseif canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
 import CwlPreconditionTesting
 #elseif canImport(CwlPosixPreconditionTesting)
 import CwlPosixPreconditionTesting
@@ -6,7 +9,33 @@ import CwlPosixPreconditionTesting
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if arch(x86_64) && canImport(Darwin)
+    #if SWIFT_PACKAGE
+    let message = ExpectationMessage.expectedTo("throw an assertion")
+
+    var actualError: Error?
+    var caughtException: Error?
+    do {
+        try Fortify.protect {
+            _ = try actualExpression.evaluate()
+        }
+    } catch {
+        if (error as NSError).domain == "Fortify" {
+            caughtException = error
+        } else {
+            actualError = error
+        }
+    }
+
+    if let actualError = actualError {
+        return PredicateResult(
+            bool: false,
+            message: message.appended(message: "; threw error instead <\(actualError)>")
+        )
+    } else {
+        return PredicateResult(bool: caughtException != nil, message: message)
+    }
+
+    #elseif arch(x86_64) && canImport(Darwin)
         let message = ExpectationMessage.expectedTo("throw an assertion")
 
         var actualError: Error?

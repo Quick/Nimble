@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - try-fortify
   pull_request:
     branches:
       - "*"

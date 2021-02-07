@@ -18,6 +18,33 @@
           "revision": "02b7a39a99c4da27abe03cab2053a9034379639f",
           "version": "2.0.0"
         }
+      },
+      {
+        "package": "fishhook",
+        "repositoryURL": "https://github.com/johnno1962/fishhook",
+        "state": {
+          "branch": null,
+          "revision": "838e967276a385f3fe608f4ab78e0566b5601e50",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "T",
+        "repositoryURL": "https://github.com/johnno1962/Fortify.git",
+        "state": {
+          "branch": null,
+          "revision": "cc6df07bb228c35006a3ec350b43b2b2712932c7",
+          "version": "2.1.4"
+        }
+      },
+      {
+        "package": "StringIndex",
+        "repositoryURL": "https://github.com/johnno1962/StringIndex",
+        "state": {
+          "branch": null,
+          "revision": "7de8ce6a0b56150249f5925007df14bce82d1e67",
+          "version": "2.0.1"
+        }
       }
     ]
   },
