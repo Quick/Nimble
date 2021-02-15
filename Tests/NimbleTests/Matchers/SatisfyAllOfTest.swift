@@ -28,6 +28,14 @@ final class SatisfyAllOfTest: XCTestCase {
         "expected to not match all of: {be greater than <10.5>}, and {be less than <100.75>}, and {be close to <50.1> (within 0.0001)}, got 50.10001") {
             expect(50.10001).toNot(satisfyAllOf(beGreaterThan(10.5), beLessThan(100.75), beCloseTo(50.1)))
         }
+        failsWithErrorMessage(
+        "expected to not match all of: {This matcher should always fail}, and {This matcher should always fail}, got true") {
+            expect(true).toNot(satisfyAllOf(alwaysFail(), alwaysFail()))
+        }
+        failsWithErrorMessage(
+        "expected to match all of: {This matcher should always fail}, and {This matcher should always fail}, got true") {
+            expect(true).to(satisfyAllOf(alwaysFail(), alwaysFail()))
+        }
     }
 
     func testOperatorAnd() {

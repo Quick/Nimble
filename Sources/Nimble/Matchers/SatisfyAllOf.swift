@@ -15,11 +15,13 @@ public func satisfyAllOf<T, U>(_ matchers: U...) -> Predicate<T>
 internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
 	return Predicate.define { actualExpression in
         var postfixMessages = [String]()
-        var matches = true
+        var status: PredicateStatus = .matches
         for predicate in predicates {
             let result = try predicate.satisfies(actualExpression)
-            if result.toBoolean(expectation: .toNotMatch) {
-                matches = false
+            if result.status == .fail {
+                status = .fail
+            } else if result.toBoolean(expectation: .toNotMatch), status != .fail {
+                status = .doesNotMatch
             }
             postfixMessages.append("{\(result.message.expectedMessage)}")
         }
@@ -36,7 +38,7 @@ internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             )
         }
 
-        return PredicateResult(bool: matches, message: msg)
+        return PredicateResult(status: status, message: msg)
     }
 }
 
