@@ -12,7 +12,7 @@ public func satisfyAllOf<T, U>(_ matchers: U...) -> Predicate<T>
         return satisfyAllOf(matchers.map { $0.predicate })
 }
 
-internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
+public func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
 	return Predicate.define { actualExpression in
         var postfixMessages = [String]()
         var matches = true
