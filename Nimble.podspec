@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
     'DEFINES_MODULE' => 'YES',
     'ENABLE_BITCODE' => 'NO',
     'ENABLE_TESTING_SEARCH_PATHS' => 'YES',
-    'OTHER_LDFLAGS' => '$(inherited) -weak-lswiftXCTest -Xlinker -no_application_extension',
+    'OTHER_LDFLAGS' => '$(inherited) -weak-lXCTestSwiftSupport -Xlinker -no_application_extension',
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
   }
 
