@@ -13,7 +13,7 @@ public func satisfyAnyOf<T, U>(_ matchers: U...) -> Predicate<T>
 }
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
-/// provided in the variable list of matchers.
+/// provided in the array of matchers.
 public func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
         return Predicate.define { actualExpression in
             var postfixMessages = [String]()
@@ -43,7 +43,7 @@ public func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
 }
 
 public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
-        return satisfyAnyOf(left, right)
+    return satisfyAnyOf(left, right)
 }
 
 @available(*, deprecated, message: "Use Predicate instead")

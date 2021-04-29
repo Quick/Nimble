@@ -13,9 +13,9 @@ public func satisfyAllOf<T, U>(_ matchers: U...) -> Predicate<T>
 }
 
 /// A Nimble matcher that succeeds when the actual value matches with all of the matchers
-/// provided in the variable list of matchers.
+/// provided in the array of matchers.
 public func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
-	return Predicate.define { actualExpression in
+    return Predicate.define { actualExpression in
         var postfixMessages = [String]()
         var matches = true
         for predicate in predicates {
