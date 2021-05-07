@@ -20,7 +20,7 @@ internal func satisfyAllOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             let result = try predicate.satisfies(actualExpression)
             if result.status == .fail {
                 status = .fail
-            } else if result.toBoolean(expectation: .toNotMatch), status != .fail {
+            } else if result.status == .doesNotMatch, status != .fail {
                 status = .doesNotMatch
             }
             postfixMessages.append("{\(result.message.expectedMessage)}")
