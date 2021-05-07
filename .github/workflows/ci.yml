@@ -52,7 +52,7 @@ jobs:
         container:
           - swift:5.2
           - swift:5.3
-          - swiftlang/swift:nightly-5.4
+          - swift:5.4
           - swiftlang/swift:nightly
       fail-fast: false
     container: ${{ matrix.container }}
