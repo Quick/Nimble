@@ -320,6 +320,9 @@
 		7B5358BE1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
 		7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
 		7B5358C01C38479700A23FAA /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */; };
+		898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
+		898F28B125D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
+		898F28B225D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
 		964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */; };
 		964CFEFE1C4FF48900513336 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */; };
 		964CFEFF1C4FF48900513336 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */; };
@@ -617,6 +620,7 @@
 		7B5358B91C3846C900A23FAA /* SatisfyAnyOfTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOfTest.swift; sourceTree = "<group>"; };
 		7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOf.swift; sourceTree = "<group>"; };
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
+		898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailMatcher.swift; sourceTree = "<group>"; };
 		8DF1C3F61C94FC75004B2D36 /* ObjcStringersTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcStringersTest.m; sourceTree = "<group>"; };
 		964CFEFC1C4FF48900513336 /* ThrowAssertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrowAssertion.swift; sourceTree = "<group>"; };
 		965B0D081B62B8ED0005AE66 /* ObjCUserDescriptionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCUserDescriptionTest.m; sourceTree = "<group>"; };
@@ -707,6 +711,7 @@
 			children = (
 				1F14FB63194180C5009F2A08 /* utils.swift */,
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
+				898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1404,6 +1409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4A569A1A3B3539009E1637 /* ObjCEqualTest.m in Sources */,
+				898F28B125D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
 				1F925EEC195C12C800ED456B /* RaisesExceptionTest.swift in Sources */,
 				62FB326A23B78D500047BED9 /* BeginWithPrefixTest.swift in Sources */,
 				1F925EFF195C187600ED456B /* EndWithTest.swift in Sources */,
@@ -1545,6 +1551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD79C9AD1D2CC848004B6F9A /* ObjCBeTrueTest.m in Sources */,
+				898F28B225D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
 				CD79C9B41D2CC848004B6F9A /* ObjCRaiseExceptionTest.m in Sources */,
 				62FB326923B78D4F0047BED9 /* BeginWithPrefixTest.swift in Sources */,
 				1F5DF1A31BDCA10200C3A531 /* BeLogicalTest.swift in Sources */,
@@ -1691,6 +1698,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4A569B1A3B3539009E1637 /* ObjCEqualTest.m in Sources */,
+				898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
 				1F925EED195C12C800ED456B /* RaisesExceptionTest.swift in Sources */,
 				62FB326B23B78D510047BED9 /* BeginWithPrefixTest.swift in Sources */,
 				1F925F00195C187600ED456B /* EndWithTest.swift in Sources */,
