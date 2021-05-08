@@ -17,11 +17,6 @@ public func allPass<S: Sequence>(
     return createPredicate(matcher)
 }
 
-@available(*, deprecated, message: "Use Predicate instead")
-public func allPass<S: Sequence, M: Matcher>(_ elementMatcher: M) -> Predicate<S> where S.Element == M.ValueType {
-    return createPredicate(elementMatcher.predicate)
-}
-
 public func allPass<S: Sequence>(_ elementPredicate: Predicate<S.Element>) -> Predicate<S> {
     return createPredicate(elementPredicate)
 }
@@ -66,7 +61,7 @@ import struct Foundation.NSFastEnumerationIterator
 import protocol Foundation.NSFastEnumeration
 
 extension NMBPredicate {
-    @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBPredicate {
+    @objc public class func allPassMatcher(_ predicate: NMBPredicate) -> NMBPredicate {
         return NMBPredicate { actualExpression in
             let location = actualExpression.location
             let actualValue = try actualExpression.evaluate()
@@ -99,22 +94,7 @@ extension NMBPredicate {
 
             let expr = Expression(expression: ({ nsObjects }), location: location)
             let pred: Predicate<[NSObject]> = createPredicate(Predicate { expr in
-                if let predicate = matcher as? NMBPredicate {
-                    return predicate.satisfies(({ try expr.evaluate() }), location: expr.location).toSwift()
-                } else {
-                    let failureMessage = FailureMessage()
-                    let result = matcher.matches(
-                        // swiftlint:disable:next force_try
-                        ({ try! expr.evaluate() }),
-                        failureMessage: failureMessage,
-                        location: expr.location
-                    )
-                    let expectationMsg = failureMessage.toExpectationMessage()
-                    return PredicateResult(
-                        bool: result,
-                        message: expectationMsg
-                    )
-                }
+                return predicate.satisfies(({ try expr.evaluate() }), location: expr.location).toSwift()
             })
             return try pred.satisfies(expr).toObjectiveC()
         }
