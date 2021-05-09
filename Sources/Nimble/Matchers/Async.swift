@@ -15,7 +15,19 @@ extension AsyncDefaults {
     public static var PollInterval: TimeInterval = 0.01
 }
 
-private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout: DispatchTimeInterval, poll: DispatchTimeInterval, fnName: String) -> Predicate<T> {
+private enum AsyncMatchStyle {
+    case eventually, never
+}
+
+// swiftlint:disable:next function_parameter_count
+private func async<T>(
+    style: ExpectationStyle,
+    matchStyle: AsyncMatchStyle,
+    predicate: Predicate<T>,
+    timeout: DispatchTimeInterval,
+    poll: DispatchTimeInterval,
+    fnName: String
+) -> Predicate<T> {
     return Predicate { actualExpression in
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).\(fnName)(...)"
@@ -30,52 +42,29 @@ private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout:
                 return lastPredicateResult!.toBoolean(expectation: style)
         }
         switch result {
-        case .completed: return lastPredicateResult!
-        case .timedOut:
-            let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
-            return PredicateResult(status: .fail, message: message)
-        case let .errorThrown(error):
-            return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
-        case let .raisedException(exception):
-            return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
-        case .blockedRunLoop:
-            let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
-                .fail("main run loop was unresponsive")
-            return PredicateResult(status: .fail, message: message)
-        case .incomplete:
-            internalError("Reached .incomplete state for \(fnName)(...).")
-        }
-    }
-}
-
-private func toNeverPredicate<T>(predicate: Predicate<T>, timeout: DispatchTimeInterval, poll: DispatchTimeInterval, fnName: String) -> Predicate<T> {
-    return Predicate { actualExpression in
-        let uncachedExpression = actualExpression.withoutCaching()
-        let fnName = "expect(...).\(fnName)(...)"
-        var lastPredicateResult: PredicateResult?
-        let result = pollBlock(
-            pollInterval: poll,
-            timeoutInterval: timeout,
-            file: actualExpression.location.file,
-            line: actualExpression.location.line,
-            fnName: fnName) {
-                lastPredicateResult = try predicate.satisfies(uncachedExpression)
-                return lastPredicateResult!.toBoolean(expectation: .toMatch)
-        }
-        switch result {
         case .completed:
-            return PredicateResult(
-                status: .fail,
-                message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
-            )
+            switch matchStyle {
+            case .eventually:
+                return lastPredicateResult!
+            case .never:
+                return PredicateResult(
+                    status: .fail,
+                    message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
+                )
+            }
         case .timedOut:
-            return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
+            switch matchStyle {
+            case .eventually:
+                let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
+                return PredicateResult(status: .fail, message: message)
+            case .never:
+                return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
+            }
         case let .errorThrown(error):
             return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
         case let .raisedException(exception):
             return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
         case .blockedRunLoop:
-            // swiftlint:disable:next line_length
             let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
                 .fail("main run loop was unresponsive")
             return PredicateResult(status: .fail, message: message)
@@ -105,7 +94,14 @@ extension Expectation {
         let (pass, msg) = execute(
             expression,
             .toMatch,
-            async(style: .toMatch, predicate: predicate, timeout: timeout, poll: pollInterval, fnName: "toEventually"),
+            async(
+                style: .toMatch,
+                matchStyle: .eventually,
+                predicate: predicate,
+                timeout: timeout,
+                poll: pollInterval,
+                fnName: "toEventually"
+            ),
             to: "to eventually",
             description: description,
             captureExceptions: false
@@ -127,6 +123,7 @@ extension Expectation {
             .toNotMatch,
             async(
                 style: .toNotMatch,
+                matchStyle: .eventually,
                 predicate: predicate,
                 timeout: timeout,
                 poll: pollInterval,
@@ -163,7 +160,14 @@ extension Expectation {
         let (pass, msg) = execute(
             expression,
             .toNotMatch,
-            toNeverPredicate(predicate: predicate, timeout: until, poll: pollInterval, fnName: "toNever"),
+            async(
+                style: .toMatch,
+                matchStyle: .never,
+                predicate: predicate,
+                timeout: until,
+                poll: pollInterval,
+                fnName: "toNever"
+            ),
             to: "to never",
             description: description,
             captureExceptions: false
