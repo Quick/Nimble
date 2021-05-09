@@ -1239,22 +1239,22 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 // Swift
 
 // passes if .succeeded is returned from the closure
-expect({
+expect {
     guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
         return .failed(reason: "wrong enum case")
     }
 
     return .succeeded
-}).to(succeed())
+}.to(succeed())
 
 // passes if .failed is returned from the closure
-expect({
+expect {
     guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
         return .failed(reason: "wrong enum case")
     }
 
     return .succeeded
-}).notTo(succeed())
+}.notTo(succeed())
 ```
 
 The `String` provided with `.failed()` is shown when the test fails.
