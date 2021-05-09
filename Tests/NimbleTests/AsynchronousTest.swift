@@ -251,7 +251,6 @@ final class AsyncTest: XCTestCase {
     }
 
     func testToNeverPositiveMatches() {
-
         var value = 0
         deferToMainQueue { value = 1 }
         expect { value }.toNever(beGreaterThan(1))
@@ -261,7 +260,6 @@ final class AsyncTest: XCTestCase {
     }
 
     func testToNeverNegativeMatches() {
-
         var value = 0
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
             expect { value }.toNever(equal(0))
