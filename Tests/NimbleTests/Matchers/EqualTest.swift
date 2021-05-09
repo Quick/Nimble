@@ -246,4 +246,12 @@ final class EqualTest: XCTestCase {
 
         expect(result).to(equal(storyCount))
     }
+
+    func testTuple() {
+        expect((1, "2")).to(equal((1, "2")))
+        expect((1, "2", 3)).to(equal((1, "2", 3)))
+        expect((1, "2", 3, four: "4")).to(equal((1, "2", 3, "4")))
+        expect((1, "2", 3, four: "4", 5)).to(equal((1, "2", 3, "4", five: 5)))
+        expect((1, "2", 3, four: "4", 5, "6")).to(equal((1, "2", 3, "4", five: 5, "6")))
+    }
 }
