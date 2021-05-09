@@ -43,24 +43,6 @@ public protocol NMBDoubleConvertible {
     var doubleValue: CDouble { get }
 }
 
-extension Double: NMBDoubleConvertible {
-    public var doubleValue: CDouble {
-        return self
-    }
-}
-
-extension Float: NMBDoubleConvertible {
-    public var doubleValue: CDouble {
-        return CDouble(self)
-    }
-}
-
-extension CGFloat: NMBDoubleConvertible {
-    public var doubleValue: CDouble {
-        return CDouble(self)
-    }
-}
-
 extension NSNumber: NMBDoubleConvertible {
 }
 
