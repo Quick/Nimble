@@ -20,12 +20,13 @@ let package = Package(
                          condition: .when(platforms: [.macOS, .iOS])),
                 .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
                          condition: .when(platforms: [.tvOS]))
-            ]
+            ],
+            exclude: ["Info.plist"]
         ),
         .testTarget(
             name: "NimbleTests", 
             dependencies: ["Nimble"], 
-            exclude: ["objc"]
+            exclude: ["objc", "Info.plist"]
         ),
     ],
     swiftLanguageVersions: [.v5]
