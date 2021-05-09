@@ -1,20 +1,27 @@
-/// A Nimble matcher that succeeds when the actual value is equal to the expected value.
-/// Values can support equal by supporting the Equatable protocol.
-///
-/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
-public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
+internal func equal<T>(
+    _ expectedValue: T?,
+    by areEquivalent: @escaping (T, T) -> Bool
+) -> Predicate<T> {
     return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
         case (nil, _?):
             return PredicateResult(status: .fail, message: msg.appendedBeNilHint())
-        case (nil, nil), (_, nil):
+        case (_, nil):
             return PredicateResult(status: .fail, message: msg)
         case (let expected?, let actual?):
-            let matches = expected == actual
+            let matches = areEquivalent(expected, actual)
             return PredicateResult(bool: matches, message: msg)
         }
     }
+}
+
+/// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+/// Values can support equal by supporting the Equatable protocol.
+///
+/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
+    equal(expectedValue, by: ==)
 }
 
 /// A Nimble matcher allowing comparison of collection with optional type
