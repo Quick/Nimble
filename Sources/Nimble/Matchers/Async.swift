@@ -8,13 +8,6 @@ public struct AsyncDefaults {
     public static var pollInterval: DispatchTimeInterval = .milliseconds(10)
 }
 
-extension AsyncDefaults {
-    @available(*, unavailable, renamed: "timeout")
-    public static var Timeout: TimeInterval = 1
-    @available(*, unavailable, renamed: "pollInterval")
-    public static var PollInterval: TimeInterval = 0.01
-}
-
 private enum AsyncMatchStyle {
     case eventually, never
 }
