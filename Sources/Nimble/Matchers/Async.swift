@@ -15,7 +15,19 @@ extension AsyncDefaults {
     public static var PollInterval: TimeInterval = 0.01
 }
 
-private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout: DispatchTimeInterval, poll: DispatchTimeInterval, fnName: String) -> Predicate<T> {
+private enum AsyncMatchStyle {
+    case eventually, never
+}
+
+// swiftlint:disable:next function_parameter_count
+private func async<T>(
+    style: ExpectationStyle,
+    matchStyle: AsyncMatchStyle,
+    predicate: Predicate<T>,
+    timeout: DispatchTimeInterval,
+    poll: DispatchTimeInterval,
+    fnName: String
+) -> Predicate<T> {
     return Predicate { actualExpression in
         let uncachedExpression = actualExpression.withoutCaching()
         let fnName = "expect(...).\(fnName)(...)"
@@ -30,10 +42,24 @@ private func async<T>(style: ExpectationStyle, predicate: Predicate<T>, timeout:
                 return lastPredicateResult!.toBoolean(expectation: style)
         }
         switch result {
-        case .completed: return lastPredicateResult!
+        case .completed:
+            switch matchStyle {
+            case .eventually:
+                return lastPredicateResult!
+            case .never:
+                return PredicateResult(
+                    status: .fail,
+                    message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
+                )
+            }
         case .timedOut:
-            let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
-            return PredicateResult(status: .fail, message: message)
+            switch matchStyle {
+            case .eventually:
+                let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
+                return PredicateResult(status: .fail, message: message)
+            case .never:
+                return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
+            }
         case let .errorThrown(error):
             return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
         case let .raisedException(exception):
@@ -68,7 +94,14 @@ extension Expectation {
         let (pass, msg) = execute(
             expression,
             .toMatch,
-            async(style: .toMatch, predicate: predicate, timeout: timeout, poll: pollInterval, fnName: "toEventually"),
+            async(
+                style: .toMatch,
+                matchStyle: .eventually,
+                predicate: predicate,
+                timeout: timeout,
+                poll: pollInterval,
+                fnName: "toEventually"
+            ),
             to: "to eventually",
             description: description,
             captureExceptions: false
@@ -90,6 +123,7 @@ extension Expectation {
             .toNotMatch,
             async(
                 style: .toNotMatch,
+                matchStyle: .eventually,
                 predicate: predicate,
                 timeout: timeout,
                 poll: pollInterval,
@@ -112,5 +146,44 @@ extension Expectation {
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func toNotEventually(_ predicate: Predicate<T>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
         return toEventuallyNot(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
+    }
+
+    /// Tests the actual value using a matcher to never match by checking
+    /// continuously at each pollInterval until the timeout is reached.
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    public func toNever(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
+        nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
+
+        let (pass, msg) = execute(
+            expression,
+            .toNotMatch,
+            async(
+                style: .toMatch,
+                matchStyle: .never,
+                predicate: predicate,
+                timeout: until,
+                poll: pollInterval,
+                fnName: "toNever"
+            ),
+            to: "to never",
+            description: description,
+            captureExceptions: false
+        )
+        verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to never match by checking
+    /// continuously at each pollInterval until the timeout is reached.
+    ///
+    /// Alias of toNever()
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    public func neverTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
+        return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }
