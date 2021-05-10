@@ -57,4 +57,39 @@
     });
 }
 
+- (void)testToNeverPositiveMatches {
+    __block id value = @0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        value = @1;
+    });
+    expect(value).toNever(beGreaterThan(1));
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        value = @0;
+    });
+    expect(value).neverTo(beGreaterThan(1));
+}
+
+- (void)testToNeverNegativeMatches {
+    __block id value = @0;
+    expectFailureMessage(@"expected to never equal <0>, got <0>", ^{
+        expect(value).toNever(equal(0));
+    });
+    expectFailureMessage(@"expected to never equal <0>, got <0>", ^{
+        expect(value).neverTo(equal(0));
+    });
+    expectFailureMessage(@"expected to never equal <1>, got <1>", ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            value = @1;
+        });
+        expect(value).toNever(equal(1));
+    });
+    expectFailureMessage(@"expected to never equal <1>, got <1>", ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            value = @1;
+        });
+        expect(value).neverTo(equal(1));
+    });
+}
+
 @end

@@ -116,6 +116,34 @@ public class NMBExpectation: NSObject {
         return toEventuallyNotWithDescription
     }
 
+    @objc public var toNever: (NMBPredicate) -> Void {
+        return { predicate in
+            self.expectValue.toNever(
+                from(objcPredicate: predicate),
+                until: self._timeout,
+                description: nil
+            )
+        }
+    }
+
+    @objc public var toNeverWithDescription: (NMBPredicate, String) -> Void {
+        return { predicate, description in
+            self.expectValue.toNever(
+                from(objcPredicate: predicate),
+                until: self._timeout,
+                description: description
+            )
+        }
+    }
+
+    @objc public var neverTo: (NMBPredicate) -> Void {
+        return toNever
+    }
+
+    @objc public var neverToWithDescription: (NMBPredicate, String) -> Void {
+        return toNeverWithDescription
+    }
+
     @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
         fail(message, location: SourceLocation(file: file, line: line))
     }
