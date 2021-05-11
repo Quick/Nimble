@@ -91,6 +91,7 @@ public class NimbleHelper: NSObject {
 }
 #endif
 
+#if !os(WASI)
 extension Date {
     init(dateTimeString: String) {
         let dateFormatter = DateFormatter()
@@ -107,3 +108,4 @@ extension NSDate {
         self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
     }
 }
+#endif
