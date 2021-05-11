@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Foundation
 import Dispatch
 
@@ -180,3 +182,5 @@ extension Expectation {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }
+
+#endif // #if !os(WASI)

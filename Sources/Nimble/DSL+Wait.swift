@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Dispatch
 import Foundation
 
@@ -117,3 +119,5 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: DispatchTi
 public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
+
+#endif // #if !os(WASI)

@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 #if canImport(Foundation)
 import Foundation
 
@@ -97,4 +99,6 @@ public func postDistributedNotifications<Out>(
 }
 #endif
 
-#endif
+#endif // #if canImport(Foundation)
+
+#endif // #if !os(WASI)

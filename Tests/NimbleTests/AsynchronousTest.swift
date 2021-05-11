@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Dispatch
 import CoreFoundation
 import Foundation
@@ -283,3 +285,5 @@ final class AsyncTest: XCTestCase {
         }
     }
 }
+
+#endif // #if !os(WASI)

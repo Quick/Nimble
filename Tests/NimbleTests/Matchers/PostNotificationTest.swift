@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import XCTest
 import Nimble
 import Foundation
@@ -79,3 +81,5 @@ final class PostNotificationTest: XCTestCase {
     }
     #endif
 }
+
+#endif // #if !os(WASI)
