@@ -87,14 +87,6 @@ public func postNotifications<Out>(
     _postNotifications(predicate, from: center)
 }
 
-@available(*, deprecated, renamed: "postNotifications(_:from:)")
-public func postNotifications<Out>(
-    _ predicate: Predicate<[Notification]>,
-    fromNotificationCenter center: NotificationCenter
-) -> Predicate<Out> {
-    postNotifications(predicate, from: center)
-}
-
 #if os(macOS)
 public func postDistributedNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
