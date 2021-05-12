@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 #if canImport(Darwin) && !SWIFT_PACKAGE
 import class Foundation.NSObject
 import typealias Foundation.TimeInterval
@@ -150,3 +152,5 @@ public class NMBExpectation: NSObject {
 }
 
 #endif
+
+#endif // #if !os(WASI)

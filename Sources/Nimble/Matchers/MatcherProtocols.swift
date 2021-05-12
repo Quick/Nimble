@@ -46,6 +46,7 @@ public protocol NMBDoubleConvertible {
 extension NSNumber: NMBDoubleConvertible {
 }
 
+#if !os(WASI)
 private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSS"
@@ -53,6 +54,7 @@ private let dateFormatter: DateFormatter = {
 
     return formatter
 }()
+#endif
 
 extension Date: NMBDoubleConvertible {
     public var doubleValue: CDouble {
@@ -66,6 +68,7 @@ extension NSDate: NMBDoubleConvertible {
     }
 }
 
+#if !os(WASI)
 extension Date: TestOutputStringConvertible {
     public var testDescription: String {
         return dateFormatter.string(from: self)
@@ -77,6 +80,7 @@ extension NSDate: TestOutputStringConvertible {
         return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
+#endif
 
 #if canImport(Darwin)
 /// Protocol for types to support beLessThan(), beLessThanOrEqualTo(),

@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import CoreFoundation
 import Dispatch
 import Foundation
@@ -369,3 +371,5 @@ internal func pollBlock(
 
         return result
 }
+
+#endif // #if !os(WASI)

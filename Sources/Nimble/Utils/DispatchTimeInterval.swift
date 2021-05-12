@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Dispatch
 
 #if canImport(CDispatch)
@@ -39,3 +41,5 @@ extension TimeInterval {
     }
 }
 #endif
+
+#endif // #if !os(WASI)

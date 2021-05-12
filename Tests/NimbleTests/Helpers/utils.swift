@@ -1,4 +1,6 @@
+#if !os(WASI)
 import Dispatch
+#endif
 import Foundation
 @testable import Nimble
 import XCTest
@@ -64,12 +66,14 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
+#if !os(WASI)
 func deferToMainQueue(action: @escaping () -> Void) {
     DispatchQueue.main.async {
         Thread.sleep(forTimeInterval: 0.01)
         action()
     }
 }
+#endif
 
 #if canImport(Darwin) && !SWIFT_PACKAGE
 public class NimbleHelper: NSObject {
@@ -87,6 +91,7 @@ public class NimbleHelper: NSObject {
 }
 #endif
 
+#if !os(WASI)
 extension Date {
     init(dateTimeString: String) {
         let dateFormatter = DateFormatter()
@@ -103,3 +108,4 @@ extension NSDate {
         self.init(timeIntervalSinceReferenceDate: date.timeIntervalSinceReferenceDate)
     }
 }
+#endif
