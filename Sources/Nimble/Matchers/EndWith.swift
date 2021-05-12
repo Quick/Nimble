@@ -25,12 +25,12 @@ public func endWith(_ endingElement: Any) -> Predicate<NMBOrderedCollection> {
         guard let collection = try actualExpression.evaluate() else { return .fail }
 
         guard collection.count > 0 else { return PredicateStatus(bool: false) }
-        #if os(Linux)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+            let collectionValue = collection.object(at: collection.count - 1) as AnyObject
+        #else
             guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
                 return .fail
             }
-        #else
-            let collectionValue = collection.object(at: collection.count - 1) as AnyObject
         #endif
 
         return PredicateStatus(bool: collectionValue.isEqual(endingElement))
