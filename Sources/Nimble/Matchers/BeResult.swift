@@ -1,33 +1,55 @@
 import Foundation
 
+/// A Nimble matcher for Result that succeeds when the actual value is success.
 ///
-/// A Nimble matcher for Result that succeeds when the actual value is success
-///
-/// You can pass a closure to do any arbitrary custom matching
-/// to the value inside result. The closure only gets called when result is success.
-public func beSuccess<T>(test: ((T) -> Void)? = nil) -> Predicate<Result<T, Error>> {
-    return Predicate.define("be <success>") { expression, message in
-        guard case let .success(value)? = try expression.evaluate()
-        else {
+/// You can pass a closure to do any arbitrary custom matching to the value inside result.
+/// The closure only gets called when the result is success.
+public func beSuccess<Success, Failure>(
+    test: ((Success) -> Void)? = nil
+) -> Predicate<Result<Success, Failure>> {
+    return Predicate.define("be <success(\(Success.self))>") { expression, message in
+        guard case let .success(value)? = try expression.evaluate() else {
             return PredicateResult(status: .doesNotMatch, message: message)
         }
-        test?(value)
-        return PredicateResult(status: .matches, message: message)
+
+        var matches = true
+        if let test = test {
+            let assertions = gatherFailingExpectations {
+                test(value)
+            }
+            let messages = assertions.map { $0.message }
+            if !messages.isEmpty {
+                matches = false
+            }
+        }
+
+        return PredicateResult(bool: matches, message: message)
     }
 }
 
+/// A Nimble matcher for Result that succeeds when the actual value is failure.
 ///
-/// A Nimble matcher for Result that succeeds when the actual value is failure
-///
-/// You can pass a closure to do custom matching for the error inside result.
-/// The closure only gets called when result is failure.
-public func beFailure<T>(test: ((Error) -> Void)? = nil) -> Predicate<Result<T, Error>> {
-    return Predicate.define("be <failure>") { expression, message in
-        guard case let .failure(error)? = try expression.evaluate()
-        else {
+/// You can pass a closure to do any arbitrary custom matching to the error inside result.
+/// The closure only gets called when the result is failure.
+public func beFailure<Success, Failure>(
+    test: ((Failure) -> Void)? = nil
+) -> Predicate<Result<Success, Failure>> {
+    return Predicate.define("be <failure(\(Failure.self))>") { expression, message in
+        guard case let .failure(error)? = try expression.evaluate() else {
             return PredicateResult(status: .doesNotMatch, message: message)
         }
-        test?(error)
-        return PredicateResult(status: .matches, message: message)
+
+        var matches = true
+        if let test = test {
+            let assertions = gatherFailingExpectations {
+                test(error)
+            }
+            let messages = assertions.map { $0.message }
+            if !messages.isEmpty {
+                matches = false
+            }
+        }
+
+        return PredicateResult(bool: matches, message: message)
     }
 }
