@@ -1216,7 +1216,7 @@ expect(aResult).to(beSuccess { value in
 enum AnError: Error {
     case somethingHappened
 }
-let otherResult: Result<String, Error> = .failure(AnError.somethingHappened) 
+let otherResult: Result<String, AnError> = .failure(.somethingHappened) 
 
 // passes if result is .failure
 expect(otherResult).to(beFailure()) 
@@ -1226,6 +1226,8 @@ expect(otherResult).to(beFailure { error in
     expect(error).to(matchError(AnError.somethingHappened))
 }) 
 ```
+
+> This matcher is only available in Swift.
 
 ## Matching a value to any of a group of matchers
 
