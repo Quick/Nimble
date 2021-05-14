@@ -7,7 +7,13 @@ import Foundation
 public func beSuccess<Success, Failure>(
     test: ((Success) -> Void)? = nil
 ) -> Predicate<Result<Success, Failure>> {
-    return Predicate.define("be <success(\(Success.self))>") { expression, message in
+    return Predicate.define { expression in
+        var rawMessage = "be <success(\(Success.self))>"
+        if test != nil {
+            rawMessage += " that satisfies block"
+        }
+        let message = ExpectationMessage.expectedActualValueTo(rawMessage)
+
         guard case let .success(value)? = try expression.evaluate() else {
             return PredicateResult(status: .doesNotMatch, message: message)
         }
@@ -34,7 +40,13 @@ public func beSuccess<Success, Failure>(
 public func beFailure<Success, Failure>(
     test: ((Failure) -> Void)? = nil
 ) -> Predicate<Result<Success, Failure>> {
-    return Predicate.define("be <failure(\(Failure.self))>") { expression, message in
+    return Predicate.define { expression in
+        var rawMessage = "be <failure(\(Failure.self))>"
+        if test != nil {
+            rawMessage += " that satisfies block"
+        }
+        let message = ExpectationMessage.expectedActualValueTo(rawMessage)
+
         guard case let .failure(error)? = try expression.evaluate() else {
             return PredicateResult(status: .doesNotMatch, message: message)
         }
