@@ -6,6 +6,21 @@ public func beNil<T>() -> Predicate<T> {
     }
 }
 
+extension Expectation {
+    /// Represents `nil` value to be used with the operator overloads for `beNil`.
+    public struct Nil: ExpressibleByNilLiteral {
+        public init(nilLiteral: ()) {}
+    }
+
+    public static func == (lhs: Expectation, rhs: Expectation.Nil) {
+        lhs.to(beNil())
+    }
+
+    public static func != (lhs: Expectation, rhs: Expectation.Nil) {
+        lhs.toNot(beNil())
+    }
+}
+
 #if canImport(Darwin)
 import Foundation
 
