@@ -1,18 +1,24 @@
 public func allPass<S: Sequence>(
-    _ passFunc: @escaping (S.Element?) throws -> Bool
+    _ passFunc: @escaping (S.Element) throws -> Bool
 ) -> Predicate<S> {
-    let matcher = Predicate.simpleNilable("pass a condition") { actualExpression in
-        return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
+    let matcher = Predicate<S.Element>.define("pass a condition") { actualExpression, message in
+        guard let actual = try actualExpression.evaluate() else {
+            return PredicateResult(status: .fail, message: message)
+        }
+        return PredicateResult(bool: try passFunc(actual), message: message)
     }
     return createPredicate(matcher)
 }
 
 public func allPass<S: Sequence>(
     _ passName: String,
-    _ passFunc: @escaping (S.Element?) throws -> Bool
+    _ passFunc: @escaping (S.Element) throws -> Bool
 ) -> Predicate<S> {
-    let matcher = Predicate.simpleNilable(passName) { actualExpression in
-        return PredicateStatus(bool: try passFunc(try actualExpression.evaluate()))
+    let matcher = Predicate<S.Element>.define(passName) { actualExpression, message in
+        guard let actual = try actualExpression.evaluate() else {
+            return PredicateResult(status: .fail, message: message)
+        }
+        return PredicateResult(bool: try passFunc(actual), message: message)
     }
     return createPredicate(matcher)
 }
@@ -33,7 +39,9 @@ private func createPredicate<S: Sequence>(_ elementMatcher: Predicate<S.Element>
         var failure: ExpectationMessage = .expectedTo("all pass")
         for currentElement in actualValue {
             let exp = Expression(
-                expression: {currentElement}, location: actualExpression.location)
+                expression: { currentElement },
+                location: actualExpression.location
+            )
             let predicateResult = try elementMatcher.satisfies(exp)
             if predicateResult.status == .matches {
                 failure = predicateResult.message.prepended(expectation: "all ")

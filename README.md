@@ -1112,7 +1112,7 @@ In Swift, the collection must be an instance of a type conforming to
 // Swift
 
 // Providing a custom function:
-expect([1, 2, 3, 4]).to(allPass { $0! < 5 })
+expect([1, 2, 3, 4]).to(allPass { $0 < 5 })
 
 // Composing the expectation with another matcher:
 expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))
