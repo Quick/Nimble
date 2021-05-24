@@ -158,6 +158,17 @@ final class EqualTest: XCTestCase {
         }
     }
 
+    // see: https://github.com/Quick/Nimble/issues/867
+    func testOperatorEqualityWithImplicitMemberSyntax() {
+        struct Xxx: Equatable {
+            let value: Int
+        }
+
+        let xxx = Xxx(value: 123)
+        expect(xxx) == .init(value: 123)
+        expect(xxx) != .init(value: 124)
+    }
+
     func testOperatorEqualityWithArrays() {
         let array1: [Int] = [1, 2, 3]
         let array2: [Int] = [1, 2, 3]
