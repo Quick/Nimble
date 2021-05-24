@@ -68,7 +68,7 @@ Be sure to include in your issue:
   tests using `./test`.
 - If you've added a file to the project, make sure it's included in both
   the OS X and iOS targets.
-- The `master` branch will always support the stable Xcode version. Other
+- The `main` branch will always support the stable Xcode version. Other
   branches will point to their corresponding versions they support.
 - If you're making a configuration change, make sure to edit both the xcode
   project and the podspec file.
@@ -92,7 +92,7 @@ to the repository.
 Your conduct as a core member is your own responsibility, but here are
 some "ground rules":
 
-- Feel free to push whatever you want to master, and (if you have
+- Feel free to push whatever you want to main, and (if you have
   ownership permissions) to create any repositories you'd like.
 
   Ideally, however, all changes should be submitted as GitHub pull

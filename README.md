@@ -1,6 +1,6 @@
 # Nimble
 
-[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=master)](https://travis-ci.org/Quick/Nimble)
+[![Build Status](https://github.com/Quick/Nimble/actions/workflows/ci-xcode.yml/badge.svg)](https://github.com/Quick/Nimble/actions/workflows/ci-xcode.yml)
 [![CocoaPods](https://img.shields.io/cocoapods/v/Nimble.svg)](https://cocoapods.org/pods/Nimble)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Accio supported](https://img.shields.io/badge/Accio-supported-0A7CF5.svg?style=flat)](https://github.com/JamitLabs/Accio)
@@ -1335,7 +1335,7 @@ in an Xcode project you distribute to others.
   distribute it yourself via GitHub.
 
 For examples of how to write your own matchers, just check out the
-[`Matchers` directory](https://github.com/Quick/Nimble/tree/master/Sources/Nimble/Matchers)
+[`Matchers` directory](https://github.com/Quick/Nimble/tree/main/Sources/Nimble/Matchers)
 to see how Nimble's built-in set of matchers are implemented. You can
 also check out the tips below.
 
@@ -1636,7 +1636,7 @@ removed completely in Nimble v10.
 > Nimble can be used on its own, or in conjunction with its sister
   project, [Quick](https://github.com/Quick/Quick). To install both
   Quick and Nimble, follow [the installation instructions in the Quick
-  Documentation](https://github.com/Quick/Quick/blob/master/Documentation/en-us/InstallingQuick.md).
+  Documentation](https://github.com/Quick/Quick/blob/main/Documentation/en-us/InstallingQuick.md).
 
 Nimble can currently be installed in one of two ways: using CocoaPods, or with
 git submodules.
