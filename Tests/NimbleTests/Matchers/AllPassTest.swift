@@ -76,10 +76,9 @@ final class AllPassTest: XCTestCase {
         }
     }
 
-    func testAllPassCollectionsWithOptionalsDontWork() {
-        failsWithErrorMessage("expected to all be nil, but failed first at element <nil> in <[nil, nil, nil]>") {
-            expect([nil, nil, nil] as [Int?]).to(allPass(beNil()))
-        }
+    func testAllPassCollectionsWithOptionals() {
+        expect([nil, nil, nil] as [Int?]).to(allPass(beNil()))
+
         failsWithErrorMessage("expected to all pass a condition, but failed first at element <nil> in <[nil, nil, nil]>") {
             expect([nil, nil, nil] as [Int?]).to(allPass({$0 == nil}))
         }
