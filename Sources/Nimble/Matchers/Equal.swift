@@ -24,21 +24,6 @@ public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
     equal(expectedValue, by: ==)
 }
 
-/// A Nimble matcher allowing comparison of collection with optional type
-public func equal<T: Equatable>(_ expectedValue: [T?]) -> Predicate<[T?]> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
-        guard let actualValue = try actualExpression.evaluate() else {
-            return PredicateResult(
-                status: .fail,
-                message: msg.appendedBeNilHint()
-            )
-        }
-
-        let matches = expectedValue == actualValue
-        return PredicateResult(bool: matches, message: msg)
-    }
-}
-
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> {
     return equal(expectedValue, stringify: { stringify($0) })
@@ -46,12 +31,8 @@ public func equal<T>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> {
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> {
-    return equal(expectedValue, stringify: {
-        if let set = $0 {
-            return stringify(Array(set).sorted { $0 < $1 })
-        } else {
-            return "nil"
-        }
+    return equal(expectedValue, stringify: { set in
+        stringify(set.map { Array($0).sorted(by: <) })
     })
 }
 
@@ -118,14 +99,6 @@ public func !=<T: Equatable>(lhs: Expectation<T>, rhs: T?) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
-    lhs.to(equal(rhs))
-}
-
-public func !=<T: Equatable>(lhs: Expectation<[T]>, rhs: [T]?) {
-    lhs.toNot(equal(rhs))
-}
-
 public func == <T>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
     lhs.to(equal(rhs))
 }
@@ -155,14 +128,6 @@ public func !=<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>) {
 }
 
 public func !=<T: Comparable>(lhs: Expectation<Set<T>>, rhs: Set<T>?) {
-    lhs.toNot(equal(rhs))
-}
-
-public func ==<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
-    lhs.to(equal(rhs))
-}
-
-public func !=<T, C: Equatable>(lhs: Expectation<[T: C]>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
 }
 
