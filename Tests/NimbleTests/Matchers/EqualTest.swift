@@ -150,11 +150,9 @@ final class EqualTest: XCTestCase {
 
         failsWithErrorMessage("expected to equal <world>, got <hello>") {
             expect("hello") == "world"
-            return
         }
         failsWithErrorMessage("expected to not equal <hello>, got <hello>") {
             expect("hello") != "hello"
-            return
         }
     }
 
@@ -215,7 +213,6 @@ final class EqualTest: XCTestCase {
             let arrayOfOptionalInts: [Int?] = [nil, 2]
             let anotherArrayOfOptionalInts: [Int?] = [1, nil]
             expect(arrayOfOptionalInts).to(equal(anotherArrayOfOptionalInts))
-            return
         }
     }
 
