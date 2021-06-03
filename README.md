@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/Quick/Nimble/actions/workflows/ci-xcode.yml/badge.svg)](https://github.com/Quick/Nimble/actions/workflows/ci-xcode.yml)
 [![CocoaPods](https://img.shields.io/cocoapods/v/Nimble.svg)](https://cocoapods.org/pods/Nimble)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Accio supported](https://img.shields.io/badge/Accio-supported-0A7CF5.svg?style=flat)](https://github.com/JamitLabs/Accio)
 [![Platforms](https://img.shields.io/cocoapods/p/Nimble.svg)](https://cocoapods.org/pods/Nimble)
 
 Use Nimble to express the expected outcomes of Swift
@@ -67,7 +66,6 @@ expect(ocean.isClean).toEventually(beTruthy())
 - [Installing Nimble](#installing-nimble)
   - [Installing Nimble as a Submodule](#installing-nimble-as-a-submodule)
   - [Installing Nimble via CocoaPods](#installing-nimble-via-cocoapods)
-  - [Installing Nimble via Accio](#installing-nimble-via-accio)
   - [Using Nimble without XCTest](#using-nimble-without-xctest)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -1676,27 +1674,6 @@ end
 ```
 
 Finally run `pod install`.
-
-## Installing Nimble via Accio
-
-Add the following to your Package.swift:
-
-```swift
-.package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "8.0.1")),
-```
-
-Next, add `Nimble` to your App targets dependencies like so:
-
-```swift
-.testTarget(
-    name: "AppTests",
-    dependencies: [
-        "Nimble",
-    ]
-),
-```
-
-Then run `accio update`.
 
 ## Using Nimble without XCTest
 
