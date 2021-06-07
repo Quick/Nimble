@@ -13,10 +13,10 @@ on:
 jobs:
   xcode:
     name: Xcode ${{ matrix.xcode }} - ${{ matrix.platform }}
-    runs-on: macos-latest
+    runs-on: macos-11
     strategy:
       matrix:
-        xcode: [12.4]
+        xcode: [12.4, 12.5]
         platform: [macos, ios, tvos]
       fail-fast: false
     env:
