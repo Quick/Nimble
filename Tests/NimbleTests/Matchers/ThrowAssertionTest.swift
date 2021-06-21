@@ -6,7 +6,7 @@ private let error: Error = NSError(domain: "test", code: 0, userInfo: nil)
 
 final class ThrowAssertionTest: XCTestCase {
     func testPositiveMatch() {
-        #if arch(x86_64) && !os(watchOS)
+        #if arch(x86_64)
         expect { () -> Void in fatalError() }.to(throwAssertion())
         #endif
     }
@@ -18,7 +18,7 @@ final class ThrowAssertionTest: XCTestCase {
     }
 
     func testPostAssertionCodeNotRun() {
-        #if arch(x86_64) && !os(watchOS)
+        #if arch(x86_64)
         var reachedPoint1 = false
         var reachedPoint2 = false
 
@@ -56,7 +56,7 @@ final class ThrowAssertionTest: XCTestCase {
     }
 
     func testNegativeMessage() {
-        #if arch(x86_64) && !os(watchOS)
+        #if arch(x86_64)
         failsWithErrorMessage("expected to not throw an assertion") {
             expect { () -> Void in fatalError() }.toNot(throwAssertion())
         }
@@ -64,7 +64,7 @@ final class ThrowAssertionTest: XCTestCase {
     }
 
     func testNonVoidClosure() {
-        #if arch(x86_64) && !os(watchOS)
+        #if arch(x86_64)
         expect { () -> Int in fatalError() }.to(throwAssertion())
         #endif
     }
