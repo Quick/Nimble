@@ -10,11 +10,15 @@ if which xcodebuild > /dev/null; then
     LATEST_IOS_VERSION=`xcrun simctl list | grep ^iOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     LATEST_TVOS_SDK_VERSION=`xcodebuild -showsdks | grep appletvsimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_TVOS_VERSION=`xcrun simctl list | grep ^tvOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
+    LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep watchos | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_WATCHOS_VERSION=`xcrun simctl list | grep ^watchOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     RUNTIME_IOS_VERSION=${NIMBLE_RUNTIME_IOS_VERSION:-$LATEST_IOS_VERSION}
     BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
     RUNTIME_TVOS_VERSION=${NIMBLE_RUNTIME_TVOS_VERSION:-$LATEST_TVOS_VERSION}
+    BUILD_WATCHOS_SDK_VERSION=${NIMBLE_BUILD_WATCHOS_SDK_VERSION:-$LATEST_WATCHOS_SDK_VERSION}
+    RUNTIME_WATCHOS_VERSION=${NIMBLE_RUNTIME_WATCHOS_VERSION:-$LATEST_WATCHOS_VERSION}
     BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
 fi
 
@@ -41,6 +45,11 @@ function print_env {
     echo "   Latest tvOS SDK: $LATEST_TVOS_SDK_VERSION"
     echo "   Building with tvOS SDK: `color_if_overridden $BUILD_TVOS_SDK_VERSION $NIMBLE_BUILD_TVOS_SDK_VERSION`"
     echo "   Running with tvOS: `color_if_overridden $RUNTIME_TVOS_VERSION $NIMBLE_RUNTIME_TVOS_VERSION`"
+    echo
+    echo " watchOS:"
+    echo "   Latest watchOS SDK: $LATEST_WATCHOS_SDK_VERSION"
+    echo "   Building with watchOS SDK: `color_if_overridden $BUILD_WATCHOS_SDK_VERSION $NIMBLE_BUILD_WATCHOS_SDK_VERSION`"
+    echo "   Running with watchOS: `color_if_overridden $RUNTIME_WATCHOS_VERSION $NIMBLE_RUNTIME_WATCHOS_VERSION`"
     echo
     echo " macOS:"
     echo "   Latest macOS SDK: $LATEST_MACOS_SDK_VERSION"
@@ -72,12 +81,19 @@ function test_tvos {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
+function test_watchos {
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-watchOS" -configuration "Debug" -destination "generic/platform=watchOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+
+    run osascript -e 'tell app "Simulator" to quit'
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-watchOS" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 - 40mm,OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
 function test_macos {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-macOS" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_xcode_spm_macos {
-    mv Nimble.xcodeproj Nimble.xcodeproj.bak    
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak
     trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
     run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
@@ -94,6 +110,13 @@ function test_xcode_spm_tvos {
     mv Nimble.xcodeproj Nimble.xcodeproj.bak
     trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
     run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
+function test_xcode_spm_watchos {
+    run osascript -e 'tell app "Simulator" to quit'
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 - 40mm,OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_podspec {
@@ -120,11 +143,13 @@ function test() {
     test_macos
     test_ios
     test_tvos
+    test_watchos
 
     if xcodebuild --help 2>&1 | grep xcframework > /dev/null; then
         test_xcode_spm_macos
         test_xcode_spm_ios
         test_xcode_spm_tvos
+        test_xcode_spm_watchos
     else
         echo "Not testing with Swift Package Manager version of Xcode because it requires at least Xcode 11"
     fi
@@ -150,18 +175,20 @@ function help {
     echo "Usage: $0 COMMANDS"
     echo
     echo "COMMANDS:"
-    echo " all             - Runs the all tests of macos, ios and tvos"
-    echo " clean           - Cleans the derived data directory of Xcode. Assumes default location"
-    echo " help            - Displays this help"
-    echo " macos           - Runs the tests on macOS 10.10 (Yosemite and newer only)"
-    echo " macos_xcodespm  - Runs the tests on macOS using the Swift Package Manager version of Xcode"
-    echo " ios             - Runs the tests as an iOS device"
-    echo " ios_xcodespm    - Runs the tests as an iOS device using the Swift Package Manager version of Xcode"
-    echo " tvos            - Runs the tests as an tvOS device"
-    echo " tvos_xcodespm   - Runs the tests as an tvOS device using the Swift Package Manager version of Xcode"
-    echo " podspec         - Runs pod lib lint against the podspec to detect breaking changes"
-    echo " swiftpm         - Runs the tests built by the Swift Package Manager"
-    echo " swiftpm_docker  - Runs the tests built by the Swift Package Manager in a docker linux container"
+    echo " all               - Runs the all tests of macos, ios and tvos"
+    echo " clean             - Cleans the derived data directory of Xcode. Assumes default location"
+    echo " help              - Displays this help"
+    echo " macos             - Runs the tests on macOS 10.10 (Yosemite and newer only)"
+    echo " macos_xcodespm    - Runs the tests on macOS using the Swift Package Manager version of Xcode"
+    echo " ios               - Runs the tests as an iOS device"
+    echo " ios_xcodespm      - Runs the tests as an iOS device using the Swift Package Manager version of Xcode"
+    echo " tvos              - Runs the tests as an tvOS device"
+    echo " tvos_xcodespm     - Runs the tests as an tvOS device using the Swift Package Manager version of Xcode"
+    echo " watchos           - Runs the tests as an watchOS device"
+    echo " watchos_xcodespm  - Runs the tests as an watchOS device using the Swift Package Manager version of Xcode"
+    echo " podspec           - Runs pod lib lint against the podspec to detect breaking changes"
+    echo " swiftpm           - Runs the tests built by the Swift Package Manager"
+    echo " swiftpm_docker    - Runs the tests built by the Swift Package Manager in a docker linux container"
     echo
     exit 1
 }
@@ -176,6 +203,8 @@ function main {
             ios_xcodespm) test_xcode_spm_ios ;;
             tvos) test_tvos ;;
             tvos_xcodespm) test_xcode_spm_tvos ;;
+            watchos) test_watchos ;;
+            watchos_xcodespm) test_xcode_spm_watchos ;;
             macos) test_macos ;;
             macos_xcodespm) test_xcode_spm_macos ;;
             podspec) test_podspec ;;

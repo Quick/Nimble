@@ -35,6 +35,7 @@ internal class NimbleEnvironment: NSObject {
     }
 
     var suppressTVOSAssertionWarning: Bool = false
+    var suppressWatchOSAssertionWarning: Bool = false
     #if !os(WASI)
     var awaiter: Awaiter
     #endif
