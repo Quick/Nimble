@@ -59,9 +59,6 @@ function test_ios {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPad Pro (9.7-inch),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
-
-    run osascript -e 'tell app "Simulator" to quit'
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
