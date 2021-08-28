@@ -51,9 +51,5 @@ public struct execTypesCountTuple<T: ExpressibleByIntegerLiteral> {
 	public init() {
 	}
 }
-
-// A workaround for a duplicate symbol error when archiving on Xcode 13.
-// See: https://github.com/Quick/Nimble/issues/913
-public let _NIMBLE_NDR_RECORD = NDR_record
 	
 #endif
