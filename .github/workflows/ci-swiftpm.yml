@@ -32,7 +32,7 @@ jobs:
           - swift:5.3
           - swift:5.4
           - swiftlang/swift:nightly-5.5
-          - swiftlang/swift:nightly
+          # - swiftlang/swift:nightly
       fail-fast: false
     container: ${{ matrix.container }}
     steps:
