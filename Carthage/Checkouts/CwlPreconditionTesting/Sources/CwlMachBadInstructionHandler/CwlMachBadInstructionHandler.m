@@ -48,6 +48,10 @@ kern_return_t catch_mach_exception_raise_state_identity(mach_port_t exception_po
 	assert(false);
 	return KERN_FAILURE;
 }
-	
+
+NDR_record_t mach_ndr_record(void) {
+	return NDR_record;
+}
+
 #endif /* TARGET_OS_OSX || TARGET_OS_IOS */
 #endif /* __APPLE__ */
