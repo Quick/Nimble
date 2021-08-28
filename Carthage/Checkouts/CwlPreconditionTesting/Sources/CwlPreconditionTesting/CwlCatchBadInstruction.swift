@@ -108,8 +108,8 @@ private func machMessageHandler(_ arg: UnsafeMutableRawPointer) -> UnsafeMutable
 		reply.Head.msgh_local_port = UInt32(MACH_PORT_NULL)
 		reply.Head.msgh_remote_port = request.Head.msgh_remote_port
 		reply.Head.msgh_size = UInt32(MemoryLayout<reply_mach_exception_raise_state_t>.size)
-		reply.NDR = NDR_record
-		
+        reply.NDR = mach_ndr_record()
+
 		if !handledfirstException {
 			// Use the MiG generated server to invoke our handler for the request and fill in the rest of the reply structure
 			guard request.withMsgHeaderPointer(in: { requestPtr in reply.withMsgHeaderPointer { replyPtr in
