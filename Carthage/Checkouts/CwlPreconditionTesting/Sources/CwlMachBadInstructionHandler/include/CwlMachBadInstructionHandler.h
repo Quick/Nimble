@@ -73,6 +73,8 @@ typedef struct
 	mach_msg_type_number_t * _Nullable new_stateCnt;
 } bad_instruction_exception_reply_t;
 
+NDR_record_t mach_ndr_record(void);
+
 NS_ASSUME_NONNULL_END
 
 #endif
