@@ -13,10 +13,10 @@ on:
 jobs:
   swiftpm_darwin:
     name: SwiftPM, Darwin, Xcode ${{ matrix.xcode }}
-    runs-on: macos-latest
+    runs-on: macos-11
     strategy:
       matrix:
-        xcode: [11.7, 12.4]
+        xcode: [11.7, 12.4, 12.5]
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app
     steps:
