@@ -20,13 +20,31 @@ internal func equal<T>(
 /// Values can support equal by supporting the Equatable protocol.
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
+public func equal<T: Equatable>(_ expectedValue: T) -> Predicate<T> {
+    equal(expectedValue as T?)
+}
+
+/// A Nimble matcher that succeeds when the actual value is equal to the expected value.
+/// Values can support equal by supporting the Equatable protocol.
+///
+/// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
     equal(expectedValue, by: ==)
 }
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
+public func equal<T>(_ expectedValue: Set<T>) -> Predicate<Set<T>> {
+    return equal(expectedValue as Set<T>?)
+}
+
+/// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T>(_ expectedValue: Set<T>?) -> Predicate<Set<T>> {
     return equal(expectedValue, stringify: { stringify($0) })
+}
+
+/// A Nimble matcher that succeeds when the actual set is equal to the expected set.
+public func equal<T: Comparable>(_ expectedValue: Set<T>) -> Predicate<Set<T>> {
+    return equal(expectedValue as Set<T>?)
 }
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
