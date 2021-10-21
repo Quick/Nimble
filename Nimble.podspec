@@ -20,6 +20,8 @@ Pod::Spec.new do |s|
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/**/*.{swift,h,m,c}",
   ]
 
+  s.header_dir = "Nimble"
+
   s.osx.exclude_files = [
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]

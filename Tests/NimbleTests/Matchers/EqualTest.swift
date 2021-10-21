@@ -156,17 +156,6 @@ final class EqualTest: XCTestCase {
         }
     }
 
-    // see: https://github.com/Quick/Nimble/issues/867
-    func testOperatorEqualityWithImplicitMemberSyntax() {
-        struct Xxx: Equatable {
-            let value: Int
-        }
-
-        let xxx = Xxx(value: 123)
-        expect(xxx) == .init(value: 123)
-        expect(xxx) != .init(value: 124)
-    }
-
     func testOperatorEqualityWithArrays() {
         let array1: [Int] = [1, 2, 3]
         let array2: [Int] = [1, 2, 3]
@@ -261,5 +250,39 @@ final class EqualTest: XCTestCase {
         expect((1, "2", 3, four: "4")).to(equal((1, "2", 3, "4")))
         expect((1, "2", 3, four: "4", 5)).to(equal((1, "2", 3, "4", five: 5)))
         expect((1, "2", 3, four: "4", 5, "6")).to(equal((1, "2", 3, "4", five: 5, "6")))
+    }
+
+    // see: https://github.com/Quick/Nimble/issues/867 and https://github.com/Quick/Nimble/issues/937
+    func testImplicitMemberSyntax() {
+        let xxx = Xxx(value: 123)
+        expect(xxx).to(equal(.init(value: 123)))
+        expect(xxx).toNot(equal(.init(value: 124)))
+        expect(xxx) == .init(value: 123)
+        expect(xxx) != .init(value: 124)
+
+        let set: Set<Xxx> = [xxx]
+        expect(set).to(equal(.init([Xxx(value: 123)])))
+        expect(set).toNot(equal(.init([Xxx(value: 124)])))
+        expect(set) == .init([Xxx(value: 123)])
+        expect(set) != .init([Xxx(value: 124)])
+
+        let yyy = Yyy(value: 456)
+        let comparableSet: Set<Yyy> = [yyy]
+        expect(comparableSet).to(equal(.init([Yyy(value: 456)])))
+        expect(comparableSet).toNot(equal(.init([Yyy(value: 457)])))
+        expect(comparableSet) == .init([Yyy(value: 456)])
+        expect(comparableSet) != .init([Yyy(value: 457)])
+    }
+}
+
+private struct Xxx: Hashable {
+    let value: Int
+}
+
+private struct Yyy: Comparable, Hashable {
+    let value: Int
+
+    static func < (lhs: Yyy, rhs: Yyy) -> Bool {
+        lhs.value < rhs.value
     }
 }
