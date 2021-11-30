@@ -20,7 +20,6 @@
 
 #if (os(macOS) || os(iOS)) && (arch(x86_64) || arch(arm64))
 
-import CwlCatchException
 import Foundation
 import Swift
 
