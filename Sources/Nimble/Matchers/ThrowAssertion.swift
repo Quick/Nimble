@@ -84,7 +84,7 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if arch(x86_64) && (canImport(Darwin) || canImport(Glibc))
+    #if (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
         let message = ExpectationMessage.expectedTo("throw an assertion")
 
         var actualError: Error?
@@ -122,8 +122,9 @@ public func throwAssertion<Out>() -> Predicate<Out> {
         }
     #else
         let message = """
-            The throwAssertion Nimble matcher can only run on x86_64 platforms.
-            You can silence this error by placing the test case inside an #if arch(x86_64) conditional statement.
+            The throwAssertion Nimble matcher can only run on x86_64 and arm64 platforms.
+            You can silence this error by placing the test case inside an #if arch(x86_64) || arch(arm64) conditional \
+            statement.
             """
         fatalError(message)
     #endif
