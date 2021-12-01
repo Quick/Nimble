@@ -26,15 +26,14 @@
 #import "CwlMachBadInstructionHandler.h"
 
 @protocol BadInstructionReply <NSObject>
-+(NSNumber *)receiveReply:(NSValue *)value;
++(int)receiveReply:(bad_instruction_exception_reply_t)reply;
 @end
 
 /// A basic function that receives callbacks from mach_exc_server and relays them to the Swift implemented BadInstructionException.catch_mach_exception_raise_state.
 kern_return_t catch_mach_exception_raise_state(mach_port_t exception_port, exception_type_t exception, const mach_exception_data_t code, mach_msg_type_number_t codeCnt, int *flavor, const thread_state_t old_state, mach_msg_type_number_t old_stateCnt, thread_state_t new_state, mach_msg_type_number_t *new_stateCnt) {
 	bad_instruction_exception_reply_t reply = { exception_port, exception, code, codeCnt, flavor, old_state, old_stateCnt, new_state, new_stateCnt };
 	Class badInstructionClass = NSClassFromString(@"BadInstructionException");
-	NSValue *value = [NSValue valueWithBytes: &reply objCType: @encode(bad_instruction_exception_reply_t)];
-	return [[badInstructionClass performSelector: @selector(receiveReply:) withObject: value] intValue];
+	return [badInstructionClass receiveReply:reply];
 }
 
 // The mach port should be configured so that this function is never used.
