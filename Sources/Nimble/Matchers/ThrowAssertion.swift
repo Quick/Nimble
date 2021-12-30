@@ -84,9 +84,10 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
+    #if os(watchOS)
+        fatalError("Nimble currently doesn't support watchOS.")
+    #elseif (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
         let message = ExpectationMessage.expectedTo("throw an assertion")
-
         var actualError: Error?
         let caughtException: BadInstructionException? = catchBadInstruction {
             #if os(tvOS)
