@@ -40,6 +40,44 @@ final class EqualTest: XCTestCase {
         }
     }
 
+    func testArrayEqualityWithOptionalElement() {
+        let array: [String] = [""]
+        let getString: () -> String? = { return "" }
+
+        // Compiles
+        expect(array) == [getString()] as [String?]
+
+        expect(array) == ([getString()] as [String?])
+
+        // Does not compile with the error:
+        // Cannot convert value of type 'String?' to expected element type 'Array<String>.ArrayLiteralElement' (aka 'String')
+        expect(array).to(equal([getString()]))
+
+        expect(array) == [getString()]
+
+        let optionalString = getString()
+        expect(array) == [optionalString]
+    }
+
+    func testDictEqualityWithOptionalElement() {
+        let dict: [String : String] = ["" : ""]
+        let getString: () -> String? = { return "" }
+
+        // Compiles
+        expect(dict) == ["": getString()] as [String: String?]
+
+        expect(dict) == (["": getString()] as [String: String?])
+
+        // Does not compile with the error:
+        // Cannot convert value of type 'String?' to expected dictionary value type 'String'
+        expect(dict).to(equal(["": getString()])) // This also does not work in latest version v2.9.1
+
+        expect(dict) == ["": getString()]
+
+        let optionalString = getString()
+        expect(dict) == ["": optionalString]
+    }
+
     func testSetEquality() {
         expect(Set([1, 2])).to(equal(Set([1, 2])))
         expect(Set<Int>()).to(equal(Set<Int>()))
