@@ -3,28 +3,39 @@ import Nimble
 
 final class ToSucceedTest: XCTestCase {
     func testToSucceed() {
-        expect({
-            return .succeeded
-        }).to(succeed())
+        expect {
+            let result: Result<Bool, Error> = .success(true)
+            
+            switch result {
+            case .success:
+                return { .succeeded }
+            default:
+                return { .failed(reason: "") }
+            }
+        }.to(succeed())
+                
+        expect {
+            .succeeded
+        }.to(succeed())
 
-        expect({
-            return .failed(reason: "")
-        }).toNot(succeed())
+        expect {
+            .failed(reason: "")
+        } .toNot(succeed())
 
         failsWithErrorMessageForNil("expected a closure, got <nil>") {
             expect(nil as (() -> ToSucceedResult)?).to(succeed())
         }
 
         failsWithErrorMessage("expected to succeed, got <failed> because <something went wrong>") {
-            expect({
+            expect {
                 .failed(reason: "something went wrong")
-            }).to(succeed())
+            } .to(succeed())
         }
 
         failsWithErrorMessage("expected to not succeed, got <succeeded>") {
-            expect({
-                return .succeeded
-            }).toNot(succeed())
+            expect {
+                .succeeded
+            } .toNot(succeed())
         }
     }
 }
