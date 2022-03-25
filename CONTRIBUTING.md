@@ -63,7 +63,7 @@ Be sure to include in your issue:
   by name.
 - Make sure your pull request includes any necessary updates to the
   README or other documentation.
-- Be sure the unit tests for both the OS X and iOS targets of Nimble
+- Be sure the unit tests for both the OS X and iOS targets of Nimble pass
   before submitting your pull request. You can run all the OS X & iOS unit
   tests using `./test`.
 - If you've added a file to the project, make sure it's included in both
