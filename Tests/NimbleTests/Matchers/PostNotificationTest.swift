@@ -68,7 +68,47 @@ final class PostNotificationTest: XCTestCase {
             }
         }.toEventually(postNotifications(equal([testNotification]), from: notificationCenter))
     }
+    
+    func testFailsWhenNotificationIsPostedUnexpectedly() {
+        let n1 = Notification(name: Notification.Name("Foo"), object: nil)
+        failsWithErrorMessage("expected to not equal <[\(n1)]>, got <[\(n1)]>") {
+            expect {
+                self.notificationCenter.post(n1)
+            }.toNot(postNotifications(equal([n1]), from: self.notificationCenter))
+        }
+    }
 
+    func testPassesWhenNotificationIsNotPosted() {
+        let n1 = Notification(name: Notification.Name("Foo"), object: nil)
+        let n2 = Notification(name: Notification.Name(n1.name.rawValue + "a"), object: nil)
+        expect {
+            self.notificationCenter.post(n2)
+        }.toEventuallyNot(postNotifications(equal([n1]), from: self.notificationCenter))
+    }
+    
+    func testPassesWhenNotificationIsPostedFromADifferentThread() {
+        let n1 = Notification(name: Notification.Name("Foo"), object: nil)
+        expect {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let backgroundThreadObject = BackgroundThreadObject()
+                let n2 = Notification(name: Notification.Name(n1.name.rawValue + "a"), object: backgroundThreadObject)
+                self.notificationCenter.post(n2)
+            }
+            self.notificationCenter.post(n1)
+        }.toEventually(postNotifications(contain([n1]), from: notificationCenter))
+    }
+
+    func testPassesWhenNotificationIsPostedFromADifferentThreadAndToEventuallyNotCalled() {
+        let n1 = Notification(name: Notification.Name("Foo"), object: nil)
+        expect {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let backgroundThreadObject = BackgroundThreadObject()
+                let n2 = Notification(name: Notification.Name(n1.name.rawValue + "a"), object: backgroundThreadObject)
+                self.notificationCenter.post(n2)
+            }
+        }.toEventuallyNot(postNotifications(equal([n1]), from: notificationCenter))
+    }
+    
     #if os(macOS)
     func testPassesWhenAllExpectedNotificationsarePostedInDistributedNotificationCenter() {
         let center = DistributedNotificationCenter()

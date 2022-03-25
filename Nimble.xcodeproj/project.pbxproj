@@ -290,6 +290,9 @@
 		472FD13B1B9E0CFE00C7B8DA /* HaveCountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */; };
 		4793854D1BA0BB2500296F85 /* ObjCHaveCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCountTest.m */; };
 		4793854E1BA0BB2500296F85 /* ObjCHaveCountTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4793854C1BA0BB2500296F85 /* ObjCHaveCountTest.m */; };
+		52F5CD6527EE571C00B19809 /* BackgroundThreadObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */; };
+		52F5CD6627EE571C00B19809 /* BackgroundThreadObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */; };
+		52F5CD6727EE571C00B19809 /* BackgroundThreadObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */; };
 		62FB326223B78BF90047BED9 /* BeginWithPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FB326123B78BF90047BED9 /* BeginWithPrefix.swift */; };
 		62FB326323B78BF90047BED9 /* BeginWithPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FB326123B78BF90047BED9 /* BeginWithPrefix.swift */; };
 		62FB326423B78BF90047BED9 /* BeginWithPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FB326123B78BF90047BED9 /* BeginWithPrefix.swift */; };
@@ -615,6 +618,7 @@
 		472FD1341B9E085700C7B8DA /* HaveCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
 		472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveCountTest.swift; sourceTree = "<group>"; };
 		4793854C1BA0BB2500296F85 /* ObjCHaveCountTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHaveCountTest.m; sourceTree = "<group>"; };
+		52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundThreadObject.swift; sourceTree = "<group>"; };
 		62FB326123B78BF90047BED9 /* BeginWithPrefix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginWithPrefix.swift; sourceTree = "<group>"; };
 		62FB326523B78D4A0047BED9 /* BeginWithPrefixTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginWithPrefixTest.swift; sourceTree = "<group>"; };
 		6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxSupport.swift; sourceTree = "<group>"; };
@@ -720,6 +724,7 @@
 				1F14FB63194180C5009F2A08 /* utils.swift */,
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
 				898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */,
+				52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1465,6 +1470,7 @@
 				7B13BA111DD361EB00C9098C /* ObjCContainElementSatisfyingTest.m in Sources */,
 				1F925EF6195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				106112C62251E13B000A5848 /* BeResultTest.swift in Sources */,
+				52F5CD6627EE571C00B19809 /* BackgroundThreadObject.swift in Sources */,
 				1F4A56791A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				A8A3B6F6207329DD00E25A08 /* SatisfyAllOfTest.swift in Sources */,
 				AE7ADE491C80C00D00B94CD3 /* MatchErrorTest.swift in Sources */,
@@ -1609,6 +1615,7 @@
 				CD79C9A31D2CC841004B6F9A /* ObjCBeFalseTest.m in Sources */,
 				1F5DF1A71BDCA10200C3A531 /* EqualTest.swift in Sources */,
 				106112C72251E13B000A5848 /* BeResultTest.swift in Sources */,
+				52F5CD6727EE571C00B19809 /* BackgroundThreadObject.swift in Sources */,
 				CD79C9AA1D2CC848004B6F9A /* ObjCBeLessThanOrEqualToTest.m in Sources */,
 				1F5DF1931BDCA10200C3A531 /* SynchronousTest.swift in Sources */,
 				CD79C9A11D2CC83B004B6F9A /* ObjCBeCloseToTest.m in Sources */,
@@ -1758,6 +1765,7 @@
 				7B13BA101DD361EA00C9098C /* ObjCContainElementSatisfyingTest.m in Sources */,
 				1F925EF7195C147800ED456B /* BeCloseToTest.swift in Sources */,
 				1F4A567A1A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
+				52F5CD6527EE571C00B19809 /* BackgroundThreadObject.swift in Sources */,
 				A8A3B6F5207329DC00E25A08 /* SatisfyAllOfTest.swift in Sources */,
 				AE7ADE4A1C80C00D00B94CD3 /* MatchErrorTest.swift in Sources */,
 				1F4A568C1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
