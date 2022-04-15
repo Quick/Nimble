@@ -18,7 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#if arch(x86_64)
+#if arch(x86_64) || arch(arm64)
 
 import Foundation
 
@@ -35,33 +35,44 @@ import Foundation
 // Treat it like a loaded shotgun. Don't point it at your face.
 
 // This function is called from the signal handler to shut down the thread and return 1 (indicating a SIGILL was received).
-private func callThreadExit() {
+let callThreadExit = {
 	pthread_exit(UnsafeMutableRawPointer(bitPattern: 1))
-}
+} as @convention(c) () -> Void
 
 // When called, this signal handler simulates a function call to `callThreadExit`
 private func sigIllHandler(code: Int32, info: UnsafeMutablePointer<__siginfo>?, uap: UnsafeMutableRawPointer?) -> Void {
-	guard let context = uap?.assumingMemoryBound(to: ucontext64_t.self) else { return }
+	guard let context = uap?.bindMemory(to: ucontext64_t.self, capacity: 1) else { return }
 
+	#if arch(x86_64)
 	// 1. Decrement the stack pointer
-	context.pointee.uc_mcontext64.pointee.__ss.__rsp -= __uint64_t(MemoryLayout<Int>.size)
+	context.pointee.uc_mcontext64.pointee.__ss.__rsp -= UInt64(MemoryLayout<Int>.size)
 
 	// 2. Save the old Instruction Pointer to the stack.
 	let rsp = context.pointee.uc_mcontext64.pointee.__ss.__rsp
-	if let ump = UnsafeMutablePointer<__uint64_t>(bitPattern: UInt(rsp)) {
+	if let ump = UnsafeMutablePointer<UInt64>(bitPattern: UInt(rsp)) {
 		ump.pointee = rsp
 	}
 
 	// 3. Set the Instruction Pointer to the new function's address
-	var f: @convention(c) () -> Void = callThreadExit
-	withUnsafePointer(to: &f) {	$0.withMemoryRebound(to: __uint64_t.self, capacity: 1) { ptr in
-		context.pointee.uc_mcontext64.pointee.__ss.__rip = ptr.pointee
-	} }
+	context.pointee.uc_mcontext64.pointee.__ss.__rip = unsafeBitCast(callThreadExit, to: UInt64.self)
+	#elseif arch(arm64)
+	// 1. Set the link register to the current address.
+	context.pointee.uc_mcontext64.pointee.__ss.__lr = context.pointee.uc_mcontext64.pointee.__ss.__pc
+	
+	// 2. Set the Instruction Pointer to the new function's address.
+	context.pointee.uc_mcontext64.pointee.__ss.__pc = unsafeBitCast(callThreadExit, to: UInt64.self)
+	#endif
 }
 
 /// Without Mach exceptions or the Objective-C runtime, there's nothing to put in the exception object. It's really just a boolean – either a SIGILL was caught or not.
 public class BadInstructionException {
 }
+
+#if arch(x86_64)
+public let nativeSignal = SIGILL
+#elseif arch(arm64)
+public let nativeSignal = SIGTRAP
+#endif
 
 /// Run the provided block. If a POSIX SIGILL is received, handle it and return a BadInstructionException (which is just an empty object in this POSIX signal version). Otherwise return nil.
 /// NOTE: This function is only intended for use in test harnesses – use in a distributed build is almost certainly a bad choice. If a SIGILL is received, the block will be interrupted using a C `longjmp`. The risks associated with abrupt jumps apply here: most Swift functions are *not* interrupt-safe. Memory may be leaked and the program will not necessarily be left in a safe state.
@@ -74,13 +85,13 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 	var sigActionNew = sigaction(__sigaction_u: action, sa_mask: sigset_t(), sa_flags: SA_SIGINFO)
 	
 	// Install the signal action
-	if sigaction(SIGILL, &sigActionNew, &sigActionPrev) != 0 {
+	if sigaction(nativeSignal, &sigActionNew, &sigActionPrev) != 0 {
 		fatalError("Sigaction error: \(errno)")
 	}
 	
 	defer {
 		// Restore the previous signal action
-		if sigaction(SIGILL, &sigActionPrev, nil) != 0 {
+		if sigaction(nativeSignal, &sigActionPrev, nil) != 0 {
 			fatalError("Sigaction error: \(errno)")
 		}
 	}
@@ -90,7 +101,7 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 		// Run the block on its own thread
 		var handlerThread: pthread_t? = nil
 		let e = pthread_create(&handlerThread, nil, { arg in
-			(arg.assumingMemoryBound(to: (() -> Void).self).pointee)()
+			arg.bindMemory(to: (() -> Void).self, capacity: 1).pointee()
 			return nil
 		}, blockPtr)
 		precondition(e == 0, "Unable to create thread")

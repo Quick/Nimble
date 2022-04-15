@@ -18,7 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#if (os(macOS) || os(iOS)) && arch(x86_64)
+#if (os(macOS) || os(iOS)) && (arch(x86_64) || arch(arm64))
 
 import Darwin
 
@@ -35,13 +35,22 @@ public func MACH_MSGH_BITS(_ remote: UInt32, _ local: UInt32) -> UInt32 { return
 // From /usr/include/mach/exception_types.h
 // #define EXC_BAD_INSTRUCTION	2	/* Instruction failed */
 // #define EXC_MASK_BAD_INSTRUCTION	(1 << EXC_BAD_INSTRUCTION)
-public let EXC_BAD_INSTRUCTION: UInt32 = 2
-public let EXC_MASK_BAD_INSTRUCTION: UInt32 = 1 << EXC_BAD_INSTRUCTION
+//public let EXC_MASK_BAD_INSTRUCTION: UInt32 = 1 << EXC_BAD_INSTRUCTION
 
+#if arch(x86_64)
 // From /usr/include/mach/i386/thread_status.h
-// #define x86_THREAD_STATE64_COUNT	((mach_msg_type_number_t) \
-//		( sizeof (x86_thread_state64_t) / sizeof (int) ))
-public let x86_THREAD_STATE64_COUNT = UInt32(MemoryLayout<x86_thread_state64_t>.size / MemoryLayout<Int32>.size)
+// #define x86_threadStateCount	((mach_msg_type_number_t) \
+//		( sizeof (x86_NativeThreadState) / sizeof (int) ))
+public let nativeThreadState = x86_THREAD_STATE64
+public let nativeThreadStateCount = UInt32(MemoryLayout<x86_thread_state64_t>.size / MemoryLayout<CInt>.size)
+typealias NativeThreadState = x86_thread_state64_t
+public let nativeMachExceptionMask = exception_mask_t(EXC_MASK_BAD_INSTRUCTION)
+#elseif arch(arm64)
+public let nativeThreadState = ARM_THREAD_STATE64
+public let nativeThreadStateCount = UInt32(MemoryLayout<arm_thread_state64_t>.size / MemoryLayout<UInt32>.size)
+typealias NativeThreadState = arm_thread_state64_t
+public let nativeMachExceptionMask = exception_mask_t(EXC_MASK_BREAKPOINT)
+#endif
 
 public let EXC_TYPES_COUNT = 14
 public struct execTypesCountTuple<T: ExpressibleByIntegerLiteral> {

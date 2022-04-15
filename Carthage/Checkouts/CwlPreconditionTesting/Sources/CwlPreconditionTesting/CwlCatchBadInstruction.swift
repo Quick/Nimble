@@ -18,7 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
-#if (os(macOS) || os(iOS)) && arch(x86_64)
+#if (os(macOS) || os(iOS)) && (arch(x86_64) || arch(arm64))
 
 import Foundation
 import Swift
@@ -108,8 +108,8 @@ private func machMessageHandler(_ arg: UnsafeMutableRawPointer) -> UnsafeMutable
 		reply.Head.msgh_local_port = UInt32(MACH_PORT_NULL)
 		reply.Head.msgh_remote_port = request.Head.msgh_remote_port
 		reply.Head.msgh_size = UInt32(MemoryLayout<reply_mach_exception_raise_state_t>.size)
-        reply.NDR = mach_ndr_record()
-
+		reply.NDR = mach_ndr_record()
+		
 		if !handledfirstException {
 			// Use the MiG generated server to invoke our handler for the request and fill in the rest of the reply structure
 			guard request.withMsgHeaderPointer(in: { requestPtr in reply.withMsgHeaderPointer { replyPtr in
@@ -181,12 +181,12 @@ public func catchBadInstruction(in block: @escaping () -> Void) -> BadInstructio
 		let currentExceptionPtr = context.currentExceptionPort
 		try kernCheck { context.withUnsafeMutablePointers { masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr in
 			// 3. Apply the mach port as the handler for this thread
-			thread_swap_exception_ports(mach_thread_self(), EXC_MASK_BAD_INSTRUCTION, currentExceptionPtr, Int32(bitPattern: UInt32(EXCEPTION_STATE) | MACH_EXCEPTION_CODES), x86_THREAD_STATE64, masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr)
+			thread_swap_exception_ports(mach_thread_self(), nativeMachExceptionMask, currentExceptionPtr, Int32(bitPattern: UInt32(EXCEPTION_STATE) | MACH_EXCEPTION_CODES), nativeThreadState, masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr)
 		} }
 		
 		defer { context.withUnsafeMutablePointers { masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr in
 			// 6. Unapply the mach port
-			_ = thread_swap_exception_ports(mach_thread_self(), EXC_MASK_BAD_INSTRUCTION, 0, EXCEPTION_DEFAULT, THREAD_STATE_NONE, masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr)
+			_ = thread_swap_exception_ports(mach_thread_self(), nativeMachExceptionMask, 0, EXCEPTION_DEFAULT, THREAD_STATE_NONE, masksPtr, countPtr, portsPtr, behaviorsPtr, flavorsPtr)
 		} }
 		
 		try withUnsafeMutablePointer(to: &context) { c throws in
