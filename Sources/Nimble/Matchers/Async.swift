@@ -11,7 +11,7 @@ public struct AsyncDefaults {
 }
 
 private enum AsyncMatchStyle {
-    case eventually, never
+    case eventually, never, always
 }
 
 // swiftlint:disable:next function_parameter_count
@@ -46,6 +46,11 @@ private func async<T>(
                     status: .fail,
                     message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
                 )
+            case .always:
+                return PredicateResult(
+                    status: .fail,
+                    message: lastPredicateResult?.message ?? .fail("didn't match the predicate when it should have")
+                )
             }
         case .timedOut:
             switch matchStyle {
@@ -54,6 +59,8 @@ private func async<T>(
                 return PredicateResult(status: .fail, message: message)
             case .never:
                 return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
+            case .always:
+                return PredicateResult(status: .matches, message: .expectedTo("always match the predicate"))
             }
         case let .errorThrown(error):
             return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
@@ -180,6 +187,45 @@ extension Expectation {
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     public func neverTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
+    }
+
+    /// Tests the actual value using a matcher to always match by checking
+    /// continusouly at each pollInterval until the timeout is reached
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    public func toAlways(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
+        nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
+
+        let (pass, msg) = execute(
+            expression,
+            .toMatch,
+            async(
+                style: .toNotMatch,
+                matchStyle: .always,
+                predicate: predicate,
+                timeout: until,
+                poll: pollInterval,
+                fnName: "toAlways"
+            ),
+            to: "to always",
+            description: description,
+            captureExceptions: false
+        )
+        verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to always match by checking
+    /// continusouly at each pollInterval until the timeout is reached
+    ///
+    /// Alias of toAlways()
+    ///
+    /// @discussion
+    /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
+    /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    public func alwaysTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) {
+        return toAlways(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }
 
