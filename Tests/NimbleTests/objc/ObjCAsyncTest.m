@@ -92,4 +92,43 @@
     });
 }
 
+- (void)testToAlwaysPositiveMatches {
+    __block id value = @2;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        value = @3;
+    });
+    expect(value).toAlways(beGreaterThan(1));
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        value = @2;
+    });
+    expect(value).alwaysTo(beGreaterThan(1));
+}
+
+- (void)testToAlwaysNegativeMatches {
+    __block id value = @0;
+    expectFailureMessage(@"expected to always equal <0>, got <1>", ^{
+        value = @1;
+        expect(value).toAlways(equal(0));
+    });
+    expectFailureMessage(@"expected to always equal <0>, got <1>", ^{
+        value = @1;
+        expect(value).alwaysTo(equal(0));
+    });
+    expectFailureMessage(@"expected to always equal <1>, got <2>", ^{
+        value = @1;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            value = @2;
+        });
+        expect(value).toAlways(equal(1));
+    });
+    expectFailureMessage(@"expected to always equal <1>, got <2>", ^{
+        value = @1;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            value = @2;
+        });
+        expect(value).alwaysTo(equal(1));
+    });
+}
+
 @end

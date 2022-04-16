@@ -284,6 +284,39 @@ final class AsyncTest: XCTestCase {
             expect { try self.doThrowError() }.neverTo(equal(0))
         }
     }
+
+    func testToAlwaysPositiveMatches() {
+        var value = 1
+        deferToMainQueue { value = 2 }
+        expect { value }.toAlways(beGreaterThan(0))
+
+        deferToMainQueue { value = 2 }
+        expect { value }.alwaysTo(beGreaterThan(1))
+    }
+
+    func testToAlwaysNegativeMatches() {
+        var value = 1
+        failsWithErrorMessage("expected to always equal <0>, got <1>") {
+            expect { value }.toAlways(equal(0))
+        }
+        failsWithErrorMessage("expected to always equal <0>, got <1>") {
+            expect { value }.alwaysTo(equal(0))
+        }
+        failsWithErrorMessage("expected to always equal <1>, got <0>") {
+            deferToMainQueue { value = 0 }
+            expect { value }.toAlways(equal(1))
+        }
+        failsWithErrorMessage("expected to always equal <1>, got <0>") {
+            deferToMainQueue { value = 0 }
+            expect { value }.alwaysTo(equal(1))
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.toAlways(equal(0))
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            expect { try self.doThrowError() }.alwaysTo(equal(0))
+        }
+    }
 }
 
 #endif // #if !os(WASI)
