@@ -44,15 +44,10 @@ final class EqualTest: XCTestCase {
         let array: [String] = [""]
         let getString: () -> String? = { return "" }
 
-        // Compiles
         expect(array) == [getString()] as [String?]
-
         expect(array) == ([getString()] as [String?])
 
-        // Does not compile with the error:
-        // Cannot convert value of type 'String?' to expected element type 'Array<String>.ArrayLiteralElement' (aka 'String')
         expect(array).to(equal([getString()]))
-
         expect(array) == [getString()]
 
         let optionalString = getString()
@@ -63,15 +58,9 @@ final class EqualTest: XCTestCase {
         let dict: [String : String] = ["" : ""]
         let getString: () -> String? = { return "" }
 
-        // Compiles
         expect(dict) == ["": getString()] as [String: String?]
-
         expect(dict) == (["": getString()] as [String: String?])
-
-        // Does not compile with the error:
-        // Cannot convert value of type 'String?' to expected dictionary value type 'String'
-        expect(dict).to(equal(["": getString()])) // This also does not work in latest version v2.9.1
-
+        expect(dict).to(equal(["": getString()])) 
         expect(dict) == ["": getString()]
 
         let optionalString = getString()
@@ -83,6 +72,12 @@ final class EqualTest: XCTestCase {
         expect(Set<Int>()).to(equal(Set<Int>()))
         expect(Set<Int>()) == Set<Int>()
         expect(Set([1, 2])) != Set<Int>()
+
+        let optionalSet: Set<Int?> = [1, 2]
+        expect(Set([1, 2])).to(equal(optionalSet))
+        expect(Set([1, 2, 3])).toNot(equal(optionalSet))
+        expect(Set([1, 2])) == optionalSet
+        expect(optionalSet) != Set([1, 2, 3])
 
         failsWithErrorMessageForNil("expected to equal <[1, 2]>, got <nil>") {
             expect(nil as Set<Int>?).to(equal(Set([1, 2])))
