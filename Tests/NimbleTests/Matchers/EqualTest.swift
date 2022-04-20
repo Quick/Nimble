@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class EqualTest: XCTestCase {
+final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))
@@ -55,12 +55,12 @@ final class EqualTest: XCTestCase {
     }
 
     func testDictEqualityWithOptionalElement() {
-        let dict: [String : String] = ["" : ""]
+        let dict: [String: String] = ["": ""]
         let getString: () -> String? = { return "" }
 
         expect(dict) == ["": getString()] as [String: String?]
         expect(dict) == (["": getString()] as [String: String?])
-        expect(dict).to(equal(["": getString()])) 
+        expect(dict).to(equal(["": getString()]))
         expect(dict) == ["": getString()]
 
         let optionalString = getString()

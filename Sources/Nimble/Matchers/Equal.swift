@@ -117,7 +117,7 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 }
 
 /// A Nimble matcher that succeeds when the actual dictionary is equal to the expected dictionary
-public func equal<K: Hashable, V: Equatable>(_ expectedValue: Dictionary<K, V?>) -> Predicate<Dictionary<K, V>> {
+public func equal<K: Hashable, V: Equatable>(_ expectedValue: [K: V?]) -> Predicate<[K: V]> {
     Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         guard let actualValue = try actualExpression.evaluate() else {
             return PredicateResult(
