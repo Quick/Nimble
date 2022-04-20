@@ -54,6 +54,27 @@ Be sure to include in your issue:
 
 2. Run `./test swiftpm`
 
+## Running the Linux tests on a Mac using Docker
+
+1. Install & set up [Docker Desktop](https://docs.docker.com/desktop/mac/install/)
+2. With Docker running, run the following:
+
+```shell
+docker pull swift:latest
+docker run -it -v `pwd`:/project swift bash
+cd project
+swift test
+```
+
+Note If you're running on an Apple Silicon Mac: As of this writing, `swift:latest` does not have an arm image. The `amazonlinux2` tag does, and you should use that.
+
+```shell
+docker pull swift:amazonlinux2
+docker run -it -v `pwd`:/project swift:amazonlinux2 bash
+cd project
+swift test
+```
+
 ## Pull Requests
 
 - Nothing is trivial. Submit pull requests for anything: typos,
