@@ -2,7 +2,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class EqualTest: XCTestCase {
+final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testEquality() {
         expect(1 as CInt).to(equal(1 as CInt))
         expect(1 as CInt).to(equal(1))
@@ -40,11 +40,44 @@ final class EqualTest: XCTestCase {
         }
     }
 
+    func testArrayEqualityWithOptionalElement() {
+        let array: [String] = [""]
+        let getString: () -> String? = { return "" }
+
+        expect(array) == [getString()] as [String?]
+        expect(array) == ([getString()] as [String?])
+
+        expect(array).to(equal([getString()]))
+        expect(array) == [getString()]
+
+        let optionalString = getString()
+        expect(array) == [optionalString]
+    }
+
+    func testDictEqualityWithOptionalElement() {
+        let dict: [String: String] = ["": ""]
+        let getString: () -> String? = { return "" }
+
+        expect(dict) == ["": getString()] as [String: String?]
+        expect(dict) == (["": getString()] as [String: String?])
+        expect(dict).to(equal(["": getString()]))
+        expect(dict) == ["": getString()]
+
+        let optionalString = getString()
+        expect(dict) == ["": optionalString]
+    }
+
     func testSetEquality() {
         expect(Set([1, 2])).to(equal(Set([1, 2])))
         expect(Set<Int>()).to(equal(Set<Int>()))
         expect(Set<Int>()) == Set<Int>()
         expect(Set([1, 2])) != Set<Int>()
+
+        let optionalSet: Set<Int?> = [1, 2]
+        expect(Set([1, 2])).to(equal(optionalSet))
+        expect(Set([1, 2, 3])).toNot(equal(optionalSet))
+        expect(Set([1, 2])) == optionalSet
+        expect(optionalSet) != Set([1, 2, 3])
 
         failsWithErrorMessageForNil("expected to equal <[1, 2]>, got <nil>") {
             expect(nil as Set<Int>?).to(equal(Set([1, 2])))
