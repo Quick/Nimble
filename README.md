@@ -738,8 +738,7 @@ expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 
 ```
 
-> Values given to the `beCloseTo` matcher must be coercable into a
-  `Double`.
+> Values given to the `beCloseTo` matcher must conform to `FloatingPoint`.
 
 ## Types/Classes
 
@@ -1070,6 +1069,18 @@ expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
 expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
     return [[turtle color] isEqualToString:@"blue"];
 }));
+```
+
+For asserting on if the given `Comparable` value is inside of a `Range`, use the `beWithin` matcher.
+
+```swift
+// Swift
+
+// Passes if 5 is within the range 1 through 10, inclusive
+expect(5).to(beWithin(1...10))
+
+// Passes if 5 is not within the range 2 through 4.
+expect(5).toNot(beWithin(2..<5))
 ```
 
 ## Strings
