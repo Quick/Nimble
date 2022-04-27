@@ -14,7 +14,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Nimble", 
+            name: "Nimble",
             dependencies: [
                 .product(name: "CwlPreconditionTesting", package: "CwlPreconditionTesting",
                          condition: .when(platforms: [.macOS, .iOS])),
@@ -24,8 +24,8 @@ let package = Package(
             exclude: ["Info.plist"]
         ),
         .testTarget(
-            name: "NimbleTests", 
-            dependencies: ["Nimble"], 
+            name: "NimbleTests",
+            dependencies: ["Nimble"],
             exclude: ["objc", "Info.plist"]
         ),
     ],
