@@ -5,7 +5,9 @@ import Foundation
 // in a notification and is picked up by Nimble
 class BackgroundThreadObject: CustomDebugStringConvertible {
     var debugDescription: String {
-        assert(!Thread.isMainThread)
+        if Thread.isMainThread {
+            fail("This notification was accessed on the main thread when it should have been handled on the thread it was received on")
+        }
         return "BackgroundThreadObject"
     }
 }
