@@ -4,7 +4,6 @@ import Nimble
 
 private let error: Error = NSError(domain: "test", code: 0, userInfo: nil)
 
-#if !os(watchOS)
 final class ThrowAssertionTest: XCTestCase {
     func testPositiveMatch() {
         #if arch(x86_64) || arch(arm64)
@@ -76,4 +75,3 @@ final class ThrowAssertionTest: XCTestCase {
         #endif
     }
 }
-#endif
