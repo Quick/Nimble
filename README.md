@@ -333,6 +333,22 @@ contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
 whole second, the expectation fails.
 
+You can also test that a value always or never matches throughout the length of the timeout. Use `toNever` and `toAlways` for this:
+
+```swift
+// Swift
+ocean.add("dolphins")
+expect(ocean).toAlways(contain("dolphins"))
+expect(ocean).toNever(contain("hares"))
+```
+
+```objc
+// Objective-C
+[ocean add:@"dolphins"]
+expect(ocean).toAlways(contain(@"dolphins"))
+expect(ocean).toNever(contain(@"hares"))
+```
+
 Sometimes it takes more than a second for a value to update. In those
 cases, use the `timeout` parameter:
 
@@ -722,8 +738,7 @@ expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 
 ```
 
-> Values given to the `beCloseTo` matcher must be coercable into a
-  `Double`.
+> Values given to the `beCloseTo` matcher must conform to `FloatingPoint`.
 
 ## Types/Classes
 
@@ -1054,6 +1069,18 @@ expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
 expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
     return [[turtle color] isEqualToString:@"blue"];
 }));
+```
+
+For asserting on if the given `Comparable` value is inside of a `Range`, use the `beWithin` matcher.
+
+```swift
+// Swift
+
+// Passes if 5 is within the range 1 through 10, inclusive
+expect(5).to(beWithin(1...10))
+
+// Passes if 5 is not within the range 2 through 4.
+expect(5).toNot(beWithin(2..<5))
 ```
 
 ## Strings

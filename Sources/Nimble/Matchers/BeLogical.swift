@@ -99,10 +99,7 @@ public func beFalse() -> Predicate<Bool> {
 public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
     return Predicate.simpleNilable("be truthy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        if let actualValue = actualValue {
-            return PredicateStatus(bool: actualValue == (true as T))
-        }
-        return PredicateStatus(bool: actualValue != nil)
+        return PredicateStatus(bool: actualValue == (true as T))
     }
 }
 
@@ -111,10 +108,7 @@ public func beTruthy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<
 public func beFalsy<T: ExpressibleByBooleanLiteral & Equatable>() -> Predicate<T> {
     return Predicate.simpleNilable("be falsy") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        if let actualValue = actualValue {
-            return PredicateStatus(bool: actualValue == (false as T))
-        }
-        return PredicateStatus(bool: actualValue == nil)
+        return PredicateStatus(bool: actualValue != (true as T))
     }
 }
 
