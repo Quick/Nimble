@@ -17,7 +17,7 @@ public func < <V: Comparable>(lhs: AsyncExpectation<V>, rhs: V) async {
 }
 
 #if canImport(Darwin)
-import enum Foundation.ComparisonResult
+import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan<T: NMBComparable>(_ expectedValue: T?) -> Matcher<T> {

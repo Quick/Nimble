@@ -236,7 +236,7 @@ public func != <T, C: Equatable>(lhs: AsyncExpectation<[T: C]>, rhs: [T: C]?) as
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 extension NMBMatcher {
     @objc public class func equalMatcher(_ expected: NSObject) -> NMBMatcher {

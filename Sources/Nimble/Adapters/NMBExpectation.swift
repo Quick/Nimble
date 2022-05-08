@@ -1,8 +1,7 @@
 #if !os(WASI)
 
 #if canImport(Darwin)
-import class Foundation.NSObject
-import typealias Foundation.TimeInterval
+import Foundation
 
 private func from(objcMatcher: NMBMatcher) -> Matcher<NSObject> {
     return Matcher { actualExpression in

@@ -1,8 +1,7 @@
 #if !os(WASI)
 import Dispatch
-import class Foundation.Thread
 #endif
-import class Foundation.NSObject
+import Foundation
 
 /// "Global" state of Nimble is stored here. Only DSL functions should access / be aware of this
 /// class' existence

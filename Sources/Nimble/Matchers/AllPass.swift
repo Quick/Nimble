@@ -64,9 +64,7 @@ private func createMatcher<S: Sequence>(_ elementMatcher: Matcher<S.Element>) ->
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
-import struct Foundation.NSFastEnumerationIterator
-import protocol Foundation.NSFastEnumeration
+import Foundation
 
 extension NMBMatcher {
     @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBMatcher {

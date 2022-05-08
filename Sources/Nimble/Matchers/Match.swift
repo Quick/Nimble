@@ -10,7 +10,7 @@ public func match(_ expectedValue: String?) -> Matcher<String> {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSString
+import Foundation
 
 extension NMBMatcher {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBMatcher {

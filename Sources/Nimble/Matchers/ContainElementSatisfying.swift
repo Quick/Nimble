@@ -45,9 +45,7 @@ public func containElementSatisfying<S: Sequence>(
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
-import struct Foundation.NSFastEnumerationIterator
-import protocol Foundation.NSFastEnumeration
+import Foundation
 
 extension NMBMatcher {
     @objc public class func containElementSatisfyingMatcher(_ matcher: @escaping ((NSObject) -> Bool)) -> NMBMatcher {

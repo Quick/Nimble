@@ -93,7 +93,7 @@ public func && <T>(left: some AsyncableMatcher<T>, right: some AsyncableMatcher<
 #endif // swift(>=5.8.0)
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 extension NMBMatcher {
     @objc public class func satisfyAllOfMatcher(_ matchers: [NMBMatcher]) -> NMBMatcher {

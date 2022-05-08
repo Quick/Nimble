@@ -205,7 +205,7 @@ extension Matcher {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>) throws -> NMBMatcherResult
 

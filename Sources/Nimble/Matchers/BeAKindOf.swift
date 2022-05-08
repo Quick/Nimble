@@ -28,7 +28,7 @@ public func beAKindOf<T, U>(_ expectedType: T.Type) -> Matcher<U> {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 /// @see beAnInstanceOf if you want to match against the exact class

@@ -1,8 +1,6 @@
 // This matcher requires the Objective-C, and being built by Xcode rather than the Swift Package Manager
 #if canImport(Darwin) && !SWIFT_PACKAGE
-import class Foundation.NSObject
-import class Foundation.NSDictionary
-import class Foundation.NSException
+import Foundation
 
 /// A Nimble matcher that succeeds when the actual expression raises an
 /// exception with the specified name, reason, and/or userInfo.

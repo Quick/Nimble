@@ -202,7 +202,7 @@ extension FailureMessage {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 public class NMBExpectationMessage: NSObject {
     private let msg: ExpectationMessage

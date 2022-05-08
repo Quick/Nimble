@@ -114,8 +114,7 @@ internal func internalError(_ msg: String, file: FileString = #filePath, line: U
 }
 
 #if canImport(Darwin)
-import class Foundation.NSException
-import struct Foundation.NSExceptionName
+import Foundation
 
 private func _nimblePrecondition(
     _ name: String,

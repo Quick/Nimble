@@ -58,7 +58,7 @@ public func be(_ expected: AnyObject?) -> Matcher<AnyObject> {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+import Foundation
 
 extension NMBMatcher {
     @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBMatcher {
