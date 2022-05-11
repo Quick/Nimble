@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS("7.4")
+      .macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v5)
     ],
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
