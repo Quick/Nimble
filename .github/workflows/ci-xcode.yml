@@ -25,6 +25,7 @@ jobs:
       - run: ./test macos
       - run: ./test ios
       - run: ./test tvos
+      - run: ./test watchos
 
   xcode_spm:
     name: Xcode ${{ matrix.xcode }} (Swift Package)
@@ -40,3 +41,4 @@ jobs:
       - run: ./test macos_xcodespm
       - run: ./test ios_xcodespm
       - run: ./test tvos_xcodespm
+      - run: ./test watchos_xcodespm

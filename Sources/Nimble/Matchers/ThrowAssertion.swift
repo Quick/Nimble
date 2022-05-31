@@ -84,9 +84,7 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 
 public func throwAssertion<Out>() -> Predicate<Out> {
     return Predicate { actualExpression in
-    #if os(watchOS)
-        fatalError("Nimble currently doesn't support watchOS.")
-    #elseif (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
+    #if (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
         let message = ExpectationMessage.expectedTo("throw an assertion")
         var actualError: Error?
         let caughtException: BadInstructionException? = catchBadInstruction {
@@ -105,6 +103,21 @@ public func throwAssertion<Out>() -> Predicate<Out> {
                     print()
                     NimbleEnvironment.activeInstance.suppressTVOSAssertionWarning = true
                 }
+            #elseif os(watchOS)
+            if !NimbleEnvironment.activeInstance.suppressWatchOSAssertionWarning {
+                print()
+                print("[Nimble Warning]: If you're getting stuck on a debugger breakpoint for a " +
+                    "fatal error while using throwAssertion(), please disable 'Debug Executable' " +
+                    "in your scheme. Go to 'Edit Scheme > Test > Info' and uncheck " +
+                    "'Debug Executable'. If you've already done that, suppress this warning " +
+                    "by setting `NimbleEnvironment.activeInstance.suppressWatchOSAssertionWarning = true`. " +
+                    "This is required because the standard methods of catching assertions " +
+                    "(mach APIs) are unavailable for watchOS. Instead, the same mechanism the " +
+                    "debugger uses is the fallback method for watchOS."
+                )
+                print()
+                NimbleEnvironment.activeInstance.suppressWatchOSAssertionWarning = true
+            }
             #endif
             do {
                 _ = try actualExpression.evaluate()
