@@ -137,5 +137,6 @@ The process is relatively straight forward, but here's is a useful checklist for
   - Use the same release notes you created for the tag, but tweak up formatting for GitHub.
 - Update [Quick](https://github.com/Quick/Quick)
   - Update Quick's submodule reference to the newly released Nimble version
+  - Update Quick's Package.swift file to pull in the newly released Nimble version
   - Update Nimble version in `README.md` and Documentation in [Quick](https://github.com/Quick/Quick) if it's not a patch version update.
 - Announce!
