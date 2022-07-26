@@ -1293,19 +1293,19 @@ Note: This matcher allows you to chain any number of matchers together. This pro
 // passes if .succeeded is returned from the closure
 expect {
     guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
-        return .failed(reason: "wrong enum case")
+        return { .failed(reason: "wrong enum case") }
     }
 
-    return .succeeded
+    return { .succeeded }
 }.to(succeed())
 
 // passes if .failed is returned from the closure
 expect {
     guard case .enumCaseWithAssociatedValueThatIDontCareAbout = actual else {
-        return .failed(reason: "wrong enum case")
+        return { .failed(reason: "wrong enum case") }
     }
 
-    return .succeeded
+    return { .succeeded }
 }.notTo(succeed())
 ```
 
