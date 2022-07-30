@@ -1,4 +1,5 @@
 import Foundation
+#if canImport(XCTest)
 import XCTest
 
 /// Default handler for Nimble. This assertion handler passes failures along to
@@ -92,3 +93,4 @@ public func recordFailure(_ message: String, location: SourceLocation) {
     }
 #endif
 }
+#endif // canImport(XCTest)
