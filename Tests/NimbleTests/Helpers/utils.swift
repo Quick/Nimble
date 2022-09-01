@@ -66,6 +66,21 @@ func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, li
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
+func suppressErrors(closure: () throws -> Void) {
+    let recorder = AssertionRecorder()
+    withAssertionHandler(recorder, closure: closure)
+}
+
+func producesStatus<T>(_ status: Expectation<T>.Status, file: FileString = #file, line: UInt = #line, closure: () -> Expectation<T>) {
+    var result: Expectation<T>.Status = .pending
+    
+    suppressErrors {
+        result = closure().status
+    }
+    
+    expect(file: file, line: line, result).to(equal(status))
+}
+
 #if !os(WASI)
 func deferToMainQueue(action: @escaping () -> Void) {
     DispatchQueue.main.async {
