@@ -152,7 +152,7 @@ extension Expectation {
     ///            unconditionally log an error.
     ///
     /// - Remark: Similar functionality can be achieved using the `status` property.
-    func onFailure(`throw` error: Error) throws {
+    public func onFailure(`throw` error: Error) throws {
         switch status {
         case .pending:
             let msg = """

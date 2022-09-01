@@ -52,7 +52,7 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
     }
 }
 
-func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     return failsWithErrorMessage(
         [message],
         file: file,
@@ -62,23 +62,24 @@ func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UI
     )
 }
 
-func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () -> Void) {
+func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }
 
-func suppressErrors(closure: () throws -> Void) {
+@discardableResult
+func suppressErrors<T>(closure: () -> T) -> T {
+    var output: T?
     let recorder = AssertionRecorder()
-    withAssertionHandler(recorder, closure: closure)
+    withAssertionHandler(recorder) {
+        output = closure()
+    }
+    return output!
 }
 
 func producesStatus<T>(_ status: Expectation<T>.Status, file: FileString = #file, line: UInt = #line, closure: () -> Expectation<T>) {
-    var result: Expectation<T>.Status = .pending
+    let expectation = suppressErrors(closure: closure)
     
-    suppressErrors {
-        result = closure().status
-    }
-    
-    expect(file: file, line: line, result).to(equal(status))
+    expect(file: file, line: line, expectation.status).to(equal(status))
 }
 
 #if !os(WASI)
