@@ -160,7 +160,8 @@ extension Expectation {
                 Try using `expect(...).to(...).onFailure(throw: ...`) instead.
                 """
             
-            recordFailure(msg, location: expression.location)
+            let handler = NimbleEnvironment.activeInstance.assertionHandler
+            handler.assert(false, message: .init(stringValue: msg), location: expression.location)
         case .passed:
             break
         case .failed, .mixed:
