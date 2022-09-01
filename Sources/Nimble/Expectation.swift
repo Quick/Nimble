@@ -65,6 +65,8 @@ public struct Expectation<T> {
     ///    expect(array[9]).to(...)
     /// }
     /// ```
+    ///
+    /// - Remark: Similar functionality can be achieved using the `onFailure(throw:)` method.
     public let status: Status
 
     private init(expression: Expression<T>, status: Status) {
@@ -126,5 +128,43 @@ extension Expectation.Status {
         if newerStatus == .pending { return self }
         if self == .pending || self == newerStatus { return newerStatus }
         return .mixed
+    }
+}
+
+extension Expectation {
+    
+    /// Throws the supplied error if the expectation has previously failed.
+    ///
+    /// This provides a mechanism for halting tests when a failure occurs.  This can be used in
+    /// conjunction with `Quick.StopTest` to halt a test when a failure would cause subsequent test
+    /// code to fail.
+    ///
+    /// In the below example, the test will stop in the first line if `array.count == 5` rather
+    /// than crash on the second line.
+    ///
+    /// ```
+    /// try expect(array).to(haveCount(10)).onFailure(throw: StopTest.silently)
+    /// expect(array[9]).to(...)
+    /// ```
+    ///
+    /// - Warning: This method **MUST** be called after a predicate method like `to` or `not`.
+    ///            Otherwise, this expectation will be in an indeterminate state and will
+    ///            unconditionally log an error.
+    ///
+    /// - Remark: Similar functionality can be achieved using the `status` property.
+    func onFailure(`throw` error: Error) throws {
+        switch status {
+        case .pending:
+            let msg = """
+                Attempted to call `Expectation.onFailure(throw:) before a predicate has been applied.
+                Try using `expect(...).to(...).onFailure(throw: ...`) instead.
+                """
+            
+            recordFailure(msg, location: expression.location)
+        case .passed:
+            break
+        case .failed, .mixed:
+            throw error
+        }
     }
 }
