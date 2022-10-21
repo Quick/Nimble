@@ -1,10 +1,10 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_10), .iOS(.v9), .tvOS(.v9), .watchOS(.v5)
+      .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)
     ],
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
