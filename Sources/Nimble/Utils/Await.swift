@@ -25,17 +25,26 @@ internal protocol WaitLock {
 }
 
 internal class AssertionWaitLock: WaitLock {
-    private var currentWaiter: WaitingInfo?
+    private var currentWaiter: WaitingInfo? {
+        get {
+            return dispatchQueue.sync {
+                _currentWaiter
+            }
+        }
+        set {
+            dispatchQueue.sync {
+                _currentWaiter = newValue
+            }
+        }
+    }
+
+    private var _currentWaiter: WaitingInfo?
+    private let dispatchQueue = DispatchQueue(label: "quick.nimble.AssertionWaitLock")
+
     init() { }
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        let isMainThread = Thread.isMainThread
-        nimblePrecondition(
-            isMainThread,
-            "InvalidNimbleAPIUsage",
-            "\(fnName) can only run on the main thread."
-        )
         nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
@@ -151,34 +160,34 @@ internal class AwaitPromiseBuilder<T> {
     }
 
     func timeout(_ timeoutInterval: DispatchTimeInterval, forcefullyAbortTimeout: DispatchTimeInterval) -> Self {
-        // = Discussion =
-        //
-        // There's a lot of technical decisions here that is useful to elaborate on. This is
-        // definitely more lower-level than the previous NSRunLoop based implementation.
-        //
-        //
-        // Why Dispatch Source?
-        //
-        //
-        // We're using a dispatch source to have better control of the run loop behavior.
-        // A timer source gives us deferred-timing control without having to rely as much on
-        // a run loop's traditional dispatching machinery (eg - NSTimers, DefaultRunLoopMode, etc.)
-        // which is ripe for getting corrupted by application code.
-        //
-        // And unlike dispatch_async(), we can control how likely our code gets prioritized to
-        // executed (see leeway parameter) + DISPATCH_TIMER_STRICT.
-        //
-        // This timer is assumed to run on the HIGH priority queue to ensure it maintains the
-        // highest priority over normal application / test code when possible.
-        //
-        //
-        // Run Loop Management
-        //
-        // In order to properly interrupt the waiting behavior performed by this factory class,
-        // this timer stops the main run loop to tell the waiter code that the result should be
-        // checked.
-        //
-        // In addition, stopping the run loop is used to halt code executed on the main run loop.
+        /// = Discussion =
+        ///
+        /// There's a lot of technical decisions here that is useful to elaborate on. This is
+        /// definitely more lower-level than the previous NSRunLoop based implementation.
+        ///
+        ///
+        /// Why Dispatch Source?
+        ///
+        ///
+        /// We're using a dispatch source to have better control of the run loop behavior.
+        /// A timer source gives us deferred-timing control without having to rely as much on
+        /// a run loop's traditional dispatching machinery (eg - NSTimers, DefaultRunLoopMode, etc.)
+        /// which is ripe for getting corrupted by application code.
+        ///
+        /// And unlike `dispatch_async()`, we can control how likely our code gets prioritized to
+        /// executed (see leeway parameter) + DISPATCH_TIMER_STRICT.
+        ///
+        /// This timer is assumed to run on the HIGH priority queue to ensure it maintains the
+        /// highest priority over normal application / test code when possible.
+        ///
+        ///
+        /// Run Loop Management
+        ///
+        /// In order to properly interrupt the waiting behavior performed by this factory class,
+        /// this timer stops the main run loop to tell the waiter code that the result should be
+        /// checked.
+        ///
+        /// In addition, stopping the run loop is used to halt code executed on the main run loop.
         trigger.timeoutSource.schedule(
             deadline: DispatchTime.now() + timeoutInterval,
             repeating: .never,
@@ -221,9 +230,8 @@ internal class AwaitPromiseBuilder<T> {
     /// Blocks for an asynchronous result.
     ///
     /// @discussion
-    /// This function must be executed on the main thread and cannot be nested. This is because
-    /// this function (and it's related methods) coordinate through the main run loop. Tampering
-    /// with the run loop can cause undesirable behavior.
+    /// This function cannot be nested. This is because this function (and it's related methods)
+    /// coordinate through the main run loop. Tampering with the run loop can cause undesirable behavior.
     ///
     /// This method will return an AwaitResult in the following cases:
     ///

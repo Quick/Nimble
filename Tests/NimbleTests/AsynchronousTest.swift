@@ -201,13 +201,13 @@ final class AsyncTest: XCTestCase {
         timer.cancel()
     }
 
-    func testWaitUntilMustBeInMainThread() {
+    func testWaitUntilAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
         let asyncOperation: () -> Void = {
             expect {
                 waitUntil { done in done() }
-            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+            }.toNot(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
         }
         DispatchQueue.global().async(execute: asyncOperation)
@@ -215,13 +215,13 @@ final class AsyncTest: XCTestCase {
 #endif
     }
 
-    func testToEventuallyMustBeInMainThread() {
+    func testToEventuallyAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false
         let asyncOperation: () -> Void = {
             expect {
-                expect(1).toEventually(equal(2))
-            }.to(raiseException(named: "InvalidNimbleAPIUsage"))
+                expect(1).toEventually(equal(1))
+            }.toNot(raiseException(named: "InvalidNimbleAPIUsage"))
             executedAsyncBlock = true
         }
         DispatchQueue.global().async(execute: asyncOperation)
