@@ -6,12 +6,10 @@ public func beVoid() -> Predicate<()> {
     }
 }
 
-extension Expectation where T == () {
-    public static func == (lhs: Expectation<()>, rhs: ()) {
-        lhs.to(beVoid())
-    }
+public func ==<Exp: Expectation>(lhs: Exp, rhs: ()) where Exp.Value == () {
+    lhs.to(beVoid())
+}
 
-    public static func != (lhs: Expectation<()>, rhs: ()) {
-        lhs.toNot(beVoid())
-    }
+public func !=<Exp: Expectation>(lhs: Exp, rhs: ()) where Exp.Value == () {
+    lhs.toNot(beVoid())
 }

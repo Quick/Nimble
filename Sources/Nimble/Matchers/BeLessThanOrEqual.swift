@@ -8,7 +8,7 @@ public func beLessThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predicate
     }
 }
 
-public func <=<T: Comparable>(lhs: Expectation<T>, rhs: T) {
+public func <=<Exp: Expectation, T: Comparable>(lhs: Exp, rhs: T) where Exp.Value == T {
     lhs.to(beLessThanOrEqualTo(rhs))
 }
 
@@ -25,7 +25,7 @@ public func beLessThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predic
     }
 }
 
-public func <=<T: NMBComparable>(lhs: Expectation<T>, rhs: T) {
+public func <=<Exp: Expectation, T: NMBComparable>(lhs: Exp, rhs: T) where Exp.Value == T {
     lhs.to(beLessThanOrEqualTo(rhs))
 }
 
