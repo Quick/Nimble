@@ -31,9 +31,8 @@ public func haveCount(_ expectedValue: Int) -> Predicate<NMBCollection> {
             let message = ExpectationMessage
                 .expectedCustomValueTo(
                     "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))",
-                    actual: "\(actualValue.count)"
+                    actual: "\(actualValue.count). Actual Value: \(stringify(actualValue))"
                 )
-                .appended(details: "Actual Value: \(stringify(actualValue))")
 
             let result = expectedValue == actualValue.count
             return PredicateResult(bool: result, message: message)
