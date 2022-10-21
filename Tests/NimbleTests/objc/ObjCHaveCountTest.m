@@ -73,31 +73,37 @@
     expect(table).to(haveCount(3));
     expect(table).notTo(haveCount(1));
 
+    NSString *tableDescription = [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+
     NSString *msg = [NSString stringWithFormat:
-                     @"expected to have NSHashTable {[2] 2[12] 1[13] 3}with count 1, got 3\nActual Value: %@",
-                     [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+                     @"expected to have %@with count 1, got 3\nActual Value: %@",
+                     tableDescription,
+                     tableDescription];
     expectFailureMessage(msg, ^{
         expect(table).to(haveCount(@1));
     });
 
     msg = [NSString stringWithFormat:
-           @"expected to not have NSHashTable {[2] 2[12] 1[13] 3}with count 3, got 3\nActual Value: %@",
-           [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+           @"expected to not have %@with count 3, got 3\nActual Value: %@",
+           tableDescription,
+           tableDescription];
     expectFailureMessage(msg, ^{
         expect(table).notTo(haveCount(@3));
     });
 
 
     msg = [NSString stringWithFormat:
-           @"expected to have NSHashTable {[2] 2[12] 1[13] 3}with count 1, got 3\nActual Value: %@",
-           [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+           @"expected to have %@with count 1, got 3\nActual Value: %@",
+           tableDescription,
+           tableDescription];
     expectFailureMessage(msg, ^{
         expect(table).to(haveCount(1));
     });
 
     msg = [NSString stringWithFormat:
-           @"expected to not have NSHashTable {[2] 2[12] 1[13] 3}with count 3, got 3\nActual Value: %@",
-           [table.description stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+           @"expected to not have %@with count 3, got 3\nActual Value: %@",
+           tableDescription,
+           tableDescription];
     expectFailureMessage(msg, ^{
         expect(table).notTo(haveCount(3));
     });
