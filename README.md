@@ -32,7 +32,8 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Operator Overloads](#operator-overloads)
   - [Lazily Computed Values](#lazily-computed-values)
   - [C Primitives](#c-primitives)
-  - [Asynchronous Expectations](#asynchronous-expectations)
+  - [Async/Await in Expectations](#asyncawait-support)
+  - [Polling Expectations](#polling-expectations)
   - [Objective-C Support](#objective-c-support)
   - [Disabling Objective-C Shorthand](#disabling-objective-c-shorthand)
 - [Built-in Matcher Functions](#built-in-matcher-functions)
@@ -297,7 +298,30 @@ expect(1 as CInt).to(equal(1))
 expect(@(1 + 1)).to(equal(@2));
 ```
 
-## Asynchronous Expectations
+## Async/Await Support
+
+Nimble makes it easy to await for an async function to complete. Simply pass
+the async function in to `expect`:
+
+```swift
+// Swift
+await expect(await aFunctionReturning1()).to(equal(1))
+```
+
+The async function is awaited on first, before passing it to the matcher. This
+enables the matcher to run synchronous code like before, without caring about
+whether the value it's processing was abtained async or not.
+
+Async support is Swift-only, and it requires that you execute the test in an
+async context. For XCTest, this is as simple as marking your test function with
+`async`. If you use Quick, then you don't need to do anything because as of
+Quick 6, all tests are executed in an async context.
+
+Note: Async/Await support is different than the `toEventually`/`toEventuallyNot`
+feature described below. In fact, async/await is not supported in expectations
+that make use of `toEventually` or `toEventuallyNot`.
+
+## Polling Expectations
 
 In Nimble, it's easy to make expectations on values that are updated
 asynchronously. Just use `toEventually` or `toEventuallyNot`:

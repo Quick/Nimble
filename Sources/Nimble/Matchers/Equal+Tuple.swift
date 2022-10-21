@@ -10,17 +10,17 @@ public func equal<T1: Equatable, T2: Equatable>(
     equal(expectedValue, by: ==)
 }
 
-public func ==<T1: Equatable, T2: Equatable>(
-    lhs: Expectation<(T1, T2)>,
+public func ==<Exp: Expectation, T1: Equatable, T2: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2)?
-) {
+) where Exp.Value == (T1, T2) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T1: Equatable, T2: Equatable>(
-    lhs: Expectation<(T1, T2)>,
+public func !=<Exp: Expectation, T1: Equatable, T2: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2)?
-) {
+) where Exp.Value == (T1, T2) {
     lhs.toNot(equal(rhs))
 }
 
@@ -35,17 +35,17 @@ public func equal<T1: Equatable, T2: Equatable, T3: Equatable>(
     equal(expectedValue, by: ==)
 }
 
-public func ==<T1: Equatable, T2: Equatable, T3: Equatable>(
-    lhs: Expectation<(T1, T2, T3)>,
+public func ==<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3)?
-) {
+) where Exp.Value == (T1, T2, T3) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T1: Equatable, T2: Equatable, T3: Equatable>(
-    lhs: Expectation<(T1, T2, T3)>,
+public func !=<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3)?
-) {
+) where Exp.Value == (T1, T2, T3) {
     lhs.toNot(equal(rhs))
 }
 
@@ -60,17 +60,17 @@ public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
     equal(expectedValue, by: ==)
 }
 
-public func ==<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4)>,
+public func ==<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4)?
-) {
+) where Exp.Value == (T1, T2, T3, T4) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4)>,
+public func !=<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4)?
-) {
+) where Exp.Value == (T1, T2, T3, T4) {
     lhs.toNot(equal(rhs))
 }
 
@@ -85,17 +85,17 @@ public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5
     equal(expectedValue, by: ==)
 }
 
-public func ==<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4, T5)>,
+public func ==<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4, T5)?
-) {
+) where Exp.Value == (T1, T2, T3, T4, T5) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4, T5)>,
+public func !=<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4, T5)?
-) {
+) where Exp.Value == (T1, T2, T3, T4, T5) {
     lhs.toNot(equal(rhs))
 }
 
@@ -110,17 +110,17 @@ public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5
     equal(expectedValue, by: ==)
 }
 
-public func ==<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4, T5, T6)>,
+public func ==<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4, T5, T6)?
-) {
+) where Exp.Value == (T1, T2, T3, T4, T5, T6) {
     lhs.to(equal(rhs))
 }
 
-public func !=<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
-    lhs: Expectation<(T1, T2, T3, T4, T5, T6)>,
+public func !=<Exp: Expectation, T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
+    lhs: Exp,
     rhs: (T1, T2, T3, T4, T5, T6)?
-) {
+) where Exp.Value == (T1, T2, T3, T4, T5, T6) {
     lhs.toNot(equal(rhs))
 }
 

@@ -33,25 +33,39 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
     return result
 }
 
-public struct Expectation<T> {
-    
-    public enum Status: Equatable {
-        
-        /// No predicates have been performed.
-        case pending
-        
-        /// All predicates have passed.
-        case passed
-        
-        /// All predicates have failed.
-        case failed
-        
-        /// Multiple predicates have been peformed, with at least one passing and one failing.
-        case mixed
-    }
+public enum ExpectationStatus: Equatable {
 
-    public let expression: Expression<T>
-    
+    /// No predicates have been performed.
+    case pending
+
+    /// All predicates have passed.
+    case passed
+
+    /// All predicates have failed.
+    case failed
+
+    /// Multiple predicates have been peformed, with at least one passing and one failing.
+    case mixed
+}
+
+extension ExpectationStatus {
+    /// Applies a new status to the current one to produce a combined status.
+    ///
+    /// This method is meant to advance the state from `.pending` to either `.passed` or`.failed`.
+    /// When called multiple times with different values, the result will be `.mixed`.
+    /// E.g., `status.applying(.passed).applying(.failed) == .mixed`.
+    func applying(_ newerStatus: ExpectationStatus) -> ExpectationStatus {
+        if newerStatus == .pending { return self }
+        if self == .pending || self == newerStatus { return newerStatus }
+        return .mixed
+    }
+}
+
+public protocol Expectation {
+    associatedtype Value
+
+    var expression: Expression<Value> { get }
+
     /// The status of the test after predicates have been evaluated.
     ///
     /// This property can be used for changing test behavior based whether an expectation has
@@ -67,39 +81,27 @@ public struct Expectation<T> {
     /// ```
     ///
     /// - Remark: Similar functionality can be achieved using the `onFailure(throw:)` method.
-    public let status: Status
+    var status: ExpectationStatus { get }
 
-    private init(expression: Expression<T>, status: Status) {
-        self.expression = expression
-        self.status = status
-    }
-
-    public init(expression: Expression<T>) {
-        self.init(expression: expression, status: .pending)
-    }
-    
     /// Takes the result of a test and passes it to the assertion handler.
     ///
     /// - Returns: An updated `Expression` with the result of the test applied to the `status`
     ///            property.
     @discardableResult
-    public func verify(_ pass: Bool, _ message: FailureMessage) -> Self {
-        let handler = NimbleEnvironment.activeInstance.assertionHandler
-        handler.assert(pass, message: message, location: expression.location)
-        
-        return .init(expression: expression, status: status.applying(pass ? .passed : .failed))
-    }
+    func verify(_ pass: Bool, _ message: FailureMessage) -> Self
+}
 
+extension Expectation {
     /// Tests the actual value using a matcher to match.
     @discardableResult
-    public func to(_ predicate: Predicate<T>, description: String? = nil) -> Self {
+    public func to(_ predicate: Predicate<Value>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toMatch, predicate, to: "to", description: description)
         return verify(pass, msg)
     }
 
     /// Tests the actual value using a matcher to not match.
     @discardableResult
-    public func toNot(_ predicate: Predicate<T>, description: String? = nil) -> Self {
+    public func toNot(_ predicate: Predicate<Value>, description: String? = nil) -> Self {
         let (pass, msg) = execute(expression, .toNotMatch, predicate, to: "to not", description: description)
         return verify(pass, msg)
     }
@@ -108,31 +110,12 @@ public struct Expectation<T> {
     ///
     /// Alias to toNot().
     @discardableResult
-    public func notTo(_ predicate: Predicate<T>, description: String? = nil) -> Self {
+    public func notTo(_ predicate: Predicate<Value>, description: String? = nil) -> Self {
         return toNot(predicate, description: description)
-    }
-
-    // see:
-    // - `async` for extension
-    // - NMBExpectation for Objective-C interface
-}
-
-extension Expectation.Status {
-    
-    /// Applies a new status to the current one to produce a combined status.
-    ///
-    /// This method is meant to advance the state from `.pending` to either `.passed` or`.failed`.
-    /// When called multiple times with different values, the result will be `.mixed`.
-    /// E.g., `status.applying(.passed).applying(.failed) == .mixed`.
-    func applying(_ newerStatus: Expectation.Status) -> Expectation.Status {
-        if newerStatus == .pending { return self }
-        if self == .pending || self == newerStatus { return newerStatus }
-        return .mixed
     }
 }
 
 extension Expectation {
-    
     /// Throws the supplied error if the expectation has previously failed.
     ///
     /// This provides a mechanism for halting tests when a failure occurs.  This can be used in
@@ -159,7 +142,7 @@ extension Expectation {
                 Attempted to call `Expectation.onFailure(throw:) before a predicate has been applied.
                 Try using `expect(...).to(...).onFailure(throw: ...`) instead.
                 """
-            
+
             let handler = NimbleEnvironment.activeInstance.assertionHandler
             handler.assert(false, message: .init(stringValue: msg), location: expression.location)
         case .passed:
@@ -167,5 +150,93 @@ extension Expectation {
         case .failed, .mixed:
             throw error
         }
+    }
+}
+
+public struct SyncExpectation<Value>: Expectation {
+    public let expression: Expression<Value>
+
+    /// The status of the test after predicates have been evaluated.
+    ///
+    /// This property can be used for changing test behavior based whether an expectation has
+    /// passed.
+    ///
+    /// In the below example, we perform additional tests on an array only if it has enough
+    /// elements.
+    ///
+    /// ```
+    /// if expect(array).to(haveCount(10)).status == .passed {
+    ///    expect(array[9]).to(...)
+    /// }
+    /// ```
+    ///
+    /// - Remark: Similar functionality can be achieved using the `onFailure(throw:)` method.
+    public let status: ExpectationStatus
+
+    private init(expression: Expression<Value>, status: ExpectationStatus) {
+        self.expression = expression
+        self.status = status
+    }
+
+    public init(expression: Expression<Value>) {
+        self.init(expression: expression, status: .pending)
+    }
+
+    /// Takes the result of a test and passes it to the assertion handler.
+    ///
+    /// - Returns: An updated `Expression` with the result of the test applied to the `status`
+    ///            property.
+    @discardableResult
+    public func verify(_ pass: Bool, _ message: FailureMessage) -> Self {
+        let handler = NimbleEnvironment.activeInstance.assertionHandler
+        handler.assert(pass, message: message, location: expression.location)
+
+        return .init(expression: expression, status: status.applying(pass ? .passed : .failed))
+    }
+
+    // see:
+    // - `Polling.swift` for toEventually and older-style polling-based approach to "async"
+    // - NMBExpectation for Objective-C interface
+}
+
+public struct AsyncExpectation<Value>: Expectation {
+    public let expression: Expression<Value>
+
+    /// The status of the test after predicates have been evaluated.
+    ///
+    /// This property can be used for changing test behavior based whether an expectation has
+    /// passed.
+    ///
+    /// In the below example, we perform additional tests on an array only if it has enough
+    /// elements.
+    ///
+    /// ```
+    /// if expect(array).to(haveCount(10)).status == .passed {
+    ///    expect(array[9]).to(...)
+    /// }
+    /// ```
+    ///
+    /// - Remark: Similar functionality can be achieved using the `onFailure(throw:)` method.
+    public let status: ExpectationStatus
+
+    private init(expression: Expression<Value>, status: ExpectationStatus) {
+        self.expression = expression
+        self.status = status
+    }
+
+    public init(expression: Expression<Value>) {
+        self.init(expression: expression, status: .pending)
+    }
+
+    /// Takes the result of a test and passes it to the assertion handler.
+    ///
+    /// - Returns: An updated `Expression` with the result of the test applied to the `status`
+    ///            property.
+    @discardableResult
+    public func verify(_ pass: Bool, _ message: FailureMessage) -> Self {
+        let handler = NimbleEnvironment.activeInstance.assertionHandler
+        handler.assert(pass, message: message, location: expression.location)
+
+        return .init(expression: expression, status: status.applying(pass ? .passed : .failed))
     }
 }

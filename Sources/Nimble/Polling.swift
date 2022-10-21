@@ -83,7 +83,7 @@ private let toEventuallyRequiresClosureError = FailureMessage(
         """
 )
 
-extension Expectation {
+extension SyncExpectation {
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
     ///
@@ -91,7 +91,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func toEventually(_ predicate: Predicate<T>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -119,7 +119,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func toEventuallyNot(_ predicate: Predicate<T>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toEventuallyNot(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -149,7 +149,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func toNotEventually(_ predicate: Predicate<T>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toNotEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toEventuallyNot(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
@@ -160,7 +160,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func toNever(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toNever(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -190,7 +190,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func neverTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func neverTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 
@@ -201,7 +201,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func toAlways(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toAlways(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -231,7 +231,7 @@ extension Expectation {
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
     @discardableResult
-    public func alwaysTo(_ predicate: Predicate<T>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func alwaysTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toAlways(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }

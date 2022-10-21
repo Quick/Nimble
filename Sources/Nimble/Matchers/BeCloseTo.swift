@@ -123,43 +123,37 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
 
 infix operator ≈ : ComparisonPrecedence
 
-extension Expectation where T: Collection, T.Element: FloatingPoint {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
+// swiftlint:disable:next identifier_name
+public func ≈<Exp: Expectation, Value>(lhs: Exp, rhs: Value) where Value: Collection, Value.Element: FloatingPoint, Exp.Value == Value {
+    lhs.to(beCloseTo(rhs))
 }
 
-extension Expectation where T: FloatingPoint {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
-
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: (expected: T, delta: T)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
-
-    public static func == (lhs: Expectation, rhs: (expected: T, delta: T)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+// swiftlint:disable:next identifier_name
+public func ≈<Exp: Expectation, Value: FloatingPoint>(lhs: Exp, rhs: Value) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs))
 }
 
-extension Expectation where T: NMBDoubleConvertible {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
+// swiftlint:disable:next identifier_name
+public func ≈<Exp: Expectation, Value: FloatingPoint>(lhs: Exp, rhs: (expected: Value, delta: Value)) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
 
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: (expected: T, delta: Double)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+public func ==<Exp: Expectation, Value: FloatingPoint>(lhs: Exp, rhs: (expected: Value, delta: Value)) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
 
-    public static func == (lhs: Expectation, rhs: (expected: T, delta: Double)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+// swiftlint:disable:next identifier_name
+public func ≈<Exp: Expectation, Value: NMBDoubleConvertible>(lhs: Exp, rhs: Value) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs))
+}
+
+// swiftlint:disable:next identifier_name
+public func ≈<Exp: Expectation, Value: NMBDoubleConvertible>(lhs: Exp, rhs: (expected: Value, delta: Double)) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ==<Exp: Expectation, Value: NMBDoubleConvertible>(lhs: Exp, rhs: (expected: Value, delta: Double)) where Exp.Value == Value {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
 // make this higher precedence than exponents so the Doubles either end aren't pulled in
