@@ -6,7 +6,7 @@ import Foundation
 import XCTest
 import Nimble
 
-final class AsyncTest: XCTestCase {
+final class PollingTest: XCTestCase {
     class Error: Swift.Error {}
     let errorToThrow = Error()
 
@@ -37,6 +37,17 @@ final class AsyncTest: XCTestCase {
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
+    }
+
+    @MainActor
+    func testToEventuallyInAsyncContextOnMain() async {
+        expect(1).toEventually(equal(1)) // Fails with 'testToEventuallyInAsyncContextOnMain(): timed out before returning a value'
+        expect { usleep(10); return 1 }.toEventually(equal(1))
+    }
+
+    func testToEventuallyInAsyncContextOffMain() async {
+        expect(1).toEventually(equal(1))
+        expect { usleep(10); return 1 }.toEventually(equal(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() {
