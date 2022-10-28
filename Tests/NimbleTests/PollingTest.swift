@@ -184,6 +184,7 @@ final class PollingTest: XCTestCase {
     }
 
     func testWaitUntilDoesNotCompleteBeforeRunLoopIsWaiting() {
+#if canImport(Darwin)
         // This verifies the fix for a race condition in which `done()` is
         // called asynchronously on a background thread after the main thread checks
         // for completion, but prior to `RunLoop.current.run(mode:before:)` being called.
@@ -214,6 +215,7 @@ final class PollingTest: XCTestCase {
         }
 
         timer.cancel()
+#endif // canImport(Darwin)
     }
 
     func testWaitUntilAllowsInBackgroundThread() {

@@ -5,7 +5,6 @@ import Foundation
 @testable import Nimble
 import XCTest
 
-@available(*, noasync)
 func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     var filePath = file
     var lineNumber = line
@@ -53,7 +52,6 @@ func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line:
     }
 }
 
-@available(*, noasync)
 func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     failsWithErrorMessage(
         [message],
@@ -64,7 +62,6 @@ func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UI
     )
 }
 
-@available(*, noasync)
 func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     failsWithErrorMessage("\(message) (use beNil() to match nils)", file: file, line: line, preferOriginalSourceLocation: preferOriginalSourceLocation, closure: closure)
 }

@@ -186,7 +186,6 @@ final class AsyncAwaitTest: XCTestCase {
         timer.setEventHandler {
             failed = true
             fail("Timed out: Main RunLoop stalled.")
-            CFRunLoopStop(CFRunLoopGetMain())
         }
         timer.resume()
 

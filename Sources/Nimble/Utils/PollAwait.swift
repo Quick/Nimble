@@ -295,7 +295,6 @@ internal class Awaiter {
         return DispatchSource.makeTimerSource(flags: .strict, queue: queue)
     }
 
-    @available(*, noasync)
     func performBlock<T>(
         file: FileString,
         line: UInt,
@@ -333,7 +332,6 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    @available(*, noasync)
     func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
@@ -365,7 +363,6 @@ internal class Awaiter {
     }
 }
 
-@available(*, noasync)
 internal func pollBlock(
     pollInterval: DispatchTimeInterval,
     timeoutInterval: DispatchTimeInterval,
