@@ -10,12 +10,12 @@ public struct AsyncDefaults {
     public static var pollInterval: DispatchTimeInterval = .milliseconds(10)
 }
 
-private enum AsyncMatchStyle {
+internal enum AsyncMatchStyle {
     case eventually, never, always
 }
 
 // swiftlint:disable:next function_parameter_count
-private func async<T>(
+private func poll<T>(
     style: ExpectationStyle,
     matchStyle: AsyncMatchStyle,
     predicate: Predicate<T>,
@@ -76,7 +76,7 @@ private func async<T>(
     }
 }
 
-private let toEventuallyRequiresClosureError = FailureMessage(
+internal let toEventuallyRequiresClosureError = FailureMessage(
     stringValue: """
         expect(...).toEventually(...) requires an explicit closure (eg - expect { ... }.toEventually(...) )
         Swift 1.2 @autoclosure behavior has changed in an incompatible way for Nimble to function
@@ -90,14 +90,18 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `toEventually` does not work in any kind of async context that uses the main actor. Use the async form of `toEventually` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func toEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
             expression,
             .toMatch,
-            async(
+            poll(
                 style: .toMatch,
                 matchStyle: .eventually,
                 predicate: predicate,
@@ -118,14 +122,18 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `toEventuallyNot` does not work in any kind of async context that uses the main actor. Use the async form of `toEventuallyNot` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func toEventuallyNot(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
             expression,
             .toNotMatch,
-            async(
+            poll(
                 style: .toNotMatch,
                 matchStyle: .eventually,
                 predicate: predicate,
@@ -148,7 +156,11 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `toNotEventually` does not work in any kind of async context that uses the main actor. Use the async form of `toNotEventually` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func toNotEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toEventuallyNot(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
     }
@@ -159,14 +171,18 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `toNever` does not work in any kind of async context that uses the main actor. Use the async form of `toNever` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func toNever(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
             expression,
             .toNotMatch,
-            async(
+            poll(
                 style: .toMatch,
                 matchStyle: .never,
                 predicate: predicate,
@@ -189,7 +205,11 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `neverTo` does not work in any kind of async context that uses the main actor. Use the async form of `neverTo` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func neverTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
@@ -200,14 +220,18 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `toAlways` does not work in any kind of async context that uses the main actor. Use the async form of `toAlways` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func toAlways(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
             expression,
             .toMatch,
-            async(
+            poll(
                 style: .toNotMatch,
                 matchStyle: .always,
                 predicate: predicate,
@@ -230,7 +254,11 @@ extension SyncExpectation {
     /// @discussion
     /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
     /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+    ///
+    /// @warning
+    /// This form of `alwaysTo` does not work in any kind of async context that uses the main actor. Use the async form of `alwaysTo` if you are running tests in an async context.
     @discardableResult
+    @available(*, noasync)
     public func alwaysTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toAlways(predicate, until: until, pollInterval: pollInterval, description: description)
     }

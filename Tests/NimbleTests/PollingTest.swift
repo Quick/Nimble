@@ -39,15 +39,19 @@ final class PollingTest: XCTestCase {
         }
     }
 
+    func testToEventuallySyncCase() {
+        expect(1).toEventually(equal(1), timeout: .seconds(300))
+    }
+
     @MainActor
     func testToEventuallyInAsyncContextOnMain() async {
-        expect(1).toEventually(equal(1)) // Fails with 'testToEventuallyInAsyncContextOnMain(): timed out before returning a value'
-        expect { usleep(10); return 1 }.toEventually(equal(1))
+        await expect(1).toEventually(equal(1), timeout: .seconds(300)) // Fails with 'testToEventuallyInAsyncContextOnMain(): timed out before returning a value'
+        await expect { usleep(10); return 1 }.toEventually(equal(1))
     }
 
     func testToEventuallyInAsyncContextOffMain() async {
-        expect(1).toEventually(equal(1))
-        expect { usleep(10); return 1 }.toEventually(equal(1))
+        await expect(1).toEventually(equal(1))
+        await expect { usleep(10); return 1 }.toEventually(equal(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() {
