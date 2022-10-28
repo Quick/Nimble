@@ -37,43 +37,7 @@ private func poll<T>(
             lastPredicateResult = try predicateRunner()
             return lastPredicateResult!.toBoolean(expectation: style)
         }
-    switch result {
-    case .completed:
-        switch matchStyle {
-        case .eventually:
-            return lastPredicateResult!
-        case .never:
-            return PredicateResult(
-                status: .fail,
-                message: lastPredicateResult?.message ?? .fail("matched the predicate when it shouldn't have")
-            )
-        case .always:
-            return PredicateResult(
-                status: .fail,
-                message: lastPredicateResult?.message ?? .fail("didn't match the predicate when it should have")
-            )
-        }
-    case .timedOut:
-        switch matchStyle {
-        case .eventually:
-            let message = lastPredicateResult?.message ?? .fail("timed out before returning a value")
-            return PredicateResult(status: .fail, message: message)
-        case .never:
-            return PredicateResult(status: .doesNotMatch, message: .expectedTo("never match the predicate"))
-        case .always:
-            return PredicateResult(status: .matches, message: .expectedTo("always match the predicate"))
-        }
-    case let .errorThrown(error):
-        return PredicateResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
-    case let .raisedException(exception):
-        return PredicateResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
-    case .blockedRunLoop:
-        let message = lastPredicateResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
-            .fail("main run loop was unresponsive")
-        return PredicateResult(status: .fail, message: message)
-    case .incomplete:
-        internalError("Reached .incomplete state for \(fnName)(...).")
-    }
+    return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
 }
 
 extension SyncExpectation {
