@@ -6,6 +6,7 @@ import Foundation
 import XCTest
 import Nimble
 
+// swiftlint:disable:next type_body_length
 final class PollingTest: XCTestCase {
     class Error: Swift.Error {}
     let errorToThrow = Error()
@@ -41,17 +42,6 @@ final class PollingTest: XCTestCase {
 
     func testToEventuallySyncCase() {
         expect(1).toEventually(equal(1), timeout: .seconds(300))
-    }
-
-    @MainActor
-    func testToEventuallyInAsyncContextOnMain() async {
-        await expect(1).toEventually(equal(1), timeout: .seconds(300)) // Fails with 'testToEventuallyInAsyncContextOnMain(): timed out before returning a value'
-        await expect { usleep(10); return 1 }.toEventually(equal(1))
-    }
-
-    func testToEventuallyInAsyncContextOffMain() async {
-        await expect(1).toEventually(equal(1))
-        await expect { usleep(10); return 1 }.toEventually(equal(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() {

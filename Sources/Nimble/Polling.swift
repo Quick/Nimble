@@ -40,6 +40,7 @@ private func poll<T>(
     }
 }
 
+// swiftlint:disable:next cyclomatic_complexity
 internal func processPollResult(_ result: PollResult<Bool>, matchStyle: AsyncMatchStyle, lastPredicateResult: PredicateResult?, fnName: String) -> PredicateResult {
     switch result {
     case .completed:

@@ -139,7 +139,7 @@ func suppressErrors<T>(closure: () -> T) -> T {
 
 func producesStatus<Exp: Expectation, T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> Exp) where Exp.Value == T {
     let expectation = suppressErrors(closure: closure)
-    
+
     expect(file: file, line: line, expectation.status).to(equal(status))
 }
 

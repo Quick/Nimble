@@ -17,6 +17,7 @@ private func execute<T>(_ expression: Expression<T>, style: ExpectationStyle, to
     }
 }
 
+// swiftlint:disable:next function_parameter_count
 private func poll<T>(
     expression: Expression<T>,
     style: ExpectationStyle,

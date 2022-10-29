@@ -1,9 +1,9 @@
+// swiftlint:disable all
 #if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
 import CwlPreconditionTesting
 #elseif canImport(CwlPosixPreconditionTesting)
 import CwlPosixPreconditionTesting
 #elseif canImport(Glibc)
-// swiftlint:disable all
 import Glibc
 
 // This function is called from the signal handler to shut down the thread and return 1 (indicating a SIGILL was received).
@@ -79,7 +79,6 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 
     return caught ? BadInstructionException() : nil
 }
-// swiftlint:enable all
 #endif
 
 public func throwAssertion<Out>() -> Predicate<Out> {
@@ -144,3 +143,4 @@ public func throwAssertion<Out>() -> Predicate<Out> {
     #endif
     }
 }
+// swiftlint:enable all

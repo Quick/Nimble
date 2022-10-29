@@ -110,10 +110,8 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
             return .doesNotMatch
         }
 
-        for index in actualValues.indices {
-            if abs(actualValues[index] - expectedValues[index]) > delta {
-                return .doesNotMatch
-            }
+        for index in actualValues.indices where abs(actualValues[index] - expectedValues[index]) > delta {
+            return .doesNotMatch
         }
         return .matches
     }

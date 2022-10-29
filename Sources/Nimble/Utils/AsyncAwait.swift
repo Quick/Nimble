@@ -124,7 +124,6 @@ internal class AsyncAwaitPromiseBuilder<T> {
         }
         self.trigger.timeoutSource.resume()
         while self.promise.asyncResult.isIncomplete() {
-            // Stopping the run loop does not work unless we run only 1 mode
             await Task.yield()
         }
 
@@ -213,4 +212,3 @@ internal func pollBlock(
 }
 
 #endif // #if !os(WASI)
-
