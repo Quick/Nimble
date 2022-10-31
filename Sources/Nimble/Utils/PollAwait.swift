@@ -70,7 +70,7 @@ internal class AssertionWaitLock: WaitLock {
     }
 }
 
-internal enum AwaitResult<T> {
+internal enum PollResult<T> {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
@@ -106,7 +106,7 @@ internal enum AwaitResult<T> {
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving an "response" to this promise.
 internal final class AwaitPromise<T> {
-    private(set) internal var asyncResult: AwaitResult<T> = .incomplete
+    private(set) internal var asyncResult: PollResult<T> = .incomplete
     private var signal: DispatchSemaphore
 
     init() {
@@ -122,7 +122,8 @@ internal final class AwaitPromise<T> {
     ///
     /// @returns a Bool that indicates if the async result was accepted or rejected because another
     ///          value was received first.
-    func resolveResult(_ result: AwaitResult<T>) -> Bool {
+    @discardableResult
+    func resolveResult(_ result: PollResult<T>) -> Bool {
         if signal.wait(timeout: .now()) == .success {
             self.asyncResult = result
             return true
@@ -132,7 +133,7 @@ internal final class AwaitPromise<T> {
     }
 }
 
-internal struct AwaitTrigger {
+internal struct PollAwaitTrigger {
     let timeoutSource: DispatchSourceTimer
     let actionSource: DispatchSourceTimer?
     let start: () throws -> Void
@@ -145,14 +146,14 @@ internal struct AwaitTrigger {
 internal class AwaitPromiseBuilder<T> {
     let awaiter: Awaiter
     let waitLock: WaitLock
-    let trigger: AwaitTrigger
+    let trigger: PollAwaitTrigger
     let promise: AwaitPromise<T>
 
     internal init(
         awaiter: Awaiter,
         waitLock: WaitLock,
         promise: AwaitPromise<T>,
-        trigger: AwaitTrigger) {
+        trigger: PollAwaitTrigger) {
             self.awaiter = awaiter
             self.waitLock = waitLock
             self.promise = promise
@@ -243,7 +244,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned AwaitResult will NEVER be .incomplete.
-    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> AwaitResult<T> {
+    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> PollResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
             file: file,
@@ -290,7 +291,7 @@ internal class Awaiter {
             self.timeoutQueue = timeoutQueue
     }
 
-    private func createTimerSource(_ queue: DispatchQueue) -> DispatchSourceTimer {
+    internal func createTimerSource(_ queue: DispatchQueue) -> DispatchSourceTimer {
         return DispatchSource.makeTimerSource(flags: .strict, queue: queue)
     }
 
@@ -302,7 +303,7 @@ internal class Awaiter {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
-            let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
+            let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure { result in
                     completionCount += 1
                     if completionCount < 2 {
@@ -335,7 +336,7 @@ internal class Awaiter {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
-        let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
+        let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
             let interval = pollInterval
             asyncSource.schedule(deadline: .now(), repeating: interval, leeway: pollLeeway)
             asyncSource.setEventHandler {
@@ -368,14 +369,16 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () throws -> Bool) -> AwaitResult<Bool> {
+    expression: @escaping () throws -> Bool) -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             if try expression() {
                 return true
             }
             return nil
-        }.timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided).wait(fnName, file: file, line: line)
+        }
+            .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided)
+            .wait(fnName, file: file, line: line)
 
         return result
 }

@@ -6,7 +6,8 @@ import Foundation
 import XCTest
 import Nimble
 
-final class AsyncTest: XCTestCase {
+// swiftlint:disable:next type_body_length
+final class PollingTest: XCTestCase {
     class Error: Swift.Error {}
     let errorToThrow = Error()
 
@@ -37,6 +38,10 @@ final class AsyncTest: XCTestCase {
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toEventuallyNot(equal(0))
         }
+    }
+
+    func testToEventuallySyncCase() {
+        expect(1).toEventually(equal(1), timeout: .seconds(300))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() {
@@ -169,6 +174,7 @@ final class AsyncTest: XCTestCase {
     }
 
     func testWaitUntilDoesNotCompleteBeforeRunLoopIsWaiting() {
+#if canImport(Darwin)
         // This verifies the fix for a race condition in which `done()` is
         // called asynchronously on a background thread after the main thread checks
         // for completion, but prior to `RunLoop.current.run(mode:before:)` being called.
@@ -199,6 +205,7 @@ final class AsyncTest: XCTestCase {
         }
 
         timer.cancel()
+#endif // canImport(Darwin)
     }
 
     func testWaitUntilAllowsInBackgroundThread() {
