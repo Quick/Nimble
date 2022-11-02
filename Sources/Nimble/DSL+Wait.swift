@@ -116,6 +116,7 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: DispatchTi
 /// 
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
 /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
+@available(*, noasync, message: "the sync version of `waitUntil` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
 public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) {
     NMBWait.until(timeout: timeout, file: file, line: line, action: action)
 }
