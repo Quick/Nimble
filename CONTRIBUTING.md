@@ -127,6 +127,20 @@ some "ground rules":
   issues or pull requests submitted to the project. Please provide kind,
   constructive feedback. Please don't be sarcastic or snarky.
 
+### Updating Minimum Swift & OS Versions
+
+When updating the minimum Swift (or Xcode) version, you only need to update:
+
+- Package.swift
+- The Github actions workflows.
+
+When updating the minimum OS versions, you need to update the above 2 options as well as:
+
+- Nimble.podspec
+- Nimble.xcodeproj (update the OS versions in the Nimble project, not for each individual target)
+
+In addition, be sure to check if there's any relevant documentation to update, and update it.
+
 ### Creating a Release
 
 The process is relatively straight forward, but here's is a useful checklist for tagging:

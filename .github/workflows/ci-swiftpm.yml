@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-12
     strategy:
       matrix:
-        xcode: ["13.3.1", "14.0.1"]
+        xcode: ["14.0.1"]
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
@@ -29,7 +29,6 @@ jobs:
     strategy:
       matrix:
         container:
-          - swift:5.6
           - swift:5.7
           # - swiftlang/swift:nightly
       fail-fast: false
