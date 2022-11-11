@@ -49,6 +49,21 @@ final class AsyncAwaitTest: XCTestCase {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
     }
 
+    func testToEventuallyWaitingOnMainTask() async {
+        class EncapsulatedValue {
+            static var executed = false
+
+            static func execute() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    Self.executed = true
+                }
+            }
+        }
+
+        EncapsulatedValue.execute()
+        await expect(EncapsulatedValue.executed).toEventually(beTrue())
+    }
+
     @MainActor
     func testToEventuallyOnMain() async {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
@@ -125,7 +140,7 @@ final class AsyncAwaitTest: XCTestCase {
         await failsWithErrorMessage("Waited more than 0.01 seconds") {
             await waitUntil(timeout: .milliseconds(10)) { done in
                 Task {
-                    Thread.sleep(forTimeInterval: 0.1)
+                    _ = try? await Task.sleep(nanoseconds: 100_000_000)
                     done()
                     await waitState.stopWaiting()
                 }

@@ -60,7 +60,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") {
-                        try predicate.satisfies(expression)
+                        try predicate.satisfies(expression.withoutCaching())
                     }
             }
         return verify(pass, msg)
@@ -84,7 +84,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") {
-                        try predicate.satisfies(expression)
+                        try predicate.satisfies(expression.withoutCaching())
                     }
             }
         return verify(pass, msg)
@@ -117,7 +117,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") {
-                        try predicate.satisfies(expression)
+                        try predicate.satisfies(expression.withoutCaching())
                     }
             }
         return verify(pass, msg)
@@ -150,7 +150,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") {
-                        try predicate.satisfies(expression)
+                        try predicate.satisfies(expression.withoutCaching())
                     }
             }
         return verify(pass, msg)
