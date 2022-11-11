@@ -140,7 +140,7 @@ final class AsyncAwaitTest: XCTestCase {
         await failsWithErrorMessage("Waited more than 0.01 seconds") {
             await waitUntil(timeout: .milliseconds(10)) { done in
                 Task {
-                    Thread.sleep(forTimeInterval: 0.1)
+                    _ = try? await Task.sleep(nanoseconds: 100_000_000)
                     done()
                     await waitState.stopWaiting()
                 }
