@@ -49,6 +49,21 @@ final class AsyncAwaitTest: XCTestCase {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
     }
 
+    func testToEventuallyWaitingOnMainTask() async {
+        class EncapsulatedValue {
+            static var executed = false
+
+            static func execute() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    Self.executed = true
+                }
+            }
+        }
+
+        EncapsulatedValue.execute()
+        await expect(EncapsulatedValue.executed).toEventually(beTrue())
+    }
+
     @MainActor
     func testToEventuallyOnMain() async {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
