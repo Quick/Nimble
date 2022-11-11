@@ -283,6 +283,14 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect((1, "2", 3, four: "4")).to(equal((1, "2", 3, "4")))
         expect((1, "2", 3, four: "4", 5)).to(equal((1, "2", 3, "4", five: 5)))
         expect((1, "2", 3, four: "4", 5, "6")).to(equal((1, "2", 3, "4", five: 5, "6")))
+
+        expect((1, "2")) == (1, "2")
+        expect((1, two: "2")) == (1, two: "2")
+        expect((1, "2", 3)) == (1, "2", 3)
+        expect((1, "2", three: 3)) == (1, "2", three: 3)
+        expect((1, "2", 3, four: "4")) == (1, "2", 3, "4")
+        expect((1, "2", 3, four: "4", 5)) == (1, "2", 3, "4", five: 5)
+        expect((1, "2", 3, four: "4", 5, "6")) == (1, "2", 3, "4", five: 5, "6")
     }
 
     // see: https://github.com/Quick/Nimble/issues/867 and https://github.com/Quick/Nimble/issues/937
