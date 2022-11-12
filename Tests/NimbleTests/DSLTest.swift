@@ -45,14 +45,6 @@ final class DSLTest: XCTestCase {
         let _: SyncExpectation<Void> = expect { () -> Void in return () }
     }
 
-    func testExpectAsyncAutoclosureNonThrowing() async throws {
-        let _: AsyncExpectation<Int> = await expect(await nonThrowingAsyncInt())
-    }
-
-    func testExpectAsyncAutoclosureThrowing() async throws {
-        let _: AsyncExpectation<Int> = await expect(try await throwingAsyncInt())
-    }
-
     func testExpectAsyncClosure() async throws {
         let _: AsyncExpectation<Int> = await expect { 1 }
         let _: AsyncExpectation<Int> = await expect { await nonThrowingAsyncInt() }
@@ -69,5 +61,12 @@ final class DSLTest: XCTestCase {
 
         let _: AsyncExpectation<Void> = await expect { return () }
         let _: AsyncExpectation<Void> = await expect { () -> Void in return () }
+    }
+
+    func testExpectCombinedSyncAndAsyncExpects() async throws {
+        await expect { await nonThrowingAsyncInt() }.to(equal(1))
+        expect(1).to(equal(1))
+
+        expect { nonThrowingInt() }.to(equal(1))
     }
 }

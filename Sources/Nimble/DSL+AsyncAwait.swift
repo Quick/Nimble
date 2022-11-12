@@ -11,7 +11,7 @@ private func convertAsyncExpression<T>(_ asyncExpression: () async throws -> T) 
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () async throws -> T?) async -> AsyncExpectation<T> {
+public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @escaping () async throws -> T?) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: Expression(
             expression: await convertAsyncExpression(expression),
@@ -20,7 +20,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T)) async -> AsyncExpectation<T> {
+public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: Expression(
             expression: await convertAsyncExpression(expression()),
@@ -29,7 +29,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T?)) async -> AsyncExpectation<T> {
+public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T?)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: Expression(
             expression: await convertAsyncExpression(expression()),
@@ -38,7 +38,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> Void)) async -> AsyncExpectation<Void> {
+public func expect(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> Void)) async -> AsyncExpectation<Void> {
     return AsyncExpectation(
         expression: Expression(
             expression: await convertAsyncExpression(expression()),
