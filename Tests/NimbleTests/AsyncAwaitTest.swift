@@ -137,9 +137,9 @@ final class AsyncAwaitTest: XCTestCase {
     }
 
     func testToEventuallyWithCustomDefaultTimeout() async {
-        AsyncDefaults.timeout = .seconds(2)
+        PollingDefaults.timeout = .seconds(2)
         defer {
-            AsyncDefaults.timeout = .seconds(1)
+            PollingDefaults.timeout = .seconds(1)
         }
 
         var value = 0
@@ -165,9 +165,9 @@ final class AsyncAwaitTest: XCTestCase {
     }
 
     func testWaitUntilWithCustomDefaultsTimeout() async {
-        AsyncDefaults.timeout = .seconds(3)
+        PollingDefaults.timeout = .seconds(3)
         defer {
-            AsyncDefaults.timeout = .seconds(1)
+            PollingDefaults.timeout = .seconds(1)
         }
         await waitUntil { done in
             Thread.sleep(forTimeInterval: 2.8)

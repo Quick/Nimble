@@ -87,7 +87,7 @@ public func expecta(file: FileString = #file, line: UInt = #line, _ expression: 
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: NimbleTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) async -> Void) async {
+public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) async -> Void) async {
     await throwableUntil(timeout: timeout) { done in
         await action(done)
     }
@@ -100,7 +100,7 @@ public func waitUntil(timeout: NimbleTimeInterval = AsyncDefaults.timeout, file:
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: NimbleTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) async {
+public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) async {
     await throwableUntil(timeout: timeout, file: file, line: line) { done in
         action(done)
     }
