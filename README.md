@@ -507,7 +507,7 @@ If you use [Quick](https://github.com/Quick/Quick), add a [`QuickConfiguration` 
 import Quick
 import Nimble
 
-class AsyncConfiguration: QuickConfiguration {
+class PollingConfiguration: QuickConfiguration {
     override class func configure(_ configuration: QCKConfiguration) {
         Nimble.PollingDefaults.timeout = .seconds(5)
         Nimble.PollingDefaults.pollInterval = .milliseconds(100)
@@ -544,11 +544,11 @@ import Nimble
 @objc
 class TestSetup: NSObject {
 	override init() {
-		XCTestObservationCenter.shared.register(AsyncConfigurationTestObserver())
+		XCTestObservationCenter.shared.register(PollingConfigurationTestObserver())
 	}
 }
 
-class AsyncConfigurationTestObserver: NSObject, XCTestObserver {
+class PollingConfigurationTestObserver: NSObject, XCTestObserver {
     func testBundleWillStart(_ testBundle: Bundle) {
         Nimble.PollingDefaults.timeout = .seconds(5)
         Nimble.PollingDefaults.pollInterval = .milliseconds(100)
