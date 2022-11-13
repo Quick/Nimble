@@ -447,6 +447,8 @@ pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
 deadlocks, and synchronous IPC.
 
+### Changing default Timeout and Poll Intervals
+
 In some cases (e.g. when running on slower machines) it can be useful to modify
 the default timeout and poll interval values. This can be done as follows:
 
@@ -459,6 +461,67 @@ Nimble.AsyncDefaults.timeout = .seconds(5)
 // Slow the polling interval to 0.1 seconds:
 Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
 ```
+
+You can set these globally at test startup in two ways:
+
+#### Quick
+
+If you use [Quick](https://github.com/Quick/Quick), add a [`QuickConfiguration` subclass](https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md) which sets your desired `AsyncDefaults`.
+
+```swift
+import Quick
+import Nimble
+
+class AsyncConfiguration: QuickConfiguration {
+    override class func configure(_ configuration: QCKConfiguration) {
+        Nimble.AsyncDefaults.timeout = .seconds(5)
+        Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+    }
+}
+```
+
+#### XCTest
+
+If you use [XCTest](https://developer.apple.com/documentation/xctest), add an object that conforms to [`XCTestObservation`](https://developer.apple.com/documentation/xctest/xctestobservation) and implement [`testBundleWillStart(_:)`](https://developer.apple.com/documentation/xctest/xctestobservation/1500772-testbundlewillstart).
+
+Additionally, you will need to register this observer with the [`XCTestObservationCenter`](https://developer.apple.com/documentation/xctest/xctestobservationcenter) at test startup. To do this, set the `NSPrincipalClass` key in your test bundle's Info.plist and implement a class with that same name.
+
+For example
+
+```xml
+<!-- Info.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ... -->
+	<key>NSPrincipalClass</key>
+	<string>MyTests.TestSetup</string>
+</dict>
+</plist>
+```
+
+```swift
+// TestSetup.swift
+import XCTest
+import Nimble
+
+@objc
+class TestSetup: NSObject {
+	override init() {
+		XCTestObservationCenter.shared.register(AsyncConfigurationTestObserver())
+	}
+}
+
+class AsyncConfigurationTestObserver: NSObject, XCTestObserver {
+    func testBundleWillStart(_ testBundle: Bundle) {
+        Nimble.AsyncDefaults.timeout = .seconds(5)
+        Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+    }
+}
+```
+
+In Linux, you can implement `LinuxMain` to set the AsyncDefaults before calling `XCTMain`.
 
 ## Objective-C Support
 
