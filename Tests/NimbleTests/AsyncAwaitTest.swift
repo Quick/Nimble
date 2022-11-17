@@ -70,6 +70,27 @@ final class AsyncAwaitTest: XCTestCase {
         await expect { usleep(10); return 1 }.toEventually(equal(1))
     }
 
+    @MainActor
+    func testToEventuallyMatcherIsAlwaysExecutedOnMainActor() async {
+        // This prevents an issue where the main thread checker can get tripped up by us `stringify`ing
+        // the expression in ``execute`` (Polling+AsyncAwait version). Which is annoying if the test
+        // is otherwise correctly executing on the main thread.
+        // Double-y so if your CI automatically reads backtraces (like what the main thread checker will output) as test crashes,
+        // and fails your build.
+        struct MySubject: CustomDebugStringConvertible, Equatable {
+            var debugDescription: String {
+                expect(Thread.isMainThread).to(beTrue())
+                return "Test"
+            }
+
+            static func == (lhs: MySubject, rhs: MySubject) -> Bool {
+                Thread.isMainThread
+            }
+        }
+
+        await expect(MySubject()).toEventually(equal(MySubject()))
+    }
+
     func testToEventuallyWithCustomDefaultTimeout() async {
         AsyncDefaults.timeout = .seconds(2)
         defer {
