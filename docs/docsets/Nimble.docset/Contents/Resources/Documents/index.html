@@ -16,7 +16,7 @@
     <a title="Nimble  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Nimble 11.1.1 Docs</a> (45% documented)</p>
+        <p><a href="index.html">Nimble 11.2.0 Docs</a> (45% documented)</p>
         <p class="header-right"><a href="https://github.com/Quick/Nimble"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="search.json">
@@ -1324,6 +1324,7 @@ thread will cause Nimble to stop the run loop to continue. This can cause test
 pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
 deadlocks, and synchronous IPC.</p>
+<h3 id='changing-default-timeout-and-poll-intervals' class='heading'>Changing default Timeout and Poll Intervals</h3>
 
 <p>In some cases (e.g. when running on slower machines) it can be useful to modify
 the default timeout and poll interval values. This can be done as follows:</p>
@@ -1335,6 +1336,59 @@ the default timeout and poll interval values. This can be done as follows:</p>
 <span class="c1">// Slow the polling interval to 0.1 seconds:</span>
 <span class="kt">Nimble</span><span class="o">.</span><span class="kt">AsyncDefaults</span><span class="o">.</span><span class="n">pollInterval</span> <span class="o">=</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </code></pre>
+
+<p>You can set these globally at test startup in two ways:</p>
+<h4 id='quick' class='heading'>Quick</h4>
+
+<p>If you use <a href="https://github.com/Quick/Quick">Quick</a>, add a <a href="https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md"><code>QuickConfiguration</code> subclass</a> which sets your desired <code><a href="Structs/AsyncDefaults.html">AsyncDefaults</a></code>.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Quick</span>
+<span class="kd">import</span> <span class="kt">Nimble</span>
+
+<span class="kd">class</span> <span class="kt">AsyncConfiguration</span><span class="p">:</span> <span class="kt">QuickConfiguration</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">_</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt">QCKConfiguration</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">Nimble</span><span class="o">.</span><span class="kt">AsyncDefaults</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="kt">Nimble</span><span class="o">.</span><span class="kt">AsyncDefaults</span><span class="o">.</span><span class="n">pollInterval</span> <span class="o">=</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='xctest' class='heading'>XCTest</h4>
+
+<p>If you use <a href="https://developer.apple.com/documentation/xctest">XCTest</a>, add an object that conforms to <a href="https://developer.apple.com/documentation/xctest/xctestobservation"><code>XCTestObservation</code></a> and implement <a href="https://developer.apple.com/documentation/xctest/xctestobservation/1500772-testbundlewillstart"><code>testBundleWillStart(_:)</code></a>.</p>
+
+<p>Additionally, you will need to register this observer with the <a href="https://developer.apple.com/documentation/xctest/xctestobservationcenter"><code>XCTestObservationCenter</code></a> at test startup. To do this, set the <code>NSPrincipalClass</code> key in your test bundle&rsquo;s Info.plist and implement a class with that same name.</p>
+
+<p>For example</p>
+<pre class="highlight xml"><code><span class="c">&lt;!-- Info.plist --&gt;</span>
+<span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="nt">&lt;key&gt;</span>NSPrincipalClass<span class="nt">&lt;/key&gt;</span>
+    <span class="nt">&lt;string&gt;</span>MyTests.TestSetup<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="c1">// TestSetup.swift</span>
+<span class="kd">import</span> <span class="kt">XCTest</span>
+<span class="kd">import</span> <span class="kt">Nimble</span>
+
+<span class="kd">@objc</span>
+<span class="kd">class</span> <span class="kt">TestSetup</span><span class="p">:</span> <span class="kt">NSObject</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">XCTestObservationCenter</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="kt">AsyncConfigurationTestObserver</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">AsyncConfigurationTestObserver</span><span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">XCTestObserver</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">testBundleWillStart</span><span class="p">(</span><span class="n">_</span> <span class="nv">testBundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">Nimble</span><span class="o">.</span><span class="kt">AsyncDefaults</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="kt">Nimble</span><span class="o">.</span><span class="kt">AsyncDefaults</span><span class="o">.</span><span class="n">pollInterval</span> <span class="o">=</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>In Linux, you can implement <code>LinuxMain</code> to set the AsyncDefaults before calling <code>XCTMain</code>.</p>
 <h2 id='objective-c-support' class='heading'>Objective-C Support</h2>
 
 <p>Nimble has full support for Objective-C. However, there are two things
@@ -2520,7 +2574,7 @@ fit.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2022-11-11)</p>
+          <p>&copy; 2022 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2022-11-17)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

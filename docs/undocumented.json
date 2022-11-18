@@ -331,7 +331,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 44,
+      "line": 45,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
