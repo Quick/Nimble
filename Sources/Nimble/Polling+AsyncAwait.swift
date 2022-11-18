@@ -1,5 +1,6 @@
 import Dispatch
 
+@MainActor
 private func execute<T>(_ expression: Expression<T>, style: ExpectationStyle, to: String, description: String?, predicateExecutor: () async throws -> PredicateResult) async -> (Bool, FailureMessage) {
     let msg = FailureMessage()
     msg.userDescription = description
