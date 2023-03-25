@@ -1,4 +1,6 @@
+#if !os(WASI)
 import Dispatch
+#endif
 
 private func convertAsyncExpression<T>(_ asyncExpression: () async throws -> T) async -> (() throws -> T) {
     let result: Result<T, Error>
@@ -45,6 +47,8 @@ public func expect(file: FileString = #file, line: UInt = #line, _ expression: (
             location: SourceLocation(file: file, line: line),
             isClosure: true))
 }
+
+#if !os(WASI)
 
 /// Wait asynchronously until the done closure is called or the timeout has been reached.
 ///
@@ -113,3 +117,5 @@ private func throwableUntil(
             break
         }
 }
+
+#endif // #if !os(WASI)
