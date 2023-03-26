@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Dispatch
 
 @MainActor
@@ -166,3 +168,5 @@ extension SyncExpectation {
         return await toAlways(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }
+
+#endif // #if !os(WASI)

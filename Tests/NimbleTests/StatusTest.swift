@@ -37,6 +37,7 @@ final class StatusTest: XCTestCase {
         }
     }
 
+    #if !os(WASI)
     func testAsync() {
         producesStatus(.passed) {
             expect(true).toEventually(beTrue())
@@ -46,4 +47,5 @@ final class StatusTest: XCTestCase {
             expect(true).toEventually(beFalse())
         }
     }
+    #endif
 }
