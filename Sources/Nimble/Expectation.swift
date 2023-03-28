@@ -62,8 +62,6 @@ extension ExpectationStatus {
 }
 
 public protocol Expectation {
-    associatedtype Value
-
     var location: SourceLocation { get }
 
     /// The status of the test after predicates have been evaluated.

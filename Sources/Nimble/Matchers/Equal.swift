@@ -195,68 +195,68 @@ public func !=<T, C: Equatable>(lhs: SyncExpectation<[T: C]>, rhs: [T: C]?) {
     lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T) {
-    lhs.to(equal(rhs))
+public func ==<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T) async {
+    await lhs.to(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T?) {
-    lhs.to(equal(rhs))
+public func ==<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T?) async {
+    await lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T) {
-    lhs.toNot(equal(rhs))
+public func !=<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T?) {
-    lhs.toNot(equal(rhs))
+public func !=<T: Equatable>(lhs: AsyncExpectation<T>, rhs: T?) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Equatable>(lhs: AsyncExpectation<[T]>, rhs: [T]?) {
-    lhs.to(equal(rhs))
+public func ==<T: Equatable>(lhs: AsyncExpectation<[T]>, rhs: [T]?) async {
+    await lhs.to(equal(rhs))
 }
 
-public func !=<T: Equatable>(lhs: AsyncExpectation<[T]>, rhs: [T]?) {
-    lhs.toNot(equal(rhs))
+public func !=<T: Equatable>(lhs: AsyncExpectation<[T]>, rhs: [T]?) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func == <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) {
-    lhs.to(equal(rhs))
+public func == <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) async {
+    await lhs.to(equal(rhs))
 }
 
-public func == <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) {
-    lhs.to(equal(rhs))
+public func == <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) async {
+    await lhs.to(equal(rhs))
 }
 
-public func != <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) {
-    lhs.toNot(equal(rhs))
+public func != <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func != <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) {
-    lhs.toNot(equal(rhs))
+public func != <T>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func ==<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) {
-    lhs.to(equal(rhs))
+public func ==<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) async {
+    await lhs.to(equal(rhs))
 }
 
-public func ==<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) {
-    lhs.to(equal(rhs))
+public func ==<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) async {
+    await lhs.to(equal(rhs))
 }
 
-public func !=<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) {
-    lhs.toNot(equal(rhs))
+public func !=<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func !=<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) {
-    lhs.toNot(equal(rhs))
+public func !=<T: Comparable>(lhs: AsyncExpectation<Set<T>>, rhs: Set<T>?) async {
+    await lhs.toNot(equal(rhs))
 }
 
-public func ==<T, C: Equatable>(lhs: AsyncExpectation<[T: C]>, rhs: [T: C]?) {
-    lhs.to(equal(rhs))
+public func ==<T, C: Equatable>(lhs: AsyncExpectation<[T: C]>, rhs: [T: C]?) async {
+    await lhs.to(equal(rhs))
 }
 
-public func !=<T, C: Equatable>(lhs: AsyncExpectation<[T: C]>, rhs: [T: C]?) {
-    lhs.toNot(equal(rhs))
+public func !=<T, C: Equatable>(lhs: AsyncExpectation<[T: C]>, rhs: [T: C]?) async {
+    await lhs.toNot(equal(rhs))
 }
 
 #if canImport(Darwin)

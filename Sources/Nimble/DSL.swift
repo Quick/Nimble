@@ -1,4 +1,4 @@
-/// Make an ``Expectation`` on a given actual value. The value given is lazily evaluated.
+/// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
 public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
@@ -7,7 +7,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
             isClosure: true))
 }
 
-/// Make an ``Expectation`` on a given actual value. The closure is lazily invoked.
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
@@ -16,7 +16,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
             isClosure: true))
 }
 
-/// Make an ``Expectation`` on a given actual value. The closure is lazily invoked.
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
@@ -25,8 +25,48 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
             isClosure: true))
 }
 
-/// Make an ``Expectation`` on a given actual value. The closure is lazily invoked.
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 public func expect(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
+    return SyncExpectation(
+        expression: Expression(
+            expression: expression(),
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
+}
+
+/// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
+/// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
+public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
+    return SyncExpectation(
+        expression: Expression(
+            expression: expression,
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
+}
+
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
+/// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
+public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
+    return SyncExpectation(
+        expression: Expression(
+            expression: expression(),
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
+}
+
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
+/// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
+public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
+    return SyncExpectation(
+        expression: Expression(
+            expression: expression(),
+            location: SourceLocation(file: file, line: line),
+            isClosure: true))
+}
+
+/// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
+/// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
+public func expects(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),

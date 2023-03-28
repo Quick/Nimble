@@ -34,12 +34,12 @@ extension SyncExpectation {
 }
 
 extension AsyncExpectation {
-    public static func == (lhs: AsyncExpectation, rhs: ExpectationNil) {
-        lhs.to(beNil())
+    public static func == (lhs: AsyncExpectation, rhs: ExpectationNil) async {
+        await lhs.to(beNil())
     }
 
-    public static func != (lhs: AsyncExpectation, rhs: ExpectationNil) {
-        lhs.toNot(beNil())
+    public static func != (lhs: AsyncExpectation, rhs: ExpectationNil) async {
+        await lhs.toNot(beNil())
     }
 }
 
