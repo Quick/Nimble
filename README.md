@@ -305,7 +305,7 @@ the async function in to `expect`:
 
 ```swift
 // Swift
-await expect(await aFunctionReturning1()).to(equal(1))
+await expect { await aFunctionReturning1() }.to(equal(1))
 ```
 
 The async function is awaited on first, before passing it to the matcher. This
