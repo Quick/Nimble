@@ -6,8 +6,8 @@ import Dispatch
 /// If you are running on a slower machine, it could be useful to increase the default timeout value
 /// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 public struct AsyncDefaults {
-    public static var timeout: DispatchTimeInterval = .seconds(1)
-    public static var pollInterval: DispatchTimeInterval = .milliseconds(10)
+    public static var timeout: NimbleTimeInterval = .seconds(1)
+    public static var pollInterval: NimbleTimeInterval = .milliseconds(10)
 }
 
 internal enum AsyncMatchStyle {
@@ -19,8 +19,8 @@ private func poll<T>(
     style: ExpectationStyle,
     matchStyle: AsyncMatchStyle,
     predicate: Predicate<T>,
-    timeout: DispatchTimeInterval,
-    poll: DispatchTimeInterval,
+    timeout: NimbleTimeInterval,
+    poll: NimbleTimeInterval,
     fnName: String
 ) -> Predicate<T> {
     return Predicate { actualExpression in
@@ -100,7 +100,7 @@ extension SyncExpectation {
     /// This form of `toEventually` does not work in any kind of async context. Use the async form of `toEventually` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `toEventually` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func toEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toEventually(_ predicate: Predicate<Value>, timeout: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -133,7 +133,7 @@ extension SyncExpectation {
     /// Use the async form of `toEventuallyNot` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `toEventuallyNot` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func toEventuallyNot(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toEventuallyNot(_ predicate: Predicate<Value>, timeout: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -168,7 +168,7 @@ extension SyncExpectation {
     /// Use the async form of `toNotEventually` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `toNotEventually` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func toNotEventually(_ predicate: Predicate<Value>, timeout: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toNotEventually(_ predicate: Predicate<Value>, timeout: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toEventuallyNot(predicate, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
@@ -184,7 +184,7 @@ extension SyncExpectation {
     /// Use the async form of `toNever` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `toNever` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func toNever(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toNever(_ predicate: Predicate<Value>, until: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -219,7 +219,7 @@ extension SyncExpectation {
     /// Use the async form of `neverTo` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `neverTo` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func neverTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func neverTo(_ predicate: Predicate<Value>, until: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toNever(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 
@@ -235,7 +235,7 @@ extension SyncExpectation {
     /// Use the async form of `toAlways` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `toAlways` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func toAlways(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func toAlways(_ predicate: Predicate<Value>, until: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = execute(
@@ -270,7 +270,7 @@ extension SyncExpectation {
     /// Use the async form of `alwaysTo` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync version of `alwaysTo` does not work in async contexts. Use the async version with the same name as a drop-in replacement")
-    public func alwaysTo(_ predicate: Predicate<Value>, until: DispatchTimeInterval = AsyncDefaults.timeout, pollInterval: DispatchTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
+    public func alwaysTo(_ predicate: Predicate<Value>, until: NimbleTimeInterval = AsyncDefaults.timeout, pollInterval: NimbleTimeInterval = AsyncDefaults.pollInterval, description: String? = nil) -> Self {
         return toAlways(predicate, until: until, pollInterval: pollInterval, description: description)
     }
 }
