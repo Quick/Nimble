@@ -45,6 +45,21 @@ final class AsyncAwaitTest: XCTestCase {
         }
     }
 
+    func testToEventuallyWithAsyncExpressions() async {
+        actor ExampleActor {
+            private var count = 0
+
+            func value() -> Int {
+                count += 1
+                return count
+            }
+        }
+
+        let subject = ExampleActor()
+
+        await expect { await subject.value() }.toEventually(equal(2))
+    }
+
     func testToEventuallySyncCase() async {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
     }

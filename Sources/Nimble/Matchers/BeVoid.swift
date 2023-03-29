@@ -6,10 +6,18 @@ public func beVoid() -> Predicate<()> {
     }
 }
 
-public func ==<Exp: Expectation>(lhs: Exp, rhs: ()) where Exp.Value == () {
+public func ==(lhs: SyncExpectation<()>, rhs: ()) {
     lhs.to(beVoid())
 }
 
-public func !=<Exp: Expectation>(lhs: Exp, rhs: ()) where Exp.Value == () {
+public func ==(lhs: AsyncExpectation<()>, rhs: ()) async {
+    await lhs.to(beVoid())
+}
+
+public func !=(lhs: SyncExpectation<()>, rhs: ()) {
     lhs.toNot(beVoid())
+}
+
+public func !=(lhs: AsyncExpectation<()>, rhs: ()) async {
+    await lhs.toNot(beVoid())
 }

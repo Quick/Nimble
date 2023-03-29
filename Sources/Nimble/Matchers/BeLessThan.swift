@@ -8,8 +8,12 @@ public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func <<Exp: Expectation, V: Comparable>(lhs: Exp, rhs: V) where Exp.Value == V {
+public func <<V: Comparable>(lhs: SyncExpectation<V>, rhs: V) {
     lhs.to(beLessThan(rhs))
+}
+
+public func <<V: Comparable>(lhs: AsyncExpectation<V>, rhs: V) async {
+    await lhs.to(beLessThan(rhs))
 }
 
 #if canImport(Darwin)
@@ -25,8 +29,12 @@ public func beLessThan<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func <<Exp: Expectation, V: NMBComparable>(lhs: Exp, rhs: V?) where Exp.Value == V {
+public func <<V: NMBComparable>(lhs: SyncExpectation<V>, rhs: V?) {
     lhs.to(beLessThan(rhs))
+}
+
+public func <<V: NMBComparable>(lhs: AsyncExpectation<V>, rhs: V?) async {
+    await lhs.to(beLessThan(rhs))
 }
 
 extension NMBPredicate {

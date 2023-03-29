@@ -46,27 +46,29 @@ final class DSLTest: XCTestCase {
     }
 
     func testExpectAsyncClosure() async throws {
-        let _: AsyncExpectation<Int> = await expect { 1 }
-        let _: AsyncExpectation<Int> = await expect { await nonThrowingAsyncInt() }
-        let _: AsyncExpectation<Int> = await expect { try await throwingAsyncInt() }
-        let _: AsyncExpectation<Int> = await expect { () -> Int in 1 }
-        let _: AsyncExpectation<Int> = await expect { () -> Int? in 1 }
-        let _: AsyncExpectation<Int> = await expect { () -> Int? in nil }
+        let _: AsyncExpectation<Int> = expect { 1 }
+        let _: AsyncExpectation<Int> = expect { await nonThrowingAsyncInt() }
+        let _: AsyncExpectation<Int> = expect { try await throwingAsyncInt() }
+        let _: AsyncExpectation<Int> = expect { () -> Int in 1 }
+        let _: AsyncExpectation<Int> = expect { () -> Int? in 1 }
+        let _: AsyncExpectation<Int> = expect { () -> Int? in nil }
 
-        let _: AsyncExpectation<Void> = await expect { }
-        let _: AsyncExpectation<Void> = await expect { () -> Void in }
+        let _: AsyncExpectation<Void> = expect { }
+        let _: AsyncExpectation<Void> = expect { () -> Void in }
 
-        let _: AsyncExpectation<Void> = await expect { return }
-        let _: AsyncExpectation<Void> = await expect { () -> Void in return }
+        let _: AsyncExpectation<Void> = expect { return }
+        let _: AsyncExpectation<Void> = expect { () -> Void in return }
 
-        let _: AsyncExpectation<Void> = await expect { return () }
-        let _: AsyncExpectation<Void> = await expect { () -> Void in return () }
+        let _: AsyncExpectation<Void> = expect { return () }
+        let _: AsyncExpectation<Void> = expect { () -> Void in return () }
     }
 
     func testExpectCombinedSyncAndAsyncExpects() async throws {
         await expect { await nonThrowingAsyncInt() }.to(equal(1))
+        await expecta(await nonThrowingAsyncInt()).to(equal(1))
         expect(1).to(equal(1))
 
         expect { nonThrowingInt() }.to(equal(1))
+        expects { nonThrowingInt() }.to(equal(1))
     }
 }

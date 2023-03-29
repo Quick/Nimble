@@ -137,7 +137,13 @@ func suppressErrors<T>(closure: () -> T) -> T {
     return output!
 }
 
-func producesStatus<Exp: Expectation, T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> Exp) where Exp.Value == T {
+func producesStatus<T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> SyncExpectation<T>) {
+    let expectation = suppressErrors(closure: closure)
+
+    expect(file: file, line: line, expectation.status).to(equal(status))
+}
+
+func producesStatus<T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> AsyncExpectation<T>) {
     let expectation = suppressErrors(closure: closure)
 
     expect(file: file, line: line, expectation.status).to(equal(status))

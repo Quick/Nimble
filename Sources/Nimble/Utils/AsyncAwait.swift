@@ -164,7 +164,7 @@ extension Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () throws -> T?) async -> AsyncAwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () async throws -> T?) async -> AsyncAwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
@@ -172,12 +172,14 @@ extension Awaiter {
             let interval = pollInterval
             asyncSource.schedule(deadline: .now(), repeating: interval, leeway: pollLeeway)
             asyncSource.setEventHandler {
-                do {
-                    if let result = try closure() {
-                        promise.resolveResult(.completed(result))
+                Task<Void, Never> {
+                    do {
+                        if let result = try await closure() {
+                            promise.resolveResult(.completed(result))
+                        }
+                    } catch let error {
+                        promise.resolveResult(.errorThrown(error))
                     }
-                } catch let error {
-                    promise.resolveResult(.errorThrown(error))
                 }
             }
             asyncSource.resume()
@@ -197,10 +199,10 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () throws -> Bool) async -> PollResult<Bool> {
+    expression: @escaping () async throws -> Bool) async -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = await awaiter.poll(pollInterval) { () throws -> Bool? in
-            if try expression() {
+            if try await expression() {
                 return true
             }
             return nil

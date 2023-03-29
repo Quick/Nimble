@@ -317,9 +317,28 @@ async context. For XCTest, this is as simple as marking your test function with
 `async`. If you use Quick, then you don't need to do anything because as of
 Quick 6, all tests are executed in an async context.
 
+To avoid a compiler errors when using synchronous `expect` in asynchronous contexts,
+`expect` with async expressions does not support autoclosures. However, the `expecta`
+(expect async) function is provided as an alternative, which does support autoclosures.
+
+```swift
+// Swift
+await expect(await aFunctionReturning1()).to(equal(1)))
+```
+
+Similarly, if you're ever in a situation where you want to force the compiler to
+produce a `SyncExpectation`, you can use the `expects` (expect sync) function to
+produce a `SyncExpectation`. Like so:
+
+```swift
+// Swift
+expects(someNonAsyncFunction()).to(equal(1)))
+
+expects(await someAsyncFunction()).to(equal(1)) // Compiler error: 'async' call in an autoclosure that does not support concurrency
+```
+
 Note: Async/Await support is different than the `toEventually`/`toEventuallyNot`
-feature described below. In fact, async/await is not supported in expectations
-that make use of `toEventually` or `toEventuallyNot`.
+feature described below.
 
 ## Polling Expectations
 
@@ -356,6 +375,22 @@ In the above example, `ocean` is constantly re-evaluated. If it ever
 contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
 whole second, the expectation fails.
+
+`toEventaully` et. al. now also supports async expectations. For example, the following test is now supported:
+
+```swift
+actor MyActor {
+    private var counter = 0
+
+    func access() -> Int {
+        counter += 1
+        return counter
+    }
+}
+
+let subject = MyActor()
+await expect { await subject.access() }.toEventually(equal(2))
+```
 
 You can also test that a value always or never matches throughout the length of the timeout. Use `toNever` and `toAlways` for this:
 
