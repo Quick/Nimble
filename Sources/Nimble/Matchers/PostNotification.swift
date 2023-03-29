@@ -74,11 +74,13 @@ private func _postNotifications<Out>(
             actualValue = "<\(stringify(collector.observedNotifications))>"
         }
 
-        var result = try predicate.satisfies(collectorNotificationsExpression)
-        result.message = result.message.replacedExpectation { message in
-            return .expectedCustomValueTo(message.expectedMessage, actual: actualValue)
-        }
-        return result
+        let predicateResult = try predicate.satisfies(collectorNotificationsExpression)
+        return PredicateResult(
+            status: predicateResult.status,
+            message: predicateResult.message.replacedExpectation { message in
+                return .expectedCustomValueTo(message.expectedMessage, actual: actualValue)
+            }
+        )
     }
 }
 

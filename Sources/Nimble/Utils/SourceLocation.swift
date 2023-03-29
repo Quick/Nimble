@@ -11,7 +11,7 @@ public typealias FileString = StaticString
 public typealias FileString = String
 #endif
 
-public final class SourceLocation: NSObject {
+public final class SourceLocation: NSObject, Sendable {
     public let file: FileString
     public let line: UInt
 

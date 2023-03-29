@@ -156,6 +156,11 @@ func deferToMainQueue(action: @escaping () -> Void) {
         action()
     }
 }
+
+func deferToMainActor(action: @escaping @MainActor () async -> Void) async {
+    try! await Task.sleep(nanoseconds: 10_000_000)
+    await action()
+}
 #endif
 
 #if canImport(Darwin) && !SWIFT_PACKAGE

@@ -16,8 +16,8 @@
 /// The Predicate provide the heavy lifting on how to assert against a given value. Internally,
 /// predicates are simple wrappers around closures to provide static type information and
 /// allow composition and wrapping of existing behaviors.
-public struct Predicate<T> {
-    fileprivate var matcher: (Expression<T>) throws -> PredicateResult
+public struct Predicate<T>: Sendable {
+    fileprivate let matcher: (Expression<T>) throws -> PredicateResult
 
     /// Constructs a predicate that knows how take a given value
     public init(_ matcher: @escaping (Expression<T>) throws -> PredicateResult) {
@@ -82,17 +82,17 @@ extension Predicate {
 }
 
 // The Expectation style intended for comparison to a PredicateStatus.
-public enum ExpectationStyle {
+public enum ExpectationStyle: Sendable {
     case toMatch, toNotMatch
 }
 
 /// The value that a Predicates return to describe if the given (actual) value matches the
 /// predicate.
-public struct PredicateResult {
+public struct PredicateResult: Sendable {
     /// Status indicates if the predicate matches, does not match, or fails.
-    public var status: PredicateStatus
+    public let status: PredicateStatus
     /// The error message that can be displayed if it does not match
-    public var message: ExpectationMessage
+    public let message: ExpectationMessage
 
     /// Constructs a new PredicateResult with a given status and error message
     public init(status: PredicateStatus, message: ExpectationMessage) {
@@ -113,7 +113,7 @@ public struct PredicateResult {
 }
 
 /// PredicateStatus is a trinary that indicates if a Predicate matches a given value or not
-public enum PredicateStatus {
+public enum PredicateStatus: Sendable {
     /// Matches indicates if the predicate / matcher passes with the given value
     ///
     /// For example, `equals(1)` returns `.matches` for `expect(1).to(equal(1))`.

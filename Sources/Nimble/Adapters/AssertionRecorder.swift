@@ -20,7 +20,7 @@ public struct AssertionRecord: CustomStringConvertible {
 /// This is useful for testing failure messages for matchers.
 ///
 /// @see AssertionHandler
-public class AssertionRecorder: AssertionHandler {
+public final class AssertionRecorder: AssertionHandler {
     /// All the assertions that were captured by this recorder
     public var assertions = [AssertionRecord]()
 

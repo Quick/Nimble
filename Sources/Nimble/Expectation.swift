@@ -33,7 +33,7 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
     return result
 }
 
-public enum ExpectationStatus: Equatable {
+public enum ExpectationStatus: Equatable, Sendable {
 
     /// No predicates have been performed.
     case pending
@@ -197,7 +197,7 @@ public struct SyncExpectation<Value>: Expectation {
     // - NMBExpectation for Objective-C interface
 }
 
-public struct AsyncExpectation<Value>: Expectation {
+public struct AsyncExpectation<Value: Sendable>: Expectation, Sendable {
     public let expression: AsyncExpression<Value>
 
     /// The status of the test after predicates have been evaluated.

@@ -3,51 +3,85 @@
 import Dispatch
 
 @MainActor
-private func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyle, to: String, description: String?, predicateExecutor: () async throws -> PredicateResult) async -> (Bool, FailureMessage) {
-    let msg = FailureMessage()
-    msg.userDescription = description
-    msg.to = to
-    do {
-        let result = try await predicateExecutor()
-        result.message.update(failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+private func execute<T: Sendable>(
+    _ expression: AsyncExpression<T>,
+    style: ExpectationStyle,
+    to: String,
+    description: String?,
+    predicateExecutor: @Sendable () async throws -> PredicateResult) async -> (Bool, FailureMessage) {
+        let msg = FailureMessage()
+        msg.userDescription = description
+        msg.to = to
+        do {
+            let result = try await predicateExecutor()
+            result.message.update(failureMessage: msg)
+            if msg.actualValue == "" {
+                msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+            }
+            return (result.toBoolean(expectation: style), msg)
+        } catch let error {
+            msg.stringValue = "unexpected error thrown: <\(error)>"
+            return (false, msg)
         }
-        return (result.toBoolean(expectation: style), msg)
-    } catch let error {
-        msg.stringValue = "unexpected error thrown: <\(error)>"
-        return (false, msg)
+    }
+
+private actor Poller<T: Sendable> {
+    private var lastPredicateResult: PredicateResult?
+
+    init() {}
+
+    func poll(expression: AsyncExpression<T>,
+              style: ExpectationStyle,
+              matchStyle: AsyncMatchStyle,
+              timeout: DispatchTimeInterval,
+              poll: DispatchTimeInterval,
+              fnName: String,
+              predicateRunner: @escaping @Sendable () async throws -> PredicateResult) async -> PredicateResult {
+        let fnName = "expect(...).\(fnName)(...)"
+        let result = await pollBlock(
+            pollInterval: poll,
+            timeoutInterval: timeout,
+            file: expression.location.file,
+            line: expression.location.line,
+            fnName: fnName) {
+                await self.updatePredicateResult(result: try await predicateRunner())
+                    .toBoolean(expectation: style)
+            }
+        return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+    }
+
+    func updatePredicateResult(result: PredicateResult) -> PredicateResult {
+        self.lastPredicateResult = result
+        return result
     }
 }
 
 // swiftlint:disable:next function_parameter_count
-private func poll<T>(
+private func poll<T: Sendable>(
     expression: AsyncExpression<T>,
     style: ExpectationStyle,
     matchStyle: AsyncMatchStyle,
     timeout: DispatchTimeInterval,
     poll: DispatchTimeInterval,
     fnName: String,
-    predicateRunner: @escaping () async throws -> PredicateResult
+    predicateRunner: @escaping @Sendable () async throws -> PredicateResult
 ) async -> PredicateResult {
-    let fnName = "expect(...).\(fnName)(...)"
-    var lastPredicateResult: PredicateResult?
-    let result = await pollBlock(
-        pollInterval: poll,
-        timeoutInterval: timeout,
-        file: expression.location.file,
-        line: expression.location.line,
-        fnName: fnName) {
-            lastPredicateResult = try await predicateRunner()
-            return lastPredicateResult!.toBoolean(expectation: style)
-        }
-    return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+    let poller = Poller<T>()
+    return await poller.poll(
+        expression: expression,
+        style: style,
+        matchStyle: matchStyle,
+        timeout: timeout,
+        poll: poll,
+        fnName: fnName,
+        predicateRunner: predicateRunner
+    )
 }
 
-private extension Expression {
+private extension Expression where Value: Sendable {
     func toAsyncExpression() -> AsyncExpression<Value> {
         AsyncExpression(
-            memoizedExpression: { memoize in try _expression(memoize) },
+            memoizedExpression: MemoizedClosure(prememoized: { try _expression($0) }),
             location: location,
             withoutCaching: _withoutCaching,
             isClosure: isClosure
@@ -55,7 +89,7 @@ private extension Expression {
     }
 }
 
-extension SyncExpectation {
+extension SyncExpectation where Value: Sendable {
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
     @discardableResult

@@ -1,4 +1,4 @@
-public indirect enum ExpectationMessage {
+public indirect enum ExpectationMessage: Sendable {
     // --- Primary Expectations ---
     /// includes actual value in output ("expected to <message>, got <actual>")
     case expectedActualValueTo(/* message: */ String)

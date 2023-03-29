@@ -11,7 +11,7 @@ class NSException {}
 /// A dummy reimplementation of the `NMBExceptionCapture` class to serve
 /// as a stand-in for build and runtime environments that don't support
 /// Objective C.
-internal class ExceptionCapture {
+internal final class ExceptionCapture: Sendable {
     let finally: (() -> Void)?
 
     init(handler: ((NSException) -> Void)?, finally: (() -> Void)?) {

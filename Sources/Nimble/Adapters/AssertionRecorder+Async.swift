@@ -13,9 +13,6 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
                                  closure: () async throws -> Void) async {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
-    let capturer = NMBExceptionCapture(handler: nil, finally: ({
-        environment.assertionHandler = oldRecorder
-    }))
     environment.assertionHandler = tempAssertionHandler
 
     do {
@@ -26,6 +23,7 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
         let location = SourceLocation(file: file, line: line)
         tempAssertionHandler.assert(false, message: failureMessage, location: location)
     }
+    environment.assertionHandler = oldRecorder
 }
 
 /// Captures expectations that occur in the given closure. Note that all

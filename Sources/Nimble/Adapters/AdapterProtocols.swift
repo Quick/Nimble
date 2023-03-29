@@ -1,5 +1,5 @@
 /// Protocol for the assertion handler that Nimble uses for all expectations.
-public protocol AssertionHandler {
+public protocol AssertionHandler: Sendable {
     func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation)
 }
 

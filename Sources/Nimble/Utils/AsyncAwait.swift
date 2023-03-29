@@ -13,20 +13,38 @@ internal struct AsyncAwaitTrigger {
     let start: () async throws -> Void
 }
 
+internal actor AsyncAwaitPromise<T: Sendable> {
+    private(set) internal var asyncResult: PollResult<T> = .incomplete
+
+    /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
+    /// this method will resolve in a no-op.
+    ///
+    /// @returns a Bool that indicates if the async result was accepted or rejected because another
+    ///          value was received first.
+    @discardableResult
+    func resolveResult(_ result: PollResult<T>) -> Bool {
+        guard case .incomplete = asyncResult else {
+            return false
+        }
+        asyncResult = result
+        return true
+    }
+}
+
 /// Factory for building fully configured AwaitPromises and waiting for their results.
 ///
 /// This factory stores all the state for an async expectation so that Await doesn't
 /// doesn't have to manage it.
-internal class AsyncAwaitPromiseBuilder<T> {
+internal class AsyncAwaitPromiseBuilder<T: Sendable> {
     let awaiter: Awaiter
     let waitLock: WaitLock
     let trigger: AsyncAwaitTrigger
-    let promise: AwaitPromise<T>
+    let promise: AsyncAwaitPromise<T>
 
     internal init(
         awaiter: Awaiter,
         waitLock: WaitLock,
-        promise: AwaitPromise<T>,
+        promise: AsyncAwaitPromise<T>,
         trigger: AsyncAwaitTrigger) {
             self.awaiter = awaiter
             self.waitLock = waitLock
@@ -69,23 +87,25 @@ internal class AsyncAwaitPromiseBuilder<T> {
             leeway: timeoutLeeway
         )
         trigger.timeoutSource.setEventHandler {
-            guard self.promise.asyncResult.isIncomplete() else { return }
-            let timedOutSem = DispatchSemaphore(value: 0)
-            let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
-            semTimedOutOrBlocked.signal()
-            DispatchQueue.main.async {
-                if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
-                    timedOutSem.signal()
-                    semTimedOutOrBlocked.signal()
-                    self.promise.resolveResult(.timedOut)
+            Task<Void, Never> {
+                guard await self.promise.asyncResult.isIncomplete() else { return }
+                let timedOutSem = DispatchSemaphore(value: 0)
+                let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
+                semTimedOutOrBlocked.signal()
+                await Task<Void, Never> { @MainActor in
+                    if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
+                        timedOutSem.signal()
+                        semTimedOutOrBlocked.signal()
+                        await self.promise.resolveResult(.timedOut)
+                    }
+                }.value
+                // potentially interrupt blocking code on run loop to let timeout code run
+                let now = DispatchTime.now() + forcefullyAbortTimeout
+                let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
+                let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
+                if didNotTimeOut && timeoutWasNotTriggered {
+                    await self.promise.resolveResult(.blockedRunLoop)
                 }
-            }
-            // potentially interrupt blocking code on run loop to let timeout code run
-            let now = DispatchTime.now() + forcefullyAbortTimeout
-            let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
-            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
-            if didNotTimeOut && timeoutWasNotTriggered {
-                self.promise.resolveResult(.blockedRunLoop)
             }
         }
         return self
@@ -120,10 +140,10 @@ internal class AsyncAwaitPromiseBuilder<T> {
         do {
             try await self.trigger.start()
         } catch let error {
-            self.promise.resolveResult(.errorThrown(error))
+            await self.promise.resolveResult(.errorThrown(error))
         }
         self.trigger.timeoutSource.resume()
-        while self.promise.asyncResult.isIncomplete() {
+        while await self.promise.asyncResult.isIncomplete() {
             await Task.yield()
         }
 
@@ -132,7 +152,7 @@ internal class AsyncAwaitPromiseBuilder<T> {
             asyncSource.cancel()
         }
 
-        return promise.asyncResult
+        return await promise.asyncResult
     }
 }
 
@@ -140,16 +160,16 @@ extension Awaiter {
     func performBlock<T>(
         file: FileString,
         line: UInt,
-        _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
+        _ closure: @escaping (@escaping (T) async -> Void) async throws -> Void
         ) async -> AsyncAwaitPromiseBuilder<T> {
-            let promise = AwaitPromise<T>()
+            let promise = AsyncAwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
             let trigger = AsyncAwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try await closure { result in
                     completionCount += 1
                     if completionCount < 2 {
-                        promise.resolveResult(.completed(result))
+                        await promise.resolveResult(.completed(result))
                     } else {
                         fail("waitUntil(..) expects its completion closure to be only called once",
                              file: file, line: line)
@@ -164,8 +184,8 @@ extension Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () async throws -> T?) async -> AsyncAwaitPromiseBuilder<T> {
-        let promise = AwaitPromise<T>()
+    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping @Sendable () async throws -> T?) async -> AsyncAwaitPromiseBuilder<T> {
+        let promise = AsyncAwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
         let trigger = AsyncAwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
@@ -175,10 +195,10 @@ extension Awaiter {
                 Task<Void, Never> {
                     do {
                         if let result = try await closure() {
-                            promise.resolveResult(.completed(result))
+                            await promise.resolveResult(.completed(result))
                         }
                     } catch let error {
-                        promise.resolveResult(.errorThrown(error))
+                        await promise.resolveResult(.errorThrown(error))
                     }
                 }
             }
@@ -199,9 +219,9 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () async throws -> Bool) async -> PollResult<Bool> {
+    expression: @escaping @Sendable () async throws -> Bool) async -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
-        let result = await awaiter.poll(pollInterval) { () throws -> Bool? in
+        let result = await awaiter.poll(pollInterval) { () async throws -> Bool? in
             if try await expression() {
                 return true
             }

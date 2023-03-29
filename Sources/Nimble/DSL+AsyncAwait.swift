@@ -3,7 +3,7 @@ import Dispatch
 #endif
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @escaping () async throws -> T?) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(file: FileString = #file, line: UInt = #line, _ expression: @escaping @Sendable () async throws -> T?) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
@@ -12,7 +12,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T)) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(file: FileString = #file, line: UInt = #line, _ expression: () -> (@Sendable () async throws -> T)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -21,7 +21,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T?)) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(file: FileString = #file, line: UInt = #line, _ expression: () -> (@Sendable () async throws -> T?)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -30,7 +30,7 @@ public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> Void)) -> AsyncExpectation<Void> {
+public func expect(file: FileString = #file, line: UInt = #line, _ expression: () -> (@Sendable () async throws -> Void)) -> AsyncExpectation<Void> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -40,7 +40,7 @@ public func expect(file: FileString = #file, line: UInt = #line, _ expression: (
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation` and `expect -> AsyncExpectation`.
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () async throws -> T?) async -> AsyncExpectation<T> {
+public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
@@ -50,7 +50,7 @@ public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expressio
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T)) async -> AsyncExpectation<T> {
+public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (@Sendable () async throws -> T)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -60,7 +60,7 @@ public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expressio
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T?)) async -> AsyncExpectation<T> {
+public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (@Sendable () async throws -> T?)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -70,7 +70,7 @@ public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expressio
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> Void)) async -> AsyncExpectation<Void> {
+public func expecta(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (@Sendable () async throws -> Void)) async -> AsyncExpectation<Void> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -87,7 +87,7 @@ public func expecta(file: FileString = #file, line: UInt = #line, _ expression: 
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) async -> Void) async {
+public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping @Sendable (@escaping () async -> Void) async -> Void) async {
     await throwableUntil(timeout: timeout) { done in
         await action(done)
     }
@@ -100,7 +100,7 @@ public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, fil
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) async {
+public func waitUntil(timeout: DispatchTimeInterval = AsyncDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping @Sendable (@escaping () async -> Void) -> Void) async {
     await throwableUntil(timeout: timeout, file: file, line: line) { done in
         action(done)
     }
@@ -115,16 +115,16 @@ private func throwableUntil(
     timeout: DispatchTimeInterval,
     file: FileString = #file,
     line: UInt = #line,
-    action: @escaping (@escaping () -> Void) async throws -> Void) async {
+    action: @escaping @Sendable (@escaping () async -> Void) async throws -> Void) async {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let leeway = timeout.divided
-        let result = await awaiter.performBlock(file: file, line: line) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
+        let result = await awaiter.performBlock(file: file, line: line) { @MainActor (done: @escaping (ErrorResult) async -> Void) async throws -> Void in
             do {
                 try await action {
-                    done(.none)
+                    await done(.none)
                 }
             } catch let e {
-                done(.error(e))
+                await done(.error(e))
             }
         }
             .timeout(timeout, forcefullyAbortTimeout: leeway)

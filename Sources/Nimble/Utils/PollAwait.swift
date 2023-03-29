@@ -70,7 +70,7 @@ internal class AssertionWaitLock: WaitLock {
     }
 }
 
-internal enum PollResult<T> {
+internal enum PollResult<T: Sendable>: Sendable {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
@@ -107,7 +107,7 @@ internal enum PollResult<T> {
 /// This class is thread-safe at receiving an "response" to this promise.
 internal final class AwaitPromise<T> {
     private(set) internal var asyncResult: PollResult<T> = .incomplete
-    private var signal: DispatchSemaphore
+    private let signal: DispatchSemaphore
 
     init() {
         signal = DispatchSemaphore(value: 1)
