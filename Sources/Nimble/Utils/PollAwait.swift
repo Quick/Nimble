@@ -4,8 +4,8 @@ import CoreFoundation
 import Dispatch
 import Foundation
 
-private let timeoutLeeway = DispatchTimeInterval.milliseconds(1)
-private let pollLeeway = DispatchTimeInterval.milliseconds(1)
+private let timeoutLeeway = NimbleTimeInterval.milliseconds(1)
+private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 
 /// Stores debugging information about callers
 internal struct WaitingInfo: CustomStringConvertible {
@@ -160,7 +160,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(_ timeoutInterval: DispatchTimeInterval, forcefullyAbortTimeout: DispatchTimeInterval) -> Self {
+    func timeout(_ timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval) -> Self {
         /// = Discussion =
         ///
         /// There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -190,9 +190,9 @@ internal class AwaitPromiseBuilder<T> {
         ///
         /// In addition, stopping the run loop is used to halt code executed on the main run loop.
         trigger.timeoutSource.schedule(
-            deadline: DispatchTime.now() + timeoutInterval,
+            deadline: DispatchTime.now() + timeoutInterval.dispatchTimeInterval,
             repeating: .never,
-            leeway: timeoutLeeway
+            leeway: timeoutLeeway.dispatchTimeInterval
         )
         trigger.timeoutSource.setEventHandler {
             guard self.promise.asyncResult.isIncomplete() else { return }
@@ -216,7 +216,7 @@ internal class AwaitPromiseBuilder<T> {
             }
             // potentially interrupt blocking code on run loop to let timeout code run
             CFRunLoopStop(runLoop)
-            let now = DispatchTime.now() + forcefullyAbortTimeout
+            let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
             if didNotTimeOut && timeoutWasNotTriggered {
@@ -332,13 +332,17 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: DispatchTimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: NimbleTimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
         let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
             let interval = pollInterval
-            asyncSource.schedule(deadline: .now(), repeating: interval, leeway: pollLeeway)
+            asyncSource.schedule(
+                deadline: .now(),
+                repeating: interval.dispatchTimeInterval,
+                leeway: pollLeeway.dispatchTimeInterval
+            )
             asyncSource.setEventHandler {
                 do {
                     if let result = try closure() {
@@ -364,8 +368,8 @@ internal class Awaiter {
 }
 
 internal func pollBlock(
-    pollInterval: DispatchTimeInterval,
-    timeoutInterval: DispatchTimeInterval,
+    pollInterval: NimbleTimeInterval,
+    timeoutInterval: NimbleTimeInterval,
     file: FileString,
     line: UInt,
     fnName: String = #function,
