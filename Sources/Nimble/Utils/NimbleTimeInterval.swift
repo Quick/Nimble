@@ -6,7 +6,7 @@ import Dispatch
 import CDispatch
 #endif
 
-/// A reimplementation of `NimbleTimeInterval` without the `never` case, and conforming to `Sendable`.
+/// A reimplementation of `DispatchTimeInterval` without the `never` case, and conforming to `Sendable`.
 public enum NimbleTimeInterval: Sendable, Equatable {
     case seconds(Int)
     case milliseconds(Int)
