@@ -106,6 +106,36 @@ final class AsyncAwaitTest: XCTestCase {
         await expect(MySubject()).toEventually(equal(MySubject()))
     }
 
+    func testToEventuallyWithSyncExpectationAlwaysExecutesExpressionOnMainActor() async {
+        await expect(Thread.isMainThread).toEventually(beTrue())
+        await expect(Thread.isMainThread).toEventuallyNot(beFalse())
+        await expect(Thread.isMainThread).toAlways(beTrue(), until: .seconds(1))
+        await expect(Thread.isMainThread).toNever(beFalse(), until: .seconds(1))
+    }
+
+    func testToEventuallyWithAsyncExpectationDoesNotNecessarilyExecutesExpressionOnMainActor() async {
+        // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
+        // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
+        func isMainThread() -> Bool { Thread.isMainThread }
+
+        await expecta(isMainThread()).toEventually(beFalse())
+        await expecta(isMainThread()).toEventuallyNot(beTrue())
+        await expecta(isMainThread()).toAlways(beFalse(), until: .seconds(1))
+        await expecta(isMainThread()).toNever(beTrue(), until: .seconds(1))
+    }
+
+    @MainActor
+    func testToEventuallyWithAsyncExpectationDoesExecuteExpressionOnMainActorWhenTestRunsOnMainActor() async {
+        // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
+        // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
+        func isMainThread() -> Bool { Thread.isMainThread }
+
+        await expecta(isMainThread()).toEventually(beTrue())
+        await expecta(isMainThread()).toEventuallyNot(beFalse())
+        await expecta(isMainThread()).toAlways(beTrue(), until: .seconds(1))
+        await expecta(isMainThread()).toNever(beFalse(), until: .seconds(1))
+    }
+
     func testToEventuallyWithCustomDefaultTimeout() async {
         AsyncDefaults.timeout = .seconds(2)
         defer {
