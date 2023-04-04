@@ -491,26 +491,26 @@ the default timeout and poll interval values. This can be done as follows:
 // Swift
 
 // Increase the global timeout to 5 seconds:
-Nimble.AsyncDefaults.timeout = .seconds(5)
+Nimble.PollingDefaults.timeout = .seconds(5)
 
 // Slow the polling interval to 0.1 seconds:
-Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+Nimble.PollingDefaults.pollInterval = .milliseconds(100)
 ```
 
 You can set these globally at test startup in two ways:
 
 #### Quick
 
-If you use [Quick](https://github.com/Quick/Quick), add a [`QuickConfiguration` subclass](https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md) which sets your desired `AsyncDefaults`.
+If you use [Quick](https://github.com/Quick/Quick), add a [`QuickConfiguration` subclass](https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md) which sets your desired `PollingDefaults`.
 
 ```swift
 import Quick
 import Nimble
 
-class AsyncConfiguration: QuickConfiguration {
+class PollingConfiguration: QuickConfiguration {
     override class func configure(_ configuration: QCKConfiguration) {
-        Nimble.AsyncDefaults.timeout = .seconds(5)
-        Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+        Nimble.PollingDefaults.timeout = .seconds(5)
+        Nimble.PollingDefaults.pollInterval = .milliseconds(100)
     }
 }
 ```
@@ -544,19 +544,19 @@ import Nimble
 @objc
 class TestSetup: NSObject {
 	override init() {
-		XCTestObservationCenter.shared.register(AsyncConfigurationTestObserver())
+		XCTestObservationCenter.shared.register(PollingConfigurationTestObserver())
 	}
 }
 
-class AsyncConfigurationTestObserver: NSObject, XCTestObserver {
+class PollingConfigurationTestObserver: NSObject, XCTestObserver {
     func testBundleWillStart(_ testBundle: Bundle) {
-        Nimble.AsyncDefaults.timeout = .seconds(5)
-        Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+        Nimble.PollingDefaults.timeout = .seconds(5)
+        Nimble.PollingDefaults.pollInterval = .milliseconds(100)
     }
 }
 ```
 
-In Linux, you can implement `LinuxMain` to set the AsyncDefaults before calling `XCTMain`.
+In Linux, you can implement `LinuxMain` to set the PollingDefaults before calling `XCTMain`.
 
 ## Objective-C Support
 
