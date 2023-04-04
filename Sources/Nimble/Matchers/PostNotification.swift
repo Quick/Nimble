@@ -61,7 +61,7 @@ private func _postNotifications<Out>(
             withoutCaching: true
         )
 
-        assert(pthread_equal(mainThread, pthread_self()) != 0, "Only expecting closure to be evaluated on main thread.")
+        assert(Thread.isMainThread, "Only expecting closure to be evaluated on main thread.")
         if !once {
             once = true
             _ = try actualExpression.evaluate()

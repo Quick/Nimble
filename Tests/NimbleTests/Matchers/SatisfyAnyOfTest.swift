@@ -46,4 +46,18 @@ final class SatisfyAnyOfTest: XCTestCase {
         expect(false).to(beTrue() || beFalse())
         expect(true).to(beTruthy() || beFalsy())
     }
+
+    func testSatisfyAllOfCachesExpressionBeforePassingToPredicates() {
+        // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
+        // But we should still handle those cases anyway.
+        var value: Int = 0
+        func testFunction() -> Int {
+            value += 1
+            return value
+        }
+
+        // This demonstrates caching because the first time this is evaluated, the function should return 1, which doesn't pass the `equal(0)`.
+        // Next time, it'll return 2, which doesn't pass the `equal(1)`.
+        expect(testFunction()).toEventually(satisfyAnyOf(equal(0), equal(1)))
+    }
 }
