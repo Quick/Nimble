@@ -17,7 +17,7 @@ let package = Package(
             name: "Nimble",
             dependencies: [
                 .product(name: "CwlPreconditionTesting", package: "CwlPreconditionTesting",
-                         condition: .when(platforms: [.macOS, .iOS])),
+                         condition: .when(platforms: [.macOS, .iOS, .macCatalyst])),
                 .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
                          condition: .when(platforms: [.tvOS, .watchOS]))
             ],
