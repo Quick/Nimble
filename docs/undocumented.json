@@ -37,21 +37,21 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 49,
+      "line": 44,
       "symbol": "nativeThreadState",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 50,
+      "line": 45,
       "symbol": "nativeThreadStateCount",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 52,
+      "line": 47,
       "symbol": "nativeMachExceptionMask",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
@@ -331,7 +331,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 45,
+      "line": 47,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"

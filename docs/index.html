@@ -16,7 +16,7 @@
     <a title="Nimble  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Nimble 11.2.0 Docs</a> (45% documented)</p>
+        <p><a href="index.html">Nimble 11.2.2 Docs</a> (45% documented)</p>
         <p class="header-right"><a href="https://github.com/Quick/Nimble"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="search.json">
@@ -1011,8 +1011,8 @@ For example, to assert that <code>1 + 1 = 2</code>, XCTest has you write:</p>
 </code></pre>
 
 <p>Or, in Objective-C:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">@"expected one plus one to equal two"</span><span class="p">);</span>
 </code></pre>
 
@@ -1037,8 +1037,8 @@ easily understood language:</p>
 
 <span class="nf">expect</span><span class="p">(</span><span class="n">seagull</span><span class="o">.</span><span class="n">squawk</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="s">"Squee!"</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="k">@import</span> <span class="n">Nimble</span><span class="p">;</span>
 
 <span class="n">expect</span><span class="p">(</span><span class="n">seagull</span><span class="p">.</span><span class="n">squawk</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="s">@"Squee!"</span><span class="p">));</span>
@@ -1059,8 +1059,8 @@ equal&ndash;use <code>toNot</code> or <code>notTo</code>:</p>
 <span class="nf">expect</span><span class="p">(</span><span class="n">seagull</span><span class="o">.</span><span class="n">squawk</span><span class="p">)</span><span class="o">.</span><span class="nf">toNot</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="s">"Oh, hello there!"</span><span class="p">))</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">seagull</span><span class="o">.</span><span class="n">squawk</span><span class="p">)</span><span class="o">.</span><span class="nf">notTo</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="s">"Oh, hello there!"</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="k">@import</span> <span class="n">Nimble</span><span class="p">;</span>
 
 <span class="n">expect</span><span class="p">(</span><span class="n">seagull</span><span class="p">.</span><span class="n">squawk</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="s">@"Oh, hello there!"</span><span class="p">));</span>
@@ -1080,17 +1080,17 @@ equal&ndash;use <code>toNot</code> or <code>notTo</code>:</p>
 </code></pre>
 
 <p>Or the *WithDescription version in Objective-C:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="k">@import</span> <span class="n">Nimble</span><span class="p">;</span>
 
 <span class="n">expect</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">@3</span><span class="p">));</span>
-<span class="c1">// failed - expected to equal &lt;3.0000&gt;, got &lt;2.0000&gt;</span>
-
+<span class="c1">// failed - expected to equal &lt;3.0000&gt;, got &lt;2.0000&gt;
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)).</span><span class="n">toWithDescription</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">@3</span><span class="p">),</span> <span class="s">@"Make sure libKindergartenMath is loaded"</span><span class="p">);</span>
-<span class="c1">// failed - Make sure libKindergartenMath is loaded</span>
-<span class="c1">// expected to equal &lt;3.0000&gt;, got &lt;2.0000&gt;</span>
-</code></pre>
+<span class="c1">// failed - Make sure libKindergartenMath is loaded
+// expected to equal &lt;3.0000&gt;, got &lt;2.0000&gt;
+</span></code></pre>
 <h2 id='type-safety' class='heading'>Type Safety</h2>
 
 <p>Nimble makes sure you don&rsquo;t compare two types that don&rsquo;t match:</p>
@@ -1153,15 +1153,15 @@ exception once evaluated:</p>
 <p>Objective-C works the same way, but you must use the <code>expectAction</code>
 macro when making an expectation on an expression that has no return
 value:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSException</span> <span class="nf">exceptionWithName</span><span class="p">:</span><span class="n">NSInternalInconsistencyException</span>
-                                                 <span class="nl">reason:</span><span class="s">@"Not enough fish in the sea."</span>
-                                               <span class="nl">userInfo:</span><span class="nb">nil</span><span class="p">];</span>
+                                                 <span class="nf">reason</span><span class="p">:</span><span class="s">@"Not enough fish in the sea."</span>
+                                               <span class="n">userInfo</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
 <span class="n">expectAction</span><span class="p">(</span><span class="o">^</span><span class="p">{</span> <span class="p">[</span><span class="n">exception</span> <span class="nf">raise</span><span class="p">];</span> <span class="p">}).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">());</span>
 
-<span class="c1">// Use the property-block syntax to be more specific.</span>
-<span class="n">expectAction</span><span class="p">(</span><span class="o">^</span><span class="p">{</span> <span class="p">[</span><span class="n">exception</span> <span class="nf">raise</span><span class="p">];</span> <span class="p">}).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">NSInternalInconsistencyException</span><span class="p">));</span>
+<span class="c1">// Use the property-block syntax to be more specific.
+</span><span class="n">expectAction</span><span class="p">(</span><span class="o">^</span><span class="p">{</span> <span class="p">[</span><span class="n">exception</span> <span class="nf">raise</span><span class="p">];</span> <span class="p">}).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">NSInternalInconsistencyException</span><span class="p">));</span>
 <span class="n">expectAction</span><span class="p">(</span><span class="o">^</span><span class="p">{</span> <span class="p">[</span><span class="n">exception</span> <span class="nf">raise</span><span class="p">];</span> <span class="p">}).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span>
     <span class="n">named</span><span class="p">(</span><span class="n">NSInternalInconsistencyException</span><span class="p">).</span>
     <span class="n">reason</span><span class="p">(</span><span class="s">"Not enough fish in the sea"</span><span class="p">));</span>
@@ -1170,8 +1170,8 @@ value:</p>
     <span class="n">reason</span><span class="p">(</span><span class="s">"Not enough fish in the sea"</span><span class="p">).</span>
     <span class="n">userInfo</span><span class="p">(@{</span><span class="s">@"something"</span><span class="o">:</span> <span class="s">@"is fishy"</span><span class="p">}));</span>
 
-<span class="c1">// You can also pass a block for custom matching of the raised exception</span>
-<span class="n">expectAction</span><span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="n">raise</span><span class="p">()).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">satisfyingBlock</span><span class="p">(</span><span class="o">^</span><span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// You can also pass a block for custom matching of the raised exception
+</span><span class="n">expectAction</span><span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="n">raise</span><span class="p">()).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">satisfyingBlock</span><span class="p">(</span><span class="o">^</span><span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">expect</span><span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="n">name</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="n">NSInternalInconsistencyException</span><span class="p">));</span>
 <span class="p">}));</span>
 </code></pre>
@@ -1205,7 +1205,7 @@ without explicitly specifying both types:</p>
 <p>Nimble makes it easy to await for an async function to complete. Simply pass
 the async function in to <code>expect</code>:</p>
 <pre class="highlight swift"><code><span class="c1">// Swift</span>
-<span class="k">await</span> <span class="nf">expect</span><span class="p">(</span><span class="k">await</span> <span class="nf">aFunctionReturning1</span><span class="p">())</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">await</span> <span class="nf">expect</span><span class="p">(</span><span class="n">await</span> <span class="nf">aFunctionReturning1</span><span class="p">())</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </code></pre>
 
 <p>The async function is awaited on first, before passing it to the matcher. This
@@ -1225,14 +1225,14 @@ that make use of <code>toEventually</code> or <code>toEventuallyNot</code>.</p>
 <p>In Nimble, it&rsquo;s easy to make expectations on values that are updated
 asynchronously. Just use <code>toEventually</code> or <code>toEventuallyNot</code>:</p>
 <pre class="highlight swift"><code><span class="c1">// Swift</span>
-<span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="k">async</span> <span class="p">{</span>
+<span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
     <span class="n">ocean</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="s">"dolphins"</span><span class="p">)</span>
     <span class="n">ocean</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="s">"whales"</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">)</span><span class="o">.</span><span class="nf">toEventually</span><span class="p">(</span><span class="nf">contain</span><span class="p">(</span><span class="s">"dolphins"</span><span class="p">,</span> <span class="s">"whales"</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_main_queue</span><span class="p">(),</span> <span class="o">^</span><span class="p">{</span>
     <span class="p">[</span><span class="n">ocean</span> <span class="nf">add</span><span class="p">:</span><span class="s">@"dolphins"</span><span class="p">];</span>
     <span class="p">[</span><span class="n">ocean</span> <span class="nf">add</span><span class="p">:</span><span class="s">@"whales"</span><span class="p">];</span>
@@ -1257,8 +1257,8 @@ whole second, the expectation fails.</p>
 <span class="nf">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">)</span><span class="o">.</span><span class="nf">toAlways</span><span class="p">(</span><span class="nf">contain</span><span class="p">(</span><span class="s">"dolphins"</span><span class="p">))</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">)</span><span class="o">.</span><span class="nf">toNever</span><span class="p">(</span><span class="nf">contain</span><span class="p">(</span><span class="s">"hares"</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-<span class="p">[</span><span class="n">ocean</span> <span class="nf">add</span><span class="p">:</span><span class="s">@"dolphins"</span><span class="p">]</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span><span class="p">[</span><span class="n">ocean</span> <span class="nf">add</span><span class="p">:</span><span class="s">@"dolphins"</span><span class="p">]</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">).</span><span class="n">toAlways</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"dolphins"</span><span class="p">))</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">).</span><span class="n">toNever</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"hares"</span><span class="p">))</span>
 </code></pre>
@@ -1273,10 +1273,10 @@ cases, use the <code>timeout</code> parameter:</p>
 <span class="c1">// Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">someValue</span><span class="p">)</span><span class="o">.</span><span class="nf">toEventually</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="nv">timeout</span><span class="p">:</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">5500</span><span class="p">),</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
-<span class="c1">// Waits three seconds for ocean to contain "starfish":</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">).</span><span class="n">withTimeout</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="n">toEventually</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"starfish"</span><span class="p">));</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Waits three seconds for ocean to contain "starfish":
+</span><span class="n">expect</span><span class="p">(</span><span class="n">ocean</span><span class="p">).</span><span class="n">withTimeout</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="n">toEventually</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"starfish"</span><span class="p">));</span>
 </code></pre>
 
 <p>You can also provide a callback by using the <code>waitUntil</code> function:</p>
@@ -1289,8 +1289,8 @@ cases, use the <code>timeout</code> parameter:</p>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">waitUntil</span><span class="p">(</span><span class="o">^</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">done</span><span class="p">)(</span><span class="kt">void</span><span class="p">)){</span>
     <span class="p">[</span><span class="n">ocean</span> <span class="nf">goFishWithHandler</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">success</span><span class="p">){</span>
         <span class="n">expect</span><span class="p">(</span><span class="n">success</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTrue</span><span class="p">());</span>
@@ -1309,8 +1309,8 @@ cases, use the <code>timeout</code> parameter:</p>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">waitUntilTimeout</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">^</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">done</span><span class="p">)(</span><span class="kt">void</span><span class="p">)){</span>
     <span class="p">[</span><span class="n">ocean</span> <span class="nf">goFishWithHandler</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">success</span><span class="p">){</span>
         <span class="n">expect</span><span class="p">(</span><span class="n">success</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTrue</span><span class="p">());</span>
@@ -1399,23 +1399,23 @@ to keep in mind when using Nimble in Objective-C:</p>
 functions like <code>equal</code>, must be Objective-C objects or can be converted into
 an <code>NSObject</code> equivalent:</li>
 </ol>
-<pre class="highlight objective_c"><code>   <span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code>   <span class="c1">// Objective-C
+</span>
    <span class="k">@import</span> <span class="n">Nimble</span><span class="p">;</span>
 
    <span class="n">expect</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">@2</span><span class="p">));</span>
    <span class="n">expect</span><span class="p">(</span><span class="s">@"Hello world"</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"world"</span><span class="p">));</span>
 
-   <span class="c1">// Boxed as NSNumber *</span>
-   <span class="n">expect</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+   <span class="c1">// Boxed as NSNumber *
+</span>   <span class="n">expect</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
    <span class="n">expect</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beLessThan</span><span class="p">(</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">));</span>
    <span class="n">expect</span><span class="p">(</span><span class="nb">true</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTruthy</span><span class="p">());</span>
 
-   <span class="c1">// Boxed as NSString *</span>
-   <span class="n">expect</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">));</span>
+   <span class="c1">// Boxed as NSString *
+</span>   <span class="n">expect</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="s">"Hello world"</span><span class="p">));</span>
 
-   <span class="c1">// Boxed as NSRange</span>
-   <span class="n">expect</span><span class="p">(</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)));</span>
+   <span class="c1">// Boxed as NSRange
+</span>   <span class="n">expect</span><span class="p">(</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)));</span>
 </code></pre>
 
 <ol>
@@ -1423,8 +1423,8 @@ an <code>NSObject</code> equivalent:</li>
 such as <code>-[NSException raise]</code>, use <code>expectAction</code> instead of
 <code>expect</code>:</li>
 </ol>
-<pre class="highlight objective_c"><code>   <span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code>   <span class="c1">// Objective-C
+</span>
    <span class="n">expectAction</span><span class="p">(</span><span class="o">^</span><span class="p">{</span> <span class="p">[</span><span class="n">exception</span> <span class="nf">raise</span><span class="p">];</span> <span class="p">}).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">());</span>
 </code></pre>
 
@@ -1499,10 +1499,10 @@ Objective-C conformant or not:</p>
 <span class="nf">expect</span><span class="p">(</span><span class="n">structObject</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beAKindOf</span><span class="p">(</span><span class="kt">SomeStructConformingToProtocol</span><span class="o">.</span><span class="k">self</span><span class="p">))</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">structObject</span><span class="p">)</span><span class="o">.</span><span class="nf">toNot</span><span class="p">(</span><span class="nf">beAKindOf</span><span class="p">(</span><span class="kt">SomeClassConformingToProtocol</span><span class="o">.</span><span class="k">self</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
-<span class="c1">// The following tests pass</span>
-<span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nf">array</span><span class="p">];</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// The following tests pass
+</span><span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="nf">array</span><span class="p">];</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">array</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAKindOf</span><span class="p">([</span><span class="n">NSArray</span> <span class="nf">class</span><span class="p">]));</span>
 <span class="n">expect</span><span class="p">(</span><span class="mi">@1</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">beAKindOf</span><span class="p">([</span><span class="n">NSNull</span> <span class="nf">class</span><span class="p">]));</span>
 </code></pre>
@@ -1541,13 +1541,13 @@ Objective-C conformant or not:</p>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">toNot</span><span class="p">(</span><span class="nf">equal</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual' is equivalent to 'expected':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 
-<span class="c1">// Passes if 'actual' is equivalent to 'expected':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
-
-<span class="c1">// Passes if 'actual' is not equivalent to 'expected':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+<span class="c1">// Passes if 'actual' is not equivalent to 'expected':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 </code></pre>
 
 <p>Values must be <code>Equatable</code>, <code>Comparable</code>, or subclasses of <code>NSObject</code>.
@@ -1573,13 +1573,13 @@ those defined as a <code>struct</code> or <code>enum</code>. If you need to comp
 consider what it means for instances of your type to be identical. This may mean
 comparing individual properties or, if it makes sense to do so, conforming your type 
 to <code>Equatable</code> and using Nimble&rsquo;s equivalence matchers instead.</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual' has the same pointer address as 'expected':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beIdenticalTo</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 
-<span class="c1">// Passes if 'actual' has the same pointer address as 'expected':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beIdenticalTo</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
-
-<span class="c1">// Passes if 'actual' does not have the same pointer address as 'expected':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">beIdenticalTo</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
+<span class="c1">// Passes if 'actual' does not have the same pointer address as 'expected':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">toNot</span><span class="p">(</span><span class="n">beIdenticalTo</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 </code></pre>
 <h2 id='comparisons' class='heading'>Comparisons</h2>
 <pre class="highlight swift"><code><span class="c1">// Swift</span>
@@ -1596,8 +1596,8 @@ to <code>Equatable</code> and using Nimble&rsquo;s equivalence matchers instead.
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beGreaterThanOrEqualTo</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">expected</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beLessThan</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beLessThanOrEqualTo</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beGreaterThan</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
@@ -1617,8 +1617,8 @@ of error, use <code>beCloseTo</code>:</p>
 
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beCloseTo</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="nv">within</span><span class="p">:</span> <span class="n">delta</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beCloseTo</span><span class="p">(</span><span class="n">expected</span><span class="p">).</span><span class="n">within</span><span class="p">(</span><span class="n">delta</span><span class="p">));</span>
 </code></pre>
 
@@ -1627,8 +1627,8 @@ of error, use <code>beCloseTo</code>:</p>
 
 <span class="nf">expect</span><span class="p">(</span><span class="mf">10.01</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beCloseTo</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nv">within</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="mi">10</span><span class="p">.</span><span class="mo">01</span><span class="p">)).</span><span class="n">to</span><span class="p">(</span><span class="n">beCloseTo</span><span class="p">(</span><span class="mi">@10</span><span class="p">).</span><span class="n">within</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">));</span>
 </code></pre>
 
@@ -1672,13 +1672,13 @@ of error, use <code>beCloseTo</code>:</p>
 <span class="c1">// Passes if 'instance' is an instance of 'aClass' or any of its subclasses:</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beAKindOf</span><span class="p">(</span><span class="n">aClass</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'instance' is an instance of 'aClass':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">instance</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAnInstanceOf</span><span class="p">(</span><span class="n">aClass</span><span class="p">));</span>
 
-<span class="c1">// Passes if 'instance' is an instance of 'aClass':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">instance</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAnInstanceOf</span><span class="p">(</span><span class="n">aClass</span><span class="p">));</span>
-
-<span class="c1">// Passes if 'instance' is an instance of 'aClass' or any of its subclasses:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">instance</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAKindOf</span><span class="p">(</span><span class="n">aClass</span><span class="p">));</span>
+<span class="c1">// Passes if 'instance' is an instance of 'aClass' or any of its subclasses:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">instance</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAKindOf</span><span class="p">(</span><span class="n">aClass</span><span class="p">));</span>
 </code></pre>
 
 <blockquote>
@@ -1691,8 +1691,8 @@ of error, use <code>beCloseTo</code>:</p>
 
 <span class="nf">expect</span><span class="p">(</span><span class="n">dolphin</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beAKindOf</span><span class="p">(</span><span class="kt">Mammal</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">dolphin</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beAKindOf</span><span class="p">([</span><span class="n">Mammal</span> <span class="nf">class</span><span class="p">]));</span>
 </code></pre>
 
@@ -1716,22 +1716,22 @@ of error, use <code>beCloseTo</code>:</p>
 <span class="c1">// Passes if 'actual' is nil:</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beNil</span><span class="p">())</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual' is not nil, true, or an object with a boolean value of true:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTruthy</span><span class="p">());</span>
 
-<span class="c1">// Passes if 'actual' is not nil, true, or an object with a boolean value of true:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTruthy</span><span class="p">());</span>
+<span class="c1">// Passes if 'actual' is only true (not nil or an object conforming to Boolean true):
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTrue</span><span class="p">());</span>
 
-<span class="c1">// Passes if 'actual' is only true (not nil or an object conforming to Boolean true):</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beTrue</span><span class="p">());</span>
+<span class="c1">// Passes if 'actual' is nil, false, or an object with a boolean value of false:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beFalsy</span><span class="p">());</span>
 
-<span class="c1">// Passes if 'actual' is nil, false, or an object with a boolean value of false:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beFalsy</span><span class="p">());</span>
+<span class="c1">// Passes if 'actual' is only false (not nil or an object conforming to Boolean false):
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beFalse</span><span class="p">());</span>
 
-<span class="c1">// Passes if 'actual' is only false (not nil or an object conforming to Boolean false):</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beFalse</span><span class="p">());</span>
-
-<span class="c1">// Passes if 'actual' is nil:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beNil</span><span class="p">());</span>
+<span class="c1">// Passes if 'actual' is nil:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beNil</span><span class="p">());</span>
 </code></pre>
 <h2 id='swift-assertions' class='heading'>Swift Assertions</h2>
 
@@ -1831,20 +1831,20 @@ explicitly cast the error.</p>
     <span class="nf">expect</span><span class="p">(</span><span class="n">exception</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beginWith</span><span class="p">(</span><span class="s">"a r"</span><span class="p">))</span>
 <span class="p">})</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual', when evaluated, raises an exception:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">())</span>
 
-<span class="c1">// Passes if 'actual', when evaluated, raises an exception:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">())</span>
+<span class="c1">// Passes if 'actual' raises an exception with the given name
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
 
-<span class="c1">// Passes if 'actual' raises an exception with the given name</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="c1">// Passes if 'actual' raises an exception with the given name and reason:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="p">).</span><span class="n">reason</span><span class="p">(</span><span class="n">reason</span><span class="p">))</span>
 
-<span class="c1">// Passes if 'actual' raises an exception with the given name and reason:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">named</span><span class="p">(</span><span class="n">name</span><span class="p">).</span><span class="n">reason</span><span class="p">(</span><span class="n">reason</span><span class="p">))</span>
-
-<span class="c1">// Passes if 'actual' raises an exception and it passes expectations defined in the given block:</span>
-<span class="c1">// (in this case, if name begins with "a r")</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">satisfyingBlock</span><span class="p">(</span><span class="o">^</span><span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// Passes if 'actual' raises an exception and it passes expectations defined in the given block:
+// (in this case, if name begins with "a r")
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">raiseException</span><span class="p">().</span><span class="n">satisfyingBlock</span><span class="p">(</span><span class="o">^</span><span class="p">(</span><span class="n">NSException</span> <span class="o">*</span><span class="n">exception</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">expect</span><span class="p">(</span><span class="n">exception</span><span class="p">.</span><span class="n">name</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="s">@"a r"</span><span class="p">));</span>
 <span class="p">}));</span>
 </code></pre>
@@ -1860,13 +1860,13 @@ Only Objective-C code can raise exceptions that Nimble will catch.</p>
 <span class="c1">// Passes if 'actual' is empty (i.e. it contains no elements):</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beEmpty</span><span class="p">())</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if expected is a member of 'actual':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 
-<span class="c1">// Passes if expected is a member of 'actual':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
-
-<span class="c1">// Passes if 'actual' is empty (i.e. it contains no elements):</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beEmpty</span><span class="p">());</span>
+<span class="c1">// Passes if 'actual' is empty (i.e. it contains no elements):
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beEmpty</span><span class="p">());</span>
 </code></pre>
 
 <blockquote>
@@ -1881,8 +1881,8 @@ Only Objective-C code can raise exceptions that Nimble will catch.</p>
 
 <span class="nf">expect</span><span class="p">([</span><span class="s">"whale"</span><span class="p">,</span> <span class="s">"dolphin"</span><span class="p">,</span> <span class="s">"starfish"</span><span class="p">])</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">contain</span><span class="p">(</span><span class="s">"dolphin"</span><span class="p">,</span> <span class="s">"starfish"</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(@[</span><span class="s">@"whale"</span><span class="p">,</span> <span class="s">@"dolphin"</span><span class="p">,</span> <span class="s">@"starfish"</span><span class="p">]).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"dolphin"</span><span class="p">));</span>
 <span class="n">expect</span><span class="p">(@[</span><span class="s">@"whale"</span><span class="p">,</span> <span class="s">@"dolphin"</span><span class="p">,</span> <span class="s">@"starfish"</span><span class="p">]).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="s">@"starfish"</span><span class="p">));</span>
 </code></pre>
@@ -1902,13 +1902,13 @@ an ordered collection, use <code>beginWith</code> and <code>endWith</code>:</p>
 <span class="c1">// Passes if the the elements in expected come at the end of 'actual':</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">endWith</span><span class="p">(</span><span class="n">expected</span><span class="o">...</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if the elements in expected appear at the beginning of 'actual':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 
-<span class="c1">// Passes if the elements in expected appear at the beginning of 'actual':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
-
-<span class="c1">// Passes if the the elements in expected come at the end of 'actual':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">endWith</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
+<span class="c1">// Passes if the the elements in expected come at the end of 'actual':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">endWith</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 </code></pre>
 
 <blockquote>
@@ -1943,8 +1943,8 @@ ordering, there is the <code>containElementSatisfying</code> matcher:</p>
 <span class="c1">// The second matcher will incorporate the provided string in the error message</span>
 <span class="c1">// should it fail</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="k">@interface</span> <span class="nc">Turtle</span> <span class="p">:</span> <span class="nc">NSObject</span>
 <span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">readonly</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">color</span><span class="p">;</span>
 <span class="k">@end</span>
@@ -1954,9 +1954,9 @@ ordering, there is the <code>containElementSatisfying</code> matcher:</p>
 
 <span class="n">NSArray</span><span class="o">&lt;</span><span class="n">Turtle</span> <span class="o">*&gt;</span> <span class="o">*</span> <span class="n">__nonnull</span> <span class="n">turtles</span> <span class="o">=</span> <span class="n">functionThatReturnsSomeTurtlesInAnyOrder</span><span class="p">();</span>
 
-<span class="c1">// This set of matchers passes regardless of whether the array is </span>
-<span class="c1">// [{color: "blue"}, {color: "green"}] or [{color: "green"}, {color: "blue"}]:</span>
-
+<span class="c1">// This set of matchers passes regardless of whether the array is 
+// [{color: "blue"}, {color: "green"}] or [{color: "green"}, {color: "blue"}]:
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">turtles</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">containElementSatisfying</span><span class="p">(</span><span class="o">^</span><span class="n">BOOL</span><span class="p">(</span><span class="n">id</span> <span class="n">__nonnull</span> <span class="n">object</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">[[</span><span class="n">turtle</span> <span class="nf">color</span><span class="p">]</span> <span class="nf">isEqualToString</span><span class="p">:</span><span class="s">@"green"</span><span class="p">];</span>
 <span class="p">}));</span>
@@ -1992,22 +1992,22 @@ ordering, there is the <code>containElementSatisfying</code> matcher:</p>
 <span class="c1">// Passes if 'actual' matches the regular expression defined in 'expected':</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">match</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual' contains 'substring':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
 
-<span class="c1">// Passes if 'actual' contains 'substring':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">contain</span><span class="p">(</span><span class="n">expected</span><span class="p">));</span>
+<span class="c1">// Passes if 'actual' begins with 'prefix':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="n">prefix</span><span class="p">));</span>
 
-<span class="c1">// Passes if 'actual' begins with 'prefix':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beginWith</span><span class="p">(</span><span class="n">prefix</span><span class="p">));</span>
+<span class="c1">// Passes if 'actual' ends with 'suffix':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">endWith</span><span class="p">(</span><span class="n">suffix</span><span class="p">));</span>
 
-<span class="c1">// Passes if 'actual' ends with 'suffix':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">endWith</span><span class="p">(</span><span class="n">suffix</span><span class="p">));</span>
+<span class="c1">// Passes if 'actual' represents the empty string, "":
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beEmpty</span><span class="p">());</span>
 
-<span class="c1">// Passes if 'actual' represents the empty string, "":</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beEmpty</span><span class="p">());</span>
-
-<span class="c1">// Passes if 'actual' matches the regular expression defined in 'expected':</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">match</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+<span class="c1">// Passes if 'actual' matches the regular expression defined in 'expected':
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">match</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 </code></pre>
 <h2 id='collection-elements' class='heading'>Collection Elements</h2>
 
@@ -2032,8 +2032,8 @@ which subclasses <code>NSObject</code>.</p>
 
 <p>Additionally, unlike in Swift, there is no override to specify a custom
 matcher function.</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(@[</span><span class="mi">@1</span><span class="p">,</span> <span class="mi">@2</span><span class="p">,</span> <span class="mi">@3</span><span class="p">,</span> <span class="mi">@4</span><span class="p">]).</span><span class="n">to</span><span class="p">(</span><span class="n">allPass</span><span class="p">(</span><span class="n">beLessThan</span><span class="p">(</span><span class="mi">@5</span><span class="p">)));</span>
 </code></pre>
 <h2 id='collection-count' class='heading'>Collection Count</h2>
@@ -2045,13 +2045,13 @@ matcher function.</p>
 <span class="c1">// Passes if 'actual' does _not_ contain the 'expected' number of elements:</span>
 <span class="nf">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span><span class="o">.</span><span class="nf">notTo</span><span class="p">(</span><span class="nf">haveCount</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// Passes if 'actual' contains the 'expected' number of elements:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">haveCount</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 
-<span class="c1">// Passes if 'actual' contains the 'expected' number of elements:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">haveCount</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
-
-<span class="c1">// Passes if 'actual' does _not_ contain the 'expected' number of elements:</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">notTo</span><span class="p">(</span><span class="n">haveCount</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+<span class="c1">// Passes if 'actual' does _not_ contain the 'expected' number of elements:
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">notTo</span><span class="p">(</span><span class="n">haveCount</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
 </code></pre>
 
 <p>For Swift, the actual value must be an instance of a type conforming to <code>Collection</code>.
@@ -2140,14 +2140,14 @@ For example, instances of <code>Array</code>, <code>Dictionary</code>, or <code>
 <span class="c1">// in Swift you also have the option to use the || operator to achieve a similar function</span>
 <span class="nf">expect</span><span class="p">(</span><span class="mi">82</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">beLessThan</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="o">||</span> <span class="nf">beGreaterThan</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
 </code></pre>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="c1">// passes if actual is either less than 10 or greater than 20
+</span><span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">satisfyAnyOf</span><span class="p">(</span><span class="n">beLessThan</span><span class="p">(</span><span class="mi">@10</span><span class="p">),</span> <span class="n">beGreaterThan</span><span class="p">(</span><span class="mi">@20</span><span class="p">)))</span>
 
-<span class="c1">// passes if actual is either less than 10 or greater than 20</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">satisfyAnyOf</span><span class="p">(</span><span class="n">beLessThan</span><span class="p">(</span><span class="mi">@10</span><span class="p">),</span> <span class="n">beGreaterThan</span><span class="p">(</span><span class="mi">@20</span><span class="p">)))</span>
-
-<span class="c1">// can include any number of matchers -- the following will pass</span>
-<span class="c1">// **be careful** -- too many matchers can be the sign of an unfocused test</span>
-<span class="n">expect</span><span class="p">(</span><span class="mi">@6</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">satisfyAnyOf</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">@2</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@3</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@4</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@5</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@6</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@7</span><span class="p">)))</span>
+<span class="c1">// can include any number of matchers -- the following will pass
+// **be careful** -- too many matchers can be the sign of an unfocused test
+</span><span class="n">expect</span><span class="p">(</span><span class="mi">@6</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">satisfyAnyOf</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="mi">@2</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@3</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@4</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@5</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@6</span><span class="p">),</span> <span class="n">equal</span><span class="p">(</span><span class="mi">@7</span><span class="p">)))</span>
 </code></pre>
 
 <p>Note: This matcher allows you to chain any number of matchers together. This provides flexibility,
@@ -2423,15 +2423,15 @@ custom matcher. The example below defines the class method
 </code></pre>
 
 <p>The above allows you to use the matcher from Objective-C:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">actual</span><span class="p">).</span><span class="n">to</span><span class="p">([</span><span class="n">NMBPredicate</span> <span class="nf">beNilMatcher</span><span class="p">]());</span>
 </code></pre>
 
 <p>To make the syntax easier to use, define a C function that calls the
 class method:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
 <span class="n">FOUNDATION_EXPORT</span> <span class="n">NMBPredicate</span> <span class="o">*</span><span class="nf">beNil</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">NMBPredicate</span> <span class="nf">beNilMatcher</span><span class="p">];</span>
 <span class="p">}</span>
@@ -2446,11 +2446,11 @@ them.</p>
 
 <p>Nimble provides the <code>beNil</code> matcher function for test writer that want
 to make expectations on <code>nil</code> objects:</p>
-<pre class="highlight objective_c"><code><span class="c1">// Objective-C</span>
-
-<span class="n">expect</span><span class="p">(</span><span class="nb">nil</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="nb">nil</span><span class="p">));</span> <span class="c1">// fails</span>
-<span class="n">expect</span><span class="p">(</span><span class="nb">nil</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beNil</span><span class="p">());</span>    <span class="c1">// passes</span>
-</code></pre>
+<pre class="highlight objective_c"><code><span class="c1">// Objective-C
+</span>
+<span class="n">expect</span><span class="p">(</span><span class="nb">nil</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="nb">nil</span><span class="p">));</span> <span class="c1">// fails
+</span><span class="n">expect</span><span class="p">(</span><span class="nb">nil</span><span class="p">).</span><span class="n">to</span><span class="p">(</span><span class="n">beNil</span><span class="p">());</span>    <span class="c1">// passes
+</span></code></pre>
 
 <p>If your matcher does not want to match with nil, you use <code>Predicate.define</code> or <code>Predicate.simple</code>. 
 Using those factory methods will automatically generate expected value failure messages when they&rsquo;re nil.</p>
@@ -2574,7 +2574,7 @@ fit.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2022 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2022-11-17)</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2023-04-04)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
