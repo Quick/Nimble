@@ -94,4 +94,13 @@ public struct Expression<Value> {
             isClosure: isClosure
         )
     }
+
+    public func withCaching() -> Expression<Value> {
+        return Expression(
+            memoizedExpression: memoizedClosure { try self.evaluate() },
+            location: self.location,
+            withoutCaching: false,
+            isClosure: isClosure
+        )
+    }
 }
