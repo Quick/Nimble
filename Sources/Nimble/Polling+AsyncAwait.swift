@@ -75,7 +75,7 @@ extension SyncExpectation {
                     matchStyle: .eventually,
                     timeout: timeout,
                     poll: pollInterval,
-                    fnName: "toEventually") {
+                    fnName: "toEventually") { @MainActor in
                         try predicate.satisfies(expression.withoutCaching())
                     }
             }
@@ -101,7 +101,7 @@ extension SyncExpectation {
                     matchStyle: .eventually,
                     timeout: timeout,
                     poll: pollInterval,
-                    fnName: "toEventuallyNot") {
+                    fnName: "toEventuallyNot") { @MainActor in
                         try predicate.satisfies(expression.withoutCaching())
                     }
             }
@@ -135,7 +135,7 @@ extension SyncExpectation {
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
-                    fnName: "toNever") {
+                    fnName: "toNever") { @MainActor in
                         try predicate.satisfies(expression.withoutCaching())
                     }
             }
@@ -169,7 +169,7 @@ extension SyncExpectation {
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
-                    fnName: "toAlways") {
+                    fnName: "toAlways") { @MainActor in
                         try predicate.satisfies(expression.withoutCaching())
                     }
             }
