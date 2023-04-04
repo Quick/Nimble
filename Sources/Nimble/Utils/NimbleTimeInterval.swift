@@ -15,7 +15,7 @@ public enum NimbleTimeInterval: Sendable, Equatable {
 }
 
 extension NimbleTimeInterval: CustomStringConvertible {
-    internal var dispatchTimeInterval: DispatchTimeInterval {
+    public var dispatchTimeInterval: DispatchTimeInterval {
         switch self {
         case .seconds(let int):
             return .seconds(int)
