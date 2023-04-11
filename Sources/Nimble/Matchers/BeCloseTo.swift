@@ -110,10 +110,8 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
             return .doesNotMatch
         }
 
-        for index in actualValues.indices {
-            if abs(actualValues[index] - expectedValues[index]) > delta {
-                return .doesNotMatch
-            }
+        for index in actualValues.indices where abs(actualValues[index] - expectedValues[index]) > delta {
+            return .doesNotMatch
         }
         return .matches
     }
@@ -123,43 +121,61 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
 
 infix operator ≈ : ComparisonPrecedence
 
-extension Expectation where T: Collection, T.Element: FloatingPoint {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
+// swiftlint:disable identifier_name
+public func ≈<Value>(lhs: SyncExpectation<Value>, rhs: Value) where Value: Collection, Value.Element: FloatingPoint {
+    lhs.to(beCloseTo(rhs))
 }
 
-extension Expectation where T: FloatingPoint {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
-
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: (expected: T, delta: T)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
-
-    public static func == (lhs: Expectation, rhs: (expected: T, delta: T)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+public func ≈<Value>(lhs: AsyncExpectation<Value>, rhs: Value) async where Value: Collection, Value.Element: FloatingPoint {
+    await lhs.to(beCloseTo(rhs))
 }
 
-extension Expectation where T: NMBDoubleConvertible {
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: T) {
-        lhs.to(beCloseTo(rhs))
-    }
+public func ≈<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: Value) {
+    lhs.to(beCloseTo(rhs))
+}
 
-    // swiftlint:disable:next identifier_name
-    public static func ≈(lhs: Expectation, rhs: (expected: T, delta: Double)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+public func ≈<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: Value) async {
+    await lhs.to(beCloseTo(rhs))
+}
 
-    public static func == (lhs: Expectation, rhs: (expected: T, delta: Double)) {
-        lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
-    }
+public func ≈<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ≈<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
+    await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ==<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ==<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
+    await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ≈<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: Value) {
+    lhs.to(beCloseTo(rhs))
+}
+
+public func ≈<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: Value) async {
+    await lhs.to(beCloseTo(rhs))
+}
+
+public func ≈<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ≈<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
+    await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ==<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
+    lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
+}
+
+public func ==<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
+    await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
 // make this higher precedence than exponents so the Doubles either end aren't pulled in
@@ -169,11 +185,11 @@ precedencegroup PlusMinusOperatorPrecedence {
 }
 
 infix operator ± : PlusMinusOperatorPrecedence
-// swiftlint:disable:next identifier_name
 public func ±<Value: FloatingPoint>(lhs: Value, rhs: Value) -> (expected: Value, delta: Value) {
     return (expected: lhs, delta: rhs)
 }
-// swiftlint:disable:next identifier_name
 public func ±<Value: NMBDoubleConvertible>(lhs: Value, rhs: Double) -> (expected: Value, delta: Double) {
     return (expected: lhs, delta: rhs)
 }
+
+// swiftlint:enable identifier_name

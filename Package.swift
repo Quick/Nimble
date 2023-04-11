@@ -1,10 +1,10 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_10), .iOS(.v9), .tvOS(.v9)
+      .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)
     ],
     products: [
         .library(name: "Nimble", targets: ["Nimble"]),
@@ -14,18 +14,18 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Nimble", 
+            name: "Nimble",
             dependencies: [
                 .product(name: "CwlPreconditionTesting", package: "CwlPreconditionTesting",
-                         condition: .when(platforms: [.macOS, .iOS])),
+                         condition: .when(platforms: [.macOS, .iOS, .macCatalyst])),
                 .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
-                         condition: .when(platforms: [.tvOS]))
+                         condition: .when(platforms: [.tvOS, .watchOS]))
             ],
             exclude: ["Info.plist"]
         ),
         .testTarget(
-            name: "NimbleTests", 
-            dependencies: ["Nimble"], 
+            name: "NimbleTests",
+            dependencies: ["Nimble"],
             exclude: ["objc", "Info.plist"]
         ),
     ],

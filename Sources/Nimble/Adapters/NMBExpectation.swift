@@ -3,7 +3,6 @@
 #if canImport(Darwin) && !SWIFT_PACKAGE
 import class Foundation.NSObject
 import typealias Foundation.TimeInterval
-import enum Dispatch.DispatchTimeInterval
 
 private func from(objcPredicate: NMBPredicate) -> Predicate<NSObject> {
     return Predicate { actualExpression in
@@ -19,7 +18,7 @@ public class NMBExpectation: NSObject {
     internal var _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: DispatchTimeInterval = .seconds(1)
+    internal var _timeout: NimbleTimeInterval = .seconds(1)
 
     @objc public init(actualBlock: @escaping () -> NSObject?, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
@@ -28,12 +27,12 @@ public class NMBExpectation: NSObject {
         self._line = line
     }
 
-    private var expectValue: Expectation<NSObject> {
+    private var expectValue: SyncExpectation<NSObject> {
         return expect(file: _file, line: _line, self._actualBlock() as NSObject?)
     }
 
     @objc public var withTimeout: (TimeInterval) -> NMBExpectation {
-        return { timeout in self._timeout = timeout.dispatchInterval
+        return { timeout in self._timeout = timeout.nimbleInterval
             return self
         }
     }
@@ -144,6 +143,34 @@ public class NMBExpectation: NSObject {
 
     @objc public var neverToWithDescription: (NMBPredicate, String) -> Void {
         return toNeverWithDescription
+    }
+
+    @objc public var toAlways: (NMBPredicate) -> Void {
+        return { predicate in
+            self.expectValue.toAlways(
+                from(objcPredicate: predicate),
+                until: self._timeout,
+                description: nil
+            )
+        }
+    }
+
+    @objc public var toAlwaysWithDescription: (NMBPredicate, String) -> Void {
+        return { predicate, description in
+            self.expectValue.toAlways(
+                from(objcPredicate: predicate),
+                until: self._timeout,
+                description: description
+            )
+        }
+    }
+
+    @objc public var alwaysTo: (NMBPredicate) -> Void {
+        return toAlways
+    }
+
+    @objc public var alwaysToWithDescription: (NMBPredicate, String) -> Void {
+        return toAlwaysWithDescription
     }
 
     @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {

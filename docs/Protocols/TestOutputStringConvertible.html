@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TestOutputStringConvertible Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/TestOutputStringConvertible" class="dashAnchor"></a>
+    <a title="TestOutputStringConvertible Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Nimble 11.2.0 Docs</a> (45% documented)</p>
+        <p class="header-right"><a href="https://github.com/Quick/Nimble"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
+        <div class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Nimble Reference</a>
+        <img id="carat" src="../img/carat.png" alt=""/>
+        TestOutputStringConvertible Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AssertionDispatcher.html">AssertionDispatcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AssertionRecorder.html">AssertionRecorder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/BadInstructionException">BadInstructionException</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BadInstructionException.html">BadInstructionException</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FailureMessage.html">FailureMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBExpectation.html">NMBExpectation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBExpectationMessage.html">NMBExpectationMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBObjCBeCloseToPredicate.html">NMBObjCBeCloseToPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBObjCRaiseExceptionPredicate.html">NMBObjCRaiseExceptionPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBPredicate.html">NMBPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBPredicateResult.html">NMBPredicateResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBPredicateStatus.html">NMBPredicateStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NMBStringer.html">NMBStringer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NimbleShortXCTestHandler.html">NimbleShortXCTestHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NimbleXCTestHandler.html">NimbleXCTestHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SourceLocation.html">SourceLocation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global%20Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble12DefaultDeltaSdvp">DefaultDelta</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble15EXC_TYPES_COUNTSivp">EXC_TYPES_COUNT</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble23MACH_MSG_TYPE_MAKE_SENDs6UInt32Vvp">MACH_MSG_TYPE_MAKE_SEND</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble0A16AssertionHandlerAA0bC0_pvp">NimbleAssertionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/nativeMachExceptionMask">nativeMachExceptionMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble23nativeMachExceptionMasks6UInt32Vvp">nativeMachExceptionMask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/nativeThreadState">nativeThreadState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble17nativeThreadStates5Int32Vvp">nativeThreadState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/nativeThreadStateCount">nativeThreadStateCount</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global%20Variables.html#/s:6Nimble22nativeThreadStateCounts6UInt32Vvp">nativeThreadStateCount</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ExpectationMessage.html">ExpectationMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ExpectationStatus.html">ExpectationStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ExpectationStyle.html">ExpectationStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/PredicateStatus.html">PredicateStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ToSucceedResult.html">ToSucceedResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/AnySequence.html">AnySequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Date.html">Date</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Float.html">Float</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Int8.html">Int8</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSArray.html">NSArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSDate.html">NSDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)NSDictionary">NSDictionary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSException.html">NSException</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)NSHashTable">NSHashTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSIndexSet.html">NSIndexSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)NSMapTable">NSMapTable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSNumber.html">NSNumber</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions.html#/c:objc(cs)NSSet">NSSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSString.html">NSString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt.html">UInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt16.html">UInt16</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt32.html">UInt32</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt64.html">UInt64</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UInt8.html">UInt8</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVySDyxq_GG_AESgtSHRzSQR_r0_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVySayxGG_AESgtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyShyxGG_AESgtSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyShyxGG_AESgtSLRzSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyShyxGG_AEtSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyShyxGG_AEtSLRzSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyxG_xSgtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyxG_xtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyx_q_q0_q1_q2_q3_tG_x_q_q0_q1_q2_q3_tSgtSQRzSQR_SQR0_SQR1_SQR2_SQR3_r4_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyx_q_q0_q1_q2_tG_x_q_q0_q1_q2_tSgtSQRzSQR_SQR0_SQR1_SQR2_r3_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyx_q_q0_q1_tG_x_q_q0_q1_tSgtSQRzSQR_SQR0_SQR1_r2_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyx_q_q0_tG_x_q_q0_tSgtSQRzSQR_SQR0_r1_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA15SyncExpectationVyx_q_tG_x_q_tSgtSQRzSQR_r0_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVySDyxq_GG_AESgtSHRzSQR_r0_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVySayxGG_AESgtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyShyxGG_AESgtSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyShyxGG_AESgtSLRzSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyShyxGG_AEtSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyShyxGG_AEtSLRzSHRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyxG_xSgtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyxG_xtSQRzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyx_q_q0_q1_q2_q3_tG_x_q_q0_q1_q2_q3_tSgtSQRzSQR_SQR0_SQR1_SQR2_SQR3_r4_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyx_q_q0_q1_q2_tG_x_q_q0_q1_q2_tSgtSQRzSQR_SQR0_SQR1_SQR2_r3_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyx_q_q0_q1_tG_x_q_q0_q1_tSgtSQRzSQR_SQR0_SQR1_r2_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyx_q_q0_tG_x_q_q0_tSgtSQRzSQR_SQR0_r1_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyAA16AsyncExpectationVyx_q_tG_x_q_tSgtSQRzSQR_r0_lF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2neoiyyx_yttAA11ExpectationRzyt5ValueRtzlF">!=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble3neeoiyyx_yXlSgtAA11ExpectationRzyXl5ValueRtzlF">!==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2aaoiyAA9PredicateVyxGAE_AEtlF">&amp;&amp;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble1loiyyx_q_SgtAA11ExpectationRzAA13NMBComparableR_5ValueQzRs_r0_lF">&lt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble1loiyyx_q_tAA11ExpectationRzSLR_5ValueQzRs_r0_lF">&lt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2leoiyyx_q_tAA11ExpectationRzAA13NMBComparableR_5ValueQzRs_r0_lF">&lt;=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2leoiyyx_q_tAA11ExpectationRzSLR_5ValueQzRs_r0_lF">&lt;=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVySDyxq_GG_AESgtSHRzSQR_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVySayxGG_AESgtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyShyxGG_AESgtSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyShyxGG_AESgtSLRzSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyShyxGG_AEtSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyShyxGG_AEtSLRzSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyxG_xSgtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyxG_xtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyx_q_q0_q1_q2_q3_tG_x_q_q0_q1_q2_q3_tSgtSQRzSQR_SQR0_SQR1_SQR2_SQR3_r4_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyx_q_q0_q1_q2_tG_x_q_q0_q1_q2_tSgtSQRzSQR_SQR0_SQR1_SQR2_r3_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyx_q_q0_q1_tG_x_q_q0_q1_tSgtSQRzSQR_SQR0_SQR1_r2_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyx_q_q0_tG_x_q_q0_tSgtSQRzSQR_SQR0_r1_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA15SyncExpectationVyx_q_tG_x_q_tSgtSQRzSQR_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVySDyxq_GG_AESgtSHRzSQR_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVySayxGG_AESgtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyShyxGG_AESgtSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyShyxGG_AESgtSLRzSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyShyxGG_AEtSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyShyxGG_AEtSLRzSHRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyxG_xSgtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyxG_xtSQRzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyx_q_q0_q1_q2_q3_tG_x_q_q0_q1_q2_q3_tSgtSQRzSQR_SQR0_SQR1_SQR2_SQR3_r4_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyx_q_q0_q1_q2_tG_x_q_q0_q1_q2_tSgtSQRzSQR_SQR0_SQR1_SQR2_r3_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyx_q_q0_q1_tG_x_q_q0_q1_tSgtSQRzSQR_SQR0_SQR1_r2_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyx_q_q0_tG_x_q_q0_tSgtSQRzSQR_SQR0_r1_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyAA16AsyncExpectationVyx_q_tG_x_q_tSgtSQRzSQR_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyx_q_8expected_Sd5deltattAA11ExpectationRzAA20NMBDoubleConvertibleR_5ValueQzRs_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyx_q_8expected_q_5deltattAA11ExpectationRzSFR_5ValueQzRs_r0_lF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2eeoiyyx_yttAA11ExpectationRzyt5ValueRtzlF">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble3eeeoiyyx_yXlSgtAA11ExpectationRzyXl5ValueRtzlF">===(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble1goiyyx_q_SgtAA11ExpectationRzAA13NMBComparableR_5ValueQzRs_r0_lF">&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble1goiyyx_q_tAA11ExpectationRzSLR_5ValueQzRs_r0_lF">&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2geoiyyx_q_tAA11ExpectationRzAA13NMBComparableR_5ValueQzRs_r0_lF">&gt;=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2geoiyyx_q_tAA11ExpectationRzSLR_5ValueQzRs_r0_lF">&gt;=(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14MACH_MSGH_BITSys6UInt32VAD_ADtF">MACH_MSGH_BITS(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble21MACH_MSGH_BITS_REMOTEys6UInt32VADF">MACH_MSGH_BITS_REMOTE(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7allPassyAA9PredicateVyxGADy7ElementQzGSTRzlF">allPass(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7allPassyAA9PredicateVyxGSb7ElementQzKcSTRzlF">allPass(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7allPassyAA9PredicateVyxGSS_Sb7ElementQzKctSTRzlF">allPass(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2beyAA9PredicateVyyXlGyXlSgF">be(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beAKindOfyAA9PredicateVySo8NSObjectCGyXlXpF">beAKindOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beAKindOfyAA9PredicateVyypGxmlF">beAKindOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14beAnInstanceOfyAA9PredicateVySo8NSObjectCGyXlXpF">beAnInstanceOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14beAnInstanceOfyAA9PredicateVyypGxmlF">beAnInstanceOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beCloseTo_6withinAA9PredicateVyq_Gq__xtSFRz7ElementQy_RszSlR_r0_lF">beCloseTo(_:within:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beCloseTo_6withinAA9PredicateVyxGx_SdtAA20NMBDoubleConvertibleRzlF">beCloseTo(_:within:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beCloseTo_6withinAA9PredicateVyxGx_xtSFRzlF">beCloseTo(_:within:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVyAA13NMBCollection_pGyF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVySSGyF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVySo12NSDictionaryCGyF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVySo7NSArrayCGyF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVySo8NSStringCGyF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVyxGySTRzlF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVyxGySTRzs10SetAlgebraRzlF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beEmptyAA9PredicateVyxGys10SetAlgebraRzlF">beEmpty()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beFailure4testAA9PredicateVys6ResultOyxq_GGyq_cSg_ts5ErrorR_r0_lF">beFailure(test:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beFalseAA9PredicateVySbGyF">beFalse()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7beFalsyAA9PredicateVyxGySQRzs27ExpressibleByBooleanLiteralRzlF">beFalsy()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13beGreaterThanyAA9PredicateVyxGxSgAA13NMBComparableRzlF">beGreaterThan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13beGreaterThanyAA9PredicateVyxGxSgSLRzlF">beGreaterThan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble22beGreaterThanOrEqualToyAA9PredicateVyxGxSgAA13NMBComparableRzlF">beGreaterThanOrEqualTo(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble22beGreaterThanOrEqualToyAA9PredicateVyxGxSgSLRzlF">beGreaterThanOrEqualTo(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13beIdenticalToyAA9PredicateVyyXlGyXlSgF">beIdenticalTo(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10beLessThanyAA9PredicateVyxGxSgAA13NMBComparableRzlF">beLessThan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10beLessThanyAA9PredicateVyxGxSgSLRzlF">beLessThan(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble19beLessThanOrEqualToyAA9PredicateVyxGxSgAA13NMBComparableRzlF">beLessThanOrEqualTo(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble19beLessThanOrEqualToyAA9PredicateVyxGxSgSLRzlF">beLessThanOrEqualTo(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5beNilAA9PredicateVyxGylF">beNil()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beSuccess4testAA9PredicateVys6ResultOyxq_GGyxcSg_ts5ErrorR_r0_lF">beSuccess(test:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6beTrueAA9PredicateVySbGyF">beTrue()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble8beTruthyAA9PredicateVyxGySQRzs27ExpressibleByBooleanLiteralRzlF">beTruthy()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6beVoidAA9PredicateVyytGyF">beVoid()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble8beWithinyAA9PredicateVyxGSNyxGSLRzlF">beWithin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble8beWithinyAA9PredicateVyxGSnyxGSLRzlF">beWithin(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beginWithyAA9PredicateVyAA20NMBOrderedCollection_pGypF">beginWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beginWithyAA9PredicateVySSGSSF">beginWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beginWithyAA9PredicateVyxG7ElementQzSTRzSQAGRQlF">beginWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beginWith6prefixAA9PredicateVyxGq_Sg_tSTRzSTR_SQ7ElementRpzAHQy_AIRSr0_lF">beginWith(prefix:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9beginWith6prefix2byAA9PredicateVyxGq_Sg_Sb7ElementQz_AIQy_tctSTRzSTR_r0_lF">beginWith(prefix:by:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/catchBadInstruction(block:)">catchBadInstruction(block:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble19catchBadInstruction2inAA0cD9ExceptionCSgyyc_tF">catchBadInstruction(in:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyAA12NMBContainer_pGSayypSgGF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyAA12NMBContainer_pGypSgd_tF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVySSGSSd_tF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVySSGSaySSGF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVySo8NSStringCGAFd_tF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVySo8NSStringCGSayAFGF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxG7ElementQzd_tSTRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxG7ElementQzd_ts10SetAlgebraRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxG7ElementSTQzd_tSTRzs10SetAlgebraRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxGSay7ElementQzGSTRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxGSay7ElementQzGs10SetAlgebraRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7containyAA9PredicateVyxGSay7ElementSTQzGSTRzs10SetAlgebraRzSQAGRQlF">contain(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble24containElementSatisfyingyAA9PredicateVyxGSb0C0Qzc_SStSTRzlF">containElementSatisfying(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble12defaultDeltaxySFRzlF">defaultDelta()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13elementsEqualyAA9PredicateVyxGq_SgSTRzSTR_SQ7ElementRpzAGQy_AHRSr0_lF">elementsEqual(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13elementsEqual_2byAA9PredicateVyxGq_Sg_Sb7ElementQz_AHQy_tctSTRzSTR_r0_lF">elementsEqual(_:by:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7endWithyAA9PredicateVyAA20NMBOrderedCollection_pGypF">endWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7endWithyAA9PredicateVySSGSSF">endWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7endWithyAA9PredicateVyxG7ElementQzSTRzSQAGRQlF">endWith(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVySDyxq_GGSDyxq_SgGSHRzSQR_r0_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVySayxSgGGAFSQRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyShyxGGAESHRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyShyxGGAESLRzSHRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyShyxGGAESgSHRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyShyxGGAESgSLRzSHRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyxGxSQRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyxGxSgSQRzlF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyx_q_q0_q1_q2_q3_tGx_q_q0_q1_q2_q3_tSgSQRzSQR_SQR0_SQR1_SQR2_SQR3_r4_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyx_q_q0_q1_q2_tGx_q_q0_q1_q2_tSgSQRzSQR_SQR0_SQR1_SQR2_r3_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyx_q_q0_q1_tGx_q_q0_q1_tSgSQRzSQR_SQR0_SQR1_r2_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyx_q_q0_tGx_q_q0_tSgSQRzSQR_SQR0_r1_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5equalyAA9PredicateVyx_q_tGx_q_tSgSQRzSQR_r0_lF">equal(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA15SyncExpectationVyxGSS_SuxSgyKXAtlF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA15SyncExpectationVyxGSS_SuxSgyKcyXKtlF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA15SyncExpectationVyxGSS_SuxyKcyXKtlF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA15SyncExpectationVyytGSS_SuyyKcyXKtF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA16AsyncExpectationVyxGSS_SuxSgyYaKctYalF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA16AsyncExpectationVyxGSS_SuxSgyYaKcyXEtYalF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA16AsyncExpectationVyxGSS_SuxyYaKcyXEtYalF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble6expect4file4line_AA16AsyncExpectationVyytGSS_SuyyYaKcyXEtYaF">expect(file:line:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble4fail_4file4lineySS_SSSutF">fail(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble4fail_4lineySS_SutF">fail(_:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble4fail_8locationySS_AA14SourceLocationCtF">fail(_:location:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble18gatherExpectations8silently7closureSayAA15AssertionRecordVGSb_yyXEtF">gatherExpectations(silently:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble18gatherExpectations8silently7closureSayAA15AssertionRecordVGSb_yyYaXEtYaF">gatherExpectations(silently:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble25gatherFailingExpectations8silently7closureSayAA15AssertionRecordVGSb_yyXEtF">gatherFailingExpectations(silently:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble25gatherFailingExpectations8silently7closureSayAA15AssertionRecordVGSb_yyYaXEtYaF">gatherFailingExpectations(silently:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9haveCountyAA9PredicateVyAA13NMBCollection_pGSiF">haveCount(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9haveCountyAA9PredicateVyxGSiSlRzlF">haveCount(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble5matchyAA9PredicateVySSGSSSgF">match(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10matchErroryAA9PredicateVys0C0_pGxSQRzsAERzlF">matchError(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10matchErroryAA9PredicateVys0C0_pGxmsAERzlF">matchError(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10matchErroryAA9PredicateVys0C0_pGxsAERzlF">matchError(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble28postDistributedNotifications_4from5namesAA9PredicateVyxGAFySay10Foundation12NotificationVGG_So013NSDistributedI6CenterCShySo18NSNotificationNameaGtlF">postDistributedNotifications(_:from:names:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble17postNotifications_4fromAA9PredicateVyxGAEySay10Foundation12NotificationVGG_So20NSNotificationCenterCtlF">postNotifications(_:from:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble20prettyCollectionTypeySSxSlRzlF">prettyCollectionType(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble20prettyCollectionTypeySSxlF">prettyCollectionType(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14raiseException5named6reason8userInfo7closureAA9PredicateVyxGSSSg_AJSo12NSDictionaryCSgySo11NSExceptionCcSgtlF">raiseException(named:reason:userInfo:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14raiseException5named6reason8userInfo7closureAA9PredicateVyxGSo15NSExceptionNameaSg_SSSgSo12NSDictionaryCSgySo0J0CcSgtlF">raiseException(named:reason:userInfo:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble13recordFailure_8locationySS_AA14SourceLocationCtF">recordFailure(_:location:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA9PredicateVyxGAEd_tlF">satisfyAllOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA9PredicateVyxGSayAEGlF">satisfyAllOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA9PredicateVyxGAEd_tlF">satisfyAnyOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA9PredicateVyxGSayAEGlF">satisfyAnyOf(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9stringifyySSxSglF">stringify(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble7succeedAA9PredicateVyAA15ToSucceedResultOGyF">succeed()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble14throwAssertionAA9PredicateVyxGylF">throwAssertion()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwErrorAA9PredicateVyxGylF">throwError()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwError_7closureAA9PredicateVyq_Gx_ys0C0_pcSgtsAGRzr0_lF">throwError(_:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwError_7closureAA9PredicateVyq_Gx_yxcSgtSQRzs0C0Rzr0_lF">throwError(_:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwError7closureAA9PredicateVyq_Gyxc_ts0C0Rzr0_lF">throwError(closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwError7closureAA9PredicateVyxGys0C0_pc_tlF">throwError(closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble10throwError9errorType7closureAA9PredicateVyq_Gxm_yxcSgts0C0Rzr0_lF">throwError(errorType:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9waitUntil7timeout4file4line6actiony8Dispatch0H12TimeIntervalO_SSSuyyycYactYaF">waitUntil(timeout:file:line:action:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9waitUntil7timeout4file4line6actiony8Dispatch0H12TimeIntervalO_SSSuyyycctF">waitUntil(timeout:file:line:action:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble9waitUntil7timeout4file4line6actiony8Dispatch0H12TimeIntervalO_SSSuyyycctYaF">waitUntil(timeout:file:line:action:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble20withAssertionHandler_4file4line7closureyAA0cD0_p_SSSuyyKXEtF">withAssertionHandler(_:file:line:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble20withAssertionHandler_4file4line7closureyAA0cD0_p_SSSuyyYaKXEtYaF">withAssertionHandler(_:file:line:closure:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble2oooiyAA9PredicateVyxGAE_AEtlF">||(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003obaoiyx8expected_Sd5deltatx_SdtAA20NMBDoubleConvertibleRzlF">±(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003obaoiyx8expected_x5deltatx_xtSFRzlF">±(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003dchoiyyx_q_8expected_Sd5deltattAA11ExpectationRzAA20NMBDoubleConvertibleR_5ValueQzRs_r0_lF">≈(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003dchoiyyx_q_8expected_q_5deltattAA11ExpectationRzSFR_5ValueQzRs_r0_lF">≈(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003dchoiyyx_q_tAA11ExpectationRzAA20NMBDoubleConvertibleR_5ValueQzRs_r0_lF">≈(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003dchoiyyx_q_tAA11ExpectationRzSFR_5ValueQzRs_r0_lF">≈(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:6Nimble003dchoiyyx_q_tAA11ExpectationRzSlR_5ValueQzRs_SF7ElementRp_r0_lF">≈(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/AssertionHandler.html">AssertionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Expectation.html">Expectation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NMBCollection.html">NMBCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NMBComparable.html">NMBComparable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NMBContainer.html">NMBContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NMBDoubleConvertible.html">NMBDoubleConvertible</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NMBOrderedCollection.html">NMBOrderedCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TestOutputStringConvertible.html">TestOutputStringConvertible</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AssertionRecord.html">AssertionRecord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AsyncDefaults.html">AsyncDefaults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AsyncExpectation.html">AsyncExpectation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExpectationNil.html">ExpectationNil</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Expression.html">Expression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Predicate.html">Predicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PredicateResult.html">PredicateResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SyncExpectation.html">SyncExpectation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/execTypesCountTuple.html">execTypesCountTuple</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/FileString">FileString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6Nimble10FileStringa">FileString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:6Nimble14PredicateBlocka">PredicateBlock</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TestOutputStringConvertible</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TestOutputStringConvertible</span></code></pre>
+
+                </div>
+              </div>
+            <p>A type with a customized test output text representation.</p>
+
+<p>This textual representation is produced when values will be
+printed in test runs, and may be useful when producing
+error messages in custom matchers.</p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code>CustomDebugStringConvertible</code>
+
+</div>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble27TestOutputStringConvertibleP15testDescriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/testDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble27TestOutputStringConvertibleP15testDescriptionSSvp">testDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">testDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2022 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2022-11-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

@@ -13,30 +13,32 @@ on:
 jobs:
   xcode:
     name: Xcode ${{ matrix.xcode }} (Xcode Project)
-    runs-on: macos-11
+    runs-on: macos-12
     strategy:
       matrix:
-        xcode: ["12.5", "13.0"]
+        xcode: ["14.0.1"]
       fail-fast: false
     env:
-      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
       - uses: actions/checkout@v3
       - run: ./test macos
       - run: ./test ios
       - run: ./test tvos
+      - run: ./test watchos
 
   xcode_spm:
     name: Xcode ${{ matrix.xcode }} (Swift Package)
-    runs-on: macos-11
+    runs-on: macos-12
     strategy:
       matrix:
-        xcode: ["12.5", "13.0"]
+        xcode: ["14.0.1"]
       fail-fast: false
     env:
-      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
       - uses: actions/checkout@v3
       - run: ./test macos_xcodespm
       - run: ./test ios_xcodespm
       - run: ./test tvos_xcodespm
+      - run: ./test watchos_xcodespm

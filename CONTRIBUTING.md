@@ -54,6 +54,27 @@ Be sure to include in your issue:
 
 2. Run `./test swiftpm`
 
+## Running the Linux tests on a Mac using Docker
+
+1. Install & set up [Docker Desktop](https://docs.docker.com/desktop/mac/install/)
+2. With Docker running, run the following:
+
+```shell
+docker pull swift:latest
+docker run -it -v `pwd`:/project swift bash
+cd project
+swift test
+```
+
+Note If you're running on an Apple Silicon Mac: As of this writing, `swift:latest` does not have an arm image. The `amazonlinux2` tag does, and you should use that.
+
+```shell
+docker pull swift:amazonlinux2
+docker run -it -v `pwd`:/project swift:amazonlinux2 bash
+cd project
+swift test
+```
+
 ## Pull Requests
 
 - Nothing is trivial. Submit pull requests for anything: typos,
@@ -106,6 +127,20 @@ some "ground rules":
   issues or pull requests submitted to the project. Please provide kind,
   constructive feedback. Please don't be sarcastic or snarky.
 
+### Updating Minimum Swift & OS Versions
+
+When updating the minimum Swift (or Xcode) version, you only need to update:
+
+- Package.swift
+- The Github actions workflows.
+
+When updating the minimum OS versions, you need to update the above 2 options as well as:
+
+- Nimble.podspec
+- Nimble.xcodeproj (update the OS versions in the Nimble project, not for each individual target)
+
+In addition, be sure to check if there's any relevant documentation to update, and update it.
+
 ### Creating a Release
 
 The process is relatively straight forward, but here's is a useful checklist for tagging:
@@ -116,5 +151,6 @@ The process is relatively straight forward, but here's is a useful checklist for
   - Use the same release notes you created for the tag, but tweak up formatting for GitHub.
 - Update [Quick](https://github.com/Quick/Quick)
   - Update Quick's submodule reference to the newly released Nimble version
+  - Update Quick's Package.swift file to pull in the newly released Nimble version
   - Update Nimble version in `README.md` and Documentation in [Quick](https://github.com/Quick/Quick) if it's not a patch version update.
 - Announce!

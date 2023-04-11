@@ -56,7 +56,7 @@ public class FailureMessage: NSObject {
         value = stripNewlines(value)
 
         if let extendedMessage = extendedMessage {
-            value += "\n\(stripNewlines(extendedMessage))"
+            value += "\n\(extendedMessage)"
         }
 
         if let userDescription = userDescription {

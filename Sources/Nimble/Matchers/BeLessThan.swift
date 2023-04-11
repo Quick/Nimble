@@ -8,15 +8,19 @@ public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func <<T: Comparable>(lhs: Expectation<T>, rhs: T) {
+public func <<V: Comparable>(lhs: SyncExpectation<V>, rhs: V) {
     lhs.to(beLessThan(rhs))
+}
+
+public func <<V: Comparable>(lhs: AsyncExpectation<V>, rhs: V) async {
+    await lhs.to(beLessThan(rhs))
 }
 
 #if canImport(Darwin)
 import enum Foundation.ComparisonResult
 
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
-public func beLessThan(_ expectedValue: NMBComparable?) -> Predicate<NMBComparable> {
+public func beLessThan<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
     let message = "be less than <\(stringify(expectedValue))>"
     return Predicate.simple(message) { actualExpression in
         let actualValue = try actualExpression.evaluate()
@@ -25,8 +29,12 @@ public func beLessThan(_ expectedValue: NMBComparable?) -> Predicate<NMBComparab
     }
 }
 
-public func < (lhs: Expectation<NMBComparable>, rhs: NMBComparable?) {
+public func <<V: NMBComparable>(lhs: SyncExpectation<V>, rhs: V?) {
     lhs.to(beLessThan(rhs))
+}
+
+public func <<V: NMBComparable>(lhs: AsyncExpectation<V>, rhs: V?) async {
+    await lhs.to(beLessThan(rhs))
 }
 
 extension NMBPredicate {

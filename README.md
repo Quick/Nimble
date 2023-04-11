@@ -32,7 +32,8 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Operator Overloads](#operator-overloads)
   - [Lazily Computed Values](#lazily-computed-values)
   - [C Primitives](#c-primitives)
-  - [Asynchronous Expectations](#asynchronous-expectations)
+  - [Async/Await in Expectations](#asyncawait-support)
+  - [Polling Expectations](#polling-expectations)
   - [Objective-C Support](#objective-c-support)
   - [Disabling Objective-C Shorthand](#disabling-objective-c-shorthand)
 - [Built-in Matcher Functions](#built-in-matcher-functions)
@@ -297,7 +298,49 @@ expect(1 as CInt).to(equal(1))
 expect(@(1 + 1)).to(equal(@2));
 ```
 
-## Asynchronous Expectations
+## Async/Await Support
+
+Nimble makes it easy to await for an async function to complete. Simply pass
+the async function in to `expect`:
+
+```swift
+// Swift
+await expect { await aFunctionReturning1() }.to(equal(1))
+```
+
+The async function is awaited on first, before passing it to the matcher. This
+enables the matcher to run synchronous code like before, without caring about
+whether the value it's processing was abtained async or not.
+
+Async support is Swift-only, and it requires that you execute the test in an
+async context. For XCTest, this is as simple as marking your test function with
+`async`. If you use Quick, then you don't need to do anything because as of
+Quick 6, all tests are executed in an async context.
+
+To avoid a compiler errors when using synchronous `expect` in asynchronous contexts,
+`expect` with async expressions does not support autoclosures. However, the `expecta`
+(expect async) function is provided as an alternative, which does support autoclosures.
+
+```swift
+// Swift
+await expect(await aFunctionReturning1()).to(equal(1)))
+```
+
+Similarly, if you're ever in a situation where you want to force the compiler to
+produce a `SyncExpectation`, you can use the `expects` (expect sync) function to
+produce a `SyncExpectation`. Like so:
+
+```swift
+// Swift
+expects(someNonAsyncFunction()).to(equal(1)))
+
+expects(await someAsyncFunction()).to(equal(1)) // Compiler error: 'async' call in an autoclosure that does not support concurrency
+```
+
+Note: Async/Await support is different than the `toEventually`/`toEventuallyNot`
+feature described below.
+
+## Polling Expectations
 
 In Nimble, it's easy to make expectations on values that are updated
 asynchronously. Just use `toEventually` or `toEventuallyNot`:
@@ -332,6 +375,38 @@ In the above example, `ocean` is constantly re-evaluated. If it ever
 contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
 whole second, the expectation fails.
+
+`toEventaully` et. al. now also supports async expectations. For example, the following test is now supported:
+
+```swift
+actor MyActor {
+    private var counter = 0
+
+    func access() -> Int {
+        counter += 1
+        return counter
+    }
+}
+
+let subject = MyActor()
+await expect { await subject.access() }.toEventually(equal(2))
+```
+
+You can also test that a value always or never matches throughout the length of the timeout. Use `toNever` and `toAlways` for this:
+
+```swift
+// Swift
+ocean.add("dolphins")
+expect(ocean).toAlways(contain("dolphins"))
+expect(ocean).toNever(contain("hares"))
+```
+
+```objc
+// Objective-C
+[ocean add:@"dolphins"]
+expect(ocean).toAlways(contain(@"dolphins"))
+expect(ocean).toNever(contain(@"hares"))
+```
 
 Sometimes it takes more than a second for a value to update. In those
 cases, use the `timeout` parameter:
@@ -407,6 +482,8 @@ pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
 deadlocks, and synchronous IPC.
 
+### Changing default Timeout and Poll Intervals
+
 In some cases (e.g. when running on slower machines) it can be useful to modify
 the default timeout and poll interval values. This can be done as follows:
 
@@ -414,11 +491,72 @@ the default timeout and poll interval values. This can be done as follows:
 // Swift
 
 // Increase the global timeout to 5 seconds:
-Nimble.AsyncDefaults.timeout = .seconds(5)
+Nimble.PollingDefaults.timeout = .seconds(5)
 
 // Slow the polling interval to 0.1 seconds:
-Nimble.AsyncDefaults.pollInterval = .milliseconds(100)
+Nimble.PollingDefaults.pollInterval = .milliseconds(100)
 ```
+
+You can set these globally at test startup in two ways:
+
+#### Quick
+
+If you use [Quick](https://github.com/Quick/Quick), add a [`QuickConfiguration` subclass](https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md) which sets your desired `PollingDefaults`.
+
+```swift
+import Quick
+import Nimble
+
+class PollingConfiguration: QuickConfiguration {
+    override class func configure(_ configuration: QCKConfiguration) {
+        Nimble.PollingDefaults.timeout = .seconds(5)
+        Nimble.PollingDefaults.pollInterval = .milliseconds(100)
+    }
+}
+```
+
+#### XCTest
+
+If you use [XCTest](https://developer.apple.com/documentation/xctest), add an object that conforms to [`XCTestObservation`](https://developer.apple.com/documentation/xctest/xctestobservation) and implement [`testBundleWillStart(_:)`](https://developer.apple.com/documentation/xctest/xctestobservation/1500772-testbundlewillstart).
+
+Additionally, you will need to register this observer with the [`XCTestObservationCenter`](https://developer.apple.com/documentation/xctest/xctestobservationcenter) at test startup. To do this, set the `NSPrincipalClass` key in your test bundle's Info.plist and implement a class with that same name.
+
+For example
+
+```xml
+<!-- Info.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ... -->
+	<key>NSPrincipalClass</key>
+	<string>MyTests.TestSetup</string>
+</dict>
+</plist>
+```
+
+```swift
+// TestSetup.swift
+import XCTest
+import Nimble
+
+@objc
+class TestSetup: NSObject {
+	override init() {
+		XCTestObservationCenter.shared.register(PollingConfigurationTestObserver())
+	}
+}
+
+class PollingConfigurationTestObserver: NSObject, XCTestObserver {
+    func testBundleWillStart(_ testBundle: Bundle) {
+        Nimble.PollingDefaults.timeout = .seconds(5)
+        Nimble.PollingDefaults.pollInterval = .milliseconds(100)
+    }
+}
+```
+
+In Linux, you can implement `LinuxMain` to set the PollingDefaults before calling `XCTMain`.
 
 ## Objective-C Support
 
@@ -722,8 +860,7 @@ expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 
 ```
 
-> Values given to the `beCloseTo` matcher must be coercable into a
-  `Double`.
+> Values given to the `beCloseTo` matcher must conform to `FloatingPoint`.
 
 ## Types/Classes
 
@@ -1054,6 +1191,18 @@ expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
 expect(turtles).to(containElementSatisfying(^BOOL(id __nonnull object) {
     return [[turtle color] isEqualToString:@"blue"];
 }));
+```
+
+For asserting on if the given `Comparable` value is inside of a `Range`, use the `beWithin` matcher.
+
+```swift
+// Swift
+
+// Passes if 5 is within the range 1 through 10, inclusive
+expect(5).to(beWithin(1...10))
+
+// Passes if 5 is not within the range 2 through 4.
+expect(5).toNot(beWithin(2..<5))
 ```
 
 ## Strings
