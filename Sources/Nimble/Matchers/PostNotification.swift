@@ -5,6 +5,7 @@ import Foundation
 
 internal class NotificationCollector {
     private(set) var observedNotifications: [Notification]
+    private(set) var observedNotificationDescriptions: [String]
     private let notificationCenter: NotificationCenter
     private let names: Set<Notification.Name>
     private var tokens: [NSObjectProtocol]
@@ -12,6 +13,7 @@ internal class NotificationCollector {
     required init(notificationCenter: NotificationCenter, names: Set<Notification.Name> = []) {
         self.notificationCenter = notificationCenter
         self.observedNotifications = []
+        self.observedNotificationDescriptions = []
         self.names = names
         self.tokens = []
     }
@@ -21,6 +23,7 @@ internal class NotificationCollector {
             return notificationCenter.addObserver(forName: name, object: nil, queue: nil) { [weak self] notification in
                 // linux-swift gets confused by .append(n)
                 self?.observedNotifications.append(notification)
+                self?.observedNotificationDescriptions.append(stringify(notification))
             }
         }
 
@@ -71,7 +74,7 @@ private func _postNotifications<Out>(
         if collector.observedNotifications.isEmpty {
             actualValue = "no notifications"
         } else {
-            actualValue = "<\(stringify(collector.observedNotifications))>"
+            actualValue = "<\(stringify(collector.observedNotificationDescriptions))>"
         }
 
         var result = try predicate.satisfies(collectorNotificationsExpression)
