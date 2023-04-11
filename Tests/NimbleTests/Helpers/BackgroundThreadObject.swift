@@ -1,4 +1,5 @@
 import Foundation
+import Nimble
 
 // Simulates an object that *really* cares what thread it is run on.
 // Supposed to replicate what happens if a NSManagedObject ends up

@@ -323,6 +323,7 @@
 		857D184F2536124400D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
 		857D18502536124400D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
 		857D18512536124500D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
+		8913626D29E5C2F500AD535E /* BackgroundThreadObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		892FDF1429D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		892FDF1529D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
@@ -2143,6 +2144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8913626D29E5C2F500AD535E /* BackgroundThreadObject.swift in Sources */,
 				D95F8945267EA1E8004B1B4D /* BeNilTest.swift in Sources */,
 				D95F8949267EA1E8004B1B4D /* MatchTest.swift in Sources */,
 				D95F8951267EA1EE004B1B4D /* utils.swift in Sources */,
