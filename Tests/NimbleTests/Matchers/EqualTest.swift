@@ -1,6 +1,9 @@
 import Foundation
 import XCTest
 import Nimble
+#if SWIFT_PACKAGE
+import NimbleSharedTestHelpers
+#endif
 
 final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testEquality() {

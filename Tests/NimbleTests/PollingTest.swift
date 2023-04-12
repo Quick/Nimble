@@ -5,6 +5,9 @@ import CoreFoundation
 import Foundation
 import XCTest
 import Nimble
+#if SWIFT_PACKAGE
+import NimbleSharedTestHelpers
+#endif
 
 // swiftlint:disable:next type_body_length
 final class PollingTest: XCTestCase {
