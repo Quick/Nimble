@@ -1,6 +1,9 @@
 import Foundation
 import XCTest
 @testable import Nimble
+#if SWIFT_PACKAGE
+import NimbleSharedTestHelpers
+#endif
 
 final class BeIdenticalToTest: XCTestCase {
     func testBeIdenticalToPositive() {

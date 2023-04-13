@@ -1,6 +1,6 @@
 #if !os(WASI)
 
-#if canImport(Darwin) && !SWIFT_PACKAGE
+#if canImport(Darwin)
 import class Foundation.NSObject
 import typealias Foundation.TimeInterval
 

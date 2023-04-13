@@ -1,9 +1,13 @@
-#import <Nimble/DSL.h>
+#import "DSL.h"
 
+#if SWIFT_PACKAGE
+@import Nimble;
+#else
 #if __has_include("Nimble-Swift.h")
 #import "Nimble-Swift.h"
 #else
 #import <Nimble/Nimble-Swift.h>
+#endif
 #endif
 
 
@@ -142,9 +146,11 @@ NIMBLE_EXPORT NMBPredicate *NMB_satisfyAllOfWithMatchers(id matchers) {
     return [NMBPredicate satisfyAllOfMatcher:matchers];
 }
 
+#if !SWIFT_PACKAGE
 NIMBLE_EXPORT NMBObjCRaiseExceptionPredicate *NMB_raiseException(void) {
     return [NMBPredicate raiseExceptionMatcher];
 }
+#endif
 
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock NMB_waitUntilTimeoutBuilder(NSString *file, NSUInteger line) {
     return ^(NSTimeInterval timeout, void (^ _Nonnull action)(void (^ _Nonnull)(void))) {
