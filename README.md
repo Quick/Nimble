@@ -314,8 +314,9 @@ whether the value it's processing was abtained async or not.
 
 Async support is Swift-only, and it requires that you execute the test in an
 async context. For XCTest, this is as simple as marking your test function with
-`async`. If you use Quick, then you don't need to do anything because as of
-Quick 6, all tests are executed in an async context.
+`async`. If you use Quick, all tests in Quick 6 are executed in an async context.
+In Quick 7 and later, only tests that are in an `AsyncSpec` subclass will be
+executed in an async context.
 
 To avoid a compiler errors when using synchronous `expect` in asynchronous contexts,
 `expect` with async expressions does not support autoclosures. However, the `expecta`
@@ -376,7 +377,22 @@ contains dolphins and whales, the expectation passes. If `ocean` still
 doesn't contain them, even after being continuously re-evaluated for one
 whole second, the expectation fails.
 
-`toEventaully` et. al. now also supports async expectations. For example, the following test is now supported:
+### Using Polling Expectations in Async Tests
+
+You can easily use `toEventually` or `toEventuallyNot` in async contexts as
+well. You only need to add an `await` statement to the beginning of the line:
+
+```swift
+// Swift
+DispatchQueue.main.async {
+    ocean.add("dolphins")
+    ocean.add("whales")
+}
+await expect(ocean).toEventually(contain("dolphens", "whiles"))
+```
+
+Starting in Numble 12,  `toEventually` et. al. now also supports async
+expectations. For example, the following test is now supported:
 
 ```swift
 actor MyActor {
@@ -391,6 +407,8 @@ actor MyActor {
 let subject = MyActor()
 await expect { await subject.access() }.toEventually(equal(2))
 ```
+
+### Verifying a Predicate will Never or Always Match
 
 You can also test that a value always or never matches throughout the length of the timeout. Use `toNever` and `toAlways` for this:
 
@@ -408,25 +426,7 @@ expect(ocean).toAlways(contain(@"dolphins"))
 expect(ocean).toNever(contain(@"hares"))
 ```
 
-Sometimes it takes more than a second for a value to update. In those
-cases, use the `timeout` parameter:
-
-```swift
-// Swift
-
-// Waits three seconds for ocean to contain "starfish":
-expect(ocean).toEventually(contain("starfish"), timeout: .seconds(3))
-
-// Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.
-expect(someValue).toEventually(equal(100), timeout: .milliseconds(5500), pollInterval: .milliseconds(200))
-```
-
-```objc
-// Objective-C
-
-// Waits three seconds for ocean to contain "starfish":
-expect(ocean).withTimeout(3).toEventually(contain(@"starfish"));
-```
+### Waiting for a Callback to be Called
 
 You can also provide a callback by using the `waitUntil` function:
 
@@ -481,6 +481,28 @@ thread will cause Nimble to stop the run loop to continue. This can cause test
 pollution for whatever incomplete code that was running on the main thread.
 Blocking the main thread can be caused by blocking IO, calls to sleep(),
 deadlocks, and synchronous IPC.
+
+### Changing the Timeout and Polling Intervals
+
+Sometimes it takes more than a second for a value to update. In those
+cases, use the `timeout` parameter:
+
+```swift
+// Swift
+
+// Waits three seconds for ocean to contain "starfish":
+expect(ocean).toEventually(contain("starfish"), timeout: .seconds(3))
+
+// Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.
+expect(someValue).toEventually(equal(100), timeout: .milliseconds(5500), pollInterval: .milliseconds(200))
+```
+
+```objc
+// Objective-C
+
+// Waits three seconds for ocean to contain "starfish":
+expect(ocean).withTimeout(3).toEventually(contain(@"starfish"));
+```
 
 ### Changing default Timeout and Poll Intervals
 
@@ -616,6 +638,7 @@ For the following matchers:
 - `beTruthy`
 - `beFalsy`
 - `haveCount`
+
 
 If you would like to see more, [file an issue](https://github.com/Quick/Nimble/issues).
 
@@ -1766,17 +1789,6 @@ extension NMBPredicate {
 }
 ```
 
-## Migrating from the Old Matcher API
-
-Previously (`<7.0.0`), Nimble supported matchers via the following types:
-
-- `Matcher`
-- `NonNilMatcherFunc`
-- `MatcherFunc`
-
-All of those types have been replaced by `Predicate`. The old API has been
-removed completely in Nimble v10.
-
 # Installing Nimble
 
 > Nimble can be used on its own, or in conjunction with its sister
@@ -1804,7 +1816,7 @@ install just Nimble.
 
 ## Installing Nimble via CocoaPods
 
-To use Nimble in CocoaPods to test your macOS, iOS or tvOS applications, add
+To use Nimble in CocoaPods to test your macOS, iOS, tvOS or watchOS applications, add
 Nimble to your podfile and add the ```use_frameworks!``` line to enable Swift
 support for CocoaPods.
 
@@ -1822,6 +1834,51 @@ end
 ```
 
 Finally run `pod install`.
+
+## Installing Nimble via Swift Package Manager
+
+### Xcode
+
+To install Nimble via Xcode's Swift Package Manager Integration:
+Select your project configuration, then the project tab, then the Package
+Dependencies tab. Click on the "plus" button at the bottom of the list,
+then follow the wizard to add Quick to your project. Specify
+`https://github.com/Quick/Nimble.git` as the url, and be sure to add
+Nimble as a dependency of your unit test target, not your app target.
+
+### Package.Swift
+
+To use Nimble with Swift Package Manager to test your applications, add Nimble
+to your `Package.Swift` and link it with your test target:
+
+```swift
+// swift-tools-version:5.5
+
+import PackageDescription
+
+let package = Package(
+    name: "MyAwesomeLibrary",
+    products: [
+        // ...
+    ],
+    dependencies: [
+        // ...
+        .package(url:  "https://github.com/Quick/Nimble.git", from: "12.0.0"),
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages this package depends on.
+        .target(
+            name: "MyAwesomeLibrary",
+            dependencies: ...),
+        .testTarget(
+            name: "MyAwesomeLibraryTests",
+            dependencies: ["MyAwesomeLibrary", "Nimble"]),
+    ]
+)
+```
+
+Please note that if you install Nimble using Swift Package Manager, then `raiseException` is not available.
 
 ## Using Nimble without XCTest
 
