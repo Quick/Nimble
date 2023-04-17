@@ -52,6 +52,7 @@ final class SatisfyAllOfTest: XCTestCase {
         expect(true).toNot(beTruthy() && beFalsy())
     }
 
+    #if !os(WASI)
     func testSatisfyAllOfCachesExpressionBeforePassingToPredicates() {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
         // But we should still handle those cases anyway.
@@ -63,4 +64,5 @@ final class SatisfyAllOfTest: XCTestCase {
 
         expect(testFunction()).toEventually(satisfyAllOf(equal(1), equal(1)))
     }
+    #endif
 }

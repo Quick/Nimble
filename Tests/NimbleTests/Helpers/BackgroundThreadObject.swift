@@ -1,3 +1,5 @@
+#if !os(WASI)
+
 import Foundation
 import Nimble
 
@@ -12,3 +14,5 @@ class BackgroundThreadObject: CustomDebugStringConvertible {
         return "BackgroundThreadObject"
     }
 }
+
+#endif // #if !os(WASI)
