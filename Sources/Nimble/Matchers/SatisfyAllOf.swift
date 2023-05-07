@@ -41,6 +41,52 @@ public func && <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
     return satisfyAllOf(left, right)
 }
 
+/// A Nimble matcher that succeeds when the actual value matches with all of the matchers
+/// provided in the variable list of matchers.
+@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+public func satisfyAllOf<T>(_ predicates: any AsyncablePredicate<T>...) -> AsyncPredicate<T> {
+    return satisfyAllOf(predicates)
+}
+
+/// A Nimble matcher that succeeds when the actual value matches with all of the matchers
+/// provided in the array of matchers.
+@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+public func satisfyAllOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncPredicate<T> {
+    return AsyncPredicate.define { actualExpression in
+        let cachedExpression = actualExpression.withCaching()
+        var postfixMessages = [String]()
+        var status: PredicateStatus = .matches
+        for predicate in predicates {
+            let result = try await predicate.satisfies(cachedExpression)
+            if result.status == .fail {
+                status = .fail
+            } else if result.status == .doesNotMatch, status != .fail {
+                status = .doesNotMatch
+            }
+            postfixMessages.append("{\(result.message.expectedMessage)}")
+        }
+
+        var msg: ExpectationMessage
+        if let actualValue = try await cachedExpression.evaluate() {
+            msg = .expectedCustomValueTo(
+                "match all of: " + postfixMessages.joined(separator: ", and "),
+                actual: "\(actualValue)"
+            )
+        } else {
+            msg = .expectedActualValueTo(
+                "match all of: " + postfixMessages.joined(separator: ", and ")
+            )
+        }
+
+        return PredicateResult(status: status, message: msg)
+    }
+}
+
+@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+public func && <T>(left: some AsyncablePredicate<T>, right: some AsyncablePredicate<T>) -> AsyncPredicate<T> {
+    return satisfyAllOf(left, right)
+}
+
 #if canImport(Darwin)
 import class Foundation.NSObject
 

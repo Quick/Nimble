@@ -1,3 +1,14 @@
+public protocol AsyncablePredicate<T> {
+    associatedtype T
+    func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult
+}
+
+extension Predicate: AsyncablePredicate {
+    public func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult {
+        try satisfies(await expression.toSynchronousExpression())
+    }
+}
+
 /// An AsyncPredicate is part of the new matcher API that provides assertions to expectations.
 ///
 /// Given a code snippet:
@@ -18,7 +29,7 @@
 /// These can also be used with either `Expectation`s or `AsyncExpectation`s.
 /// But these can only be used from async contexts, and are unavailable in Objective-C.
 /// You can, however, call regular Predicates from an AsyncPredicate, if you wish to compose one like that.
-public struct AsyncPredicate<T> {
+public struct AsyncPredicate<T>: AsyncablePredicate {
     fileprivate var matcher: (AsyncExpression<T>) async throws -> PredicateResult
 
     public init(_ matcher: @escaping (AsyncExpression<T>) async throws -> PredicateResult) {

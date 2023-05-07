@@ -6,6 +6,7 @@ import NimbleSharedTestHelpers
 #endif
 
 final class SatisfyAnyOfTest: XCTestCase {
+    // MARK: - Synchronous Variant
     func testSatisfyAnyOf() {
         expect(2).to(satisfyAnyOf(equal(2), equal(3)))
         expect(2 as NSNumber).toNot(satisfyAnyOf(equal(3 as NSNumber), equal("turtles" as NSString)))
@@ -63,6 +64,74 @@ final class SatisfyAnyOfTest: XCTestCase {
         // This demonstrates caching because the first time this is evaluated, the function should return 1, which doesn't pass the `equal(0)`.
         // Next time, it'll return 2, which doesn't pass the `equal(1)`.
         expect(testFunction()).toEventually(satisfyAnyOf(equal(0), equal(1)))
+    }
+    #endif
+
+    // MARK: - Async Variant
+    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    func testAsyncSatisfyAnyOf() async {
+        await expect(2).to(satisfyAnyOf(asyncEqual(2), asyncEqual(3)))
+        await expect(2 as NSNumber).toNot(satisfyAnyOf(asyncEqual(3 as NSNumber), asyncEqual("turtles" as NSString)))
+        await expect([1, 2, 3]).to(satisfyAnyOf(asyncEqual([1, 2, 3]), allPass({$0 < 4}), haveCount(3)))
+        await expect("turtle").toNot(satisfyAnyOf(asyncContain("a"), endWith("magic")))
+        await expect(82.0).toNot(satisfyAnyOf(beLessThan(10.5), beGreaterThan(100.75), asyncBeCloseTo(50.1)))
+        await expect(false).to(satisfyAnyOf(beTrue(), beFalse(), asyncEqual(true), asyncEqual(false)))
+        await expect(true).to(satisfyAnyOf(beTruthy(), beFalsy(), asyncEqual(false), asyncEqual(true)))
+
+        await failsWithErrorMessage(
+            "expected to match one of: {equal <3>}, or {equal <4>}, or {equal <5>}, got 2") {
+                await expect(2).to(satisfyAnyOf(asyncEqual(3), asyncEqual(4), asyncEqual(5)))
+        }
+        await failsWithErrorMessage(
+            "expected to match one of: {all be less than 4, but failed first at element <5> in <[5, 6, 7]>}, or {equal <[1, 2, 3, 4]>}, got [5, 6, 7]") {
+                await expect([5, 6, 7]).to(satisfyAnyOf(allPass("be less than 4", {$0 < 4}), asyncEqual([1, 2, 3, 4])))
+        }
+        await failsWithErrorMessage(
+            "expected to match one of: {be true}, got false") {
+                await expect(false).to(satisfyAnyOf(beTrue()))
+        }
+        await failsWithErrorMessage(
+            "expected to not match one of: {be less than <10.5>}, or {be greater than <100.75>}, or {be close to <50.1> (within 0.0001)}, got 50.10001") {
+                await expect(50.10001).toNot(satisfyAnyOf(beLessThan(10.5), beGreaterThan(100.75), asyncBeCloseTo(50.1)))
+        }
+        await failsWithErrorMessage(
+            "expected to match one of: {This matcher should always fail}, or {This matcher should always fail}, got true") {
+            await expect(true).to(satisfyAnyOf(asyncAlwaysFail(), asyncAlwaysFail()))
+        }
+        await failsWithErrorMessage(
+            "expected to not match one of: {This matcher should always fail}, or {This matcher should always fail}, got true") {
+            await expect(true).toNot(satisfyAnyOf(asyncAlwaysFail(), asyncAlwaysFail()))
+        }
+    }
+
+    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    func testAsyncOperatorOr() async {
+        await expect(2).to(asyncEqual(2) || asyncEqual(3))
+        await expect(2 as NSNumber).toNot(asyncEqual(3 as NSNumber) || asyncEqual("turtles" as NSString))
+        await expect("turtle").toNot(asyncContain("a") || endWith("magic"))
+        await expect(82.0).toNot(beLessThan(10.5) || beGreaterThan(100.75) || asyncBeCloseTo(83.0))
+        await expect(false).to(beTrue() || beFalse() || asyncEqual(true) || asyncEqual(false))
+        await expect(true).to(beTruthy() || beFalsy() || asyncEqual(true) || asyncEqual(false))
+    }
+
+    #if !os(WASI)
+    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    func testAsyncSatisfyAllOfCachesExpressionBeforePassingToPredicates() async {
+        // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
+        // But we should still handle those cases anyway.
+        actor Counter {
+            var value: Int = 0
+            func increment() -> Int {
+                value += 1
+                return value
+            }
+        }
+
+        let counter = Counter()
+
+        // This demonstrates caching because the first time this is evaluated, the function should return 1, which doesn't pass the `equal(0)`.
+        // Next time, it'll return 2, which doesn't pass the `equal(1)`.
+        await expecta(await counter.increment()).toEventually(satisfyAnyOf(asyncEqual(0), asyncEqual(1)))
     }
     #endif
 }

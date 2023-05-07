@@ -8,7 +8,7 @@ import NimbleSharedTestHelpers
 final class BeEmptyTest: XCTestCase {
     func testBeEmptyPositive() {
         // Array
-        expect([] as [Int]).to(beEmpty())
+        expect([Int]()).to(beEmpty())
         expect([1]).toNot(beEmpty())
 
         expect([] as [CInt]).to(beEmpty())
