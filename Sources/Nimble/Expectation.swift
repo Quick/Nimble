@@ -33,6 +33,23 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
     return result
 }
 
+internal func execute<T>(_ expression: AsyncExpression<T>, _ style: ExpectationStyle, _ predicate: AsyncPredicate<T>, to: String, description: String?) async -> (Bool, FailureMessage) {
+    let msg = FailureMessage()
+    msg.userDescription = description
+    msg.to = to
+    do {
+        let result = try await predicate.satisfies(expression)
+        result.message.update(failureMessage: msg)
+        if msg.actualValue == "" {
+            msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+        }
+        return (result.toBoolean(expectation: style), msg)
+    } catch let error {
+        msg.stringValue = "unexpected error thrown: <\(error)>"
+        return (false, msg)
+    }
+}
+
 public enum ExpectationStatus: Equatable {
 
     /// No predicates have been performed.
@@ -192,6 +209,29 @@ public struct SyncExpectation<Value>: Expectation {
         toNot(predicate, description: description)
     }
 
+    // MARK: - AsyncPredicates
+    /// Tests the actual value using a matcher to match.
+    @discardableResult
+    public func to(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
+        let (pass, msg) = await execute(expression.toAsyncExpression(), .toMatch, predicate, to: "to", description: description)
+        return verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    @discardableResult
+    public func toNot(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
+        let (pass, msg) = await execute(expression.toAsyncExpression(), .toNotMatch, predicate, to: "to not", description: description)
+        return verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
+    @discardableResult
+    public func notTo(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
+        await toNot(predicate, description: description)
+    }
+
     // see:
     // - `Polling.swift` for toEventually and older-style polling-based approach to "async"
     // - NMBExpectation for Objective-C interface
@@ -259,6 +299,28 @@ public struct AsyncExpectation<Value>: Expectation {
     /// Alias to toNot().
     @discardableResult
     public func notTo(_ predicate: Predicate<Value>, description: String? = nil) async -> Self {
+        await toNot(predicate, description: description)
+    }
+
+    /// Tests the actual value using a matcher to match.
+    @discardableResult
+    public func to(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
+        let (pass, msg) = await execute(expression, .toMatch, predicate, to: "to", description: description)
+        return verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    @discardableResult
+    public func toNot(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
+        let (pass, msg) = await execute(expression, .toNotMatch, predicate, to: "to not", description: description)
+        return verify(pass, msg)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
+    @discardableResult
+    public func notTo(_ predicate: AsyncPredicate<Value>, description: String? = nil) async -> Self {
         await toNot(predicate, description: description)
     }
 }

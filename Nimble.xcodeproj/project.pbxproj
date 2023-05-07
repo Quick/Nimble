@@ -369,6 +369,18 @@
 		899441F92902EF2600C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
 		899441FA2902EF2700C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
 		899441FB2902EF2800C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
+		89EEF5A52A03293100988224 /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncPredicate.swift */; };
+		89EEF5A62A03293100988224 /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncPredicate.swift */; };
+		89EEF5A72A03293100988224 /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncPredicate.swift */; };
+		89EEF5A82A03293100988224 /* AsyncPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncPredicate.swift */; };
+		89EEF5B72A032C3200988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
+		89EEF5B82A032C3300988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
+		89EEF5B92A032C3300988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
+		89EEF5BA2A032C3400988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
+		89EEF5C02A06211C00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
+		89EEF5C12A06211D00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
+		89EEF5C22A06211E00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
+		89EEF5C32A06211F00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
 		89F5E06D290765BB001F9377 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F5E06C290765BB001F9377 /* PollingTest.swift */; };
 		89F5E06E290765BB001F9377 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F5E06C290765BB001F9377 /* PollingTest.swift */; };
 		89F5E06F290765BB001F9377 /* PollingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F5E06C290765BB001F9377 /* PollingTest.swift */; };
@@ -768,6 +780,9 @@
 		898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailMatcher.swift; sourceTree = "<group>"; };
 		899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitTest.swift; sourceTree = "<group>"; };
 		899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+AsyncAwait.swift"; sourceTree = "<group>"; };
+		89EEF5A42A03293100988224 /* AsyncPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPredicate.swift; sourceTree = "<group>"; };
+		89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPredicateTest.swift; sourceTree = "<group>"; };
+		89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelpers.swift; sourceTree = "<group>"; };
 		89F5E06C290765BB001F9377 /* PollingTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollingTest.swift; sourceTree = "<group>"; };
 		89F5E0852908E655001F9377 /* Polling+AsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polling+AsyncAwait.swift"; sourceTree = "<group>"; };
 		89F5E08B290B8D22001F9377 /* AsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwait.swift; sourceTree = "<group>"; };
@@ -881,6 +896,7 @@
 			children = (
 				1F0648CB19639F5A001F9C46 /* ObjectWithLazyProperty.swift */,
 				52F5CD6427EE571C00B19809 /* BackgroundThreadObject.swift */,
+				89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -994,6 +1010,7 @@
 			children = (
 				DD72EC631A93874A002F7651 /* AllPassTest.swift */,
 				898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */,
+				89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */,
 				1F1B5AD31963E13900CA8BF9 /* BeAKindOfTest.swift */,
 				1F925EE8195C124400ED456B /* BeAnInstanceOfTest.swift */,
 				1F925EF5195C147800ED456B /* BeCloseToTest.swift */,
@@ -1049,6 +1066,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB1BC781A92235600F743C3 /* AllPass.swift */,
+				89EEF5A42A03293100988224 /* AsyncPredicate.swift */,
 				1FD8CD0E1968AB07008ED995 /* BeAKindOf.swift */,
 				1FD8CD0D1968AB07008ED995 /* BeAnInstanceOf.swift */,
 				1FD8CD0F1968AB07008ED995 /* BeCloseTo.swift */,
@@ -1669,6 +1687,7 @@
 				1FD8CD381968AB07008ED995 /* Expression.swift in Sources */,
 				1FD8CD3A1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				CDFB6A4C1F7E082500AD8CC7 /* mach_excServer.c in Sources */,
+				89EEF5A62A03293100988224 /* AsyncPredicate.swift in Sources */,
 				472FD1351B9E085700C7B8DA /* HaveCount.swift in Sources */,
 				1FA0C4001E30B14500623165 /* Predicate.swift in Sources */,
 				964CFEFD1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
@@ -1681,6 +1700,7 @@
 			files = (
 				1F4A569A1A3B3539009E1637 /* ObjCEqualTest.m in Sources */,
 				898F28B125D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
+				89EEF5B82A032C3300988224 /* AsyncPredicateTest.swift in Sources */,
 				1F925EEC195C12C800ED456B /* RaisesExceptionTest.swift in Sources */,
 				899441F02902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */,
 				89F5E098290C37B8001F9377 /* StatusTest.swift in Sources */,
@@ -1714,6 +1734,7 @@
 				CDC157922511957100EAA480 /* DSLTest.swift in Sources */,
 				7A6AB2C31E7F547E00A2F694 /* ToSucceedTest.swift in Sources */,
 				A8A3B707207368F000E25A08 /* ObjCSatisfyAllOfTest.m in Sources */,
+				89EEF5C12A06211D00988224 /* AsyncHelpers.swift in Sources */,
 				1F4A56701A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
 				1F4A56971A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
 				1F4A567C1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
@@ -1822,6 +1843,7 @@
 				CDD80B851F20307B0002CD65 /* MatcherProtocols.swift in Sources */,
 				1F5DF1721BDCA0F500C3A531 /* Expectation.swift in Sources */,
 				7B5358C01C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
+				89EEF5A72A03293100988224 /* AsyncPredicate.swift in Sources */,
 				0477153723B740B800402D4E /* NimbleTimeInterval.swift in Sources */,
 				7B13BA0C1DD361D300C9098C /* ContainElementSatisfying.swift in Sources */,
 				1F5DF1871BDCA0F500C3A531 /* Match.swift in Sources */,
@@ -1834,6 +1856,7 @@
 			files = (
 				CD79C9AD1D2CC848004B6F9A /* ObjCBeTrueTest.m in Sources */,
 				898F28B225D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
+				89EEF5B92A032C3300988224 /* AsyncPredicateTest.swift in Sources */,
 				CD79C9B41D2CC848004B6F9A /* ObjCRaiseExceptionTest.m in Sources */,
 				899441F12902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */,
 				62FB326923B78D4F0047BED9 /* BeginWithPrefixTest.swift in Sources */,
@@ -1867,6 +1890,7 @@
 				1F5DF1971BDCA10200C3A531 /* AllPassTest.swift in Sources */,
 				CD79C9A61D2CC848004B6F9A /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				CD79C99F1D2CC835004B6F9A /* ObjCSyncTest.m in Sources */,
+				89EEF5C22A06211E00988224 /* AsyncHelpers.swift in Sources */,
 				1FCF91511C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
 				CD79C9B51D2CC848004B6F9A /* ObjCUserDescriptionTest.m in Sources */,
 				1F5DF19C1BDCA10200C3A531 /* BeginWithTest.swift in Sources */,
@@ -1980,6 +2004,7 @@
 				CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */,
+				89EEF5A52A03293100988224 /* AsyncPredicate.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				1FA0C3FF1E30B14500623165 /* Predicate.swift in Sources */,
 				472FD1391B9E0A9700C7B8DA /* HaveCount.swift in Sources */,
@@ -1992,6 +2017,7 @@
 			files = (
 				1F4A569B1A3B3539009E1637 /* ObjCEqualTest.m in Sources */,
 				89F5E09F290C37DD001F9377 /* ObjCSyncTest.m in Sources */,
+				89EEF5B72A032C3200988224 /* AsyncPredicateTest.swift in Sources */,
 				898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */,
 				1F925EED195C12C800ED456B /* RaisesExceptionTest.swift in Sources */,
 				899441EF2902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */,
@@ -2025,6 +2051,7 @@
 				1F4A56771A3B3253009E1637 /* ObjCBeGreaterThanTest.m in Sources */,
 				CDC157912511957100EAA480 /* DSLTest.swift in Sources */,
 				1F925EFA195C175000ED456B /* BeNilTest.swift in Sources */,
+				89EEF5C02A06211C00988224 /* AsyncHelpers.swift in Sources */,
 				7A6AB2C21E7F547E00A2F694 /* ToSucceedTest.swift in Sources */,
 				A8A3B706207368EF00E25A08 /* ObjCSatisfyAllOfTest.m in Sources */,
 				1F4A56711A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
@@ -2133,6 +2160,7 @@
 				D95F8975267EA20A004B1B4D /* BeIdenticalTo.swift in Sources */,
 				D95F8984267EA20E004B1B4D /* SourceLocation.swift in Sources */,
 				D95F8929267EA1CA004B1B4D /* DSL.m in Sources */,
+				89EEF5A82A03293100988224 /* AsyncPredicate.swift in Sources */,
 				D95F896B267EA20A004B1B4D /* BeEmpty.swift in Sources */,
 				D95F896E267EA20A004B1B4D /* BeVoid.swift in Sources */,
 				D95F8957267EA1F7004B1B4D /* AdapterProtocols.swift in Sources */,
@@ -2145,6 +2173,7 @@
 			files = (
 				8913649B29E695F300AD535E /* ObjCBeIdenticalToTest.m in Sources */,
 				8913626D29E5C2F500AD535E /* BackgroundThreadObject.swift in Sources */,
+				89EEF5BA2A032C3400988224 /* AsyncPredicateTest.swift in Sources */,
 				8913649829E695F300AD535E /* ObjCEndWithTest.m in Sources */,
 				D95F8945267EA1E8004B1B4D /* BeNilTest.swift in Sources */,
 				D95F8949267EA1E8004B1B4D /* MatchTest.swift in Sources */,
@@ -2178,6 +2207,7 @@
 				8913649C29E695F300AD535E /* ObjCBeLessThanTest.m in Sources */,
 				8913649129E6925C00AD535E /* utils.swift in Sources */,
 				D95F892E267EA1D9004B1B4D /* DSLTest.swift in Sources */,
+				89EEF5C32A06211F00988224 /* AsyncHelpers.swift in Sources */,
 				D95F8932267EA1E8004B1B4D /* BeGreaterThanOrEqualToTest.swift in Sources */,
 				891364A029E695F300AD535E /* ObjCHaveCountTest.m in Sources */,
 				891364A529E695F300AD535E /* ObjCBeginWithTest.m in Sources */,
