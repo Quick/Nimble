@@ -43,14 +43,14 @@ public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers.
-@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+@available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
 public func satisfyAnyOf<T>(_ predicates: any AsyncablePredicate<T>...) -> AsyncPredicate<T> {
     return satisfyAnyOf(predicates)
 }
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the array of matchers.
-@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+@available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
 public func satisfyAnyOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncPredicate<T> {
     return AsyncPredicate.define { actualExpression in
         let cachedExpression = actualExpression.withCaching()
@@ -82,8 +82,8 @@ public func satisfyAnyOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncP
     }
 }
 
-@available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-public func || <T>(left: some AsyncablePredicate<T>, right: some AsyncablePredicate<T>) -> AsyncPredicate<T> {
+@available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+public func || <T>(left: any AsyncablePredicate<T>, right: any AsyncablePredicate<T>) -> AsyncPredicate<T> {
     return satisfyAnyOf(left, right)
 }
 

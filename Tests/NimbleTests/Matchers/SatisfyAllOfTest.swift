@@ -68,7 +68,7 @@ final class SatisfyAllOfTest: XCTestCase {
     #endif
 
     // MARK: - AsyncPredicate variant
-    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncSatisfyAllOf() async {
         await expect(2).to(satisfyAllOf(asyncEqual(2), beLessThan(3)))
         await expect(2 as NSNumber).toNot(satisfyAllOf(asyncEqual(3 as NSNumber), equal("turtles" as NSString)))
@@ -104,7 +104,7 @@ final class SatisfyAllOfTest: XCTestCase {
         }
     }
 
-    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncOperatorAnd() async {
         await expect(2).to(asyncEqual(2) && beLessThan(3))
         await expect(2).to(beLessThan(3) && beGreaterThan(1))
@@ -117,7 +117,7 @@ final class SatisfyAllOfTest: XCTestCase {
     }
 
     #if !os(WASI)
-    @available(macOSApplicationExtension 13.0.0, macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
+    @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncSatisfyAllOfCachesExpressionBeforePassingToPredicates() async {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
         // But we should still handle those cases anyway.
