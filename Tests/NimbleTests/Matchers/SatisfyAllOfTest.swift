@@ -67,6 +67,10 @@ final class SatisfyAllOfTest: XCTestCase {
     }
     #endif
 
+    // There's a compiler bug in swift 5.7.2 and earlier (xcode 14.2 and earlier)
+    // which causes runtime crashes when you use `[any AsyncablePredicate<T>]`.
+    // https://github.com/apple/swift/issues/61403
+    #if swift(>=5.8.0)
     // MARK: - AsyncPredicate variant
     @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncSatisfyAllOf() async {
@@ -133,5 +137,6 @@ final class SatisfyAllOfTest: XCTestCase {
 
         await expecta(await counter.increment()).toEventually(satisfyAllOf(asyncEqual(1), asyncEqual(1)))
     }
-    #endif
+    #endif // !os(WASI)
+    #endif // swift(>=5.8.0)
 }

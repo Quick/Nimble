@@ -41,6 +41,10 @@ public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
     return satisfyAnyOf(left, right)
 }
 
+// There's a compiler bug in swift 5.7.2 and earlier (xcode 14.2 and earlier)
+// which causes runtime crashes when you use `[any AsyncablePredicate<T>]`.
+// https://github.com/apple/swift/issues/61403
+#if swift(>=5.8.0)
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers.
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
@@ -83,9 +87,10 @@ public func satisfyAnyOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncP
 }
 
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-public func || <T>(left: any AsyncablePredicate<T>, right: any AsyncablePredicate<T>) -> AsyncPredicate<T> {
+public func || <T>(left: some AsyncablePredicate<T>, right: some AsyncablePredicate<T>) -> AsyncPredicate<T> {
     return satisfyAnyOf(left, right)
 }
+#endif // swift(>=5.8.0)
 
 #if canImport(Darwin)
 import class Foundation.NSObject
