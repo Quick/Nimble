@@ -1,11 +1,3 @@
-#if !os(WASI)
-
-import Dispatch
-
-#if canImport(CDispatch)
-import CDispatch
-#endif
-
 /// A reimplementation of `DispatchTimeInterval` without the `never` case, and conforming to `Sendable`.
 public enum NimbleTimeInterval: Sendable, Equatable {
     case seconds(Int)
@@ -15,19 +7,6 @@ public enum NimbleTimeInterval: Sendable, Equatable {
 }
 
 extension NimbleTimeInterval: CustomStringConvertible {
-    public var dispatchTimeInterval: DispatchTimeInterval {
-        switch self {
-        case .seconds(let int):
-            return .seconds(int)
-        case .milliseconds(let int):
-            return .milliseconds(int)
-        case .microseconds(let int):
-            return .microseconds(int)
-        case .nanoseconds(let int):
-            return .nanoseconds(int)
-        }
-    }
-
     // ** Note: We cannot simply divide the time interval because NimbleTimeInterval associated value type is Int
     internal var divided: NimbleTimeInterval {
         switch self {
@@ -58,6 +37,62 @@ extension TimeInterval {
         return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
     }
 }
+#endif // canImport(Foundation)
+
+#if !os(WASI)
+import Dispatch
+
+#if canImport(CDispatch)
+import CDispatch
 #endif
+
+extension NimbleTimeInterval {
+    public var dispatchTimeInterval: DispatchTimeInterval {
+        switch self {
+        case .seconds(let int):
+            return .seconds(int)
+        case .milliseconds(let int):
+            return .milliseconds(int)
+        case .microseconds(let int):
+            return .microseconds(int)
+        case .nanoseconds(let int):
+            return .nanoseconds(int)
+        }
+    }
+}
+
+@available(macOS 13, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension NimbleTimeInterval {
+    public var duration: Duration {
+        switch self {
+        case .seconds(let int):
+            return .seconds(int)
+        case .milliseconds(let int):
+            return .milliseconds(int)
+        case .microseconds(let int):
+            return .microseconds(int)
+        case .nanoseconds(let int):
+            return .nanoseconds(int)
+        }
+    }
+
+    public init(duration: Duration) {
+        let (seconds, attoseconds) = duration.components
+
+        if attoseconds == 0 {
+            self = .seconds(Int(seconds))
+            return
+        }
+
+        let nanoseconds = attoseconds / 1_000_000_000
+        if (nanoseconds % 1_000_000) == 0 {
+            self = .milliseconds((Int(seconds) * 1_000) + Int(nanoseconds / 1_000_000))
+        } else if (nanoseconds % 1_000) == 0 {
+            self = .microseconds((Int(seconds) * 1_000_000) + Int(nanoseconds / 1_000))
+        } else {
+            self = .nanoseconds((Int(seconds) * 1_000_000_000) + Int(nanoseconds))
+        }
+    }
+}
 
 #endif // #if !os(WASI)
