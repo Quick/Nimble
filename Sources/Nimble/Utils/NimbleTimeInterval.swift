@@ -25,10 +25,31 @@ extension NimbleTimeInterval: CustomStringConvertible {
         case let .nanoseconds(val): return "\(Float(val)/1_000_000_000) seconds"
         }
     }
+
+    public static func * (lhs: NimbleTimeInterval, rhs: Int) -> NimbleTimeInterval {
+        lhs.multiply(by: rhs)
+    }
+
+    public static func * (lhs: Int, rhs: NimbleTimeInterval) -> NimbleTimeInterval {
+        rhs.multiply(by: lhs)
+    }
+
+    private func multiply(by value: Int) -> NimbleTimeInterval {
+        switch self {
+        case let .seconds(int):
+            return .seconds(int * value)
+        case let .milliseconds(int):
+            return .milliseconds(int * value)
+        case let .microseconds(int):
+            return .microseconds(int * value)
+        case let .nanoseconds(int):
+            return .nanoseconds(int * value)
+        }
+    }
 }
 
 #if canImport(Foundation)
-import typealias Foundation.TimeInterval
+import Foundation
 
 extension TimeInterval {
     var nimbleInterval: NimbleTimeInterval {
@@ -37,41 +58,18 @@ extension TimeInterval {
         return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
     }
 }
-#endif // canImport(Foundation)
-
-#if !os(WASI)
-import Dispatch
-
-#if canImport(CDispatch)
-import CDispatch
-#endif
-
-extension NimbleTimeInterval {
-    public var dispatchTimeInterval: DispatchTimeInterval {
-        switch self {
-        case .seconds(let int):
-            return .seconds(int)
-        case .milliseconds(let int):
-            return .milliseconds(int)
-        case .microseconds(let int):
-            return .microseconds(int)
-        case .nanoseconds(let int):
-            return .nanoseconds(int)
-        }
-    }
-}
 
 @available(macOS 13, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension NimbleTimeInterval {
     public var duration: Duration {
         switch self {
-        case .seconds(let int):
+        case let .seconds(int):
             return .seconds(int)
-        case .milliseconds(let int):
+        case let .milliseconds(int):
             return .milliseconds(int)
-        case .microseconds(let int):
+        case let .microseconds(int):
             return .microseconds(int)
-        case .nanoseconds(let int):
+        case let .nanoseconds(int):
             return .nanoseconds(int)
         }
     }
@@ -91,6 +89,30 @@ extension NimbleTimeInterval {
             self = .microseconds((Int(seconds) * 1_000_000) + Int(nanoseconds / 1_000))
         } else {
             self = .nanoseconds((Int(seconds) * 1_000_000_000) + Int(nanoseconds))
+        }
+    }
+}
+
+#endif // canImport(Foundation)
+
+#if !os(WASI)
+import Dispatch
+
+#if canImport(CDispatch)
+import CDispatch
+#endif
+
+extension NimbleTimeInterval {
+    public var dispatchTimeInterval: DispatchTimeInterval {
+        switch self {
+        case let .seconds(int):
+            return .seconds(int)
+        case let .milliseconds(int):
+            return .milliseconds(int)
+        case let .microseconds(int):
+            return .microseconds(int)
+        case let .nanoseconds(int):
+            return .nanoseconds(int)
         }
     }
 }
