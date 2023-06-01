@@ -20,6 +20,37 @@ private func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyl
     }
 }
 
+private actor Poller<T> {
+     private var lastPredicateResult: PredicateResult?
+
+     init() {}
+
+     func poll(expression: AsyncExpression<T>,
+               style: ExpectationStyle,
+               matchStyle: AsyncMatchStyle,
+               timeout: NimbleTimeInterval,
+               poll: NimbleTimeInterval,
+               fnName: String,
+               predicateRunner: @escaping () async throws -> PredicateResult) async -> PredicateResult {
+         let fnName = "expect(...).\(fnName)(...)"
+         let result = await pollBlock(
+             pollInterval: poll,
+             timeoutInterval: timeout,
+             file: expression.location.file,
+             line: expression.location.line,
+             fnName: fnName) {
+                 self.updatePredicateResult(result: try await predicateRunner())
+                     .toBoolean(expectation: style)
+             }
+         return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+     }
+
+     func updatePredicateResult(result: PredicateResult) -> PredicateResult {
+         self.lastPredicateResult = result
+         return result
+     }
+ }
+
 // swiftlint:disable:next function_parameter_count
 private func poll<T>(
     expression: AsyncExpression<T>,
@@ -30,18 +61,16 @@ private func poll<T>(
     fnName: String,
     predicateRunner: @escaping () async throws -> PredicateResult
 ) async -> PredicateResult {
-    let fnName = "expect(...).\(fnName)(...)"
-    var lastPredicateResult: PredicateResult?
-    let result = await pollBlock(
-        pollInterval: poll,
-        timeoutInterval: timeout,
-        file: expression.location.file,
-        line: expression.location.line,
-        fnName: fnName) {
-            lastPredicateResult = try await predicateRunner()
-            return lastPredicateResult!.toBoolean(expectation: style)
-        }
-    return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+    let poller = Poller<T>()
+    return await poller.poll(
+        expression: expression,
+        style: style,
+        matchStyle: matchStyle,
+        timeout: timeout,
+        poll: poll,
+        fnName: fnName,
+        predicateRunner: predicateRunner
+    )
 }
 
 private extension Expression {
