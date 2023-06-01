@@ -62,7 +62,7 @@ final class BeEmptyTest: XCTestCase {
 
         // Array
         failsWithErrorMessage("expected to not be empty, got <[]>") {
-            expect([]).toNot(beEmpty())
+            expect([] as [Int]).toNot(beEmpty())
         }
         failsWithErrorMessage("expected to be empty, got <[1]>") {
             expect([1]).to(beEmpty())
