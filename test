@@ -10,9 +10,9 @@ if which xcodebuild > /dev/null; then
     LATEST_IOS_VERSION=`xcrun simctl list | grep ^iOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     LATEST_TVOS_SDK_VERSION=`xcodebuild -showsdks | grep appletvsimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_TVOS_VERSION=`xcrun simctl list | grep ^tvOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
-    LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep watchos | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk watchos' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_WATCHOS_VERSION=`xcrun simctl list | grep ^watchOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
-    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     RUNTIME_IOS_VERSION=${NIMBLE_RUNTIME_IOS_VERSION:-$LATEST_IOS_VERSION}
     BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
@@ -21,6 +21,10 @@ if which xcodebuild > /dev/null; then
     RUNTIME_WATCHOS_VERSION=${NIMBLE_RUNTIME_WATCHOS_VERSION:-$LATEST_WATCHOS_VERSION}
     BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
 fi
+
+echo "Debug environment printing:"
+xcrun simctl list
+echo "End debug environment printing"
 
 set -e
 
