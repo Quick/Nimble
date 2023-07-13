@@ -22,10 +22,6 @@ if which xcodebuild > /dev/null; then
     BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
 fi
 
-echo "Debug environment printing:"
-xcrun simctl list
-echo "End debug environment printing"
-
 set -e
 
 function color_if_overridden {
@@ -72,7 +68,7 @@ function test_ios {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_tvos {
@@ -103,7 +99,7 @@ function test_xcode_spm_ios {
     run osascript -e 'tell app "Simulator" to quit'
     mv Nimble.xcodeproj Nimble.xcodeproj.bak
     trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
-    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_xcode_spm_tvos {
