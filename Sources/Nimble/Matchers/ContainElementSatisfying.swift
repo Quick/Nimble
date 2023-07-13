@@ -21,6 +21,29 @@ public func containElementSatisfying<S: Sequence>(
     }
 }
 
+public func containElementSatisfying<S: Sequence>(
+    _ predicate: @escaping ((S.Element) async -> Bool), _ predicateDescription: String = ""
+) -> AsyncPredicate<S> {
+    return AsyncPredicate.define { actualExpression in
+        let message: ExpectationMessage
+        if predicateDescription == "" {
+            message = .expectedTo("find object in collection that satisfies predicate")
+        } else {
+            message = .expectedTo("find object in collection \(predicateDescription)")
+        }
+
+        if let sequence = try await actualExpression.evaluate() {
+            for object in sequence where await predicate(object) {
+                return PredicateResult(bool: true, message: message)
+            }
+
+            return PredicateResult(bool: false, message: message)
+        }
+
+        return PredicateResult(status: .fail, message: message)
+    }
+}
+
 #if canImport(Darwin)
 import class Foundation.NSObject
 import struct Foundation.NSFastEnumerationIterator

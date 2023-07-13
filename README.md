@@ -324,7 +324,7 @@ To avoid a compiler errors when using synchronous `expect` in asynchronous conte
 
 ```swift
 // Swift
-await expect(await aFunctionReturning1()).to(equal(1)))
+await expecta(await aFunctionReturning1()).to(equal(1)))
 ```
 
 Similarly, if you're ever in a situation where you want to force the compiler to
@@ -337,6 +337,22 @@ expects(someNonAsyncFunction()).to(equal(1)))
 
 expects(await someAsyncFunction()).to(equal(1)) // Compiler error: 'async' call in an autoclosure that does not support concurrency
 ```
+
+### Async Matchers
+
+In addition to asserting on async functions prior to passing them to a
+synchronous predicate, you can also write matchers that directly take in an
+async value. These are called `AsyncPredicate`s. This is most obviously useful
+when directly asserting against an actor. In addition to writing your own
+async matchers, Nimble currently ships with async versions of the following
+predicates:
+
+- `allPass`
+- `containElementSatisfying`
+- `satisfyAllOf` and the `&&` operator overload accept both `AsyncPredicate` and
+  synchronous `Predicate`s.
+- `satisfyAnyOf` and the `||` operator overload accept both `AsyncPredicate` and
+  synchronous `Predicate`s.
 
 Note: Async/Await support is different than the `toEventually`/`toEventuallyNot`
 feature described below.
@@ -1193,6 +1209,9 @@ expect(turtles).to(containElementSatisfying({ turtle in
 // should it fail
 ```
 
+Note: in Swift, `containElementSatisfying` also has a variant that takes in an
+async function.
+
 ```objc
 // Objective-C
 
@@ -1285,6 +1304,19 @@ expect([1, 2, 3, 4]).to(allPass { $0 < 5 })
 
 // Composing the expectation with another matcher:
 expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))
+```
+
+There are also variants of `allPass` that check against async matchers, and
+that take in async functions:
+
+```swift
+// Swift
+
+// Providing a custom function:
+expect([1, 2, 3, 4]).to(allPass { await asyncFunctionReturningBool($0) })
+
+// Composing the expectation with another matcher:
+expect([1, 2, 3, 4]).to(allPass(someAsyncMatcher()))
 ```
 
 ### Objective-C
@@ -1413,6 +1445,9 @@ expect(6).to(satisfyAnyOf(equal(2), equal(3), equal(4), equal(5), equal(6), equa
 // in Swift you also have the option to use the || operator to achieve a similar function
 expect(82).to(beLessThan(50) || beGreaterThan(80))
 ```
+
+Note: In swift, you can mix and match synchronous and asynchronous predicates
+using by `satisfyAnyOf`/`||`.
 
 ```objc
 // Objective-C
@@ -1708,6 +1743,39 @@ For a more comprehensive message that spans multiple lines, use
 // details do not show inline in Xcode, but do show up in test logs.
 .expectedActualValueTo("be true").appended(details: "use beFalse() for inverse\nor use beNil()")
 ```
+
+## Asynchronous Predicates
+
+To write predicates against async expressions, return an instance of
+`AsyncPredicate`. The closure passed to `AsyncPredicate` is async, and the
+expression you evaluate is also asynchronous and needs to be awaited on.
+
+```swift
+// Swift
+
+actor CallRecorder<Arguments> {
+    private(set) var calls: [Arguments] = []
+    
+    func record(call: Arguments) {
+        calls.append(call)
+    }
+}
+
+func beCalled<Argument: Equatable>(with arguments: Argument) -> AsyncPredicate<CallRecorder<Argument>> {
+    AsyncPredicate { (expression: AsyncExpression<CallRecorder<Argument>>) in
+        let message = ExpectationMessage.expectedActualValueTo("be called with \(arguments)")
+        guard let calls = try await expression.evaluate()?.calls else {
+            return PredicateResult(status: .fail, message: message.appendedBeNilHint())
+        }
+        
+        return PredicateResult(bool: calls.contains(args), message: message.appended(details: "called with \(calls)"))
+    }
+}
+```
+
+In this example, we created an actor to act as an object to record calls to an
+async function. Then, we created the `beCalled(with:)` matcher to check if the
+actor has received a call with the given arguments.
 
 ## Supporting Objective-C
 
