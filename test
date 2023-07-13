@@ -10,9 +10,9 @@ if which xcodebuild > /dev/null; then
     LATEST_IOS_VERSION=`xcrun simctl list | grep ^iOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     LATEST_TVOS_SDK_VERSION=`xcodebuild -showsdks | grep appletvsimulator | cut -d ' ' -f 4 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_TVOS_VERSION=`xcrun simctl list | grep ^tvOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
-    LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep watchos | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk watchos' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_WATCHOS_VERSION=`xcrun simctl list | grep ^watchOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
-    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep 'macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     RUNTIME_IOS_VERSION=${NIMBLE_RUNTIME_IOS_VERSION:-$LATEST_IOS_VERSION}
     BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
@@ -68,7 +68,7 @@ function test_ios {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_tvos {
@@ -99,7 +99,7 @@ function test_xcode_spm_ios {
     run osascript -e 'tell app "Simulator" to quit'
     mv Nimble.xcodeproj Nimble.xcodeproj.bak
     trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
-    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone 8,OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_xcode_spm_tvos {
