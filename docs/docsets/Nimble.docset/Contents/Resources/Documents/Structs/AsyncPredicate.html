@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CurrentTestCaseTracker Class Reference</title>
+    <title>AsyncPredicate Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/CurrentTestCaseTracker" class="dashAnchor"></a>
-    <a title="CurrentTestCaseTracker Class Reference"></a>
+    <a name="//apple_ref/swift/Struct/AsyncPredicate" class="dashAnchor"></a>
+    <a title="AsyncPredicate Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Nimble 12.1.0 Docs</a> (47% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Nimble Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        CurrentTestCaseTracker Class Reference
+        AsyncPredicate Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -1047,16 +1047,34 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CurrentTestCaseTracker</h1>
+            <h1>AsyncPredicate</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CurrentTestCaseTracker</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">XCTestObservation</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/AsyncablePredicate.html">AsyncablePredicate</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Helper class providing access to the currently executing XCTestCase instance, if any</p>
+            <p>An AsyncPredicate is part of the new matcher API that provides assertions to expectations.</p>
+
+<p>Given a code snippet:</p>
+
+<p>expect(1).to(equal(2))
+               ^^^^^^^^
+           Called a &ldquo;matcher&rdquo;</p>
+
+<p>A matcher consists of two parts a constructor function and the Predicate. The term Predicate
+is used as a separate name from Matcher to help transition custom matchers to the new Nimble
+matcher API.</p>
+
+<p>The Predicate provide the heavy lifting on how to assert against a given value. Internally,
+predicates are simple wrappers around closures to provide static type information and
+allow composition and wrapping of existing behaviors.</p>
+
+<p><code>AsyncPredicate</code>s serve to allow writing matchers that must be run in async contexts.
+These can also be used with either <code><a href="../Protocols/Expectation.html">Expectation</a></code>s or <code><a href="../Structs/AsyncExpectation.html">AsyncExpectation</a></code>s.
+But these can only be used from async contexts, and are unavailable in Objective-C.
+You can, however, call regular Predicates from an AsyncPredicate, if you wish to compose one like that.</p>
 
           </section>
           <section class="section task-group-section">
@@ -1065,9 +1083,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(cpy)sharedInstance"></a>
-                    <a name="//apple_ref/swift/Variable/sharedInstance" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(cpy)sharedInstance">sharedInstance</a>
+                    <a name="/s:6Nimble14AsyncPredicateVyACyxGAA0C6ResultVAA0B10ExpressionVyxGYaKccfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateVyACyxGAA0C6ResultVAA0B10ExpressionVyxGYaKccfc">init(_:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1082,8 +1100,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">sharedInstance</span><span class="p">:</span> <span class="kt">CurrentTestCaseTracker</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1093,24 +1110,30 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseWillStart:"></a>
-                    <a name="//apple_ref/swift/Method/testCaseWillStart(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseWillStart:">testCaseWillStart(_:<wbr>)</a>
+                    <a name="/s:6Nimble14AsyncPredicateV9satisfiesyAA0C6ResultVAA0B10ExpressionVyxGYaKF"></a>
+                    <a name="//apple_ref/swift/Method/satisfies(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV9satisfiesyAA0C6ResultVAA0B10ExpressionVyxGYaKF">satisfies(_:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Uses a predicate on a given value to see if it passes the predicate.</p>
+
+<p>@param expression The value to run the predicate&rsquo;s logic against
+@returns A predicate result indicate passing or failing and an associated error message.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testCaseWillStart</span><span class="p">(</span><span class="n">_</span> <span class="nv">testCase</span><span class="p">:</span> <span class="kt">XCTestCase</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">satisfies</span><span class="p">(</span><span class="n">_</span> <span class="nv">expression</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span></code></pre>
 
                         </div>
                       </div>
@@ -1120,9 +1143,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseDidFinish:"></a>
-                    <a name="//apple_ref/swift/Method/testCaseDidFinish(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseDidFinish:">testCaseDidFinish(_:<wbr>)</a>
+                    <a name="/s:6Nimble14AsyncPredicateV6define7matcherACyxGAA0C6ResultVAA0B10ExpressionVyxGYaKc_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/define(matcher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV6define7matcherACyxGAA0C6ResultVAA0B10ExpressionVyxGYaKc_tFZ">define(matcher:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1130,14 +1153,158 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Like Predicate() constructor, but automatically guard against nil (actual) values</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testCaseDidFinish</span><span class="p">(</span><span class="n">_</span> <span class="nv">testCase</span><span class="p">:</span> <span class="kt">XCTestCase</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">define</span><span class="p">(</span><span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble14AsyncPredicateV6define_7matcherACyxGSS_AA0C6ResultVAA0B10ExpressionVyxG_AA18ExpectationMessageOtYaKctFZ"></a>
+                    <a name="//apple_ref/swift/Method/define(_:matcher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV6define_7matcherACyxGSS_AA0C6ResultVAA0B10ExpressionVyxG_AA18ExpectationMessageOtYaKctFZ">define(_:<wbr>matcher:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines a predicate with a default message that can be returned in the closure
+Also ensures the predicate&rsquo;s actual value cannot pass with <code>nil</code> given.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">define</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"match"</span><span class="p">,</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Enums/ExpectationMessage.html">ExpectationMessage</a></span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble14AsyncPredicateV13defineNilable_7matcherACyxGSS_AA0C6ResultVAA0B10ExpressionVyxG_AA18ExpectationMessageOtYaKctFZ"></a>
+                    <a name="//apple_ref/swift/Method/defineNilable(_:matcher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV13defineNilable_7matcherACyxGSS_AA0C6ResultVAA0B10ExpressionVyxG_AA18ExpectationMessageOtYaKctFZ">defineNilable(_:<wbr>matcher:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines a predicate with a default message that can be returned in the closure
+Unlike <code>define</code>, this allows nil values to succeed if the given closure chooses to.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">defineNilable</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"match"</span><span class="p">,</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Enums/ExpectationMessage.html">ExpectationMessage</a></span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble14AsyncPredicateV6simple_7matcherACyxGSS_AA0C6StatusOAA0B10ExpressionVyxGYaKctFZ"></a>
+                    <a name="//apple_ref/swift/Method/simple(_:matcher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV6simple_7matcherACyxGSS_AA0C6StatusOAA0B10ExpressionVyxGYaKctFZ">simple(_:<wbr>matcher:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a simple predicate definition that provides no control over the predefined
+error message.</p>
+
+<p>Also ensures the predicate&rsquo;s actual value cannot pass with <code>nil</code> given.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">simple</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"match"</span><span class="p">,</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/PredicateStatus.html">PredicateStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble14AsyncPredicateV13simpleNilable_7matcherACyxGSS_AA0C6StatusOAA0B10ExpressionVyxGYaKctFZ"></a>
+                    <a name="//apple_ref/swift/Method/simpleNilable(_:matcher:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV13simpleNilable_7matcherACyxGSS_AA0C6StatusOAA0B10ExpressionVyxGYaKctFZ">simpleNilable(_:<wbr>matcher:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a simple predicate definition that provides no control over the predefined
+error message.</p>
+
+<p>Unlike <code>simple</code>, this allows nil values to succeed if the given closure chooses to.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">simpleNilable</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"match"</span><span class="p">,</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/PredicateStatus.html">PredicateStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble14AsyncPredicateV13requireNonNilACyxGvp"></a>
+                    <a name="//apple_ref/swift/Property/requireNonNil" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble14AsyncPredicateV13requireNonNilACyxGvp">requireNonNil</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a new Predicate based on the current one that always fails if nil is given as
+the actual value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">requireNonNil</span><span class="p">:</span> <span class="kt">AsyncPredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

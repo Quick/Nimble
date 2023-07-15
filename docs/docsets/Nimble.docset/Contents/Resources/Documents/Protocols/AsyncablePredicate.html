@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CurrentTestCaseTracker Class Reference</title>
+    <title>AsyncablePredicate Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/CurrentTestCaseTracker" class="dashAnchor"></a>
-    <a title="CurrentTestCaseTracker Class Reference"></a>
+    <a name="//apple_ref/swift/Protocol/AsyncablePredicate" class="dashAnchor"></a>
+    <a title="AsyncablePredicate Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Nimble 12.1.0 Docs</a> (47% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Nimble Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        CurrentTestCaseTracker Class Reference
+        AsyncablePredicate Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -1047,16 +1047,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CurrentTestCaseTracker</h1>
+            <h1>AsyncablePredicate</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">CurrentTestCaseTracker</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">XCTestObservation</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">AsyncablePredicate</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
-            <p>Helper class providing access to the currently executing XCTestCase instance, if any</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
@@ -1065,9 +1064,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(cpy)sharedInstance"></a>
-                    <a name="//apple_ref/swift/Variable/sharedInstance" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(cpy)sharedInstance">sharedInstance</a>
+                    <a name="/s:6Nimble18AsyncablePredicateP1TQa"></a>
+                    <a name="//apple_ref/swift/Alias/T" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble18AsyncablePredicateP1TQa">T</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1082,8 +1081,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@objc</span>
-<span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">sharedInstance</span><span class="p">:</span> <span class="kt">CurrentTestCaseTracker</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">T</span></code></pre>
 
                         </div>
                       </div>
@@ -1093,10 +1091,13 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseWillStart:"></a>
-                    <a name="//apple_ref/swift/Method/testCaseWillStart(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseWillStart:">testCaseWillStart(_:<wbr>)</a>
+                    <a name="/s:6Nimble18AsyncablePredicateP9satisfiesyAA0C6ResultVAA15AsyncExpressionVy1TQzGYaKF"></a>
+                    <a name="//apple_ref/swift/Method/satisfies(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble18AsyncablePredicateP9satisfiesyAA0C6ResultVAA15AsyncExpressionVy1TQzGYaKF">satisfies(_:<wbr>)</a>
                     </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
@@ -1110,34 +1111,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testCaseWillStart</span><span class="p">(</span><span class="n">_</span> <span class="nv">testCase</span><span class="p">:</span> <span class="kt">XCTestCase</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseDidFinish:"></a>
-                    <a name="//apple_ref/swift/Method/testCaseDidFinish(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@Nimble@objc(cs)CurrentTestCaseTracker(im)testCaseDidFinish:">testCaseDidFinish(_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testCaseDidFinish</span><span class="p">(</span><span class="n">_</span> <span class="nv">testCase</span><span class="p">:</span> <span class="kt">XCTestCase</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">satisfies</span><span class="p">(</span><span class="n">_</span> <span class="nv">expression</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/AsyncablePredicate.html#/s:6Nimble18AsyncablePredicateP1TQa">T</a></span><span class="o">&gt;</span><span class="p">)</span> <span class="n">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/PredicateResult.html">PredicateResult</a></span></code></pre>
 
                         </div>
                       </div>

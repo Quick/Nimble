@@ -358,6 +358,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/AsyncExpression.swift",
+      "line": 114,
+      "symbol": "AsyncExpression.withCaching()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/DSL+Wait.swift",
       "line": 20,
       "symbol": "NMBWait.until(timeout:file:line:action:)",
@@ -401,35 +408,35 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 36,
+      "line": 53,
       "symbol": "ExpectationStatus",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 64,
-      "symbol": "Expectation",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 65,
-      "symbol": "Expectation.location",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 87,
+      "line": 76,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 92,
+      "line": 81,
+      "symbol": "Expectation",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
+      "line": 82,
+      "symbol": "Expectation.location",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
+      "line": 109,
       "symbol": "Expectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -443,65 +450,65 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 130,
+      "line": 147,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 131,
+      "line": 148,
       "symbol": "SyncExpectation.expression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 155,
+      "line": 172,
       "symbol": "SyncExpectation.init(expression:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 171,
+      "line": 188,
       "symbol": "SyncExpectation.location",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 200,
+      "line": 240,
       "symbol": "AsyncExpectation",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 201,
+      "line": 241,
       "symbol": "AsyncExpectation.expression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 218,
-      "symbol": "AsyncExpectation",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 225,
+      "line": 265,
       "symbol": "AsyncExpectation.init(expression:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 229,
+      "line": 269,
       "symbol": "AsyncExpectation.location",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
+      "line": 338,
+      "symbol": "AsyncExpectation",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -624,6 +631,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expression.swift",
+      "line": 107,
+      "symbol": "Expression.toAsyncExpression()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/FailureMessage.swift",
       "line": 7,
       "symbol": "FailureMessage.expected",
@@ -712,6 +726,62 @@
       "line": 72,
       "symbol": "NMBPredicate.allPassMatcher(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncAllPass.swift",
+      "line": 1,
+      "symbol": "allPass(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncAllPass.swift",
+      "line": 13,
+      "symbol": "allPass(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncAllPass.swift",
+      "line": 26,
+      "symbol": "allPass(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
+      "line": 1,
+      "symbol": "AsyncablePredicate",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
+      "line": 2,
+      "symbol": "AsyncablePredicate.T",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
+      "line": 3,
+      "symbol": "AsyncablePredicate.satisfies(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
+      "line": 7,
+      "symbol": "Predicate.satisfies(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
+      "line": 35,
+      "symbol": "AsyncPredicate.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -1199,7 +1269,14 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/ContainElementSatisfying.swift",
-      "line": 30,
+      "line": 24,
+      "symbol": "containElementSatisfying(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/ContainElementSatisfying.swift",
+      "line": 53,
       "symbol": "NMBPredicate.containElementSatisfyingMatcher(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
@@ -1703,13 +1780,6 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
-      "line": 29,
-      "symbol": "NMBPredicate",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
       "line": 40,
       "symbol": "NMBPredicate",
       "symbol_kind": "source.lang.swift.decl.extension",
@@ -1752,20 +1822,6 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
-      "line": 47,
-      "symbol": "NMBPredicate",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
-      "line": 47,
-      "symbol": "NMBPredicate",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
       "line": 48,
       "symbol": "NMBPredicate",
       "symbol_kind": "source.lang.swift.decl.extension",
@@ -1781,6 +1837,13 @@
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
       "line": 49,
+      "symbol": "NMBPredicate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
+      "line": 52,
       "symbol": "NMBPredicate",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -1837,6 +1900,20 @@
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
       "line": 92,
+      "symbol": "NMBPredicate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
+      "line": 98,
+      "symbol": "NMBPredicate",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/Predicate.swift",
+      "line": 98,
       "symbol": "NMBPredicate",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -2060,7 +2137,14 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/SatisfyAllOf.swift",
-      "line": 48,
+      "line": 90,
+      "symbol": "&&(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/SatisfyAllOf.swift",
+      "line": 99,
       "symbol": "NMBPredicate.satisfyAllOfMatcher(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
@@ -2074,7 +2158,14 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/SatisfyAnyOf.swift",
-      "line": 48,
+      "line": 90,
+      "symbol": "||(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/SatisfyAnyOf.swift",
+      "line": 99,
       "symbol": "NMBPredicate.satisfyAnyOfMatcher(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.class",
       "warning": "undocumented"
