@@ -296,6 +296,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect((1, "2", 3, four: "4", 5, "6")) == (1, "2", 3, "4", five: 5, "6")
     }
 
+    // swiftlint:disable large_tuple vertical_whitespace
     func testTuple2Array() async {
         typealias OriginalArray = [(Int, String)]
         typealias ExpectedArray = [(Int, named: String)]
@@ -311,7 +312,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) == expectedArray
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
-        
+
         let originalArrayAsync = { () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
@@ -327,45 +328,12 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         let originalArray: OriginalArray = [
             (0, "0", 0.0),
             (1, "1", 1.0),
-            (2, "2", 2.0)
+            (2, "2", 2.0),
         ]
         let expectedArray: ExpectedArray = [
             (0, named: "0", 0.0),
             (1, named: "1", 1.0),
-            (2, named: "2", 2.0)
-        ]
-        expect(OriginalArray()).to(equal([]))
-        expect(OriginalArray()) == []
-        expect(OriginalArray()).toNot(equal(expectedArray))
-        expect(OriginalArray()) != expectedArray
-        expect(originalArray).to(equal(expectedArray))
-        expect(originalArray).toNot(equal(expectedArray.reversed()))
-        expect(originalArray).toNot(equal([]))
-        expect(originalArray) == expectedArray
-        expect(originalArray) != expectedArray.reversed()
-        expect(originalArray) != []
-        
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
-    }
-    
-    func testTuple4Array() async {
-        typealias OriginalArray = [(Int, String, Double, Int)]
-        typealias ExpectedArray = [(Int, named: String, Double, negative: Int)]
-        let originalArray: OriginalArray = [
-            (0, "0", 0.0, -0),
-            (1, "1", 1.0, -1),
-            (2, "2", 2.0, -2)
-        ]
-        let expectedArray: ExpectedArray = [
-            (0, named: "0", 0.0, negative: -0),
-            (1, named: "1", 1.0, negative: -1),
-            (2, named: "2", 2.0, negative: -2)
+            (2, named: "2", 2.0),
         ]
         expect(OriginalArray()).to(equal([]))
         expect(OriginalArray()) == []
@@ -386,19 +354,19 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
     }
-    
-    func testTuple5Array() async {
-        typealias OriginalArray = [(Int, String, Double, Int, String)]
-        typealias ExpectedArray = [(Int, named: String, Double, negative: Int, String)]
+
+    func testTuple4Array() async {
+        typealias OriginalArray = [(Int, String, Double, Int)]
+        typealias ExpectedArray = [(Int, named: String, Double, negative: Int)]
         let originalArray: OriginalArray = [
-            (0, "0", 0.0, -0, "-0"),
-            (1, "1", 1.0, -1, "-1"),
-            (2, "2", 2.0, -2, "-2")
+            (0, "0", 0.0, -0),
+            (1, "1", 1.0, -1),
+            (2, "2", 2.0, -2),
         ]
         let expectedArray: ExpectedArray = [
-            (0, named: "0", 0.0, negative: -0, "-0"),
-            (1, named: "1", 1.0, negative: -1, "-1"),
-            (2, named: "2", 2.0, negative: -2, "-2")
+            (0, named: "0", 0.0, negative: -0),
+            (1, named: "1", 1.0, negative: -1),
+            (2, named: "2", 2.0, negative: -2),
         ]
         expect(OriginalArray()).to(equal([]))
         expect(OriginalArray()) == []
@@ -410,7 +378,40 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) == expectedArray
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
-        
+
+        let originalArrayAsync = { () async in originalArray }
+        await expect(originalArrayAsync).toEventually(equal(expectedArray))
+        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
+        await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        await expect(originalArrayAsync) == expectedArray
+        await expect(originalArrayAsync) != expectedArray.reversed()
+        await expect(originalArrayAsync) != []
+    }
+
+    func testTuple5Array() async {
+        typealias OriginalArray = [(Int, String, Double, Int, String)]
+        typealias ExpectedArray = [(Int, named: String, Double, negative: Int, String)]
+        let originalArray: OriginalArray = [
+            (0, "0", 0.0, -0, "-0"),
+            (1, "1", 1.0, -1, "-1"),
+            (2, "2", 2.0, -2, "-2"),
+        ]
+        let expectedArray: ExpectedArray = [
+            (0, named: "0", 0.0, negative: -0, "-0"),
+            (1, named: "1", 1.0, negative: -1, "-1"),
+            (2, named: "2", 2.0, negative: -2, "-2"),
+        ]
+        expect(OriginalArray()).to(equal([]))
+        expect(OriginalArray()) == []
+        expect(OriginalArray()).toNot(equal(expectedArray))
+        expect(OriginalArray()) != expectedArray
+        expect(originalArray).to(equal(expectedArray))
+        expect(originalArray).toNot(equal(expectedArray.reversed()))
+        expect(originalArray).toNot(equal([]))
+        expect(originalArray) == expectedArray
+        expect(originalArray) != expectedArray.reversed()
+        expect(originalArray) != []
+
         let originalArrayAsync = { () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
@@ -426,12 +427,12 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         let originalArray: OriginalArray = [
             (0, "0", 0.0, -0, "-0", -0.0),
             (1, "1", 1.0, -1, "-1", -1.0),
-            (2, "2", 2.0, -2, "-2", -2.0)
+            (2, "2", 2.0, -2, "-2", -2.0),
         ]
         let expectedArray: ExpectedArray = [
             (0, named: "0", 0.0, negative: -0, "-0", -0.0),
             (1, named: "1", 1.0, negative: -1, "-1", -1.0),
-            (2, named: "2", 2.0, negative: -2, "-2", -2.0)
+            (2, named: "2", 2.0, negative: -2, "-2", -2.0),
         ]
         expect(OriginalArray()).to(equal([]))
         expect(OriginalArray()) == []
@@ -443,7 +444,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) == expectedArray
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
-        
+
         let originalArrayAsync = { () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
@@ -452,6 +453,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
     }
+    // swiftlint:enable large_tuple vertical_whitespace
 
     // see: https://github.com/Quick/Nimble/issues/867 and https://github.com/Quick/Nimble/issues/937
     func testImplicitMemberSyntax() {
