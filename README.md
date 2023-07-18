@@ -407,7 +407,7 @@ DispatchQueue.main.async {
 await expect(ocean).toEventually(contain("dolphens", "whiles"))
 ```
 
-Starting in Numble 12,  `toEventually` et. al. now also supports async
+Starting in Nimble 12,  `toEventually` et. al. now also supports async
 expectations. For example, the following test is now supported:
 
 ```swift
