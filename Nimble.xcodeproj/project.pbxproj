@@ -455,6 +455,10 @@
 		B20058C520E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		B20058C620E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
 		B20058C720E92CE400C1264D /* ElementsEqualTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20058C420E92CE400C1264D /* ElementsEqualTest.swift */; };
+		C576224D2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */; };
+		C576224E2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */; };
+		C576224F2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */; };
+		C57622502A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */; };
 		CD3D9A79232647BC00802581 /* CwlCatchBadInstructionPosix.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */; };
 		CD79C99E1D2CC832004B6F9A /* ObjCAsyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A56651A3B305F009E1637 /* ObjCAsyncTest.m */; };
 		CD79C99F1D2CC835004B6F9A /* ObjCSyncTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A37AF1B7C5042001C8357 /* ObjCSyncTest.m */; };
@@ -811,6 +815,7 @@
 		AE7ADE481C80C00D00B94CD3 /* MatchErrorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchErrorTest.swift; sourceTree = "<group>"; };
 		B20058C020E92C7500C1264D /* ElementsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqual.swift; sourceTree = "<group>"; };
 		B20058C420E92CE400C1264D /* ElementsEqualTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqualTest.swift; sourceTree = "<group>"; };
+		C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Equal+TupleArray.swift"; sourceTree = "<group>"; };
 		CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstructionPosix.swift; sourceTree = "<group>"; };
 		CDBC39B82462EA7D00069677 /* PredicateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
 		CDC157902511957100EAA480 /* DSLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLTest.swift; sourceTree = "<group>"; };
@@ -1101,6 +1106,7 @@
 				1FD8CD1B1968AB07008ED995 /* EndWith.swift */,
 				1FD8CD1C1968AB07008ED995 /* Equal.swift */,
 				CDF5C57A2647B89B0036532C /* Equal+Tuple.swift */,
+				C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */,
 				472FD1341B9E085700C7B8DA /* HaveCount.swift */,
 				DDB4D5EC19FE43C200E9D9FE /* Match.swift */,
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
@@ -1670,6 +1676,7 @@
 				F8A1BE2F1CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F1871C61CA89EDB00A34BF2 /* DSL.m in Sources */,
 				89F5E092290B9D5C001F9377 /* AssertionRecorder+Async.swift in Sources */,
+				C576224E2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */,
 				1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				AE7ADE451C80BF8000B94CD3 /* MatchError.swift in Sources */,
 				1FC494AA1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
@@ -1815,6 +1822,7 @@
 				1F5DF1761BDCA0F500C3A531 /* AllPass.swift in Sources */,
 				AE4BA9AF1C88DDB500B73906 /* Errors.swift in Sources */,
 				1F5DF1861BDCA0F500C3A531 /* HaveCount.swift in Sources */,
+				C576224F2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */,
 				1F5DF1811BDCA0F500C3A531 /* BeLogical.swift in Sources */,
 				1F1871DB1CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
 				CDFB6A4F1F7E084600AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */,
@@ -1991,6 +1999,7 @@
 				F8A1BE301CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				89F5E091290B9D5C001F9377 /* AssertionRecorder+Async.swift in Sources */,
+				C576224D2A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */,
 				1F1871D21CA89EEE00A34BF2 /* DSL.m in Sources */,
 				AE7ADE461C80BF8000B94CD3 /* MatchError.swift in Sources */,
 				1FC494AB1C29CBA40010975C /* NimbleEnvironment.swift in Sources */,
@@ -2136,6 +2145,7 @@
 				D95F897E267EA20A004B1B4D /* BeWithin.swift in Sources */,
 				D95F8928267EA1CA004B1B4D /* NMBExceptionCapture.m in Sources */,
 				D95F8981267EA20A004B1B4D /* BeginWith.swift in Sources */,
+				C57622502A61D3AE00BD6A8C /* Equal+TupleArray.swift in Sources */,
 				D95F8965267EA20A004B1B4D /* BeLogical.swift in Sources */,
 				D95F895D267EA205004B1B4D /* Expectation.swift in Sources */,
 				D95F8959267EA205004B1B4D /* NMBExpectation.swift in Sources */,
