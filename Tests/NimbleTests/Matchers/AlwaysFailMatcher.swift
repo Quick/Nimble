@@ -4,7 +4,7 @@ import Nimble
 import NimbleSharedTestHelpers
 #endif
 
-func alwaysFail<T>() -> Predicate<T> {
+func alwaysFail<T>() -> Nimble.Predicate<T> {
     return Predicate { _ throws -> PredicateResult in
         return PredicateResult(status: .fail, message: .fail("This matcher should always fail"))
     }
