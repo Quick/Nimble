@@ -6,11 +6,11 @@ import Dispatch
 /// If you are running on a slower machine, it could be useful to increase the default timeout value
 /// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 ///
-/// - Warning: This has been renamed to ``PollingDefaults``. Starting in Nimble 13, the deprecation warning will change to a compiler error (removed). In Nimble 14, `AsyncDefaults` will be removed entirely.
+/// - Warning: This has been renamed to ``PollingDefaults``. Starting in Nimble 14, `AsyncDefaults` will be removed entirely.
 ///
 /// For the time being, `AsyncDefaults` will function the same.
 /// However, `AsyncDefaults` will be removed in a future release.
-@available(*, deprecated, renamed: "PollingDefaults")
+@available(*, unavailable, renamed: "PollingDefaults")
 public struct AsyncDefaults {
     public static var timeout: NimbleTimeInterval {
         get {
@@ -33,7 +33,7 @@ public struct AsyncDefaults {
 /// If you are running on a slower machine, it could be useful to increase the default timeout value
 /// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 ///
-/// Note: This used to be known as ``AsyncDefaults``.
+/// - Note: This used to be known as ``AsyncDefaults``.
 public struct PollingDefaults {
     public static var timeout: NimbleTimeInterval = .seconds(1)
     public static var pollInterval: NimbleTimeInterval = .milliseconds(10)
