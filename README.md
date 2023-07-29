@@ -7,7 +7,7 @@
 
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
-[Cedar](https://github.com/pivotal/cedar).
+[Cedar](https://github.com/cedarbdd/cedar).
 
 ```swift
 // Swift
