@@ -313,7 +313,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
+        let originalArrayAsync = { @Sendable () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
@@ -346,7 +346,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
+        let originalArrayAsync = { @Sendable () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
@@ -379,7 +379,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
+        let originalArrayAsync = { @Sendable () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
@@ -412,7 +412,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
+        let originalArrayAsync = { @Sendable () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
@@ -445,7 +445,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
+        let originalArrayAsync = { @Sendable () async in originalArray }
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
