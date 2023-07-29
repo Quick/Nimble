@@ -50,7 +50,7 @@ internal func execute<T>(_ expression: AsyncExpression<T>, _ style: ExpectationS
     }
 }
 
-public enum ExpectationStatus: Equatable {
+public enum ExpectationStatus: Equatable, Sendable {
 
     /// No matchers have been performed.
     case pending
@@ -214,8 +214,10 @@ public struct SyncExpectation<Value>: Expectation {
     public func notTo(_ matcher: Matcher<Value>, description: String? = nil) -> Self {
         toNot(matcher, description: description)
     }
+}
 
-    // MARK: - AsyncMatchers
+extension SyncExpectation where Value: Sendable {
+    // MARK: - AsyncPredicates
     /// Tests the actual value using a matcher to match.
     @discardableResult
     public func to(_ matcher: AsyncMatcher<Value>, description: String? = nil) async -> Self {
@@ -243,7 +245,7 @@ public struct SyncExpectation<Value>: Expectation {
     // - NMBExpectation for Objective-C interface
 }
 
-public struct AsyncExpectation<Value>: Expectation {
+public struct AsyncExpectation<Value: Sendable>: Expectation, Sendable {
     public let expression: AsyncExpression<Value>
 
     /// The status of the test after matchers have been evaluated.
