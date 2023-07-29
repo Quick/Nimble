@@ -1,9 +1,9 @@
-public protocol AsyncableMatcher<Value> {
-    associatedtype Value
+public protocol AsyncableMatcher<Value>: Sendable {
+    associatedtype Value: Sendable
     func satisfies(_ expression: AsyncExpression<Value>) async throws -> MatcherResult
 }
 
-extension Matcher: AsyncableMatcher {
+extension Matcher: AsyncableMatcher where T: Sendable {
     public func satisfies(_ expression: AsyncExpression<T>) async throws -> MatcherResult {
         try satisfies(await expression.toSynchronousExpression())
     }
@@ -27,10 +27,10 @@ extension Matcher: AsyncableMatcher {
 /// These can also be used with either `Expectation`s or `AsyncExpectation`s.
 /// But these can only be used from async contexts, and are unavailable in Objective-C.
 /// You can, however, call regular Matchers from an AsyncMatcher, if you wish to compose one like that.
-public struct AsyncMatcher<T>: AsyncableMatcher {
-    fileprivate var matcher: (AsyncExpression<T>) async throws -> MatcherResult
+public struct AsyncMatcher<T: Sendable>: AsyncableMatcher, Sendable {
+    fileprivate var matcher: @Sendable (AsyncExpression<T>) async throws -> MatcherResult
 
-    public init(_ matcher: @escaping (AsyncExpression<T>) async throws -> MatcherResult) {
+    public init(_ matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> MatcherResult) {
         self.matcher = matcher
     }
 
@@ -49,7 +49,7 @@ public typealias AsyncPredicate = AsyncMatcher
 /// Provides convenience helpers to defining matchers
 extension AsyncMatcher {
     /// Like Matcher() constructor, but automatically guard against nil (actual) values
-    public static func define(matcher: @escaping (AsyncExpression<T>) async throws -> MatcherResult) -> AsyncMatcher<T> {
+    public static func define(matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> MatcherResult) -> AsyncMatcher<T> {
         return AsyncMatcher<T> { actual in
             return try await matcher(actual)
         }.requireNonNil
@@ -57,7 +57,7 @@ extension AsyncMatcher {
 
     /// Defines a matcher with a default message that can be returned in the closure
     /// Also ensures the matcher's actual value cannot pass with `nil` given.
-    public static func define(_ message: String = "match", matcher: @escaping (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T> {
+    public static func define(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T> {
         return AsyncMatcher<T> { actual in
             return try await matcher(actual, .expectedActualValueTo(message))
         }.requireNonNil
@@ -65,7 +65,7 @@ extension AsyncMatcher {
 
     /// Defines a matcher with a default message that can be returned in the closure
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
-    public static func defineNilable(_ message: String = "match", matcher: @escaping (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T> {
+    public static func defineNilable(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T> {
         return AsyncMatcher<T> { actual in
             return try await matcher(actual, .expectedActualValueTo(message))
         }
@@ -75,7 +75,7 @@ extension AsyncMatcher {
     /// error message.
     ///
     /// Also ensures the matcher's actual value cannot pass with `nil` given.
-    public static func simple(_ message: String = "match", matcher: @escaping (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T> {
+    public static func simple(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T> {
         return AsyncMatcher<T> { actual in
             return MatcherResult(status: try await matcher(actual), message: .expectedActualValueTo(message))
         }.requireNonNil
@@ -85,7 +85,7 @@ extension AsyncMatcher {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ message: String = "match", matcher: @escaping (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T> {
+    public static func simpleNilable(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T> {
         return AsyncMatcher<T> { actual in
             return MatcherResult(status: try await matcher(actual), message: .expectedActualValueTo(message))
         }
@@ -94,7 +94,7 @@ extension AsyncMatcher {
 
 extension AsyncMatcher {
     // Someday, make this public? Needs documentation
-    internal func after(f: @escaping (AsyncExpression<T>, MatcherResult) async throws -> MatcherResult) -> AsyncMatcher<T> {
+    internal func after(f: @escaping @Sendable (AsyncExpression<T>, MatcherResult) async throws -> MatcherResult) -> AsyncMatcher<T> {
         // swiftlint:disable:previous identifier_name
         return AsyncMatcher { actual -> MatcherResult in
             let result = try await self.satisfies(actual)
