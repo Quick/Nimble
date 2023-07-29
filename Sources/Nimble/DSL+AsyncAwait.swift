@@ -3,7 +3,7 @@ import Dispatch
 #endif
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @escaping @Sendable () async throws -> T?) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @escaping @Sendable () async throws -> T?) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
@@ -12,7 +12,7 @@ public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, li
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @Sendable () -> (@Sendable () async throws -> T)) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @Sendable () -> (@Sendable () async throws -> T)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -21,7 +21,7 @@ public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, li
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @Sendable () -> (@Sendable () async throws -> T?)) -> AsyncExpectation<T> {
+public func expect<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @Sendable () -> (@Sendable () async throws -> T?)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -40,7 +40,7 @@ public func expect(fileID: String = #fileID, file: FileString = #filePath, line:
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation` and `expect -> AsyncExpectation`.
-public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async -> AsyncExpectation<T> {
+public func expecta<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
@@ -50,7 +50,7 @@ public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @Sendable () -> (@Sendable () async throws -> T)) async -> AsyncExpectation<T> {
+public func expecta<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @Sendable () -> (@Sendable () async throws -> T)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
@@ -60,7 +60,7 @@ public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @Sendable () -> (@Sendable () async throws -> T?)) async -> AsyncExpectation<T> {
+public func expecta<T: Sendable>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @Sendable () -> (@Sendable () async throws -> T?)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),

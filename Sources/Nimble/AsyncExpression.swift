@@ -1,4 +1,4 @@
-private actor MemoizedClosure<T> {
+private actor MemoizedClosure<T: Sendable> {
     var closure: @Sendable () async throws -> T
     var cache: T?
 
@@ -25,7 +25,7 @@ private actor MemoizedClosure<T> {
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T>(_ closure: @escaping @Sendable () async throws -> T) -> @Sendable (Bool) async throws -> T {
+private func memoizedClosure<T: Sendable>(_ closure: @escaping @Sendable () async throws -> T) -> @Sendable (Bool) async throws -> T {
     let memoized = MemoizedClosure(closure)
     return { withoutCaching in
         try await memoized.call(withoutCaching)
@@ -43,7 +43,7 @@ private func memoizedClosure<T>(_ closure: @escaping @Sendable () async throws -
 ///
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
-public struct AsyncExpression<Value>: Sendable {
+public struct AsyncExpression<Value: Sendable>: Sendable {
     internal let _expression: @Sendable (Bool) async throws -> Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
