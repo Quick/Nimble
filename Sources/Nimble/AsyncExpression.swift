@@ -1,12 +1,34 @@
+private actor MemoizedClosure<T> {
+    var closure: @Sendable () async throws -> T
+    var cache: T?
+
+    init(_ closure: @escaping @Sendable () async throws -> T) {
+        self.closure = closure
+    }
+
+    func set(_ cache: T) -> T {
+        self.cache = cache
+        return cache
+    }
+
+    func call(_ withoutCaching: Bool) async throws -> T {
+        if withoutCaching {
+            return try await closure()
+        }
+        if let cache {
+            return cache
+        } else {
+            return set(try await closure())
+        }
+    }
+}
+
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T>(_ closure: @escaping () async throws -> T) -> (Bool) async throws -> T {
-    var cache: T?
+private func memoizedClosure<T>(_ closure: @escaping @Sendable () async throws -> T) -> @Sendable (Bool) async throws -> T {
+    let memoized = MemoizedClosure(closure)
     return { withoutCaching in
-        if withoutCaching || cache == nil {
-            cache = try await closure()
-        }
-        return cache!
+        try await memoized.call(withoutCaching)
     }
 }
 
@@ -21,8 +43,8 @@ private func memoizedClosure<T>(_ closure: @escaping () async throws -> T) -> (B
 ///
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
-public struct AsyncExpression<Value> {
-    internal let _expression: (Bool) async throws -> Value?
+public struct AsyncExpression<Value>: Sendable {
+    internal let _expression: @Sendable (Bool) async throws -> Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -38,7 +60,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: @escaping () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -59,7 +81,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -90,7 +112,7 @@ public struct AsyncExpression<Value> {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping (Value?) throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
@@ -98,7 +120,7 @@ public struct AsyncExpression<Value> {
         )
     }
 
-    public func cast<U>(_ block: @escaping (Value?) async throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
