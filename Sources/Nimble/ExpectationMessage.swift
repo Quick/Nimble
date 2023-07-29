@@ -1,4 +1,4 @@
-public indirect enum ExpectationMessage {
+public indirect enum ExpectationMessage: Sendable {
     // --- Primary Expectations ---
     /// includes actual value in output ("expected to <message>, got <actual>")
     case expectedActualValueTo(/* message: */ String)
@@ -204,7 +204,7 @@ extension FailureMessage {
 #if canImport(Darwin)
 import class Foundation.NSObject
 
-public class NMBExpectationMessage: NSObject {
+public final class NMBExpectationMessage: NSObject, Sendable {
     private let msg: ExpectationMessage
 
     internal init(swift msg: ExpectationMessage) {

@@ -37,29 +37,33 @@ final class SynchronousTest: XCTestCase {
     }
 
     func testToProvidesActualValueExpression() {
-        var value: Int?
-        expect(1).to(Predicate.simple { expr in value = try expr.evaluate(); return .matches })
-        expect(value).to(equal(1))
+        let recorder = Recorder<Int?>()
+        expect(1).to(Predicate.simple { expr in recorder.record(try expr.evaluate()); return .matches })
+        expect(recorder.records).to(equal([1]))
     }
 
     func testToProvidesAMemoizedActualValueExpression() {
-        var callCount = 0
-        expect { callCount += 1 }.to(Predicate.simple { expr in
+        let recorder = Recorder<Void>()
+        expect {
+            recorder.record(())
+        }.to(Predicate.simple { expr in
             _ = try expr.evaluate()
             _ = try expr.evaluate()
             return .matches
         })
-        expect(callCount).to(equal(1))
+        expect(recorder.records).to(haveCount(1))
     }
 
     func testToProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
-        var callCount = 0
-        expect { callCount += 1 }.to(Predicate.simple { expr in
-            expect(callCount).to(equal(0))
+        let recorder = Recorder<Void>()
+        expect {
+            recorder.record(())
+        }.to(Predicate.simple { expr in
+            expect(recorder.records).to(beEmpty())
             _ = try expr.evaluate()
             return .matches
         })
-        expect(callCount).to(equal(1))
+        expect(recorder.records).to(haveCount(1))
     }
 
     func testToMatchAgainstLazyProperties() {
@@ -76,29 +80,29 @@ final class SynchronousTest: XCTestCase {
     }
 
     func testToNotProvidesActualValueExpression() {
-        var value: Int?
-        expect(1).toNot(Predicate.simple { expr in value = try expr.evaluate(); return .doesNotMatch })
-        expect(value).to(equal(1))
+        let recorder = Recorder<Int?>()
+        expect(1).toNot(Predicate.simple { expr in recorder.record(try expr.evaluate()); return .doesNotMatch })
+        expect(recorder.records).to(equal([1]))
     }
 
     func testToNotProvidesAMemoizedActualValueExpression() {
-        var callCount = 0
-        expect { callCount += 1 }.toNot(Predicate.simple { expr in
+        let recorder = Recorder<Void>()
+        expect { recorder.record(()) }.toNot(Predicate.simple { expr in
             _ = try expr.evaluate()
             _ = try expr.evaluate()
             return .doesNotMatch
         })
-        expect(callCount).to(equal(1))
+        expect(recorder.records).to(haveCount(1))
     }
 
     func testToNotProvidesAMemoizedActualValueExpressionIsEvaluatedAtMatcherControl() {
-        var callCount = 0
-        expect { callCount += 1 }.toNot(Predicate.simple { expr in
-            expect(callCount).to(equal(0))
+        let recorder = Recorder<Void>()
+        expect { recorder.record(()) }.toNot(Predicate.simple { expr in
+            expect(recorder.records).to(beEmpty())
             _ = try expr.evaluate()
             return .doesNotMatch
         })
-        expect(callCount).to(equal(1))
+        expect(recorder.records).to(haveCount(1))
     }
 
     func testToNegativeMatches() {
@@ -127,5 +131,26 @@ final class SynchronousTest: XCTestCase {
         failsWithErrorMessage(["expected to not equal <2>, got <2>", "expected to equal <3>, got <2>"]) {
             expect(2).toNot(equal(1)).toNot(equal(2)).to(equal(3))
         }
+    }
+}
+
+private final class Recorder<T: Sendable>: @unchecked Sendable {
+    private var _records: [T] = []
+    private let lock = NSRecursiveLock()
+
+    var records: [T] {
+        get {
+            lock.lock()
+            defer {
+                lock.unlock()
+            }
+            return _records
+        }
+    }
+
+    func record(_ value: T) {
+        lock.lock()
+        self._records.append(value)
+        lock.unlock()
     }
 }

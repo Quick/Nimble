@@ -17,10 +17,10 @@
 /// predicates are simple wrappers around closures to provide static type information and
 /// allow composition and wrapping of existing behaviors.
 public struct Predicate<T> {
-    fileprivate var matcher: (Expression<T>) throws -> PredicateResult
+    fileprivate let matcher: @Sendable (Expression<T>) throws -> PredicateResult
 
     /// Constructs a predicate that knows how take a given value
-    public init(_ matcher: @escaping (Expression<T>) throws -> PredicateResult) {
+    public init(_ matcher: @escaping @Sendable (Expression<T>) throws -> PredicateResult) {
         self.matcher = matcher
     }
 
@@ -33,10 +33,12 @@ public struct Predicate<T> {
     }
 }
 
+extension Predicate: Sendable where T: Sendable {}
+
 /// Provides convenience helpers to defining predicates
 extension Predicate {
     /// Like Predicate() constructor, but automatically guard against nil (actual) values
-    public static func define(matcher: @escaping (Expression<T>) throws -> PredicateResult) -> Predicate<T> {
+    public static func define(matcher: @escaping @Sendable (Expression<T>) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
             return try matcher(actual)
         }.requireNonNil
@@ -44,7 +46,7 @@ extension Predicate {
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func define(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+    public static func define(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
             return try matcher(actual, .expectedActualValueTo(message))
         }.requireNonNil
@@ -52,7 +54,7 @@ extension Predicate {
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
-    public static func defineNilable(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
+    public static func defineNilable(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>, ExpectationMessage) throws -> PredicateResult) -> Predicate<T> {
         return Predicate<T> { actual in
             return try matcher(actual, .expectedActualValueTo(message))
         }
@@ -64,7 +66,7 @@ extension Predicate {
     /// error message.
     ///
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func simple(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
+    public static func simple(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
             return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }.requireNonNil
@@ -74,7 +76,7 @@ extension Predicate {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
+    public static func simpleNilable(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>) throws -> PredicateStatus) -> Predicate<T> {
         return Predicate<T> { actual in
             return PredicateResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }
@@ -82,13 +84,13 @@ extension Predicate {
 }
 
 // The Expectation style intended for comparison to a PredicateStatus.
-public enum ExpectationStyle {
+public enum ExpectationStyle: Sendable {
     case toMatch, toNotMatch
 }
 
 /// The value that a Predicates return to describe if the given (actual) value matches the
 /// predicate.
-public struct PredicateResult {
+public struct PredicateResult: Sendable {
     /// Status indicates if the predicate matches, does not match, or fails.
     public var status: PredicateStatus
     /// The error message that can be displayed if it does not match
@@ -113,7 +115,7 @@ public struct PredicateResult {
 }
 
 /// PredicateStatus is a trinary that indicates if a Predicate matches a given value or not
-public enum PredicateStatus {
+public enum PredicateStatus: Sendable {
     /// Matches indicates if the predicate / matcher passes with the given value
     ///
     /// For example, `equals(1)` returns `.matches` for `expect(1).to(equal(1))`.
@@ -167,7 +169,7 @@ public enum PredicateStatus {
 
 extension Predicate {
     // Someday, make this public? Needs documentation
-    internal func after(f: @escaping (Expression<T>, PredicateResult) throws -> PredicateResult) -> Predicate<T> {
+    internal func after(f: @escaping @Sendable (Expression<T>, PredicateResult) throws -> PredicateResult) -> Predicate<T> {
         // swiftlint:disable:previous identifier_name
         return Predicate { actual -> PredicateResult in
             let result = try self.satisfies(actual)
@@ -193,7 +195,7 @@ extension Predicate {
 #if canImport(Darwin)
 import class Foundation.NSObject
 
-public typealias PredicateBlock = (_ actualExpression: Expression<NSObject>) throws -> NMBPredicateResult
+public typealias PredicateBlock = @Sendable (_ actualExpression: Expression<NSObject>) throws -> NMBPredicateResult
 
 public class NMBPredicate: NSObject {
     private let predicate: PredicateBlock
@@ -202,7 +204,7 @@ public class NMBPredicate: NSObject {
         self.predicate = predicate
     }
 
-    func satisfies(_ expression: @escaping () throws -> NSObject?, location: SourceLocation) -> NMBPredicateResult {
+    func satisfies(_ expression: @escaping  @Sendable() throws -> NSObject?, location: SourceLocation) -> NMBPredicateResult {
         let expr = Expression(expression: expression, location: location)
         do {
             return try self.predicate(expr)
@@ -238,7 +240,7 @@ extension PredicateResult {
     }
 }
 
-final public class NMBPredicateStatus: NSObject {
+final public class NMBPredicateStatus: NSObject, Sendable {
     private let status: Int
     private init(status: Int) {
         self.status = status

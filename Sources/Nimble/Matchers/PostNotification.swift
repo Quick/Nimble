@@ -43,19 +43,39 @@ internal class NotificationCollector {
     }
 }
 
-private let mainThread = pthread_self()
+private final class OnlyOnceChecker: @unchecked Sendable {
+    var hasRun = false
+    let lock = NSRecursiveLock()
+
+    func runOnlyOnce(_ closure: @Sendable () throws -> Void) rethrows {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
+        if !hasRun {
+            hasRun = true
+            try closure()
+        }
+    }
+}
 
 private func _postNotifications<Out>(
     _ predicate: Predicate<[Notification]>,
     from center: NotificationCenter,
     names: Set<Notification.Name> = []
 ) -> Predicate<Out> {
-    _ = mainThread // Force lazy-loading of this value
     let collector = NotificationCollector(notificationCenter: center, names: names)
     collector.startObserving()
-    var once: Bool = false
+    let once = OnlyOnceChecker()
 
     return Predicate { actualExpression in
+        guard Thread.isMainThread else {
+            let message = ExpectationMessage
+                .expectedTo("post notifications - but was called off the main thread.")
+                .appended(details: "postNotifications and postDistributedNotifications attempted to run their predicate off the main thread. This is a bug in Nimble.")
+            return PredicateResult(status: .fail, message: message)
+        }
+
         let collectorNotificationsExpression = Expression(
             memoizedExpression: { _ in
                 return collector.observedNotifications
@@ -65,8 +85,7 @@ private func _postNotifications<Out>(
         )
 
         assert(Thread.isMainThread, "Only expecting closure to be evaluated on main thread.")
-        if !once {
-            once = true
+        try once.runOnlyOnce {
             _ = try actualExpression.evaluate()
         }
 

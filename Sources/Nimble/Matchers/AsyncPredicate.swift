@@ -29,10 +29,10 @@ extension Predicate: AsyncablePredicate {
 /// These can also be used with either `Expectation`s or `AsyncExpectation`s.
 /// But these can only be used from async contexts, and are unavailable in Objective-C.
 /// You can, however, call regular Predicates from an AsyncPredicate, if you wish to compose one like that.
-public struct AsyncPredicate<T>: AsyncablePredicate {
-    fileprivate var matcher: (AsyncExpression<T>) async throws -> PredicateResult
+public struct AsyncPredicate<T: Sendable>: AsyncablePredicate, Sendable {
+    fileprivate var matcher: @Sendable (AsyncExpression<T>) async throws -> PredicateResult
 
-    public init(_ matcher: @escaping (AsyncExpression<T>) async throws -> PredicateResult) {
+    public init(_ matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> PredicateResult) {
         self.matcher = matcher
     }
 
@@ -48,7 +48,7 @@ public struct AsyncPredicate<T>: AsyncablePredicate {
 /// Provides convenience helpers to defining predicates
 extension AsyncPredicate {
     /// Like Predicate() constructor, but automatically guard against nil (actual) values
-    public static func define(matcher: @escaping (AsyncExpression<T>) async throws -> PredicateResult) -> AsyncPredicate<T> {
+    public static func define(matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> PredicateResult) -> AsyncPredicate<T> {
         return AsyncPredicate<T> { actual in
             return try await matcher(actual)
         }.requireNonNil
@@ -56,7 +56,7 @@ extension AsyncPredicate {
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func define(_ message: String = "match", matcher: @escaping (AsyncExpression<T>, ExpectationMessage) async throws -> PredicateResult) -> AsyncPredicate<T> {
+    public static func define(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>, ExpectationMessage) async throws -> PredicateResult) -> AsyncPredicate<T> {
         return AsyncPredicate<T> { actual in
             return try await matcher(actual, .expectedActualValueTo(message))
         }.requireNonNil
@@ -64,7 +64,7 @@ extension AsyncPredicate {
 
     /// Defines a predicate with a default message that can be returned in the closure
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
-    public static func defineNilable(_ message: String = "match", matcher: @escaping (AsyncExpression<T>, ExpectationMessage) async throws -> PredicateResult) -> AsyncPredicate<T> {
+    public static func defineNilable(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>, ExpectationMessage) async throws -> PredicateResult) -> AsyncPredicate<T> {
         return AsyncPredicate<T> { actual in
             return try await matcher(actual, .expectedActualValueTo(message))
         }
@@ -74,7 +74,7 @@ extension AsyncPredicate {
     /// error message.
     ///
     /// Also ensures the predicate's actual value cannot pass with `nil` given.
-    public static func simple(_ message: String = "match", matcher: @escaping (AsyncExpression<T>) async throws -> PredicateStatus) -> AsyncPredicate<T> {
+    public static func simple(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> PredicateStatus) -> AsyncPredicate<T> {
         return AsyncPredicate<T> { actual in
             return PredicateResult(status: try await matcher(actual), message: .expectedActualValueTo(message))
         }.requireNonNil
@@ -84,7 +84,7 @@ extension AsyncPredicate {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ message: String = "match", matcher: @escaping (AsyncExpression<T>) async throws -> PredicateStatus) -> AsyncPredicate<T> {
+    public static func simpleNilable(_ message: String = "match", matcher: @escaping @Sendable (AsyncExpression<T>) async throws -> PredicateStatus) -> AsyncPredicate<T> {
         return AsyncPredicate<T> { actual in
             return PredicateResult(status: try await matcher(actual), message: .expectedActualValueTo(message))
         }
@@ -93,7 +93,7 @@ extension AsyncPredicate {
 
 extension AsyncPredicate {
     // Someday, make this public? Needs documentation
-    internal func after(f: @escaping (AsyncExpression<T>, PredicateResult) async throws -> PredicateResult) -> AsyncPredicate<T> {
+    internal func after(f: @escaping @Sendable (AsyncExpression<T>, PredicateResult) async throws -> PredicateResult) -> AsyncPredicate<T> {
         // swiftlint:disable:previous identifier_name
         return AsyncPredicate { actual -> PredicateResult in
             let result = try await self.satisfies(actual)
