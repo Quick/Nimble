@@ -50,7 +50,7 @@ internal func execute<T>(_ expression: AsyncExpression<T>, _ style: ExpectationS
     }
 }
 
-public enum ExpectationStatus: Equatable {
+public enum ExpectationStatus: Equatable, Sendable {
 
     /// No predicates have been performed.
     case pending
@@ -208,7 +208,9 @@ public struct SyncExpectation<Value>: Expectation {
     public func notTo(_ predicate: Predicate<Value>, description: String? = nil) -> Self {
         toNot(predicate, description: description)
     }
+}
 
+extension SyncExpectation where Value: Sendable {
     // MARK: - AsyncPredicates
     /// Tests the actual value using a matcher to match.
     @discardableResult
@@ -237,7 +239,7 @@ public struct SyncExpectation<Value>: Expectation {
     // - NMBExpectation for Objective-C interface
 }
 
-public struct AsyncExpectation<Value>: Expectation {
+public struct AsyncExpectation<Value: Sendable>: Expectation, Sendable {
     public let expression: AsyncExpression<Value>
 
     /// The status of the test after predicates have been evaluated.

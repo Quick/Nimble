@@ -1,10 +1,10 @@
-public protocol AsyncablePredicate<T> {
-    associatedtype T
-    func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult
+public protocol AsyncablePredicate<Value> {
+    associatedtype Value: Sendable
+    func satisfies(_ expression: AsyncExpression<Value>) async throws -> PredicateResult
 }
 
 extension Predicate: AsyncablePredicate {
-    public func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult {
+    public func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult where T: Sendable {
         try satisfies(await expression.toSynchronousExpression())
     }
 }
