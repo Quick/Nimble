@@ -65,28 +65,28 @@ function run {
 }
 
 function test_ios {
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -destination "generic/platform=iOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-iOS" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "iphonesimulator$BUILD_IOS_SDK_VERSION" -destination "name=iPhone SE (3rd generation),OS=$RUNTIME_IOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_tvos {
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -destination "generic/platform=tvOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -destination "generic/platform=tvOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-tvOS" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "appletvsimulator$BUILD_TVOS_SDK_VERSION" -destination "name=Apple TV,OS=$RUNTIME_TVOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_watchos {
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-watchOS" -configuration "Debug" -destination "generic/platform=watchOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -destination "generic/platform=watchOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-watchOS" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 (40mm),OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 (40mm),OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_macos {
-    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble-macOS" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
 function test_xcode_spm_macos {
