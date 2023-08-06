@@ -33,6 +33,7 @@ private func asyncBeNil<T>() -> AsyncPredicate<T> {
     }
 }
 
+#if !os(WASI)
 final class AsyncAllPassTest: XCTestCase {
     func testAllPassArray() async {
         await expect([1, 2, 3, 4]).to(allPass { value in
@@ -132,3 +133,4 @@ final class AsyncAllPassTest: XCTestCase {
         }
     }
 }
+#endif

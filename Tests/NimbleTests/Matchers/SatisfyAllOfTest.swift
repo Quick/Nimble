@@ -71,6 +71,7 @@ final class SatisfyAllOfTest: XCTestCase {
     // which causes runtime crashes when you use `[any AsyncablePredicate<T>]`.
     // https://github.com/apple/swift/issues/61403
     #if swift(>=5.8.0)
+    #if !os(WASI)
     // MARK: - AsyncPredicate variant
     @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncSatisfyAllOf() async {
@@ -120,7 +121,6 @@ final class SatisfyAllOfTest: XCTestCase {
         await expect(true).toNot(beTruthy() && beFalsy())
     }
 
-    #if !os(WASI)
     @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
     func testAsyncSatisfyAllOfCachesExpressionBeforePassingToPredicates() async {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
