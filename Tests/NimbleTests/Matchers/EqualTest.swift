@@ -314,9 +314,11 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != []
 
         let originalArrayAsync = { () async in originalArray }
+        #if !os(WASI)
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        #endif
         await expect(originalArrayAsync) == expectedArray
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
@@ -347,9 +349,11 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != []
 
         let originalArrayAsync = { () async in originalArray }
+        #if !os(WASI)
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        #endif
         await expect(originalArrayAsync) == expectedArray
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
@@ -380,9 +384,11 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != []
 
         let originalArrayAsync = { () async in originalArray }
+        #if !os(WASI)
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        #endif
         await expect(originalArrayAsync) == expectedArray
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
@@ -413,9 +419,11 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != []
 
         let originalArrayAsync = { () async in originalArray }
+        #if !os(WASI)
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        #endif
         await expect(originalArrayAsync) == expectedArray
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
@@ -446,9 +454,11 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != []
 
         let originalArrayAsync = { () async in originalArray }
+        #if !os(WASI)
         await expect(originalArrayAsync).toEventually(equal(expectedArray))
         await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
         await expect(originalArrayAsync).toEventuallyNot(equal([]))
+        #endif
         await expect(originalArrayAsync) == expectedArray
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
