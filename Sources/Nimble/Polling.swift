@@ -34,9 +34,36 @@ public struct AsyncDefaults {
 /// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 ///
 /// - Note: This used to be known as ``AsyncDefaults``.
-public struct PollingDefaults {
-    public static var timeout: NimbleTimeInterval = .seconds(1)
-    public static var pollInterval: NimbleTimeInterval = .milliseconds(10)
+public struct PollingDefaults: @unchecked Sendable {
+    private static let lock = NSRecursiveLock()
+
+    private static var _timeout: NimbleTimeInterval = .seconds(1)
+    private static var _pollInterval: NimbleTimeInterval = .milliseconds(10)
+
+    public static var timeout: NimbleTimeInterval {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _timeout
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            _timeout = newValue
+        }
+    }
+    public static var pollInterval: NimbleTimeInterval {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _pollInterval
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            _pollInterval = newValue
+        }
+    }
 }
 
 internal enum AsyncMatchStyle {
