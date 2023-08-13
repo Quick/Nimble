@@ -3,7 +3,7 @@ public protocol AsyncableMatcher<Value>: Sendable {
     func satisfies(_ expression: AsyncExpression<Value>) async throws -> MatcherResult
 }
 
-extension Matcher: AsyncableMatcher where T: Sendable {
+extension Matcher: AsyncableMatcher {
     public func satisfies(_ expression: AsyncExpression<T>) async throws -> MatcherResult {
         try satisfies(await expression.toSynchronousExpression())
     }
