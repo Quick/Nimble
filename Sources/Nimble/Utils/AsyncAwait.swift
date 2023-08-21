@@ -113,25 +113,25 @@ internal actor AsyncPromise<T> {
 
         func await() async -> T {
             await withUnsafeContinuation { continuation in
-                lock.withLock {
-                    if let value {
-                        continuation.resume(returning: value)
-                    } else {
-                        continuations.append(continuation)
-                    }
+                lock.lock()
+                defer { lock.unlock() }
+                if let value {
+                    continuation.resume(returning: value)
+                } else {
+                    continuations.append(continuation)
                 }
             }
         }
 
         func send(_ value: T) {
-            lock.withLock {
-                if self.value != nil { return }
-                continuations.forEach { continuation in
-                    continuation.resume(returning: value)
-                }
-                continuations = []
-                self.value = value
+            lock.lock()
+            defer { lock.unlock() }
+            if self.value != nil { return }
+            continuations.forEach { continuation in
+                continuation.resume(returning: value)
             }
+            continuations = []
+            self.value = value
         }
     }
 
@@ -282,9 +282,9 @@ private func runPoller(
 private final class Box<T: Sendable>: @unchecked Sendable {
     private var _value: T
     var value: T {
-        lock.withLock {
-            _value
-        }
+        lock.lock()
+        defer { lock.unlock() }
+        return _value
     }
 
     private let lock = NSLock()
@@ -294,9 +294,9 @@ private final class Box<T: Sendable>: @unchecked Sendable {
     }
 
     func operate(_ closure: @Sendable (T) -> T) {
-        lock.withLock {
-            _value = closure(_value)
-        }
+        lock.lock()
+        defer { lock.unlock() }
+        _value = closure(_value)
     }
 }
 

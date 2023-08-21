@@ -31,11 +31,12 @@ internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
     init() { }
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
-        lock.withLock {
-            let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-            nimblePrecondition(
-                currentWaiter == nil,
-                "InvalidNimbleAPIUsage",
+        lock.lock()
+        defer { lock.unlock() }
+        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        nimblePrecondition(
+            currentWaiter == nil,
+            "InvalidNimbleAPIUsage",
             """
             Nested async expectations are not allowed to avoid creating flaky tests.
 
@@ -45,21 +46,20 @@ internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
             \t\(currentWaiter!)
             is currently managing the main run loop.
             """
-            )
-            currentWaiter = info
-        }
+        )
+        currentWaiter = info
     }
 
     func isWaitingLocked() -> Bool {
-        lock.withLock {
-            currentWaiter != nil
-        }
+        lock.lock()
+        defer { lock.unlock() }
+        return currentWaiter != nil
     }
 
     func releaseWaitingLock() {
-        lock.withLock {
-            currentWaiter = nil
-        }
+        lock.lock()
+        defer { lock.unlock() }
+        currentWaiter = nil
     }
 }
 
