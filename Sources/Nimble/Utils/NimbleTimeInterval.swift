@@ -57,18 +57,6 @@ extension NimbleTimeInterval: CustomStringConvertible {
     }
 }
 
-@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-extension NimbleTimeInterval {
-    public var duration: Duration {
-        switch self {
-        case .seconds(let int): return .seconds(int)
-        case .milliseconds(let int): return .milliseconds(int)
-        case .microseconds(let int): return .microseconds(int)
-        case .nanoseconds(let int): return .nanoseconds(int)
-        }
-    }
-}
-
 #if canImport(Foundation)
 import Foundation
 
