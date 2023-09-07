@@ -16,6 +16,10 @@
 /// The Predicate provide the heavy lifting on how to assert against a given value. Internally,
 /// predicates are simple wrappers around closures to provide static type information and
 /// allow composition and wrapping of existing behaviors.
+///
+///
+public typealias NimblePredicate<T> = Predicate<T>
+
 public struct Predicate<T> {
     fileprivate var matcher: (Expression<T>) throws -> PredicateResult
 

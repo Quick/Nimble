@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "Nimble",
     platforms: [
-      .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)
+        .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .custom("visionOS", versionString: "0.1")
     ],
     products: [
         .library(
@@ -19,7 +19,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .upToNextMajor(from: "2.1.0")),
+        .package(url: "https://github.com/skumor-foreflight/CwlPreconditionTesting", branch: "master")
     ],
     targets: {
         var testHelperDependencies: [PackageDescription.Target.Dependency] = ["Nimble"]
@@ -31,7 +31,7 @@ let package = Package(
                 name: "Nimble",
                 dependencies: [
                     .product(name: "CwlPreconditionTesting", package: "CwlPreconditionTesting",
-                             condition: .when(platforms: [.macOS, .iOS, .macCatalyst])),
+                             condition: .when(platforms: [.macOS, .iOS, .macCatalyst, .visionOS])),
                     .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
                              condition: .when(platforms: [.tvOS, .watchOS]))
                 ],

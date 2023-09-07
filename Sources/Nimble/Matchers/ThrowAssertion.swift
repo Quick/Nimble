@@ -1,5 +1,5 @@
 // swiftlint:disable all
-#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
+#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS) || os(visionOS))
 import CwlPreconditionTesting
 #elseif canImport(CwlPosixPreconditionTesting)
 import CwlPosixPreconditionTesting
@@ -81,8 +81,8 @@ public func catchBadInstruction(block: @escaping () -> Void) -> BadInstructionEx
 }
 #endif
 
-public func throwAssertion<Out>() -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwAssertion<Out>() -> NimblePredicate<Out> {
+    return NimblePredicate { actualExpression in
     #if (arch(x86_64) || arch(arm64)) && (canImport(Darwin) || canImport(Glibc))
         let message = ExpectationMessage.expectedTo("throw an assertion")
         var actualError: Error?
