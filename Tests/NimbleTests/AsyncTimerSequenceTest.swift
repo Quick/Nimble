@@ -13,7 +13,7 @@ final class AsyncTimerSequenceTest: XCTestCase {
             FakeInstant(now: 1),
             FakeInstant(now: 2),
             FakeInstant(now: 3),
-            FakeInstant(now: 4)
+            FakeInstant(now: 4),
         ]))
     }
 
@@ -27,7 +27,7 @@ final class AsyncTimerSequenceTest: XCTestCase {
             FakeInstant(now: 2),
             FakeInstant(now: 4),
             FakeInstant(now: 6),
-            FakeInstant(now: 8)
+            FakeInstant(now: 8),
         ]))
     }
     func testOutputsVoidAtSpecifiedIntervals3() async throws {
@@ -40,7 +40,7 @@ final class AsyncTimerSequenceTest: XCTestCase {
             FakeInstant(now: 3),
             FakeInstant(now: 6),
             FakeInstant(now: 9),
-            FakeInstant(now: 12)
+            FakeInstant(now: 12),
         ]))
     }
 }
@@ -62,20 +62,16 @@ struct FakeClock: NimbleClockProtocol {
     private final class Implementation: @unchecked Sendable {
         var _now = FakeInstant(now: 0)
         var now: FakeInstant {
-            get {
-                lock.lock()
-                defer { lock.unlock() }
-                return _now
-            }
+            lock.lock()
+            defer { lock.unlock() }
+            return _now
         }
 
         var _recordedInstants: [FakeInstant] = [FakeInstant(now: 0)]
         var recordedInstants: [FakeInstant] {
-            get {
-                lock.lock()
-                defer { lock.unlock() }
-                return _recordedInstants
-            }
+            lock.lock()
+            defer { lock.unlock() }
+            return _recordedInstants
         }
 
         let lock = NSLock()

@@ -7,139 +7,6 @@ import Foundation
 private let timeoutLeeway = NimbleTimeInterval.milliseconds(1)
 private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 
-// Basically a re-implementation of Clock and InstantProtocol.
-// This can be removed once we drop support for iOS < 16.
-internal protocol NimbleClockProtocol: Sendable {
-    associatedtype Instant: NimbleInstantProtocol
-
-    func now() -> Instant
-
-    func sleep(until: Instant) async throws
-}
-
-internal protocol NimbleInstantProtocol: Sendable, Comparable {
-    associatedtype Interval: NimbleIntervalProtocol
-
-    func advanced(byInterval: Interval) -> Self
-
-    func intervalSince(_: Self) -> Interval
-}
-
-internal protocol NimbleIntervalProtocol: Sendable, Comparable {
-    static func + (lhs: Self, rhs: Self) -> Self
-    static func - (lhs: Self, rhs: Self) -> Self
-    static func * (lhs: Self, rhs: Self) -> Self
-    static func / (lhs: Self, rhs: Self) -> Self
-
-    func rounded(_ rule: FloatingPointRoundingRule) -> Self
-}
-
-internal struct DateClock: NimbleClockProtocol {
-    typealias Instant = Date
-
-    func now() -> Instant {
-        Date()
-    }
-
-    func sleep(until: Instant) async throws {
-        try await Task.sleep(nanoseconds: UInt64(Swift.max(0, until.timeIntervalSinceNow * 1_000_000_000)))
-    }
-}
-
-// Date is Sendable as of at least iOS 16.
-// But as of Swift 5.9, it's still not Sendable in the open source version.
-extension Date: @unchecked Sendable {}
-
-extension Date: NimbleInstantProtocol {
-    typealias Interval = NimbleTimeInterval
-
-    func advanced(byInterval interval: NimbleTimeInterval) -> Date {
-        advanced(by: interval.timeInterval)
-    }
-
-    func intervalSince(_ other: Date) -> NimbleTimeInterval {
-        timeIntervalSince(other).nimbleInterval
-    }
-}
-
-extension NimbleTimeInterval: NimbleIntervalProtocol {
-    func rounded(_ rule: FloatingPointRoundingRule) -> NimbleTimeInterval {
-        timeInterval.rounded(rule).nimbleInterval
-    }
-
-    static func + (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> NimbleTimeInterval {
-        (lhs.timeInterval + rhs.timeInterval).nimbleInterval
-    }
-
-    static func - (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> NimbleTimeInterval {
-        (lhs.timeInterval - rhs.timeInterval).nimbleInterval
-    }
-
-    static func * (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> NimbleTimeInterval {
-        (lhs.timeInterval * rhs.timeInterval).nimbleInterval
-    }
-
-    static func / (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> NimbleTimeInterval {
-        (lhs.timeInterval / rhs.timeInterval).nimbleInterval
-    }
-
-    public static func < (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> Bool {
-        lhs.timeInterval < rhs.timeInterval
-    }
-}
-
-// Similar to (made by directly referencing) swift-async-algorithm's AsyncTimerSequence.
-// https://github.com/apple/swift-async-algorithms/blob/main/Sources/AsyncAlgorithms/AsyncTimerSequence.swift
-// Only this one is compatible with OS versions that Nimble supports.
-struct AsyncTimerSequence<Clock: NimbleClockProtocol>: AsyncSequence {
-    typealias Element = Void
-    let clock: Clock
-    let interval: Clock.Instant.Interval
-
-    struct AsyncIterator: AsyncIteratorProtocol {
-        typealias Element = Void
-
-        let clock: Clock
-        let interval: Clock.Instant.Interval
-
-        var last: Clock.Instant? = nil
-
-        func nextDeadline() -> Clock.Instant {
-            let now = clock.now()
-
-            let last = self.last ?? now
-            let next = last.advanced(byInterval: interval)
-            if next < now {
-                let nextTimestep = interval * (now.intervalSince(next) / interval).rounded(.up)
-                return last.advanced(byInterval: nextTimestep)
-            } else {
-                return next
-            }
-        }
-
-        mutating func next() async -> Void? {
-            let next = nextDeadline()
-            do {
-                try await clock.sleep(until: next)
-            } catch {
-                return nil
-            }
-            last = next
-            return ()
-        }
-    }
-
-    func makeAsyncIterator() -> AsyncIterator {
-        return AsyncIterator(clock: clock, interval: interval)
-    }
-}
-
-extension AsyncTimerSequence<DateClock> {
-    init(interval: NimbleTimeInterval) {
-        self.init(clock: DateClock(), interval: interval)
-    }
-}
-
 // Like PollResult, except it doesn't support objective-c exceptions.
 // Which is tolerable because Swift Concurrency doesn't support recording objective-c exceptions.
 internal enum AsyncPollResult<T> {
@@ -177,7 +44,7 @@ internal enum AsyncPollResult<T> {
         case .incomplete: return .incomplete
         case .timedOut: return .timedOut
         case .blockedRunLoop: return .blockedRunLoop
-        case .completed(let t): return .completed(t)
+        case .completed(let value): return .completed(value)
         case .errorThrown(let error): return .errorThrown(error)
         }
     }
@@ -240,7 +107,7 @@ internal actor AsyncPromise<T> {
     }
 }
 
-///.Wait until the timeout period, then checks why the matcher might have timed out
+/// Wait until the timeout period, then checks why the matcher might have timed out
 ///
 /// Why Dispatch?
 ///
@@ -467,6 +334,5 @@ internal func pollBlock(
             expression: expression
         )
     }
-
 
 #endif // #if !os(WASI)

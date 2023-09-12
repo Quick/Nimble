@@ -111,7 +111,6 @@ internal func internalError(_ msg: String, file: FileString = #file, line: UInt 
         Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the code snippet that caused this error.
         """
     )
-    // swiftlint:enable line_length
 }
 
 #if canImport(Darwin)
