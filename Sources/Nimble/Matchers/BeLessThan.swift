@@ -8,11 +8,11 @@ public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func <<V: Comparable>(lhs: SyncExpectation<V>, rhs: V) {
+public func < <V: Comparable>(lhs: SyncExpectation<V>, rhs: V) {
     lhs.to(beLessThan(rhs))
 }
 
-public func <<V: Comparable>(lhs: AsyncExpectation<V>, rhs: V) async {
+public func < <V: Comparable>(lhs: AsyncExpectation<V>, rhs: V) async {
     await lhs.to(beLessThan(rhs))
 }
 
@@ -29,11 +29,11 @@ public func beLessThan<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func <<V: NMBComparable>(lhs: SyncExpectation<V>, rhs: V?) {
+public func < <V: NMBComparable>(lhs: SyncExpectation<V>, rhs: V?) {
     lhs.to(beLessThan(rhs))
 }
 
-public func <<V: NMBComparable>(lhs: AsyncExpectation<V>, rhs: V?) async {
+public func < <V: NMBComparable>(lhs: AsyncExpectation<V>, rhs: V?) async {
     await lhs.to(beLessThan(rhs))
 }
 

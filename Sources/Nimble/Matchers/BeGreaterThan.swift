@@ -8,11 +8,11 @@ public func beGreaterThan<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
     }
 }
 
-public func ><T: Comparable>(lhs: SyncExpectation<T>, rhs: T) {
+public func > <T: Comparable>(lhs: SyncExpectation<T>, rhs: T) {
     lhs.to(beGreaterThan(rhs))
 }
 
-public func ><T: Comparable>(lhs: AsyncExpectation<T>, rhs: T) async {
+public func > <T: Comparable>(lhs: AsyncExpectation<T>, rhs: T) async {
     await lhs.to(beGreaterThan(rhs))
 }
 
@@ -30,11 +30,11 @@ public func beGreaterThan<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T>
     }
 }
 
-public func ><T: NMBComparable>(lhs: SyncExpectation<T>, rhs: T?) {
+public func > <T: NMBComparable>(lhs: SyncExpectation<T>, rhs: T?) {
     lhs.to(beGreaterThan(rhs))
 }
 
-public func ><T: NMBComparable>(lhs: AsyncExpectation<T>, rhs: T?) async {
+public func > <T: NMBComparable>(lhs: AsyncExpectation<T>, rhs: T?) async {
     await lhs.to(beGreaterThan(rhs))
 }
 

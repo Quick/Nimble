@@ -255,6 +255,7 @@ private final class Box<T: Sendable>: @unchecked Sendable {
     }
 }
 
+// swiftlint:disable:next function_parameter_count
 private func runAwaitTrigger<T>(
     awaiter: Awaiter,
     timeoutInterval: NimbleTimeInterval,

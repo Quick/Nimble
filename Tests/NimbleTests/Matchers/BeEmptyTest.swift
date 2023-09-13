@@ -51,7 +51,7 @@ final class BeEmptyTest: XCTestCase {
         expect(TestOptionSet.one).toNot(beEmpty())
     }
 
-    func testBeEmptyNegative() {
+    func testBeEmptyNegative() { // swiftlint:disable:this function_body_length
         // NSArray
         failsWithErrorMessage("expected to not be empty, got <()>") {
             expect(NSArray()).toNot(beEmpty())
@@ -133,7 +133,7 @@ final class BeEmptyTest: XCTestCase {
         }
     }
 
-    func testNilMatches() {
+    func testNilMatches() { // swiftlint:disable:this function_body_length
         failsWithErrorMessageForNil("expected to be empty, got <nil>") {
             expect(nil as String?).to(beEmpty())
         }
