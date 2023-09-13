@@ -8,7 +8,7 @@ private let timeoutLeeway = NimbleTimeInterval.milliseconds(1)
 private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 
 /// Stores debugging information about callers
-internal struct WaitingInfo: CustomStringConvertible {
+internal struct WaitingInfo: CustomStringConvertible, Sendable {
     let name: String
     let file: FileString
     let lineNumber: UInt
@@ -24,26 +24,15 @@ internal protocol WaitLock {
     func isWaitingLocked() -> Bool
 }
 
-internal class AssertionWaitLock: WaitLock {
-    private var currentWaiter: WaitingInfo? {
-        get {
-            return dispatchQueue.sync {
-                _currentWaiter
-            }
-        }
-        set {
-            dispatchQueue.sync {
-                _currentWaiter = newValue
-            }
-        }
-    }
-
-    private var _currentWaiter: WaitingInfo?
-    private let dispatchQueue = DispatchQueue(label: "quick.nimble.AssertionWaitLock")
+internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
+    private var currentWaiter: WaitingInfo?
+    private let lock = NSRecursiveLock()
 
     init() { }
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
+        lock.lock()
+        defer { lock.unlock() }
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
         nimblePrecondition(
             currentWaiter == nil,
@@ -62,10 +51,14 @@ internal class AssertionWaitLock: WaitLock {
     }
 
     func isWaitingLocked() -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
         return currentWaiter != nil
     }
 
     func releaseWaitingLock() {
+        lock.lock()
+        defer { lock.unlock() }
         currentWaiter = nil
     }
 }
@@ -104,7 +97,7 @@ internal enum PollResult<T> {
 }
 
 /// Holds the resulting value from an asynchronous expectation.
-/// This class is thread-safe at receiving an "response" to this promise.
+/// This class is thread-safe at receiving a "response" to this promise.
 internal final class AwaitPromise<T> {
     private(set) internal var asyncResult: PollResult<T> = .incomplete
     private var signal: DispatchSemaphore
@@ -243,7 +236,7 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected exception (objc)
     /// - The async expectation raised an unexpected error (swift)
     ///
-    /// The returned AwaitResult will NEVER be .incomplete.
+    /// The returned PollResult will NEVER be .incomplete.
     func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> PollResult<T> {
         waitLock.acquireWaitingLock(
             fnName,

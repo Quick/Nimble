@@ -42,7 +42,7 @@ private actor Poller<T> {
                  self.updatePredicateResult(result: try await predicateRunner())
                      .toBoolean(expectation: style)
              }
-         return processPollResult(result, matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+         return processPollResult(result.toPollResult(), matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
      }
 
      func updatePredicateResult(result: PredicateResult) -> PredicateResult {

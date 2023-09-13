@@ -38,6 +38,15 @@ extension NimbleTimeInterval: CustomStringConvertible {
         }
     }
 
+    public var nanoseconds: UInt64 {
+        switch self {
+        case .seconds(let int): return UInt64(int) * 1_000_000_000
+        case .milliseconds(let int): return UInt64(int) * 1_000_000
+        case .microseconds(let int): return UInt64(int) * 1_000
+        case .nanoseconds(let int): return UInt64(int)
+        }
+    }
+
     public var description: String {
         switch self {
         case let .seconds(val): return val == 1 ? "\(Float(val)) second" : "\(Float(val)) seconds"
@@ -49,13 +58,30 @@ extension NimbleTimeInterval: CustomStringConvertible {
 }
 
 #if canImport(Foundation)
-import typealias Foundation.TimeInterval
+import Foundation
+
+extension NimbleTimeInterval {
+    public var timeInterval: TimeInterval {
+        switch self {
+        case .seconds(let int): return TimeInterval(int)
+        case .milliseconds(let int): return TimeInterval(int) / 1_000
+        case .microseconds(let int): return TimeInterval(int) / 1_000_000
+        case .nanoseconds(let int): return TimeInterval(int) / 1_000_000_000
+        }
+    }
+}
 
 extension TimeInterval {
-    var nimbleInterval: NimbleTimeInterval {
+    public var nimbleInterval: NimbleTimeInterval {
         let microseconds = Int64(self * TimeInterval(USEC_PER_SEC))
         // perhaps use nanoseconds, though would more often be > Int.max
         return microseconds < Int.max ? .microseconds(Int(microseconds)) : .seconds(Int(self))
+    }
+}
+
+extension Date {
+    public func advanced(by nimbleTimeInterval: NimbleTimeInterval) -> Date {
+        self.advanced(by: nimbleTimeInterval.timeInterval)
     }
 }
 #endif
