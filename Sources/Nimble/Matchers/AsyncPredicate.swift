@@ -1,6 +1,6 @@
-public protocol AsyncablePredicate<T> {
-    associatedtype T
-    func satisfies(_ expression: AsyncExpression<T>) async throws -> PredicateResult
+public protocol AsyncablePredicate<Value> {
+    associatedtype Value
+    func satisfies(_ expression: AsyncExpression<Value>) async throws -> PredicateResult
 }
 
 extension Predicate: AsyncablePredicate {

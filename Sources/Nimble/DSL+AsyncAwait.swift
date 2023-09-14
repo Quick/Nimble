@@ -117,15 +117,18 @@ private func throwableUntil(
     line: UInt = #line,
     action: @escaping (@escaping () -> Void) async throws -> Void) async {
         let leeway = timeout.divided
-        let result = await performBlock(timeoutInterval: timeout, leeway: leeway, file: file, line: line) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
-            do {
-                try await action {
-                    done(.none)
+        let result = await performBlock(
+            timeoutInterval: timeout,
+            leeway: leeway,
+            file: file, line: line) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
+                do {
+                    try await action {
+                        done(.none)
+                    }
+                } catch let e {
+                    done(.error(e))
                 }
-            } catch let e {
-                done(.error(e))
             }
-        }
 
         switch result {
         case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")

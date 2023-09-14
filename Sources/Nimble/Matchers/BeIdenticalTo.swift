@@ -15,19 +15,19 @@ public func beIdenticalTo(_ expected: AnyObject?) -> Predicate<AnyObject> {
     }
 }
 
-public func ===(lhs: SyncExpectation<AnyObject>, rhs: AnyObject?) {
+public func === (lhs: SyncExpectation<AnyObject>, rhs: AnyObject?) {
     lhs.to(beIdenticalTo(rhs))
 }
 
-public func ===(lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
+public func === (lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
     await lhs.to(beIdenticalTo(rhs))
 }
 
-public func !==(lhs: SyncExpectation<AnyObject>, rhs: AnyObject?) {
+public func !== (lhs: SyncExpectation<AnyObject>, rhs: AnyObject?) {
     lhs.toNot(beIdenticalTo(rhs))
 }
 
-public func !==(lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
+public func !== (lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
     await lhs.toNot(beIdenticalTo(rhs))
 }
 

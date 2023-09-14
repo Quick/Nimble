@@ -1,3 +1,5 @@
+// swiftlint:disable file_length
+
 import Foundation
 import XCTest
 import Nimble
@@ -296,7 +298,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect((1, "2", 3, four: "4", 5, "6")) == (1, "2", 3, "4", five: 5, "6")
     }
 
-    // swiftlint:disable large_tuple vertical_whitespace
+    // swiftlint:disable large_tuple
     func testTuple2Array() async {
         typealias OriginalArray = [(Int, String)]
         typealias ExpectedArray = [(Int, named: String)]
@@ -453,7 +455,7 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         await expect(originalArrayAsync) != expectedArray.reversed()
         await expect(originalArrayAsync) != []
     }
-    // swiftlint:enable large_tuple vertical_whitespace
+    // swiftlint:enable large_tuple
 
     // see: https://github.com/Quick/Nimble/issues/867 and https://github.com/Quick/Nimble/issues/937
     func testImplicitMemberSyntax() {

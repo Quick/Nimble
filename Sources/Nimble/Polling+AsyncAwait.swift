@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 #if !os(WASI)
 
 import Dispatch
@@ -21,35 +22,36 @@ private func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyl
 }
 
 private actor Poller<T> {
-     private var lastPredicateResult: PredicateResult?
+    private var lastPredicateResult: PredicateResult?
 
-     init() {}
+    init() {}
 
-     func poll(expression: AsyncExpression<T>,
-               style: ExpectationStyle,
-               matchStyle: AsyncMatchStyle,
-               timeout: NimbleTimeInterval,
-               poll: NimbleTimeInterval,
-               fnName: String,
-               predicateRunner: @escaping () async throws -> PredicateResult) async -> PredicateResult {
-         let fnName = "expect(...).\(fnName)(...)"
-         let result = await pollBlock(
-             pollInterval: poll,
-             timeoutInterval: timeout,
-             file: expression.location.file,
-             line: expression.location.line,
-             fnName: fnName) {
-                 self.updatePredicateResult(result: try await predicateRunner())
-                     .toBoolean(expectation: style)
-             }
-         return processPollResult(result.toPollResult(), matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
-     }
+    // swiftlint:disable:next function_parameter_count
+    func poll(expression: AsyncExpression<T>,
+              style: ExpectationStyle,
+              matchStyle: AsyncMatchStyle,
+              timeout: NimbleTimeInterval,
+              poll: NimbleTimeInterval,
+              fnName: String,
+              predicateRunner: @escaping () async throws -> PredicateResult) async -> PredicateResult {
+        let fnName = "expect(...).\(fnName)(...)"
+        let result = await pollBlock(
+            pollInterval: poll,
+            timeoutInterval: timeout,
+            file: expression.location.file,
+            line: expression.location.line,
+            fnName: fnName) {
+                self.updatePredicateResult(result: try await predicateRunner())
+                    .toBoolean(expectation: style)
+            }
+        return processPollResult(result.toPollResult(), matchStyle: matchStyle, lastPredicateResult: lastPredicateResult, fnName: fnName)
+    }
 
-     func updatePredicateResult(result: PredicateResult) -> PredicateResult {
-         self.lastPredicateResult = result
-         return result
-     }
- }
+    func updatePredicateResult(result: PredicateResult) -> PredicateResult {
+        self.lastPredicateResult = result
+        return result
+    }
+}
 
 // swiftlint:disable:next function_parameter_count
 private func poll<T>(

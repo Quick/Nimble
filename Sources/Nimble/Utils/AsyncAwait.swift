@@ -91,12 +91,6 @@ internal actor AsyncPromise<T> {
     }
 
     nonisolated func send(_ value: T) {
-        Task {
-            await self._send(value)
-        }
-    }
-
-    private func _send(_ value: T) {
         self.storage.send(value)
     }
 
@@ -255,6 +249,7 @@ private final class Box<T: Sendable>: @unchecked Sendable {
     }
 }
 
+// swiftlint:disable:next function_parameter_count
 private func runAwaitTrigger<T>(
     awaiter: Awaiter,
     timeoutInterval: NimbleTimeInterval,

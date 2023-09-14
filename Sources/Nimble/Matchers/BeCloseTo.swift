@@ -122,59 +122,59 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
 infix operator ≈ : ComparisonPrecedence
 
 // swiftlint:disable identifier_name
-public func ≈<Value>(lhs: SyncExpectation<Value>, rhs: Value) where Value: Collection, Value.Element: FloatingPoint {
+public func ≈ <Value>(lhs: SyncExpectation<Value>, rhs: Value) where Value: Collection, Value.Element: FloatingPoint {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value>(lhs: AsyncExpectation<Value>, rhs: Value) async where Value: Collection, Value.Element: FloatingPoint {
+public func ≈ <Value>(lhs: AsyncExpectation<Value>, rhs: Value) async where Value: Collection, Value.Element: FloatingPoint {
     await lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: Value) {
+public func ≈ <Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: Value) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: Value) async {
+public func ≈ <Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: Value) async {
     await lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
+public func ≈ <Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ≈<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
+public func ≈ <Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
     await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ==<Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
+public func == <Value: FloatingPoint>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Value)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ==<Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
+public func == <Value: FloatingPoint>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Value)) async {
     await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ≈<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: Value) {
+public func ≈ <Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: Value) {
     lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: Value) async {
+public func ≈ <Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: Value) async {
     await lhs.to(beCloseTo(rhs))
 }
 
-public func ≈<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
+public func ≈ <Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ≈<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
+public func ≈ <Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
     await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ==<Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
+public func == <Value: NMBDoubleConvertible>(lhs: SyncExpectation<Value>, rhs: (expected: Value, delta: Double)) {
     lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
-public func ==<Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
+public func == <Value: NMBDoubleConvertible>(lhs: AsyncExpectation<Value>, rhs: (expected: Value, delta: Double)) async {
     await lhs.to(beCloseTo(rhs.expected, within: rhs.delta))
 }
 
@@ -185,10 +185,10 @@ precedencegroup PlusMinusOperatorPrecedence {
 }
 
 infix operator ± : PlusMinusOperatorPrecedence
-public func ±<Value: FloatingPoint>(lhs: Value, rhs: Value) -> (expected: Value, delta: Value) {
+public func ± <Value: FloatingPoint>(lhs: Value, rhs: Value) -> (expected: Value, delta: Value) {
     return (expected: lhs, delta: rhs)
 }
-public func ±<Value: NMBDoubleConvertible>(lhs: Value, rhs: Double) -> (expected: Value, delta: Double) {
+public func ± <Value: NMBDoubleConvertible>(lhs: Value, rhs: Double) -> (expected: Value, delta: Double) {
     return (expected: lhs, delta: rhs)
 }
 
