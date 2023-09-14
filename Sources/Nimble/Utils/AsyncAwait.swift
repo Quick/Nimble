@@ -91,12 +91,6 @@ internal actor AsyncPromise<T> {
     }
 
     nonisolated func send(_ value: T) {
-        Task {
-            await self._send(value)
-        }
-    }
-
-    private func _send(_ value: T) {
         self.storage.send(value)
     }
 
