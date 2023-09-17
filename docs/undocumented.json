@@ -415,7 +415,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 76,
+      "line": 78,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -506,7 +506,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 338,
+      "line": 340,
       "symbol": "AsyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -759,7 +759,7 @@
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Matchers/AsyncPredicate.swift",
       "line": 2,
-      "symbol": "AsyncablePredicate.T",
+      "symbol": "AsyncablePredicate.Value",
       "symbol_kind": "source.lang.swift.decl.associatedtype",
       "warning": "undocumented"
     },
@@ -2392,6 +2392,34 @@
       "line": 18,
       "symbol": "NimbleTimeInterval.dispatchTimeInterval",
       "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Utils/NimbleTimeInterval.swift",
+      "line": 41,
+      "symbol": "NimbleTimeInterval.nanoseconds",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Utils/NimbleTimeInterval.swift",
+      "line": 64,
+      "symbol": "NimbleTimeInterval.timeInterval",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Utils/NimbleTimeInterval.swift",
+      "line": 75,
+      "symbol": "TimeInterval.nimbleInterval",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Utils/NimbleTimeInterval.swift",
+      "line": 83,
+      "symbol": "Date.advanced(by:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {

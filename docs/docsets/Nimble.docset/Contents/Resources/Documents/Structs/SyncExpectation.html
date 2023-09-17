@@ -17,7 +17,7 @@
     <a title="SyncExpectation Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Nimble 12.2.0 Docs</a> (46% documented)</p>
+        <p><a href="../index.html">Nimble 12.3.0 Docs</a> (46% documented)</p>
         <p class="header-right"><a href="https://github.com/Quick/Nimble"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -223,6 +223,9 @@
                 <a href="../Extensions/String.html">String</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/TimeInterval.html">TimeInterval</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/UInt.html">UInt</a>
               </li>
               <li class="nav-group-task">
@@ -363,7 +366,7 @@
                 <a href="../Functions.html#/s:6Nimble3neeoiyyAA16AsyncExpectationVyyXlG_yXlSgtYaF">!==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble2aaoiyAA14AsyncPredicateVyxGq__q0_t1TQy_RszAA09AsyncableD0R_AaHR0_AFQy0_AGRSr1_lF">&amp;&amp;(_:_:)</a>
+                <a href="../Functions.html#/s:6Nimble2aaoiyAA14AsyncPredicateVyxGq__q0_t5ValueQy_RszAA09AsyncableD0R_AaHR0_AFQy0_AGRSr1_lF">&amp;&amp;(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:6Nimble2aaoiyAA9PredicateVyxGAE_AEtlF">&amp;&amp;(_:_:)</a>
@@ -921,10 +924,10 @@
                 <a href="../Functions.html#/s:6Nimble13recordFailure_8locationySS_AA14SourceLocationCtF">recordFailure(_:location:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA14AsyncPredicateVyxGAA09AsyncableF0_px1TRts_XPd_tlF">satisfyAllOf(_:)</a>
+                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA14AsyncPredicateVyxGAA09AsyncableF0_px5ValueRts_XPd_tlF">satisfyAllOf(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA14AsyncPredicateVyxGSayAA09AsyncableF0_px1TRts_XPGlF">satisfyAllOf(_:)</a>
+                <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA14AsyncPredicateVyxGSayAA09AsyncableF0_px5ValueRts_XPGlF">satisfyAllOf(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA9PredicateVyxGAEd_tlF">satisfyAllOf(_:)</a>
@@ -933,10 +936,10 @@
                 <a href="../Functions.html#/s:6Nimble12satisfyAllOfyAA9PredicateVyxGSayAEGlF">satisfyAllOf(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA14AsyncPredicateVyxGAA09AsyncableF0_px1TRts_XPd_tlF">satisfyAnyOf(_:)</a>
+                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA14AsyncPredicateVyxGAA09AsyncableF0_px5ValueRts_XPd_tlF">satisfyAnyOf(_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA14AsyncPredicateVyxGSayAA09AsyncableF0_px1TRts_XPGlF">satisfyAnyOf(_:)</a>
+                <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA14AsyncPredicateVyxGSayAA09AsyncableF0_px5ValueRts_XPGlF">satisfyAnyOf(_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:6Nimble12satisfyAnyOfyAA9PredicateVyxGAEd_tlF">satisfyAnyOf(_:)</a>
@@ -987,7 +990,7 @@
                 <a href="../Functions.html#/s:6Nimble20withAssertionHandler_4file4line7closureyAA0cD0_p_SSSuyyYaKXEtYaF">withAssertionHandler(_:file:line:closure:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:6Nimble2oooiyAA14AsyncPredicateVyxGq__q0_t1TQy_RszAA09AsyncableD0R_AaHR0_AFQy0_AGRSr1_lF">||(_:_:)</a>
+                <a href="../Functions.html#/s:6Nimble2oooiyAA14AsyncPredicateVyxGq__q0_t5ValueQy_RszAA09AsyncableD0R_AaHR0_AFQy0_AGRSr1_lF">||(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:6Nimble2oooiyAA9PredicateVyxGAE_AEtlF">||(_:_:)</a>
@@ -2054,7 +2057,7 @@ This form of <code>toEventually</code> does not work in any kind of async contex
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `toEventually` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `toEventually` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2092,7 +2095,7 @@ Use the async form of <code>toEventuallyNot</code> if you are running tests in a
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `toEventuallyNot` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `toEventuallyNot` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventuallyNot</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2132,7 +2135,7 @@ Use the async form of <code>toNotEventually</code> if you are running tests in a
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `toNotEventually` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `toNotEventually` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNotEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2170,7 +2173,7 @@ Use the async form of <code>toNever</code> if you are running tests in an async 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `toNever` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `toNever` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNever</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2210,7 +2213,7 @@ Use the async form of <code>neverTo</code> if you are running tests in an async 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `neverTo` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `neverTo` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">neverTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2248,7 +2251,7 @@ Use the async form of <code>toAlways</code> if you are running tests in an async
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `toAlways` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `toAlways` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">toAlways</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2288,7 +2291,7 @@ Use the async form of <code>alwaysTo</code> if you are running tests in an async
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync version of `alwaysTo` does not work in async contexts. Use the async version with the same name as a drop-in replacement"</span><span class="p">)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">noasync</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"the sync variant of `alwaysTo` does not work in async contexts. Use the async variant as a drop-in replacement"</span><span class="p">)</span>
 <span class="kd">@discardableResult</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">alwaysTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt"><a href="../Structs/Predicate.html">Predicate</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SyncExpectation</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
@@ -2302,7 +2305,7 @@ Use the async form of <code>alwaysTo</code> if you are running tests in an async
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2023 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2023-07-28)</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2023-09-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
