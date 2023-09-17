@@ -6,6 +6,7 @@ build/
 .idea
 DerivedData/
 Nimble.framework.zip
+Nimble.xcframework.zip
 
 # Carthage
 #
