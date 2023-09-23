@@ -1,6 +1,8 @@
 #if !os(WASI)
 
+#if canImport(CoreFoundation)
 import CoreFoundation
+#endif
 import Dispatch
 import Foundation
 
@@ -192,31 +194,16 @@ internal class AwaitPromiseBuilder<T> {
             let timedOutSem = DispatchSemaphore(value: 0)
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
-            let runLoop = CFRunLoopGetMain()
-            #if canImport(Darwin)
-                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
-            #else
-                let runLoopMode = kCFRunLoopDefaultMode
-            #endif
-            CFRunLoopPerformBlock(runLoop, runLoopMode) {
+            let runLoop = RunLoop.main
+            runLoop.perform(inModes: [.default], block: {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
                     if self.promise.resolveResult(.timedOut) {
-                        CFRunLoopStop(CFRunLoopGetMain())
+                        runLoop._stop()
                     }
                 }
-            }
-            // potentially interrupt blocking code on run loop to let timeout code run
-            CFRunLoopStop(runLoop)
-            let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
-            let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
-            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
-            if didNotTimeOut && timeoutWasNotTriggered {
-                if self.promise.resolveResult(.blockedRunLoop) {
-                    CFRunLoopStop(CFRunLoopGetMain())
-                }
-            }
+            })
         }
         return self
     }
@@ -302,7 +289,7 @@ internal class Awaiter {
                     if completionCount < 2 {
                         func completeBlock() {
                             if promise.resolveResult(.completed(result)) {
-                                CFRunLoopStop(CFRunLoopGetMain())
+                                RunLoop.main._stop()
                             }
                         }
 
@@ -340,12 +327,12 @@ internal class Awaiter {
                 do {
                     if let result = try closure() {
                         if promise.resolveResult(.completed(result)) {
-                            CFRunLoopStop(CFRunLoopGetCurrent())
+                            RunLoop.current._stop()
                         }
                     }
                 } catch let error {
                     if promise.resolveResult(.errorThrown(error)) {
-                        CFRunLoopStop(CFRunLoopGetCurrent())
+                        RunLoop.current._stop()
                     }
                 }
             }
