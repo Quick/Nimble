@@ -195,7 +195,12 @@ internal class AwaitPromiseBuilder<T> {
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
             #if canImport(CoreFoundation)
-                        let runLoop = CFRunLoopGetMain()
+            let runLoop = CFRunLoopGetMain()
+            #if canImport(Darwin)
+                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
+            #else
+                let runLoopMode = kCFRunLoopDefaultMode
+            #endif
             CFRunLoopPerformBlock(runLoop, runLoopMode) {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
