@@ -95,13 +95,11 @@ final class PollingTest: XCTestCase {
         }
     }
 
-    #if !os(Windows)
     func testWaitUntilTimesOutIfNotCalled() {
         failsWithErrorMessage("Waited more than 1.0 second") {
             waitUntil(timeout: .seconds(1)) { _ in return }
         }
     }
-    #endif
 
     func testWaitUntilTimesOutWhenExceedingItsTime() {
         var waiting = true
