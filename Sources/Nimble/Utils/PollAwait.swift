@@ -219,13 +219,25 @@ internal class AwaitPromiseBuilder<T> {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
                     if self.promise.resolveResult(.timedOut) {
-                        runLoop._stop()
+                        RunLoop.main._stop()
                     }
                 }
             })
             // potentially interrupt blocking code on run loop to let timeout code run
             runLoop._stop()
             #endif
+            let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
+            let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
+            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
+            if didNotTimeOut && timeoutWasNotTriggered {
+                if self.promise.resolveResult(.blockedRunLoop) {
+                    #if canImport(CoreFoundation)
+                    CFRunLoopStop(CFRunLoopGetMain())
+                    #else
+                    RunLoop.main._stop()
+                    #endif
+                }
+            }
         }
         return self
     }
