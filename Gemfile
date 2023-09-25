@@ -1,4 +1,4 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem 'cocoapods', '~> 1.12'
+gem 'cocoapods', '~> 1.13'
