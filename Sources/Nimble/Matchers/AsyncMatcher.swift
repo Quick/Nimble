@@ -43,6 +43,9 @@ public struct AsyncMatcher<T>: AsyncableMatcher {
     }
 }
 
+@available(*, deprecated, renamed: "AsyncMatcher")
+public typealias AsyncPredicate = AsyncMatcher
+
 /// Provides convenience helpers to defining matchers
 extension AsyncMatcher {
     /// Like Matcher() constructor, but automatically guard against nil (actual) values
