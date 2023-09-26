@@ -4,15 +4,15 @@ import Nimble
 import NimbleSharedTestHelpers
 #endif
 
-func alwaysFail<T>() -> Predicate<T> {
-    return Predicate { _ throws -> PredicateResult in
-        return PredicateResult(status: .fail, message: .fail("This matcher should always fail"))
+func alwaysFail<T>() -> Nimble.Matcher<T> {
+    return Matcher { _ throws -> MatcherResult in
+        return MatcherResult(status: .fail, message: .fail("This matcher should always fail"))
     }
 }
 
-func asyncAlwaysFail<T>() -> AsyncPredicate<T> {
-    return AsyncPredicate { _ throws -> PredicateResult in
-        return PredicateResult(status: .fail, message: .fail("This matcher should always fail"))
+func asyncAlwaysFail<T>() -> AsyncMatcher<T> {
+    return AsyncMatcher { _ throws -> MatcherResult in
+        return MatcherResult(status: .fail, message: .fail("This matcher should always fail"))
     }
 }
 

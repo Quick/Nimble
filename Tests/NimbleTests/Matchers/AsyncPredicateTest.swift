@@ -5,13 +5,13 @@ import Nimble
 import NimbleSharedTestHelpers
 #endif
 
-private func beCalled(times: UInt) -> AsyncPredicate<CallCounter> {
-    AsyncPredicate.define { expression in
+private func beCalled(times: UInt) -> AsyncMatcher<CallCounter> {
+    AsyncMatcher.define { expression in
         let message = ExpectationMessage.expectedActualValueTo("be called \(times) times")
         if let value = try await expression.evaluate()?.callCount {
-            return PredicateResult(bool: value == times, message: message)
+            return MatcherResult(bool: value == times, message: message)
         } else {
-            return PredicateResult(status: .fail, message: message.appendedBeNilHint())
+            return MatcherResult(status: .fail, message: message.appendedBeNilHint())
         }
     }
 }
@@ -26,19 +26,19 @@ private actor CallCounter {
 
 private func asyncFunction<T: Equatable>(value: T) async -> T { return value }
 
-final class AsyncPredicateTest: XCTestCase {
-    func testAsyncPredicatesWithAsyncExpectations() async {
+final class AsyncMatcherTest: XCTestCase {
+    func testAsyncMatchersWithAsyncExpectations() async {
         await expecta(await asyncFunction(value: 1)).to(asyncEqual(1))
     }
 
-    func testAsyncPredicatesWithSyncExpectations() async {
+    func testAsyncMatchersWithSyncExpectations() async {
         let subject = CallCounter()
         await subject.call()
         await expects(subject).to(beCalled(times: 1))
     }
 
 #if !os(WASI)
-    func testAsyncPollingWithAsyncPredicates() async {
+    func testAsyncPollingWithAsyncMatchers() async {
         let subject = CallCounter()
 
         await expect {
@@ -54,7 +54,7 @@ final class AsyncPredicateTest: XCTestCase {
         await expect { await asyncFunction(value: 1) }.toAlways(asyncEqual(1))
     }
 
-    func testSyncPollingWithAsyncPredicates() async {
+    func testSyncPollingWithAsyncMatchers() async {
         await expects(1).toEventually(asyncEqual(1))
         await expects(1).toAlways(asyncEqual(1))
         await expects(1).toEventuallyNot(asyncEqual(0))

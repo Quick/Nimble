@@ -1,18 +1,18 @@
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers.
-public func satisfyAnyOf<T>(_ predicates: Predicate<T>...) -> Predicate<T> {
-    return satisfyAnyOf(predicates)
+public func satisfyAnyOf<T>(_ matchers: Matcher<T>...) -> Matcher<T> {
+    return satisfyAnyOf(matchers)
 }
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the array of matchers.
-public func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
-    return Predicate.define { actualExpression in
+public func satisfyAnyOf<T>(_ matchers: [Matcher<T>]) -> Matcher<T> {
+    return Matcher.define { actualExpression in
         let cachedExpression = actualExpression.withCaching()
         var postfixMessages = [String]()
-        var status: PredicateStatus = .doesNotMatch
-        for predicate in predicates {
-            let result = try predicate.satisfies(cachedExpression)
+        var status: MatcherStatus = .doesNotMatch
+        for matcher in matchers {
+            let result = try matcher.satisfies(cachedExpression)
             if result.status == .fail {
                 status = .fail
             } else if result.status == .matches, status != .fail {
@@ -33,35 +33,35 @@ public func satisfyAnyOf<T>(_ predicates: [Predicate<T>]) -> Predicate<T> {
             )
         }
 
-        return PredicateResult(status: status, message: msg)
+        return MatcherResult(status: status, message: msg)
     }
 }
 
-public func || <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
+public func || <T>(left: Matcher<T>, right: Matcher<T>) -> Matcher<T> {
     return satisfyAnyOf(left, right)
 }
 
 // There's a compiler bug in swift 5.7.2 and earlier (xcode 14.2 and earlier)
-// which causes runtime crashes when you use `[any AsyncablePredicate<T>]`.
+// which causes runtime crashes when you use `[any AsyncableMatcher<T>]`.
 // https://github.com/apple/swift/issues/61403
 #if swift(>=5.8.0)
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the variable list of matchers.
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-public func satisfyAnyOf<T>(_ predicates: any AsyncablePredicate<T>...) -> AsyncPredicate<T> {
-    return satisfyAnyOf(predicates)
+public func satisfyAnyOf<T>(_ matchers: any AsyncableMatcher<T>...) -> AsyncMatcher<T> {
+    return satisfyAnyOf(matchers)
 }
 
 /// A Nimble matcher that succeeds when the actual value matches with any of the matchers
 /// provided in the array of matchers.
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-public func satisfyAnyOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncPredicate<T> {
-    return AsyncPredicate.define { actualExpression in
+public func satisfyAnyOf<T>(_ matchers: [any AsyncableMatcher<T>]) -> AsyncMatcher<T> {
+    return AsyncMatcher.define { actualExpression in
         let cachedExpression = actualExpression.withCaching()
         var postfixMessages = [String]()
-        var status: PredicateStatus = .doesNotMatch
-        for predicate in predicates {
-            let result = try await predicate.satisfies(cachedExpression)
+        var status: MatcherStatus = .doesNotMatch
+        for matcher in matchers {
+            let result = try await matcher.satisfies(cachedExpression)
             if result.status == .fail {
                 status = .fail
             } else if result.status == .matches, status != .fail {
@@ -82,12 +82,12 @@ public func satisfyAnyOf<T>(_ predicates: [any AsyncablePredicate<T>]) -> AsyncP
             )
         }
 
-        return PredicateResult(status: status, message: msg)
+        return MatcherResult(status: status, message: msg)
     }
 }
 
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-public func || <T>(left: some AsyncablePredicate<T>, right: some AsyncablePredicate<T>) -> AsyncPredicate<T> {
+public func || <T>(left: some AsyncableMatcher<T>, right: some AsyncableMatcher<T>) -> AsyncMatcher<T> {
     return satisfyAnyOf(left, right)
 }
 #endif // swift(>=5.8.0)
@@ -95,22 +95,22 @@ public func || <T>(left: some AsyncablePredicate<T>, right: some AsyncablePredic
 #if canImport(Darwin)
 import class Foundation.NSObject
 
-extension NMBPredicate {
-    @objc public class func satisfyAnyOfMatcher(_ predicates: [NMBPredicate]) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
-            if predicates.isEmpty {
-                return NMBPredicateResult(
-                    status: NMBPredicateStatus.fail,
+extension NMBMatcher {
+    @objc public class func satisfyAnyOfMatcher(_ matchers: [NMBMatcher]) -> NMBMatcher {
+        return NMBMatcher { actualExpression in
+            if matchers.isEmpty {
+                return NMBMatcherResult(
+                    status: NMBMatcherStatus.fail,
                     message: NMBExpectationMessage(
                         fail: "satisfyAnyOf must be called with at least one matcher"
                     )
                 )
             }
 
-            var elementEvaluators = [Predicate<NSObject>]()
-            for predicate in predicates {
-                let elementEvaluator = Predicate<NSObject> { expression in
-                    return predicate.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
+            var elementEvaluators = [Matcher<NSObject>]()
+            for matcher in matchers {
+                let elementEvaluator = Matcher<NSObject> { expression in
+                    return matcher.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
                 }
 
                 elementEvaluators.append(elementEvaluator)

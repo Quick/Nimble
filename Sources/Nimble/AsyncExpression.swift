@@ -66,7 +66,7 @@ public struct AsyncExpression<Value> {
         self.isClosure = isClosure
     }
 
-    /// Creates a new synchronous expression, for use in Predicates.
+    /// Creates a new synchronous expression, for use in Matchers.
     public func toSynchronousExpression() async -> Expression<Value> {
         let value: Result<Value?, Error>
         do {

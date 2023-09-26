@@ -9,8 +9,8 @@
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<Out>() -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwError<Out>() -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -19,12 +19,12 @@ public func throwError<Out>() -> Predicate<Out> {
         }
 
         if let actualError = actualError {
-            return PredicateResult(
+            return MatcherResult(
                 bool: true,
                 message: .expectedCustomValueTo("throw any error", actual: "<\(actualError)>")
             )
         } else {
-            return PredicateResult(
+            return MatcherResult(
                 bool: false,
                 message: .expectedCustomValueTo("throw any error", actual: "no error")
             )
@@ -43,8 +43,8 @@ public func throwError<Out>() -> Predicate<Out> {
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = nil) -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = nil) -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -74,7 +74,7 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }
 
@@ -89,8 +89,8 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> Void)? = nil) -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> Void)? = nil) -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -120,7 +120,7 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }
 
@@ -138,8 +138,8 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
 public func throwError<T: Error, Out>(
     errorType: T.Type,
     closure: ((T) -> Void)? = nil
-) -> Predicate<Out> {
-    return Predicate { actualExpression in
+) -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -186,7 +186,7 @@ public func throwError<T: Error, Out>(
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }
 
@@ -197,8 +197,8 @@ public func throwError<T: Error, Out>(
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -221,7 +221,7 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<O
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }
 
@@ -232,8 +232,8 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Predicate<O
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Predicate<Out> {
-    return Predicate { actualExpression in
+public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Matcher<Out> {
+    return Matcher { actualExpression in
         var actualError: Error?
         do {
             _ = try actualExpression.evaluate()
@@ -256,6 +256,6 @@ public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Predi
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }

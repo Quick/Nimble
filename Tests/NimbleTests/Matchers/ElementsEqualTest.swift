@@ -27,7 +27,7 @@ final class ElementsEqualTest: XCTestCase {
         expect(sequence1).to(elementsEqual([1, 2, 3]))
     }
 
-    func testSequenceElementsEqualityUsingPredicateClosure() {
+    func testSequenceElementsEqualityUsingMatcherClosure() {
         failsWithErrorMessageForNil("expected to elementsEqual <nil>, got <nil>") {
             expect(nil as [Int]?).to(elementsEqual(nil as [Int]?, by: { $0 == $1 }))
         }

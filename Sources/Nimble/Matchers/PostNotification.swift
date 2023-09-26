@@ -46,16 +46,16 @@ internal class NotificationCollector {
 private let mainThread = pthread_self()
 
 private func _postNotifications<Out>(
-    _ predicate: Predicate<[Notification]>,
+    _ matcher: Matcher<[Notification]>,
     from center: NotificationCenter,
     names: Set<Notification.Name> = []
-) -> Predicate<Out> {
+) -> Matcher<Out> {
     _ = mainThread // Force lazy-loading of this value
     let collector = NotificationCollector(notificationCenter: center, names: names)
     collector.startObserving()
     var once: Bool = false
 
-    return Predicate { actualExpression in
+    return Matcher { actualExpression in
         let collectorNotificationsExpression = Expression(
             memoizedExpression: { _ in
                 return collector.observedNotifications
@@ -77,7 +77,7 @@ private func _postNotifications<Out>(
             actualValue = "<\(stringify(collector.observedNotificationDescriptions))>"
         }
 
-        var result = try predicate.satisfies(collectorNotificationsExpression)
+        var result = try matcher.satisfies(collectorNotificationsExpression)
         result.message = result.message.replacedExpectation { message in
             return .expectedCustomValueTo(message.expectedMessage, actual: actualValue)
         }
@@ -86,19 +86,19 @@ private func _postNotifications<Out>(
 }
 
 public func postNotifications<Out>(
-    _ predicate: Predicate<[Notification]>,
+    _ matcher: Matcher<[Notification]>,
     from center: NotificationCenter = .default
-) -> Predicate<Out> {
-    _postNotifications(predicate, from: center)
+) -> Matcher<Out> {
+    _postNotifications(matcher, from: center)
 }
 
 #if os(macOS)
 public func postDistributedNotifications<Out>(
-    _ predicate: Predicate<[Notification]>,
+    _ matcher: Matcher<[Notification]>,
     from center: DistributedNotificationCenter = .default(),
     names: Set<Notification.Name>
-) -> Predicate<Out> {
-    _postNotifications(predicate, from: center, names: names)
+) -> Matcher<Out> {
+    _postNotifications(matcher, from: center, names: names)
 }
 #endif
 

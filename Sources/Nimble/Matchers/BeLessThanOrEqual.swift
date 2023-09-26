@@ -1,10 +1,10 @@
 /// A Nimble matcher that succeeds when the actual value is less than
 /// or equal to the expected value.
-public func beLessThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.simple("be less than or equal to <\(stringify(expectedValue))>") { actualExpression in
+public func beLessThanOrEqualTo<T: Comparable>(_ expectedValue: T?) -> Matcher<T> {
+    return Matcher.simple("be less than or equal to <\(stringify(expectedValue))>") { actualExpression in
         guard let actual = try actualExpression.evaluate(), let expected = expectedValue else { return .fail }
 
-        return PredicateStatus(bool: actual <= expected)
+        return MatcherStatus(bool: actual <= expected)
     }
 }
 
@@ -21,11 +21,11 @@ import enum Foundation.ComparisonResult
 
 /// A Nimble matcher that succeeds when the actual value is less than
 /// or equal to the expected value.
-public func beLessThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.simple("be less than or equal to <\(stringify(expectedValue))>") { actualExpression in
+public func beLessThanOrEqualTo<T: NMBComparable>(_ expectedValue: T?) -> Matcher<T> {
+    return Matcher.simple("be less than or equal to <\(stringify(expectedValue))>") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue.map { $0.NMB_compare(expectedValue) != .orderedDescending } ?? false
-        return PredicateStatus(bool: matches)
+        return MatcherStatus(bool: matches)
     }
 }
 
@@ -37,9 +37,9 @@ public func <= <T: NMBComparable>(lhs: AsyncExpectation<T>, rhs: T) async {
     await lhs.to(beLessThanOrEqualTo(rhs))
 }
 
-extension NMBPredicate {
-    @objc public class func beLessThanOrEqualToMatcher(_ expected: NMBComparable?) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
+extension NMBMatcher {
+    @objc public class func beLessThanOrEqualToMatcher(_ expected: NMBComparable?) -> NMBMatcher {
+        return NMBMatcher { actualExpression in
             let expr = actualExpression.cast { $0 as? NMBComparable }
             return try beLessThanOrEqualTo(expected).satisfies(expr).toObjectiveC()
         }

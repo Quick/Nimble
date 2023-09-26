@@ -1,20 +1,20 @@
 /// A Nimble matcher that succeeds when the actual value is within given range.
-public func beWithin<T: Comparable>(_ range: Range<T>) -> Predicate<T> {
+public func beWithin<T: Comparable>(_ range: Range<T>) -> Matcher<T> {
     let errorMessage = "be within range <(\(range.lowerBound)..<\(range.upperBound))>"
-    return Predicate.simple(errorMessage) { actualExpression in
+    return Matcher.simple(errorMessage) { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            return PredicateStatus(bool: range.contains(actual))
+            return MatcherStatus(bool: range.contains(actual))
         }
         return .fail
     }
 }
 
 /// A Nimble matcher that succeeds when the actual value is within given range.
-public func beWithin<T: Comparable>(_ range: ClosedRange<T>) -> Predicate<T> {
+public func beWithin<T: Comparable>(_ range: ClosedRange<T>) -> Matcher<T> {
     let errorMessage = "be within range <(\(range.lowerBound)...\(range.upperBound))>"
-    return Predicate.simple(errorMessage) { actualExpression in
+    return Matcher.simple(errorMessage) { actualExpression in
         if let actual = try actualExpression.evaluate() {
-            return PredicateStatus(bool: range.contains(actual))
+            return MatcherStatus(bool: range.contains(actual))
         }
         return .fail
     }

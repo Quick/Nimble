@@ -11,7 +11,7 @@ final class OnFailureThrowsTest: XCTestCase {
     }
 
     func testUnexecutedLogsAnError() {
-        failsWithErrorMessage("Attempted to call `Expectation.onFailure(throw:) before a predicate has been applied.\nTry using `expect(...).to(...).onFailure(throw: ...`) instead.") {
+        failsWithErrorMessage("Attempted to call `Expectation.onFailure(throw:) before a matcher has been applied.\nTry using `expect(...).to(...).onFailure(throw: ...`) instead.") {
             try expect(true).onFailure(throw: MyError.error1)
         }
     }
