@@ -43,7 +43,11 @@ internal class NotificationCollector {
     }
 }
 
+#if !os(Windows)
 private let mainThread = pthread_self()
+#else
+private let mainThread = Thread.mainThread
+#endif
 
 private func _postNotifications<Out>(
     _ predicate: Predicate<[Notification]>,

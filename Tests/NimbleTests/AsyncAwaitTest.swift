@@ -85,7 +85,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     @MainActor
     func testToEventuallyOnMain() async {
         await expect(1).toEventually(equal(1), timeout: .seconds(300))
-        await expect { usleep(10); return 1 }.toEventually(equal(1))
+        await expect { try? await Task.sleep(nanoseconds: 10_000); return 1 }.toEventually(equal(1))
     }
 
     @MainActor
