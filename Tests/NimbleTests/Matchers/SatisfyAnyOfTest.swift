@@ -52,7 +52,7 @@ final class SatisfyAnyOfTest: XCTestCase {
     }
 
     #if !os(WASI)
-    func testSatisfyAllOfCachesExpressionBeforePassingToPredicates() {
+    func testSatisfyAllOfCachesExpressionBeforePassingToMatchers() {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
         // But we should still handle those cases anyway.
         var value: Int = 0
@@ -68,7 +68,7 @@ final class SatisfyAnyOfTest: XCTestCase {
     #endif
 
     // There's a compiler bug in swift 5.7 and earlier (xcode 14.2 and earlier)
-    // which causes runtime crashes when you use `[any AsyncablePredicate<T>]`.
+    // which causes runtime crashes when you use `[any AsyncableMatcher<T>]`.
     // https://github.com/apple/swift/issues/61403
     #if swift(>=5.8.0)
     // MARK: - Async Variant
@@ -120,7 +120,7 @@ final class SatisfyAnyOfTest: XCTestCase {
 
     #if !os(WASI)
     @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
-    func testAsyncSatisfyAllOfCachesExpressionBeforePassingToPredicates() async {
+    func testAsyncSatisfyAllOfCachesExpressionBeforePassingToMatchers() async {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
         // But we should still handle those cases anyway.
         actor Counter {

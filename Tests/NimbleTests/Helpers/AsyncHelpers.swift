@@ -4,43 +4,43 @@ import XCTest
 import NimbleSharedTestHelpers
 #endif
 
-func asyncEqual<T: Equatable>(_ expectedValue: T) -> AsyncPredicate<T> {
-    AsyncPredicate.define { expression in
+func asyncEqual<T: Equatable>(_ expectedValue: T) -> AsyncMatcher<T> {
+    AsyncMatcher.define { expression in
         let message = ExpectationMessage.expectedActualValueTo("equal \(expectedValue)")
         if let value = try await expression.evaluate() {
-            return PredicateResult(bool: value == expectedValue, message: message)
+            return MatcherResult(bool: value == expectedValue, message: message)
         } else {
-            return PredicateResult(status: .fail, message: message.appendedBeNilHint())
+            return MatcherResult(status: .fail, message: message.appendedBeNilHint())
         }
     }
 }
 
-func asyncContain<S: Sequence>(_ items: S.Element...) -> AsyncPredicate<S> where S.Element: Equatable {
+func asyncContain<S: Sequence>(_ items: S.Element...) -> AsyncMatcher<S> where S.Element: Equatable {
     return asyncContain(items)
 }
 
-func asyncContain<S: Sequence>(_ items: [S.Element]) -> AsyncPredicate<S> where S.Element: Equatable {
-    return AsyncPredicate.simple("contain <\(String(describing: items))>") { actualExpression in
+func asyncContain<S: Sequence>(_ items: [S.Element]) -> AsyncMatcher<S> where S.Element: Equatable {
+    return AsyncMatcher.simple("contain <\(String(describing: items))>") { actualExpression in
         guard let actual = try await actualExpression.evaluate() else { return .fail }
 
         let matches = items.allSatisfy {
             return actual.contains($0)
         }
-        return PredicateStatus(bool: matches)
+        return MatcherStatus(bool: matches)
     }
 }
 
 func asyncBeCloseTo<Value: FloatingPoint>(
     _ expectedValue: Value
-) -> AsyncPredicate<Value> {
+) -> AsyncMatcher<Value> {
     let delta: Value = 1/10000
     let errorMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
-    return AsyncPredicate.simple(errorMessage) { actualExpression in
+    return AsyncMatcher.simple(errorMessage) { actualExpression in
         guard let actualValue = try await actualExpression.evaluate() else {
             return .doesNotMatch
         }
 
-        return PredicateStatus(bool: abs(actualValue - expectedValue) < delta)
+        return MatcherStatus(bool: abs(actualValue - expectedValue) < delta)
     }
 }
 

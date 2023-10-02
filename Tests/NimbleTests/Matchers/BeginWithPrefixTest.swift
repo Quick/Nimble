@@ -32,7 +32,7 @@ final class BeginWithPrefixTest: XCTestCase {
         expect([]).to(beginWith(prefix: [] as [Int]))
     }
 
-    func testBeginWithSequencePrefixUsingPredicateClosure() {
+    func testBeginWithSequencePrefixUsingMatcherClosure() {
         failsWithErrorMessageForNil("expected to begin with <nil>, got <nil>") {
             expect(nil as [Int]?).to(beginWith(prefix: nil as [Int]?, by: { $0 == $1 }))
         }

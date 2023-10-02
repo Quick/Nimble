@@ -6,7 +6,7 @@ import NimbleSharedTestHelpers
 #endif
 
 final class ContainElementSatisfyingTest: XCTestCase {
-    // MARK: - Predicate variant
+    // MARK: - Matcher variant
     func testContainElementSatisfying() {
         var orderIndifferentArray = [1, 2, 3]
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
@@ -33,7 +33,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
 
     func testContainElementSatisfyingDefaultErrorMessage() {
         let orderIndifferentArray = [1, 2, 3]
-        failsWithErrorMessage("expected to find object in collection that satisfies predicate") {
+        failsWithErrorMessage("expected to find object in collection that satisfies matcher") {
             expect(orderIndifferentArray).to(containElementSatisfying({ number in
                 return number == 4
             }))
@@ -58,7 +58,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
 
     func testContainElementSatisfyingNegativeCaseDefaultErrorMessage() {
         let orderIndifferentArray = ["puppies", "kittens", "turtles"]
-        failsWithErrorMessage("expected to not find object in collection that satisfies predicate") {
+        failsWithErrorMessage("expected to not find object in collection that satisfies matcher") {
             expect(orderIndifferentArray).toNot(containElementSatisfying({ string in
                 return string == "kittens"
             }))
@@ -74,7 +74,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
         }
     }
 
-    // MARK: - AsyncPredicate variant
+    // MARK: - AsyncMatcher variant
     func testAsyncContainElementSatisfying() async {
         var orderIndifferentArray = [1, 2, 3]
         await expect(orderIndifferentArray).to(containElementSatisfying({ number in
@@ -101,7 +101,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
 
     func testAsyncContainElementSatisfyingDefaultErrorMessage() async {
         let orderIndifferentArray = [1, 2, 3]
-        await failsWithErrorMessage("expected to find object in collection that satisfies predicate") {
+        await failsWithErrorMessage("expected to find object in collection that satisfies matcher") {
             await expect(orderIndifferentArray).to(containElementSatisfying({ number in
                 await asyncEqualityCheck(number, 4)
             }))
@@ -126,7 +126,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
 
     func testAsyncContainElementSatisfyingNegativeCaseDefaultErrorMessage() async {
         let orderIndifferentArray = ["puppies", "kittens", "turtles"]
-        await failsWithErrorMessage("expected to not find object in collection that satisfies predicate") {
+        await failsWithErrorMessage("expected to not find object in collection that satisfies matcher") {
             await expect(orderIndifferentArray).toNot(containElementSatisfying({ string in
                 await asyncEqualityCheck(string, "kittens")
             }))

@@ -8,13 +8,13 @@ extension Optional: _OptionalProtocol {
 }
 
 /// A Nimble matcher that succeeds when the actual value is nil.
-public func beNil<T>() -> Predicate<T> {
-    return Predicate.simpleNilable("be nil") { actualExpression in
+public func beNil<T>() -> Matcher<T> {
+    return Matcher.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         if let actual = actualValue, let nestedOptionl = actual as? _OptionalProtocol {
-            return PredicateStatus(bool: nestedOptionl.isNil)
+            return MatcherStatus(bool: nestedOptionl.isNil)
         }
-        return PredicateStatus(bool: actualValue == nil)
+        return MatcherStatus(bool: actualValue == nil)
     }
 }
 
@@ -46,9 +46,9 @@ extension AsyncExpectation {
 #if canImport(Darwin)
 import Foundation
 
-extension NMBPredicate {
-    @objc public class func beNilMatcher() -> NMBPredicate {
-        return NMBPredicate { actualExpression in
+extension NMBMatcher {
+    @objc public class func beNilMatcher() -> NMBMatcher {
+        return NMBMatcher { actualExpression in
             return try beNil().satisfies(actualExpression).toObjectiveC()
         }
     }
