@@ -55,7 +55,7 @@ jobs:
     name: SwiftPM, Windows
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Swift
         uses: compnerd/gha-setup-swift@main
         with:
