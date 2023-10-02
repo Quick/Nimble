@@ -36,7 +36,7 @@
 }
 
 - (void)testFailingMatches {
-    expectFailureMessage(@"expected to find object in collection that satisfies predicate", ^{
+    expectFailureMessage(@"expected to find object in collection that satisfies matcher", ^{
         expect(@[@1]).to(containElementSatisfying(^BOOL(id object) {
             return [object isEqualToNumber:@2];
         }));

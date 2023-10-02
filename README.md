@@ -55,7 +55,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
   - [Custom Validation](#custom-validation)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
-  - [PredicateResult](#predicateresult)
+  - [MatcherResult](#matcherresult)
   - [Lazy Evaluation](#lazy-evaluation)
   - [Type Checking via Swift Generics](#type-checking-via-swift-generics)
   - [Customizing Failure Messages](#customizing-failure-messages)
@@ -341,18 +341,18 @@ expects(await someAsyncFunction()).to(equal(1)) // Compiler error: 'async' call 
 ### Async Matchers
 
 In addition to asserting on async functions prior to passing them to a
-synchronous predicate, you can also write matchers that directly take in an
-async value. These are called `AsyncPredicate`s. This is most obviously useful
+synchronous matcher, you can also write matchers that directly take in an
+async value. These are called `AsyncMatcher`s. This is most obviously useful
 when directly asserting against an actor. In addition to writing your own
 async matchers, Nimble currently ships with async versions of the following
-predicates:
+matchers:
 
 - `allPass`
 - `containElementSatisfying`
-- `satisfyAllOf` and the `&&` operator overload accept both `AsyncPredicate` and
-  synchronous `Predicate`s.
-- `satisfyAnyOf` and the `||` operator overload accept both `AsyncPredicate` and
-  synchronous `Predicate`s.
+- `satisfyAllOf` and the `&&` operator overload accept both `AsyncMatcher` and
+  synchronous `Matcher`s.
+- `satisfyAnyOf` and the `||` operator overload accept both `AsyncMatcher` and
+  synchronous `Matcher`s.
 
 Note: Async/Await support is different than the `toEventually`/`toEventuallyNot`
 feature described below.
@@ -424,7 +424,7 @@ let subject = MyActor()
 await expect { await subject.access() }.toEventually(equal(2))
 ```
 
-### Verifying a Predicate will Never or Always Match
+### Verifying a Matcher will Never or Always Match
 
 You can also test that a value always or never matches throughout the length of the timeout. Use `toNever` and `toAlways` for this:
 
@@ -1446,7 +1446,7 @@ expect(6).to(satisfyAnyOf(equal(2), equal(3), equal(4), equal(5), equal(6), equa
 expect(82).to(beLessThan(50) || beGreaterThan(80))
 ```
 
-Note: In swift, you can mix and match synchronous and asynchronous predicates
+Note: In swift, you can mix and match synchronous and asynchronous matchers
 using by `satisfyAnyOf`/`||`.
 
 ```objc
@@ -1496,25 +1496,25 @@ When using `toEventually()` be careful not to make state changes or run process 
 # Writing Your Own Matchers
 
 In Nimble, matchers are Swift functions that take an expected
-value and return a `Predicate` closure. Take `equal`, for example:
+value and return a `Matcher` closure. Take `equal`, for example:
 
 ```swift
 // Swift
 
-public func equal<T: Equatable>(expectedValue: T?) -> Predicate<T> {
+public func equal<T: Equatable>(expectedValue: T?) -> Matcher<T> {
     // Can be shortened to:
-    //   Predicate { actual in  ... }
+    //   Matcher { actual in  ... }
     //
     // But shown with types here for clarity.
-    return Predicate { (actualExpression: Expression<T>) throws -> PredicateResult in
+    return Matcher { (actualExpression: Expression<T>) throws -> MatcherResult in
         let msg = ExpectationMessage.expectedActualValueTo("equal <\(expectedValue)>")
         if let actualValue = try actualExpression.evaluate() {
-            return PredicateResult(
+            return MatcherResult(
                 bool: actualValue == expectedValue!,
                 message: msg
             )
         } else {
-            return PredicateResult(
+            return MatcherResult(
                 status: .fail,
                 message: msg.appendedBeNilHint()
             )
@@ -1523,7 +1523,7 @@ public func equal<T: Equatable>(expectedValue: T?) -> Predicate<T> {
 }
 ```
 
-The return value of a `Predicate` closure is a `PredicateResult` that indicates
+The return value of a `Matcher` closure is a `MatcherResult` that indicates
 whether the actual value matches the expectation and what error message to
 display on failure.
 
@@ -1543,27 +1543,27 @@ For examples of how to write your own matchers, just check out the
 to see how Nimble's built-in set of matchers are implemented. You can
 also check out the tips below.
 
-## PredicateResult
+## MatcherResult
 
-`PredicateResult` is the return struct that `Predicate` return to indicate
-success and failure. A `PredicateResult` is made up of two values:
-`PredicateStatus` and `ExpectationMessage`.
+`MatcherResult` is the return struct that `Matcher` return to indicate
+success and failure. A `MatcherResult` is made up of two values:
+`MatcherStatus` and `ExpectationMessage`.
 
-Instead of a boolean, `PredicateStatus` captures a trinary set of values:
+Instead of a boolean, `MatcherStatus` captures a trinary set of values:
 
 ```swift
 // Swift
 
-public enum PredicateStatus {
-// The predicate "passes" with the given expression
+public enum MatcherStatus {
+// The matcher "passes" with the given expression
 // eg - expect(1).to(equal(1))
 case matches
 
-// The predicate "fails" with the given expression
+// The matcher "fails" with the given expression
 // eg - expect(1).toNot(equal(1))
 case doesNotMatch
 
-// The predicate never "passes" with the given expression, even if negated
+// The matcher never "passes" with the given expression, even if negated
 // eg - expect(nil as Int?).toNot(equal(1))
 case fail
 
@@ -1589,11 +1589,11 @@ case fail(/* message: */ String)
 }
 ```
 
-Predicates should usually depend on either `.expectedActualValueTo(..)` or
+Matchers should usually depend on either `.expectedActualValueTo(..)` or
 `.fail(..)` when reporting errors. Special cases can be used for the other enum
 cases.
 
-Finally, if your Predicate utilizes other Predicates, you can utilize
+Finally, if your Matcher utilizes other Matchers, you can utilize
 `.appended(details:)` and `.appended(message:)` methods to annotate an existing
 error with more details.
 
@@ -1610,15 +1610,15 @@ custom matchers should call `actualExpression.evaluate()`:
 ```swift
 // Swift
 
-public func beNil<T>() -> Predicate<T> {
-    // Predicate.simpleNilable(..) automatically generates ExpectationMessage for
+public func beNil<T>() -> Matcher<T> {
+    // Matcher.simpleNilable(..) automatically generates ExpectationMessage for
     // us based on the string we provide to it. Also, the 'Nilable' postfix indicates
-    // that this Predicate supports matching against nil actualExpressions, instead of
-    // always resulting in a PredicateStatus.fail result -- which is true for
-    // Predicate.simple(..)
-    return Predicate.simpleNilable("be nil") { actualExpression in
+    // that this Matcher supports matching against nil actualExpressions, instead of
+    // always resulting in a MatcherStatus.fail result -- which is true for
+    // Matcher.simple(..)
+    return Matcher.simpleNilable("be nil") { actualExpression in
         let actualValue = try actualExpression.evaluate()
-        return PredicateStatus(bool: actualValue == nil)
+        return MatcherStatus(bool: actualValue == nil)
     }
 }
 ```
@@ -1640,16 +1640,16 @@ against the one provided to the matcher function, and passes if they are the sam
 ```swift
 // Swift
 
-public func haveDescription(description: String) -> Predicate<Printable?> {
-    return Predicate.simple("have description") { actual in
-        return PredicateStatus(bool: actual.evaluate().description == description)
+public func haveDescription(description: String) -> Matcher<Printable?> {
+    return Matcher.simple("have description") { actual in
+        return MatcherStatus(bool: actual.evaluate().description == description)
     }
 }
 ```
 
 ## Customizing Failure Messages
 
-When using `Predicate.simple(..)` or `Predicate.simpleNilable(..)`, Nimble
+When using `Matcher.simple(..)` or `Matcher.simpleNilable(..)`, Nimble
 outputs the following failure message when an expectation fails:
 
 ```swift
@@ -1658,36 +1658,36 @@ outputs the following failure message when an expectation fails:
 "expected to \(message), got <\(actual)>"
 ```
 
-You can customize this message by modifying the way you create a `Predicate`.
+You can customize this message by modifying the way you create a `Matcher`.
 
 ### Basic Customization
 
 For slightly more complex error messaging, receive the created failure message
-with `Predicate.define(..)`:
+with `Matcher.define(..)`:
 
 ```swift
 // Swift
 
-public func equal<T: Equatable>(_ expectedValue: T?) -> Predicate<T> {
-    return Predicate.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+public func equal<T: Equatable>(_ expectedValue: T?) -> Matcher<T> {
+    return Matcher.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue == expectedValue && expectedValue != nil
         if expectedValue == nil || actualValue == nil {
             if expectedValue == nil && actualValue != nil {
-                return PredicateResult(
+                return MatcherResult(
                     status: .fail,
                     message: msg.appendedBeNilHint()
                 )
             }
-            return PredicateResult(status: .fail, message: msg)
+            return MatcherResult(status: .fail, message: msg)
         }
-        return PredicateResult(bool: matches, message: msg)
+        return MatcherResult(bool: matches, message: msg)
     }
 }
 ```
 
 In the example above, `msg` is defined based on the string given to
-`Predicate.define`. The code looks akin to:
+`Matcher.define`. The code looks akin to:
 
 ```swift
 // Swift
@@ -1697,10 +1697,10 @@ let msg = ExpectationMessage.expectedActualValueTo("equal <\(stringify(expectedV
 
 ### Full Customization
 
-To fully customize the behavior of the Predicate, use the overload that expects
-a `PredicateResult` to be returned.
+To fully customize the behavior of the Matcher, use the overload that expects
+a `MatcherResult` to be returned.
 
-Along with `PredicateResult`, there are other `ExpectationMessage` enum values you can use:
+Along with `MatcherResult`, there are other `ExpectationMessage` enum values you can use:
 
 ```swift
 public indirect enum ExpectationMessage {
@@ -1744,10 +1744,10 @@ For a more comprehensive message that spans multiple lines, use
 .expectedActualValueTo("be true").appended(details: "use beFalse() for inverse\nor use beNil()")
 ```
 
-## Asynchronous Predicates
+## Asynchronous Matchers
 
-To write predicates against async expressions, return an instance of
-`AsyncPredicate`. The closure passed to `AsyncPredicate` is async, and the
+To write matchers against async expressions, return an instance of
+`AsyncMatcher`. The closure passed to `AsyncMatcher` is async, and the
 expression you evaluate is also asynchronous and needs to be awaited on.
 
 ```swift
@@ -1761,14 +1761,14 @@ actor CallRecorder<Arguments> {
     }
 }
 
-func beCalled<Argument: Equatable>(with arguments: Argument) -> AsyncPredicate<CallRecorder<Argument>> {
-    AsyncPredicate { (expression: AsyncExpression<CallRecorder<Argument>>) in
+func beCalled<Argument: Equatable>(with arguments: Argument) -> AsyncMatcher<CallRecorder<Argument>> {
+    AsyncMatcher { (expression: AsyncExpression<CallRecorder<Argument>>) in
         let message = ExpectationMessage.expectedActualValueTo("be called with \(arguments)")
         guard let calls = try await expression.evaluate()?.calls else {
-            return PredicateResult(status: .fail, message: message.appendedBeNilHint())
+            return MatcherResult(status: .fail, message: message.appendedBeNilHint())
         }
         
-        return PredicateResult(bool: calls.contains(args), message: message.appended(details: "called with \(calls)"))
+        return MatcherResult(bool: calls.contains(args), message: message.appended(details: "called with \(calls)"))
     }
 }
 ```
@@ -1780,16 +1780,16 @@ actor has received a call with the given arguments.
 ## Supporting Objective-C
 
 To use a custom matcher written in Swift from Objective-C, you'll have
-to extend the `NMBPredicate` class, adding a new class method for your
+to extend the `NMBMatcher` class, adding a new class method for your
 custom matcher. The example below defines the class method
-`+[NMBPredicate beNilMatcher]`:
+`+[NMBMatcher beNilMatcher]`:
 
 ```swift
 // Swift
 
-extension NMBPredicate {
-    @objc public class func beNilMatcher() -> NMBPredicate {
-        return NMBPredicate { actualExpression in
+extension NMBMatcher {
+    @objc public class func beNilMatcher() -> NMBMatcher {
+        return NMBMatcher { actualExpression in
             return try beNil().satisfies(actualExpression).toObjectiveC()
         }
     }
@@ -1801,7 +1801,7 @@ The above allows you to use the matcher from Objective-C:
 ```objc
 // Objective-C
 
-expect(actual).to([NMBPredicate beNilMatcher]());
+expect(actual).to([NMBMatcher beNilMatcher]());
 ```
 
 To make the syntax easier to use, define a C function that calls the
@@ -1810,8 +1810,8 @@ class method:
 ```objc
 // Objective-C
 
-FOUNDATION_EXPORT NMBPredicate *beNil() {
-    return [NMBPredicate beNilMatcher];
+FOUNDATION_EXPORT NMBMatcher *beNil() {
+    return [NMBMatcher beNilMatcher];
 }
 ```
 
@@ -1833,22 +1833,22 @@ expect(nil).to(equal(nil)); // fails
 expect(nil).to(beNil());    // passes
 ```
 
-If your matcher does not want to match with nil, you use `Predicate.define` or `Predicate.simple`. 
+If your matcher does not want to match with nil, you use `Matcher.define` or `Matcher.simple`. 
 Using those factory methods will automatically generate expected value failure messages when they're nil.
 
 ```swift
-public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Predicate<S> where S.Element: Equatable {
-    return Predicate.simple("begin with <\(startingElement)>") { actualExpression in
+public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Matcher<S> where S.Element: Equatable {
+    return Matcher.simple("begin with <\(startingElement)>") { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else { return .fail }
 
         var actualGenerator = actualValue.makeIterator()
-        return PredicateStatus(bool: actualGenerator.next() == startingElement)
+        return MatcherStatus(bool: actualGenerator.next() == startingElement)
     }
 }
 
-extension NMBPredicate {
-    @objc public class func beginWithMatcher(_ expected: Any) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
+extension NMBMatcher {
+    @objc public class func beginWithMatcher(_ expected: Any) -> NMBMatcher {
+        return NMBMatcher { actualExpression in
             let actual = try actualExpression.evaluate()
             let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
             return try beginWith(expected).satisfies(expr).toObjectiveC()

@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
 
 @class NMBExpectation;
-@class NMBPredicate;
-@class NMBObjCBeCloseToPredicate;
-@class NMBObjCRaiseExceptionPredicate;
+@class NMBMatcher;
+@class NMBObjCBeCloseToMatcher;
+@class NMBObjCRaiseExceptionMatcher;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -66,16 +66,16 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(void), NSStrin
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBPredicate *NMB_equal(TYPE expectedValue) { \
+        NMBMatcher *NMB_equal(TYPE expectedValue) { \
             return NMB_equal((EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBPredicate *equal(TYPE expectedValue), NMB_equal(expectedValue));
+        NIMBLE_SHORT_OVERLOADED(NMBMatcher *equal(TYPE expectedValue), NMB_equal(expectedValue));
 
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_equal(__nullable id expectedValue);
+    NMBMatcher *NMB_equal(__nullable id expectedValue);
 
-    NIMBLE_SHORT_OVERLOADED(NMBPredicate *equal(__nullable id expectedValue),
+    NIMBLE_SHORT_OVERLOADED(NMBMatcher *equal(__nullable id expectedValue),
                             NMB_equal(expectedValue));
 
     // overloaded dispatch for nils - expect(nil)
@@ -101,17 +101,17 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(void), NSStrin
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBPredicate *NMB_haveCount(TYPE expectedValue) { \
+        NMBMatcher *NMB_haveCount(TYPE expectedValue) { \
             return NMB_haveCount((EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBPredicate *haveCount(TYPE expectedValue), \
+        NIMBLE_SHORT_OVERLOADED(NMBMatcher *haveCount(TYPE expectedValue), \
             NMB_haveCount(expectedValue));
 
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_haveCount(id expectedValue);
+    NMBMatcher *NMB_haveCount(id expectedValue);
 
-    NIMBLE_SHORT_OVERLOADED(NMBPredicate *haveCount(id expectedValue),
+    NIMBLE_SHORT_OVERLOADED(NMBMatcher *haveCount(id expectedValue),
                             NMB_haveCount(expectedValue));
 
     DEFINE_OVERLOAD(long, @(expectedValue))
@@ -127,14 +127,14 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(void), NSStrin
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBObjCBeCloseToPredicate *NMB_beCloseTo(TYPE expectedValue) { \
+        NMBObjCBeCloseToMatcher *NMB_beCloseTo(TYPE expectedValue) { \
             return NMB_beCloseTo((NSNumber *)(EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToPredicate *beCloseTo(TYPE expectedValue), \
+        NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToMatcher *beCloseTo(TYPE expectedValue), \
             NMB_beCloseTo(expectedValue));
 
-    NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToPredicate *NMB_beCloseTo(NSNumber *expectedValue);
-    NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToPredicate *beCloseTo(NSNumber *expectedValue),
+    NIMBLE_EXPORT NIMBLE_OVERLOADABLE NMBObjCBeCloseToMatcher *NMB_beCloseTo(NSNumber *expectedValue);
+    NIMBLE_SHORT_OVERLOADED(NMBObjCBeCloseToMatcher *beCloseTo(NSNumber *expectedValue),
                             NMB_beCloseTo(expectedValue));
 
     // it would be better to only overload float & double, but zero becomes ambigious
@@ -152,33 +152,33 @@ NIMBLE_EXPORT NMBExpectation *NMB_expectAction(void(^actualBlock)(void), NSStrin
 
 #undef DEFINE_OVERLOAD
 
-NIMBLE_EXPORT NMBPredicate *NMB_beAnInstanceOf(Class expectedClass);
-NIMBLE_EXPORT_INLINE NMBPredicate *beAnInstanceOf(Class expectedClass) {
+NIMBLE_EXPORT NMBMatcher *NMB_beAnInstanceOf(Class expectedClass);
+NIMBLE_EXPORT_INLINE NMBMatcher *beAnInstanceOf(Class expectedClass) {
     return NMB_beAnInstanceOf(expectedClass);
 }
 
-NIMBLE_EXPORT NMBPredicate *NMB_beAKindOf(Class expectedClass);
-NIMBLE_EXPORT_INLINE NMBPredicate *beAKindOf(Class expectedClass) {
+NIMBLE_EXPORT NMBMatcher *NMB_beAKindOf(Class expectedClass);
+NIMBLE_EXPORT_INLINE NMBMatcher *beAKindOf(Class expectedClass) {
     return NMB_beAKindOf(expectedClass);
 }
 
-NIMBLE_EXPORT NMBPredicate *NMB_beginWith(id itemElementOrSubstring);
-NIMBLE_EXPORT_INLINE NMBPredicate *beginWith(id itemElementOrSubstring) {
+NIMBLE_EXPORT NMBMatcher *NMB_beginWith(id itemElementOrSubstring);
+NIMBLE_EXPORT_INLINE NMBMatcher *beginWith(id itemElementOrSubstring) {
     return NMB_beginWith(itemElementOrSubstring);
 }
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBPredicate *NMB_beGreaterThan(TYPE expectedValue) { \
+        NMBMatcher *NMB_beGreaterThan(TYPE expectedValue) { \
             return NMB_beGreaterThan((EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBPredicate *beGreaterThan(TYPE expectedValue), NMB_beGreaterThan(expectedValue));
+        NIMBLE_SHORT_OVERLOADED(NMBMatcher *beGreaterThan(TYPE expectedValue), NMB_beGreaterThan(expectedValue));
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_beGreaterThan(NSNumber *expectedValue);
+    NMBMatcher *NMB_beGreaterThan(NSNumber *expectedValue);
 
     NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE
-    NMBPredicate *beGreaterThan(NSNumber *expectedValue) {
+    NMBMatcher *beGreaterThan(NSNumber *expectedValue) {
         return NMB_beGreaterThan(expectedValue);
     }
 
@@ -197,17 +197,17 @@ NIMBLE_EXPORT_INLINE NMBPredicate *beginWith(id itemElementOrSubstring) {
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBPredicate *NMB_beGreaterThanOrEqualTo(TYPE expectedValue) { \
+        NMBMatcher *NMB_beGreaterThanOrEqualTo(TYPE expectedValue) { \
             return NMB_beGreaterThanOrEqualTo((EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBPredicate *beGreaterThanOrEqualTo(TYPE expectedValue), \
+        NIMBLE_SHORT_OVERLOADED(NMBMatcher *beGreaterThanOrEqualTo(TYPE expectedValue), \
             NMB_beGreaterThanOrEqualTo(expectedValue));
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue);
+    NMBMatcher *NMB_beGreaterThanOrEqualTo(NSNumber *expectedValue);
 
     NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE
-    NMBPredicate *beGreaterThanOrEqualTo(NSNumber *expectedValue) {
+    NMBMatcher *beGreaterThanOrEqualTo(NSNumber *expectedValue) {
         return NMB_beGreaterThanOrEqualTo(expectedValue);
     }
 
@@ -225,28 +225,28 @@ NIMBLE_EXPORT_INLINE NMBPredicate *beginWith(id itemElementOrSubstring) {
 
 #undef DEFINE_OVERLOAD
 
-NIMBLE_EXPORT NMBPredicate *NMB_beIdenticalTo(id expectedInstance);
-NIMBLE_SHORT(NMBPredicate *beIdenticalTo(id expectedInstance),
+NIMBLE_EXPORT NMBMatcher *NMB_beIdenticalTo(id expectedInstance);
+NIMBLE_SHORT(NMBMatcher *beIdenticalTo(id expectedInstance),
              NMB_beIdenticalTo(expectedInstance));
 
-NIMBLE_EXPORT NMBPredicate *NMB_be(id expectedInstance);
-NIMBLE_SHORT(NMBPredicate *be(id expectedInstance),
+NIMBLE_EXPORT NMBMatcher *NMB_be(id expectedInstance);
+NIMBLE_SHORT(NMBMatcher *be(id expectedInstance),
              NMB_be(expectedInstance));
 
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
         NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-        NMBPredicate *NMB_beLessThan(TYPE expectedValue) { \
+        NMBMatcher *NMB_beLessThan(TYPE expectedValue) { \
             return NMB_beLessThan((EXPR)); \
         } \
-        NIMBLE_SHORT_OVERLOADED(NMBPredicate *beLessThan(TYPE expectedValue), \
+        NIMBLE_SHORT_OVERLOADED(NMBMatcher *beLessThan(TYPE expectedValue), \
             NMB_beLessThan(expectedValue));
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_beLessThan(NSNumber *expectedValue);
+    NMBMatcher *NMB_beLessThan(NSNumber *expectedValue);
 
     NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE
-    NMBPredicate *beLessThan(NSNumber *expectedValue) {
+    NMBMatcher *beLessThan(NSNumber *expectedValue) {
         return NMB_beLessThan(expectedValue);
     }
 
@@ -266,18 +266,18 @@ NIMBLE_SHORT(NMBPredicate *be(id expectedInstance),
 
 #define DEFINE_OVERLOAD(TYPE, EXPR) \
     NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE \
-    NMBPredicate *NMB_beLessThanOrEqualTo(TYPE expectedValue) { \
+    NMBMatcher *NMB_beLessThanOrEqualTo(TYPE expectedValue) { \
         return NMB_beLessThanOrEqualTo((EXPR)); \
     } \
-    NIMBLE_SHORT_OVERLOADED(NMBPredicate *beLessThanOrEqualTo(TYPE expectedValue), \
+    NIMBLE_SHORT_OVERLOADED(NMBMatcher *beLessThanOrEqualTo(TYPE expectedValue), \
         NMB_beLessThanOrEqualTo(expectedValue));
 
 
     NIMBLE_EXPORT NIMBLE_OVERLOADABLE
-    NMBPredicate *NMB_beLessThanOrEqualTo(NSNumber *expectedValue);
+    NMBMatcher *NMB_beLessThanOrEqualTo(NSNumber *expectedValue);
 
     NIMBLE_EXPORT_INLINE NIMBLE_OVERLOADABLE
-    NMBPredicate *beLessThanOrEqualTo(NSNumber *expectedValue) {
+    NMBMatcher *beLessThanOrEqualTo(NSNumber *expectedValue) {
         return NMB_beLessThanOrEqualTo(expectedValue);
     }
 
@@ -294,63 +294,63 @@ NIMBLE_SHORT(NMBPredicate *be(id expectedInstance),
 
 #undef DEFINE_OVERLOAD
 
-NIMBLE_EXPORT NMBPredicate *NMB_beTruthy(void);
-NIMBLE_SHORT(NMBPredicate *beTruthy(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beTruthy(void);
+NIMBLE_SHORT(NMBMatcher *beTruthy(void),
              NMB_beTruthy());
 
-NIMBLE_EXPORT NMBPredicate *NMB_beFalsy(void);
-NIMBLE_SHORT(NMBPredicate *beFalsy(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beFalsy(void);
+NIMBLE_SHORT(NMBMatcher *beFalsy(void),
              NMB_beFalsy());
 
-NIMBLE_EXPORT NMBPredicate *NMB_beTrue(void);
-NIMBLE_SHORT(NMBPredicate *beTrue(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beTrue(void);
+NIMBLE_SHORT(NMBMatcher *beTrue(void),
              NMB_beTrue());
 
-NIMBLE_EXPORT NMBPredicate *NMB_beFalse(void);
-NIMBLE_SHORT(NMBPredicate *beFalse(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beFalse(void);
+NIMBLE_SHORT(NMBMatcher *beFalse(void),
              NMB_beFalse());
 
-NIMBLE_EXPORT NMBPredicate *NMB_beNil(void);
-NIMBLE_SHORT(NMBPredicate *beNil(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beNil(void);
+NIMBLE_SHORT(NMBMatcher *beNil(void),
              NMB_beNil());
 
-NIMBLE_EXPORT NMBPredicate *NMB_beEmpty(void);
-NIMBLE_SHORT(NMBPredicate *beEmpty(void),
+NIMBLE_EXPORT NMBMatcher *NMB_beEmpty(void);
+NIMBLE_SHORT(NMBMatcher *beEmpty(void),
              NMB_beEmpty());
 
-NIMBLE_EXPORT NMBPredicate *NMB_containWithNilTermination(id itemOrSubstring, ...) NS_REQUIRES_NIL_TERMINATION;
+NIMBLE_EXPORT NMBMatcher *NMB_containWithNilTermination(id itemOrSubstring, ...) NS_REQUIRES_NIL_TERMINATION;
 #define NMB_contain(...) NMB_containWithNilTermination(__VA_ARGS__, nil)
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define contain(...) NMB_contain(__VA_ARGS__)
 #endif
 
-NIMBLE_EXPORT NMBPredicate *NMB_containElementSatisfying(BOOL(^predicate)(id));
-NIMBLE_SHORT(NMBPredicate *containElementSatisfying(BOOL(^predicate)(id)),
-             NMB_containElementSatisfying(predicate));
+NIMBLE_EXPORT NMBMatcher *NMB_containElementSatisfying(BOOL(^matcher)(id));
+NIMBLE_SHORT(NMBMatcher *containElementSatisfying(BOOL(^matcher)(id)),
+             NMB_containElementSatisfying(matcher));
 
-NIMBLE_EXPORT NMBPredicate *NMB_endWith(id itemElementOrSubstring);
-NIMBLE_SHORT(NMBPredicate *endWith(id itemElementOrSubstring),
+NIMBLE_EXPORT NMBMatcher *NMB_endWith(id itemElementOrSubstring);
+NIMBLE_SHORT(NMBMatcher *endWith(id itemElementOrSubstring),
              NMB_endWith(itemElementOrSubstring));
 
-NIMBLE_EXPORT NMBObjCRaiseExceptionPredicate *NMB_raiseException(void);
-NIMBLE_SHORT(NMBObjCRaiseExceptionPredicate *raiseException(void),
+NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException(void);
+NIMBLE_SHORT(NMBObjCRaiseExceptionMatcher *raiseException(void),
              NMB_raiseException());
 
-NIMBLE_EXPORT NMBPredicate *NMB_match(id expectedValue);
-NIMBLE_SHORT(NMBPredicate *match(id expectedValue),
+NIMBLE_EXPORT NMBMatcher *NMB_match(id expectedValue);
+NIMBLE_SHORT(NMBMatcher *match(id expectedValue),
              NMB_match(expectedValue));
 
-NIMBLE_EXPORT NMBPredicate *NMB_allPass(id matcher);
-NIMBLE_SHORT(NMBPredicate *allPass(id matcher),
+NIMBLE_EXPORT NMBMatcher *NMB_allPass(id matcher);
+NIMBLE_SHORT(NMBMatcher *allPass(id matcher),
              NMB_allPass(matcher));
 
-NIMBLE_EXPORT NMBPredicate *NMB_satisfyAnyOfWithMatchers(id matchers);
+NIMBLE_EXPORT NMBMatcher *NMB_satisfyAnyOfWithMatchers(id matchers);
 #define NMB_satisfyAnyOf(...) NMB_satisfyAnyOfWithMatchers(@[__VA_ARGS__])
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define satisfyAnyOf(...) NMB_satisfyAnyOf(__VA_ARGS__)
 #endif
 
-NIMBLE_EXPORT NMBPredicate *NMB_satisfyAllOfWithMatchers(id matchers);
+NIMBLE_EXPORT NMBMatcher *NMB_satisfyAllOfWithMatchers(id matchers);
 #define NMB_satisfyAllOf(...) NMB_satisfyAllOfWithMatchers(@[__VA_ARGS__])
 #ifndef NIMBLE_DISABLE_SHORT_SYNTAX
 #define satisfyAllOf(...) NMB_satisfyAllOf(__VA_ARGS__)

@@ -12,7 +12,7 @@ final class UserDescriptionTest: XCTestCase {
             expected to match, got <1>
             """
         ) {
-            expect(1).to(Predicate.simple { _ in .doesNotMatch }, description: "These aren't equal!")
+            expect(1).to(Matcher.simple { _ in .doesNotMatch }, description: "These aren't equal!")
         }
     }
 
@@ -23,7 +23,7 @@ final class UserDescriptionTest: XCTestCase {
             expected to not match, got <1>
             """
         ) {
-            expect(1).notTo(Predicate.simple { _ in .matches }, description: "These aren't equal!")
+            expect(1).notTo(Matcher.simple { _ in .matches }, description: "These aren't equal!")
         }
     }
 
@@ -34,7 +34,7 @@ final class UserDescriptionTest: XCTestCase {
             expected to not match, got <1>
             """
         ) {
-            expect(1).toNot(Predicate.simple { _ in .matches }, description: "These aren't equal!")
+            expect(1).toNot(Matcher.simple { _ in .matches }, description: "These aren't equal!")
         }
     }
 

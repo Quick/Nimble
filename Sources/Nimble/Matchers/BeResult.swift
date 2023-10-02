@@ -6,8 +6,8 @@ import Foundation
 /// The closure only gets called when the result is success.
 public func beSuccess<Success, Failure>(
     test: ((Success) -> Void)? = nil
-) -> Predicate<Result<Success, Failure>> {
-    return Predicate.define { expression in
+) -> Matcher<Result<Success, Failure>> {
+    return Matcher.define { expression in
         var rawMessage = "be <success(\(Success.self))>"
         if test != nil {
             rawMessage += " that satisfies block"
@@ -15,7 +15,7 @@ public func beSuccess<Success, Failure>(
         let message = ExpectationMessage.expectedActualValueTo(rawMessage)
 
         guard case let .success(value)? = try expression.evaluate() else {
-            return PredicateResult(status: .doesNotMatch, message: message)
+            return MatcherResult(status: .doesNotMatch, message: message)
         }
 
         var matches = true
@@ -29,7 +29,7 @@ public func beSuccess<Success, Failure>(
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }
 
@@ -39,8 +39,8 @@ public func beSuccess<Success, Failure>(
 /// The closure only gets called when the result is failure.
 public func beFailure<Success, Failure>(
     test: ((Failure) -> Void)? = nil
-) -> Predicate<Result<Success, Failure>> {
-    return Predicate.define { expression in
+) -> Matcher<Result<Success, Failure>> {
+    return Matcher.define { expression in
         var rawMessage = "be <failure(\(Failure.self))>"
         if test != nil {
             rawMessage += " that satisfies block"
@@ -48,7 +48,7 @@ public func beFailure<Success, Failure>(
         let message = ExpectationMessage.expectedActualValueTo(rawMessage)
 
         guard case let .failure(error)? = try expression.evaluate() else {
-            return PredicateResult(status: .doesNotMatch, message: message)
+            return MatcherResult(status: .doesNotMatch, message: message)
         }
 
         var matches = true
@@ -62,6 +62,6 @@ public func beFailure<Success, Failure>(
             }
         }
 
-        return PredicateResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: message)
     }
 }

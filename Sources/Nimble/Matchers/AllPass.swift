@@ -1,36 +1,36 @@
 public func allPass<S: Sequence>(
     _ passFunc: @escaping (S.Element) throws -> Bool
-) -> Predicate<S> {
-    let matcher = Predicate<S.Element>.define("pass a condition") { actualExpression, message in
+) -> Matcher<S> {
+    let matcher = Matcher<S.Element>.define("pass a condition") { actualExpression, message in
         guard let actual = try actualExpression.evaluate() else {
-            return PredicateResult(status: .fail, message: message)
+            return MatcherResult(status: .fail, message: message)
         }
-        return PredicateResult(bool: try passFunc(actual), message: message)
+        return MatcherResult(bool: try passFunc(actual), message: message)
     }
-    return createPredicate(matcher)
+    return createMatcher(matcher)
 }
 
 public func allPass<S: Sequence>(
     _ passName: String,
     _ passFunc: @escaping (S.Element) throws -> Bool
-) -> Predicate<S> {
-    let matcher = Predicate<S.Element>.define(passName) { actualExpression, message in
+) -> Matcher<S> {
+    let matcher = Matcher<S.Element>.define(passName) { actualExpression, message in
         guard let actual = try actualExpression.evaluate() else {
-            return PredicateResult(status: .fail, message: message)
+            return MatcherResult(status: .fail, message: message)
         }
-        return PredicateResult(bool: try passFunc(actual), message: message)
+        return MatcherResult(bool: try passFunc(actual), message: message)
     }
-    return createPredicate(matcher)
+    return createMatcher(matcher)
 }
 
-public func allPass<S: Sequence>(_ elementPredicate: Predicate<S.Element>) -> Predicate<S> {
-    return createPredicate(elementPredicate)
+public func allPass<S: Sequence>(_ elementMatcher: Matcher<S.Element>) -> Matcher<S> {
+    return createMatcher(elementMatcher)
 }
 
-private func createPredicate<S: Sequence>(_ elementMatcher: Predicate<S.Element>) -> Predicate<S> {
-    return Predicate { actualExpression in
+private func createMatcher<S: Sequence>(_ elementMatcher: Matcher<S.Element>) -> Matcher<S> {
+    return Matcher { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else {
-            return PredicateResult(
+            return MatcherResult(
                 status: .fail,
                 message: .appends(.expectedTo("all pass"), " (use beNil() to match nils)")
             )
@@ -42,24 +42,24 @@ private func createPredicate<S: Sequence>(_ elementMatcher: Predicate<S.Element>
                 expression: { currentElement },
                 location: actualExpression.location
             )
-            let predicateResult = try elementMatcher.satisfies(exp)
-            if predicateResult.status == .matches {
-                failure = predicateResult.message.prepended(expectation: "all ")
+            let matcherResult = try elementMatcher.satisfies(exp)
+            if matcherResult.status == .matches {
+                failure = matcherResult.message.prepended(expectation: "all ")
             } else {
-                failure = predicateResult.message
+                failure = matcherResult.message
                     .replacedExpectation({ .expectedTo($0.expectedMessage) })
                     .wrappedExpectation(
                         before: "all ",
                         after: ", but failed first at element <\(stringify(currentElement))>"
                             + " in <\(stringify(actualValue))>"
                 )
-                return PredicateResult(status: .doesNotMatch, message: failure)
+                return MatcherResult(status: .doesNotMatch, message: failure)
             }
         }
         failure = failure.replacedExpectation({ expectation in
             return .expectedTo(expectation.expectedMessage)
         })
-        return PredicateResult(status: .matches, message: failure)
+        return MatcherResult(status: .matches, message: failure)
     }
 }
 
@@ -68,9 +68,9 @@ import class Foundation.NSObject
 import struct Foundation.NSFastEnumerationIterator
 import protocol Foundation.NSFastEnumeration
 
-extension NMBPredicate {
-    @objc public class func allPassMatcher(_ predicate: NMBPredicate) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
+extension NMBMatcher {
+    @objc public class func allPassMatcher(_ matcher: NMBMatcher) -> NMBMatcher {
+        return NMBMatcher { actualExpression in
             let location = actualExpression.location
             let actualValue = try actualExpression.evaluate()
             var nsObjects = [NSObject]()
@@ -91,8 +91,8 @@ extension NMBPredicate {
             }
 
             if !collectionIsUsable {
-                return NMBPredicateResult(
-                    status: NMBPredicateStatus.fail,
+                return NMBMatcherResult(
+                    status: NMBMatcherStatus.fail,
                     message: NMBExpectationMessage(
                         // swiftlint:disable:next line_length
                         fail: "allPass can only be used with types which implement NSFastEnumeration (NSArray, NSSet, ...), and whose elements subclass NSObject, got <\(actualValue?.description ?? "nil")>"
@@ -101,8 +101,8 @@ extension NMBPredicate {
             }
 
             let expr = Expression(expression: ({ nsObjects }), location: location)
-            let pred: Predicate<[NSObject]> = createPredicate(Predicate { expr in
-                return predicate.satisfies(({ try expr.evaluate() }), location: expr.location).toSwift()
+            let pred: Matcher<[NSObject]> = createMatcher(Matcher { expr in
+                return matcher.satisfies(({ try expr.evaluate() }), location: expr.location).toSwift()
             })
             return try pred.satisfies(expr).toObjectiveC()
         }
