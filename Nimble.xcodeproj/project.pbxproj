@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -165,15 +165,15 @@
 		CDC157912511957100EAA480 /* DSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC157902511957100EAA480 /* DSLTest.swift */; };
 		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDF5C57B2647B89B0036532C /* Equal+Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5C57A2647B89B0036532C /* Equal+Tuple.swift */; };
-		CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; platformFilters = (driverkit, ios, maccatalyst, macos, ); settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
+		CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
+		CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
+		CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); settings = {ATTRIBUTES = (Public, ); }; };
+		CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
+		CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
+		CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
 		CDFB6A471F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */; };
-		CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; platformFilters = (driverkit, ios, maccatalyst, macos, ); settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
+		CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); settings = {ATTRIBUTES = (Public, ); }; };
+		CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
 		DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */; };
@@ -1254,10 +1254,10 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator driverkit iphoneos iphonesimulator macosx watchos watchsimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator driverkit iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,7";
 			};
 			name = Debug;
 		};
@@ -1297,12 +1297,12 @@
 				PRODUCT_NAME = Nimble;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator driverkit iphoneos iphonesimulator macosx watchos watchsimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator driverkit iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TARGETED_DEVICE_FAMILY = "1,2,3,4";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,7";
 			};
 			name = Release;
 		};
