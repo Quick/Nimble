@@ -25,7 +25,7 @@ public func endWith(_ endingElement: Any) -> Matcher<NMBOrderedCollection> {
         guard let collection = try actualExpression.evaluate() else { return .fail }
 
         guard collection.count > 0 else { return MatcherStatus(bool: false) }
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
             let collectionValue = collection.object(at: collection.count - 1) as AnyObject
         #else
             guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
