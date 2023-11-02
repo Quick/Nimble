@@ -20,7 +20,7 @@
 
 #ifdef __APPLE__
 #import "TargetConditionals.h"
-#if TARGET_OS_OSX || TARGET_OS_IOS
+#if TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_VISION
 
 #import "mach_excServer.h"
 #import "CwlMachBadInstructionHandler.h"

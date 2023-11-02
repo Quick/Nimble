@@ -1,6 +1,6 @@
 #ifdef __APPLE__
 #import "TargetConditionals.h"
-#if TARGET_OS_OSX || TARGET_OS_IOS
+#if TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_VISION
 
 #ifndef	_mach_exc_server_
 #define	_mach_exc_server_

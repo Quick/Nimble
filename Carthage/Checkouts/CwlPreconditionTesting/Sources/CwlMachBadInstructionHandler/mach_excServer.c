@@ -10,7 +10,7 @@
 #define	__MIG_check__Request__mach_exc_subsystem__ 1
 
 #import "mach_excServer.h"
-#if TARGET_OS_OSX || TARGET_OS_IOS
+#if TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_VISION
 
 #ifndef	mig_internal
 #define	mig_internal	static __inline__
