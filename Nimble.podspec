@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.15"
   s.tvos.deployment_target = "13.0"
   s.watchos.deployment_target = "7.0"
+  s.visionos.deployment_target = "1.0"
   s.source       = { :git => "https://github.com/Quick/Nimble.git",
                      :tag => "v#{s.version}" }
 
@@ -27,6 +28,9 @@ Pod::Spec.new do |s|
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]
   s.ios.exclude_files = [
+    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
+  ]
+  s.visionos.exclude_files = [
     "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
   ]
   s.tvos.exclude_files = [
