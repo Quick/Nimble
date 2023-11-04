@@ -95,6 +95,11 @@ function test_watchos {
 }
 
 function test_visionos {
+    if [[ -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        echo "visionOS is not supported on this machine"
+        return
+    fi
+
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -destination "generic/platform=visionOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
 
     run osascript -e 'tell app "Simulator" to quit'
@@ -133,6 +138,11 @@ function test_xcode_spm_watchos {
 }
 
 function test_xcode_spm_visionos {
+    if [[ -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        echo "visionOS is not supported on this machine"
+        return
+    fi
+
     run osascript -e 'tell app "Simulator" to quit'
     mv Nimble.xcodeproj Nimble.xcodeproj.bak
     trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
