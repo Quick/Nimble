@@ -150,11 +150,16 @@ function test_xcode_spm_visionos {
 }
 
 function test_podspec {
+    PLATFORMS="ios,tvos,watchos,macos"
+    if [[ ! -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        PLATFORMS="$PLATFORMS,visionos"
+    fi
+
     echo "Gathering CocoaPods installation information..."
     run bundle exec pod --version
     echo "Linting podspec..."
     # Note: remove `--allow-warnings` once old Matcher API has been removed
-    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation --verbose
+    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation --verbose --platforms=$PLATFORMS
 }
 
 function test_swiftpm {
