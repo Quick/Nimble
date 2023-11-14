@@ -1,2 +1,2 @@
 github "mattgallagher/CwlCatchException" ~> 2.0
-github "bitmovin-engineering/CwlPreconditionTesting" "bitmovin/main"
+github "mattgallagher/CwlPreconditionTesting" ~> 2.2

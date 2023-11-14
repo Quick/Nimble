@@ -19,8 +19,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // TODO: use official repo once merged
-        .package(url: "https://github.com/bitmovin-engineering/CwlPreconditionTesting.git", branch: "bitmovin/feature/visionos-support"),
+        .package(url: "https://github.com/mattgallagher/CwlPreconditionTesting.git", .upToNextMajor(from: "2.2.0")),
     ],
     targets: {
         var testHelperDependencies: [PackageDescription.Target.Dependency] = ["Nimble"]

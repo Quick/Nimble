@@ -23,7 +23,7 @@
 import Foundation
 import Swift
 
-#if SWIFT_PACKAGE
+#if SWIFT_PACKAGE || COCOAPODS
 	import CwlCatchException
 	import CwlMachBadInstructionHandler
 #endif
