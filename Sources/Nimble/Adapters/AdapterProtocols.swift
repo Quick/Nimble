@@ -1,6 +1,7 @@
 /// Protocol for the assertion handler that Nimble uses for all expectations.
 public protocol AssertionHandler {
     func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation)
+    func require(_ passed: Bool, message: FailureMessage, location: SourceLocation)
 }
 
 /// Global backing interface for assertions that Nimble creates.

@@ -125,6 +125,8 @@
 		857D1849253610A900D8693A /* BeWithin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D1848253610A900D8693A /* BeWithin.swift */; };
 		857D184F2536124400D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
 		8913649429E6925F00AD535E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
+		891729D52B1842D6005CC866 /* DSL+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D42B1842D6005CC866 /* DSL+Require.swift */; };
+		891729D72B18431D005CC866 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D62B18431D005CC866 /* Requirement.swift */; };
 		891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A04702AB0164500B46613 /* AsyncTimerSequence.swift */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962402A5FABD000A7929D /* AsyncAllPass.swift */; };
@@ -310,6 +312,8 @@
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
 		857D1848253610A900D8693A /* BeWithin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithin.swift; sourceTree = "<group>"; };
 		857D184D2536123F00D8693A /* BeWithinTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithinTest.swift; sourceTree = "<group>"; };
+		891729D42B1842D6005CC866 /* DSL+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+Require.swift"; sourceTree = "<group>"; };
+		891729D62B18431D005CC866 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		891A04702AB0164500B46613 /* AsyncTimerSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequence.swift; sourceTree = "<group>"; };
 		892FDF1229D3EA7700523A80 /* AsyncExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncExpression.swift; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 				1FD8CD041968AB07008ED995 /* Adapters */,
 				892FDF1229D3EA7700523A80 /* AsyncExpression.swift */,
 				1FD8CD081968AB07008ED995 /* DSL.swift */,
+				891729D62B18431D005CC866 /* Requirement.swift */,
+				891729D42B1842D6005CC866 /* DSL+Require.swift */,
 				899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */,
 				DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */,
 				1FD8CD091968AB07008ED995 /* Expectation.swift */,
@@ -959,6 +965,7 @@
 				1FD8CD451968AB07008ED995 /* BeginWith.swift in Sources */,
 				1FD8CD4B1968AB07008ED995 /* BeIdenticalTo.swift in Sources */,
 				1FD8CD431968AB07008ED995 /* BeEmpty.swift in Sources */,
+				891729D52B1842D6005CC866 /* DSL+Require.swift in Sources */,
 				1F1871D41CA89EEE00A34BF2 /* NMBStringify.m in Sources */,
 				A8F6B5BD2070186D00FCB5ED /* SatisfyAllOf.swift in Sources */,
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
@@ -968,6 +975,7 @@
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
 				7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
 				896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */,
+				891729D72B18431D005CC866 /* Requirement.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */,
 				89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */,

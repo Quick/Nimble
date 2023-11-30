@@ -71,4 +71,20 @@ final class DSLTest: XCTestCase {
         expect { nonThrowingInt() }.to(equal(1))
         expects { nonThrowingInt() }.to(equal(1))
     }
+
+    func testRequire() throws {
+        expect { try require(1).to(equal(1)) }.toNot(throwError())
+
+        let records = gatherExpectations(silently: true) {
+            do {
+                try require(1).to(equal(2))
+            } catch {
+                expect(error).to(matchError(RequirementError.self))
+            }
+        }
+
+        expect(records).to(haveCount(2))
+        expect(records.first?.success).to(beFalse())
+        expect(records.last?.success).to(beTrue())
+    }
 }
