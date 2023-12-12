@@ -73,24 +73,15 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     }
 }
 
-import XCTest
-
 public struct SyncRequirement<Value> {
     public let expression: Expression<Value>
-    public let status: ExpectationStatus
 
     public var location: SourceLocation { expression.location }
 
-    private init(expression: Expression<Value>, status: ExpectationStatus) {
-        self.expression = expression
-        self.status = status
-    }
-
     public init(expression: Expression<Value>) {
-        self.init(expression: expression, status: .pending)
+        self.expression = expression
     }
 
-    @discardableResult
     public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.require(pass, message: message, location: expression.location)
@@ -98,19 +89,15 @@ public struct SyncRequirement<Value> {
             throw RequirementError(message: message.stringValue, location: self.location)
         }
         return value
-
-//        return try value.get()
     }
 
     /// Tests the actual value using a matcher to match.
-    @discardableResult
     public func to(_ matcher: Matcher<Value>, description: String? = nil) throws -> Value {
         let (pass, msg, result) = executeRequire(expression, .toMatch, matcher, to: "to", description: description)
         return try verify(pass, msg, result)
     }
 
     /// Tests the actual value using a matcher to not match.
-    @discardableResult
     public func toNot(_ matcher: Matcher<Value>, description: String? = nil) throws -> Value {
         let (pass, msg, result) = executeRequire(expression, .toNotMatch, matcher, to: "to not", description: description)
         return try verify(pass, msg, result)
@@ -119,21 +106,18 @@ public struct SyncRequirement<Value> {
     /// Tests the actual value using a matcher to not match.
     ///
     /// Alias to toNot().
-    @discardableResult
     public func notTo(_ matcher: Matcher<Value>, description: String? = nil) throws -> Value {
         try toNot(matcher, description: description)
     }
 
     // MARK: - AsyncMatchers
     /// Tests the actual value using a matcher to match.
-    @discardableResult
     public func to(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
         let (pass, msg, result) = await executeRequire(expression.toAsyncExpression(), .toMatch, matcher, to: "to", description: description)
         return try verify(pass, msg, result)
     }
 
     /// Tests the actual value using a matcher to not match.
-    @discardableResult
     public func toNot(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
         let (pass, msg, result) = await executeRequire(expression.toAsyncExpression(), .toNotMatch, matcher, to: "to not", description: description)
         return try verify(pass, msg, result)
@@ -142,7 +126,64 @@ public struct SyncRequirement<Value> {
     /// Tests the actual value using a matcher to not match.
     ///
     /// Alias to toNot().
-    @discardableResult
+    public func notTo(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
+        try await toNot(matcher, description: description)
+    }
+}
+
+public struct AsyncRequirement<Value> {
+    public let expression: AsyncExpression<Value>
+
+    public var location: SourceLocation { expression.location }
+
+    public init(expression: AsyncExpression<Value>) {
+        self.expression = expression
+    }
+
+    public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
+        let handler = NimbleEnvironment.activeInstance.assertionHandler
+        handler.require(pass, message: message, location: expression.location)
+        guard pass, let value else {
+            throw RequirementError(message: message.stringValue, location: self.location)
+        }
+        return value
+    }
+
+    /// Tests the actual value using a matcher to match.
+    public func to(_ matcher: Matcher<Value>, description: String? = nil) async throws -> Value {
+        let (pass, msg, result) = executeRequire(await expression.toSynchronousExpression(), .toMatch, matcher, to: "to", description: description)
+        return try verify(pass, msg, result)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    public func toNot(_ matcher: Matcher<Value>, description: String? = nil) async throws -> Value {
+        let (pass, msg, result) = executeRequire(await expression.toSynchronousExpression(), .toNotMatch, matcher, to: "to not", description: description)
+        return try verify(pass, msg, result)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
+    public func notTo(_ matcher: Matcher<Value>, description: String? = nil) async throws -> Value {
+        try await toNot(matcher, description: description)
+    }
+
+    // MARK: - AsyncMatchers
+    /// Tests the actual value using a matcher to match.
+    public func to(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
+        let (pass, msg, result) = await executeRequire(expression, .toMatch, matcher, to: "to", description: description)
+        return try verify(pass, msg, result)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    public func toNot(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
+        let (pass, msg, result) = await executeRequire(expression, .toNotMatch, matcher, to: "to not", description: description)
+        return try verify(pass, msg, result)
+    }
+
+    /// Tests the actual value using a matcher to not match.
+    ///
+    /// Alias to toNot().
     public func notTo(_ matcher: AsyncMatcher<Value>, description: String? = nil) async throws -> Value {
         try await toNot(matcher, description: description)
     }

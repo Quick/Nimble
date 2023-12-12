@@ -18,16 +18,17 @@ private func throwingAsyncInt() async throws -> Int {
 }
 
 final class DSLTest: XCTestCase {
-    func testExpectAutoclosureNonThrowing() throws {
+    // MARK: - Expect
+    func testExpectAutoclosureNonThrowing() {
         let _: SyncExpectation<Int> = expect(1)
         let _: SyncExpectation<Int> = expect(nonThrowingInt())
     }
 
-    func testExpectAutoclosureThrowing() throws {
+    func testExpectAutoclosureThrowing() {
         let _: SyncExpectation<Int> = expect(try throwingInt())
     }
 
-    func testExpectClosure() throws {
+    func testExpectClosure() {
         let _: SyncExpectation<Int> = expect { 1 }
         let _: SyncExpectation<Int> = expect { nonThrowingInt() }
         let _: SyncExpectation<Int> = expect { try throwingInt() }
@@ -45,7 +46,7 @@ final class DSLTest: XCTestCase {
         let _: SyncExpectation<Void> = expect { () -> Void in return () }
     }
 
-    func testExpectAsyncClosure() async throws {
+    func testExpectAsyncClosure() async {
         let _: AsyncExpectation<Int> = expect { 1 }
         let _: AsyncExpectation<Int> = expect { await nonThrowingAsyncInt() }
         let _: AsyncExpectation<Int> = expect { try await throwingAsyncInt() }
@@ -63,7 +64,7 @@ final class DSLTest: XCTestCase {
         let _: AsyncExpectation<Void> = expect { () -> Void in return () }
     }
 
-    func testExpectCombinedSyncAndAsyncExpects() async throws {
+    func testExpectCombinedSyncAndAsyncExpects() async {
         await expect { await nonThrowingAsyncInt() }.to(equal(1))
         await expecta(await nonThrowingAsyncInt()).to(equal(1))
         expect(1).to(equal(1))
@@ -72,12 +73,67 @@ final class DSLTest: XCTestCase {
         expects { nonThrowingInt() }.to(equal(1))
     }
 
+    // MARK: - Require
+    func testRequireAutoclosureNonThrowing() {
+        let _: SyncRequirement<Int> = require(1)
+        let _: SyncRequirement<Int> = require(nonThrowingInt())
+    }
+
+    func testRequireAutoclosureThrowing() {
+        let _: SyncRequirement<Int> = require(try throwingInt())
+    }
+
+    func testRequireClosure() {
+        let _: SyncRequirement<Int> = require { 1 }
+        let _: SyncRequirement<Int> = require { nonThrowingInt() }
+        let _: SyncRequirement<Int> = require { try throwingInt() }
+        let _: SyncRequirement<Int> = require { () -> Int in 1 }
+        let _: SyncRequirement<Int> = require { () -> Int? in 1 }
+        let _: SyncRequirement<Int> = require { () -> Int? in nil }
+
+        let _: SyncRequirement<Void> = require { }
+        let _: SyncRequirement<Void> = require { () -> Void in }
+
+        let _: SyncRequirement<Void> = require { return }
+        let _: SyncRequirement<Void> = require { () -> Void in return }
+
+        let _: SyncRequirement<Void> = require { return () }
+        let _: SyncRequirement<Void> = require { () -> Void in return () }
+    }
+
+    func testRequireAsyncClosure() async {
+        let _: AsyncRequirement<Int> = require { 1 }
+        let _: AsyncRequirement<Int> = require { await nonThrowingAsyncInt() }
+        let _: AsyncRequirement<Int> = require { try await throwingAsyncInt() }
+        let _: AsyncRequirement<Int> = require { () -> Int in 1 }
+        let _: AsyncRequirement<Int> = require { () -> Int? in 1 }
+        let _: AsyncRequirement<Int> = require { () -> Int? in nil }
+
+        let _: AsyncRequirement<Void> = require { }
+        let _: AsyncRequirement<Void> = require { () -> Void in }
+
+        let _: AsyncRequirement<Void> = require { return }
+        let _: AsyncRequirement<Void> = require { () -> Void in return }
+
+        let _: AsyncRequirement<Void> = require { return () }
+        let _: AsyncRequirement<Void> = require { () -> Void in return () }
+    }
+
+    func testExpectCombinedSyncAndAsyncRequirements() async throws {
+        _ = try await require { await nonThrowingAsyncInt() }.to(equal(1))
+        _ = try await requireAsync(await nonThrowingAsyncInt()).to(equal(1))
+        _ = try require(1).to(equal(1))
+
+        _ = try require { nonThrowingInt() }.to(equal(1))
+    }
+
     func testRequire() throws {
-        expect { try require(1).to(equal(1)) }.toNot(throwError())
+        expect { try require(1).to(equal(1)) }.to(equal(1))
+        expect { try require(3).toNot(beNil()) }.to(equal(3))
 
         let records = gatherExpectations(silently: true) {
             do {
-                try require(1).to(equal(2))
+                _ = try require(1).to(equal(2))
             } catch {
                 expect(error).to(matchError(RequirementError.self))
             }
