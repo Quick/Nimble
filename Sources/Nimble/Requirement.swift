@@ -1,3 +1,5 @@
+import Foundation
+
 public struct RequirementError: Error, CustomNSError {
     let message: String
     let location: SourceLocation
