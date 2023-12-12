@@ -27,8 +27,9 @@ internal func executeRequire<T>(_ expression: Expression<T>, _ style: Expectatio
         msg.userDescription = description
         msg.to = to
         do {
-            let result = try matcher.satisfies(expression)
-            let value = try expression.evaluate()
+            let cachedExpression = expression.withCaching()
+            let result = try matcher.satisfies(cachedExpression)
+            let value = try cachedExpression.evaluate()
             result.message.update(failureMessage: msg)
             if msg.actualValue == "" {
                 msg.actualValue = "<\(stringify(value))>"
@@ -62,8 +63,9 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     msg.userDescription = description
     msg.to = to
     do {
-        let result = try await matcher.satisfies(expression)
-        let value = try await expression.evaluate()
+        let cachedExpression = expression.withCaching()
+        let result = try await matcher.satisfies(cachedExpression)
+        let value = try await cachedExpression.evaluate()
         result.message.update(failureMessage: msg)
         if msg.actualValue == "" {
             msg.actualValue = "<\(stringify(value))>"

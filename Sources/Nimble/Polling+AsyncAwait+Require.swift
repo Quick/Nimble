@@ -3,84 +3,11 @@
 
 import Dispatch
 
-@MainActor
-internal func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyle, to: String, description: String?, matcherExecutor: () async throws -> MatcherResult) async -> (Bool, FailureMessage) {
-    let msg = FailureMessage()
-    msg.userDescription = description
-    msg.to = to
-    do {
-        let result = try await matcherExecutor()
-        result.message.update(failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
-        }
-        return (result.toBoolean(expectation: style), msg)
-    } catch let error {
-        msg.stringValue = "unexpected error thrown: <\(error)>"
-        return (false, msg)
-    }
-}
-
-internal actor Poller<T> {
-    private var lastMatcherResult: MatcherResult?
-
-    init() {}
-
-    // swiftlint:disable:next function_parameter_count
-    func poll(expression: AsyncExpression<T>,
-              style: ExpectationStyle,
-              matchStyle: AsyncMatchStyle,
-              timeout: NimbleTimeInterval,
-              poll: NimbleTimeInterval,
-              fnName: String,
-              matcherRunner: @escaping () async throws -> MatcherResult) async -> MatcherResult {
-        let fnName = "expect(...).\(fnName)(...)"
-        let result = await pollBlock(
-            pollInterval: poll,
-            timeoutInterval: timeout,
-            file: expression.location.file,
-            line: expression.location.line,
-            fnName: fnName) {
-                self.updateMatcherResult(result: try await matcherRunner())
-                    .toBoolean(expectation: style)
-            }
-        return processPollResult(result.toPollResult(), matchStyle: matchStyle, lastMatcherResult: lastMatcherResult, fnName: fnName)
-    }
-
-    func updateMatcherResult(result: MatcherResult) -> MatcherResult {
-        self.lastMatcherResult = result
-        return result
-    }
-}
-
-// swiftlint:disable:next function_parameter_count
-internal func poll<T>(
-    expression: AsyncExpression<T>,
-    style: ExpectationStyle,
-    matchStyle: AsyncMatchStyle,
-    timeout: NimbleTimeInterval,
-    poll: NimbleTimeInterval,
-    fnName: String,
-    matcherRunner: @escaping () async throws -> MatcherResult
-) async -> MatcherResult {
-    let poller = Poller<T>()
-    return await poller.poll(
-        expression: expression,
-        style: style,
-        matchStyle: matchStyle,
-        timeout: timeout,
-        poll: poll,
-        fnName: fnName,
-        matcherRunner: matcherRunner
-    )
-}
-
-extension SyncExpectation {
+extension SyncRequirement {
     // MARK: - With Synchronous Matchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let asyncExpression = expression.toAsyncExpression()
@@ -100,13 +27,12 @@ extension SyncExpectation {
                         try matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventuallyNot(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventuallyNot(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let asyncExpression = expression.toAsyncExpression()
@@ -126,22 +52,20 @@ extension SyncExpectation {
                         try matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toEventuallyNot()
-    @discardableResult
-    public func toNotEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
+    public func toNotEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toNever(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toNever(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
         let asyncExpression = expression.toAsyncExpression()
 
@@ -160,22 +84,20 @@ extension SyncExpectation {
                         try matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toNever()
-    @discardableResult
-    public func neverTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func neverTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
-    @discardableResult
-    public func toAlways(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toAlways(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
         let asyncExpression = expression.toAsyncExpression()
 
@@ -194,23 +116,21 @@ extension SyncExpectation {
                         try matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
     ///
     /// Alias of toAlways()
-    @discardableResult
-    public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     // MARK: - With AsyncMatchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let asyncExpression = expression.toAsyncExpression()
@@ -230,13 +150,12 @@ extension SyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventuallyNot(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventuallyNot(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let asyncExpression = expression.toAsyncExpression()
@@ -256,22 +175,20 @@ extension SyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toEventuallyNot()
-    @discardableResult
-    public func toNotEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
+    public func toNotEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toNever(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toNever(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
         let asyncExpression = expression.toAsyncExpression()
 
@@ -290,22 +207,20 @@ extension SyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toNever()
-    @discardableResult
-    public func neverTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func neverTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
-    @discardableResult
-    public func toAlways(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toAlways(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
         let asyncExpression = expression.toAsyncExpression()
 
@@ -324,25 +239,23 @@ extension SyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await asyncExpression.evaluate())
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
     ///
     /// Alias of toAlways()
-    @discardableResult
-    public func alwaysTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func alwaysTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 }
 
-extension AsyncExpectation {
+extension AsyncRequirement {
     // MARK: - With Synchronous Matchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -360,13 +273,12 @@ extension AsyncExpectation {
                         try matcher.satisfies(await expression.withoutCaching().toSynchronousExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventuallyNot(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventuallyNot(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -384,22 +296,20 @@ extension AsyncExpectation {
                         try matcher.satisfies(await expression.withoutCaching().toSynchronousExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toEventuallyNot()
-    @discardableResult
-    public func toNotEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
+    public func toNotEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toNever(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toNever(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -417,22 +327,20 @@ extension AsyncExpectation {
                         try matcher.satisfies(await expression.withoutCaching().toSynchronousExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toNever()
-    @discardableResult
-    public func neverTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func neverTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
-    @discardableResult
-    public func toAlways(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toAlways(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -450,23 +358,21 @@ extension AsyncExpectation {
                         try matcher.satisfies(await expression.withoutCaching().toSynchronousExpression())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
     ///
     /// Alias of toAlways()
-    @discardableResult
-    public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     // MARK: - With AsyncMatchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -484,13 +390,12 @@ extension AsyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toEventuallyNot(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toEventuallyNot(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -508,22 +413,20 @@ extension AsyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to not match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toEventuallyNot()
-    @discardableResult
-    public func toNotEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
+    public func toNotEventually(_ matcher: AsyncMatcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
-    @discardableResult
-    public func toNever(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toNever(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -541,22 +444,20 @@ extension AsyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to never match by checking
     /// continuously at each pollInterval until the timeout is reached.
     ///
     /// Alias of toNever()
-    @discardableResult
-    public func neverTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func neverTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toNever(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
-    @discardableResult
-    public func toAlways(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
+    public func toAlways(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
         let (pass, msg) = await execute(
@@ -574,16 +475,15 @@ extension AsyncExpectation {
                         try await matcher.satisfies(expression.withoutCaching())
                     }
             }
-        return verify(pass, msg)
+        return try verify(pass, msg, try await expression.evaluate())
     }
 
     /// Tests the actual value using a matcher to always match by checking
     /// continusouly at each pollInterval until the timeout is reached
     ///
     /// Alias of toAlways()
-    @discardableResult
-    public func alwaysTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async -> Self {
-        return await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
+    public func alwaysTo(_ matcher: AsyncMatcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) async throws -> Value {
+        return try await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
 }
 
