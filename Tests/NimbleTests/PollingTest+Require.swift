@@ -20,33 +20,59 @@ final class PollingRequireTest: XCTestCase {
         throw errorToThrow
     }
 
-    func testToEventuallyPositiveMatches() throws {
+    func testToEventuallyPositiveMatches() {
         var value = 0
         deferToMainQueue { value = 1 }
-        _ = try require { value }.toEventually(equal(1))
+        expect {
+            try require { value }.toEventually(equal(1))
+        }.to(equal(1))
 
         deferToMainQueue { value = 0 }
-        _ = try require { value }.toEventuallyNot(equal(1))
+        expect {
+            try require { value }.toEventuallyNot(equal(1))
+        }.to(equal(0))
     }
 
     func testToEventuallyNegativeMatches() {
         let value = 0
         failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {
-            _ = try require { value }.toEventuallyNot(equal(0))
+            try require { value }.toEventuallyNot(equal(0))
         }
         failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
-            _ = try require { value }.toEventually(equal(1))
+            try require { value }.toEventually(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.toEventually(equal(1))
+            try require { try self.doThrowError() }.toEventually(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.toEventuallyNot(equal(0))
+            try require { try self.doThrowError() }.toEventuallyNot(equal(0))
+        }
+    }
+
+    func testPollUnwrapPositiveCase() {
+        var value: Int? = nil
+        deferToMainQueue {
+            value = 1
+        }
+        expect {
+            try pollUnwrap(value)
+        }.to(equal(1))
+    }
+
+    func testPollUnwrapNegativeCase() {
+        failsWithErrorMessage("expected to eventually not be nil, got nil") {
+            try pollUnwrap(nil as Int?)
+            failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+                try pollUnwrap { try self.doThrowError() as Int? }
+            }
+            failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+                try pollUnwrap { try self.doThrowError() as Int? }
+            }
         }
     }
 
     func testToEventuallySyncCase() throws {
-        _ = try require(1).toEventually(equal(1), timeout: .seconds(300))
+        try require(1).toEventually(equal(1), timeout: .seconds(300))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() throws {
@@ -65,12 +91,12 @@ final class PollingRequireTest: XCTestCase {
         var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        _ = try require { value }.toEventually(equal(1))
+        try require { value }.toEventually(equal(1))
 
         asyncOperation = { sleepThenSetValueTo(0) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        _ = try require { value }.toEventuallyNot(equal(1))
+        try require { value }.toEventuallyNot(equal(1))
     }
 
     func testToEventuallyAllowsInBackgroundThread() {
@@ -78,7 +104,7 @@ final class PollingRequireTest: XCTestCase {
         var executedAsyncBlock: Bool = false
         let asyncOperation: () -> Void = {
             do {
-                _ = try require {
+                try require {
                     expect(1).toEventually(equal(1))
                 }.toNot(raiseException(named: "InvalidNimbleAPIUsage"))
             } catch {
@@ -102,8 +128,8 @@ final class PollingRequireTest: XCTestCase {
         var subject: ClassUnderTest? = ClassUnderTest()
 
         if let sub = subject {
-            _ = try require(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
-            _ = try require(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
+            try require(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
+            try require(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
         }
 
         waitUntil(timeout: .milliseconds(500)) { done in
@@ -118,66 +144,66 @@ final class PollingRequireTest: XCTestCase {
     func testToNeverPositiveMatches() throws {
         var value = 0
         deferToMainQueue { value = 1 }
-        _ = try require { value }.toNever(beGreaterThan(1))
+        try require { value }.toNever(beGreaterThan(1))
 
         deferToMainQueue { value = 0 }
-        _ = try require { value }.neverTo(beGreaterThan(1))
+        try require { value }.neverTo(beGreaterThan(1))
     }
 
     func testToNeverNegativeMatches() {
         var value = 0
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            _ = try require { value }.toNever(equal(0))
+            try require { value }.toNever(equal(0))
         }
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            _ = try require { value }.neverTo(equal(0))
+            try require { value }.neverTo(equal(0))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
             deferToMainQueue { value = 1 }
-            _ = try require { value }.toNever(equal(1))
+            try require { value }.toNever(equal(1))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
             deferToMainQueue { value = 1 }
-            _ = try require { value }.neverTo(equal(1))
+            try require { value }.neverTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.toNever(equal(0))
+            try require { try self.doThrowError() }.toNever(equal(0))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.neverTo(equal(0))
+            try require { try self.doThrowError() }.neverTo(equal(0))
         }
     }
 
     func testToAlwaysPositiveMatches() throws {
         var value = 1
         deferToMainQueue { value = 2 }
-        _ = try require { value }.toAlways(beGreaterThan(0))
+        try require { value }.toAlways(beGreaterThan(0))
 
         deferToMainQueue { value = 2 }
-        _ = try require { value }.alwaysTo(beGreaterThan(1))
+        try require { value }.alwaysTo(beGreaterThan(1))
     }
 
     func testToAlwaysNegativeMatches() {
         var value = 1
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            _ = try require { value }.toAlways(equal(0))
+            try require { value }.toAlways(equal(0))
         }
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            _ = try require { value }.alwaysTo(equal(0))
+            try require { value }.alwaysTo(equal(0))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
             deferToMainQueue { value = 0 }
-            _ = try require { value }.toAlways(equal(1))
+            try require { value }.toAlways(equal(1))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
             deferToMainQueue { value = 0 }
-            _ = try require { value }.alwaysTo(equal(1))
+            try require { value }.alwaysTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.toAlways(equal(0))
+            try require { try self.doThrowError() }.toAlways(equal(0))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            _ = try require { try self.doThrowError() }.alwaysTo(equal(0))
+            try require { try self.doThrowError() }.alwaysTo(equal(0))
         }
     }
 }

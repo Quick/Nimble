@@ -706,42 +706,56 @@ extension AsyncRequirement {
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventually<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
+public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
     try require(file: file, line: line, expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventually<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
+public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
+    try require(file: file, line: line, expression()).toEventuallyNot(beNil())
+}
+
+/// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
+/// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
+@discardableResult
+public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
+    try require(file: file, line: line, expression()).toEventuallyNot(beNil())
+}
+
+/// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
+/// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
+@discardableResult
+public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
     try require(file: file, line: line, expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventually<T>(file: FileString = #file, line: UInt = #line, _ expression: @escaping () async throws -> T?) async throws -> T {
+public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expression: @escaping () async throws -> T?) async throws -> T {
     try await requirea(file: file, line: line, try await expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventually<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T?)) async throws -> T {
+public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T?)) async throws -> T {
     try await requirea(file: file, line: line, expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventuallyAsync<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
+public func pollUnwrapa<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
     try await requirea(file: file, line: line, try await expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func unwrapEventuallyAsync<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
+public func pollUnwrapa<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
     try await requirea(file: file, line: line, expression()).toEventuallyNot(beNil())
 }
 

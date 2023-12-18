@@ -120,11 +120,11 @@ final class DSLTest: XCTestCase {
     }
 
     func testExpectCombinedSyncAndAsyncRequirements() async throws {
-        _ = try await require { await nonThrowingAsyncInt() }.to(equal(1))
-        _ = try await requirea(await nonThrowingAsyncInt()).to(equal(1))
-        _ = try require(1).to(equal(1))
+        try await require { await nonThrowingAsyncInt() }.to(equal(1))
+        try await requirea(await nonThrowingAsyncInt()).to(equal(1))
+        try require(1).to(equal(1))
 
-        _ = try require { nonThrowingInt() }.to(equal(1))
+        try require { nonThrowingInt() }.to(equal(1))
     }
 
     func testRequire() throws {
@@ -133,7 +133,7 @@ final class DSLTest: XCTestCase {
 
         let records = gatherExpectations(silently: true) {
             do {
-                _ = try require(1).to(equal(2))
+                try require(1).to(equal(2))
             } catch {
                 expect(error).to(matchError(RequirementError.self))
             }
