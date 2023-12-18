@@ -11,10 +11,8 @@ public struct AssertionRecord: CustomStringConvertible {
     /// The source location the expectation occurred on.
     public let location: SourceLocation
 
-    public let issueType: IssueType
-
     public var description: String {
-        return "AssertionRecord { success=\(success), message='\(message.stringValue)', location=\(location), issueType=\(issueType) }"
+        return "AssertionRecord { success=\(success), message='\(message.stringValue)', location=\(location) }"
     }
 }
 
@@ -33,17 +31,7 @@ public class AssertionRecorder: AssertionHandler {
             AssertionRecord(
                 success: assertion,
                 message: message,
-                location: location,
-                issueType: .assertionFailure))
-    }
-
-    public func require(_ passed: Bool, message: FailureMessage, location: SourceLocation) {
-        assertions.append(
-            AssertionRecord(
-                success: passed,
-                message: message,
-                location: location,
-                issueType: .thrownError))
+                location: location))
     }
 }
 

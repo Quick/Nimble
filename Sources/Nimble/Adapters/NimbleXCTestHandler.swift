@@ -9,12 +9,6 @@ public class NimbleXCTestHandler: AssertionHandler {
             recordFailure("\(message.stringValue)\n", location: location)
         }
     }
-
-    public func require(_ passed: Bool, message: FailureMessage, location: SourceLocation) {
-        if !passed {
-            recordFailure("\(message.stringValue)\n", issueType: .thrownError, location: location)
-        }
-    }
 }
 
 /// Alternative handler for Nimble. This assertion handler passes failures along
@@ -31,28 +25,12 @@ public class NimbleShortXCTestHandler: AssertionHandler {
             recordFailure("\(msg)\n", location: location)
         }
     }
-
-    public func require(_ passed: Bool, message: FailureMessage, location: SourceLocation) {
-        if !passed {
-            let msg: String
-            if let actual = message.actualValue {
-                msg = "got: \(actual) \(message.postfixActual)"
-            } else {
-                msg = "expected \(message.to) \(message.postfixMessage)"
-            }
-            recordFailure("\(msg)\n", issueType: .thrownError, location: location)
-        }
-    }
 }
 
 /// Fallback handler in case XCTest is unavailable. This assertion handler will abort
 /// the program if it is invoked.
 class NimbleXCTestUnavailableHandler: AssertionHandler {
     func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
-        fatalError("XCTest is not available and no custom assertion handler was configured. Aborting.")
-    }
-
-    func require(_ passed: Bool, message: FailureMessage, location: SourceLocation) {
         fatalError("XCTest is not available and no custom assertion handler was configured. Aborting.")
     }
 }
@@ -94,21 +72,7 @@ func isXCTestAvailable() -> Bool {
 #endif
 }
 
-public enum IssueType {
-    case assertionFailure
-    case thrownError
-
-    #if canImport(Darwin)
-    var xctIssueType: XCTIssueReference.IssueType {
-        switch self {
-        case .assertionFailure: return .assertionFailure
-        case .thrownError: return .thrownError
-        }
-    }
-    #endif
-}
-
-public func recordFailure(_ message: String, issueType: IssueType = .assertionFailure, location: SourceLocation) {
+public func recordFailure(_ message: String, location: SourceLocation) {
 #if !canImport(Darwin)
     XCTFail("\(message)", file: location.file, line: location.line)
 #else
@@ -116,7 +80,7 @@ public func recordFailure(_ message: String, issueType: IssueType = .assertionFa
         let line = Int(location.line)
         let location = XCTSourceCodeLocation(filePath: location.file, lineNumber: line)
         let sourceCodeContext = XCTSourceCodeContext(location: location)
-        let issue = XCTIssue(type: issueType.xctIssueType, compactDescription: message, sourceCodeContext: sourceCodeContext)
+        let issue = XCTIssue(type: .assertionFailure, compactDescription: message, sourceCodeContext: sourceCodeContext)
         testCase.record(issue)
     } else {
         let msg = """

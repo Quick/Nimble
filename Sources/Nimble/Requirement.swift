@@ -88,7 +88,7 @@ public struct SyncRequirement<Value> {
 
     public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
-        handler.require(pass, message: message, location: expression.location)
+        handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
             throw RequirementError(message: message.stringValue, location: self.location)
         }
@@ -146,7 +146,7 @@ public struct AsyncRequirement<Value> {
 
     public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
-        handler.require(pass, message: message, location: expression.location)
+        handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
             throw RequirementError(message: message.stringValue, location: self.location)
         }

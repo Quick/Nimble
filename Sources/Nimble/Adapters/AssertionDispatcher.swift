@@ -16,10 +16,4 @@ public class AssertionDispatcher: AssertionHandler {
             handler.assert(assertion, message: message, location: location)
         }
     }
-
-    public func require(_ passed: Bool, message: FailureMessage, location: SourceLocation) {
-        for handler in handlers {
-            handler.require(passed, message: message, location: location)
-        }
-    }
 }
