@@ -121,7 +121,7 @@ final class DSLTest: XCTestCase {
 
     func testExpectCombinedSyncAndAsyncRequirements() async throws {
         _ = try await require { await nonThrowingAsyncInt() }.to(equal(1))
-        _ = try await requireAsync(await nonThrowingAsyncInt()).to(equal(1))
+        _ = try await requirea(await nonThrowingAsyncInt()).to(equal(1))
         _ = try require(1).to(equal(1))
 
         _ = try require { nonThrowingInt() }.to(equal(1))

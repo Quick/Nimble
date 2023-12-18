@@ -129,7 +129,7 @@
 		891729D72B18431D005CC866 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D62B18431D005CC866 /* Requirement.swift */; };
 		891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A04702AB0164500B46613 /* AsyncTimerSequence.swift */; };
 		8922828A2B2833B7002DA355 /* PollingTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892282892B2833B7002DA355 /* PollingTest+Require.swift */; };
-		8922828D2B283818002DA355 /* Polling+AsyncAwait+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828B2B2837E1002DA355 /* Polling+AsyncAwait+Require.swift */; };
+		8922828D2B283818002DA355 /* Polling+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828B2B2837E1002DA355 /* Polling+Require.swift */; };
 		8922828F2B283956002DA355 /* AsyncAwaitTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962402A5FABD000A7929D /* AsyncAllPass.swift */; };
@@ -319,7 +319,7 @@
 		891729D62B18431D005CC866 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		891A04702AB0164500B46613 /* AsyncTimerSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequence.swift; sourceTree = "<group>"; };
 		892282892B2833B7002DA355 /* PollingTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PollingTest+Require.swift"; sourceTree = "<group>"; };
-		8922828B2B2837E1002DA355 /* Polling+AsyncAwait+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polling+AsyncAwait+Require.swift"; sourceTree = "<group>"; };
+		8922828B2B2837E1002DA355 /* Polling+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polling+Require.swift"; sourceTree = "<group>"; };
 		8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncAwaitTest+Require.swift"; sourceTree = "<group>"; };
 		892FDF1229D3EA7700523A80 /* AsyncExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncExpression.swift; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
@@ -466,7 +466,7 @@
 				1FD8CD0B1968AB07008ED995 /* FailureMessage.swift */,
 				1F1871E31CA89FB600A34BF2 /* Polling.swift */,
 				89F5E0852908E655001F9377 /* Polling+AsyncAwait.swift */,
-				8922828B2B2837E1002DA355 /* Polling+AsyncAwait+Require.swift */,
+				8922828B2B2837E1002DA355 /* Polling+Require.swift */,
 				891729D62B18431D005CC866 /* Requirement.swift */,
 				1F1A742D1940169200FFFC47 /* Info.plist */,
 				1FD8CD0C1968AB07008ED995 /* Matchers */,
@@ -987,7 +987,7 @@
 				891729D72B18431D005CC866 /* Requirement.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */,
-				8922828D2B283818002DA355 /* Polling+AsyncAwait+Require.swift in Sources */,
+				8922828D2B283818002DA355 /* Polling+Require.swift in Sources */,
 				89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				1FA0C3FF1E30B14500623165 /* Matcher.swift in Sources */,
