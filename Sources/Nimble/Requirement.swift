@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RequirementError: Error, CustomNSError {
+public struct RequireError: Error, CustomNSError {
     let message: String
     let location: SourceLocation
 
@@ -11,16 +11,10 @@ public struct RequirementError: Error, CustomNSError {
         ["XCTestErrorUserInfoKeyShouldIgnore": true]
     }
 
-    static func unknown(_ location: SourceLocation) -> RequirementError {
-        RequirementError(message: "Nimble error - file a bug if you see this!", location: location)
+    static func unknown(_ location: SourceLocation) -> RequireError {
+        RequireError(message: "Nimble error - file a bug if you see this!", location: location)
     }
 }
-
-public enum RequireError: Error {
-    case requirementFailed
-    case exceptionRaised(name: String, reason: String?, userInfo: [AnyHashable: Any]?)
-}
-
 internal func executeRequire<T>(_ expression: Expression<T>, _ style: ExpectationStyle, _ matcher: Matcher<T>, to: String, description: String?, captureExceptions: Bool = true) -> (Bool, FailureMessage, T?) {
     func run() -> (Bool, FailureMessage, T?) {
         let msg = FailureMessage()
@@ -90,7 +84,7 @@ public struct SyncRequirement<Value> {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
-            throw RequirementError(message: message.stringValue, location: self.location)
+            throw RequireError(message: message.stringValue, location: self.location)
         }
         return value
     }
@@ -154,7 +148,7 @@ public struct AsyncRequirement<Value> {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
-            throw RequirementError(message: message.stringValue, location: self.location)
+            throw RequireError(message: message.stringValue, location: self.location)
         }
         return value
     }

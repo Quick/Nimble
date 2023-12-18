@@ -143,10 +143,10 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
         func isMainThread() -> Bool { Thread.isMainThread }
 
-        try await require(isMainThread()).toEventually(beFalse())
-        try await require(isMainThread()).toEventuallyNot(beTrue())
-        try await require(isMainThread()).toAlways(beFalse(), until: .seconds(1))
-        try await require(isMainThread()).toNever(beTrue(), until: .seconds(1))
+        try await requirea(isMainThread()).toEventually(beFalse())
+        try await requirea(isMainThread()).toEventuallyNot(beTrue())
+        try await requirea(isMainThread()).toAlways(beFalse(), until: .seconds(1))
+        try await requirea(isMainThread()).toNever(beTrue(), until: .seconds(1))
     }
 
     @MainActor
@@ -155,10 +155,10 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
         func isMainThread() -> Bool { Thread.isMainThread }
 
-        try await require(isMainThread()).toEventually(beTrue())
-        try await require(isMainThread()).toEventuallyNot(beFalse())
-        try await require(isMainThread()).toAlways(beTrue(), until: .seconds(1))
-        try await require(isMainThread()).toNever(beFalse(), until: .seconds(1))
+        try await requirea(isMainThread()).toEventually(beTrue())
+        try await requirea(isMainThread()).toEventuallyNot(beFalse())
+        try await requirea(isMainThread()).toAlways(beTrue(), until: .seconds(1))
+        try await requirea(isMainThread()).toNever(beFalse(), until: .seconds(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() async throws {

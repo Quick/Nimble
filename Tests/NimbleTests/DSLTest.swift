@@ -135,7 +135,7 @@ final class DSLTest: XCTestCase {
             do {
                 try require(1).to(equal(2))
             } catch {
-                expect(error).to(matchError(RequirementError.self))
+                expect(error).to(matchError(RequireError.self))
             }
         }
 

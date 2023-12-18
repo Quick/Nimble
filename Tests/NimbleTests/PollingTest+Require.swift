@@ -60,14 +60,16 @@ final class PollingRequireTest: XCTestCase {
     }
 
     func testPollUnwrapNegativeCase() {
-        failsWithErrorMessage("expected to eventually not be nil, got nil") {
-            try pollUnwrap(nil as Int?)
-            failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-                try pollUnwrap { try self.doThrowError() as Int? }
-            }
-            failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-                try pollUnwrap { try self.doThrowError() as Int? }
-            }
+        failsWithErrorMessage("expected to eventually not be nil, got <nil>") {
+            do {
+                try pollUnwrap(nil as Int?)
+            } catch {}
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            try pollUnwrap { try self.doThrowError() as Int? }
+        }
+        failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
+            try pollUnwrap { try self.doThrowError() as Int? }
         }
     }
 
