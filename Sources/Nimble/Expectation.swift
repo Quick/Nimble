@@ -126,6 +126,12 @@ extension Expectation {
     ///            unconditionally log an error.
     ///
     /// - Remark: Similar functionality can be achieved using the `status` property.
+    /// - Attention: This is deprecated in favor of the `require` dsl (``require``, ``unwrap``,
+    ///              ``pollUnwrap``), which integrates the matcher seemlessly, or, in the case of
+    ///              `unwrap` and `pollUnwrap`, acts as a shorthand when you require that an
+    ///              expression evaluate to some non-nil value. `onFailure` will be removed in
+    ///              Nimble 15.
+    @available(*, deprecated, message: "Use the require dsl")
     public func onFailure(`throw` error: Error) throws {
         switch status {
         case .pending:
