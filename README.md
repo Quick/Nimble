@@ -767,6 +767,17 @@ Note: As with `require`, there are `unwraps`, `unwrapa`, `pollUnwraps`, and
 `pollUnwrapa` variants for allowing you to use autoclosures specifically with
 synchronous or asynchronous code.
 
+## Throwing a Custom Error from Require
+
+By default, if the matcher fails in a `require`, then a `RequireError` will be
+thrown. You can override this behavior and throw a custom error by passing a
+non-nil `Error` value to the `customError` parameter:
+
+```swift
+try require(1).to(equal(2)) // throws a `RequireError`
+try require(customError: MyCustomError(), 1).to(equal(2)) // throws a `MyCustomError`
+```
+
 # Built-in Matcher Functions
 
 Nimble includes a wide variety of matcher functions.

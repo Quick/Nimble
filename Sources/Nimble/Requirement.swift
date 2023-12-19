@@ -74,17 +74,22 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
 public struct SyncRequirement<Value> {
     public let expression: Expression<Value>
 
+    /// A custom error to throw.
+    /// If nil, then we will throw a ``RequireError`` on failure.
+    public let customError: Error?
+
     public var location: SourceLocation { expression.location }
 
-    public init(expression: Expression<Value>) {
+    public init(expression: Expression<Value>, customError: Error?) {
         self.expression = expression
+        self.customError = customError
     }
 
     public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
-            throw RequireError(message: message.stringValue, location: self.location)
+            throw customError ?? RequireError(message: message.stringValue, location: self.location)
         }
         return value
     }
@@ -138,17 +143,22 @@ public struct SyncRequirement<Value> {
 public struct AsyncRequirement<Value> {
     public let expression: AsyncExpression<Value>
 
+    /// A custom error to throw.
+    /// If nil, then we will throw a ``RequireError`` on failure.
+    public let customError: Error?
+
     public var location: SourceLocation { expression.location }
 
-    public init(expression: AsyncExpression<Value>) {
+    public init(expression: AsyncExpression<Value>, customError: Error?) {
         self.expression = expression
+        self.customError = customError
     }
 
     public func verify(_ pass: Bool, _ message: FailureMessage, _ value: Value?) throws -> Value {
         let handler = NimbleEnvironment.activeInstance.assertionHandler
         handler.assert(pass, message: message, location: expression.location)
         guard pass, let value else {
-            throw RequireError(message: message.stringValue, location: self.location)
+            throw customError ?? RequireError(message: message.stringValue, location: self.location)
         }
         return value
     }

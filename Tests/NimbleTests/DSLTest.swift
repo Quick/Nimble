@@ -127,7 +127,7 @@ final class DSLTest: XCTestCase {
         try require { nonThrowingInt() }.to(equal(1))
     }
 
-    func testRequire() throws {
+    func testRequire() {
         expect { try require(1).to(equal(1)) }.to(equal(1))
         expect { try require(3).toNot(beNil()) }.to(equal(3))
 
@@ -136,6 +136,40 @@ final class DSLTest: XCTestCase {
                 try require(1).to(equal(2))
             } catch {
                 expect(error).to(matchError(RequireError.self))
+            }
+        }
+
+        expect(records).to(haveCount(2))
+        expect(records.first?.success).to(beFalse())
+        expect(records.last?.success).to(beTrue())
+    }
+
+    func testRequireWithCustomError() {
+        struct MyCustomError: Error {}
+
+        let records = gatherExpectations(silently: true) {
+            do {
+                try require(customError: MyCustomError(), 1).to(equal(2))
+                fail("require did not throw an error")
+            } catch {
+                expect(error).to(matchError(MyCustomError.self))
+            }
+        }
+
+        expect(records).to(haveCount(2))
+        expect(records.first?.success).to(beFalse())
+        expect(records.last?.success).to(beTrue())
+    }
+
+    func testAsyncRequireWithCustomError() async {
+        struct MyCustomError: Error {}
+
+        let records = await gatherExpectations(silently: true) {
+            do {
+                try await requirea(customError: MyCustomError(), 1).to(equal(2))
+                fail("require did not throw an error")
+            } catch {
+                expect(error as? MyCustomError).toNot(beNil())
             }
         }
 
