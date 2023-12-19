@@ -132,9 +132,11 @@
 		898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
 		899441EF2902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */; };
 		899441F82902EF2500C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
-		89AD7E102ACB16E50076FAAF /* CwlCatchBadInstructionPosix.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */; platformFilters = (tvos, watchos, ); };
 		89C297CC2A911CDA002A143F /* AsyncTimerSequenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */; };
 		89C297CE2A92AB34002A143F /* AsyncPromiseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */; };
+		89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */ = {isa = PBXBuildFile; productRef = 89D8AC842B3211C600410644 /* CwlCatchException */; };
+		89D8AC872B3211EA00410644 /* CwlPosixPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, watchos, ); productRef = 89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */; };
+		89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (driverkit, ios, maccatalyst, macos, ); productRef = 89D8AC882B3211EA00410644 /* CwlPreconditionTesting */; };
 		89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncMatcher.swift */; };
 		89EEF5B72A032C3200988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
 		89EEF5C02A06211C00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
@@ -165,15 +167,6 @@
 		CDC157912511957100EAA480 /* DSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC157902511957100EAA480 /* DSLTest.swift */; };
 		CDD80B831F2030790002CD65 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */; };
 		CDF5C57B2647B89B0036532C /* Equal+Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF5C57A2647B89B0036532C /* Equal+Tuple.swift */; };
-		CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */; platformFilters = (driverkit, ios, maccatalyst, macos, ); settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
-		CDFB6A471F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */; };
-		CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */; platformFilters = (driverkit, ios, maccatalyst, macos, ); settings = {ATTRIBUTES = (Public, ); }; };
-		CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */; platformFilters = (driverkit, ios, maccatalyst, macos, ); };
 		DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */; };
 		DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72EC631A93874A002F7651 /* AllPassTest.swift */; };
 		DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */; };
@@ -341,20 +334,9 @@
 		B20058C020E92C7500C1264D /* ElementsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqual.swift; sourceTree = "<group>"; };
 		B20058C420E92CE400C1264D /* ElementsEqualTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsEqualTest.swift; sourceTree = "<group>"; };
 		C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Equal+TupleArray.swift"; sourceTree = "<group>"; };
-		CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstructionPosix.swift; sourceTree = "<group>"; };
 		CDBC39B82462EA7D00069677 /* PredicateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateTest.swift; sourceTree = "<group>"; };
 		CDC157902511957100EAA480 /* DSLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSLTest.swift; sourceTree = "<group>"; };
 		CDF5C57A2647B89B0036532C /* Equal+Tuple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Equal+Tuple.swift"; sourceTree = "<group>"; };
-		CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchException.swift; sourceTree = "<group>"; };
-		CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlCatchException.m; sourceTree = "<group>"; };
-		CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlCatchException.h; sourceTree = "<group>"; };
-		CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlBadInstructionException.swift; sourceTree = "<group>"; };
-		CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlCatchBadInstruction.swift; sourceTree = "<group>"; };
-		CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CwlDarwinDefinitions.swift; sourceTree = "<group>"; };
-		CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CwlMachBadInstructionHandler.m; sourceTree = "<group>"; };
-		CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CwlMachBadInstructionHandler.h; sourceTree = "<group>"; };
-		CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_excServer.c; sourceTree = "<group>"; };
-		CDFB6A381F7E082400AD8CC7 /* mach_excServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_excServer.h; sourceTree = "<group>"; };
 		DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
 		DD72EC631A93874A002F7651 /* AllPassTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPassTest.swift; sourceTree = "<group>"; };
 		DD9A9A8D19CF413800706F49 /* BeIdenticalToObjectTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeIdenticalToObjectTest.swift; sourceTree = "<group>"; };
@@ -370,6 +352,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D8AC872B3211EA00410644 /* CwlPosixPreconditionTesting in Frameworks */,
+				89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */,
+				89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,9 +408,9 @@
 				1F1871B91CA89E1B00A34BF2 /* NimbleObjectiveC */,
 				1F1A74381940169200FFFC47 /* NimbleTests */,
 				1FFD729A1963FC8200CD29A2 /* NimbleObjectiveCTests */,
-				CDFB69521F7E06E600AD8CC7 /* Carthage-Checkouts */,
 				8913628529E6687500AD535E /* NimbleSharedTestHelpers */,
 				1F1A742A1940169200FFFC47 /* Products */,
+				89D8AC832B3211C600410644 /* Frameworks */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -668,97 +653,11 @@
 			path = include;
 			sourceTree = "<group>";
 		};
-		CD3D9A77232647BC00802581 /* CwlPosixPreconditionTesting */ = {
+		89D8AC832B3211C600410644 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CD3D9A78232647BC00802581 /* CwlCatchBadInstructionPosix.swift */,
 			);
-			path = CwlPosixPreconditionTesting;
-			sourceTree = "<group>";
-		};
-		CDFB69521F7E06E600AD8CC7 /* Carthage-Checkouts */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB69551F7E076F00AD8CC7 /* CwlCatchException */,
-				CDFB69741F7E076F00AD8CC7 /* CwlPreconditionTesting */,
-			);
-			name = "Carthage-Checkouts";
-			path = Carthage/Checkouts;
-			sourceTree = "<group>";
-		};
-		CDFB69551F7E076F00AD8CC7 /* CwlCatchException */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A1D1F7E07C600AD8CC7 /* CwlCatchException */,
-				CDFB6A1F1F7E07C600AD8CC7 /* CwlCatchExceptionSupport */,
-			);
-			name = CwlCatchException;
-			path = CwlCatchException/Sources;
-			sourceTree = "<group>";
-		};
-		CDFB69741F7E076F00AD8CC7 /* CwlPreconditionTesting */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A331F7E082400AD8CC7 /* CwlMachBadInstructionHandler */,
-				CDFB6A291F7E082400AD8CC7 /* CwlPreconditionTesting */,
-				CD3D9A77232647BC00802581 /* CwlPosixPreconditionTesting */,
-			);
-			name = CwlPreconditionTesting;
-			path = CwlPreconditionTesting/Sources;
-			sourceTree = "<group>";
-		};
-		CDFB6A1D1F7E07C600AD8CC7 /* CwlCatchException */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A1E1F7E07C600AD8CC7 /* CwlCatchException.swift */,
-			);
-			path = CwlCatchException;
-			sourceTree = "<group>";
-		};
-		CDFB6A1F1F7E07C600AD8CC7 /* CwlCatchExceptionSupport */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A201F7E07C600AD8CC7 /* CwlCatchException.m */,
-				CDFB6A211F7E07C600AD8CC7 /* include */,
-			);
-			path = CwlCatchExceptionSupport;
-			sourceTree = "<group>";
-		};
-		CDFB6A211F7E07C600AD8CC7 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A221F7E07C600AD8CC7 /* CwlCatchException.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		CDFB6A291F7E082400AD8CC7 /* CwlPreconditionTesting */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A2A1F7E082400AD8CC7 /* CwlBadInstructionException.swift */,
-				CDFB6A2B1F7E082400AD8CC7 /* CwlCatchBadInstruction.swift */,
-				CDFB6A2D1F7E082400AD8CC7 /* CwlDarwinDefinitions.swift */,
-			);
-			path = CwlPreconditionTesting;
-			sourceTree = "<group>";
-		};
-		CDFB6A331F7E082400AD8CC7 /* CwlMachBadInstructionHandler */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A341F7E082400AD8CC7 /* CwlMachBadInstructionHandler.m */,
-				CDFB6A351F7E082400AD8CC7 /* include */,
-				CDFB6A371F7E082400AD8CC7 /* mach_excServer.c */,
-				CDFB6A381F7E082400AD8CC7 /* mach_excServer.h */,
-			);
-			path = CwlMachBadInstructionHandler;
-			sourceTree = "<group>";
-		};
-		CDFB6A351F7E082400AD8CC7 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				CDFB6A361F7E082400AD8CC7 /* CwlMachBadInstructionHandler.h */,
-			);
-			path = include;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -768,8 +667,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A491F7E082500AD8CC7 /* CwlMachBadInstructionHandler.h in Headers */,
-				CDFB6A271F7E07C700AD8CC7 /* CwlCatchException.h in Headers */,
 				1F1871DF1CA89EF500A34BF2 /* NMBStringify.h in Headers */,
 				1F1871DD1CA89EF500A34BF2 /* DSL.h in Headers */,
 				1F1871DE1CA89EF500A34BF2 /* NMBExceptionCapture.h in Headers */,
@@ -794,6 +691,11 @@
 			dependencies = (
 			);
 			name = Nimble;
+			packageProductDependencies = (
+				89D8AC842B3211C600410644 /* CwlCatchException */,
+				89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */,
+				89D8AC882B3211EA00410644 /* CwlPreconditionTesting */,
+			);
 			productName = "Nimble-macOS";
 			productReference = 1F925EAD195C0D6300ED456B /* Nimble.framework */;
 			productType = "com.apple.product-type.framework";
@@ -851,6 +753,10 @@
 				Base,
 			);
 			mainGroup = 1F1A741F1940169200FFFC47;
+			packageReferences = (
+				89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */,
+				89D8AC822B3211A900410644 /* XCRemoteSwiftPackageReference "CwlPreconditionTesting" */,
+			);
 			productRefGroup = 1F1A742A1940169200FFFC47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -900,14 +806,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDFB6A3F1F7E082500AD8CC7 /* CwlDarwinDefinitions.swift in Sources */,
-				CDFB6A3B1F7E082500AD8CC7 /* CwlCatchBadInstruction.swift in Sources */,
-				CDFB6A231F7E07C700AD8CC7 /* CwlCatchException.swift in Sources */,
-				CDFB6A391F7E082500AD8CC7 /* CwlBadInstructionException.swift in Sources */,
-				CDFB6A251F7E07C700AD8CC7 /* CwlCatchException.m in Sources */,
-				CDFB6A4B1F7E082500AD8CC7 /* mach_excServer.c in Sources */,
-				89AD7E102ACB16E50076FAAF /* CwlCatchBadInstructionPosix.swift in Sources */,
-				CDFB6A471F7E082500AD8CC7 /* CwlMachBadInstructionHandler.m in Sources */,
 				1FD8CD411968AB07008ED995 /* BeCloseTo.swift in Sources */,
 				1F1871D31CA89EEE00A34BF2 /* NMBExceptionCapture.m in Sources */,
 				106112BD2251DFE7000A5848 /* BeResult.swift in Sources */,
@@ -1416,6 +1314,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattgallagher/CwlCatchException";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
+		89D8AC822B3211A900410644 /* XCRemoteSwiftPackageReference "CwlPreconditionTesting" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattgallagher/CwlPreconditionTesting";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89D8AC842B3211C600410644 /* CwlCatchException */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */;
+			productName = CwlCatchException;
+		};
+		89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89D8AC822B3211A900410644 /* XCRemoteSwiftPackageReference "CwlPreconditionTesting" */;
+			productName = CwlPosixPreconditionTesting;
+		};
+		89D8AC882B3211EA00410644 /* CwlPreconditionTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89D8AC822B3211A900410644 /* XCRemoteSwiftPackageReference "CwlPreconditionTesting" */;
+			productName = CwlPreconditionTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1F1A74201940169200FFFC47 /* Project object */;
 }
