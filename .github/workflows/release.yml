@@ -1,0 +1,28 @@
+name: "Release Artifacts"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  carthage_archive:
+    name: Darwin, Xcode 14.0
+    runs-on: macos-12
+    strategy:
+      matrix:
+        xcode: ["14.0.1"]
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Archive Nimble
+        run: |
+          carthage build --archive --use-xcframeworks
+          zip -r Nimble.xcframework.zip Carthage/Build/Nimble.xcframework
+      - name: Upload Nimble.xcframework.zip
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            Nimble.xcframework.zip
+            Nimble.framework.zip
