@@ -17,36 +17,9 @@ Pod::Spec.new do |s|
 
   s.source_files = [
     "Sources/**/*.{swift,h,m,c}",
-    "Carthage/Checkouts/CwlCatchException/Sources/**/*.{swift,h,m,c}",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/**/*.{swift,h,m,c}",
   ]
 
   s.header_dir = "Nimble"
-
-  s.osx.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
-  ]
-  s.ios.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPosixPreconditionTesting/CwlCatchBadInstructionPosix.swift",
-  ]
-  s.tvos.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
-  ]
-  s.watchos.exclude_files = [
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlCatchBadInstruction.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
-    "Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m",
-    "Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/include/CwlCatchException.h",
-  ]
 
   s.exclude_files = "Sources/Nimble/Adapters/NonObjectiveC/*.swift"
   s.weak_framework = "XCTest"
@@ -60,6 +33,11 @@ Pod::Spec.new do |s|
     'OTHER_LDFLAGS' => '$(inherited) -weak-lXCTestSwiftSupport -Xlinker -no_application_extension',
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
   }
+
+  [s.osx, s.ios].each do |platform|
+    platform.dependency 'CwlMachBadInstructionHandler', '~> 2.1.0'
+    platform.dependency 'CwlCatchException', '~> 2.1.0'
+  end
 
   s.cocoapods_version = '>= 1.4.0'
   if s.respond_to?(:swift_versions) then
