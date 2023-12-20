@@ -125,7 +125,12 @@
 		857D1849253610A900D8693A /* BeWithin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D1848253610A900D8693A /* BeWithin.swift */; };
 		857D184F2536124400D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
 		8913649429E6925F00AD535E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
+		891729D52B1842D6005CC866 /* DSL+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D42B1842D6005CC866 /* DSL+Require.swift */; };
+		891729D72B18431D005CC866 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D62B18431D005CC866 /* Requirement.swift */; };
 		891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A04702AB0164500B46613 /* AsyncTimerSequence.swift */; };
+		8922828A2B2833B7002DA355 /* PollingTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892282892B2833B7002DA355 /* PollingTest+Require.swift */; };
+		8922828D2B283818002DA355 /* Polling+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828B2B2837E1002DA355 /* Polling+Require.swift */; };
+		8922828F2B283956002DA355 /* AsyncAwaitTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962402A5FABD000A7929D /* AsyncAllPass.swift */; };
 		8969624A2A5FAD5F00A7929D /* AsyncAllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */; };
@@ -310,7 +315,12 @@
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
 		857D1848253610A900D8693A /* BeWithin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithin.swift; sourceTree = "<group>"; };
 		857D184D2536123F00D8693A /* BeWithinTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithinTest.swift; sourceTree = "<group>"; };
+		891729D42B1842D6005CC866 /* DSL+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+Require.swift"; sourceTree = "<group>"; };
+		891729D62B18431D005CC866 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		891A04702AB0164500B46613 /* AsyncTimerSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequence.swift; sourceTree = "<group>"; };
+		892282892B2833B7002DA355 /* PollingTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PollingTest+Require.swift"; sourceTree = "<group>"; };
+		8922828B2B2837E1002DA355 /* Polling+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polling+Require.swift"; sourceTree = "<group>"; };
+		8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncAwaitTest+Require.swift"; sourceTree = "<group>"; };
 		892FDF1229D3EA7700523A80 /* AsyncExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncExpression.swift; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
 		896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPassTest.swift; sourceTree = "<group>"; };
@@ -448,6 +458,7 @@
 				892FDF1229D3EA7700523A80 /* AsyncExpression.swift */,
 				1FD8CD081968AB07008ED995 /* DSL.swift */,
 				899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */,
+				891729D42B1842D6005CC866 /* DSL+Require.swift */,
 				DA9E8C811A414BB9002633C2 /* DSL+Wait.swift */,
 				1FD8CD091968AB07008ED995 /* Expectation.swift */,
 				1FD8CD0A1968AB07008ED995 /* Expression.swift */,
@@ -455,6 +466,8 @@
 				1FD8CD0B1968AB07008ED995 /* FailureMessage.swift */,
 				1F1871E31CA89FB600A34BF2 /* Polling.swift */,
 				89F5E0852908E655001F9377 /* Polling+AsyncAwait.swift */,
+				8922828B2B2837E1002DA355 /* Polling+Require.swift */,
+				891729D62B18431D005CC866 /* Requirement.swift */,
 				1F1A742D1940169200FFFC47 /* Info.plist */,
 				1FD8CD0C1968AB07008ED995 /* Matchers */,
 				1F1A742E1940169200FFFC47 /* Nimble.h */,
@@ -470,10 +483,12 @@
 				CDC157902511957100EAA480 /* DSLTest.swift */,
 				89F5E096290C37B8001F9377 /* OnFailureThrowsTest.swift */,
 				89F5E06C290765BB001F9377 /* PollingTest.swift */,
+				892282892B2833B7002DA355 /* PollingTest+Require.swift */,
 				CDBC39B82462EA7D00069677 /* PredicateTest.swift */,
 				89F5E095290C37B8001F9377 /* StatusTest.swift */,
 				1F0648D31963AAB2001F9C46 /* SynchronousTest.swift */,
 				899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */,
+				8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */,
 				89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */,
 				89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */,
 				965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */,
@@ -959,6 +974,7 @@
 				1FD8CD451968AB07008ED995 /* BeginWith.swift in Sources */,
 				1FD8CD4B1968AB07008ED995 /* BeIdenticalTo.swift in Sources */,
 				1FD8CD431968AB07008ED995 /* BeEmpty.swift in Sources */,
+				891729D52B1842D6005CC866 /* DSL+Require.swift in Sources */,
 				1F1871D41CA89EEE00A34BF2 /* NMBStringify.m in Sources */,
 				A8F6B5BD2070186D00FCB5ED /* SatisfyAllOf.swift in Sources */,
 				1FD8CD531968AB07008ED995 /* BeNil.swift in Sources */,
@@ -968,8 +984,10 @@
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
 				7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
 				896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */,
+				891729D72B18431D005CC866 /* Requirement.swift in Sources */,
 				1FD8CD391968AB07008ED995 /* Expression.swift in Sources */,
 				891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */,
+				8922828D2B283818002DA355 /* Polling+Require.swift in Sources */,
 				89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */,
 				1FD8CD3B1968AB07008ED995 /* FailureMessage.swift in Sources */,
 				1FA0C3FF1E30B14500623165 /* Matcher.swift in Sources */,
@@ -1038,6 +1056,7 @@
 				DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
 				1F4A56801A3B333F009E1637 /* ObjCBeLessThanTest.m in Sources */,
 				857D184F2536124400D8693A /* BeWithinTest.swift in Sources */,
+				8922828F2B283956002DA355 /* AsyncAwaitTest+Require.swift in Sources */,
 				1F0648CD19639F5A001F9C46 /* ObjectWithLazyProperty.swift in Sources */,
 				89F5E0A4290C3803001F9377 /* ObjCContainTest.m in Sources */,
 				106112C52251E13B000A5848 /* BeResultTest.swift in Sources */,
@@ -1046,6 +1065,7 @@
 				89C297CC2A911CDA002A143F /* AsyncTimerSequenceTest.swift in Sources */,
 				DD9A9A9019CF43AD00706F49 /* BeIdenticalToObjectTest.swift in Sources */,
 				1F4BB8B61DACA0E30048464B /* ThrowAssertionTest.swift in Sources */,
+				8922828A2B2833B7002DA355 /* PollingTest+Require.swift in Sources */,
 				8913649429E6925F00AD535E /* utils.swift in Sources */,
 				89F5E0A2290C37FB001F9377 /* ObjCBeNilTest.m in Sources */,
 				1F0648D51963AAB2001F9C46 /* SynchronousTest.swift in Sources */,
