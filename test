@@ -121,7 +121,14 @@ function test_podspec {
     run bundle exec pod --version
     echo "Linting podspec..."
     # Note: remove `--allow-warnings` once old Matcher API has been removed
-    run bundle exec pod lib lint Nimble.podspec --allow-warnings --skip-import-validation --verbose
+    run bundle exec pod lib lint Nimble.podspec
+}
+
+function test_carthage {
+    echo "Gathering Carthage installation information..."
+    run carthage version
+    echo "Verifying that Carthage artifacts build"
+    run carthage build archive --use-xcframeworks
 }
 
 function test_swiftpm {
@@ -184,6 +191,7 @@ function help {
     echo " watchos           - Runs the tests as an watchOS device"
     echo " watchos_xcodespm  - Runs the tests as an watchOS device using the Swift Package Manager version of Xcode"
     echo " podspec           - Runs pod lib lint against the podspec to detect breaking changes"
+    echo " carthage          - Runs verifyies that the carthage artifacts build"
     echo " swiftpm           - Runs the tests built by the Swift Package Manager"
     echo " swiftpm_docker    - Runs the tests built by the Swift Package Manager in a docker linux container"
     echo
@@ -205,6 +213,7 @@ function main {
             macos) test_macos ;;
             macos_xcodespm) test_xcode_spm_macos ;;
             podspec) test_podspec ;;
+            carthage) test_carthage ;;
             test) test ;;
             all) test ;;
             swiftpm) test_swiftpm ;;

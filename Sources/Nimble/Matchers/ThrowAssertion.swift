@@ -137,8 +137,8 @@ public func throwAssertion<Out>() -> Matcher<Out> {
         #else
         let message = """
             The throwAssertion Nimble matcher does not support your platform.
-            Note: throwAssertion no longer works on tvOS or watchOS platforms when you pull in Nimble with Cocoapods.
-            You will have to use Nimble with Swift Package Manager or Carthage.
+            Note: throwAssertion no longer works on tvOS or watchOS platforms when you use Nimble with Cocoapods.
+                  You will have to use Nimble with Swift Package Manager or Carthage.
             """
         fatalError(message)
         #endif
