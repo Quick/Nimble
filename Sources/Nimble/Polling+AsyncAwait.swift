@@ -4,7 +4,7 @@
 import Dispatch
 
 @MainActor
-private func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyle, to: String, description: String?, matcherExecutor: () async throws -> MatcherResult) async -> (Bool, FailureMessage) {
+internal func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyle, to: String, description: String?, matcherExecutor: () async throws -> MatcherResult) async -> (Bool, FailureMessage) {
     let msg = FailureMessage()
     msg.userDescription = description
     msg.to = to
@@ -21,7 +21,7 @@ private func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationStyl
     }
 }
 
-private actor Poller<T> {
+internal actor Poller<T> {
     private var lastMatcherResult: MatcherResult?
 
     init() {}
@@ -54,7 +54,7 @@ private actor Poller<T> {
 }
 
 // swiftlint:disable:next function_parameter_count
-private func poll<T>(
+internal func poll<T>(
     expression: AsyncExpression<T>,
     style: ExpectationStyle,
     matchStyle: AsyncMatchStyle,

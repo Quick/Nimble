@@ -44,7 +44,7 @@ internal enum AsyncMatchStyle {
 }
 
 // swiftlint:disable:next function_parameter_count
-private func poll<T>(
+internal func poll<T>(
     style: ExpectationStyle,
     matchStyle: AsyncMatchStyle,
     matcher: Matcher<T>,
