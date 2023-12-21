@@ -127,7 +127,7 @@ function test_carthage {
     echo "Gathering Carthage installation information..."
     run carthage version
     echo "Verifying that Carthage artifacts build"
-    run carthage build archive --use-xcframeworks --verbose
+    run carthage build --archive --use-xcframeworks --verbose
 }
 
 function test_swiftpm {
