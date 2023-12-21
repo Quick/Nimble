@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
   }
 
-  [s.osx, s.ios].each do |platform|
+  [s.osx, s.ios, s.visionos].each do |platform|
     platform.dependency 'CwlMachBadInstructionHandler', '~> 2.1.0'
     platform.dependency 'CwlCatchException', '~> 2.1.0'
   end
