@@ -141,7 +141,7 @@
 		89C297CE2A92AB34002A143F /* AsyncPromiseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */; };
 		89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */ = {isa = PBXBuildFile; productRef = 89D8AC842B3211C600410644 /* CwlCatchException */; };
 		89D8AC872B3211EA00410644 /* CwlPosixPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, watchos, ); productRef = 89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */; };
-		89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (driverkit, ios, maccatalyst, macos, ); productRef = 89D8AC882B3211EA00410644 /* CwlPreconditionTesting */; };
+		89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); productRef = 89D8AC882B3211EA00410644 /* CwlPreconditionTesting */; };
 		89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncMatcher.swift */; };
 		89EEF5B72A032C3200988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
 		89EEF5C02A06211C00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
