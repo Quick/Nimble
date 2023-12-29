@@ -35,8 +35,7 @@ Pod::Spec.new do |s|
   }
 
   [s.osx, s.ios].each do |platform|
-    platform.dependency 'CwlMachBadInstructionHandler', '~> 2.1.0'
-    platform.dependency 'CwlCatchException', '~> 2.1.0'
+    platform.dependency 'CwlPreconditionTesting', '~> 2.1.0'
   end
 
   s.cocoapods_version = '>= 1.4.0'
