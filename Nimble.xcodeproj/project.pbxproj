@@ -131,6 +131,8 @@
 		8922828A2B2833B7002DA355 /* PollingTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892282892B2833B7002DA355 /* PollingTest+Require.swift */; };
 		8922828D2B283818002DA355 /* Polling+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828B2B2837E1002DA355 /* Polling+Require.swift */; };
 		8922828F2B283956002DA355 /* AsyncAwaitTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */; };
+		8923E60D2B47CE7E00F3961A /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923E60C2B47CE7E00F3961A /* Map.swift */; };
+		8923E6102B47D08300F3961A /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923E60E2B47D06E00F3961A /* MapTest.swift */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962402A5FABD000A7929D /* AsyncAllPass.swift */; };
 		8969624A2A5FAD5F00A7929D /* AsyncAllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */; };
@@ -314,6 +316,8 @@
 		892282892B2833B7002DA355 /* PollingTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PollingTest+Require.swift"; sourceTree = "<group>"; };
 		8922828B2B2837E1002DA355 /* Polling+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Polling+Require.swift"; sourceTree = "<group>"; };
 		8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncAwaitTest+Require.swift"; sourceTree = "<group>"; };
+		8923E60C2B47CE7E00F3961A /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		8923E60E2B47D06E00F3961A /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		892FDF1229D3EA7700523A80 /* AsyncExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncExpression.swift; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
 		896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPassTest.swift; sourceTree = "<group>"; };
@@ -524,6 +528,7 @@
 				1F925EFE195C187600ED456B /* EndWithTest.swift */,
 				1F925F04195C18B700ED456B /* EqualTest.swift */,
 				472FD1361B9E094B00C7B8DA /* HaveCountTest.swift */,
+				8923E60E2B47D06E00F3961A /* MapTest.swift */,
 				AE7ADE481C80C00D00B94CD3 /* MatchErrorTest.swift */,
 				DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */,
 				1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */,
@@ -583,10 +588,11 @@
 				C576224C2A61D3AE00BD6A8C /* Equal+TupleArray.swift */,
 				472FD1341B9E085700C7B8DA /* HaveCount.swift */,
 				DDB4D5EC19FE43C200E9D9FE /* Match.swift */,
+				8923E60C2B47CE7E00F3961A /* Map.swift */,
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				AE7ADE441C80BF8000B94CD3 /* MatchError.swift */,
-				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
 				1FA0C3FE1E30B14500623165 /* Matcher.swift */,
+				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
 				A8F6B5BC2070186D00FCB5ED /* SatisfyAllOf.swift */,
 				7B5358BD1C38479700A23FAA /* SatisfyAnyOf.swift */,
@@ -850,6 +856,7 @@
 				29EA59671B551EE6002D767E /* ThrowError.swift in Sources */,
 				62FB326223B78BF90047BED9 /* BeginWithPrefix.swift in Sources */,
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
+				8923E60D2B47CE7E00F3961A /* Map.swift in Sources */,
 				CDF5C57B2647B89B0036532C /* Equal+Tuple.swift in Sources */,
 				857D1849253610A900D8693A /* BeWithin.swift in Sources */,
 				1FD8CD4D1968AB07008ED995 /* BeLessThan.swift in Sources */,
@@ -975,6 +982,7 @@
 				DD72EC651A93874A002F7651 /* AllPassTest.swift in Sources */,
 				1F4A569E1A3B3565009E1637 /* ObjCMatchTest.m in Sources */,
 				1F925EEA195C124400ED456B /* BeAnInstanceOfTest.swift in Sources */,
+				8923E6102B47D08300F3961A /* MapTest.swift in Sources */,
 				29EA59641B551ED2002D767E /* ThrowErrorTest.swift in Sources */,
 				6CAEDD0B1CAEA86F003F1584 /* LinuxSupport.swift in Sources */,
 				1F4A566B1A3B3108009E1637 /* ObjCBeAnInstanceOfTest.m in Sources */,
