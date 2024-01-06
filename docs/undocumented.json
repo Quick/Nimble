@@ -1,90 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlCatchException/Sources/CwlCatchException/CwlCatchException.swift",
-      "line": 32,
-      "symbol": "NSException.catchException(in:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlBadInstructionException.swift",
-      "line": 42,
-      "symbol": "BadInstructionException.init(coder:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 31,
-      "symbol": "MACH_MSG_TYPE_MAKE_SEND",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 32,
-      "symbol": "MACH_MSGH_BITS_REMOTE(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 33,
-      "symbol": "MACH_MSGH_BITS(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 44,
-      "symbol": "nativeThreadState",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 45,
-      "symbol": "nativeThreadStateCount",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 47,
-      "symbol": "nativeMachExceptionMask",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 55,
-      "symbol": "EXC_TYPES_COUNT",
-      "symbol_kind": "source.lang.swift.decl.var.global",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 56,
-      "symbol": "execTypesCountTuple",
-      "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 59,
-      "symbol": "execTypesCountTuple.value",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlPreconditionTesting/CwlDarwinDefinitions.swift",
-      "line": 60,
-      "symbol": "execTypesCountTuple.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Adapters/AdapterProtocols.swift",
       "line": 3,
       "symbol": "AssertionHandler.assert(_:message:location:)",
@@ -450,56 +366,56 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 147,
+      "line": 153,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 148,
+      "line": 154,
       "symbol": "SyncExpectation.expression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 172,
+      "line": 178,
       "symbol": "SyncExpectation.init(expression:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 188,
+      "line": 194,
       "symbol": "SyncExpectation.location",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 240,
+      "line": 246,
       "symbol": "AsyncExpectation",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 241,
+      "line": 247,
       "symbol": "AsyncExpectation.expression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 265,
+      "line": 271,
       "symbol": "AsyncExpectation.init(expression:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 269,
+      "line": 275,
       "symbol": "AsyncExpectation.location",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -2350,6 +2266,97 @@
       "line": 39,
       "symbol": "PollingDefaults.pollInterval",
       "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 3,
+      "symbol": "RequireError",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 6,
+      "symbol": "SyncRequirement",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 74,
+      "symbol": "SyncRequirement",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 75,
+      "symbol": "SyncRequirement.expression",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 81,
+      "symbol": "SyncRequirement.location",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 83,
+      "symbol": "SyncRequirement.init(expression:customError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 88,
+      "symbol": "SyncRequirement.verify(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 143,
+      "symbol": "AsyncRequirement",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 144,
+      "symbol": "AsyncRequirement.expression",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 150,
+      "symbol": "AsyncRequirement.location",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 152,
+      "symbol": "AsyncRequirement.init(expression:customError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 157,
+      "symbol": "AsyncRequirement.verify(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Requirement.swift",
+      "line": 454,
+      "symbol": "AsyncRequirement",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {

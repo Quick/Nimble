@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Double Extension Reference</title>
+    <title>AsyncRequirement Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -13,8 +13,8 @@
     <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/Double" class="dashAnchor"></a>
-    <a title="Double Extension Reference"></a>
+    <a name="//apple_ref/swift/Struct/AsyncRequirement" class="dashAnchor"></a>
+    <a title="AsyncRequirement Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">Nimble 13.1.2 Docs</a> (52% documented)</p>
@@ -30,7 +30,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">Nimble Reference</a>
         <img id="carat" src="../img/carat.png" alt=""/>
-        Double Extension Reference
+        AsyncRequirement Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -1203,16 +1203,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Double</h1>
+            <h1>AsyncRequirement</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Double</span><span class="p">:</span> <span class="kt">ExpressibleByBooleanLiteral</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Double</span><span class="p">:</span> <span class="kt"><a href="../Protocols/TestOutputStringConvertible.html">TestOutputStringConvertible</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AsyncRequirement</span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>Undocumented</p>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -1220,35 +1220,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:s27ExpressibleByBooleanLiteralP07booleanD0x0cD4TypeQz_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(booleanLiteral:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s27ExpressibleByBooleanLiteralP07booleanD0x0cD4TypeQz_tcfc">init(booleanLiteral:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">booleanLiteral</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Sd6NimbleE15testDescriptionSSvp"></a>
-                    <a name="//apple_ref/swift/Property/testDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Sd6NimbleE15testDescriptionSSvp">testDescription</a>
+                    <a name="/s:6Nimble16AsyncRequirementV10expressionAA0B10ExpressionVyxGvp"></a>
+                    <a name="//apple_ref/swift/Property/expression" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV10expressionAA0B10ExpressionVyxGvp">expression</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1263,7 +1237,805 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">testDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">expression</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV11customErrors0E0_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/customError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV11customErrors0E0_pSgvp">customError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A custom error to throw.
+If nil, then we will throw a <code><a href="../Structs/RequireError.html">RequireError</a></code> on failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">customError</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV8locationAA14SourceLocationCvp"></a>
+                    <a name="//apple_ref/swift/Property/location" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV8locationAA14SourceLocationCvp">location</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Classes/SourceLocation.html">SourceLocation</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV10expression11customErrorACyxGAA0B10ExpressionVyxG_s0F0_pSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(expression:customError:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV10expression11customErrorACyxGAA0B10ExpressionVyxG_s0F0_pSgtcfc">init(expression:<wbr>customError:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">expression</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncExpression.html">AsyncExpression</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">customError</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV6verifyyxSb_AA14FailureMessageCxSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/verify(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV6verifyyxSb_AA14FailureMessageCxSgtKF">verify(_:<wbr>_:<wbr>_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verify</span><span class="p">(</span><span class="n">_</span> <span class="nv">pass</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Classes/FailureMessage.html">FailureMessage</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Value</span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV2to_11descriptionxAA7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/to(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV2to_11descriptionxAA7MatcherVyxG_SSSgtYaKF">to(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to match.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">to</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV5toNot_11descriptionxAA7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNot(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV5toNot_11descriptionxAA7MatcherVyxG_SSSgtYaKF">toNot(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNot</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV5notTo_11descriptionxAA7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/notTo(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV5notTo_11descriptionxAA7MatcherVyxG_SSSgtYaKF">notTo(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match.</p>
+
+<p>Alias to toNot().</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">notTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/AsyncMatchers"></a>
+                <a name="//apple_ref/swift/Section/AsyncMatchers" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/AsyncMatchers"></a>
+                  <h3 class="section-name"><span>AsyncMatchers</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV2to_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/to(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV2to_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF">to(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to match.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">to</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV5toNot_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNot(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV5toNot_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF">toNot(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNot</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV5notTo_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/notTo(_:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV5notTo_11descriptionxAA0B7MatcherVyxG_SSSgtYaKF">notTo(_:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match.</p>
+
+<p>Alias to toNot().</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">notTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Async%20Polling%20With%20Synchronous%20Matchers"></a>
+                <a name="//apple_ref/swift/Section/Async Polling With Synchronous Matchers" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Async%20Polling%20With%20Synchronous%20Matchers"></a>
+                  <h3 class="section-name"><span>Async Polling With Synchronous Matchers</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV12toEventually_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toEventually(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV12toEventually_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toEventually(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to match by checking continuously
+at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV15toEventuallyNot_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toEventuallyNot(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV15toEventuallyNot_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF">toEventuallyNot(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventuallyNot</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV15toNotEventually_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNotEventually(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV15toNotEventually_7timeout12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF">toNotEventually(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+<p>Alias of toEventuallyNot()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNotEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV7toNever_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNever(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV7toNever_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toNever(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to never match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNever</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV7neverTo_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/neverTo(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV7neverTo_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">neverTo(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to never match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+<p>Alias of toNever()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">neverTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV8toAlways_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toAlways(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV8toAlways_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toAlways(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to always match by checking
+continusouly at each pollInterval until the timeout is reached</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toAlways</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV8alwaysTo_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/alwaysTo(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV8alwaysTo_5until12pollInterval11descriptionxAA7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">alwaysTo(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to always match by checking
+continusouly at each pollInterval until the timeout is reached</p>
+
+<p>Alias of toAlways()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">alwaysTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/Matcher.html">Matcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Async%20Polling%20With%20AsyncMatchers"></a>
+                <a name="//apple_ref/swift/Section/Async Polling With AsyncMatchers" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Async%20Polling%20With%20AsyncMatchers"></a>
+                  <h3 class="section-name"><span>Async Polling With AsyncMatchers</span>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV12toEventually_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toEventually(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV12toEventually_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toEventually(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to match by checking continuously
+at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV15toEventuallyNot_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toEventuallyNot(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV15toEventuallyNot_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF">toEventuallyNot(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toEventuallyNot</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV15toNotEventually_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNotEventually(_:timeout:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV15toNotEventually_7timeout12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeI0OALSSSgtYaKF">toNotEventually(_:<wbr>timeout:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to not match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+<p>Alias of toEventuallyNot()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNotEventually</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV7toNever_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toNever(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV7toNever_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toNever(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to never match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toNever</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV7neverTo_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/neverTo(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV7neverTo_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">neverTo(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to never match by checking
+continuously at each pollInterval until the timeout is reached.</p>
+
+<p>Alias of toNever()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">neverTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV8toAlways_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/toAlways(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV8toAlways_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">toAlways(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to always match by checking
+continusouly at each pollInterval until the timeout is reached</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">toAlways</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Nimble16AsyncRequirementV8alwaysTo_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF"></a>
+                    <a name="//apple_ref/swift/Method/alwaysTo(_:until:pollInterval:description:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Nimble16AsyncRequirementV8alwaysTo_5until12pollInterval11descriptionxAA0B7MatcherVyxG_AA0a4TimeH0OALSSSgtYaKF">alwaysTo(_:<wbr>until:<wbr>pollInterval:<wbr>description:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Tests the actual value using a matcher to always match by checking
+continusouly at each pollInterval until the timeout is reached</p>
+
+<p>Alias of toAlways()</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">alwaysTo</span><span class="p">(</span><span class="n">_</span> <span class="nv">matcher</span><span class="p">:</span> <span class="kt"><a href="../Structs/AsyncMatcher.html">AsyncMatcher</a></span><span class="o">&lt;</span><span class="kt">Value</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">until</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="nv">pollInterval</span><span class="p">:</span> <span class="kt"><a href="../Enums/NimbleTimeInterval.html">NimbleTimeInterval</a></span> <span class="o">=</span> <span class="kt"><a href="../Structs/PollingDefaults.html">PollingDefaults</a></span><span class="o">.</span><span class="n">pollInterval</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Value</span></code></pre>
 
                         </div>
                       </div>

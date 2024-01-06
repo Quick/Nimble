@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Nimble"
-  s.version      = "13.0.0"
+  s.version      = "13.1.2"
   s.summary      = "A Matcher Framework for Swift and Objective-C"
   s.description  = <<-DESC
                    Use Nimble to express the expected outcomes of Swift or Objective-C expressions. Inspired by Cedar.
@@ -36,8 +36,7 @@ Pod::Spec.new do |s|
   }
 
   [s.osx, s.ios, s.visionos].each do |platform|
-    platform.dependency 'CwlMachBadInstructionHandler', '~> 2.1.0'
-    platform.dependency 'CwlCatchException', '~> 2.1.0'
+    platform.dependency 'CwlPreconditionTesting', '~> 2.1.0'
   end
 
   s.cocoapods_version = '>= 1.4.0'

@@ -11,8 +11,13 @@
 #import <Nimble/DSL.h>
 
 #if TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_VISION
+#if COCOAPODS
+    #import <CwlMachBadInstructionHandler/CwlMachBadInstructionHandler.h>
+    #import <CwlCatchExceptionSupport/CwlCatchException.h>
+#else
     #import "CwlMachBadInstructionHandler.h"
     #import "CwlCatchException.h"
+#endif
 #endif
 
 FOUNDATION_EXPORT double NimbleVersionNumber;
