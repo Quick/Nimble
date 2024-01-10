@@ -25,4 +25,3 @@ jobs:
         with:
           files: |
             Nimble.xcframework.zip
-            Nimble.framework.zip
