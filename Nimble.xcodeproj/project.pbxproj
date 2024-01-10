@@ -319,6 +319,7 @@
 		8923E60C2B47CE7E00F3961A /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		8923E60E2B47D06E00F3961A /* MapTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTest.swift; sourceTree = "<group>"; };
 		892FDF1229D3EA7700523A80 /* AsyncExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncExpression.swift; sourceTree = "<group>"; };
+		8952ADDC2B4F159400D9305F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
 		896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPassTest.swift; sourceTree = "<group>"; };
 		898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailMatcher.swift; sourceTree = "<group>"; };
@@ -460,6 +461,7 @@
 				1F1A742D1940169200FFFC47 /* Info.plist */,
 				1FD8CD0C1968AB07008ED995 /* Matchers */,
 				1F1A742E1940169200FFFC47 /* Nimble.h */,
+				8952ADDC2B4F159400D9305F /* PrivacyInfo.xcprivacy */,
 				1FD8CD241968AB07008ED995 /* Utils */,
 			);
 			name = Nimble;

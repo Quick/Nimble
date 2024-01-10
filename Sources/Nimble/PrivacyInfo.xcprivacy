@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+Nimble is a library that is only used for testing and should never be included
+in the binary submitted to App Store Connect.
+
+Despite not being shipped to Apple, Nimble does not and will never collect any
+kind of analytics or tracking.
+-->
+<plist version="1.0">
+<dict>
+    <key>NSPrivacyTracking</key>
+    <false/>
+</dict>
+</plist>

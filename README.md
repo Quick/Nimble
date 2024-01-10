@@ -69,6 +69,7 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Result](#result)
   - [Matching a value to any of a group of matchers](#matching-a-value-to-any-of-a-group-of-matchers)
   - [Custom Validation](#custom-validation)
+  - [Mapping a Value to Another Value](#mapping-a-value-to-another-value)
 - [Writing Your Own Matchers](#writing-your-own-matchers)
   - [MatcherResult](#matcherresult)
   - [Lazy Evaluation](#lazy-evaluation)
@@ -86,6 +87,7 @@ expect(ocean.isClean).toEventually(beTruthy())
     - [Xcode](#xcode)
     - [Package.Swift](#packageswift)
   - [Using Nimble without XCTest](#using-nimble-without-xctest)
+  - [Privacy Statement](#privacy-statement)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -2117,3 +2119,11 @@ rm "${SWIFT_STDLIB_TOOL_DESTINATION_DIR}/libswiftXCTest.dylib"
 
 You can now use Nimble assertions in your code and handle failures as you see
 fit.
+
+## Privacy Statement
+
+Nimble is a library that is only used for testing and should never be included
+in the binary submitted to App Store Connect.
+
+Despite not being shipped to Apple, Nimble does not and will never collect any
+kind of analytics or tracking.
