@@ -35,7 +35,10 @@ let package = Package(
                     .product(name: "CwlPosixPreconditionTesting", package: "CwlPreconditionTesting",
                              condition: .when(platforms: [.tvOS, .watchOS]))
                 ],
-                exclude: ["Info.plist"]
+                exclude: ["Info.plist"],
+                resources: [
+                    .copy("PrivacyInfo.xcprivacy")
+                ]
             ),
             .target(
                 name: "NimbleSharedTestHelpers",
