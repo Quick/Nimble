@@ -32,7 +32,7 @@ jobs:
     runs-on: macos-13
     strategy:
       matrix:
-        xcode: ["14.3.1"]
+        xcode: ["14.3.1", "15.2"]
       fail-fast: false
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
@@ -42,6 +42,8 @@ jobs:
       - run: ./test ios
       - run: ./test tvos
       - run: ./test watchos
+      - run: ./test visionos
+        if: matrix.xcode == '15.2'
 
   xcode_spm:
     name: Xcode ${{ matrix.xcode }} (Swift Package)
