@@ -12,10 +12,10 @@
     {
       "identity" : "cwlpreconditiontesting",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bitmovin-engineering/CwlPreconditionTesting.git",
+      "location" : "https://github.com/mattgallagher/CwlPreconditionTesting.git",
       "state" : {
-        "branch" : "bitmovin/feature/visionos-support",
-        "revision" : "204426ebff46789adc32d4fc49b35cdb7da6f218"
+        "revision" : "dc9af4781f2afdd1e68e90f80b8603be73ea7abc",
+        "version" : "2.2.0"
       }
     }
   ],

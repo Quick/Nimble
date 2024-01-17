@@ -91,7 +91,15 @@ public struct AsyncExpression<Value> {
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
     public func cast<U>(_ block: @escaping (Value?) throws -> U?) -> AsyncExpression<U> {
-        return AsyncExpression<U>(
+        AsyncExpression<U>(
+            expression: ({ try await block(self.evaluate()) }),
+            location: self.location,
+            isClosure: self.isClosure
+        )
+    }
+
+    public func cast<U>(_ block: @escaping (Value?) async throws -> U?) -> AsyncExpression<U> {
+        AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
             isClosure: self.isClosure
@@ -99,11 +107,11 @@ public struct AsyncExpression<Value> {
     }
 
     public func evaluate() async throws -> Value? {
-        return try await self._expression(_withoutCaching)
+        try await self._expression(_withoutCaching)
     }
 
     public func withoutCaching() -> AsyncExpression<Value> {
-        return AsyncExpression(
+        AsyncExpression(
             memoizedExpression: self._expression,
             location: location,
             withoutCaching: true,
@@ -112,7 +120,7 @@ public struct AsyncExpression<Value> {
     }
 
     public func withCaching() -> AsyncExpression<Value> {
-        return AsyncExpression(
+        AsyncExpression(
             memoizedExpression: memoizedClosure { try await self.evaluate() },
             location: self.location,
             withoutCaching: false,
