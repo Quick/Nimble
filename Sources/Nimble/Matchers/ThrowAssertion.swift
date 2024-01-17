@@ -1,5 +1,5 @@
 // swiftlint:disable all
-#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS))
+#if canImport(CwlPreconditionTesting) && (os(macOS) || os(iOS) || os(visionOS))
 import CwlPreconditionTesting
 #elseif canImport(CwlPosixPreconditionTesting)
 import CwlPosixPreconditionTesting

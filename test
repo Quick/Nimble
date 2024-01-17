@@ -13,6 +13,8 @@ if which xcodebuild > /dev/null; then
     LATEST_WATCHOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk watchos' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
     LATEST_WATCHOS_VERSION=`xcrun simctl list | grep ^watchOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     LATEST_MACOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk macosx' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_VISIONOS_SDK_VERSION=`xcodebuild -showsdks | grep -e '-sdk xros' | cut -d ' ' -f 2 | ruby -e 'puts STDIN.read.chomp.split("\n").last'`
+    LATEST_VISIONOS_VERSION=`xcrun simctl list | grep ^visionOS | ruby -e 'puts /\(([0-9.]+).*\)/.match(STDIN.read.chomp.split("\n").last).to_a[1]'`
     BUILD_IOS_SDK_VERSION=${NIMBLE_BUILD_IOS_SDK_VERSION:-$LATEST_IOS_SDK_VERSION}
     RUNTIME_IOS_VERSION=${NIMBLE_RUNTIME_IOS_VERSION:-$LATEST_IOS_VERSION}
     BUILD_TVOS_SDK_VERSION=${NIMBLE_BUILD_TVOS_SDK_VERSION:-$LATEST_TVOS_SDK_VERSION}
@@ -20,6 +22,8 @@ if which xcodebuild > /dev/null; then
     BUILD_WATCHOS_SDK_VERSION=${NIMBLE_BUILD_WATCHOS_SDK_VERSION:-$LATEST_WATCHOS_SDK_VERSION}
     RUNTIME_WATCHOS_VERSION=${NIMBLE_RUNTIME_WATCHOS_VERSION:-$LATEST_WATCHOS_VERSION}
     BUILD_MACOS_SDK_VERSION=${NIMBLE_BUILD_MACOS_SDK_VERSION:-$LATEST_MACOS_SDK_VERSION}
+    BUILD_VISIONOS_SDK_VERSION=${NIMBLE_BUILD_VISIONOS_SDK_VERSION:-$LATEST_VISIONOS_SDK_VERSION}
+    RUNTIME_VISIONOS_VERSION=${NIMBLE_RUNTIME_VISIONOS_VERSION:-$LATEST_VISIONOS_VERSION}
 fi
 
 set -e
@@ -50,6 +54,11 @@ function print_env {
     echo "   Latest watchOS SDK: $LATEST_WATCHOS_SDK_VERSION"
     echo "   Building with watchOS SDK: `color_if_overridden $BUILD_WATCHOS_SDK_VERSION $NIMBLE_BUILD_WATCHOS_SDK_VERSION`"
     echo "   Running with watchOS: `color_if_overridden $RUNTIME_WATCHOS_VERSION $NIMBLE_RUNTIME_WATCHOS_VERSION`"
+    echo
+    echo " visionOS:"
+    echo "   Latest visionOS SDK: $LATEST_VISIONOS_SDK_VERSION"
+    echo "   Building with visionOS SDK: `color_if_overridden $BUILD_VISIONOS_SDK_VERSION $NIMBLE_BUILD_VISIONOS_SDK_VERSION`"
+    echo "   Running with visionOS: `color_if_overridden $RUNTIME_VISIONOS_VERSION $NIMBLE_RUNTIME_VISIONOS_VERSION`"
     echo
     echo " macOS:"
     echo "   Latest macOS SDK: $LATEST_MACOS_SDK_VERSION"
@@ -85,6 +94,18 @@ function test_watchos {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 (40mm),OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
+function test_visionos {
+    if [[ -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        echo "visionOS is not supported on this machine"
+        return
+    fi
+
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -destination "generic/platform=visionOS" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build | xcpretty
+
+    run osascript -e 'tell app "Simulator" to quit'
+    run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "xrsimulator$BUILD_VISIONOS_SDK_VERSION" -destination "name=Apple Vision Pro),OS=$RUNTIME_VISIONOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
 function test_macos {
     run set -o pipefail && xcodebuild -project Nimble.xcodeproj -scheme "Nimble" -configuration "Debug" -sdk "macosx$BUILD_MACOS_SDK_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
@@ -116,11 +137,28 @@ function test_xcode_spm_watchos {
     run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "watchsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Watch Series 6 (40mm),OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
 }
 
+function test_xcode_spm_visionos {
+    if [[ -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        echo "visionOS is not supported on this machine"
+        return
+    fi
+
+    run osascript -e 'tell app "Simulator" to quit'
+    mv Nimble.xcodeproj Nimble.xcodeproj.bak
+    trap 'mv Nimble.xcodeproj.bak Nimble.xcodeproj' EXIT
+    run set -o pipefail && xcodebuild -scheme "Nimble" -configuration "Debug" -sdk "xrsimulator$BUILD_WATCHOS_SDK_VERSION" -destination "name=Apple Vision Pro,OS=$RUNTIME_WATCHOS_VERSION" OTHER_SWIFT_FLAGS='$(inherited) -suppress-warnings' build-for-testing test-without-building | xcpretty
+}
+
 function test_podspec {
+    PLATFORMS="ios,tvos,watchos,macos"
+    if [[ ! -z $LATEST_VISIONOS_SDK_VERSION ]]; then
+        PLATFORMS="$PLATFORMS,visionos"
+    fi
+
     echo "Gathering CocoaPods installation information..."
     run bundle exec pod --version
     echo "Linting podspec..."
-    run bundle exec pod lib lint Nimble.podspec --skip-import-validation --verbose
+    run bundle exec pod lib lint Nimble.podspec --skip-import-validation --verbose --platforms=$PLATFORMS
 }
 
 function test_carthage {
@@ -147,12 +185,14 @@ function test() {
     test_ios
     test_tvos
     test_watchos
+    test_visionos
 
     if xcodebuild --help 2>&1 | grep xcframework > /dev/null; then
         test_xcode_spm_macos
         test_xcode_spm_ios
         test_xcode_spm_tvos
         test_xcode_spm_watchos
+        test_xcode_spm_visionos
     else
         echo "Not testing with Swift Package Manager version of Xcode because it requires at least Xcode 11"
     fi
@@ -189,6 +229,8 @@ function help {
     echo " tvos_xcodespm     - Runs the tests as an tvOS device using the Swift Package Manager version of Xcode"
     echo " watchos           - Runs the tests as an watchOS device"
     echo " watchos_xcodespm  - Runs the tests as an watchOS device using the Swift Package Manager version of Xcode"
+    echo " visionos          - Runs the tests as an visionOS device"
+    echo " visionos_xcodespm - Runs the tests as an visionOS device using the Swift Package Manager version of Xcode"
     echo " podspec           - Runs pod lib lint against the podspec to detect breaking changes"
     echo " carthage          - Runs verifyies that the carthage artifacts build"
     echo " swiftpm           - Runs the tests built by the Swift Package Manager"
@@ -209,6 +251,8 @@ function main {
             tvos_xcodespm) test_xcode_spm_tvos ;;
             watchos) test_watchos ;;
             watchos_xcodespm) test_xcode_spm_watchos ;;
+            visionos) test_visionos ;;
+            visionos_xcodespm) test_xcode_spm_visionos ;;
             macos) test_macos ;;
             macos_xcodespm) test_xcode_spm_macos ;;
             podspec) test_podspec ;;

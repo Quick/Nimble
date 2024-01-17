@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.15"
   s.tvos.deployment_target = "13.0"
   s.watchos.deployment_target = "7.0"
+  s.visionos.deployment_target = "1.0"
   s.source       = { :git => "https://github.com/Quick/Nimble.git",
                      :tag => "v#{s.version}" }
 
@@ -34,7 +35,7 @@ Pod::Spec.new do |s|
     'OTHER_SWIFT_FLAGS' => '$(inherited) -suppress-warnings',
   }
 
-  [s.osx, s.ios].each do |platform|
+  [s.osx, s.ios, s.visionos].each do |platform|
     platform.dependency 'CwlPreconditionTesting', '~> 2.1.0'
   end
 

@@ -17,7 +17,7 @@ public func beginWith(_ startingElement: Any) -> Matcher<NMBOrderedCollection> {
     return Matcher.simple("begin with <\(startingElement)>") { actualExpression in
         guard let collection = try actualExpression.evaluate() else { return .fail }
         guard collection.count > 0 else { return .doesNotMatch }
-        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+        #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
             let collectionValue = collection.object(at: 0) as AnyObject
         #else
             guard let collectionValue = collection.object(at: 0) as? NSObject else {
