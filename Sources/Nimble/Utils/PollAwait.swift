@@ -98,6 +98,11 @@ internal enum PollResult<T> {
     }
 }
 
+internal enum PollStatus {
+    case finished(Bool)
+    case incomplete
+}
+
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving a "response" to this promise.
 internal final class AwaitPromise<T> {
@@ -399,11 +404,11 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () throws -> Bool) -> PollResult<Bool> {
+    expression: @escaping () throws -> PollStatus) -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
-            if try expression() {
-                return true
+            if case .finished(let result) = try expression() {
+                return result
             }
             return nil
         }

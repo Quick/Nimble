@@ -41,8 +41,19 @@ internal actor Poller<T> {
             file: expression.location.file,
             line: expression.location.line,
             fnName: fnName) {
-                self.updateMatcherResult(result: try await matcherRunner())
-                    .toBoolean(expectation: style)
+                if self.updateMatcherResult(result: try await matcherRunner())
+                    .toBoolean(expectation: style) {
+                    if matchStyle.isContinous {
+                        return .incomplete
+                    }
+                    return .finished(true)
+                } else {
+                    if matchStyle.isContinous {
+                        return .finished(false)
+                    } else {
+                        return .incomplete
+                    }
+                }
             }
         return processPollResult(result.toPollResult(), matchStyle: matchStyle, lastMatcherResult: lastMatcherResult, fnName: fnName)
     }
@@ -152,7 +163,7 @@ extension SyncExpectation {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -186,7 +197,7 @@ extension SyncExpectation {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -282,7 +293,7 @@ extension SyncExpectation {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -316,7 +327,7 @@ extension SyncExpectation {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -409,7 +420,7 @@ extension AsyncExpectation {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -442,7 +453,7 @@ extension AsyncExpectation {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -533,7 +544,7 @@ extension AsyncExpectation {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -566,7 +577,7 @@ extension AsyncExpectation {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,

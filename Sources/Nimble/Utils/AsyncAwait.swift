@@ -165,11 +165,11 @@ private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTime
     return await promise.value
 }
 
-private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> Bool) async -> AsyncPollResult<Bool> {
+private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
     for try await _ in AsyncTimerSequence(interval: pollInterval) {
         do {
-            if try await expression() {
-                return .completed(true)
+            if case .finished(let result) = try await expression() {
+                return .completed(result)
             }
         } catch {
             return .errorThrown(error)
@@ -199,7 +199,7 @@ private func runPoller(
     pollInterval: NimbleTimeInterval,
     awaiter: Awaiter,
     fnName: String = #function, file: FileString = #file, line: UInt = #line,
-    expression: @escaping () async throws -> Bool
+    expression: @escaping () async throws -> PollStatus
 ) async -> AsyncPollResult<Bool> {
     awaiter.waitLock.acquireWaitingLock(
         fnName,
@@ -324,7 +324,7 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () async throws -> Bool) async -> AsyncPollResult<Bool> {
+    expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
         await runPoller(
             timeoutInterval: timeoutInterval,
             pollInterval: pollInterval,

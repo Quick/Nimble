@@ -372,6 +372,9 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             await expect { try self.doThrowError() }.alwaysTo(equal(0))
         }
+        await failsWithErrorMessage("expected to always equal <0>, got <nil> (use beNil() to match nils)") {
+            await expect(nil).toAlways(equal(0))
+        }
     }
 }
 

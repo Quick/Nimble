@@ -174,6 +174,9 @@ final class PollingRequireTest: XCTestCase {
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.neverTo(equal(0))
         }
+        failsWithErrorMessage("expected to never equal <1>, got <1>") {
+            try require(1).toNever(equal(1))
+        }
     }
 
     func testToAlwaysPositiveMatches() throws {
@@ -206,6 +209,9 @@ final class PollingRequireTest: XCTestCase {
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.alwaysTo(equal(0))
+        }
+        failsWithErrorMessage("expected to always equal <1>, got <nil> (use beNil() to match nils)") {
+            try require(nil).toAlways(equal(1))
         }
     }
 }

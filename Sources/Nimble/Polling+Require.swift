@@ -107,7 +107,7 @@ extension SyncRequirement {
             expression,
             .toNotMatch,
             poll(
-                style: .toMatch,
+                style: .toNotMatch,
                 matchStyle: .never,
                 matcher: matcher,
                 timeout: until,
@@ -158,7 +158,7 @@ extension SyncRequirement {
             expression,
             .toMatch,
             poll(
-                style: .toNotMatch,
+                style: .toMatch,
                 matchStyle: .always,
                 matcher: matcher,
                 timeout: until,
@@ -266,7 +266,7 @@ extension SyncRequirement {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -300,7 +300,7 @@ extension SyncRequirement {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -396,7 +396,7 @@ extension SyncRequirement {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -430,7 +430,7 @@ extension SyncRequirement {
             description: description) {
                 await poll(
                     expression: asyncExpression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -523,7 +523,7 @@ extension AsyncRequirement {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -556,7 +556,7 @@ extension AsyncRequirement {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
@@ -647,7 +647,7 @@ extension AsyncRequirement {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toMatch,
+                    style: .toNotMatch,
                     matchStyle: .never,
                     timeout: until,
                     poll: pollInterval,
@@ -680,7 +680,7 @@ extension AsyncRequirement {
             description: description) {
                 await poll(
                     expression: expression,
-                    style: .toNotMatch,
+                    style: .toMatch,
                     matchStyle: .always,
                     timeout: until,
                     poll: pollInterval,
