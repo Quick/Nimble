@@ -16,7 +16,7 @@
     <a title="Nimble  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Nimble 13.1.2 Docs</a> (52% documented)</p>
+        <p><a href="index.html">Nimble 13.2.1 Docs</a> (52% documented)</p>
         <p class="header-right"><a href="https://github.com/Quick/Nimble"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="search.json">
@@ -851,6 +851,12 @@
                 <a href="Functions.html#/s:6Nimble9haveCountyAA7MatcherVyxGSiSlRzlF">haveCount(_:)</a>
               </li>
               <li class="nav-group-task">
+                <a href="Functions.html#/s:6Nimble3mapyAA12AsyncMatcherVyxGq_xYaKc_q0_t5ValueQy0_Rs_AA09AsyncableD0R0_r1_lF">map(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:6Nimble3mapyAA7MatcherVyxGq_xKc_ADyq_Gtr0_lF">map(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Functions.html#/s:6Nimble5matchyAA7MatcherVySSGSSSgF">match(_:)</a>
               </li>
               <li class="nav-group-task">
@@ -1285,6 +1291,7 @@ or Objective-C expressions. Inspired by
 <li><a href="#result">Result</a></li>
 <li><a href="#matching-a-value-to-any-of-a-group-of-matchers">Matching a value to any of a group of matchers</a></li>
 <li><a href="#custom-validation">Custom Validation</a></li>
+<li><a href="#mapping-a-value-to-another-value">Mapping a Value to Another Value</a></li>
 </ul></li>
 <li><a href="#writing-your-own-matchers">Writing Your Own Matchers</a>
 
@@ -1308,6 +1315,7 @@ or Objective-C expressions. Inspired by
 <li><a href="#xcode">Xcode</a></li>
 <li><a href="#packageswift">Package.Swift</a></li>
 <li><a href="#using-nimble-without-xctest">Using Nimble without XCTest</a></li>
+<li><a href="#privacy-statement">Privacy Statement</a></li>
 </ul></li>
 </ul>
 
@@ -2640,6 +2648,35 @@ using by <code>satisfyAnyOf</code>/<code>||</code>.</p>
 <p>The <code>String</code> provided with <code>.failed()</code> is shown when the test fails.</p>
 
 <p>When using <code>toEventually()</code> be careful not to make state changes or run process intensive code since this closure will be ran many times.</p>
+<h2 id='mapping-a-value-to-another-value' class='heading'>Mapping a Value to Another Value</h2>
+
+<p>Sometimes, you only want to match against a property or group of properties.
+For example, if you wanted to check that only one or a few properties of a value
+are equal to something else. For this, use the <code>map</code> matcher to convert a value
+to another value and check it with a matcher.</p>
+<pre class="highlight swift"><code><span class="c1">// Swift</span>
+
+<span class="nf">expect</span><span class="p">(</span><span class="n">someValue</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">map</span><span class="p">(\</span><span class="o">.</span><span class="n">someProperty</span><span class="p">,</span> <span class="nf">equal</span><span class="p">(</span><span class="n">expectedProperty</span><span class="p">)))</span>
+
+<span class="c1">// or, for checking multiple different properties:</span>
+
+<span class="nf">expect</span><span class="p">(</span><span class="n">someValue</span><span class="p">)</span><span class="o">.</span><span class="nf">to</span><span class="p">(</span><span class="nf">satisfyAllOf</span><span class="p">(</span>
+    <span class="nf">map</span><span class="p">(\</span><span class="o">.</span><span class="n">firstProperty</span><span class="p">,</span> <span class="nf">equal</span><span class="p">(</span><span class="n">expectedFirstProperty</span><span class="p">)),</span>
+    <span class="nf">map</span><span class="p">({</span> <span class="nv">$0</span><span class="o">.</span><span class="n">secondProperty</span> <span class="p">},</span> <span class="nf">equal</span><span class="p">(</span><span class="n">expectedSecondProperty</span><span class="p">))</span>
+<span class="p">))</span>
+</code></pre>
+
+<p>The <code>map</code> matcher takes in either a closure or a keypath literal, and a matcher
+to compose with. It also works with async closures and async matchers.</p>
+
+<p>In most cases, it is simpler and easier to not use map (that is, prefer
+<code>expect(someValue.property).to(equal(1))</code> to
+<code>expect(someValue).to(map(\.property, equal(1)))</code>). But <code>map</code> is incredibly
+useful when combined with <code>satisfyAllOf</code>/<code>satisfyAnyOf</code>, especially for checking
+a value that cannot conform to <code>Equatable</code> (or you don&rsquo;t want to make it
+conform to <code>Equatable</code>). However, if you find yourself reusing <code>map</code> many times
+to do a fuzzy-equals of a given type, you will find writing a custom matcher to
+be much easier to use and maintain.</p>
 <h1 id='writing-your-own-matchers' class='heading'>Writing Your Own Matchers</h1>
 
 <p>In Nimble, matchers are Swift functions that take an expected
@@ -3089,11 +3126,18 @@ rm &quot;${SWIFT_STDLIB_TOOL_DESTINATION_DIR}/libswiftXCTest.dylib&quot;
 
 <p>You can now use Nimble assertions in your code and handle failures as you see
 fit.</p>
+<h2 id='privacy-statement' class='heading'>Privacy Statement</h2>
+
+<p>Nimble is a library that is only used for testing and should never be included
+in the binary submitted to App Store Connect.</p>
+
+<p>Despite not being shipped to Apple, Nimble does not and will never collect any
+kind of analytics or tracking.</p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2024 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2024-01-04)</p>
+          <p>&copy; 2024 <a class="link" href="https://github.com/Quick/Nimble" target="_blank" rel="external noopener">Nimble Contributors</a>. All rights reserved. (Last updated: 2024-02-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

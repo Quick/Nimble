@@ -262,20 +262,27 @@
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/AsyncExpression.swift",
       "line": 101,
+      "symbol": "AsyncExpression.cast(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/AsyncExpression.swift",
+      "line": 109,
       "symbol": "AsyncExpression.evaluate()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/AsyncExpression.swift",
-      "line": 105,
+      "line": 113,
       "symbol": "AsyncExpression.withoutCaching()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/AsyncExpression.swift",
-      "line": 114,
+      "line": 122,
       "symbol": "AsyncExpression.withCaching()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -331,13 +338,6 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 78,
-      "symbol": "SyncExpectation",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
       "line": 81,
       "symbol": "Expectation",
       "symbol_kind": "source.lang.swift.decl.protocol",
@@ -352,6 +352,13 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
+      "line": 89,
+      "symbol": "SyncExpectation",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
       "line": 109,
       "symbol": "Expectation",
       "symbol_kind": "source.lang.swift.decl.extension",
@@ -359,7 +366,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 120,
+      "line": 140,
       "symbol": "SyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
@@ -422,7 +429,7 @@
     },
     {
       "file": "/Users/you/workspace/Nimble/Sources/Nimble/Expectation.swift",
-      "line": 340,
+      "line": 351,
       "symbol": "AsyncExpectation",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
