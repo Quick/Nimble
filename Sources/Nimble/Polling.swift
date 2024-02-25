@@ -41,6 +41,15 @@ public struct PollingDefaults {
 
 internal enum AsyncMatchStyle {
     case eventually, never, always
+
+    var isContinous: Bool {
+        switch self {
+        case .eventually:
+            return false
+        case .never, .always:
+            return true
+        }
+    }
 }
 
 // swiftlint:disable:next function_parameter_count
@@ -63,7 +72,18 @@ internal func poll<T>(
             line: actualExpression.location.line,
             fnName: fnName) {
                 lastMatcherResult = try matcher.satisfies(uncachedExpression)
-                return lastMatcherResult!.toBoolean(expectation: style)
+                if lastMatcherResult!.toBoolean(expectation: style) {
+                    if matchStyle.isContinous {
+                        return .incomplete
+                    }
+                    return .finished(true)
+                } else {
+                    if matchStyle.isContinous {
+                        return .finished(false)
+                    } else {
+                        return .incomplete
+                    }
+                }
         }
         return processPollResult(result, matchStyle: matchStyle, lastMatcherResult: lastMatcherResult, fnName: fnName)
     }
@@ -220,7 +240,7 @@ extension SyncExpectation {
             expression,
             .toNotMatch,
             poll(
-                style: .toMatch,
+                style: .toNotMatch,
                 matchStyle: .never,
                 matcher: matcher,
                 timeout: until,
@@ -271,7 +291,7 @@ extension SyncExpectation {
             expression,
             .toMatch,
             poll(
-                style: .toNotMatch,
+                style: .toMatch,
                 matchStyle: .always,
                 matcher: matcher,
                 timeout: until,
