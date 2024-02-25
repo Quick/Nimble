@@ -45,9 +45,9 @@ internal enum AsyncMatchStyle {
     var isContinous: Bool {
         switch self {
         case .eventually:
-            false
+            return false
         case .never, .always:
-            true
+            return true
         }
     }
 }
