@@ -42,18 +42,26 @@ public struct PollingDefaults: @unchecked Sendable {
 
     public static var timeout: NimbleTimeInterval {
         get {
-            return lock.withLock { return _timeout }
+            lock.lock()
+            defer { lock.unlock() }
+            return _timeout
         }
         set {
-            lock.withLock { _timeout = newValue }
+            lock.lock()
+            defer { lock.unlock() }
+            _timeout = newValue
         }
     }
     public static var pollInterval: NimbleTimeInterval {
         get {
-            return lock.withLock { return _pollInterval }
+            lock.lock()
+            defer { lock.unlock() }
+            return _pollInterval
         }
         set {
-            lock.withLock { _pollInterval = newValue }
+            lock.lock()
+            defer { lock.unlock() }
+            _pollInterval = newValue
         }
     }
 }
