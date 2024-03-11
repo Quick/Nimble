@@ -21,7 +21,7 @@ jobs:
           ./test carthage
           zip -r Nimble.xcframework.zip Carthage/Build/Nimble.xcframework
       - name: Upload Nimble.xcframework.zip
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             Nimble.xcframework.zip
