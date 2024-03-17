@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   }
 
   [s.osx, s.ios, s.visionos].each do |platform|
-    platform.dependency 'CwlPreconditionTesting', '~> 2.1.0'
+    platform.dependency 'CwlPreconditionTesting', '~> 2.2.0'
   end
 
   s.cocoapods_version = '>= 1.4.0'
