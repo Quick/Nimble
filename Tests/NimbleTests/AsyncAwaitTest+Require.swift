@@ -8,7 +8,7 @@ import NimbleSharedTestHelpers
 
 final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testToPositiveMatches() async throws {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -49,7 +49,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testPollUnwrapPositiveCase() async {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -141,7 +141,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     func testToEventuallyWithAsyncExpectationDoesNotNecessarilyExecutesExpressionOnMainActor() async throws {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         try await requirea(isMainThread()).toEventually(beFalse())
         try await requirea(isMainThread()).toEventuallyNot(beTrue())
@@ -153,7 +153,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     func testToEventuallyWithAsyncExpectationDoesExecuteExpressionOnMainActorWhenTestRunsOnMainActor() async throws {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         try await requirea(isMainThread()).toEventually(beTrue())
         try await requirea(isMainThread()).toEventuallyNot(beFalse())
