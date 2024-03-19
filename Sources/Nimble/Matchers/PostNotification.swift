@@ -80,7 +80,7 @@ private func _postNotifications<Out>(
             let message = ExpectationMessage
                 .expectedTo("post notifications - but was called off the main thread.")
                 .appended(details: "postNotifications and postDistributedNotifications attempted to run their predicate off the main thread. This is a bug in Nimble.")
-            return PredicateResult(status: .fail, message: message)
+            return MatcherResult(status: .fail, message: message)
         }
 
         let collectorNotificationsExpression = Expression(
