@@ -174,33 +174,6 @@ public indirect enum ExpectationMessage: Sendable {
     }
 }
 
-extension FailureMessage {
-    internal func toExpectationMessage() -> ExpectationMessage {
-        let defaultMessage = FailureMessage()
-        if expected != defaultMessage.expected || _stringValueOverride != nil {
-            return .fail(stringValue)
-        }
-
-        var message: ExpectationMessage = .fail(userDescription ?? "")
-        if actualValue != "" && actualValue != nil {
-            message = .expectedCustomValueTo(postfixMessage, actual: actualValue ?? "")
-        } else if postfixMessage != defaultMessage.postfixMessage {
-            if actualValue == nil {
-                message = .expectedTo(postfixMessage)
-            } else {
-                message = .expectedActualValueTo(postfixMessage)
-            }
-        }
-        if postfixActual != defaultMessage.postfixActual {
-            message = .appends(message, postfixActual)
-        }
-        if let extended = extendedMessage {
-            message = .details(message, extended)
-        }
-        return message
-    }
-}
-
 #if canImport(Darwin)
 import class Foundation.NSObject
 
