@@ -96,7 +96,7 @@ public enum ExpectationStyle: Sendable {
 
 /// The value that a Matcher returns to describe if the given (actual) value matches the
 /// matcher.
-public struct MatcherResult {
+public struct MatcherResult: Sendable {
     /// Status indicates if the matcher matches, does not match, or fails.
     public var status: MatcherStatus
     /// The error message that can be displayed if it does not match
