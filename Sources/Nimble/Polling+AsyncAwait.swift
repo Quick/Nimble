@@ -41,7 +41,7 @@ internal actor Poller<T> {
             file: expression.location.file,
             line: expression.location.line,
             fnName: fnName) {
-                if self.updateMatcherResult(result: try await matcherRunner())
+                if await self.updateMatcherResult(result: try await matcherRunner())
                     .toBoolean(expectation: style) {
                     if matchStyle.isContinous {
                         return .incomplete
