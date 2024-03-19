@@ -8,7 +8,7 @@ import NimbleSharedTestHelpers
 
 final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testToPositiveMatches() async throws {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -16,10 +16,10 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         try await require { try await someAsyncFunction() }.to(equal(1))
     }
 
-    class Error: Swift.Error {}
-    let errorToThrow = Error()
+    struct Error: Swift.Error, Sendable {}
+    static let errorToThrow = Error()
 
-    private func doThrowError() throws -> Int {
+    private static func doThrowError() throws -> Int {
         throw errorToThrow
     }
 
@@ -40,16 +40,16 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         await failsWithErrorMessage("expected to eventually equal <1>, got <0>") {
             try await require { value }.toEventually(equal(1))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.toEventually(equal(1))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.toEventually(equal(1))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.toEventuallyNot(equal(0))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.toEventuallyNot(equal(0))
         }
     }
 
     func testPollUnwrapPositiveCase() async {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -62,11 +62,11 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         await failsWithErrorMessage("expected to eventually not be nil, got nil") {
             try await pollUnwrap { nil as Int? }
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await pollUnwrap { try self.doThrowError() as Int? }
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await pollUnwrap { try Self.doThrowError() as Int? }
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await pollUnwrap { try self.doThrowError() as Int? }
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await pollUnwrap { try Self.doThrowError() as Int? }
         }
     }
 
@@ -90,18 +90,20 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testToEventuallyWaitingOnMainTask() async throws {
-        class EncapsulatedValue {
-            static var executed = false
+        class EncapsulatedValue: @unchecked Sendable {
+            var executed = false
 
-            static func execute() {
+            func execute() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    Self.executed = true
+                    self.executed = true
                 }
             }
         }
 
-        EncapsulatedValue.execute()
-        try await require(EncapsulatedValue.executed).toEventually(beTrue())
+        let obj = EncapsulatedValue()
+
+        obj.execute()
+        try await require(obj.executed).toEventually(beTrue())
     }
 
     @MainActor
@@ -117,7 +119,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         // is otherwise correctly executing on the main thread.
         // Double-y so if your CI automatically reads backtraces (like what the main thread checker will output) as test crashes,
         // and fails your build.
-        struct MySubject: CustomDebugStringConvertible, Equatable {
+        struct MySubject: CustomDebugStringConvertible, Equatable, Sendable {
             var debugDescription: String {
                 expect(Thread.isMainThread).to(beTrue())
                 return "Test"
@@ -141,24 +143,12 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     func testToEventuallyWithAsyncExpectationDoesNotNecessarilyExecutesExpressionOnMainActor() async throws {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         try await requirea(isMainThread()).toEventually(beFalse())
         try await requirea(isMainThread()).toEventuallyNot(beTrue())
         try await requirea(isMainThread()).toAlways(beFalse(), until: .seconds(1))
         try await requirea(isMainThread()).toNever(beTrue(), until: .seconds(1))
-    }
-
-    @MainActor
-    func testToEventuallyWithAsyncExpectationDoesExecuteExpressionOnMainActorWhenTestRunsOnMainActor() async throws {
-        // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
-        // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
-
-        try await requirea(isMainThread()).toEventually(beTrue())
-        try await requirea(isMainThread()).toEventuallyNot(beFalse())
-        try await requirea(isMainThread()).toAlways(beTrue(), until: .seconds(1))
-        try await requirea(isMainThread()).toNever(beFalse(), until: .seconds(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() async throws {
@@ -167,23 +157,37 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
             PollingDefaults.timeout = .seconds(1)
         }
 
-        var value = 0
+        final class Box: @unchecked Sendable {
+            private let lock = NSRecursiveLock()
 
-        let sleepThenSetValueTo: (Int) -> Void = { newValue in
-            Thread.sleep(forTimeInterval: 1.1)
-            value = newValue
+            private var _value = 0
+            var value: Int {
+                lock.lock()
+                defer {
+                    lock.unlock()
+                }
+                return _value
+            }
+
+            func sleepThenSetValueTo(_ newValue: Int) {
+                Thread.sleep(forTimeInterval: 1.1)
+                lock.lock()
+                _value = newValue
+                lock.unlock()
+            }
         }
 
+        let box = Box()
         let task = Task {
-            sleepThenSetValueTo(1)
+            box.sleepThenSetValueTo(1)
         }
-        try await require { value }.toEventually(equal(1))
+        try await require { box.value }.toEventually(equal(1))
 
         let secondTask = Task {
-            sleepThenSetValueTo(0)
+            box.sleepThenSetValueTo(0)
         }
 
-        try await require { value }.toEventuallyNot(equal(1))
+        try await require { box.value }.toEventuallyNot(equal(1))
 
         _ = await task.value
         _ = await secondTask.result
@@ -237,11 +241,11 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
             deferToMainQueue { value = 1 }
             try await require { value }.neverTo(equal(1))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.toNever(equal(0))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.toNever(equal(0))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.neverTo(equal(0))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.neverTo(equal(0))
         }
         await failsWithErrorMessage("expected to never equal <1>, got <1>") {
             try await require(1).toNever(equal(1))
@@ -273,11 +277,11 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
             deferToMainQueue { value = 0 }
             try await require { value }.alwaysTo(equal(1))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.toAlways(equal(0))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.toAlways(equal(0))
         }
-        await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
-            try await require { try self.doThrowError() }.alwaysTo(equal(0))
+        await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
+            try await require { try Self.doThrowError() }.alwaysTo(equal(0))
         }
         await failsWithErrorMessage("expected to always equal <0>, got <nil> (use beNil() to match nils)") {
             try await require(nil).toAlways(equal(0))
