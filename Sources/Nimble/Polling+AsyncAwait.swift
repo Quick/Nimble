@@ -40,7 +40,7 @@ internal actor Poller<T> {
             timeoutInterval: timeout,
             sourceLocation: expression.location,
             fnName: fnName) {
-                if self.updateMatcherResult(result: try await matcherRunner())
+                if await self.updateMatcherResult(result: try await matcherRunner())
                     .toBoolean(expectation: style) {
                     if matchStyle.isContinous {
                         return .incomplete
