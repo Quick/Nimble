@@ -127,11 +127,7 @@ else
 
     git add ${PODSPEC} || { restore_podspec; die "Failed to add ${PODSPEC} to INDEX"; }
 
-    echo "--- Updating Docs ---"
-    ./script/build_docs.zsh
-    git add docs || { git co docs; die "Failed to add docs to INDEX"; }
-
-    git commit -m "[$VERSION_TAG] Update docs and podspec" || { restore_podspec; die "Failed to push updated version: $VERSION"; }
+    git commit -m "[$VERSION_TAG] Update podspec" || { restore_podspec; die "Failed to push updated version: $VERSION"; }
 fi
 
 RELEASE_NOTES="Version ${VERSION}. Open https://github.com/Quick/Nimble/releases/tag/$VERSION_TAG for full release notes."

@@ -125,6 +125,7 @@
 		857D1849253610A900D8693A /* BeWithin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D1848253610A900D8693A /* BeWithin.swift */; };
 		857D184F2536124400D8693A /* BeWithinTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D184D2536123F00D8693A /* BeWithinTest.swift */; };
 		8913649429E6925F00AD535E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F14FB63194180C5009F2A08 /* utils.swift */; };
+		8914E31C2BB866BF00C888DE /* Nimble.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8914E31B2BB866BF00C888DE /* Nimble.docc */; };
 		891729D52B1842D6005CC866 /* DSL+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D42B1842D6005CC866 /* DSL+Require.swift */; };
 		891729D72B18431D005CC866 /* Requirement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891729D62B18431D005CC866 /* Requirement.swift */; };
 		891A04712AB0164500B46613 /* AsyncTimerSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891A04702AB0164500B46613 /* AsyncTimerSequence.swift */; };
@@ -310,6 +311,7 @@
 		7B5358C11C39155600A23FAA /* ObjCSatisfyAnyOfTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCSatisfyAnyOfTest.m; sourceTree = "<group>"; };
 		857D1848253610A900D8693A /* BeWithin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithin.swift; sourceTree = "<group>"; };
 		857D184D2536123F00D8693A /* BeWithinTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeWithinTest.swift; sourceTree = "<group>"; };
+		8914E31B2BB866BF00C888DE /* Nimble.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Nimble.docc; sourceTree = "<group>"; };
 		891729D42B1842D6005CC866 /* DSL+Require.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+Require.swift"; sourceTree = "<group>"; };
 		891729D62B18431D005CC866 /* Requirement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requirement.swift; sourceTree = "<group>"; };
 		891A04702AB0164500B46613 /* AsyncTimerSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequence.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				1F1A742E1940169200FFFC47 /* Nimble.h */,
 				8952ADDC2B4F159400D9305F /* PrivacyInfo.xcprivacy */,
 				1FD8CD241968AB07008ED995 /* Utils */,
+				8914E31B2BB866BF00C888DE /* Nimble.docc */,
 			);
 			name = Nimble;
 			path = Sources/Nimble;
@@ -839,6 +842,7 @@
 				1F43728C1A1B343C00EB80F8 /* SourceLocation.swift in Sources */,
 				1FD8CD4F1968AB07008ED995 /* BeLessThanOrEqual.swift in Sources */,
 				1F1871E71CA8A18400A34BF2 /* Polling.swift in Sources */,
+				8914E31C2BB866BF00C888DE /* Nimble.docc in Sources */,
 				1FDBD8681AF8A4FF0089F27B /* AssertionDispatcher.swift in Sources */,
 				AE4BA9AE1C88DDB500B73906 /* Errors.swift in Sources */,
 				892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */,
