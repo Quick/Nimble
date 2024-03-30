@@ -1,0 +1,1033 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble18ExpectationMessageO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "ExpectationMessage"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "ExpectationMessage"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "ExpectationMessage"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "indirect"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "ExpectationMessage"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appends(_:_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/details(_:_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedActualValueTo(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedCustomValueTo(_:actual:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedTo(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/fail(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/prepends(_:_:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedMessage"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appended(details:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appended(message:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appendedBeNilHint()",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/prepended(expectation:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/replacedExpectation(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/toString(actual:expected:to:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/wrappedExpectation(before:after:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/expectationmessage"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ExpectationMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/appended(details:)": {
+  "abstract" : [
+    {
+      "text" : "Appends a detailed (aka - multiline) message after the primary expectation message",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Detailed messages will be placed after .appended(message:) calls.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "appended"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "details"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appended(details:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "appended(details:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/appended(details:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/appended(message:)": {
+  "abstract" : [
+    {
+      "text" : "Appends a message after the primary expectation message",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "appended"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "message"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appended(message:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "appended(message:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/appended(message:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/appendedBeNilHint()": {
+  "abstract" : [
+    {
+      "text" : "Appends a message hinting to use beNil() for when the actual value given was nil.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "appendedBeNilHint"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appendedBeNilHint()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "appendedBeNilHint()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/appendedbenilhint()"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/appends(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "appends after an existing message (”",
+      "type" : "text"
+    },
+    {
+      "text" : " (use beNil() to match nils)”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "appends"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/appends(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.appends(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/appends(_:_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/details(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "provides long-form multi-line explainations (”",
+      "type" : "text"
+    },
+    {
+      "text" : "\\n\\n",
+      "type" : "text"
+    },
+    {
+      "text" : "”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "details"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/details(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.details(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/details(_:_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/expectedActualValueTo(_:)": {
+  "abstract" : [
+    {
+      "text" : "includes actual value in output (“expected to ",
+      "type" : "text"
+    },
+    {
+      "text" : ", got ",
+      "type" : "text"
+    },
+    {
+      "text" : "”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expectedActualValueTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedActualValueTo(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.expectedActualValueTo(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/expectedactualvalueto(_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/expectedCustomValueTo(_:actual:)": {
+  "abstract" : [
+    {
+      "text" : "uses a custom actual value string in output (“expected to ",
+      "type" : "text"
+    },
+    {
+      "text" : ", got ",
+      "type" : "text"
+    },
+    {
+      "text" : "”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expectedCustomValueTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "actual"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedCustomValueTo(_:actual:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.expectedCustomValueTo(_:actual:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/expectedcustomvalueto(_:actual:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/expectedMessage": {
+  "abstract" : [
+    {
+      "text" : "Returns the smallest message after the “expected to” string that summarizes the error.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expectedMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedMessage",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expectedMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/expectedmessage"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/expectedTo(_:)": {
+  "abstract" : [
+    {
+      "text" : "excludes actual value in output (“expected to ",
+      "type" : "text"
+    },
+    {
+      "text" : "”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expectedTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/expectedTo(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.expectedTo(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/expectedto(_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/fail(_:)": {
+  "abstract" : [
+    {
+      "text" : "allows any free-form message (”",
+      "type" : "text"
+    },
+    {
+      "text" : "”)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fail"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/fail(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.fail(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/fail(_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/prepended(expectation:)": {
+  "abstract" : [
+    {
+      "text" : "Prepends a message by modifying the primary expectation",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prepended"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expectation"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/prepended(expectation:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "prepended(expectation:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/prepended(expectation:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/prepends(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "Not Fully Implemented Yet.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "prepends"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/prepends(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "ExpectationMessage.prepends(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/prepends(_:_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/replacedExpectation(_:)": {
+  "abstract" : [
+    {
+      "text" : "Replaces a primary expectation with one returned by f. Preserves all composite expectations",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "that were built upon it (aka - all appended(message:) and appended(details:).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "replacedExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "(("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/replacedExpectation(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "replacedExpectation(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/replacedexpectation(_:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/toString(actual:expected:to:)": {
+  "abstract" : [
+    {
+      "text" : "Converts the tree of ExpectationMessages into a final built string.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toString"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "actual"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expected"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/toString(actual:expected:to:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toString(actual:expected:to:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/tostring(actual:expected:to:)"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage/wrappedExpectation(before:after:)": {
+  "abstract" : [
+    {
+      "text" : "Wraps a primary expectation with text before and after it.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Alias to prepended(message: before).appended(message: after)",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "wrappedExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "before"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "after"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage\/wrappedExpectation(before:after:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "wrappedExpectation(before:after:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage\/wrappedexpectation(before:after:)"
+}
+}
+}

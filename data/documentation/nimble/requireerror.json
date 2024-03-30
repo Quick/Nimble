@@ -1,0 +1,251 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble12RequireErrorV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "RequireError"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "RequireError"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "RequireError"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "RequireError"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/10Foundation13CustomNSErrorP",
+        "doc:\/\/Nimble\/s5ErrorP",
+        "doc:\/\/Nimble\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/RequireError\/errorUserInfo"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/RequireError\/CustomNSError-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/requireerror"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/10Foundation13CustomNSErrorP": {
+  "identifier" : "doc:\/\/Nimble\/10Foundation13CustomNSErrorP",
+  "title" : "Foundation.CustomNSError",
+  "type" : "unresolvable"
+},
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/RequireError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "RequireError",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requireerror"
+},
+"doc://Nimble/documentation/Nimble/RequireError/CustomNSError-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError\/CustomNSError-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CustomNSError Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requireerror\/customnserror-implementations"
+},
+"doc://Nimble/documentation/Nimble/RequireError/errorUserInfo": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "errorUserInfo"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : " : "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "Any"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError\/errorUserInfo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "errorUserInfo",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requireerror\/erroruserinfo"
+},
+"doc://Nimble/s5ErrorP": {
+  "identifier" : "doc:\/\/Nimble\/s5ErrorP",
+  "title" : "Swift.Error",
+  "type" : "unresolvable"
+},
+"doc://Nimble/s8SendableP": {
+  "identifier" : "doc:\/\/Nimble\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

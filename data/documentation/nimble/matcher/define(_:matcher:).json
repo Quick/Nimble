@@ -1,0 +1,643 @@
+{
+  "abstract" : [
+    {
+      "text" : "Defines a matcher with a default message that can be returned in the closure",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Also ensures the matcher’s actual value cannot pass with ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " given.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Matcher"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher\/define(_:matcher:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "Nimble",
+    "externalID" : "s:6Nimble7MatcherV6define_7matcherACyxGSS_AA0B6ResultVAA10ExpressionVyxG_AA18ExpectationMessageOtKctFZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "func"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "define"
+      },
+      {
+        "kind" : "text",
+        "text" : "("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "matcher"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ("
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble10ExpressionV",
+        "text" : "Expression"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ">, "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+        "text" : "ExpectationMessage"
+      },
+      {
+        "kind" : "text",
+        "text" : ") "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "throws"
+      },
+      {
+        "kind" : "text",
+        "text" : " -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble13MatcherResultV",
+        "text" : "MatcherResult"
+      },
+      {
+        "kind" : "text",
+        "text" : ") -> "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble7MatcherV",
+        "text" : "Matcher"
+      },
+      {
+        "kind" : "text",
+        "text" : "<"
+      },
+      {
+        "kind" : "typeIdentifier",
+        "text" : "T"
+      },
+      {
+        "kind" : "text",
+        "text" : ">"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Method",
+    "symbolKind" : "method",
+    "title" : "define(_:matcher:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "func"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "define"
+            },
+            {
+              "kind" : "text",
+              "text" : "("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "_"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "internalParam",
+              "text" : "message"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : " = \"match\", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "matcher"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "@escaping"
+            },
+            {
+              "kind" : "text",
+              "text" : " ("
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expression",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble10ExpressionV",
+              "text" : "Expression"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ">, "
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+              "text" : "ExpectationMessage"
+            },
+            {
+              "kind" : "text",
+              "text" : ") "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "throws"
+            },
+            {
+              "kind" : "text",
+              "text" : " -> "
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherResult",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble13MatcherResultV",
+              "text" : "MatcherResult"
+            },
+            {
+              "kind" : "text",
+              "text" : ") -> "
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble7MatcherV",
+              "text" : "Matcher"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "T"
+            },
+            {
+              "kind" : "text",
+              "text" : ">"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/matcher\/define(_:matcher:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ExpectationMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage"
+},
+"doc://Nimble/documentation/Nimble/Expression": {
+  "abstract" : [
+    {
+      "text" : "Expression represents the closure of the value inside expect(…).",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Expressions are memoized by default. This makes them safe to call",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "evaluate() multiple times without causing a re-evaluation of the underlying",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "closure.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Expression"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expression",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Expression"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Expression",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expression"
+},
+"doc://Nimble/documentation/Nimble/Matcher": {
+  "abstract" : [
+    {
+      "text" : "A Matcher is part of the new matcher API that provides assertions to expectations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Matcher",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcher"
+},
+"doc://Nimble/documentation/Nimble/Matcher/define(_:matcher:)": {
+  "abstract" : [
+    {
+      "text" : "Defines a matcher with a default message that can be returned in the closure",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Also ensures the matcher’s actual value cannot pass with ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " given.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "define"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10ExpressionV",
+      "text" : "Expression"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble18ExpectationMessageO",
+      "text" : "ExpectationMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble13MatcherResultV",
+      "text" : "MatcherResult"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher\/define(_:matcher:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "define(_:matcher:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcher\/define(_:matcher:)"
+},
+"doc://Nimble/documentation/Nimble/MatcherResult": {
+  "abstract" : [
+    {
+      "text" : "The value that a Matcher returns to describe if the given (actual) value matches the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "matcher.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MatcherResult"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherResult",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MatcherResult"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MatcherResult",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherresult"
+}
+}
+}

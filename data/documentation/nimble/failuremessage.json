@@ -1,0 +1,617 @@
+{
+  "abstract" : [
+    {
+      "text" : "Encapsulates the failure message that matchers can report to the end user.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble14FailureMessageC",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "class"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "FailureMessage"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "FailureMessage"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "FailureMessage"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "class"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "FailureMessage"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This is shared state between Nimble and matchers that mutate this value.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/10Foundation8NSObjectC"
+      ],
+      "kind" : "relationships",
+      "title" : "Inherits From",
+      "type" : "inheritsFrom"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/10Foundation16NSObjectProtocolP",
+        "doc:\/\/Nimble\/s28CustomDebugStringConvertibleP",
+        "doc:\/\/Nimble\/s23CustomStringConvertibleP",
+        "doc:\/\/Nimble\/SQ",
+        "doc:\/\/Nimble\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/init()",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/init(stringValue:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/actualValue",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/expected",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/extendedMessage",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/postfixActual",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/postfixMessage",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/stringValue",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/to",
+        "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/userDescription"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/failuremessage"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/10Foundation16NSObjectProtocolP": {
+  "identifier" : "doc:\/\/Nimble\/10Foundation16NSObjectProtocolP",
+  "title" : "Foundation.NSObjectProtocol",
+  "type" : "unresolvable"
+},
+"doc://Nimble/10Foundation8NSObjectC": {
+  "identifier" : "doc:\/\/Nimble\/10Foundation8NSObjectC",
+  "title" : "Foundation.NSObject",
+  "type" : "unresolvable"
+},
+"doc://Nimble/SH": {
+  "identifier" : "doc:\/\/Nimble\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/SQ": {
+  "identifier" : "doc:\/\/Nimble\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage": {
+  "abstract" : [
+    {
+      "text" : "Encapsulates the failure message that matchers can report to the end user.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "FailureMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "FailureMessage"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "FailureMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/actualValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "actualValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/actualValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "actualValue",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/actualvalue"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/expected": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expected"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/expected",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expected",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/expected"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/extendedMessage": {
+  "abstract" : [
+    {
+      "text" : "An optional message that will be appended as a new line and provides additional details",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "about the failure. This message will only be visible in the issue navigator \/ in logs but",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "not directly in the source editor since only a single line is presented there.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "extendedMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/extendedMessage",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "extendedMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/extendedmessage"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/init()": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "()"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/init()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/init()"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/init(stringValue:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "stringValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/init(stringValue:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(stringValue:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/init(stringvalue:)"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/postfixActual": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "postfixActual"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/postfixActual",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "postfixActual",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/postfixactual"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/postfixMessage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "postfixMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/postfixMessage",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "postfixMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/postfixmessage"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/stringValue": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "stringValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/stringValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "stringValue",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/stringvalue"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/to": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/to",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "to",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/to"
+},
+"doc://Nimble/documentation/Nimble/FailureMessage/userDescription": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "userDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage\/userDescription",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "userDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/failuremessage\/userdescription"
+},
+"doc://Nimble/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/Nimble\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://Nimble/s28CustomDebugStringConvertibleP": {
+  "identifier" : "doc:\/\/Nimble\/s28CustomDebugStringConvertibleP",
+  "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+}
+}
+}

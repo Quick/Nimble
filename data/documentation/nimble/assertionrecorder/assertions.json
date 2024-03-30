@@ -1,0 +1,274 @@
+{
+  "abstract" : [
+    {
+      "text" : "All the assertions that were captured by this recorder",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble",
+        "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecorder"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecorder\/assertions"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble17AssertionRecorderC10assertionsSayAA0B6RecordVGvp",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "assertions"
+      },
+      {
+        "kind" : "text",
+        "text" : ": ["
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble15AssertionRecordV",
+        "text" : "AssertionRecord"
+      },
+      {
+        "kind" : "text",
+        "text" : "]"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Instance Property",
+    "symbolKind" : "property",
+    "title" : "assertions"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "assertions"
+            },
+            {
+              "kind" : "text",
+              "text" : ": ["
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecord",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble15AssertionRecordV",
+              "text" : "AssertionRecord"
+            },
+            {
+              "kind" : "text",
+              "text" : "]"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/assertionrecorder\/assertions"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/AssertionRecord": {
+  "abstract" : [
+    {
+      "text" : "A data structure that stores information about an assertion when",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "AssertionRecorder is set as the Nimble assertion handler.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AssertionRecord"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecord",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AssertionRecord"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AssertionRecord",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/assertionrecord"
+},
+"doc://Nimble/documentation/Nimble/AssertionRecorder": {
+  "abstract" : [
+    {
+      "text" : "An AssertionHandler that silently records assertions that Nimble makes.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This is useful for testing failure messages for matchers.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AssertionRecorder"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecorder",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AssertionRecorder"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AssertionRecorder",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/assertionrecorder"
+},
+"doc://Nimble/documentation/Nimble/AssertionRecorder/assertions": {
+  "abstract" : [
+    {
+      "text" : "All the assertions that were captured by this recorder",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "assertions"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ["
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15AssertionRecordV",
+      "text" : "AssertionRecord"
+    },
+    {
+      "kind" : "text",
+      "text" : "]"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecorder\/assertions",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "assertions",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/assertionrecorder\/assertions"
+}
+}
+}

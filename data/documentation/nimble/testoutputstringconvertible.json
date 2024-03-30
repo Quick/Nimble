@@ -1,0 +1,632 @@
+{
+  "abstract" : [
+    {
+      "text" : "A type with a customized test output text representation.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/TestOutputStringConvertible"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble27TestOutputStringConvertibleP",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "protocol"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "TestOutputStringConvertible"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "TestOutputStringConvertible"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Protocol",
+    "symbolKind" : "protocol",
+    "title" : "TestOutputStringConvertible"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "protocol"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "TestOutputStringConvertible"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This textual representation is produced when values will be",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "printed in test runs, and may be useful when producing",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "error messages in custom matchers.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "code" : "CustomDebugStringConvertible",
+                  "type" : "codeVoice"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "See Also",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/AnySequence",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Array",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/Data",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/Date",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Double",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Float",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSArray",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSDate",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSIndexSet",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSNumber",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/String"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforming Types",
+      "type" : "conformingTypes"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/TestOutputStringConvertible\/testDescription"
+      ],
+      "title" : "Instance Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/testoutputstringconvertible"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Foundation/Data": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation4DataV",
+      "text" : "Data"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/Data",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Data"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Data",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/data"
+},
+"doc://Nimble/documentation/Nimble/Foundation/Date": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation4DateV",
+      "text" : "Date"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/Date",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Date"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Date",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/date"
+},
+"doc://Nimble/documentation/Nimble/Foundation/NSArray": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation7NSArrayC",
+      "text" : "NSArray"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSArray",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSArray"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSArray",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/nsarray"
+},
+"doc://Nimble/documentation/Nimble/Foundation/NSDate": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation6NSDateC",
+      "text" : "NSDate"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSDate",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSDate"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSDate",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/nsdate"
+},
+"doc://Nimble/documentation/Nimble/Foundation/NSIndexSet": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation10NSIndexSetC",
+      "text" : "NSIndexSet"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSIndexSet",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSIndexSet"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSIndexSet",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/nsindexset"
+},
+"doc://Nimble/documentation/Nimble/Foundation/NSNumber": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:10Foundation8NSNumberC",
+      "text" : "NSNumber"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Foundation\/NSNumber",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NSNumber"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NSNumber",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/foundation\/nsnumber"
+},
+"doc://Nimble/documentation/Nimble/Swift/AnySequence": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:s11AnySequenceV",
+      "text" : "AnySequence"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/AnySequence",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AnySequence"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AnySequence",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swift\/anysequence"
+},
+"doc://Nimble/documentation/Nimble/Swift/Array": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sa",
+      "text" : "Array"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Array",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Array"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Array",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swift\/array"
+},
+"doc://Nimble/documentation/Nimble/Swift/Double": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Double",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Double"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Double",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swift\/double"
+},
+"doc://Nimble/documentation/Nimble/Swift/Float": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:Sf",
+      "text" : "Float"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/Float",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Float"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Float",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swift\/float"
+},
+"doc://Nimble/documentation/Nimble/Swift/String": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "extension"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Swift\/String",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "String"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "String",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swift\/string"
+},
+"doc://Nimble/documentation/Nimble/TestOutputStringConvertible": {
+  "abstract" : [
+    {
+      "text" : "A type with a customized test output text representation.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "protocol"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "TestOutputStringConvertible"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/TestOutputStringConvertible",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "TestOutputStringConvertible"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "TestOutputStringConvertible",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/testoutputstringconvertible"
+},
+"doc://Nimble/documentation/Nimble/TestOutputStringConvertible/testDescription": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "testDescription"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/TestOutputStringConvertible\/testDescription",
+  "kind" : "symbol",
+  "required" : true,
+  "role" : "symbol",
+  "title" : "testDescription",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/testoutputstringconvertible\/testdescription"
+}
+}
+}

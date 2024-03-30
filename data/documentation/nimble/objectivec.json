@@ -1,0 +1,881 @@
+{
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Objective-C Support"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "All parameters passed to the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "expect",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " function, as well as matcher",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : "functions like ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "equal",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ", must be Objective-C objects or can be converted into",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : "an ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "NSObject",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " equivalent:",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                },
+                {
+                  "code" : [
+                    "\/\/ Objective-C",
+                    "",
+                    "@import Nimble;",
+                    "",
+                    "expect(@(1 + 1)).to(equal(@2));",
+                    "expect(@\"Hello world\").to(contain(@\"world\"));",
+                    "",
+                    "\/\/ Boxed as NSNumber *",
+                    "expect(2).to(equal(2));",
+                    "expect(1.2).to(beLessThan(2.0));",
+                    "expect(true).to(beTruthy());",
+                    "",
+                    "\/\/ Boxed as NSString *",
+                    "expect(\"Hello world\").to(equal(\"Hello world\"));",
+                    "",
+                    "\/\/ Boxed as NSRange",
+                    "expect(NSMakeRange(1, 10)).to(equal(NSMakeRange(1, 10)));"
+                  ],
+                  "syntax" : "objc",
+                  "type" : "codeListing"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "To make an expectation on an expression that does not return a value,",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : "such as ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "-[NSException raise]",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ", use ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "expectAction",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " instead of",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "expect",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ":",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                },
+                {
+                  "code" : [
+                    "\/\/ Objective-C",
+                    "",
+                    "expectAction(^{ [exception raise]; }).to(raiseException());"
+                  ],
+                  "syntax" : "objc",
+                  "type" : "codeListing"
+                }
+              ]
+            }
+          ],
+          "type" : "orderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The following types are currently converted to an ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSObject",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " type:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "inlineContent" : [
+                        {
+                          "text" : "C Numeric types",
+                          "type" : "text"
+                        }
+                      ],
+                      "type" : "strong"
+                    },
+                    {
+                      "text" : " are converted to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "NSNumber *",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "NSRange",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is converted to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "NSValue *",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "char *",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " is converted to ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "NSString *",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For the following matchers:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "equal",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beGreaterThan",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beGreaterThanOrEqual",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beLessThan",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beLessThanOrEqual",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beCloseTo",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beTrue",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beFalse",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beTruthy",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "beFalsy",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "haveCount",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you would like to see more, ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/Quick\/Nimble\/issues",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Disabling-Objective-C-Shorthand",
+          "level" : 2,
+          "text" : "Disabling Objective-C Shorthand",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Nimble provides a shorthand for expressing expectations using the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function. To disable this shorthand in Objective-C, define the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "NIMBLE_DISABLE_SHORT_SYNTAX",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " macro somewhere in your code before",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "importing Nimble:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "#define NIMBLE_DISABLE_SHORT_SYNTAX 1",
+            "",
+            "@import Nimble;",
+            "",
+            "NMB_expect(^{ return seagull.squawk; }, __FILE__, __LINE__).to(NMB_equal(@\"Squee!\"));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Disabling the shorthand is useful if you’re testing functions with",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "names that conflict with Nimble functions, such as ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " or",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "equal",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". If that’s not the case, there’s no point in disabling the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "shorthand.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+        "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/objectivec"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Concurrency": {
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Concurrency (Async\/Await) Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/concurrency"
+},
+"doc://Nimble/documentation/Nimble/Expectations": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Expectations Using `expect(...).to`",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectations"
+},
+"doc://Nimble/documentation/Nimble/PollingExpectations": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Polling Expectations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingexpectations"
+},
+"doc://Nimble/documentation/Nimble/Require": {
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Using `require` to demand that a matcher pass before continuing",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require"
+},
+"doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Writing Your Own Matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/writingcustommatchers"
+},
+"https://github.com/Quick/Nimble/issues": {
+  "identifier" : "https:\/\/github.com\/Quick\/Nimble\/issues",
+  "title" : "file an issue",
+  "titleInlineContent" : [
+    {
+      "text" : "file an issue",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/Quick\/Nimble\/issues"
+}
+}
+}

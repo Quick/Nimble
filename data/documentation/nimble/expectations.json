@@ -1,0 +1,915 @@
+{
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Expectations Using `expect(...).to`"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "import Nimble",
+            "",
+            "expect(seagull.squawk).to(equal(\"Squee!\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "@import Nimble;",
+            "",
+            "expect(seagull.squawk).to(equal(@\"Squee!\"));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " function autocompletes to include ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "file:",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " and ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "line:",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ",",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "but these parameters are optional. Use the default values to have",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "Xcode highlight the correct line when an expectation is not met.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To perform the opposite expectation–to assert something is ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "not",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "equal–use ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "notTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "import Nimble",
+            "",
+            "expect(seagull.squawk).toNot(equal(\"Oh, hello there!\"))",
+            "expect(seagull.squawk).notTo(equal(\"Oh, hello there!\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "@import Nimble;",
+            "",
+            "expect(seagull.squawk).toNot(equal(@\"Oh, hello there!\"));",
+            "expect(seagull.squawk).notTo(equal(@\"Oh, hello there!\"));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Custom-Failure-Messages",
+          "level" : 2,
+          "text" : "Custom Failure Messages",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Would you like to add more information to the test’s failure messages? Use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "description",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " optional argument to add your own text:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "expect(1 + 1).to(equal(3))",
+            "\/\/ failed - expected to equal <3>, got <2>",
+            "",
+            "expect(1 + 1).to(equal(3), description: \"Make sure libKindergartenMath is loaded\")",
+            "\/\/ failed - Make sure libKindergartenMath is loaded",
+            "\/\/ expected to equal <3>, got <2>"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Or the *WithDescription version in Objective-C:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "@import Nimble;",
+            "",
+            "expect(@(1+1)).to(equal(@3));",
+            "\/\/ failed - expected to equal <3.0000>, got <2.0000>",
+            "",
+            "expect(@(1+1)).toWithDescription(equal(@3), @\"Make sure libKindergartenMath is loaded\");",
+            "\/\/ failed - Make sure libKindergartenMath is loaded",
+            "\/\/ expected to equal <3.0000>, got <2.0000>"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Type-Safety",
+          "level" : 2,
+          "text" : "Type Safety",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Nimble makes sure you don’t compare two types that don’t match:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Does not compile:",
+            "expect(1 + 1).to(equal(\"Squee!\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Nimble uses generics–only available in Swift–to ensure",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "type correctness. That means type checking is",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "not available when using Nimble in Objective-C. :sob:",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "anchor" : "Operator-Overloads",
+          "level" : 2,
+          "text" : "Operator Overloads",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Tired of so much typing? With Nimble, you can use overloaded operators",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "like ",
+              "type" : "text"
+            },
+            {
+              "code" : "==",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " for equivalence, or ",
+              "type" : "text"
+            },
+            {
+              "code" : ">",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " for comparisons:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Passes if squawk does not equal \"Hi!\":",
+            "expect(seagull.squawk) != \"Hi!\"",
+            "",
+            "\/\/ Passes if 10 is greater than 2:",
+            "expect(10) > 2"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Operator overloads are only available in Swift, so you won’t be able",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "to use this syntax in Objective-C. :broken_heart:",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "anchor" : "Lazily-Computed-Values",
+          "level" : 2,
+          "text" : "Lazily Computed Values",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function doesn’t evaluate the value it’s given until it’s",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "time to match. So Nimble can test whether an expression raises an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "exception once evaluated:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Note: Swift currently doesn't have exceptions.",
+            "\/\/       Only Objective-C code can raise exceptions",
+            "\/\/       that Nimble will catch.",
+            "\/\/       (see https:\/\/github.com\/Quick\/Nimble\/issues\/220#issuecomment-172667064)",
+            "let exception = NSException(",
+            "    name: NSInternalInconsistencyException,",
+            "    reason: \"Not enough fish in the sea.\",",
+            "    userInfo: [\"something\": \"is fishy\"])",
+            "expect { exception.raise() }.to(raiseException())",
+            "",
+            "\/\/ Also, you can customize raiseException to be more specific",
+            "expect { exception.raise() }.to(raiseException(named: NSInternalInconsistencyException))",
+            "expect { exception.raise() }.to(raiseException(",
+            "    named: NSInternalInconsistencyException,",
+            "    reason: \"Not enough fish in the sea\"))",
+            "expect { exception.raise() }.to(raiseException(",
+            "    named: NSInternalInconsistencyException,",
+            "    reason: \"Not enough fish in the sea\",",
+            "    userInfo: [\"something\": \"is fishy\"]))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Objective-C works the same way, but you must use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "expectAction",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "macro when making an expectation on an expression that has no return",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "value:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "NSException *exception = [NSException exceptionWithName:NSInternalInconsistencyException",
+            "                                                 reason:@\"Not enough fish in the sea.\"",
+            "                                               userInfo:nil];",
+            "expectAction(^{ [exception raise]; }).to(raiseException());",
+            "",
+            "\/\/ Use the property-block syntax to be more specific.",
+            "expectAction(^{ [exception raise]; }).to(raiseException().named(NSInternalInconsistencyException));",
+            "expectAction(^{ [exception raise]; }).to(raiseException().",
+            "    named(NSInternalInconsistencyException).",
+            "    reason(\"Not enough fish in the sea\"));",
+            "expectAction(^{ [exception raise]; }).to(raiseException().",
+            "    named(NSInternalInconsistencyException).",
+            "    reason(\"Not enough fish in the sea\").",
+            "    userInfo(@{@\"something\": @\"is fishy\"}));",
+            "",
+            "\/\/ You can also pass a block for custom matching of the raised exception",
+            "expectAction(exception.raise()).to(raiseException().satisfyingBlock(^(NSException *exception) {",
+            "    expect(exception.name).to(beginWith(NSInternalInconsistencyException));",
+            "}));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "C-Primitives",
+          "level" : 2,
+          "text" : "C Primitives",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Some testing frameworks make it hard to test primitive C values.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "In Nimble, it just works:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "let actual: CInt = 1",
+            "let expectedValue: CInt = 1",
+            "expect(actual).to(equal(expectedValue))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In fact, Nimble uses type inference, so you can write the above",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "without explicitly specifying both types:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "expect(1 as CInt).to(equal(1))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "In Objective-C, Nimble only supports Objective-C objects. To",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "make expectations on primitive C values, wrap then in an object",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "literal:",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "code" : [
+            "expect(@(1 + 1)).to(equal(@2));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+        "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/expectations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Concurrency": {
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Concurrency (Async\/Await) Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/concurrency"
+},
+"doc://Nimble/documentation/Nimble/ObjectiveC": {
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Objective-C Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/objectivec"
+},
+"doc://Nimble/documentation/Nimble/PollingExpectations": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Polling Expectations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingexpectations"
+},
+"doc://Nimble/documentation/Nimble/Require": {
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Using `require` to demand that a matcher pass before continuing",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require"
+},
+"doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Writing Your Own Matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/writingcustommatchers"
+}
+}
+}

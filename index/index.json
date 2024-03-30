@@ -1,0 +1,4205 @@
+{
+  "interfaceLanguages" : {
+    "swift" : [
+      {
+        "children" : [
+          {
+            "title" : "Guides",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/background",
+            "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expectations",
+            "title" : "Expectations Using `expect(...).to`",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/concurrency",
+            "title" : "Swift Concurrency (Async\/Await) Support",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollingexpectations",
+            "title" : "Polling Expectations",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/objectivec",
+            "title" : "Objective-C Support",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require",
+            "title" : "Using `require` to demand that a matcher pass before continuing",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/writingcustommatchers",
+            "title" : "Writing Your Own Matchers",
+            "type" : "article"
+          },
+          {
+            "title" : "Matchers",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/typechecking",
+            "title" : "Type Checking",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equivalence",
+            "title" : "Equivalence",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/identity",
+            "title" : "Identity",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/comparisons",
+            "title" : "Comparisons",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/truthiness",
+            "title" : "Truthiness",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/swiftassertions",
+            "title" : "Swift Assertions",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/swifterrors",
+            "title" : "Swift Error Handling",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/exceptions",
+            "title" : "Exceptions",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/strings",
+            "title" : "Strings",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/notifications",
+            "title" : "Notifications",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/result",
+            "title" : "Result",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/groupsofmatchers",
+            "title" : "Matching a value to any of a group of matchers",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/customvalidation",
+            "title" : "Custom Validation",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/map",
+            "title" : "Mapping a Value to Another Value",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/collectionmembership",
+            "title" : "Collection Membership",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/collectionelements",
+            "title" : "Collection Elements",
+            "type" : "article"
+          },
+          {
+            "path" : "\/documentation\/nimble\/collectioncount",
+            "title" : "Collection Count",
+            "type" : "article"
+          },
+          {
+            "title" : "Classes",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertiondispatcher\/init(handlers:)",
+                "title" : "init(handlers: [any AssertionHandler])",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertiondispatcher\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/assertiondispatcher",
+            "title" : "AssertionDispatcher",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecorder\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecorder\/assertions",
+                "title" : "var assertions: [AssertionRecord]",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecorder\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/assertionrecorder",
+            "title" : "AssertionRecorder",
+            "type" : "class"
+          },
+          {
+            "path" : "\/documentation\/nimble\/badinstructionexception",
+            "title" : "BadInstructionException",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/init()",
+                "title" : "init()",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/init(stringvalue:)",
+                "title" : "init(stringValue: String)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/actualvalue",
+                "title" : "var actualValue: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/expected",
+                "title" : "var expected: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/extendedmessage",
+                "title" : "var extendedMessage: String?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/postfixactual",
+                "title" : "var postfixActual: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/postfixmessage",
+                "title" : "var postfixMessage: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/stringvalue",
+                "title" : "var stringValue: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/to",
+                "title" : "var to: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/failuremessage\/userdescription",
+                "title" : "var userDescription: String?",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/failuremessage",
+            "title" : "FailureMessage",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbwait\/throwableuntil(timeout:file:line:action:)",
+                "title" : "class func throwableUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) throws -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbwait\/until(_:line:action:)",
+                "title" : "class func until(FileString, line: UInt, action: (() -> Void) -> Void)",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbwait\/until(timeout:file:line:action:)",
+                "title" : "class func until(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nmbwait",
+            "title" : "NMBWait",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbleshortxctesthandler\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nimbleshortxctesthandler",
+            "title" : "NimbleShortXCTestHandler",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nimblexctesthandler",
+            "title" : "NimbleXCTestHandler",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/sourcelocation\/description",
+                "title" : "var description: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/sourcelocation\/file",
+                "title" : "let file: FileString",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/sourcelocation\/line",
+                "title" : "let line: UInt",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/sourcelocation",
+            "title" : "SourceLocation",
+            "type" : "class"
+          },
+          {
+            "title" : "Protocols",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionhandler\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/assertionhandler",
+            "title" : "AssertionHandler",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Associated Types",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncablematcher\/value",
+                "title" : "Value",
+                "type" : "associatedtype"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncablematcher\/satisfies(_:)",
+                "title" : "func satisfies(AsyncExpression<Self.Value>) async throws -> MatcherResult",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/asyncablematcher",
+            "title" : "AsyncableMatcher",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectation\/location",
+                "title" : "var location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectation\/status",
+                "title" : "var status: ExpectationStatus",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectation\/onfailure(throw:)",
+                "title" : "func onFailure(throw: any Error) throws",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectation\/verify(_:_:)",
+                "title" : "func verify(Bool, FailureMessage) -> Self",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expectation",
+            "title" : "Expectation",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbcollection\/count",
+                "title" : "var count: Int",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nmbcollection",
+            "title" : "NMBCollection",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbcontainer\/contains(_:)",
+                "title" : "func contains(Any) -> Bool",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nmbcontainer",
+            "title" : "NMBContainer",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmbdoubleconvertible\/doublevalue",
+                "title" : "var doubleValue: CDouble",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nmbdoubleconvertible",
+            "title" : "NMBDoubleConvertible",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nmborderedcollection\/object(at:)",
+                "title" : "func object(at: Int) -> Any",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nmborderedcollection",
+            "title" : "NMBOrderedCollection",
+            "type" : "protocol"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/testoutputstringconvertible\/testdescription",
+                "title" : "var testDescription: String",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/testoutputstringconvertible",
+            "title" : "TestOutputStringConvertible",
+            "type" : "protocol"
+          },
+          {
+            "title" : "Structures",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecord\/description",
+                "title" : "var description: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecord\/location",
+                "title" : "let location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecord\/message",
+                "title" : "let message: FailureMessage",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/assertionrecord\/success",
+                "title" : "let success: Bool",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/assertionrecord",
+            "title" : "AssertionRecord",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Operators",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/!=(_:_:)",
+                "title" : "static func != (AsyncExpectation<Value>, ExpectationNil) async",
+                "type" : "op"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/==(_:_:)",
+                "title" : "static func == (AsyncExpectation<Value>, ExpectationNil) async",
+                "type" : "op"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/init(expression:)",
+                "title" : "init(expression: AsyncExpression<Value>)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/expression",
+                "title" : "let expression: AsyncExpression<Value>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/location",
+                "title" : "var location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/status",
+                "title" : "let status: ExpectationStatus",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/alwaysto(_:until:pollinterval:description:)-47n0e",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/alwaysto(_:until:pollinterval:description:)-4gqrp",
+                "title" : "func alwaysTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/neverto(_:until:pollinterval:description:)-1z5yt",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/neverto(_:until:pollinterval:description:)-2n4qx",
+                "title" : "func neverTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/notto(_:description:)-5as7c",
+                "title" : "func notTo(Matcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/notto(_:description:)-6ywnh",
+                "title" : "func notTo(AsyncMatcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/to(_:description:)-336k8",
+                "title" : "func to(AsyncMatcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/to(_:description:)-3fm1r",
+                "title" : "func to(Matcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toalways(_:until:pollinterval:description:)-63ews",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toalways(_:until:pollinterval:description:)-ufwa",
+                "title" : "func toAlways(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toeventually(_:timeout:pollinterval:description:)-38brw",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toeventually(_:timeout:pollinterval:description:)-64e59",
+                "title" : "func toEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-4ez1r",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-564xu",
+                "title" : "func toEventuallyNot(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonever(_:until:pollinterval:description:)-39hax",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonever(_:until:pollinterval:description:)-4au3h",
+                "title" : "func toNever(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonot(_:description:)-37jzj",
+                "title" : "func toNot(Matcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonot(_:description:)-cwbu",
+                "title" : "func toNot(AsyncMatcher<Value>, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonoteventually(_:timeout:pollinterval:description:)-1gtyr",
+                "title" : "func toNotEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/tonoteventually(_:timeout:pollinterval:description:)-9x41g",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpectation\/verify(_:_:)",
+                "title" : "func verify(Bool, FailureMessage) -> AsyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/asyncexpectation\/onfailure(throw:)",
+                    "title" : "func onFailure(throw: any Error) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/asyncexpectation\/expectation-implementations",
+                "title" : "Expectation Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/asyncexpectation",
+            "title" : "AsyncExpectation",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/init(expression:location:isclosure:)",
+                "title" : "init(expression: () async throws -> Value?, location: SourceLocation, isClosure: Bool)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/init(memoizedexpression:location:withoutcaching:isclosure:)",
+                "title" : "init(memoizedExpression: (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/isclosure",
+                "title" : "let isClosure: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/location",
+                "title" : "let location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/cast(_:)-1rprm",
+                "title" : "func cast<U>((Value?) async throws -> U?) -> AsyncExpression<U>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/cast(_:)-27213",
+                "title" : "func cast<U>((Value?) throws -> U?) -> AsyncExpression<U>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/evaluate()",
+                "title" : "func evaluate() async throws -> Value?",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/tosynchronousexpression()",
+                "title" : "func toSynchronousExpression() async -> Expression<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/withcaching()",
+                "title" : "func withCaching() -> AsyncExpression<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncexpression\/withoutcaching()",
+                "title" : "func withoutCaching() -> AsyncExpression<Value>",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/asyncexpression",
+            "title" : "AsyncExpression",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/init(_:)",
+                "title" : "init((AsyncExpression<T>) async throws -> MatcherResult)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/requirenonnil",
+                "title" : "var requireNonNil: AsyncMatcher<T>",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/satisfies(_:)",
+                "title" : "func satisfies(AsyncExpression<T>) async throws -> MatcherResult",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/define(_:matcher:)",
+                "title" : "static func define(String, matcher: (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/define(matcher:)",
+                "title" : "static func define(matcher: (AsyncExpression<T>) async throws -> MatcherResult) -> AsyncMatcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/definenilable(_:matcher:)",
+                "title" : "static func defineNilable(String, matcher: (AsyncExpression<T>, ExpectationMessage) async throws -> MatcherResult) -> AsyncMatcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/simple(_:matcher:)",
+                "title" : "static func simple(String, matcher: (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncmatcher\/simplenilable(_:matcher:)",
+                "title" : "static func simpleNilable(String, matcher: (AsyncExpression<T>) async throws -> MatcherStatus) -> AsyncMatcher<T>",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/asyncmatcher",
+            "title" : "AsyncMatcher",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/init(expression:customerror:)",
+                "title" : "init(expression: AsyncExpression<Value>, customError: (any Error)?)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/customerror",
+                "title" : "let customError: (any Error)?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/expression",
+                "title" : "let expression: AsyncExpression<Value>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/location",
+                "title" : "var location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/alwaysto(_:until:pollinterval:description:)-1io7",
+                "title" : "func alwaysTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/alwaysto(_:until:pollinterval:description:)-20c7k",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/neverto(_:until:pollinterval:description:)-1ri7g",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/neverto(_:until:pollinterval:description:)-66etj",
+                "title" : "func neverTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/notto(_:description:)-34ct2",
+                "title" : "func notTo(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/notto(_:description:)-7997q",
+                "title" : "func notTo(Matcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/to(_:description:)-3envi",
+                "title" : "func to(Matcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/to(_:description:)-67o3l",
+                "title" : "func to(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toalways(_:until:pollinterval:description:)-3z2mn",
+                "title" : "func toAlways(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toalways(_:until:pollinterval:description:)-vhdr",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toeventually(_:timeout:pollinterval:description:)-714fw",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toeventually(_:timeout:pollinterval:description:)-7xl7w",
+                "title" : "func toEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-360ei",
+                "title" : "func toEventuallyNot(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-3tbjo",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonever(_:until:pollinterval:description:)-3hom9",
+                "title" : "func toNever(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonever(_:until:pollinterval:description:)-671mg",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonot(_:description:)-1lgro",
+                "title" : "func toNot(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonot(_:description:)-iypr",
+                "title" : "func toNot(Matcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-41ifb",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-5pmde",
+                "title" : "func toNotEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/asyncrequirement\/verify(_:_:_:)",
+                "title" : "func verify(Bool, FailureMessage, Value?) throws -> Value",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/asyncrequirement",
+            "title" : "AsyncRequirement",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationnil\/init(nilliteral:)",
+                "title" : "init(nilLiteral: ())",
+                "type" : "init"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expectationnil",
+            "title" : "ExpectationNil",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/init(expression:location:isclosure:)",
+                "title" : "init(expression: () throws -> Value?, location: SourceLocation, isClosure: Bool)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/init(memoizedexpression:location:withoutcaching:isclosure:)",
+                "title" : "init(memoizedExpression: (Bool) throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/isclosure",
+                "title" : "let isClosure: Bool",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/location",
+                "title" : "let location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/cast(_:)",
+                "title" : "func cast<U>((Value?) throws -> U?) -> Expression<U>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/evaluate()",
+                "title" : "func evaluate() throws -> Value?",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/toasyncexpression()",
+                "title" : "func toAsyncExpression() -> AsyncExpression<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/withcaching()",
+                "title" : "func withCaching() -> Expression<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expression\/withoutcaching()",
+                "title" : "func withoutCaching() -> Expression<Value>",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expression",
+            "title" : "Expression",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/init(_:)",
+                "title" : "init((Expression<T>) throws -> MatcherResult)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/requirenonnil",
+                "title" : "var requireNonNil: Matcher<T>",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/satisfies(_:)-88pp9",
+                "title" : "func satisfies(Expression<T>) throws -> MatcherResult",
+                "type" : "method"
+              },
+              {
+                "title" : "Type Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/define(_:matcher:)",
+                "title" : "static func define(String, matcher: (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/define(matcher:)",
+                "title" : "static func define(matcher: (Expression<T>) throws -> MatcherResult) -> Matcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/definenilable(_:matcher:)",
+                "title" : "static func defineNilable(String, matcher: (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/simple(_:matcher:)",
+                "title" : "static func simple(String, matcher: (Expression<T>) throws -> MatcherStatus) -> Matcher<T>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcher\/simplenilable(_:matcher:)",
+                "title" : "static func simpleNilable(String, matcher: (Expression<T>) throws -> MatcherStatus) -> Matcher<T>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/matcher\/satisfies(_:)-t3iu",
+                    "title" : "func satisfies(AsyncExpression<T>) async throws -> MatcherResult",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/matcher\/asyncablematcher-implementations",
+                "title" : "AsyncableMatcher Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/matcher",
+            "title" : "Matcher",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherresult\/init(bool:message:)",
+                "title" : "init(bool: Bool, message: ExpectationMessage)",
+                "type" : "init"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherresult\/init(status:message:)",
+                "title" : "init(status: MatcherStatus, message: ExpectationMessage)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherresult\/message",
+                "title" : "var message: ExpectationMessage",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherresult\/status",
+                "title" : "var status: MatcherStatus",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherresult\/toboolean(expectation:)",
+                "title" : "func toBoolean(expectation: ExpectationStyle) -> Bool",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/matcherresult",
+            "title" : "MatcherResult",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/pollingdefaults\/pollinterval",
+                "title" : "static var pollInterval: NimbleTimeInterval",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/pollingdefaults\/timeout",
+                "title" : "static var timeout: NimbleTimeInterval",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/pollingdefaults",
+            "title" : "PollingDefaults",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/requireerror\/erroruserinfo",
+                "title" : "var errorUserInfo: [String : Any]",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/requireerror\/errorcode",
+                    "title" : "var errorCode: Int",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Type Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/requireerror\/errordomain",
+                    "title" : "static var errorDomain: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/requireerror\/customnserror-implementations",
+                "title" : "CustomNSError Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/requireerror",
+            "title" : "RequireError",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Operators",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/!=(_:_:)",
+                "title" : "static func != (SyncExpectation<Value>, ExpectationNil)",
+                "type" : "op"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/==(_:_:)",
+                "title" : "static func == (SyncExpectation<Value>, ExpectationNil)",
+                "type" : "op"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/init(expression:)",
+                "title" : "init(expression: Expression<Value>)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/expression",
+                "title" : "let expression: Expression<Value>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/location",
+                "title" : "var location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/status",
+                "title" : "let status: ExpectationStatus",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/alwaysto(_:until:pollinterval:description:)-30uox",
+                "title" : "func alwaysTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/alwaysto(_:until:pollinterval:description:)-5najb",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/alwaysto(_:until:pollinterval:description:)-82x4j",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/neverto(_:until:pollinterval:description:)-3uiid",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/neverto(_:until:pollinterval:description:)-87kp4",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/neverto(_:until:pollinterval:description:)-9uct1",
+                "title" : "func neverTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/notto(_:description:)-2x8sz",
+                "title" : "func notTo(Matcher<Value>, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/notto(_:description:)-8kyww",
+                "title" : "func notTo(AsyncMatcher<Value>, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/to(_:description:)-5uned",
+                "title" : "func to(AsyncMatcher<Value>, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/to(_:description:)-93yi8",
+                "title" : "func to(Matcher<Value>, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toalways(_:until:pollinterval:description:)-1w2kv",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toalways(_:until:pollinterval:description:)-507zs",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toalways(_:until:pollinterval:description:)-6tlhm",
+                "title" : "func toAlways(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventually(_:timeout:pollinterval:description:)-1x3mw",
+                "title" : "func toEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventually(_:timeout:pollinterval:description:)-3yl0x",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventually(_:timeout:pollinterval:description:)-4u4j3",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-3lcic",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-4r2qs",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-6ymia",
+                "title" : "func toEventuallyNot(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonever(_:until:pollinterval:description:)-1xk4j",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonever(_:until:pollinterval:description:)-3o54r",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonever(_:until:pollinterval:description:)-8asou",
+                "title" : "func toNever(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonot(_:description:)-3ofxb",
+                "title" : "func toNot(Matcher<Value>, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonot(_:description:)-83wfo",
+                "title" : "func toNot(AsyncMatcher<Value>, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonoteventually(_:timeout:pollinterval:description:)-352uh",
+                "title" : "func toNotEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonoteventually(_:timeout:pollinterval:description:)-3do3z",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/tonoteventually(_:timeout:pollinterval:description:)-6t030",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncexpectation\/verify(_:_:)",
+                "title" : "func verify(Bool, FailureMessage) -> SyncExpectation<Value>",
+                "type" : "method"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/syncexpectation\/onfailure(throw:)",
+                    "title" : "func onFailure(throw: any Error) throws",
+                    "type" : "method"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/syncexpectation\/expectation-implementations",
+                "title" : "Expectation Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/syncexpectation",
+            "title" : "SyncExpectation",
+            "type" : "struct"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/init(expression:customerror:)",
+                "title" : "init(expression: Expression<Value>, customError: (any Error)?)",
+                "type" : "init"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/customerror",
+                "title" : "let customError: (any Error)?",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/expression",
+                "title" : "let expression: Expression<Value>",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/location",
+                "title" : "var location: SourceLocation",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-60736",
+                "title" : "func alwaysTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-7ikl5",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-8e80c",
+                "title" : "func alwaysTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-3l8df",
+                "title" : "func neverTo(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-6ljem",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-7c4ud",
+                "title" : "func neverTo(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/notto(_:description:)-2rtye",
+                "title" : "func notTo(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/notto(_:description:)-9lrvj",
+                "title" : "func notTo(Matcher<Value>, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/to(_:description:)-1ggms",
+                "title" : "func to(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/to(_:description:)-5s8tc",
+                "title" : "func to(Matcher<Value>, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-4ar4c",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-5kjsi",
+                "title" : "func toAlways(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-8r7x",
+                "title" : "func toAlways(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-22p34",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-3f6xk",
+                "title" : "func toEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-4h9gi",
+                "title" : "func toEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-2zsk8",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-378kq",
+                "title" : "func toEventuallyNot(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-8pgl",
+                "title" : "func toEventuallyNot(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-5buab",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-84kki",
+                "title" : "func toNever(AsyncMatcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-mi0v",
+                "title" : "func toNever(Matcher<Value>, until: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonot(_:description:)-1z7pr",
+                "title" : "func toNot(Matcher<Value>, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonot(_:description:)-9vf2z",
+                "title" : "func toNot(AsyncMatcher<Value>, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-2sfkc",
+                "title" : "func toNotEventually(AsyncMatcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-3iwqp",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) async throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-8hxxh",
+                "title" : "func toNotEventually(Matcher<Value>, timeout: NimbleTimeInterval, pollInterval: NimbleTimeInterval, description: String?) throws -> Value",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/syncrequirement\/verify(_:_:_:)",
+                "title" : "func verify(Bool, FailureMessage, Value?) throws -> Value",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/syncrequirement",
+            "title" : "SyncRequirement",
+            "type" : "struct"
+          },
+          {
+            "title" : "Variables",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/defaultdelta",
+            "title" : "let DefaultDelta: Double",
+            "type" : "var"
+          },
+          {
+            "path" : "\/documentation\/nimble\/nimbleassertionhandler",
+            "title" : "var NimbleAssertionHandler: any AssertionHandler",
+            "type" : "var"
+          },
+          {
+            "title" : "Functions",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:)-2jexg",
+            "title" : "func allPass<S>(Matcher<S.Element>) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:)-5avdc",
+            "title" : "func allPass<S>(AsyncMatcher<S.Element>) -> AsyncMatcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:)-6q6j5",
+            "title" : "func allPass<S>((S.Element) throws -> Bool) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:)-9i1yo",
+            "title" : "func allPass<S>((S.Element) async throws -> Bool) -> AsyncMatcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:_:)-3kwct",
+            "title" : "func allPass<S>(String, (S.Element) throws -> Bool) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/allpass(_:_:)-59vkt",
+            "title" : "func allPass<S>(String, (S.Element) async throws -> Bool) -> AsyncMatcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/be(_:)",
+            "title" : "func be(AnyObject?) -> Matcher<AnyObject>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beakindof(_:)",
+            "title" : "func beAKindOf<T>(T.Type) -> Matcher<Any>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beaninstanceof(_:)-25vd8",
+            "title" : "func beAnInstanceOf(AnyClass) -> Matcher<NSObject>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beaninstanceof(_:)-3m1ll",
+            "title" : "func beAnInstanceOf<T>(T.Type) -> Matcher<Any>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/becloseto(_:within:)-1penf",
+            "title" : "func beCloseTo<Value>(Value, within: Double) -> Matcher<Value>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/becloseto(_:within:)-2ekge",
+            "title" : "func beCloseTo<Value, Values>(Values, within: Value) -> Matcher<Values>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/becloseto(_:within:)-8goy6",
+            "title" : "func beCloseTo<Value>(Value, within: Value) -> Matcher<Value>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-1phtu",
+            "title" : "func beEmpty<S>() -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-2dmdf",
+            "title" : "func beEmpty<S>() -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-4tk26",
+            "title" : "func beEmpty() -> Matcher<NSDictionary>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-5ybqq",
+            "title" : "func beEmpty() -> Matcher<NSArray>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-6mkht",
+            "title" : "func beEmpty() -> Matcher<NSString>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-8xbp2",
+            "title" : "func beEmpty() -> Matcher<any NMBCollection>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-8zwdh",
+            "title" : "func beEmpty<S>() -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beempty()-9y5jr",
+            "title" : "func beEmpty() -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/befailure(_:)",
+            "title" : "func beFailure<Success, Failure>(Matcher<Failure>) -> Matcher<Result<Success, Failure>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/befailure(test:)",
+            "title" : "func beFailure<Success, Failure>(test: ((Failure) -> Void)?) -> Matcher<Result<Success, Failure>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/befalse()",
+            "title" : "func beFalse() -> Matcher<Bool>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/befalsy()",
+            "title" : "func beFalsy<T>() -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/begreaterthan(_:)",
+            "title" : "func beGreaterThan<T>(T?) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/begreaterthanorequalto(_:)",
+            "title" : "func beGreaterThanOrEqualTo<T>(T?) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beidenticalto(_:)",
+            "title" : "func beIdenticalTo(AnyObject?) -> Matcher<AnyObject>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/belessthan(_:)",
+            "title" : "func beLessThan<T>(T?) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/belessthanorequalto(_:)",
+            "title" : "func beLessThanOrEqualTo<T>(T?) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/benil()",
+            "title" : "func beNil<T>() -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/besuccess(_:)-444ip",
+            "title" : "func beSuccess<Success, Failure>(Matcher<Success>) -> Matcher<Result<Success, Failure>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/besuccess(_:)-6l09y",
+            "title" : "func beSuccess<Success, Failure>(Success) -> Matcher<Result<Success, Failure>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/besuccess(test:)",
+            "title" : "func beSuccess<Success, Failure>(test: ((Success) -> Void)?) -> Matcher<Result<Success, Failure>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/betrue()",
+            "title" : "func beTrue() -> Matcher<Bool>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/betruthy()",
+            "title" : "func beTruthy<T>() -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/bevoid()",
+            "title" : "func beVoid() -> Matcher<()>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/bewithin(_:)-33vbq",
+            "title" : "func beWithin<T>(ClosedRange<T>) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/bewithin(_:)-9cwl3",
+            "title" : "func beWithin<T>(Range<T>) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beginwith(_:)-1owm0",
+            "title" : "func beginWith(String) -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beginwith(_:)-24tjb",
+            "title" : "func beginWith(Any) -> Matcher<any NMBOrderedCollection>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beginwith(_:)-25593",
+            "title" : "func beginWith<S>(S.Element) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beginwith(prefix:)",
+            "title" : "func beginWith<Seq1, Seq2>(prefix: Seq2?) -> Matcher<Seq1>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/beginwith(prefix:by:)",
+            "title" : "func beginWith<Seq1, Seq2>(prefix: Seq2?, by: (Seq1.Element, Seq2.Element) -> Bool) -> Matcher<Seq1>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/catchbadinstruction(block:)",
+            "title" : "func catchBadInstruction(block: () -> Void) -> BadInstructionException?",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-2aowy",
+            "title" : "func contain([Any?]) -> Matcher<any NMBContainer>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-3rklc",
+            "title" : "func contain(String...) -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-41z5g",
+            "title" : "func contain([String]) -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-78pt3",
+            "title" : "func contain<S>(S.Element...) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-862bt",
+            "title" : "func contain(NSString...) -> Matcher<NSString>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-8fxbb",
+            "title" : "func contain<S>([S.Element]) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-8sjnq",
+            "title" : "func contain<S>(S.Element...) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-dgf4",
+            "title" : "func contain<S>([S.Element]) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-h8gp",
+            "title" : "func contain(Any?...) -> Matcher<any NMBContainer>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-owbf",
+            "title" : "func contain<S>(S.Element...) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-vjep",
+            "title" : "func contain<S>([S.Element]) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/contain(_:)-wfmf",
+            "title" : "func contain([NSString]) -> Matcher<NSString>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/containelementsatisfying(_:_:)-44wi3",
+            "title" : "func containElementSatisfying<S>(((S.Element) -> Bool), String) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/containelementsatisfying(_:_:)-8omf3",
+            "title" : "func containElementSatisfying<S>(((S.Element) async -> Bool), String) -> AsyncMatcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/defaultdelta()",
+            "title" : "func defaultDelta<F>() -> F",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/elementsequal(_:)",
+            "title" : "func elementsEqual<Seq1, Seq2>(Seq2?) -> Matcher<Seq1>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/elementsequal(_:by:)",
+            "title" : "func elementsEqual<Seq1, Seq2>(Seq2?, by: (Seq1.Element, Seq2.Element) -> Bool) -> Matcher<Seq1>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/endwith(_:)-20hcx",
+            "title" : "func endWith(String) -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/endwith(_:)-4n6y3",
+            "title" : "func endWith(Any) -> Matcher<any NMBOrderedCollection>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/endwith(_:)-6f0ul",
+            "title" : "func endWith<S>(S.Element) -> Matcher<S>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-1jkdb",
+            "title" : "func equal<K, V>([K : V?]) -> Matcher<[K : V]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-29m3q",
+            "title" : "func equal<T1, T2, T3, T4, T5>([(T1, T2, T3, T4, T5)]?) -> Matcher<[(T1, T2, T3, T4, T5)]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-2k2k5",
+            "title" : "func equal<T1, T2, T3>((T1, T2, T3)?) -> Matcher<(T1, T2, T3)>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-4jb77",
+            "title" : "func equal<T1, T2>((T1, T2)?) -> Matcher<(T1, T2)>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-4uzmz",
+            "title" : "func equal<T>(T?) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-4vzd2",
+            "title" : "func equal<T>(Set<T>?) -> Matcher<Set<T>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-4w4xq",
+            "title" : "func equal<T1, T2, T3, T4>([(T1, T2, T3, T4)]?) -> Matcher<[(T1, T2, T3, T4)]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-4zxpx",
+            "title" : "func equal<T1, T2, T3>([(T1, T2, T3)]?) -> Matcher<[(T1, T2, T3)]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-5fne6",
+            "title" : "func equal<T>([T?]) -> Matcher<[T?]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-63nh8",
+            "title" : "func equal<T1, T2>([(T1, T2)]?) -> Matcher<[(T1, T2)]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-6p8q5",
+            "title" : "func equal<T>(Set<T>?) -> Matcher<Set<T>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-6ymip",
+            "title" : "func equal<T1, T2, T3, T4>((T1, T2, T3, T4)?) -> Matcher<(T1, T2, T3, T4)>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-7j9dn",
+            "title" : "func equal<T>(Set<T>) -> Matcher<Set<T>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-95y6m",
+            "title" : "func equal<T1, T2, T3, T4, T5>((T1, T2, T3, T4, T5)?) -> Matcher<(T1, T2, T3, T4, T5)>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-96tj4",
+            "title" : "func equal<T1, T2, T3, T4, T5, T6>((T1, T2, T3, T4, T5, T6)?) -> Matcher<(T1, T2, T3, T4, T5, T6)>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-9l2si",
+            "title" : "func equal<T>(Set<T>) -> Matcher<Set<T>>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-fpzg",
+            "title" : "func equal<T1, T2, T3, T4, T5, T6>([(T1, T2, T3, T4, T5, T6)]?) -> Matcher<[(T1, T2, T3, T4, T5, T6)]>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/equal(_:)-t0mf",
+            "title" : "func equal<T>(T) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-2mr8i",
+            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-58u5j",
+            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-59120",
+            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() async throws -> T)) -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-5cchd",
+            "title" : "func expect<T>(file: FileString, line: UInt, () throws -> T?) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-6ye9t",
+            "title" : "func expect(file: FileString, line: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-748cc",
+            "title" : "func expect<T>(file: FileString, line: UInt, () async throws -> T?) -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-7htau",
+            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expect(file:line:_:)-7qpwy",
+            "title" : "func expect(file: FileString, line: UInt, () -> (() async throws -> Void)) -> AsyncExpectation<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-41vom",
+            "title" : "func expecta<T>(file: FileString, line: UInt, () async throws -> T?) async -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-8270k",
+            "title" : "func expecta<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) async -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-8wfby",
+            "title" : "func expecta<T>(file: FileString, line: UInt, () -> (() async throws -> T)) async -> AsyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-9mpn3",
+            "title" : "func expecta(file: FileString, line: UInt, () -> (() async throws -> Void)) async -> AsyncExpectation<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expects(file:line:_:)-11ihr",
+            "title" : "func expects<T>(file: FileString, line: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expects(file:line:_:)-4yogq",
+            "title" : "func expects(file: FileString, line: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expects(file:line:_:)-6mfun",
+            "title" : "func expects<T>(file: FileString, line: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/expects(file:line:_:)-6rmwa",
+            "title" : "func expects<T>(file: FileString, line: UInt, () throws -> T?) -> SyncExpectation<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/fail(_:file:line:)",
+            "title" : "func fail(String, file: FileString, line: UInt)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/fail(_:line:)",
+            "title" : "func fail(FileString, line: UInt)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/fail(_:location:)",
+            "title" : "func fail(String, location: SourceLocation)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/gatherexpectations(silently:closure:)-2po6t",
+            "title" : "func gatherExpectations(silently: Bool, closure: () async -> Void) async -> [AssertionRecord]",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/gatherexpectations(silently:closure:)-75ohy",
+            "title" : "func gatherExpectations(silently: Bool, closure: () -> Void) -> [AssertionRecord]",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/gatherfailingexpectations(silently:closure:)-2g14s",
+            "title" : "func gatherFailingExpectations(silently: Bool, closure: () -> Void) -> [AssertionRecord]",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/gatherfailingexpectations(silently:closure:)-30gyn",
+            "title" : "func gatherFailingExpectations(silently: Bool, closure: () async -> Void) async -> [AssertionRecord]",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/havecount(_:)-5t6dt",
+            "title" : "func haveCount(Int) -> Matcher<any NMBCollection>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/havecount(_:)-d79t",
+            "title" : "func haveCount<T>(Int) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/map(_:_:)-5l17g",
+            "title" : "func map<T, U>((T) async throws -> U, some AsyncableMatcher) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/map(_:_:)-6ykjm",
+            "title" : "func map<T, U>((T) throws -> U, Matcher<U>) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/match(_:)",
+            "title" : "func match(String?) -> Matcher<String>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/matcherror(_:)-4geex",
+            "title" : "func matchError<T>(T) -> Matcher<any Error>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/matcherror(_:)-6jywp",
+            "title" : "func matchError<T>(T.Type) -> Matcher<any Error>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/matcherror(_:)-8o974",
+            "title" : "func matchError<T>(T) -> Matcher<any Error>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrap(file:line:_:)-16s5w",
+            "title" : "func pollUnwrap<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrap(file:line:_:)-3fmx1",
+            "title" : "func pollUnwrap<T>(file: FileString, line: UInt, () async throws -> T?) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrap(file:line:_:)-3yd3y",
+            "title" : "func pollUnwrap<T>(file: FileString, line: UInt, () -> (() throws -> T?)) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrap(file:line:_:)-60bfs",
+            "title" : "func pollUnwrap<T>(file: FileString, line: UInt, () throws -> T?) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrapa(file:line:_:)-2vokl",
+            "title" : "func pollUnwrapa<T>(file: FileString, line: UInt, () async throws -> T?) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwrapa(file:line:_:)-5jamj",
+            "title" : "func pollUnwrapa<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwraps(file:line:_:)-3jrcn",
+            "title" : "func pollUnwraps<T>(file: FileString, line: UInt, () throws -> T?) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/pollunwraps(file:line:_:)-52c5x",
+            "title" : "func pollUnwraps<T>(file: FileString, line: UInt, () -> (() throws -> T?)) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/postnotifications(_:from:)",
+            "title" : "func postNotifications<Out>(Matcher<[Notification]>, from: NotificationCenter) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/prettycollectiontype(_:)-3wxmq",
+            "title" : "func prettyCollectionType<T>(T) -> String",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/prettycollectiontype(_:)-8eo0q",
+            "title" : "func prettyCollectionType<T>(T) -> String",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/recordfailure(_:location:)",
+            "title" : "func recordFailure(String, location: SourceLocation)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-16zcr",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-2sg1s",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-4be0k",
+            "title" : "func require(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-5w0op",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7at88",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7pbrd",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-or36",
+            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T)) -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-3a46w",
+            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-u53z",
+            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-xk2k",
+            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T)) async -> AsyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-1vgwt",
+            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-228v4",
+            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-3s28q",
+            "title" : "func requires(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-5wq4u",
+            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyallof(_:)-2npr5",
+            "title" : "func satisfyAllOf<T>([any AsyncableMatcher<T>]) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyallof(_:)-99ble",
+            "title" : "func satisfyAllOf<T>(any AsyncableMatcher<T>...) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyallof(_:)-nprr",
+            "title" : "func satisfyAllOf<T>([Matcher<T>]) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyallof(_:)-x0z5",
+            "title" : "func satisfyAllOf<T>(Matcher<T>...) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyanyof(_:)-3q3xr",
+            "title" : "func satisfyAnyOf<T>(Matcher<T>...) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyanyof(_:)-7m952",
+            "title" : "func satisfyAnyOf<T>([any AsyncableMatcher<T>]) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyanyof(_:)-8groo",
+            "title" : "func satisfyAnyOf<T>(any AsyncableMatcher<T>...) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/satisfyanyof(_:)-8yumz",
+            "title" : "func satisfyAnyOf<T>([Matcher<T>]) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/stringify(_:)",
+            "title" : "func stringify<T>(T?) -> String",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/succeed()",
+            "title" : "func succeed() -> Matcher<ToSucceedResult>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwassertion()",
+            "title" : "func throwAssertion<Out>() -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror()",
+            "title" : "func throwError<Out>() -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror(_:closure:)-bepw",
+            "title" : "func throwError<T, Out>(T, closure: ((T) -> Void)?) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror(_:closure:)-phyk",
+            "title" : "func throwError<T, Out>(T, closure: ((any Error) -> Void)?) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror(closure:)-2uav9",
+            "title" : "func throwError<Out>(closure: ((any Error) -> Void)) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror(closure:)-6lkaq",
+            "title" : "func throwError<T, Out>(closure: ((T) -> Void)) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/throwerror(errortype:closure:)",
+            "title" : "func throwError<T, Out>(errorType: T.Type, closure: ((T) -> Void)?) -> Matcher<Out>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-13k8e",
+            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3x8y7",
+            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3y0k8",
+            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-7jnzo",
+            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-5avgm",
+            "title" : "func unwrapa<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-6y8i4",
+            "title" : "func unwrapa<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-12fhs",
+            "title" : "func unwraps<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-5t0tc",
+            "title" : "func unwraps<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-1sonl",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void) async",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-3locq",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-5xt23",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) async -> Void) async",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-6mpkx",
+            "title" : "func withAssertionHandler(any AssertionHandler, file: FileString, line: UInt, closure: () async throws -> Void) async",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-n9cw",
+            "title" : "func withAssertionHandler(any AssertionHandler, file: FileString, line: UInt, closure: () throws -> Void)",
+            "type" : "func"
+          },
+          {
+            "title" : "Operators",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-15i87",
+            "title" : "func != <T1, T2, T3>(SyncExpectation<(T1, T2, T3)>, (T1, T2, T3)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-1h75b",
+            "title" : "func != <T>(SyncExpectation<T>, T)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-1m9eo",
+            "title" : "func != <T>(AsyncExpectation<Set<T>>, Set<T>?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-1r6my",
+            "title" : "func != <T1, T2, T3, T4, T5>(AsyncExpectation<(T1, T2, T3, T4, T5)>, (T1, T2, T3, T4, T5)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-27dsw",
+            "title" : "func != <T>(AsyncExpectation<T>, T) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-2qvt3",
+            "title" : "func != <T1, T2, T3, T4, T5>(AsyncExpectation<[(T1, T2, T3, T4, T5)]>, [(T1, T2, T3, T4, T5)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-2rphw",
+            "title" : "func != <T1, T2, T3>(AsyncExpectation<(T1, T2, T3)>, (T1, T2, T3)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-2ukpv",
+            "title" : "func != <T1, T2, T3, T4, T5, T6>(AsyncExpectation<[(T1, T2, T3, T4, T5, T6)]>, [(T1, T2, T3, T4, T5, T6)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-31zpb",
+            "title" : "func != <T1, T2>(SyncExpectation<(T1, T2)>, (T1, T2)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-3p88",
+            "title" : "func != <T>(AsyncExpectation<Set<T>>, Set<T>) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-3tcy4",
+            "title" : "func != <T1, T2>(AsyncExpectation<(T1, T2)>, (T1, T2)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-3uw3g",
+            "title" : "func != <T>(SyncExpectation<Set<T>>, Set<T>)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-3w2c7",
+            "title" : "func != <T>(AsyncExpectation<Set<T>>, Set<T>) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-4472g",
+            "title" : "func != (AsyncExpectation<()>, ()) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-46lop",
+            "title" : "func != <T, C>(SyncExpectation<[T : C]>, [T : C]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-4zl37",
+            "title" : "func != <T1, T2, T3, T4>(SyncExpectation<[(T1, T2, T3, T4)]>, [(T1, T2, T3, T4)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-56q10",
+            "title" : "func != <T>(SyncExpectation<Set<T>>, Set<T>)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-5ci7n",
+            "title" : "func != <T1, T2, T3, T4, T5, T6>(SyncExpectation<[(T1, T2, T3, T4, T5, T6)]>, [(T1, T2, T3, T4, T5, T6)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-6k4mv",
+            "title" : "func != <T1, T2, T3>(AsyncExpectation<[(T1, T2, T3)]>, [(T1, T2, T3)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-6s1n7",
+            "title" : "func != <T>(AsyncExpectation<[T]>, [T]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-6wgq2",
+            "title" : "func != <T1, T2, T3, T4>(AsyncExpectation<[(T1, T2, T3, T4)]>, [(T1, T2, T3, T4)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-6y4i0",
+            "title" : "func != <T>(SyncExpectation<Set<T>>, Set<T>?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-6zzgy",
+            "title" : "func != <T1, T2, T3, T4, T5, T6>(AsyncExpectation<(T1, T2, T3, T4, T5, T6)>, (T1, T2, T3, T4, T5, T6)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7b2vg",
+            "title" : "func != <T>(SyncExpectation<Set<T>>, Set<T>?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7h6k0",
+            "title" : "func != <T1, T2, T3, T4, T5, T6>(SyncExpectation<(T1, T2, T3, T4, T5, T6)>, (T1, T2, T3, T4, T5, T6)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7hyzu",
+            "title" : "func != <T>(AsyncExpectation<Set<T>>, Set<T>?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7jdr5",
+            "title" : "func != <T, C>(AsyncExpectation<[T : C]>, [T : C]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7q401",
+            "title" : "func != <T1, T2, T3, T4, T5>(SyncExpectation<[(T1, T2, T3, T4, T5)]>, [(T1, T2, T3, T4, T5)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-7qmtr",
+            "title" : "func != <T1, T2, T3>(SyncExpectation<[(T1, T2, T3)]>, [(T1, T2, T3)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-83ok0",
+            "title" : "func != <T>(SyncExpectation<[T]>, [T]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-87xjw",
+            "title" : "func != <T1, T2>(AsyncExpectation<[(T1, T2)]>, [(T1, T2)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-8a3ii",
+            "title" : "func != <T1, T2, T3, T4>(AsyncExpectation<(T1, T2, T3, T4)>, (T1, T2, T3, T4)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-8ow4y",
+            "title" : "func != <T1, T2, T3, T4, T5>(SyncExpectation<(T1, T2, T3, T4, T5)>, (T1, T2, T3, T4, T5)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-8pens",
+            "title" : "func != <T1, T2>(SyncExpectation<[(T1, T2)]>, [(T1, T2)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-95fll",
+            "title" : "func != <T>(AsyncExpectation<T>, T?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-9n7sx",
+            "title" : "func != <T1, T2, T3, T4>(SyncExpectation<(T1, T2, T3, T4)>, (T1, T2, T3, T4)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-rtqi",
+            "title" : "func != <T>(SyncExpectation<T>, T?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!=(_:_:)-sv6w",
+            "title" : "func != (SyncExpectation<()>, ())",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!==(_:_:)-4ejai",
+            "title" : "func !== (SyncExpectation<AnyObject>, AnyObject?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/!==(_:_:)-yv04",
+            "title" : "func !== (AsyncExpectation<AnyObject>, AnyObject?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/&&(_:_:)-4rkr1",
+            "title" : "func && <T>(Matcher<T>, Matcher<T>) -> Matcher<T>",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/&&(_:_:)-9wt1",
+            "title" : "func && <T>(some AsyncableMatcher, some AsyncableMatcher) -> AsyncMatcher<T>",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-131t0",
+            "title" : "func == <Value>(SyncExpectation<Value>, (expected: Value, delta: Double))",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-13f6e",
+            "title" : "func == <T1, T2>(SyncExpectation<(T1, T2)>, (T1, T2)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-19a2h",
+            "title" : "func == <T>(AsyncExpectation<Set<T>>, Set<T>) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-22767",
+            "title" : "func == <T>(AsyncExpectation<Set<T>>, Set<T>?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-2944j",
+            "title" : "func == <T1, T2, T3, T4>(AsyncExpectation<(T1, T2, T3, T4)>, (T1, T2, T3, T4)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-2c2m2",
+            "title" : "func == <T1, T2, T3, T4, T5, T6>(SyncExpectation<(T1, T2, T3, T4, T5, T6)>, (T1, T2, T3, T4, T5, T6)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-2nosj",
+            "title" : "func == <T1, T2>(SyncExpectation<[(T1, T2)]>, [(T1, T2)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-38095",
+            "title" : "func == <T>(AsyncExpectation<T>, T) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-3n0h2",
+            "title" : "func == <T1, T2>(AsyncExpectation<[(T1, T2)]>, [(T1, T2)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-3qzgj",
+            "title" : "func == <T1, T2, T3, T4, T5, T6>(AsyncExpectation<[(T1, T2, T3, T4, T5, T6)]>, [(T1, T2, T3, T4, T5, T6)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-3velv",
+            "title" : "func == <T1, T2, T3, T4>(AsyncExpectation<[(T1, T2, T3, T4)]>, [(T1, T2, T3, T4)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-45iuu",
+            "title" : "func == <T1, T2, T3>(SyncExpectation<(T1, T2, T3)>, (T1, T2, T3)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4dwu6",
+            "title" : "func == (AsyncExpectation<()>, ()) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4flzp",
+            "title" : "func == <T1, T2, T3, T4, T5, T6>(SyncExpectation<[(T1, T2, T3, T4, T5, T6)]>, [(T1, T2, T3, T4, T5, T6)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4itd6",
+            "title" : "func == <T>(AsyncExpectation<Set<T>>, Set<T>) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4j4w1",
+            "title" : "func == <T, C>(AsyncExpectation<[T : C]>, [T : C]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4qnjf",
+            "title" : "func == <T>(SyncExpectation<[T]>, [T]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4roc5",
+            "title" : "func == <T1, T2, T3>(SyncExpectation<[(T1, T2, T3)]>, [(T1, T2, T3)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4ufvq",
+            "title" : "func == <T>(SyncExpectation<Set<T>>, Set<T>)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-4wc3u",
+            "title" : "func == <T, C>(SyncExpectation<[T : C]>, [T : C]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-59pur",
+            "title" : "func == <T>(SyncExpectation<T>, T?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-5qjpb",
+            "title" : "func == <T1, T2, T3, T4, T5>(AsyncExpectation<(T1, T2, T3, T4, T5)>, (T1, T2, T3, T4, T5)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-60e9y",
+            "title" : "func == <T>(SyncExpectation<T>, T)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-60str",
+            "title" : "func == <T>(AsyncExpectation<T>, T?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-73lf4",
+            "title" : "func == <T1, T2, T3, T4, T5, T6>(AsyncExpectation<(T1, T2, T3, T4, T5, T6)>, (T1, T2, T3, T4, T5, T6)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-74nq2",
+            "title" : "func == <T>(SyncExpectation<Set<T>>, Set<T>?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-7css5",
+            "title" : "func == <Value>(AsyncExpectation<Value>, (expected: Value, delta: Value)) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-7h5bs",
+            "title" : "func == <T1, T2, T3, T4>(SyncExpectation<(T1, T2, T3, T4)>, (T1, T2, T3, T4)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-7infz",
+            "title" : "func == <T1, T2, T3, T4>(SyncExpectation<[(T1, T2, T3, T4)]>, [(T1, T2, T3, T4)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-7ovl0",
+            "title" : "func == <Value>(SyncExpectation<Value>, (expected: Value, delta: Value))",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-8032l",
+            "title" : "func == <T>(SyncExpectation<Set<T>>, Set<T>?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-89ryv",
+            "title" : "func == <T>(AsyncExpectation<Set<T>>, Set<T>?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-8cxsq",
+            "title" : "func == <T1, T2, T3, T4, T5>(SyncExpectation<(T1, T2, T3, T4, T5)>, (T1, T2, T3, T4, T5)?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-8vizw",
+            "title" : "func == <T1, T2, T3, T4, T5>(AsyncExpectation<[(T1, T2, T3, T4, T5)]>, [(T1, T2, T3, T4, T5)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-90nx",
+            "title" : "func == <T>(SyncExpectation<Set<T>>, Set<T>)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-98c6t",
+            "title" : "func == <T1, T2, T3>(AsyncExpectation<[(T1, T2, T3)]>, [(T1, T2, T3)]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-994kn",
+            "title" : "func == <T1, T2, T3>(AsyncExpectation<(T1, T2, T3)>, (T1, T2, T3)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-9gjj0",
+            "title" : "func == <T1, T2>(AsyncExpectation<(T1, T2)>, (T1, T2)?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-9k5o1",
+            "title" : "func == (SyncExpectation<()>, ())",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-9wlko",
+            "title" : "func == <T1, T2, T3, T4, T5>(SyncExpectation<[(T1, T2, T3, T4, T5)]>, [(T1, T2, T3, T4, T5)]?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-d2r8",
+            "title" : "func == <T>(AsyncExpectation<[T]>, [T]?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/==(_:_:)-ubo",
+            "title" : "func == <Value>(AsyncExpectation<Value>, (expected: Value, delta: Double)) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/===(_:_:)-3bnja",
+            "title" : "func === (SyncExpectation<AnyObject>, AnyObject?)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/===(_:_:)-6v9vl",
+            "title" : "func === (AsyncExpectation<AnyObject>, AnyObject?) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-1dobt",
+            "title" : "func ≈ <Value>(AsyncExpectation<Value>, Value) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-2ey8b",
+            "title" : "func ≈ <Value>(SyncExpectation<Value>, Value)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-34o1t",
+            "title" : "func > <T>(AsyncExpectation<T>, T) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-3k1ji",
+            "title" : "func ≈ <Value>(SyncExpectation<Value>, (expected: Value, delta: Value))",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-3z674",
+            "title" : "func ± <Value>(Value, Value) -> (expected: Value, delta: Value)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-4wzz5",
+            "title" : "func ≈ <Value>(AsyncExpectation<Value>, (expected: Value, delta: Value)) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-6nued",
+            "title" : "func ≈ <Value>(AsyncExpectation<Value>, (expected: Value, delta: Double)) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-6nz5l",
+            "title" : "func ≈ <Value>(SyncExpectation<Value>, Value)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-7002r",
+            "title" : "func ± <Value>(Value, Double) -> (expected: Value, delta: Double)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-79bwb",
+            "title" : "func < <V>(AsyncExpectation<V>, V) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-7djfd",
+            "title" : "func ≈ <Value>(AsyncExpectation<Value>, Value) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-7f0li",
+            "title" : "func ≈ <Value>(SyncExpectation<Value>, Value)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-83ze2",
+            "title" : "func ≈ <Value>(SyncExpectation<Value>, (expected: Value, delta: Double))",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-8v7n2",
+            "title" : "func ≈ <Value>(AsyncExpectation<Value>, Value) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-8vp4l",
+            "title" : "func < <V>(SyncExpectation<V>, V)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_(_:_:)-h249",
+            "title" : "func > <T>(SyncExpectation<T>, T)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_=(_:_:)-2q8b5",
+            "title" : "func <= <T>(SyncExpectation<T>, T)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_=(_:_:)-4nkxn",
+            "title" : "func >= <T>(SyncExpectation<T>, T)",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_=(_:_:)-7z3c8",
+            "title" : "func >= <T>(AsyncExpectation<T>, T) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/_=(_:_:)-9r54u",
+            "title" : "func <= <T>(AsyncExpectation<T>, T) async",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/__(_:_:)-2dlok",
+            "title" : "func || <T>(Matcher<T>, Matcher<T>) -> Matcher<T>",
+            "type" : "op"
+          },
+          {
+            "path" : "\/documentation\/nimble\/__(_:_:)-9x0w7",
+            "title" : "func || <T>(some AsyncableMatcher, some AsyncableMatcher) -> AsyncMatcher<T>",
+            "type" : "op"
+          },
+          {
+            "title" : "Type Aliases",
+            "type" : "groupMarker"
+          },
+          {
+            "path" : "\/documentation\/nimble\/asyncpredicate",
+            "title" : "AsyncPredicate",
+            "type" : "typealias"
+          },
+          {
+            "path" : "\/documentation\/nimble\/filestring",
+            "title" : "FileString",
+            "type" : "typealias"
+          },
+          {
+            "path" : "\/documentation\/nimble\/predicate",
+            "title" : "Predicate",
+            "type" : "typealias"
+          },
+          {
+            "path" : "\/documentation\/nimble\/predicateresult",
+            "title" : "PredicateResult",
+            "type" : "typealias"
+          },
+          {
+            "path" : "\/documentation\/nimble\/predicatestatus",
+            "title" : "PredicateStatus",
+            "type" : "typealias"
+          },
+          {
+            "title" : "Enumerations",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/appends(_:_:)",
+                "title" : "case appends(ExpectationMessage, String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/details(_:_:)",
+                "title" : "case details(ExpectationMessage, String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/expectedactualvalueto(_:)",
+                "title" : "case expectedActualValueTo(String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/expectedcustomvalueto(_:actual:)",
+                "title" : "case expectedCustomValueTo(String, actual: String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/expectedto(_:)",
+                "title" : "case expectedTo(String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/fail(_:)",
+                "title" : "case fail(String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/prepends(_:_:)",
+                "title" : "case prepends(String, ExpectationMessage)",
+                "type" : "case"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/expectedmessage",
+                "title" : "var expectedMessage: String",
+                "type" : "property"
+              },
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/appended(details:)",
+                "title" : "func appended(details: String) -> ExpectationMessage",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/appended(message:)",
+                "title" : "func appended(message: String) -> ExpectationMessage",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/appendedbenilhint()",
+                "title" : "func appendedBeNilHint() -> ExpectationMessage",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/prepended(expectation:)",
+                "title" : "func prepended(expectation: String) -> ExpectationMessage",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/replacedexpectation(_:)",
+                "title" : "func replacedExpectation((ExpectationMessage) -> ExpectationMessage) -> ExpectationMessage",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/tostring(actual:expected:to:)",
+                "title" : "func toString(actual: String, expected: String, to: String) -> String",
+                "type" : "method"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationmessage\/wrappedexpectation(before:after:)",
+                "title" : "func wrappedExpectation(before: String, after: String) -> ExpectationMessage",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expectationmessage",
+            "title" : "ExpectationMessage",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstatus\/failed",
+                "title" : "case failed",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstatus\/mixed",
+                "title" : "case mixed",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstatus\/passed",
+                "title" : "case passed",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstatus\/pending",
+                "title" : "case pending",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/expectationstatus\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/expectationstatus\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expectationstatus",
+            "title" : "ExpectationStatus",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstyle\/tomatch",
+                "title" : "case toMatch",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/expectationstyle\/tonotmatch",
+                "title" : "case toNotMatch",
+                "type" : "case"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/expectationstyle\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/expectationstyle\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/expectationstyle",
+            "title" : "ExpectationStyle",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherstatus\/doesnotmatch",
+                "title" : "case doesNotMatch",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherstatus\/fail",
+                "title" : "case fail",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherstatus\/matches",
+                "title" : "case matches",
+                "type" : "case"
+              },
+              {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/matcherstatus\/init(bool:)",
+                "title" : "init(bool: Bool)",
+                "type" : "init"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/matcherstatus\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/matcherstatus\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/matcherstatus",
+            "title" : "MatcherStatus",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/microseconds(_:)",
+                "title" : "case microseconds(Int)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/milliseconds(_:)",
+                "title" : "case milliseconds(Int)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/nanoseconds(_:)",
+                "title" : "case nanoseconds(Int)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/seconds(_:)",
+                "title" : "case seconds(Int)",
+                "type" : "case"
+              },
+              {
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/dispatchtimeinterval",
+                "title" : "var dispatchTimeInterval: DispatchTimeInterval",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/nanoseconds",
+                "title" : "var nanoseconds: UInt64",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/timeinterval",
+                "title" : "var timeInterval: TimeInterval",
+                "type" : "property"
+              },
+              {
+                "title" : "Default Implementations",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/'...(_:)-23p27",
+                    "title" : "static func ... (Self) -> PartialRangeThrough<Self>",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/'...(_:)-55z6f",
+                    "title" : "static func ... (Self) -> PartialRangeFrom<Self>",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/'...(_:_:)",
+                    "title" : "static func ... (Self, Self) -> ClosedRange<Self>",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/'.._(_:)",
+                    "title" : "static func ..< (Self) -> PartialRangeUpTo<Self>",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/'.._(_:_:)",
+                    "title" : "static func ..< (Self, Self) -> Range<Self>",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/_(_:_:)-51bkh",
+                    "title" : "static func > (Self, Self) -> Bool",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/_(_:_:)-9vai1",
+                    "title" : "static func < (NimbleTimeInterval, NimbleTimeInterval) -> Bool",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/_=(_:_:)-1bsa",
+                    "title" : "static func <= (Self, Self) -> Bool",
+                    "type" : "op"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/_=(_:_:)-6kc0s",
+                    "title" : "static func >= (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/comparable-implementations",
+                "title" : "Comparable Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/description",
+                    "title" : "var description: String",
+                    "type" : "property"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/customstringconvertible-implementations",
+                "title" : "CustomStringConvertible Implementations",
+                "type" : "symbol"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Operators",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/nimbletimeinterval\/!=(_:_:)",
+                    "title" : "static func != (Self, Self) -> Bool",
+                    "type" : "op"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/nimbletimeinterval\/equatable-implementations",
+                "title" : "Equatable Implementations",
+                "type" : "symbol"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nimbletimeinterval",
+            "title" : "NimbleTimeInterval",
+            "type" : "enum"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Enumeration Cases",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/tosucceedresult\/failed(reason:)",
+                "title" : "case failed(reason: String)",
+                "type" : "case"
+              },
+              {
+                "path" : "\/documentation\/nimble\/tosucceedresult\/succeeded",
+                "title" : "case succeeded",
+                "type" : "case"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/tosucceedresult",
+            "title" : "ToSucceedResult",
+            "type" : "enum"
+          },
+          {
+            "title" : "Extended Modules",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Classes",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/nsarray\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/nsarray\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/nsarray",
+                "title" : "NSArray",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/nsdate\/doublevalue",
+                        "title" : "var doubleValue: CDouble",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/nsdate\/nmbdoubleconvertible-implementations",
+                    "title" : "NMBDoubleConvertible Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/nsdate\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/nsdate\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/nsdate",
+                "title" : "NSDate",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/nsindexset\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/nsindexset\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/nsindexset",
+                "title" : "NSIndexSet",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/nsnumber\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/nsnumber\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/nsnumber",
+                "title" : "NSNumber",
+                "type" : "extension"
+              },
+              {
+                "title" : "Extended Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/data\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/data\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/data",
+                "title" : "Data",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Methods",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/foundation\/date\/advanced(by:)",
+                    "title" : "func advanced(by: NimbleTimeInterval) -> Date",
+                    "type" : "method"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/date\/doublevalue",
+                        "title" : "var doubleValue: CDouble",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/date\/nmbdoubleconvertible-implementations",
+                    "title" : "NMBDoubleConvertible Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/foundation\/date\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/foundation\/date\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/foundation\/date",
+                "title" : "Date",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/foundation",
+            "title" : "Foundation",
+            "type" : "extension"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Extended Structures",
+                "type" : "groupMarker"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/anysequence\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/anysequence\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/anysequence",
+                "title" : "AnySequence",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/array\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/array\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/array",
+                "title" : "Array",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Instance Properties",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "path" : "\/documentation\/nimble\/swift\/double\/nimbleinterval",
+                    "title" : "var nimbleInterval: NimbleTimeInterval",
+                    "type" : "property"
+                  },
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/double\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/double\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/double\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/double\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/double",
+                "title" : "Double",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/float\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/float\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/float\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/float\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/float",
+                "title" : "Float",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/int\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/int\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/int",
+                "title" : "Int",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/int16\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/int16\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/int16",
+                "title" : "Int16",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/int32\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/int32\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/int32",
+                "title" : "Int32",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/int64\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/int64\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/int64",
+                "title" : "Int64",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/int8\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/int8\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/int8",
+                "title" : "Int8",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Instance Properties",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/string\/testdescription",
+                        "title" : "var testDescription: String",
+                        "type" : "property"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/string\/testoutputstringconvertible-implementations",
+                    "title" : "TestOutputStringConvertible Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/string",
+                "title" : "String",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/uint\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/uint\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/uint",
+                "title" : "UInt",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/uint16\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/uint16\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/uint16",
+                "title" : "UInt16",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/uint32\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/uint32\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/uint32",
+                "title" : "UInt32",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/uint64\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/uint64\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/uint64",
+                "title" : "UInt64",
+                "type" : "extension"
+              },
+              {
+                "children" : [
+                  {
+                    "title" : "Default Implementations",
+                    "type" : "groupMarker"
+                  },
+                  {
+                    "children" : [
+                      {
+                        "title" : "Initializers",
+                        "type" : "groupMarker"
+                      },
+                      {
+                        "path" : "\/documentation\/nimble\/swift\/uint8\/init(booleanliteral:)",
+                        "title" : "init(booleanLiteral: Bool)",
+                        "type" : "init"
+                      }
+                    ],
+                    "path" : "\/documentation\/nimble\/swift\/uint8\/expressiblebybooleanliteral-implementations",
+                    "title" : "ExpressibleByBooleanLiteral Implementations",
+                    "type" : "symbol"
+                  }
+                ],
+                "path" : "\/documentation\/nimble\/swift\/uint8",
+                "title" : "UInt8",
+                "type" : "extension"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/swift",
+            "title" : "Swift",
+            "type" : "extension"
+          }
+        ],
+        "path" : "\/documentation\/nimble",
+        "title" : "Nimble",
+        "type" : "module"
+      }
+    ]
+  },
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 1
+  }
+}

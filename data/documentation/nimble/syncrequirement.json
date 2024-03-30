@@ -1,0 +1,3636 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble15SyncRequirementV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "SyncRequirement"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "SyncRequirement"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "SyncRequirement"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "SyncRequirement"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "Value"
+            },
+            {
+              "kind" : "text",
+              "text" : ">"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/init(expression:customError:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/customError",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/expression",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/location"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-60736",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-7ikl5",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-8e80c",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-3l8df",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-6ljem",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-7c4ud",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/notTo(_:description:)-2rtye",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/notTo(_:description:)-9lrvj",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/to(_:description:)-1ggms",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/to(_:description:)-5s8tc",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-4ar4c",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-5kjsi",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-8r7x",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-22p34",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-3f6xk",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-4h9gi",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-2zsk8",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-378kq",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-8pgl",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-5buab",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-84kki",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-mi0v",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNot(_:description:)-1z7pr",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNot(_:description:)-9vf2z",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-2sfkc",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-3iwqp",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-8hxxh",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/verify(_:_:_:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/syncrequirement"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/RequireError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "RequireError",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requireerror"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SyncRequirement"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SyncRequirement"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SyncRequirement",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/alwaysTo(_:until:pollInterval:description:)-60736": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "alwaysTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-60736",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "alwaysTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-60736"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/alwaysTo(_:until:pollInterval:description:)-7ikl5": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "alwaysTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-7ikl5",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "alwaysTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-7ikl5"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/alwaysTo(_:until:pollInterval:description:)-8e80c": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "alwaysTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/alwaysTo(_:until:pollInterval:description:)-8e80c",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "alwaysTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/alwaysto(_:until:pollinterval:description:)-8e80c"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/customError": {
+  "abstract" : [
+    {
+      "text" : "A custom error to throw.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "If nil, then we will throw a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on failure.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/customError",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "customError",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/customerror"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/expression": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expression"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10ExpressionV",
+      "text" : "Expression"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/expression",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expression",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/expression"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/init(expression:customError:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "expression"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10ExpressionV",
+      "text" : "Expression"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?)"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/init(expression:customError:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(expression:customError:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/init(expression:customerror:)"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/location": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "location"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble14SourceLocationC",
+      "text" : "SourceLocation"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/location",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "location",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/location"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/neverTo(_:until:pollInterval:description:)-3l8df": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "neverTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-3l8df",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "neverTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-3l8df"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/neverTo(_:until:pollInterval:description:)-6ljem": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "neverTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-6ljem",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "neverTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-6ljem"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/neverTo(_:until:pollInterval:description:)-7c4ud": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "neverTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/neverTo(_:until:pollInterval:description:)-7c4ud",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "neverTo(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/neverto(_:until:pollinterval:description:)-7c4ud"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/notTo(_:description:)-2rtye": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "notTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/notTo(_:description:)-2rtye",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "notTo(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/notto(_:description:)-2rtye"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/notTo(_:description:)-9lrvj": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "notTo"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/notTo(_:description:)-9lrvj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "notTo(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/notto(_:description:)-9lrvj"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/to(_:description:)-1ggms": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/to(_:description:)-1ggms",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "to(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/to(_:description:)-1ggms"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/to(_:description:)-5s8tc": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "to"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/to(_:description:)-5s8tc",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "to(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/to(_:description:)-5s8tc"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toAlways(_:until:pollInterval:description:)-4ar4c": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toAlways"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-4ar4c",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toAlways(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-4ar4c"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toAlways(_:until:pollInterval:description:)-5kjsi": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toAlways"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-5kjsi",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toAlways(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-5kjsi"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toAlways(_:until:pollInterval:description:)-8r7x": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to always match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continusouly at each pollInterval until the timeout is reached",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toAlways"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toAlways(_:until:pollInterval:description:)-8r7x",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toAlways(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toalways(_:until:pollinterval:description:)-8r7x"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventually(_:timeout:pollInterval:description:)-22p34": {
+  "abstract" : [
+    {
+      "text" : "Require the actual value using a matcher to match by checking continuously",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-22p34",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-22p34"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventually(_:timeout:pollInterval:description:)-3f6xk": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to match by checking continuously",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-3f6xk",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-3f6xk"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventually(_:timeout:pollInterval:description:)-4h9gi": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to match by checking continuously",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventually(_:timeout:pollInterval:description:)-4h9gi",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventually(_:timeout:pollinterval:description:)-4h9gi"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventuallyNot(_:timeout:pollInterval:description:)-2zsk8": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventuallyNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-2zsk8",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventuallyNot(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-2zsk8"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventuallyNot(_:timeout:pollInterval:description:)-378kq": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventuallyNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-378kq",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventuallyNot(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-378kq"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toEventuallyNot(_:timeout:pollInterval:description:)-8pgl": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventuallyNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toEventuallyNot(_:timeout:pollInterval:description:)-8pgl",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventuallyNot(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/toeventuallynot(_:timeout:pollinterval:description:)-8pgl"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNever(_:until:pollInterval:description:)-5buab": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNever"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-5buab",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNever(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-5buab"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNever(_:until:pollInterval:description:)-84kki": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNever"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-84kki",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNever(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-84kki"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNever(_:until:pollInterval:description:)-mi0v": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to never match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNever"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "until"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNever(_:until:pollInterval:description:)-mi0v",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNever(_:until:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonever(_:until:pollinterval:description:)-mi0v"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNot(_:description:)-1z7pr": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNot(_:description:)-1z7pr",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNot(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonot(_:description:)-1z7pr"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNot(_:description:)-9vf2z": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNot(_:description:)-9vf2z",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNot(_:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonot(_:description:)-9vf2z"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNotEventually(_:timeout:pollInterval:description:)-2sfkc": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNotEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-2sfkc",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNotEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-2sfkc"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNotEventually(_:timeout:pollInterval:description:)-3iwqp": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNotEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-3iwqp",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNotEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-3iwqp"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/toNotEventually(_:timeout:pollInterval:description:)-8hxxh": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toNotEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/toNotEventually(_:timeout:pollInterval:description:)-8hxxh",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toNotEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/tonoteventually(_:timeout:pollinterval:description:)-8hxxh"
+},
+"doc://Nimble/documentation/Nimble/SyncRequirement/verify(_:_:_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "verify"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble14FailureMessageC",
+      "text" : "FailureMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement\/verify(_:_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "verify(_:_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncrequirement\/verify(_:_:_:)"
+}
+}
+}

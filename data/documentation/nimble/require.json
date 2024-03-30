@@ -1,0 +1,979 @@
+{
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/Require"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Using `require` to demand that a matcher pass before continuing"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, in testing a function that returns an array, you might need to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "first guarantee that there are exactly 3 items in the array before continuing",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to assert on it. Instead of writing code that needlessly duplicates an assertion",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and a conditional like so:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let collection = myFunction()",
+            "expect(collection).to(haveCount(3))",
+            "guard collection.count == 3 else { return }",
+            "\/\/ ..."
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can replace that with:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let collection = try require(myFunction()).to(haveCount(3))",
+            "\/\/ ..."
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Polling-with-require",
+          "level" : 2,
+          "text" : "Polling with `require`.",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Because ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " does everything you can do with ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", you can also use",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " using ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ",",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "eventuallyTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNotEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "neverTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ",",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "toAlways",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", and ",
+              "type" : "text"
+            },
+            {
+              "code" : "alwaysTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". These work exactly the same as they do when using",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", except that they throw if they fail, and they return the value of the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "expression when they pass.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Using-require-with-Async-expressions-and-Async-matchers",
+          "level" : 2,
+          "text" : "Using `require` with Async expressions and Async matchers",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " also works with both async expressions",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "code" : "require { await someExpression() }.to(...)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "), and async matchers",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(",
+              "type" : "text"
+            },
+            {
+              "code" : "require().to(someAsyncMatcher())",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ").",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Note that to prevent compiler confusion,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "you cannot use ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " with async autoclosures. That is,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "require(await someExpression())",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " will not compile. You can instead either",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "make the closure explicit (",
+              "type" : "text"
+            },
+            {
+              "code" : "require { await someExpression() }",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "), or use the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "requirea",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function, which does accept autoclosures.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Similarly, if you ever wish to use the sync version of ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " when the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "compiler is trying to force you to use the async version, you can use the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "requires",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function, which only allows synchronous expressions.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Using-unwrap-to-replace-requiretoNotbeNil",
+          "level" : 2,
+          "text" : "Using `unwrap` to replace `require(...).toNot(beNil())`",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "It’s very common to require that a value not be nil. Instead of writing",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "try require(...).toNot(beNil())",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", Nimble provides the ",
+              "type" : "text"
+            },
+            {
+              "code" : "unwrap",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function. This",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "expression throws an error if the expression evaluates to nil, or returns the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "non-nil result when it passes. For example:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "let value = try unwrap(nil as Int?) \/\/ throws",
+            "let value = try unwrap(1 as Int?) \/\/ returns 1"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Additionally, there is also the ",
+              "type" : "text"
+            },
+            {
+              "code" : "pollUnwrap",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function, which aliases to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "require(...).toEventuallyNot(beNil())",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". This is extremely useful for verifying",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "that a value that is updated on a background thread was eventually set to a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "non-nil value.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Note: As with ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", there are ",
+              "type" : "text"
+            },
+            {
+              "code" : "unwraps",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "unwrapa",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "pollUnwraps",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "pollUnwrapa",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " variants for allowing you to use autoclosures specifically with",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "synchronous or asynchronous code.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Throwing-a-Custom-Error-from-Require",
+          "level" : 2,
+          "text" : "Throwing a Custom Error from Require",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "By default, if the matcher fails in a ",
+              "type" : "text"
+            },
+            {
+              "code" : "require",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", then a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " will be",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "thrown. You can override this behavior and throw a custom error by passing a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "non-nil ",
+              "type" : "text"
+            },
+            {
+              "code" : "Error",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " value to the ",
+              "type" : "text"
+            },
+            {
+              "code" : "customError",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " parameter:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "try require(1).to(equal(2)) \/\/ throws a `RequireError`",
+            "try require(customError: MyCustomError(), 1).to(equal(2)) \/\/ throws a `MyCustomError`"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+        "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/require"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Concurrency": {
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Concurrency (Async\/Await) Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/concurrency"
+},
+"doc://Nimble/documentation/Nimble/Expectations": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Expectations Using `expect(...).to`",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectations"
+},
+"doc://Nimble/documentation/Nimble/ObjectiveC": {
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Objective-C Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/objectivec"
+},
+"doc://Nimble/documentation/Nimble/PollingExpectations": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Polling Expectations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingexpectations"
+},
+"doc://Nimble/documentation/Nimble/RequireError": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/RequireError",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "RequireError"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "RequireError",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requireerror"
+},
+"doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Writing Your Own Matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/writingcustommatchers"
+}
+}
+}

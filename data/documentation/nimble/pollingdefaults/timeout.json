@@ -1,0 +1,313 @@
+{
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingDefaults"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingDefaults\/timeout"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble15PollingDefaultsV7timeoutAA0A12TimeIntervalOvpZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "var"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "timeout"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+        "text" : "NimbleTimeInterval"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "timeout"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "var"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "timeout"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+              "text" : "NimbleTimeInterval"
+            },
+            {
+              "kind" : "text",
+              "text" : " { "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "get"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "set"
+            },
+            {
+              "kind" : "text",
+              "text" : " }"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/pollingdefaults\/timeout"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval": {
+  "abstract" : [
+    {
+      "text" : "A reimplementation of ",
+      "type" : "text"
+    },
+    {
+      "code" : "DispatchTimeInterval",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " without the ",
+      "type" : "text"
+    },
+    {
+      "code" : "never",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " case, and conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "Sendable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTimeInterval"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval"
+},
+"doc://Nimble/documentation/Nimble/PollingDefaults": {
+  "abstract" : [
+    {
+      "text" : "If you are running on a slower machine, it could be useful to increase the default timeout value",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "PollingDefaults"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingDefaults",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "PollingDefaults"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "PollingDefaults",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingdefaults"
+},
+"doc://Nimble/documentation/Nimble/PollingDefaults/timeout": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingDefaults\/timeout",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "timeout",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingdefaults\/timeout"
+}
+}
+}

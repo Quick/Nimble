@@ -1,0 +1,912 @@
+{
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Swift Concurrency (Async\/Await) Support"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Simply pass the async function in to ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "await expect { await aFunctionReturning1() }.to(equal(1))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The async function is awaited on first, before passing it to the matcher. This",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "enables the matcher to run synchronous code like before, without caring about",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "whether the value it’s processing was abtained async or not.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Async support is Swift-only, and it requires that you execute the test in an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "async context. For XCTest, this is as simple as marking your test function with",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "async",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". If you use Quick, all tests in Quick 6 are executed in an async context.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "In Quick 7 and later, only tests that are in an ",
+              "type" : "text"
+            },
+            {
+              "code" : "AsyncSpec",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " subclass will be",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "executed in an async context.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To avoid a compiler errors when using synchronous ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " in asynchronous contexts,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " with async expressions does not support autoclosures. However, the ",
+              "type" : "text"
+            },
+            {
+              "code" : "expecta",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "(expect async) function is provided as an alternative, which does support autoclosures.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "await expecta(await aFunctionReturning1()).to(equal(1)))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Similarly, if you’re ever in a situation where you want to force the compiler to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "produce a ",
+              "type" : "text"
+            },
+            {
+              "code" : "SyncExpectation",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", you can use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "expects",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " (expect sync) function to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "produce a ",
+              "type" : "text"
+            },
+            {
+              "code" : "SyncExpectation",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". Like so:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "expects(someNonAsyncFunction()).to(equal(1)))",
+            "",
+            "expects(await someAsyncFunction()).to(equal(1)) \/\/ Compiler error: 'async' call in an autoclosure that does not support concurrency"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Async-Matchers",
+          "level" : 3,
+          "text" : "Async Matchers",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In addition to asserting on async functions prior to passing them to a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "synchronous matcher, you can also write matchers that directly take in an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "async value. These are called ",
+              "type" : "text"
+            },
+            {
+              "code" : "AsyncMatcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "s. This is most obviously useful",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "when directly asserting against an actor. In addition to writing your own",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "async matchers, Nimble currently ships with async versions of the following",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "matchers:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "allPass",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "containElementSatisfying",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "satisfyAllOf",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "&&",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " operator overload accept both ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "AsyncMatcher",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : "synchronous ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : "s.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "satisfyAnyOf",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " and the ",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "||",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : " operator overload accept both ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncMatcher",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : " and",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : " ",
+                      "type" : "text"
+                    },
+                    {
+                      "text" : "synchronous ",
+                      "type" : "text"
+                    },
+                    {
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+                      "isActive" : true,
+                      "type" : "reference"
+                    },
+                    {
+                      "text" : "s.",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Note: Swift Concurrency support is different than the ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "\/",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " feature described in ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Polling Expectations works by continuously polling",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the ",
+              "type" : "text"
+            },
+            {
+              "code" : "Expectation",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " until it passes. As described here, Nimble’s Swift",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Concurrency support is about waiting for an expression to finish.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "It is certainly possible to use Polling Expectations with async\/await, as the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "result of a concurrent Expectation can certainly change with time.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+        "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/concurrency"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/AsyncMatcher": {
+  "abstract" : [
+    {
+      "text" : "An AsyncMatcher is part of the new matcher API that provides assertions to expectations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "AsyncMatcher"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncMatcher",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "AsyncMatcher"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "AsyncMatcher",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/asyncmatcher"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Expectations": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Expectations Using `expect(...).to`",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectations"
+},
+"doc://Nimble/documentation/Nimble/Matcher": {
+  "abstract" : [
+    {
+      "text" : "A Matcher is part of the new matcher API that provides assertions to expectations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Matcher",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcher"
+},
+"doc://Nimble/documentation/Nimble/ObjectiveC": {
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Objective-C Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/objectivec"
+},
+"doc://Nimble/documentation/Nimble/PollingExpectations": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Polling Expectations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingexpectations"
+},
+"doc://Nimble/documentation/Nimble/Require": {
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Using `require` to demand that a matcher pass before continuing",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require"
+},
+"doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Writing Your Own Matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/writingcustommatchers"
+}
+}
+}

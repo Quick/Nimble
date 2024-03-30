@@ -1,0 +1,2030 @@
+{
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Polling Expectations"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Forms-of-Polling-Expectations",
+          "level" : 2,
+          "text" : "Forms of Polling Expectations",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "There are 4 forms of polling expectations: ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ",",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "\/",
+              "type" : "text"
+            },
+            {
+              "code" : "toNotEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toAlways",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "\/",
+              "type" : "text"
+            },
+            {
+              "code" : "alwaysTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", and ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "\/",
+              "type" : "text"
+            },
+            {
+              "code" : "neverTo",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "These each have different behaviors for what they expect the matcher to return",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "until they stop polling.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " will run until the Matcher matches, while ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "will run so long as the Matcher doesn’t match. This makes them opposites.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "It is a very common mistake to assume that ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventuallyNot",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "opposite of ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventually",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". For example, if you’re using a ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
+                  "isActive" : true,
+                  "type" : "reference"
+                },
+                {
+                  "text" : ",",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "you might be used to checking that it is called on a background thread by using",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toEventually(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". If you want to check that a spy is not",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "called during some background behavior, you might be tempted to use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toEventuallyNot(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "All this will do is verify that, by the time the Expectation first runs, the spy",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "has not been called. At which point, that background behavior might not even have",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "run. The correct thing is to use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toNever",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", as in ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toNever(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Warning",
+          "style" : "warning",
+          "type" : "aside"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Polling form",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Pass Duration",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Expected Matcher Result",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toEventually",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until pass",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toEventuallyNot",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "toNotEventually",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until pass",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to not match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toAlways",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "alwaysTo",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until fail",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toNever",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "neverTo",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until fail",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to not match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "anchor" : "Verifying-a-Matcher-will-Eventually-Match-or-stop-Matching",
+          "level" : 3,
+          "text" : "Verifying a Matcher will Eventually Match or stop Matching",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To verify that a value eventually matches or stops matching through the length",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "of the timeout, use ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : "\/",
+              "type" : "text"
+            },
+            {
+              "code" : "toNotEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "DispatchQueue.main.async {",
+            "    ocean.add(\"dolphins\")",
+            "    ocean.add(\"whales\")",
+            "}",
+            "expect(ocean).toEventually(contain(\"dolphins\", \"whales\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "dispatch_async(dispatch_get_main_queue(), ^{",
+            "    [ocean add:@\"dolphins\"];",
+            "    [ocean add:@\"whales\"];",
+            "});",
+            "expect(ocean).toEventually(contain(@\"dolphins\", @\"whales\"));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the above example, ",
+              "type" : "text"
+            },
+            {
+              "code" : "ocean",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is constantly re-evaluated. If it ever",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "contains dolphins and whales, the expectation passes. If ",
+              "type" : "text"
+            },
+            {
+              "code" : "ocean",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " still",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "doesn’t contain them, even after being continuously re-evaluated for one",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "whole second, the expectation fails.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Verifying-a-Matcher-will-Never-or-Always-Match",
+          "level" : 3,
+          "text" : "Verifying a Matcher will Never or Always Match",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can also test that a value always or never matches throughout the length of the timeout. Use ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "toAlways",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " for this:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "ocean.add(\"dolphins\")",
+            "expect(ocean).toAlways(contain(\"dolphins\"))",
+            "expect(ocean).toNever(contain(\"hares\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "[ocean add:@\"dolphins\"]",
+            "expect(ocean).toAlways(contain(@\"dolphins\"))",
+            "expect(ocean).toNever(contain(@\"hares\"))"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Behaviors-of-different-forms-of-Polling",
+          "level" : 3,
+          "text" : "Behaviors of different forms of Polling",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Fundamentally, the behaviors of the different types of polling (",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ",",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toAlways",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ") are about the duration of the polling,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and what they’re looking for with regard to the Expectation.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " will run until the Expectation matches, while ",
+              "type" : "text"
+            },
+            {
+              "code" : "toNever",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "will run so long as the Expectation dosen’t match. This effectively makes them",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "opposites.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "It is a very common mistake to assume that ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventuallyNot",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " is the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "opposite of ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventually",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". For example, if you’re using a ",
+                  "type" : "text"
+                },
+                {
+                  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
+                  "isActive" : true,
+                  "overridingTitle" : "Swift Fakes Spy",
+                  "overridingTitleInlineContent" : [
+                    {
+                      "text" : "Swift Fakes Spy",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "reference"
+                },
+                {
+                  "text" : ",",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "you might be used to checking that it is called on a background thread by using",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toEventually(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ". If you want to check that a spy is not",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "called during some background behavior, you might be tempted to use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toEventuallyNot(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "All this will do is verify that, by the time the Expectation first runs, the spy",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "has not been called. At which point, that background behavior might not even have",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "run. The correct thing is to use ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toNever",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ", as in ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expect(spy).toNever(beCalled())",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Warning",
+          "style" : "warning",
+          "type" : "aside"
+        },
+        {
+          "header" : "row",
+          "rows" : [
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Polling form",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Pass Duration",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Expected Matcher Result",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toEventually",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until pass",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toEventuallyNot",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "toNotEventually",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until pass",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to not match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toAlways",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "alwaysTo",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until fail",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "code" : "toNever",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : "\/",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : "neverTo",
+                      "type" : "codeVoice"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Until fail",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ],
+              [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "to not match",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            ]
+          ],
+          "type" : "table"
+        },
+        {
+          "anchor" : "Waiting-for-a-Callback-to-be-Called",
+          "level" : 3,
+          "text" : "Waiting for a Callback to be Called",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can also provide a callback by using the ",
+              "type" : "text"
+            },
+            {
+              "code" : "waitUntil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "waitUntil { done in",
+            "    ocean.goFish { success in",
+            "        expect(success).to(beTrue())",
+            "        done()",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "waitUntil(^(void (^done)(void)){",
+            "    [ocean goFishWithHandler:^(BOOL success){",
+            "        expect(success).to(beTrue());",
+            "        done();",
+            "    }];",
+            "});"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "waitUntil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " also optionally takes a timeout parameter:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "waitUntil(timeout: .seconds(10)) { done in",
+            "    ocean.goFish { success in",
+            "        expect(success).to(beTrue())",
+            "        done()",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "waitUntilTimeout(10, ^(void (^done)(void)){",
+            "    [ocean goFishWithHandler:^(BOOL success){",
+            "        expect(success).to(beTrue());",
+            "        done();",
+            "    }];",
+            "});"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Note: ",
+              "type" : "text"
+            },
+            {
+              "code" : "waitUntil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " triggers its timeout code on the main thread. Blocking the main",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "thread will cause Nimble to stop the run loop to continue. This can cause test",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "pollution for whatever incomplete code that was running on the main thread.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Blocking the main thread can be caused by blocking IO, calls to sleep(),",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "deadlocks, and synchronous IPC.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Changing-the-Timeout-and-Polling-Intervals",
+          "level" : 3,
+          "text" : "Changing the Timeout and Polling Intervals",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Sometimes it takes more than a second for a value to update. In those",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "cases, use the ",
+              "type" : "text"
+            },
+            {
+              "code" : "timeout",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " parameter:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Waits three seconds for ocean to contain \"starfish\":",
+            "expect(ocean).toEventually(contain(\"starfish\"), timeout: .seconds(3))",
+            "",
+            "\/\/ Evaluate someValue every 0.2 seconds repeatedly until it equals 100, or fails if it timeouts after 5.5 seconds.",
+            "expect(someValue).toEventually(equal(100), timeout: .milliseconds(5500), pollInterval: .milliseconds(200))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "\/\/ Waits three seconds for ocean to contain \"starfish\":",
+            "expect(ocean).withTimeout(3).toEventually(contain(@\"starfish\"));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Changing-default-Timeout-and-Poll-Intervals",
+          "level" : 3,
+          "text" : "Changing default Timeout and Poll Intervals",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In some cases (e.g. when running on slower machines) it can be useful to modify",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the default timeout and poll interval values. This can be done as follows:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Increase the global timeout to 5 seconds:",
+            "Nimble.PollingDefaults.timeout = .seconds(5)",
+            "",
+            "\/\/ Slow the polling interval to 0.1 seconds:",
+            "Nimble.PollingDefaults.pollInterval = .milliseconds(100)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can set these globally at test startup in two ways:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Quick",
+          "level" : 4,
+          "text" : "Quick",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you use ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/Quick\/Quick",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", add a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/Quick\/Quick\/blob\/main\/Documentation\/en-us\/ConfiguringQuick.md",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " which sets your desired ",
+              "type" : "text"
+            },
+            {
+              "code" : "PollingDefaults",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "import Quick",
+            "import Nimble",
+            "",
+            "class PollingConfiguration: QuickConfiguration {",
+            "    override class func configure(_ configuration: QCKConfiguration) {",
+            "        Nimble.PollingDefaults.timeout = .seconds(5)",
+            "        Nimble.PollingDefaults.pollInterval = .milliseconds(100)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "XCTest",
+          "level" : 4,
+          "text" : "XCTest",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If you use ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", add an object that conforms to ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and implement ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation\/1500772-testbundlewillstart",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Additionally, you will need to register this observer with the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservationcenter",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " at test startup. To do this, set the ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSPrincipalClass",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " key in your test bundle’s Info.plist and implement a class with that same name.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "<!-- Info.plist -->",
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "<!DOCTYPE plist PUBLIC \"-\/\/Apple\/\/DTD PLIST 1.0\/\/EN\" \"http:\/\/www.apple.com\/DTDs\/PropertyList-1.0.dtd\">",
+            "<plist version=\"1.0\">",
+            "<dict>",
+            "    <!-- ... -->",
+            "    <key>NSPrincipalClass<\/key>",
+            "    <string>MyTests.TestSetup<\/string>",
+            "<\/dict>",
+            "<\/plist>"
+          ],
+          "syntax" : "xml",
+          "type" : "codeListing"
+        },
+        {
+          "code" : [
+            "\/\/ TestSetup.swift",
+            "import XCTest",
+            "import Nimble",
+            "",
+            "@objc",
+            "class TestSetup: NSObject {",
+            "    override init() {",
+            "        XCTestObservationCenter.shared.register(PollingConfigurationTestObserver())",
+            "    }",
+            "}",
+            "",
+            "class PollingConfigurationTestObserver: NSObject, XCTestObserver {",
+            "    func testBundleWillStart(_ testBundle: Bundle) {",
+            "        Nimble.PollingDefaults.timeout = .seconds(5)",
+            "        Nimble.PollingDefaults.pollInterval = .milliseconds(100)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In Linux, you can implement ",
+              "type" : "text"
+            },
+            {
+              "code" : "LinuxMain",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to set the PollingDefaults before calling ",
+              "type" : "text"
+            },
+            {
+              "code" : "XCTMain",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Using-Polling-Expectations-in-Async-Tests",
+          "level" : 2,
+          "text" : "Using Polling Expectations in Async Tests",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can easily use ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventuallyNot",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " in async contexts as",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "well. You only need to add an ",
+              "type" : "text"
+            },
+            {
+              "code" : "await",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " statement to the beginning of the line:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "DispatchQueue.main.async {",
+            "    ocean.add(\"dolphins\")",
+            "    ocean.add(\"whales\")",
+            "}",
+            "await expect(ocean).toEventually(contain(\"dolphens\", \"whiles\"))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Starting in Nimble 12,  ",
+              "type" : "text"
+            },
+            {
+              "code" : "toEventually",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " et. al. now also supports async",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "expectations. For example, the following test is now supported:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "actor MyActor {",
+            "    private var counter = 0",
+            "",
+            "    func access() -> Int {",
+            "        counter += 1",
+            "        return counter",
+            "    }",
+            "}",
+            "",
+            "let subject = MyActor()",
+            "await expect { await subject.access() }.toEventually(equal(2))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+        "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/pollingexpectations"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Concurrency": {
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Concurrency (Async\/Await) Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/concurrency"
+},
+"doc://Nimble/documentation/Nimble/Expectations": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Expectations Using `expect(...).to`",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectations"
+},
+"doc://Nimble/documentation/Nimble/ObjectiveC": {
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Objective-C Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/objectivec"
+},
+"doc://Nimble/documentation/Nimble/Require": {
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Using `require` to demand that a matcher pass before continuing",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require"
+},
+"doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Writing Your Own Matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/writingcustommatchers"
+},
+"https://developer.apple.com/documentation/xctest": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest",
+  "title" : "XCTest",
+  "titleInlineContent" : [
+    {
+      "text" : "XCTest",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/xctest"
+},
+"https://developer.apple.com/documentation/xctest/xctestobservation": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation",
+  "title" : "XCTestObservation",
+  "titleInlineContent" : [
+    {
+      "code" : "XCTestObservation",
+      "type" : "codeVoice"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation"
+},
+"https://developer.apple.com/documentation/xctest/xctestobservation/1500772-testbundlewillstart": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation\/1500772-testbundlewillstart",
+  "title" : "testBundleWillStart(_:)",
+  "titleInlineContent" : [
+    {
+      "code" : "testBundleWillStart(_:)",
+      "type" : "codeVoice"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservation\/1500772-testbundlewillstart"
+},
+"https://developer.apple.com/documentation/xctest/xctestobservationcenter": {
+  "identifier" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservationcenter",
+  "title" : "XCTestObservationCenter",
+  "titleInlineContent" : [
+    {
+      "code" : "XCTestObservationCenter",
+      "type" : "codeVoice"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/developer.apple.com\/documentation\/xctest\/xctestobservationcenter"
+},
+"https://github.com/Quick/Quick": {
+  "identifier" : "https:\/\/github.com\/Quick\/Quick",
+  "title" : "Quick",
+  "titleInlineContent" : [
+    {
+      "text" : "Quick",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/Quick\/Quick"
+},
+"https://github.com/Quick/Quick/blob/main/Documentation/en-us/ConfiguringQuick.md": {
+  "identifier" : "https:\/\/github.com\/Quick\/Quick\/blob\/main\/Documentation\/en-us\/ConfiguringQuick.md",
+  "title" : "QuickConfiguration subclass",
+  "titleInlineContent" : [
+    {
+      "code" : "QuickConfiguration",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " subclass",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/Quick\/Quick\/blob\/main\/Documentation\/en-us\/ConfiguringQuick.md"
+},
+"https://github.com/Quick/swift-fakes/blob/main/Sources/Fakes/Spy.swift": {
+  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
+  "title" : "Swift Fakes Spy",
+  "titleInlineContent" : [
+    {
+      "text" : "Swift Fakes Spy",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift"
+}
+}
+}

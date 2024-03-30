@@ -1,0 +1,374 @@
+{
+  "abstract" : [
+    {
+      "text" : "MatcherStatus is a trinary that indicates if a Matcher matches a given value or not",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble13MatcherStatusO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "MatcherStatus"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "MatcherStatus"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "MatcherStatus"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "MatcherStatus"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/SQ",
+        "doc:\/\/Nimble\/SH"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/doesNotMatch",
+        "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/fail",
+        "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/matches"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/init(bool:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/matcherstatus"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/SH": {
+  "identifier" : "doc:\/\/Nimble\/SH",
+  "title" : "Swift.Hashable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/SQ": {
+  "identifier" : "doc:\/\/Nimble\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus": {
+  "abstract" : [
+    {
+      "text" : "MatcherStatus is a trinary that indicates if a Matcher matches a given value or not",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MatcherStatus"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MatcherStatus"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MatcherStatus",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus\/equatable-implementations"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus/doesNotMatch": {
+  "abstract" : [
+    {
+      "text" : "DoesNotMatch indicates if the matcher fails with the given value, but ",
+      "type" : "text"
+    },
+    {
+      "inlineContent" : [
+        {
+          "text" : "would",
+          "type" : "text"
+        }
+      ],
+      "type" : "emphasis"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "succeed if the expectation was inverted.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "doesNotMatch"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/doesNotMatch",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MatcherStatus.doesNotMatch",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus\/doesnotmatch"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus/fail": {
+  "abstract" : [
+    {
+      "text" : "Fail indicates the matcher will never satisfy with the given value in any case.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "A perfect example is that most matchers fail whenever given ",
+      "type" : "text"
+    },
+    {
+      "code" : "nil",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fail"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/fail",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MatcherStatus.fail",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus\/fail"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus/init(bool:)": {
+  "abstract" : [
+    {
+      "text" : "Converts a boolean to either .matches (if true) or .doesNotMatch (if false).",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/init(bool:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(bool:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus\/init(bool:)"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus/matches": {
+  "abstract" : [
+    {
+      "text" : "Matches indicates if the matcher \/ matcher passes with the given value",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "matches"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus\/matches",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MatcherStatus.matches",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus\/matches"
+}
+}
+}

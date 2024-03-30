@@ -1,0 +1,1870 @@
+{
+  "abstract" : [
+    {
+      "text" : "In Nimble, matchers are Swift functions that take an expected",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "value and return a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Matcher",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " closure. Take ",
+      "type" : "text"
+    },
+    {
+      "code" : "equal",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", for example:",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/WritingCustomMatchers"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Writing Your Own Matchers"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public func equal<T: Equatable>(expectedValue: T?) -> Matcher<T> {",
+            "    \/\/ Can be shortened to:",
+            "    \/\/   Matcher { actual in  ... }",
+            "    \/\/",
+            "    \/\/ But shown with types here for clarity.",
+            "    return Matcher { (actualExpression: Expression<T>) throws -> MatcherResult in",
+            "        let msg = ExpectationMessage.expectedActualValueTo(\"equal <\\(expectedValue)>\")",
+            "        if let actualValue = try actualExpression.evaluate() {",
+            "            return MatcherResult(",
+            "                bool: actualValue == expectedValue!,",
+            "                message: msg",
+            "            )",
+            "        } else {",
+            "            return MatcherResult(",
+            "                status: .fail,",
+            "                message: msg.appendedBeNilHint()",
+            "            )",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The return value of a ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " closure is a ",
+              "type" : "text"
+            },
+            {
+              "code" : "MatcherResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " that indicates",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "whether the actual value matches the expectation and what error message to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "display on failure.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The actual ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "equal",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " matcher function does not match when",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "expected",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " are nil; the example above has been edited for brevity.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Since matchers are just Swift functions, you can define them anywhere:",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "at the top of your test file, in a file shared by all of your tests, or",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "in an Xcode project you distribute to others.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "If you write a matcher you think everyone can use, consider adding it",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "to Nimble’s built-in set of matchers by sending a pull request! Or",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "distribute it yourself via GitHub.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For examples of how to write your own matchers, just check out the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/Quick\/Nimble\/tree\/main\/Sources\/Nimble\/Matchers",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to see how Nimble’s built-in set of matchers are implemented. You can",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "also check out the tips below.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "MatcherResult",
+          "level" : 2,
+          "text" : "MatcherResult",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "MatcherResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is the return struct that ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " returns to indicate",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "success and failure. A ",
+              "type" : "text"
+            },
+            {
+              "code" : "MatcherResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is made up of two values:",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Instead of a boolean, ",
+              "type" : "text"
+            },
+            {
+              "code" : "MatcherStatus",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " captures a trinary set of values:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public enum MatcherStatus {",
+            "\/\/ The matcher \"passes\" with the given expression",
+            "\/\/ eg - expect(1).to(equal(1))",
+            "case matches",
+            "",
+            "\/\/ The matcher \"fails\" with the given expression",
+            "\/\/ eg - expect(1).toNot(equal(1))",
+            "case doesNotMatch",
+            "",
+            "\/\/ The matcher never \"passes\" with the given expression, even if negated",
+            "\/\/ eg - expect(nil as Int?).toNot(equal(1))",
+            "case fail",
+            "",
+            "\/\/ ...",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Meanwhile, ",
+              "type" : "text"
+            },
+            {
+              "code" : "ExpectationMessage",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " provides messaging semantics for error reporting.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public indirect enum ExpectationMessage {",
+            "\/\/ Emits standard error message:",
+            "\/\/ eg - \"expected to <string>, got <actual>\"",
+            "case expectedActualValueTo(\/* message: *\/ String)",
+            "",
+            "\/\/ Allows any free-form message",
+            "\/\/ eg - \"<string>\"",
+            "case fail(\/* message: *\/ String)",
+            "",
+            "\/\/ ...",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Matchers should usually depend on either ",
+              "type" : "text"
+            },
+            {
+              "code" : ".expectedActualValueTo(_:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : ".fail(_:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " when reporting errors. Special cases can be used for the other enum",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "cases.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Finally, if your Matcher utilizes other Matchers, you can utilize",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : ".appended(details:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : ".appended(message:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " methods to annotate an existing",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "error with more details.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A common message to append is failing on nils. For that, ",
+              "type" : "text"
+            },
+            {
+              "code" : ".appendedBeNilHint()",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "can be used.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Lazy-Evaluation",
+          "level" : 2,
+          "text" : "Lazy Evaluation",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "actualExpression",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is a lazy, memoized closure around the value provided to the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function. The expression can either be a closure or a value directly",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "passed to ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect(_:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". In order to determine whether that value matches,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "custom matchers should call ",
+              "type" : "text"
+            },
+            {
+              "code" : "actualExpression.evaluate()",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public func beNil<T>() -> Matcher<T> {",
+            "    \/\/ Matcher.simpleNilable(..) automatically generates ExpectationMessage for",
+            "    \/\/ us based on the string we provide to it. Also, the 'Nilable' postfix indicates",
+            "    \/\/ that this Matcher supports matching against nil actualExpressions, instead of",
+            "    \/\/ always resulting in a MatcherStatus.fail result -- which is true for",
+            "    \/\/ Matcher.simple(..)",
+            "    return Matcher.simpleNilable(\"be nil\") { actualExpression in",
+            "        let actualValue = try actualExpression.evaluate()",
+            "        return MatcherStatus(bool: actualValue == nil)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the above example, ",
+              "type" : "text"
+            },
+            {
+              "code" : "actualExpression",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is not ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " – it is a closure",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "that returns a value. The value it returns, which is accessed via the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "evaluate()",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " method, may be ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". If that value is ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", the ",
+              "type" : "text"
+            },
+            {
+              "code" : "beNil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "matcher function returns ",
+              "type" : "text"
+            },
+            {
+              "code" : "true",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", indicating that the expectation passed.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Type-Checking-via-Swift-Generics",
+          "level" : 2,
+          "text" : "Type Checking via Swift Generics",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Using Swift’s generics, matchers can constrain the type of the actual value",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "passed to the ",
+              "type" : "text"
+            },
+            {
+              "code" : "expect",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " function by modifying the return type.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For example, the following matcher, ",
+              "type" : "text"
+            },
+            {
+              "code" : "haveDescription",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", only accepts actual",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "values that implement the ",
+              "type" : "text"
+            },
+            {
+              "code" : "CustomStringConvertible",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " protocol. It checks their ",
+              "type" : "text"
+            },
+            {
+              "code" : "description",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "against the one provided to the matcher function, and passes if they are the same:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public func haveDescription(description: String) -> Matcher<CustomStringConvertible> {",
+            "    return Matcher.simple(\"have description\") { actual in",
+            "        return MatcherStatus(bool: actual.evaluate().description == description)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Customizing-Failure-Messages",
+          "level" : 2,
+          "text" : "Customizing Failure Messages",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When using ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.simple(..)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.simpleNilable(..)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", Nimble",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "outputs the following failure message when an expectation fails:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ where `message` is the first string argument and",
+            "\/\/ `actual` is the actual value received in `expect(..)`",
+            "\"expected to \\(message), got <\\(actual)>\""
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "You can customize this message by modifying the way you create a ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Basic-Customization",
+          "level" : 3,
+          "text" : "Basic Customization",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For slightly more complex error messaging, receive the created failure message",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "with ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.define(..)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "public func equal<T: Equatable>(_ expectedValue: T?) -> Matcher<T> {",
+            "    return Matcher.define(\"equal <\\(stringify(expectedValue))>\") { actualExpression, msg in",
+            "        let actualValue = try actualExpression.evaluate()",
+            "        let matches = actualValue == expectedValue && expectedValue != nil",
+            "        if expectedValue == nil || actualValue == nil {",
+            "            if expectedValue == nil && actualValue != nil {",
+            "                return MatcherResult(",
+            "                    status: .fail,",
+            "                    message: msg.appendedBeNilHint()",
+            "                )",
+            "            }",
+            "            return MatcherResult(status: .fail, message: msg)",
+            "        }",
+            "        return MatcherResult(bool: matches, message: msg)",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the example above, ",
+              "type" : "text"
+            },
+            {
+              "code" : "msg",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is defined based on the string given to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.define",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". The code looks akin to:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "let msg = ExpectationMessage.expectedActualValueTo(\"equal <\\(stringify(expectedValue))>\")"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Full-Customization",
+          "level" : 3,
+          "text" : "Full Customization",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To fully customize the behavior of the Matcher, use the overload that expects",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "a ",
+              "type" : "text"
+            },
+            {
+              "code" : "MatcherResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to be returned.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Along with ",
+              "type" : "text"
+            },
+            {
+              "code" : "MatcherResult",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", there are other ",
+              "type" : "text"
+            },
+            {
+              "code" : "ExpectationMessage",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " enum values you can use:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "public indirect enum ExpectationMessage {",
+            "\/\/ Emits standard error message:",
+            "\/\/ eg - \"expected to <message>, got <actual>\"",
+            "case expectedActualValueTo(\/* message: *\/ String)",
+            "",
+            "\/\/ Allows any free-form message",
+            "\/\/ eg - \"<message>\"",
+            "case fail(\/* message: *\/ String)",
+            "",
+            "\/\/ Emits standard error message with a custom actual value instead of the default.",
+            "\/\/ eg - \"expected to <message>, got <actual>\"",
+            "case expectedCustomValueTo(\/* message: *\/ String, \/* actual: *\/ String)",
+            "",
+            "\/\/ Emits standard error message without mentioning the actual value",
+            "\/\/ eg - \"expected to <message>\"",
+            "case expectedTo(\/* message: *\/ String)",
+            "",
+            "\/\/ ...",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For matchers that compose other matchers, there are a handful of helper",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "functions to annotate messages.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "code" : "appended(message: String)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is used to append to the original failure message:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ produces \"expected to be true, got <actual> (use beFalse() for inverse)\"",
+            "\/\/ appended message do show up inline in Xcode.",
+            ".expectedActualValueTo(\"be true\").appended(message: \" (use beFalse() for inverse)\")"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For a more comprehensive message that spans multiple lines, use",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "appended(details: String)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " instead:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ produces \"expected to be true, got <actual>\\n\\nuse beFalse() for inverse\\nor use beNil()\"",
+            "\/\/ details do not show inline in Xcode, but do show up in test logs.",
+            ".expectedActualValueTo(\"be true\").appended(details: \"use beFalse() for inverse\\nor use beNil()\")"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Asynchronous-Matchers",
+          "level" : 2,
+          "text" : "Asynchronous Matchers",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To write matchers against async expressions, return an instance of",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "AsyncMatcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ". The closure passed to ",
+              "type" : "text"
+            },
+            {
+              "code" : "AsyncMatcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is async, and the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "expression you evaluate is also asynchronous and needs to be awaited on.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "actor CallRecorder<Arguments> {",
+            "    private(set) var calls: [Arguments] = []",
+            "    ",
+            "    func record(call: Arguments) {",
+            "        calls.append(call)",
+            "    }",
+            "}",
+            "",
+            "func beCalled<Argument: Equatable>(with arguments: Argument) -> AsyncMatcher<CallRecorder<Argument>> {",
+            "    AsyncMatcher { (expression: AsyncExpression<CallRecorder<Argument>>) in",
+            "        let message = ExpectationMessage.expectedActualValueTo(\"be called with \\(arguments)\")",
+            "        guard let calls = try await expression.evaluate()?.calls else {",
+            "            return MatcherResult(status: .fail, message: message.appendedBeNilHint())",
+            "        }",
+            "        ",
+            "        return MatcherResult(bool: calls.contains(args), message: message.appended(details: \"called with \\(calls)\"))",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In this example, we created an actor to act as an object to record calls to an",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "async function. Then, we created the ",
+              "type" : "text"
+            },
+            {
+              "code" : "beCalled(with:)",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " matcher to check if the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "actor has received a call with the given arguments.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Supporting-Objective-C",
+          "level" : 2,
+          "text" : "Supporting Objective-C",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To use a custom matcher written in Swift from Objective-C, you’ll have",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to extend the ",
+              "type" : "text"
+            },
+            {
+              "code" : "NMBMatcher",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " class, adding a new class method for your",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "custom matcher. The example below defines the class method",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "+[NMBMatcher beNilMatcher]",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ":",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "extension NMBMatcher {",
+            "    @objc public class func beNilMatcher() -> NMBMatcher {",
+            "        return NMBMatcher { actualExpression in",
+            "            return try beNil().satisfies(actualExpression).toObjectiveC()",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The above allows you to use the matcher from Objective-C:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "expect(actual).to([NMBMatcher beNilMatcher]());"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To make the syntax easier to use, define a C function that calls the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "class method:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "FOUNDATION_EXPORT NMBMatcher *beNil() {",
+            "    return [NMBMatcher beNilMatcher];",
+            "}"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Properly-Handling-nil-in-Objective-C-Matchers",
+          "level" : 3,
+          "text" : "Properly Handling `nil` in Objective-C Matchers",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When supporting Objective-C, make sure you handle ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " appropriately.",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Like ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/pivotal\/cedar\/issues\/100",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ",",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "most matchers do not match with nil",
+                  "type" : "text"
+                }
+              ],
+              "type" : "strong"
+            },
+            {
+              "text" : ". This is to bring prevent test",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "writers from being surprised by ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " values where they did not expect",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "them.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Nimble provides the ",
+              "type" : "text"
+            },
+            {
+              "code" : "beNil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " matcher function for test writer that want",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to make expectations on ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " objects:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "expect(nil).to(equal(nil)); \/\/ fails",
+            "expect(nil).to(beNil());    \/\/ passes"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "If your matcher does not want to match with nil, you use ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.define",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " or ",
+              "type" : "text"
+            },
+            {
+              "code" : "Matcher.simple",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "Using those factory methods will automatically generate expected value failure messages when they’re nil.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "public func beginWith<S: Sequence>(_ startingElement: S.Element) -> Matcher<S> where S.Element: Equatable {",
+            "    return Matcher.simple(\"begin with <\\(startingElement)>\") { actualExpression in",
+            "        guard let actualValue = try actualExpression.evaluate() else { return .fail }",
+            "",
+            "        var actualGenerator = actualValue.makeIterator()",
+            "        return MatcherStatus(bool: actualGenerator.next() == startingElement)",
+            "    }",
+            "}",
+            "",
+            "extension NMBMatcher {",
+            "    @objc public class func beginWithMatcher(_ expected: Any) -> NMBMatcher {",
+            "        return NMBMatcher { actualExpression in",
+            "            let actual = try actualExpression.evaluate()",
+            "            let expr = actualExpression.cast { $0 as? NMBOrderedCollection }",
+            "            return try beginWith(expected).satisfies(expr).toObjectiveC()",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+        "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Require"
+      ],
+      "title" : "Guides"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/writingcustommatchers"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Background": {
+  "abstract" : [
+    {
+      "text" : "Apple’s Xcode includes the XCTest framework, which provides",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion macros to test whether code behaves properly.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, to assert that ",
+      "type" : "text"
+    },
+    {
+      "code" : "1 + 1 = 2",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", XCTest has you write:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Background",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Some Background: Expressing Outcomes Using Assertions in XCTest",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/background"
+},
+"doc://Nimble/documentation/Nimble/Concurrency": {
+  "abstract" : [
+    {
+      "text" : "Nimble makes it easy to await for an async function to complete.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Concurrency",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Concurrency (Async\/Await) Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/concurrency"
+},
+"doc://Nimble/documentation/Nimble/ExpectationMessage": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ExpectationMessage",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "ExpectationMessage"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "ExpectationMessage",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectationmessage"
+},
+"doc://Nimble/documentation/Nimble/Expectations": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to express expectations using a natural,",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "easily understood language:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Expectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Expectations Using `expect(...).to`",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expectations"
+},
+"doc://Nimble/documentation/Nimble/Matcher": {
+  "abstract" : [
+    {
+      "text" : "A Matcher is part of the new matcher API that provides assertions to expectations.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Matcher",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "Matcher"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "Matcher",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcher"
+},
+"doc://Nimble/documentation/Nimble/MatcherStatus": {
+  "abstract" : [
+    {
+      "text" : "MatcherStatus is a trinary that indicates if a Matcher matches a given value or not",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MatcherStatus"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/MatcherStatus",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MatcherStatus"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MatcherStatus",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherstatus"
+},
+"doc://Nimble/documentation/Nimble/ObjectiveC": {
+  "abstract" : [
+    {
+      "text" : "Nimble has full support for Objective-C. However, there are two things",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to keep in mind when using Nimble in Objective-C:",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/ObjectiveC",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Objective-C Support",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/objectivec"
+},
+"doc://Nimble/documentation/Nimble/PollingExpectations": {
+  "abstract" : [
+    {
+      "text" : "In Nimble, it’s easy to make expectations on values that are updated",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "asynchronously. These are called Polling Expectations, because they work by",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously polling the Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/PollingExpectations",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Polling Expectations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/pollingexpectations"
+},
+"doc://Nimble/documentation/Nimble/Require": {
+  "abstract" : [
+    {
+      "text" : "Nimble 13.1 added the ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " dsl to complement ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ". ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "looks similar to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " and works with matchers just like ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " does. The",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "difference is that ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " requires that the matcher passes - if the matcher",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "doesn’t pass, then ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " will throw an error. Additionally, if ",
+      "type" : "text"
+    },
+    {
+      "code" : "require",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "does pass, then it’ll return the result of running the expression.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Require",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Using `require` to demand that a matcher pass before continuing",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require"
+},
+"https://github.com/Quick/Nimble/tree/main/Sources/Nimble/Matchers": {
+  "identifier" : "https:\/\/github.com\/Quick\/Nimble\/tree\/main\/Sources\/Nimble\/Matchers",
+  "title" : "Matchers directory",
+  "titleInlineContent" : [
+    {
+      "code" : "Matchers",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " directory",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/Quick\/Nimble\/tree\/main\/Sources\/Nimble\/Matchers"
+},
+"https://github.com/pivotal/cedar/issues/100": {
+  "identifier" : "https:\/\/github.com\/pivotal\/cedar\/issues\/100",
+  "title" : "Cedar",
+  "titleInlineContent" : [
+    {
+      "text" : "Cedar",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/pivotal\/cedar\/issues\/100"
+}
+}
+}

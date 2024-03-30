@@ -1,0 +1,552 @@
+{
+  "abstract" : [
+    {
+      "text" : "Nimble provides a means to check that all elements of a collection pass a given expectation.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionElements"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Collection Elements"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Swift",
+          "level" : 2,
+          "text" : "Swift",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In Swift, the collection must be an instance of a type conforming to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "Sequence",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Providing a custom function:",
+            "expect([1, 2, 3, 4]).to(allPass { $0 < 5 })",
+            "",
+            "\/\/ Composing the expectation with another matcher:",
+            "expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "There are also variants of ",
+              "type" : "text"
+            },
+            {
+              "code" : "allPass",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " that check against async matchers, and",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "that take in async functions:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Swift",
+            "",
+            "\/\/ Providing a custom function:",
+            "expect([1, 2, 3, 4]).to(allPass { await asyncFunctionReturningBool($0) })",
+            "",
+            "\/\/ Composing the expectation with another matcher:",
+            "expect([1, 2, 3, 4]).to(allPass(someAsyncMatcher()))"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Objective-C",
+          "level" : 2,
+          "text" : "Objective-C",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In Objective-C, the collection must be an instance of a type which implements",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSFastEnumeration",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " protocol, and whose elements are instances of a type",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "which subclasses ",
+              "type" : "text"
+            },
+            {
+              "code" : "NSObject",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Additionally, unlike in Swift, there is no override to specify a custom",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "matcher function.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "\/\/ Objective-C",
+            "",
+            "expect(@[@1, @2, @3, @4]).to(allPass(beLessThan(@5)));"
+          ],
+          "syntax" : "objc",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/TypeChecking",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Truthiness",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SwiftAssertions",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SwiftErrors",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Result",
+        "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
+        "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Map",
+        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
+        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount"
+      ],
+      "title" : "Matchers"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/collectionelements"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/CollectionCount": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Collection Count",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/collectioncount"
+},
+"doc://Nimble/documentation/Nimble/CollectionMembership": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Collection Membership",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/collectionmembership"
+},
+"doc://Nimble/documentation/Nimble/Comparisons": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Comparisons",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/comparisons"
+},
+"doc://Nimble/documentation/Nimble/CustomValidation": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Custom Validation",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/customvalidation"
+},
+"doc://Nimble/documentation/Nimble/Equivalence": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Equivalence",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/equivalence"
+},
+"doc://Nimble/documentation/Nimble/Exceptions": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Exceptions",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/exceptions"
+},
+"doc://Nimble/documentation/Nimble/GroupsOfMatchers": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Matching a value to any of a group of matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/groupsofmatchers"
+},
+"doc://Nimble/documentation/Nimble/Identity": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Identity",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/identity"
+},
+"doc://Nimble/documentation/Nimble/Map": {
+  "abstract" : [
+    {
+      "text" : "Sometimes, you only want to match against a property or group of properties.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "For example, if you wanted to check that only one or a few properties of a value",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "are equal to something else. For this, use the ",
+      "type" : "text"
+    },
+    {
+      "code" : "map",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matcher to convert a value",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "to another value and check it with a matcher.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Map",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Mapping a Value to Another Value",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/map"
+},
+"doc://Nimble/documentation/Nimble/Notifications": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Notifications",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/notifications"
+},
+"doc://Nimble/documentation/Nimble/Result": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Result",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Result",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/result"
+},
+"doc://Nimble/documentation/Nimble/Strings": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Strings",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/strings"
+},
+"doc://Nimble/documentation/Nimble/SwiftAssertions": {
+  "abstract" : [
+    {
+      "text" : "If you’re using Swift, you can use the ",
+      "type" : "text"
+    },
+    {
+      "code" : "throwAssertion",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matcher to check if an assertion is thrown (e.g. ",
+      "type" : "text"
+    },
+    {
+      "code" : "fatalError()",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "). This is made possible by ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/github.com\/mattgallagher",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : "’s ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " library.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SwiftAssertions",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Assertions",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swiftassertions"
+},
+"doc://Nimble/documentation/Nimble/SwiftErrors": {
+  "abstract" : [
+    {
+      "text" : "You can use the ",
+      "type" : "text"
+    },
+    {
+      "code" : "throwError",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matcher to check if an error is thrown.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SwiftErrors",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Error Handling",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swifterrors"
+},
+"doc://Nimble/documentation/Nimble/Truthiness": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Truthiness",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Truthiness",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/truthiness"
+},
+"doc://Nimble/documentation/Nimble/TypeChecking": {
+  "abstract" : [
+    {
+      "text" : "Nimble supports checking the type membership of any kind of object, whether",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Objective-C conformant or not.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/TypeChecking",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Type Checking",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/typechecking"
+},
+"https://github.com/mattgallagher": {
+  "identifier" : "https:\/\/github.com\/mattgallagher",
+  "title" : "@mattgallagher",
+  "titleInlineContent" : [
+    {
+      "text" : "@mattgallagher",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/mattgallagher"
+},
+"https://github.com/mattgallagher/CwlPreconditionTesting": {
+  "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
+  "title" : "CwlPreconditionTesting",
+  "titleInlineContent" : [
+    {
+      "text" : "CwlPreconditionTesting",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting"
+}
+}
+}

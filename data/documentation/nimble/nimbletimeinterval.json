@@ -1,0 +1,557 @@
+{
+  "abstract" : [
+    {
+      "text" : "A reimplementation of ",
+      "type" : "text"
+    },
+    {
+      "code" : "DispatchTimeInterval",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " without the ",
+      "type" : "text"
+    },
+    {
+      "code" : "never",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " case, and conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "Sendable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/Nimble\/documentation\/Nimble"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:6Nimble0A12TimeIntervalO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "NimbleTimeInterval"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "Nimble"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "NimbleTimeInterval"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "NimbleTimeInterval"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "Linux"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "NimbleTimeInterval"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/SL",
+        "doc:\/\/Nimble\/s23CustomStringConvertibleP",
+        "doc:\/\/Nimble\/SQ",
+        "doc:\/\/Nimble\/s8SendableP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/microseconds(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/milliseconds(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/nanoseconds(_:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/seconds(_:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/dispatchTimeInterval",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/nanoseconds",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/timeInterval"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/Comparable-Implementations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/CustomStringConvertible-Implementations",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/nimble\/nimbletimeinterval"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://Nimble/SL": {
+  "identifier" : "doc:\/\/Nimble\/SL",
+  "title" : "Swift.Comparable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/SQ": {
+  "identifier" : "doc:\/\/Nimble\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://Nimble/documentation/Nimble": {
+  "abstract" : [
+    {
+      "inlineContent" : [
+        {
+          "text" : "Nimble",
+          "type" : "text"
+        }
+      ],
+      "type" : "strong"
+    },
+    {
+      "text" : " is a testing framework for verifying the outcomes and Swift or Objective-C expressions.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "Nimble",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval": {
+  "abstract" : [
+    {
+      "text" : "A reimplementation of ",
+      "type" : "text"
+    },
+    {
+      "code" : "DispatchTimeInterval",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " without the ",
+      "type" : "text"
+    },
+    {
+      "code" : "never",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " case, and conforming to ",
+      "type" : "text"
+    },
+    {
+      "code" : "Sendable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTimeInterval"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/Comparable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/Comparable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Comparable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/comparable-implementations"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/CustomStringConvertible-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/CustomStringConvertible-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "CustomStringConvertible Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/customstringconvertible-implementations"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/equatable-implementations"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/dispatchTimeInterval": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "dispatchTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:8Dispatch0A12TimeIntervalO",
+      "text" : "DispatchTimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/dispatchTimeInterval",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "dispatchTimeInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/dispatchtimeinterval"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/microseconds(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "microseconds"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/microseconds(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval.microseconds(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/microseconds(_:)"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/milliseconds(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "milliseconds"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/milliseconds(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval.milliseconds(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/milliseconds(_:)"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/nanoseconds": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nanoseconds"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s6UInt64V",
+      "text" : "UInt64"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/nanoseconds",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "nanoseconds",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/nanoseconds"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/nanoseconds(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "nanoseconds"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/nanoseconds(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval.nanoseconds(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/nanoseconds(_:)"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/seconds(_:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "seconds"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/seconds(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "NimbleTimeInterval.seconds(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/seconds(_:)"
+},
+"doc://Nimble/documentation/Nimble/NimbleTimeInterval/timeInterval": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "timeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:10Foundation12TimeIntervala",
+      "text" : "TimeInterval"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTimeInterval\/timeInterval",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "timeInterval",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletimeinterval\/timeinterval"
+},
+"doc://Nimble/s23CustomStringConvertibleP": {
+  "identifier" : "doc:\/\/Nimble\/s23CustomStringConvertibleP",
+  "title" : "Swift.CustomStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://Nimble/s8SendableP": {
+  "identifier" : "doc:\/\/Nimble\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}
