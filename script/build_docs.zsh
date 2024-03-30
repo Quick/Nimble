@@ -1,20 +1,15 @@
 #!/bin/zsh
 
-#  Created by Jesse Squires
-#  https://www.jessesquires.com
-#
-#  Copyright © 2020-present Jesse Squires
-#
-#  Jazzy: https://github.com/realm/jazzy/releases/latest
-#  Generates documentation using jazzy and checks for installation.
+GIT_ROOT=$(git rev-parse --show-toplevel)
+pushd "${GIT_ROOT}" 2>&1 >/dev/null
 
-bundle exec jazzy \
-    --clean \
-    --author "Nimble Contributors" \
-    --author_url "https://github.com/Quick/Nimble" \
-    --github_url "https://github.com/Quick/Nimble" \
-    --module "Nimble" \
-    --source-directory . \
-    --readme "README.md" \
-    -x -scheme,Nimble \
-    --output docs/
+export DOCC_JSON_PRETTYPRINT="YES"
+
+swift package --allow-writing-to-directory docs \
+    generate-documentation --target Nimble \
+    --disable-indexing \
+    --transform-for-static-hosting \
+    --hosting-base-path 'https://quick.github.io/Nimble' \
+    --output-path docs
+
+popd
