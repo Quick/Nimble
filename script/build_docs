@@ -8,5 +8,5 @@ swift package --allow-writing-to-directory docs \
     generate-documentation --target Nimble \
     --disable-indexing \
     --transform-for-static-hosting \
-    --hosting-base-path 'https://quick.github.io/Nimble' \
+    --hosting-base-path 'Nimble' \
     --output-path docs
