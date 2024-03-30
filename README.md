@@ -1516,6 +1516,14 @@ expect(aResult).to(beSuccess { value in
     expect(value).to(equal("Hooray"))
 })
 
+// passes if the result value is .success and if the Success value matches
+// the passed-in matcher (in this case, `equal`)
+expect(aResult).to(beSuccess(equal("Hooray")))
+
+// passes if the result value is .success and if the Success value equals
+// the passed-in value (only available when the Success value is Equatable)
+expect(aResult).to(beSuccess("Hooray"))
+
 
 enum AnError: Error {
     case somethingHappened
@@ -1529,6 +1537,10 @@ expect(otherResult).to(beFailure())
 expect(otherResult).to(beFailure { error in
     expect(error).to(matchError(AnError.somethingHappened))
 }) 
+
+// passes if the result value is .failure and if the Failure value matches
+// the passed-in matcher (in this case, `matchError`)
+expect(otherResult).to(beFailure(matchError(AnError.somethingHappened)))
 ```
 
 > This matcher is only available in Swift.
