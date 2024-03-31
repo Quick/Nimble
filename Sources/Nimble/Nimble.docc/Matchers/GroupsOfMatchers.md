@@ -1,5 +1,7 @@
 # Matching a value to any of a group of matchers
 
+Combining matchers into a single Expectation.
+
 ```swift
 // Swift
 

@@ -1,5 +1,8 @@
 # Result
 
+You can check the contents of a `Result` type using the `beSuccess` or
+`beFailure` matchers.
+
 ```swift
 // Swift
 let aResult: Result<String, Error> = .success("Hooray") 
@@ -39,4 +42,4 @@ expect(otherResult).to(beFailure { error in
 expect(otherResult).to(beFailure(matchError(AnError.somethingHappened)))
 ```
 
-> This matcher is only available in Swift.
+> Note: This matcher is only available in Swift.

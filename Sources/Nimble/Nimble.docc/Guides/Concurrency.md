@@ -2,7 +2,7 @@
 
 Nimble makes it easy to await for an async function to complete.
 
-Simply pass the async function in to `expect`:
+Simply pass the async function in to ``expecta(file:line:_:)-4z5rl``:
 
 ```swift
 // Swift
@@ -29,7 +29,7 @@ await expecta(await aFunctionReturning1()).to(equal(1)))
 ```
 
 Similarly, if you're ever in a situation where you want to force the compiler to
-produce a `SyncExpectation`, you can use the `expects` (expect sync) function to
+produce a ``SyncExpectation``, you can use the ``expects(file:line:_:)-1ojb4`` (expect sync) function to
 produce a `SyncExpectation`. Like so:
 
 ```swift
@@ -43,19 +43,21 @@ expects(await someAsyncFunction()).to(equal(1)) // Compiler error: 'async' call 
 
 In addition to asserting on async functions prior to passing them to a
 synchronous matcher, you can also write matchers that directly take in an
-async value. These are called `AsyncMatcher`s. This is most obviously useful
+async value. These are called ``AsyncMatcher``s. This is most obviously useful
 when directly asserting against an actor. In addition to writing your own
 async matchers, Nimble currently ships with async versions of the following
 matchers:
 
-- ``allPass``
-- ``containElementSatisfying``
-- ``satisfyAllOf`` and the ``&&`` operator overload accept both `AsyncMatcher` and
+- ``allPass(_:)-5avdc``
+- ``containElementSatisfying(_:_:)-8omf3``
+- ``satisfyAllOf(_:)-99ble`` and the ``&&(left:right:)`` operator overload accept both ``AsyncMatcher`` and
   synchronous ``Matcher``s.
-- ``satisfyAnyOf`` and the ``||`` operator overload accept both ``AsyncMatcher`` and
+- ``satisfyAnyOf(_:)-8groo`` and the ``||(left:right:)`` operator overload accept both ``AsyncMatcher`` and
   synchronous ``Matcher``s.
 
-Note: Swift Concurrency support is different than the `toEventually`/`toEventuallyNot` feature described in <doc:PollingExpectations>.
+Note: Swift Concurrency support is different than the
+``AsyncExpectation/toEventually(_:timeout:pollInterval:description:)-38brw``/``AsyncExpectation/toEventuallyNot(_:timeout:pollInterval:description:)-4ez1r``
+feature described in <doc:PollingExpectations>.
 Polling Expectations works by continuously polling
 the `Expectation` until it passes. As described here, Nimble's Swift
 Concurrency support is about waiting for an expression to finish.

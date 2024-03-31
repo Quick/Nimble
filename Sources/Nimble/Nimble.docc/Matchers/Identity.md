@@ -1,5 +1,7 @@
 #  Identity
 
+Checking if an object is the same address as another.
+
 ```swift
 // Swift
 
@@ -32,3 +34,6 @@ expect(actual).to(beIdenticalTo(expected));
 // Passes if 'actual' does not have the same pointer address as 'expected':
 expect(actual).toNot(beIdenticalTo(expected));
 ```
+
+> Warning: `beIdenticalTo` checks the pointer addresses. It does not use the
+`Identifiable` protocol to check for identity.

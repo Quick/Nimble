@@ -14,21 +14,18 @@ until they stop polling.
 For example, `toEventually` will run until the Matcher matches, while `toNever`
 will run so long as the Matcher doesn't match. This makes them opposites.
 
-> Warning: It is a very common mistake to assume that `toEventuallyNot` is the
-opposite of `toEventually`. For example, if you're using a [Swift Fakes Spy](https://github.com/Quick/swift-fakes/blob/main/Sources/Fakes/Spy.swift),
-you might be used to checking that it is called on a background thread by using
-`expect(spy).toEventually(beCalled())`. If you want to check that a spy is not
-called during some background behavior, you might be tempted to use `expect(spy).toEventuallyNot(beCalled())`.
-All this will do is verify that, by the time the Expectation first runs, the spy
-has not been called. At which point, that background behavior might not even have
-run. The correct thing is to use `toNever`, as in `expect(spy).toNever(beCalled())`.
-
 Polling form                        | Pass Duration | Expected Matcher Result
 ------------------------------------|---------------|------------------------
 `toEventually`                      | Until pass    | to match
 `toEventuallyNot`/`toNotEventually` | Until pass    | to not match
 `toAlways`/`alwaysTo`               | Until fail    | to match
 `toNever`/`neverTo`                 | Until fail    | to not match
+
+> Warning: It is a very common mistake to conflate `toEventuallyNot` with `toNever`.
+`toEventuallyNot` runs intil the first time the matcher doesn't match. `toNever`
+continously polls so long as the matcher doesn't match. Be mindful of the
+behavior you expect to observe, and be sure to check that your Polling
+Expectation is not falsely matching.
 
 ### Verifying a Matcher will Eventually Match or stop Matching
 
@@ -76,33 +73,6 @@ expect(ocean).toNever(contain("hares"))
 expect(ocean).toAlways(contain(@"dolphins"))
 expect(ocean).toNever(contain(@"hares"))
 ```
-
-### Behaviors of different forms of Polling
-
-Fundamentally, the behaviors of the different types of polling (`toEventually`,
-`toEventuallyNot`, `toAlways`, `toNever`) are about the duration of the polling,
-and what they're looking for with regard to the Expectation.
-
-For example, `toEventually` will run until the Expectation matches, while `toNever`
-will run so long as the Expectation dosen't match. This effectively makes them
-opposites.
-
-> Warning: It is a very common mistake to assume that `toEventuallyNot` is the
-opposite of `toEventually`. For example, if you're using a [Swift Fakes Spy](https://github.com/Quick/swift-fakes/blob/main/Sources/Fakes/Spy.swift),
-you might be used to checking that it is called on a background thread by using
-`expect(spy).toEventually(beCalled())`. If you want to check that a spy is not
-called during some background behavior, you might be tempted to use `expect(spy).toEventuallyNot(beCalled())`.
-All this will do is verify that, by the time the Expectation first runs, the spy
-has not been called. At which point, that background behavior might not even have
-run. The correct thing is to use `toNever`, as in `expect(spy).toNever(beCalled())`.
-
-Polling form                        | Pass Duration | Expected Matcher Result
-------------------------------------|---------------|------------------------
-`toEventually`                      | Until pass    | to match
-`toEventuallyNot`/`toNotEventually` | Until pass    | to not match
-`toAlways`/`alwaysTo`               | Until fail    | to match
-`toNever`/`neverTo`                 | Until fail    | to not match
-
 
 ### Waiting for a Callback to be Called
 

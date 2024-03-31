@@ -1,5 +1,7 @@
 # Mapping a Value to Another Value
 
+Mapping a value to another value in the matcher.
+
 Sometimes, you only want to match against a property or group of properties.
 For example, if you wanted to check that only one or a few properties of a value
 are equal to something else. For this, use the ``map`` matcher to convert a value
