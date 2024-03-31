@@ -1,4 +1,10 @@
 {
+  "abstract" : [
+    {
+      "text" : "Checking whether an expression is true, false, or nil.",
+      "type" : "text"
+    }
+  ],
   "hierarchy" : {
     "paths" : [
       [
@@ -29,6 +35,165 @@
           "level" : 2,
           "text" : "Overview",
           "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beTrue()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " matcher matches only if the expression evaluates to ",
+              "type" : "text"
+            },
+            {
+              "code" : "true",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", while",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beTruthy()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " matcher will also match if the expression also evaluates to a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "non-",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " value, or an object with a boolean value of ",
+              "type" : "text"
+            },
+            {
+              "code" : "true",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Similarly, the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beFalse()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " matcher matches only if the expression evaluates to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "false",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", while the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beFalsy()",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " also accepts ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", or objects with a boolean",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "value of ",
+              "type" : "text"
+            },
+            {
+              "code" : "false",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Finally, the ",
+              "type" : "text"
+            },
+            {
+              "code" : "beNil())",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " matcher matches only if the expression evaluates to",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ".",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
         },
         {
           "code" : [
@@ -100,10 +265,7 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/Result",
         "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
         "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
-        "doc:\/\/Nimble\/documentation\/Nimble\/Map",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionElements",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount"
+        "doc:\/\/Nimble\/documentation\/Nimble\/Map"
       ],
       "title" : "Matchers"
     }
@@ -145,45 +307,12 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble"
 },
-"doc://Nimble/documentation/Nimble/CollectionCount": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Collection Count",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectioncount"
-},
-"doc://Nimble/documentation/Nimble/CollectionElements": {
-  "abstract" : [
-    {
-      "text" : "Nimble provides a means to check that all elements of a collection pass a given expectation.",
-      "type" : "text"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionElements",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Collection Elements",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectionelements"
-},
-"doc://Nimble/documentation/Nimble/CollectionMembership": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Collection Membership",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectionmembership"
-},
 "doc://Nimble/documentation/Nimble/Comparisons": {
   "abstract" : [
-
+    {
+      "text" : "Comparing the expression with other values.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
   "kind" : "article",
@@ -194,7 +323,10 @@
 },
 "doc://Nimble/documentation/Nimble/CustomValidation": {
   "abstract" : [
-
+    {
+      "text" : "Nimble allows you to perform custom validation.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
   "kind" : "article",
@@ -205,7 +337,10 @@
 },
 "doc://Nimble/documentation/Nimble/Equivalence": {
   "abstract" : [
-
+    {
+      "text" : "Checking if a value is equal to another.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
   "kind" : "article",
@@ -216,7 +351,10 @@
 },
 "doc://Nimble/documentation/Nimble/Exceptions": {
   "abstract" : [
-
+    {
+      "text" : "Check exceptions raised from Objective-C.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
   "kind" : "article",
@@ -227,7 +365,10 @@
 },
 "doc://Nimble/documentation/Nimble/GroupsOfMatchers": {
   "abstract" : [
-
+    {
+      "text" : "Combining matchers into a single Expectation.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
   "kind" : "article",
@@ -238,7 +379,10 @@
 },
 "doc://Nimble/documentation/Nimble/Identity": {
   "abstract" : [
-
+    {
+      "text" : "Checking if an object is the same address as another.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
   "kind" : "article",
@@ -250,39 +394,7 @@
 "doc://Nimble/documentation/Nimble/Map": {
   "abstract" : [
     {
-      "text" : "Sometimes, you only want to match against a property or group of properties.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "For example, if you wanted to check that only one or a few properties of a value",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "are equal to something else. For this, use the ",
-      "type" : "text"
-    },
-    {
-      "code" : "map",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " matcher to convert a value",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "to another value and check it with a matcher.",
+      "text" : "Mapping a value to another value in the matcher.",
       "type" : "text"
     }
   ],
@@ -295,7 +407,30 @@
 },
 "doc://Nimble/documentation/Nimble/Notifications": {
   "abstract" : [
-
+    {
+      "text" : "Checking Notifications posted to ",
+      "type" : "text"
+    },
+    {
+      "code" : "NotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "DistributedNotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
   "kind" : "article",
@@ -306,7 +441,38 @@
 },
 "doc://Nimble/documentation/Nimble/Result": {
   "abstract" : [
-
+    {
+      "text" : "You can check the contents of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Result",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " type using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "beSuccess",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "beFailure",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Result",
   "kind" : "article",
@@ -317,7 +483,58 @@
 },
 "doc://Nimble/documentation/Nimble/Strings": {
   "abstract" : [
-
+    {
+      "text" : "You can check strings using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "contain",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beginWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "endWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beEmpty",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ",",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and ",
+      "type" : "text"
+    },
+    {
+      "code" : "match",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
   "kind" : "article",
@@ -337,7 +554,15 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " matcher to check if an assertion is thrown (e.g. ",
+      "text" : " matcher to check if an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion is thrown (e.g. ",
       "type" : "text"
     },
     {
@@ -345,25 +570,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "). This is made possible by ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "https:\/\/github.com\/mattgallagher",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : "’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " library.",
+      "text" : ").",
       "type" : "text"
     }
   ],
@@ -381,11 +588,25 @@
       "type" : "text"
     },
     {
-      "code" : "throwError",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/throwError()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : " matcher to check if an error is thrown.",
+      "text" : " matcher to check if an error is thrown, and the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to check already-captured errors.",
       "type" : "text"
     }
   ],
@@ -418,29 +639,382 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/typechecking"
 },
-"https://github.com/mattgallagher": {
-  "identifier" : "https:\/\/github.com\/mattgallagher",
-  "title" : "@mattgallagher",
-  "titleInlineContent" : [
+"doc://Nimble/documentation/Nimble/beFalse()": {
+  "abstract" : [
     {
-      "text" : "@mattgallagher",
+      "text" : "A Nimble matcher that succeeds when the actual value is exactly false.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This matcher will not match against nils.",
       "type" : "text"
     }
   ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/mattgallagher"
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "beFalse"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beFalse()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "beFalse()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/befalse()"
 },
-"https://github.com/mattgallagher/CwlPreconditionTesting": {
-  "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
-  "title" : "CwlPreconditionTesting",
-  "titleInlineContent" : [
+"doc://Nimble/documentation/Nimble/beFalsy()": {
+  "abstract" : [
     {
-      "text" : "CwlPreconditionTesting",
+      "text" : "A Nimble matcher that succeeds when the actual value is logically false.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This matcher will match against nils.",
       "type" : "text"
     }
   ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting"
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "beFalsy"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beFalsy()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "beFalsy()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/befalsy()"
+},
+"doc://Nimble/documentation/Nimble/beTrue()": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual value is exactly true.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This matcher will not match against nils.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "beTrue"
+    },
+    {
+      "kind" : "text",
+      "text" : "() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beTrue()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "beTrue()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/betrue()"
+},
+"doc://Nimble/documentation/Nimble/beTruthy()": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual value is not logically false.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "beTruthy"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/beTruthy()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "beTruthy()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/betruthy()"
+},
+"doc://Nimble/documentation/Nimble/matchError(_:)-8o974": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual expression evaluates to an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error from the specified case.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "matchError"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "matchError(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherror(_:)-8o974"
+},
+"doc://Nimble/documentation/Nimble/throwError()": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual expression throws an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error of the specified type or from the specified case.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "throwError"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Out"
+    },
+    {
+      "kind" : "text",
+      "text" : ">() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Out"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/throwError()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "throwError()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/throwerror()"
 }
 }
 }

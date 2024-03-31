@@ -43,7 +43,7 @@
               "type" : "text"
             },
             {
-              "code" : "expect",
+              "code" : "expecta(file:line:_:)-4z5rl",
               "type" : "codeVoice"
             },
             {
@@ -203,15 +203,16 @@
               "type" : "text"
             },
             {
-              "code" : "SyncExpectation",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : ", you can use the ",
               "type" : "text"
             },
             {
-              "code" : "expects",
+              "code" : "expects(file:line:_:)-1ojb4",
               "type" : "codeVoice"
             },
             {
@@ -276,8 +277,9 @@
               "type" : "text"
             },
             {
-              "code" : "AsyncMatcher",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncMatcher",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : "s. This is most obviously useful",
@@ -317,8 +319,9 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "allPass",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/allPass(_:)-5avdc",
+                      "isActive" : true,
+                      "type" : "reference"
                     }
                   ],
                   "type" : "paragraph"
@@ -330,8 +333,9 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "containElementSatisfying",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/containElementSatisfying(_:_:)-8omf3",
+                      "isActive" : true,
+                      "type" : "reference"
                     }
                   ],
                   "type" : "paragraph"
@@ -343,15 +347,16 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "satisfyAllOf",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAllOf(_:)-99ble",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
                       "text" : " and the ",
                       "type" : "text"
                     },
                     {
-                      "code" : "&&",
+                      "code" : "&&(left:right:)",
                       "type" : "codeVoice"
                     },
                     {
@@ -359,8 +364,9 @@
                       "type" : "text"
                     },
                     {
-                      "code" : "AsyncMatcher",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncMatcher",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
                       "text" : " and",
@@ -393,15 +399,16 @@
                 {
                   "inlineContent" : [
                     {
-                      "code" : "satisfyAnyOf",
-                      "type" : "codeVoice"
+                      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAnyOf(_:)-8groo",
+                      "isActive" : true,
+                      "type" : "reference"
                     },
                     {
                       "text" : " and the ",
                       "type" : "text"
                     },
                     {
-                      "code" : "||",
+                      "code" : "||(left:right:)",
                       "type" : "codeVoice"
                     },
                     {
@@ -445,23 +452,33 @@
         {
           "inlineContent" : [
             {
-              "text" : "Note: Swift Concurrency support is different than the ",
+              "text" : "Note: Swift Concurrency support is different than the",
               "type" : "text"
             },
             {
-              "code" : "toEventually",
-              "type" : "codeVoice"
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation\/toEventually(_:timeout:pollInterval:description:)-38brw",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
               "text" : "\/",
               "type" : "text"
             },
             {
-              "code" : "toEventuallyNot",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation\/toEventuallyNot(_:timeout:pollInterval:description:)-4ez1r",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
-              "text" : " feature described in ",
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "feature described in ",
               "type" : "text"
             },
             {
@@ -587,6 +604,272 @@
   "title" : "Nimble",
   "type" : "topic",
   "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/AsyncExpectation/toEventually(_:timeout:pollInterval:description:)-38brw": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to match by checking continuously",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventually"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation\/toEventually(_:timeout:pollInterval:description:)-38brw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventually(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/asyncexpectation\/toeventually(_:timeout:pollinterval:description:)-38brw"
+},
+"doc://Nimble/documentation/Nimble/AsyncExpectation/toEventuallyNot(_:timeout:pollInterval:description:)-4ez1r": {
+  "abstract" : [
+    {
+      "text" : "Tests the actual value using a matcher to not match by checking",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "continuously at each pollInterval until the timeout is reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "toEventuallyNot"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "pollInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "description"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Value"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation\/toEventuallyNot(_:timeout:pollInterval:description:)-4ez1r",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "toEventuallyNot(_:timeout:pollInterval:description:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/asyncexpectation\/toeventuallynot(_:timeout:pollinterval:description:)-4ez1r"
 },
 "doc://Nimble/documentation/Nimble/AsyncMatcher": {
   "abstract" : [
@@ -870,6 +1153,37 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/require"
 },
+"doc://Nimble/documentation/Nimble/SyncExpectation": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "SyncExpectation"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "SyncExpectation"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "SyncExpectation",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/syncexpectation"
+},
 "doc://Nimble/documentation/Nimble/WritingCustomMatchers": {
   "abstract" : [
     {
@@ -907,6 +1221,347 @@
   "title" : "Writing Your Own Matchers",
   "type" : "topic",
   "url" : "\/documentation\/nimble\/writingcustommatchers"
+},
+"doc://Nimble/documentation/Nimble/allPass(_:)-5avdc": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "allPass"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/allPass(_:)-5avdc",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "allPass(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/allpass(_:)-5avdc"
+},
+"doc://Nimble/documentation/Nimble/containElementSatisfying(_:_:)-8omf3": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "containElementSatisfying"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ">((("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : "), "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "S"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/containElementSatisfying(_:_:)-8omf3",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "containElementSatisfying(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/containelementsatisfying(_:_:)-8omf3"
+},
+"doc://Nimble/documentation/Nimble/satisfyAllOf(_:)-99ble": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual value matches with all of the matchers",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "provided in the variable list of matchers.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "satisfyAllOf"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncableMatcherP",
+      "text" : "AsyncableMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">...) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAllOf(_:)-99ble",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "satisfyAllOf(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/satisfyallof(_:)-99ble"
+},
+"doc://Nimble/documentation/Nimble/satisfyAnyOf(_:)-8groo": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual value matches with any of the matchers",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "provided in the variable list of matchers.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "satisfyAnyOf"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">(any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncableMatcherP",
+      "text" : "AsyncableMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">...) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAnyOf(_:)-8groo",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "satisfyAnyOf(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/satisfyanyof(_:)-8groo"
 }
 }
 }

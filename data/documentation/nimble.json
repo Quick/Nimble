@@ -50,7 +50,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "Nimbel provides 3 things:",
+              "text" : "Nimble provides 4 things:",
               "type" : "text"
             }
           ],
@@ -85,7 +85,7 @@
                       "type" : "strong"
                     },
                     {
-                      "text" : ", or functions to check the outcome of an expression.",
+                      "text" : ", or functions to check the Behavior of an expression.",
                       "type" : "text"
                     }
                   ],
@@ -111,7 +111,7 @@
                       "type" : "strong"
                     },
                     {
-                      "text" : " - an expression-matcher combination to pass before continuing.",
+                      "text" : " - an expression-matcher combination - to pass before continuing.",
                       "type" : "text"
                     }
                   ],
@@ -134,6 +134,219 @@
             }
           ],
           "type" : "unorderedList"
+        },
+        {
+          "anchor" : "Terms",
+          "level" : 2,
+          "text" : "Terms",
+          "type" : "heading"
+        },
+        {
+          "items" : [
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "A Swift or Objective-C bit of code. For example ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "1 + 1",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : ".",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Expression",
+                    "type" : "text"
+                  }
+                ]
+              }
+            },
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "A result or side effect of an expression. For example ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "print(\"hello\")",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : " has a behavior of writing “hello\\n” to standard output, while ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "1 + 1",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : " has a behavior of returning 2.",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Behavior",
+                    "type" : "text"
+                  }
+                ]
+              }
+            },
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "A function from Nimble which checks an Expression’s Behavior.",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Matcher",
+                    "type" : "text"
+                  }
+                ]
+              }
+            },
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "An Expression combined with an Expression. For example, ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "expect(1 + 1).to(equal(2))",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : " is an Expectation.",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Expectation",
+                    "type" : "text"
+                  }
+                ]
+              }
+            },
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "An expectation that is continuously polled until it finishes.",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Polling Expectation",
+                    "type" : "text"
+                  }
+                ]
+              }
+            },
+            {
+              "definition" : {
+                "content" : [
+                  {
+                    "inlineContent" : [
+                      {
+                        "text" : "An Expectation that must pass before continuing. These are usually defined using ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "require",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : " instead of ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "expect",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : ", though there are shortcuts such as ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "unwrap(file:line:customError:_:)-5q9f3",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : " and ",
+                        "type" : "text"
+                      },
+                      {
+                        "code" : "pollUnwrap(file:line:_:)-4ddnp",
+                        "type" : "codeVoice"
+                      },
+                      {
+                        "text" : ".",
+                        "type" : "text"
+                      }
+                    ],
+                    "type" : "paragraph"
+                  }
+                ]
+              },
+              "term" : {
+                "inlineContent" : [
+                  {
+                    "text" : "Requirement",
+                    "type" : "text"
+                  }
+                ]
+              }
+            }
+          ],
+          "type" : "termList"
         }
       ],
       "kind" : "content"
@@ -181,12 +394,16 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/Result",
         "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
         "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
-        "doc:\/\/Nimble\/documentation\/Nimble\/Map",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionElements",
-        "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount"
+        "doc:\/\/Nimble\/documentation\/Nimble\/Map"
       ],
       "title" : "Matchers"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/Collections"
+      ],
+      "title" : "Articles"
     },
     {
       "identifiers" : [
@@ -10132,45 +10349,34 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/badinstructionexception"
 },
-"doc://Nimble/documentation/Nimble/CollectionCount": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionCount",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Collection Count",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectioncount"
-},
-"doc://Nimble/documentation/Nimble/CollectionElements": {
+"doc://Nimble/documentation/Nimble/Collections": {
   "abstract" : [
     {
-      "text" : "Nimble provides a means to check that all elements of a collection pass a given expectation.",
+      "text" : "Nimble allows you to easily check ",
+      "type" : "text"
+    },
+    {
+      "code" : "Collection",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "s.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionElements",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Collections",
   "kind" : "article",
   "role" : "article",
-  "title" : "Collection Elements",
+  "title" : "Collection",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectionelements"
-},
-"doc://Nimble/documentation/Nimble/CollectionMembership": {
-  "abstract" : [
-
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CollectionMembership",
-  "kind" : "article",
-  "role" : "article",
-  "title" : "Collection Membership",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/collectionmembership"
+  "url" : "\/documentation\/nimble\/collections"
 },
 "doc://Nimble/documentation/Nimble/Comparisons": {
   "abstract" : [
-
+    {
+      "text" : "Comparing the expression with other values.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
   "kind" : "article",
@@ -10195,7 +10401,10 @@
 },
 "doc://Nimble/documentation/Nimble/CustomValidation": {
   "abstract" : [
-
+    {
+      "text" : "Nimble allows you to perform custom validation.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
   "kind" : "article",
@@ -10240,7 +10449,10 @@
 },
 "doc://Nimble/documentation/Nimble/Equivalence": {
   "abstract" : [
-
+    {
+      "text" : "Checking if a value is equal to another.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
   "kind" : "article",
@@ -10251,7 +10463,10 @@
 },
 "doc://Nimble/documentation/Nimble/Exceptions": {
   "abstract" : [
-
+    {
+      "text" : "Check exceptions raised from Objective-C.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
   "kind" : "article",
@@ -10595,7 +10810,10 @@
 },
 "doc://Nimble/documentation/Nimble/GroupsOfMatchers": {
   "abstract" : [
-
+    {
+      "text" : "Combining matchers into a single Expectation.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
   "kind" : "article",
@@ -10606,7 +10824,10 @@
 },
 "doc://Nimble/documentation/Nimble/Identity": {
   "abstract" : [
-
+    {
+      "text" : "Checking if an object is the same address as another.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
   "kind" : "article",
@@ -10618,39 +10839,7 @@
 "doc://Nimble/documentation/Nimble/Map": {
   "abstract" : [
     {
-      "text" : "Sometimes, you only want to match against a property or group of properties.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "For example, if you wanted to check that only one or a few properties of a value",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "are equal to something else. For this, use the ",
-      "type" : "text"
-    },
-    {
-      "code" : "map",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " matcher to convert a value",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "to another value and check it with a matcher.",
+      "text" : "Mapping a value to another value in the matcher.",
       "type" : "text"
     }
   ],
@@ -11143,7 +11332,30 @@
 },
 "doc://Nimble/documentation/Nimble/Notifications": {
   "abstract" : [
-
+    {
+      "text" : "Checking Notifications posted to ",
+      "type" : "text"
+    },
+    {
+      "code" : "NotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "DistributedNotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
   "kind" : "article",
@@ -11486,7 +11698,38 @@
 },
 "doc://Nimble/documentation/Nimble/Result": {
   "abstract" : [
-
+    {
+      "text" : "You can check the contents of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Result",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " type using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "beSuccess",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "beFailure",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Result",
   "kind" : "article",
@@ -11528,7 +11771,58 @@
 },
 "doc://Nimble/documentation/Nimble/Strings": {
   "abstract" : [
-
+    {
+      "text" : "You can check strings using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "contain",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beginWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "endWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beEmpty",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ",",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and ",
+      "type" : "text"
+    },
+    {
+      "code" : "match",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
   "kind" : "article",
@@ -11559,7 +11853,15 @@
       "type" : "codeVoice"
     },
     {
-      "text" : " matcher to check if an assertion is thrown (e.g. ",
+      "text" : " matcher to check if an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion is thrown (e.g. ",
       "type" : "text"
     },
     {
@@ -11567,25 +11869,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : "). This is made possible by ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "https:\/\/github.com\/mattgallagher",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : "’s ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " library.",
+      "text" : ").",
       "type" : "text"
     }
   ],
@@ -11603,11 +11887,25 @@
       "type" : "text"
     },
     {
-      "code" : "throwError",
-      "type" : "codeVoice"
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/throwError()",
+      "isActive" : true,
+      "type" : "reference"
     },
     {
-      "text" : " matcher to check if an error is thrown.",
+      "text" : " matcher to check if an error is thrown, and the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to check already-captured errors.",
       "type" : "text"
     }
   ],
@@ -11758,7 +12056,10 @@
 },
 "doc://Nimble/documentation/Nimble/Truthiness": {
   "abstract" : [
-
+    {
+      "text" : "Checking whether an expression is true, false, or nil.",
+      "type" : "text"
+    }
   ],
   "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Truthiness",
   "kind" : "article",
@@ -30055,30 +30356,6 @@
   "title" : "withAssertionHandler(_:file:line:closure:)",
   "type" : "topic",
   "url" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-n9cw"
-},
-"https://github.com/mattgallagher": {
-  "identifier" : "https:\/\/github.com\/mattgallagher",
-  "title" : "@mattgallagher",
-  "titleInlineContent" : [
-    {
-      "text" : "@mattgallagher",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/mattgallagher"
-},
-"https://github.com/mattgallagher/CwlPreconditionTesting": {
-  "identifier" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting",
-  "title" : "CwlPreconditionTesting",
-  "titleInlineContent" : [
-    {
-      "text" : "CwlPreconditionTesting",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/mattgallagher\/CwlPreconditionTesting"
 }
 }
 }

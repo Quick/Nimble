@@ -167,131 +167,6 @@
           "type" : "paragraph"
         },
         {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "It is a very common mistake to assume that ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toEventuallyNot",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " is the",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "opposite of ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toEventually",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". For example, if you’re using a ",
-                  "type" : "text"
-                },
-                {
-                  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
-                  "isActive" : true,
-                  "type" : "reference"
-                },
-                {
-                  "text" : ",",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "you might be used to checking that it is called on a background thread by using",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toEventually(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". If you want to check that a spy is not",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "called during some background behavior, you might be tempted to use ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toEventuallyNot(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "All this will do is verify that, by the time the Expectation first runs, the spy",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "has not been called. At which point, that background behavior might not even have",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "run. The correct thing is to use ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toNever",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", as in ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toNever(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Warning",
-          "style" : "warning",
-          "type" : "aside"
-        },
-        {
           "header" : "row",
           "rows" : [
             [
@@ -495,6 +370,78 @@
             ]
           ],
           "type" : "table"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "It is a very common mistake to conflate ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventuallyNot",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " with ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toNever",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : ".",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toEventuallyNot",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " runs intil the first time the matcher doesn’t match. ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "toNever",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "continously polls so long as the matcher doesn’t match. Be mindful of the",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "behavior you expect to observe, and be sure to check that your Polling",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "Expectation is not falsely matching.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Warning",
+          "style" : "warning",
+          "type" : "aside"
         },
         {
           "anchor" : "Verifying-a-Matcher-will-Eventually-Match-or-stop-Matching",
@@ -667,439 +614,6 @@
           ],
           "syntax" : "objc",
           "type" : "codeListing"
-        },
-        {
-          "anchor" : "Behaviors-of-different-forms-of-Polling",
-          "level" : 3,
-          "text" : "Behaviors of different forms of Polling",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "Fundamentally, the behaviors of the different types of polling (",
-              "type" : "text"
-            },
-            {
-              "code" : "toEventually",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ",",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "code" : "toEventuallyNot",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", ",
-              "type" : "text"
-            },
-            {
-              "code" : "toAlways",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", ",
-              "type" : "text"
-            },
-            {
-              "code" : "toNever",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ") are about the duration of the polling,",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "and what they’re looking for with regard to the Expectation.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "For example, ",
-              "type" : "text"
-            },
-            {
-              "code" : "toEventually",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " will run until the Expectation matches, while ",
-              "type" : "text"
-            },
-            {
-              "code" : "toNever",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "will run so long as the Expectation dosen’t match. This effectively makes them",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "opposites.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "content" : [
-            {
-              "inlineContent" : [
-                {
-                  "text" : "It is a very common mistake to assume that ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toEventuallyNot",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : " is the",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "opposite of ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toEventually",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". For example, if you’re using a ",
-                  "type" : "text"
-                },
-                {
-                  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
-                  "isActive" : true,
-                  "overridingTitle" : "Swift Fakes Spy",
-                  "overridingTitleInlineContent" : [
-                    {
-                      "text" : "Swift Fakes Spy",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "reference"
-                },
-                {
-                  "text" : ",",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "you might be used to checking that it is called on a background thread by using",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toEventually(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ". If you want to check that a spy is not",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "called during some background behavior, you might be tempted to use ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toEventuallyNot(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "All this will do is verify that, by the time the Expectation first runs, the spy",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "has not been called. At which point, that background behavior might not even have",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
-                  "type" : "text"
-                },
-                {
-                  "text" : "run. The correct thing is to use ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "toNever",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ", as in ",
-                  "type" : "text"
-                },
-                {
-                  "code" : "expect(spy).toNever(beCalled())",
-                  "type" : "codeVoice"
-                },
-                {
-                  "text" : ".",
-                  "type" : "text"
-                }
-              ],
-              "type" : "paragraph"
-            }
-          ],
-          "name" : "Warning",
-          "style" : "warning",
-          "type" : "aside"
-        },
-        {
-          "header" : "row",
-          "rows" : [
-            [
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Polling form",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Pass Duration",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Expected Matcher Result",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            ],
-            [
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "code" : "toEventually",
-                      "type" : "codeVoice"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Until pass",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "to match",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            ],
-            [
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "code" : "toEventuallyNot",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : "\/",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "toNotEventually",
-                      "type" : "codeVoice"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Until pass",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "to not match",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            ],
-            [
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "code" : "toAlways",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : "\/",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "alwaysTo",
-                      "type" : "codeVoice"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Until fail",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "to match",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            ],
-            [
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "code" : "toNever",
-                      "type" : "codeVoice"
-                    },
-                    {
-                      "text" : "\/",
-                      "type" : "text"
-                    },
-                    {
-                      "code" : "neverTo",
-                      "type" : "codeVoice"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "Until fail",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ],
-              [
-                {
-                  "inlineContent" : [
-                    {
-                      "text" : "to not match",
-                      "type" : "text"
-                    }
-                  ],
-                  "type" : "paragraph"
-                }
-              ]
-            ]
-          ],
-          "type" : "table"
         },
         {
           "anchor" : "Waiting-for-a-Callback-to-be-Called",
@@ -2013,18 +1527,6 @@
   ],
   "type" : "link",
   "url" : "https:\/\/github.com\/Quick\/Quick\/blob\/main\/Documentation\/en-us\/ConfiguringQuick.md"
-},
-"https://github.com/Quick/swift-fakes/blob/main/Sources/Fakes/Spy.swift": {
-  "identifier" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift",
-  "title" : "Swift Fakes Spy",
-  "titleInlineContent" : [
-    {
-      "text" : "Swift Fakes Spy",
-      "type" : "text"
-    }
-  ],
-  "type" : "link",
-  "url" : "https:\/\/github.com\/Quick\/swift-fakes\/blob\/main\/Sources\/Fakes\/Spy.swift"
 }
 }
 }

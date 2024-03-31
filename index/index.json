@@ -117,18 +117,12 @@
             "type" : "article"
           },
           {
-            "path" : "\/documentation\/nimble\/collectionmembership",
-            "title" : "Collection Membership",
-            "type" : "article"
+            "title" : "Articles",
+            "type" : "groupMarker"
           },
           {
-            "path" : "\/documentation\/nimble\/collectionelements",
-            "title" : "Collection Elements",
-            "type" : "article"
-          },
-          {
-            "path" : "\/documentation\/nimble\/collectioncount",
-            "title" : "Collection Count",
+            "path" : "\/documentation\/nimble\/collections",
+            "title" : "Collection",
             "type" : "article"
           },
           {
