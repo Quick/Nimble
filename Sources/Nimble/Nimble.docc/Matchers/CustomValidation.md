@@ -1,5 +1,7 @@
 # Custom Validation
 
+Nimble allows you to perform custom validation.
+
 ```swift
 // Swift
 
@@ -24,4 +26,5 @@ expect {
 
 The `String` provided with `.failed()` is shown when the test fails.
 
-> Warning: When using Polling Expectations be careful not to make state changes or run process intensive code since this closure will be ran many times.
+> Warning: When using Polling Expectations be careful not to make state changes
+or run process intensive code since this closure will be ran many times.

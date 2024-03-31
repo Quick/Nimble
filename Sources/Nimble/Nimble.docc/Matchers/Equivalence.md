@@ -1,5 +1,7 @@
 #  Equivalence
 
+Checking if a value is equal to another.
+
 ```swift
 // Swift
 

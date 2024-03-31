@@ -1,5 +1,8 @@
 # Notifications
 
+Checking Notifications posted to `NotificationCenter` or a
+`DistributedNotificationCenter`.
+
 ```swift
 // Swift
 let testNotification = Notification(name: Notification.Name("Foo"), object: nil)

@@ -1,6 +1,9 @@
 # Swift Error Handling
 
-You can use the `throwError` matcher to check if an error is thrown.
+You can use the ``throwError()`` matcher to check if an error is thrown, and the
+``matchError(_:)-8o974`` to check already-captured errors.
+
+`throwError` operates on errors that expressions throw using `try`.
 
 ```swift
 // Swift

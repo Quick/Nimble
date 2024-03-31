@@ -1,4 +1,85 @@
-# Collection Membership
+# Collection
+
+Nimble allows you to easily check `Collection`s.
+
+## Collection Count
+
+```swift
+// Swift
+
+// Passes if 'actual' contains the 'expected' number of elements:
+expect(actual).to(haveCount(expected))
+
+// Passes if 'actual' does _not_ contain the 'expected' number of elements:
+expect(actual).notTo(haveCount(expected))
+```
+
+```objc
+// Objective-C
+
+// Passes if 'actual' contains the 'expected' number of elements:
+expect(actual).to(haveCount(expected))
+
+// Passes if 'actual' does _not_ contain the 'expected' number of elements:
+expect(actual).notTo(haveCount(expected))
+```
+
+For Swift, the actual value must be an instance of a type conforming to `Collection`.
+For example, instances of `Array`, `Dictionary`, or `Set`.
+
+For Objective-C, the actual value must be one of the following classes, or their subclasses:
+
+ - `NSArray`,
+ - `NSDictionary`,
+ - `NSSet`, or
+ - `NSHashTable`.
+
+## Collection Elements
+
+### Swift
+
+In Swift, the collection must be an instance of a type conforming to
+`Sequence`.
+
+```swift
+// Swift
+
+// Providing a custom function:
+expect([1, 2, 3, 4]).to(allPass { $0 < 5 })
+
+// Composing the expectation with another matcher:
+expect([1, 2, 3, 4]).to(allPass(beLessThan(5)))
+```
+
+There are also variants of `allPass` that check against async matchers, and
+that take in async functions:
+
+```swift
+// Swift
+
+// Providing a custom function:
+expect([1, 2, 3, 4]).to(allPass { await asyncFunctionReturningBool($0) })
+
+// Composing the expectation with another matcher:
+expect([1, 2, 3, 4]).to(allPass(someAsyncMatcher()))
+```
+
+### Objective-C
+
+In Objective-C, the collection must be an instance of a type which implements
+the `NSFastEnumeration` protocol, and whose elements are instances of a type
+which subclasses `NSObject`.
+
+Additionally, unlike in Swift, there is no override to specify a custom
+matcher function.
+
+```objc
+// Objective-C
+
+expect(@[@1, @2, @3, @4]).to(allPass(beLessThan(@5)));
+```
+
+## Collection Membership
 
 ```swift
 // Swift

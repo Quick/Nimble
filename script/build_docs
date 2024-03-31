@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 export DOCC_JSON_PRETTYPRINT="YES"
 
 mkdir -p docs

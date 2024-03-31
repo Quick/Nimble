@@ -1,5 +1,7 @@
 # Comparisons
 
+Comparing the expression with other values.
+
 ```swift
 // Swift
 
