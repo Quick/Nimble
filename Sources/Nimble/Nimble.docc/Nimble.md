@@ -4,7 +4,7 @@
 
 ## Overview
 
-Nimbel provides 4 things:
+Nimble provides 4 things:
 
 - A way to verify expressions using a natural, easily understood language.
 - **Matchers**, or functions to check the Behavior of an expression.
