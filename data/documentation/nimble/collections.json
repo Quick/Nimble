@@ -870,6 +870,28 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/TypeChecking",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Truthiness",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SwiftAssertions",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SwiftErrors",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Result",
+        "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
+        "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Map"
+      ],
+      "title" : "Matchers"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
@@ -906,6 +928,491 @@
   "title" : "Nimble",
   "type" : "topic",
   "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Comparisons": {
+  "abstract" : [
+    {
+      "text" : "Comparing the expression with other values.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Comparisons",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Comparisons",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/comparisons"
+},
+"doc://Nimble/documentation/Nimble/CustomValidation": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to perform custom validation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Custom Validation",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/customvalidation"
+},
+"doc://Nimble/documentation/Nimble/Equivalence": {
+  "abstract" : [
+    {
+      "text" : "Checking if a value is equal to another.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Equivalence",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Equivalence",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/equivalence"
+},
+"doc://Nimble/documentation/Nimble/Exceptions": {
+  "abstract" : [
+    {
+      "text" : "Check exceptions raised from Objective-C.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Exceptions",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Exceptions",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/exceptions"
+},
+"doc://Nimble/documentation/Nimble/GroupsOfMatchers": {
+  "abstract" : [
+    {
+      "text" : "Combining matchers into a single Expectation.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Matching a value to any of a group of matchers",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/groupsofmatchers"
+},
+"doc://Nimble/documentation/Nimble/Identity": {
+  "abstract" : [
+    {
+      "text" : "Checking if an object is the same address as another.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Identity",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Identity",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/identity"
+},
+"doc://Nimble/documentation/Nimble/Map": {
+  "abstract" : [
+    {
+      "text" : "Mapping a value to another value in the matcher.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Map",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Mapping a Value to Another Value",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/map"
+},
+"doc://Nimble/documentation/Nimble/Notifications": {
+  "abstract" : [
+    {
+      "text" : "Checking Notifications posted to ",
+      "type" : "text"
+    },
+    {
+      "code" : "NotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "DistributedNotificationCenter",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Notifications",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/notifications"
+},
+"doc://Nimble/documentation/Nimble/Result": {
+  "abstract" : [
+    {
+      "text" : "You can check the contents of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "Result",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " type using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "beSuccess",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " or",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "code" : "beFailure",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Result",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Result",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/result"
+},
+"doc://Nimble/documentation/Nimble/Strings": {
+  "abstract" : [
+    {
+      "text" : "You can check strings using the ",
+      "type" : "text"
+    },
+    {
+      "code" : "contain",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beginWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "endWith",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", ",
+      "type" : "text"
+    },
+    {
+      "code" : "beEmpty",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ",",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "and ",
+      "type" : "text"
+    },
+    {
+      "code" : "match",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matchers.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Strings",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Strings",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/strings"
+},
+"doc://Nimble/documentation/Nimble/SwiftAssertions": {
+  "abstract" : [
+    {
+      "text" : "If you’re using Swift, you can use the ",
+      "type" : "text"
+    },
+    {
+      "code" : "throwAssertion",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " matcher to check if an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "assertion is thrown (e.g. ",
+      "type" : "text"
+    },
+    {
+      "code" : "fatalError()",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ").",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SwiftAssertions",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Assertions",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swiftassertions"
+},
+"doc://Nimble/documentation/Nimble/SwiftErrors": {
+  "abstract" : [
+    {
+      "text" : "You can use the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/throwError()",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " matcher to check if an error is thrown, and the",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to check already-captured errors.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SwiftErrors",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Swift Error Handling",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/swifterrors"
+},
+"doc://Nimble/documentation/Nimble/Truthiness": {
+  "abstract" : [
+    {
+      "text" : "Checking whether an expression is true, false, or nil.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Truthiness",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Truthiness",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/truthiness"
+},
+"doc://Nimble/documentation/Nimble/TypeChecking": {
+  "abstract" : [
+    {
+      "text" : "Nimble supports checking the type membership of any kind of object, whether",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "Objective-C conformant or not.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/TypeChecking",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Type Checking",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/typechecking"
+},
+"doc://Nimble/documentation/Nimble/matchError(_:)-8o974": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual expression evaluates to an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error from the specified case.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "matchError"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "matchError(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/matcherror(_:)-8o974"
+},
+"doc://Nimble/documentation/Nimble/throwError()": {
+  "abstract" : [
+    {
+      "text" : "A Nimble matcher that succeeds when the actual expression throws an",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "error of the specified type or from the specified case.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "throwError"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "Out"
+    },
+    {
+      "kind" : "text",
+      "text" : ">() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Out"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/throwError()",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "throwError()",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/throwerror()"
 },
 "https://github.com/Quick/Nimble/issues/27": {
   "identifier" : "https:\/\/github.com\/Quick\/Nimble\/issues\/27",

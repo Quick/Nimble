@@ -117,10 +117,6 @@
             "type" : "article"
           },
           {
-            "title" : "Articles",
-            "type" : "groupMarker"
-          },
-          {
             "path" : "\/documentation\/nimble\/collections",
             "title" : "Collection",
             "type" : "article"

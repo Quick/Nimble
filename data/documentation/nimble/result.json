@@ -150,7 +150,8 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/Notifications",
         "doc:\/\/Nimble\/documentation\/Nimble\/GroupsOfMatchers",
         "doc:\/\/Nimble\/documentation\/Nimble\/CustomValidation",
-        "doc:\/\/Nimble\/documentation\/Nimble\/Map"
+        "doc:\/\/Nimble\/documentation\/Nimble\/Map",
+        "doc:\/\/Nimble\/documentation\/Nimble\/Collections"
       ],
       "title" : "Matchers"
     }
@@ -191,6 +192,28 @@
   "title" : "Nimble",
   "type" : "topic",
   "url" : "\/documentation\/nimble"
+},
+"doc://Nimble/documentation/Nimble/Collections": {
+  "abstract" : [
+    {
+      "text" : "Nimble allows you to easily check ",
+      "type" : "text"
+    },
+    {
+      "code" : "Collection",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "s.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/Collections",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Collection",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/collections"
 },
 "doc://Nimble/documentation/Nimble/Comparisons": {
   "abstract" : [
