@@ -56,4 +56,4 @@ Nimble includes a wide variety of matcher functions.
 - <doc:GroupsOfMatchers>
 - <doc:CustomValidation>
 - <doc:Map>
-- <doc:Collection>
+- <doc:Collections>
