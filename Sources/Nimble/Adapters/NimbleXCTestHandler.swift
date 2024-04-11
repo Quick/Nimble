@@ -3,7 +3,7 @@ import XCTest
 
 /// Default handler for Nimble. This assertion handler passes failures along to
 /// XCTest.
-public class NimbleXCTestHandler: AssertionHandler {
+public final class NimbleXCTestHandler: AssertionHandler {
     public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         if !assertion {
             recordFailure("\(message.stringValue)\n", location: location)
@@ -13,7 +13,7 @@ public class NimbleXCTestHandler: AssertionHandler {
 
 /// Alternative handler for Nimble. This assertion handler passes failures along
 /// to XCTest by attempting to reduce the failure message size.
-public class NimbleShortXCTestHandler: AssertionHandler {
+public final class NimbleShortXCTestHandler: AssertionHandler {
     public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         if !assertion {
             let msg: String
@@ -29,7 +29,7 @@ public class NimbleShortXCTestHandler: AssertionHandler {
 
 /// Fallback handler in case XCTest is unavailable. This assertion handler will abort
 /// the program if it is invoked.
-class NimbleXCTestUnavailableHandler: AssertionHandler {
+final class NimbleXCTestUnavailableHandler: AssertionHandler {
     func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         fatalError("XCTest is not available and no custom assertion handler was configured. Aborting.")
     }
@@ -37,24 +37,37 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
 
 #if canImport(Darwin)
 /// Helper class providing access to the currently executing XCTestCase instance, if any
-@objc final public class CurrentTestCaseTracker: NSObject, XCTestObservation {
+@objc final public class CurrentTestCaseTracker: NSObject, XCTestObservation, @unchecked Sendable {
     @objc public static let sharedInstance = CurrentTestCaseTracker()
 
-    private(set) var currentTestCase: XCTestCase?
+    private let lock = NSRecursiveLock()
+
+    private var _currentTestCase: XCTestCase?
+    var currentTestCase: XCTestCase? {
+        lock.lock()
+        defer { lock.unlock() }
+        return _currentTestCase
+    }
 
     private var stashed_swift_reportFatalErrorsToDebugger: Bool = false
 
     @objc public func testCaseWillStart(_ testCase: XCTestCase) {
+        lock.lock()
+        defer { lock.unlock() }
+
         #if (os(macOS) || os(iOS) || os(visionOS)) && !SWIFT_PACKAGE
         stashed_swift_reportFatalErrorsToDebugger = _swift_reportFatalErrorsToDebugger
         _swift_reportFatalErrorsToDebugger = false
         #endif
 
-        currentTestCase = testCase
+        _currentTestCase = testCase
     }
 
     @objc public func testCaseDidFinish(_ testCase: XCTestCase) {
-        currentTestCase = nil
+        lock.lock()
+        defer { lock.unlock() }
+
+        _currentTestCase = nil
 
         #if (os(macOS) || os(iOS) || os(visionOS)) && !SWIFT_PACKAGE
         _swift_reportFatalErrorsToDebugger = stashed_swift_reportFatalErrorsToDebugger

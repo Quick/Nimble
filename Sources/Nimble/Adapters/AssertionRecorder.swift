@@ -3,7 +3,7 @@
 ///
 /// @see AssertionRecorder
 /// @see AssertionHandler
-public struct AssertionRecord: CustomStringConvertible {
+public struct AssertionRecord: CustomStringConvertible, Sendable {
     /// Whether the assertion succeeded or failed
     public let success: Bool
     /// The failure message the assertion would display on failure.
@@ -20,9 +20,17 @@ public struct AssertionRecord: CustomStringConvertible {
 /// This is useful for testing failure messages for matchers.
 ///
 /// @see AssertionHandler
-public class AssertionRecorder: AssertionHandler {
+public final class AssertionRecorder: AssertionHandler {
     /// All the assertions that were captured by this recorder
-    public var assertions = [AssertionRecord]()
+    public var assertions: [AssertionRecord] {
+        get {
+            _assertion.value
+        }
+        set {
+            _assertion.set(newValue)
+        }
+    }
+    private let _assertion = LockedContainer([AssertionRecord]())
 
     public init() {}
 
