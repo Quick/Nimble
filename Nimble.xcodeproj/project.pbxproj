@@ -134,6 +134,7 @@
 		8922828F2B283956002DA355 /* AsyncAwaitTest+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */; };
 		8923E60D2B47CE7E00F3961A /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923E60C2B47CE7E00F3961A /* Map.swift */; };
 		8923E6102B47D08300F3961A /* MapTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8923E60E2B47D06E00F3961A /* MapTest.swift */; };
+		8924FE0B2C1CA6BB00A9062A /* Testing in Frameworks */ = {isa = PBXBuildFile; productRef = 8924FE0A2C1CA6BB00A9062A /* Testing */; };
 		892FDF1329D3EA7700523A80 /* AsyncExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892FDF1229D3EA7700523A80 /* AsyncExpression.swift */; };
 		895644DD2C1B63910006EC12 /* NimbleSwiftTestingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895644DC2C1B63910006EC12 /* NimbleSwiftTestingHandler.swift */; };
 		895644DF2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895644DE2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift */; };
@@ -378,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89D8AC872B3211EA00410644 /* CwlPosixPreconditionTesting in Frameworks */,
+				8924FE0B2C1CA6BB00A9062A /* Testing in Frameworks */,
 				89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */,
 				89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */,
 			);
@@ -733,6 +735,7 @@
 				89D8AC842B3211C600410644 /* CwlCatchException */,
 				89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */,
 				89D8AC882B3211EA00410644 /* CwlPreconditionTesting */,
+				8924FE0A2C1CA6BB00A9062A /* Testing */,
 			);
 			productName = "Nimble-macOS";
 			productReference = 1F925EAD195C0D6300ED456B /* Nimble.framework */;
@@ -794,6 +797,7 @@
 			packageReferences = (
 				89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */,
 				89D8AC822B3211A900410644 /* XCRemoteSwiftPackageReference "CwlPreconditionTesting" */,
+				8924FE092C1CA6BB00A9062A /* XCRemoteSwiftPackageReference "swift-testing" */,
 			);
 			productRefGroup = 1F1A742A1940169200FFFC47 /* Products */;
 			projectDirPath = "";
@@ -1366,6 +1370,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8924FE092C1CA6BB00A9062A /* XCRemoteSwiftPackageReference "swift-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/younata/swift-testing";
+			requirement = {
+				branch = "public-issues-pitch";
+				kind = branch;
+			};
+		};
 		89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mattgallagher/CwlCatchException";
@@ -1385,6 +1397,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8924FE0A2C1CA6BB00A9062A /* Testing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8924FE092C1CA6BB00A9062A /* XCRemoteSwiftPackageReference "swift-testing" */;
+			productName = Testing;
+		};
 		89D8AC842B3211C600410644 /* CwlCatchException */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 89D8AC812B32119300410644 /* XCRemoteSwiftPackageReference "CwlCatchException" */;
