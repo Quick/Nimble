@@ -88,7 +88,7 @@ public func recordFailure(_ message: String, location: SourceLocation) {
 #else
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
         let line = Int(location.line)
-        let location = XCTSourceCodeLocation(filePath: location.file, lineNumber: line)
+        let location = XCTSourceCodeLocation(filePath: location.filePath, lineNumber: line)
         let sourceCodeContext = XCTSourceCodeContext(location: location)
         let issue = XCTIssue(type: .assertionFailure, compactDescription: message, sourceCodeContext: sourceCodeContext)
         testCase.record(issue)
@@ -96,7 +96,7 @@ public func recordFailure(_ message: String, location: SourceLocation) {
         let msg = """
             Attempted to report a test failure to XCTest while no test case was running. The failure was:
             \"\(message)\"
-            It occurred at: \(location.file):\(location.line)
+            It occurred at: \(location)
             """
         NSException(name: .internalInconsistencyException, reason: msg, userInfo: nil).raise()
     }

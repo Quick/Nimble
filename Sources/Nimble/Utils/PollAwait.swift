@@ -12,16 +12,15 @@ private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 /// Stores debugging information about callers
 internal struct WaitingInfo: CustomStringConvertible, Sendable {
     let name: String
-    let file: FileString
-    let lineNumber: UInt
+    let sourceLocation: SourceLocation
 
     var description: String {
-        return "\(name) at \(file):\(lineNumber)"
+        return "\(name) at \(sourceLocation)"
     }
 }
 
 internal protocol WaitLock {
-    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt)
+    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation)
     func releaseWaitingLock()
     func isWaitingLocked() -> Bool
 }
@@ -32,10 +31,10 @@ internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
 
     init() { }
 
-    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
+    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation) {
         lock.lock()
         defer { lock.unlock() }
-        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        let info = WaitingInfo(name: fnName, sourceLocation: sourceLocation)
         nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
@@ -263,11 +262,11 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned PollResult will NEVER be .incomplete.
-    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> PollResult<T> {
+    func wait(_ fnName: String = #function, sourceLocation: SourceLocation) -> PollResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
-            file: file,
-            line: line)
+            sourceLocation: sourceLocation
+        )
 
         let capture = NMBExceptionCapture(handler: ({ exception in
             _ = self.promise.resolveResult(.raisedException(exception))
@@ -401,8 +400,7 @@ internal class Awaiter {
 internal func pollBlock(
     pollInterval: NimbleTimeInterval,
     timeoutInterval: NimbleTimeInterval,
-    file: FileString,
-    line: UInt,
+    sourceLocation: SourceLocation,
     fnName: String = #function,
     expression: @escaping () throws -> PollStatus) -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
@@ -413,7 +411,7 @@ internal func pollBlock(
             return nil
         }
             .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided)
-            .wait(fnName, file: file, line: line)
+            .wait(fnName, sourceLocation: sourceLocation)
 
         return result
 }
