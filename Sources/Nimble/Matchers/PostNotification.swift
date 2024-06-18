@@ -3,12 +3,13 @@
 #if canImport(Foundation)
 import Foundation
 
-internal class NotificationCollector {
-    private(set) var observedNotifications: [Notification]
-    private(set) var observedNotificationDescriptions: [String]
+final class NotificationCollector: Sendable {
+    nonisolated(unsafe) private(set) var observedNotifications: [Notification]
+    nonisolated(unsafe) private(set) var observedNotificationDescriptions: [String]
     private let notificationCenter: NotificationCenter
     private let names: Set<Notification.Name>
-    private var tokens: [NSObjectProtocol]
+    nonisolated(unsafe) private var tokens: [NSObjectProtocol]
+    private let lock = NSRecursiveLock()
 
     required init(notificationCenter: NotificationCenter, names: Set<Notification.Name> = []) {
         self.notificationCenter = notificationCenter
@@ -22,11 +23,21 @@ internal class NotificationCollector {
         func addObserver(forName name: Notification.Name?) -> NSObjectProtocol {
             return notificationCenter.addObserver(forName: name, object: nil, queue: nil) { [weak self] notification in
                 // linux-swift gets confused by .append(n)
-                self?.observedNotifications.append(notification)
-                self?.observedNotificationDescriptions.append(stringify(notification))
+                guard let self else { return }
+
+                self.lock.lock()
+                defer {
+                    self.lock.unlock()
+                }
+                self.observedNotifications.append(notification)
+                self.observedNotificationDescriptions.append(stringify(notification))
             }
         }
 
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
         if names.isEmpty {
             tokens.append(addObserver(forName: nil))
         } else {
@@ -44,13 +55,13 @@ internal class NotificationCollector {
 }
 
 #if !os(Windows)
-private let mainThread = pthread_self()
+nonisolated(unsafe) private let mainThread = pthread_self()
 #else
 private let mainThread = Thread.mainThread
 #endif
 
-private final class OnlyOnceChecker: @unchecked Sendable {
-    var hasRun = false
+private final class OnlyOnceChecker: Sendable {
+    nonisolated(unsafe) var hasRun = false
     let lock = NSRecursiveLock()
 
     func runOnlyOnce(_ closure: @Sendable () throws -> Void) rethrows {
