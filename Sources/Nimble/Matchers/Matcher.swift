@@ -215,7 +215,7 @@ public typealias MatcherBlock = @Sendable (_ actualExpression: Expression<NSObje
 @available(*, deprecated, renamed: "MatcherBlock")
 public typealias PredicateBlock = MatcherBlock
 
-public class NMBMatcher: NSObject {
+public class NMBMatcher: NSObject, @unchecked Sendable {
     private let matcher: MatcherBlock
 
     public init(matcher: @escaping MatcherBlock) {
