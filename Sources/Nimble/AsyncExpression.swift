@@ -1,3 +1,5 @@
+import Foundation
+
 /// Memoizes the given closure, only calling the passed closure once; even if repeat calls to the returned closure
 private final class MemoizedClosure<T>: Sendable {
     enum State {

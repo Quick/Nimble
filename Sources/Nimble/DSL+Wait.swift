@@ -23,7 +23,7 @@ public class NMBWait: NSObject {
         file: FileString = #filePath,
         line: UInt = #line,
         column: UInt = #column,
-        action: @escaping (@escaping () -> Void) -> Void) {
+        action: sending @escaping (@escaping @Sendable () -> Void) -> Void) {
             // Convert TimeInterval to NimbleTimeInterval
             until(timeout: timeout.nimbleInterval, file: file, line: line, action: action)
     }
@@ -35,7 +35,7 @@ public class NMBWait: NSObject {
         file: FileString = #filePath,
         line: UInt = #line,
         column: UInt = #column,
-        action: @escaping (@escaping () -> Void) -> Void) {
+        action: sending @escaping (@escaping @Sendable () -> Void) -> Void) {
             return throwableUntil(timeout: timeout, file: file, line: line) { done in
                 action(done)
             }
@@ -48,10 +48,10 @@ public class NMBWait: NSObject {
         file: FileString = #filePath,
         line: UInt = #line,
         column: UInt = #column,
-        action: @escaping (@escaping () -> Void) throws -> Void) {
+        action: sending @escaping (@escaping @Sendable () -> Void) throws -> Void) {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
             let leeway = timeout.divided
-            let result = awaiter.performBlock(file: file, line: line) { (done: @escaping (ErrorResult) -> Void) throws -> Void in
+            let result = awaiter.performBlock(file: file, line: line) { (done: @escaping @Sendable (ErrorResult) -> Void) throws -> Void in
                 DispatchQueue.main.async {
                     let capture = NMBExceptionCapture(
                         handler: ({ exception in
@@ -110,8 +110,7 @@ public class NMBWait: NSObject {
         file: FileString = #filePath,
         line: UInt = #line,
         column: UInt = #column,
-        action: @escaping (@escaping () -> Void) -> Void) {
-        until(timeout: .seconds(1), fileID: fileID, file: file, line: line, column: column, action: action)
+        action: sending @escaping (@escaping @Sendable () -> Void) -> Void) {
     }
 #else
     public class func until(
@@ -138,7 +137,7 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: NimbleTime
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
 /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
 @available(*, noasync, message: "the sync variant of `waitUntil` does not work in async contexts. Use the async variant as a drop-in replacement")
-public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, action: @escaping (@escaping () -> Void) -> Void) {
+public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, action: sending @escaping (@escaping @Sendable () -> Void) -> Void) {
     NMBWait.until(timeout: timeout, fileID: fileID, file: file, line: line, column: column, action: action)
 }
 

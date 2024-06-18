@@ -93,7 +93,7 @@ public func waitUntil(
     file: FileString = #filePath,
     line: UInt = #line,
     column: UInt = #column,
-    action: @escaping (@escaping () -> Void) async -> Void
+    action: sending @escaping (@escaping @Sendable () -> Void) async -> Void
 ) async {
     await throwableUntil(
         timeout: timeout,
@@ -116,7 +116,7 @@ public func waitUntil(
     file: FileString = #filePath,
     line: UInt = #line,
     column: UInt = #column,
-    action: @escaping (@escaping () -> Void) -> Void
+    action: sending @escaping (@escaping @Sendable () -> Void) -> Void
 ) async {
     await throwableUntil(
         timeout: timeout,
@@ -134,12 +134,12 @@ private enum ErrorResult {
 private func throwableUntil(
     timeout: NimbleTimeInterval,
     sourceLocation: SourceLocation,
-    action: @escaping (@escaping () -> Void) async throws -> Void) async {
+    action: sending @escaping (@escaping @Sendable () -> Void) async throws -> Void) async {
         let leeway = timeout.divided
         let result = await performBlock(
             timeoutInterval: timeout,
             leeway: leeway,
-            sourceLocation: sourceLocation) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
+            sourceLocation: sourceLocation) { @MainActor (done: @escaping @Sendable (ErrorResult) -> Void) async throws -> Void in
                 do {
                     try await action {
                         done(.none)
