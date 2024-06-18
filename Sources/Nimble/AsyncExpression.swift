@@ -1,8 +1,8 @@
-private actor MemoizedClosure<T: Sendable> {
-    var closure: @Sendable () async throws -> T
+private actor MemoizedClosure<T> {
+    var closure: () async throws -> sending T
     var cache: T?
 
-    init(_ closure: @escaping @Sendable () async throws -> T) {
+    init(_ closure: @escaping () async throws -> sending T) {
         self.closure = closure
     }
 
@@ -11,7 +11,7 @@ private actor MemoizedClosure<T: Sendable> {
         return cache
     }
 
-    func call(_ withoutCaching: Bool) async throws -> T {
+    func call(_ withoutCaching: Bool) async throws -> sending T {
         if withoutCaching {
             return try await closure()
         }
@@ -25,7 +25,7 @@ private actor MemoizedClosure<T: Sendable> {
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T: Sendable>(_ closure: @escaping @Sendable () async throws -> T) -> @Sendable (Bool) async throws -> T {
+private func memoizedClosure<T>(_ closure: sending @escaping () async throws -> sending T) -> @Sendable (Bool) async throws -> sending T {
     let memoized = MemoizedClosure(closure)
     return { withoutCaching in
         try await memoized.call(withoutCaching)
@@ -43,8 +43,8 @@ private func memoizedClosure<T: Sendable>(_ closure: @escaping @Sendable () asyn
 ///
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
-public struct AsyncExpression<Value: Sendable>: Sendable {
-    internal let _expression: @Sendable (Bool) async throws -> Value?
+public struct AsyncExpression<Value> {
+    internal let _expression: @Sendable (Bool) async throws -> sending Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -60,7 +60,7 @@ public struct AsyncExpression<Value: Sendable>: Sendable {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: sending @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -112,7 +112,7 @@ public struct AsyncExpression<Value: Sendable>: Sendable {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> sending U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
