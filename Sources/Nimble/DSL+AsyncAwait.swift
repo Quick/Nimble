@@ -139,7 +139,7 @@ private func throwableUntil(
         let result = await performBlock(
             timeoutInterval: timeout,
             leeway: leeway,
-            sourceLocation: sourceLocation) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
+            sourceLocation: sourceLocation) { @MainActor (done: @escaping @Sendable (ErrorResult) -> Void) async throws -> Void in
                 do {
                     try await action {
                         done(.none)

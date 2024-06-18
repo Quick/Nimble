@@ -64,7 +64,7 @@ internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
     }
 }
 
-internal enum PollResult<T> {
+internal enum PollResult<T: Sendable>: Sendable {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
@@ -104,9 +104,9 @@ internal enum PollStatus {
 
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving a "response" to this promise.
-internal final class AwaitPromise<T> {
-    private(set) internal var asyncResult: PollResult<T> = .incomplete
-    private var signal: DispatchSemaphore
+internal final class AwaitPromise<T: Sendable>: Sendable {
+    nonisolated(unsafe) private(set) internal var asyncResult: PollResult<T> = .incomplete
+    private let signal: DispatchSemaphore
 
     init() {
         signal = DispatchSemaphore(value: 1)
@@ -142,7 +142,7 @@ internal struct PollAwaitTrigger {
 ///
 /// This factory stores all the state for an async expectation so that Await doesn't
 /// doesn't have to manage it.
-internal class AwaitPromiseBuilder<T> {
+internal class AwaitPromiseBuilder<T: Sendable> {
     let awaiter: Awaiter
     let waitLock: WaitLock
     let trigger: PollAwaitTrigger
@@ -313,36 +313,39 @@ internal class Awaiter {
         return DispatchSource.makeTimerSource(flags: .strict, queue: queue)
     }
 
-    func performBlock<T>(
+    func performBlock<T: Sendable>(
         file: FileString,
         line: UInt,
-        _ closure: @escaping (@escaping (T) -> Void) throws -> Void
+        _ closure: sending @escaping (@escaping @Sendable (T) -> Void) throws -> Void
         ) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
-            var completionCount = 0
+            nonisolated(unsafe) var completionCount = 0
+            let lock = NSRecursiveLock()
             let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure { result in
-                    completionCount += 1
-                    if completionCount < 2 {
-                        func completeBlock() {
-                            if promise.resolveResult(.completed(result)) {
-                                #if canImport(CoreFoundation)
-                                CFRunLoopStop(CFRunLoopGetMain())
-                                #else
-                                RunLoop.main._stop()
-                                #endif
+                    lock.withLock {
+                        completionCount += 1
+                        if completionCount < 2 {
+                            @Sendable func completeBlock() {
+                                if promise.resolveResult(.completed(result)) {
+#if canImport(CoreFoundation)
+                                    CFRunLoopStop(CFRunLoopGetMain())
+#else
+                                    RunLoop.main._stop()
+#endif
+                                }
                             }
-                        }
 
-                        if Thread.isMainThread {
-                            completeBlock()
+                            if Thread.isMainThread {
+                                completeBlock()
+                            } else {
+                                DispatchQueue.main.async { completeBlock() }
+                            }
                         } else {
-                            DispatchQueue.main.async { completeBlock() }
+                            fail("waitUntil(..) expects its completion closure to be only called once",
+                                 file: file, line: line)
                         }
-                    } else {
-                        fail("waitUntil(..) expects its completion closure to be only called once",
-                             file: file, line: line)
                     }
                 }
             }
