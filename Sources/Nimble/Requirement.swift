@@ -57,7 +57,7 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     msg.userDescription = description
     msg.to = to
     do {
-        let cachedExpression = expression.withCaching()
+        let cachedExpression = await expression.withCaching()
         let result = try await matcher.satisfies(cachedExpression)
         let value = try await cachedExpression.evaluate()
         result.message.update(failureMessage: msg)
