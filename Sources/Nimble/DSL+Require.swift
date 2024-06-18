@@ -123,7 +123,7 @@ public func requires(file: FileString = #file, line: UInt = #line, customError: 
 /// `require` will return the result of the expression if the matcher passes, and throw an error if not.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func require<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @escaping () async throws -> T?) -> AsyncRequirement<T> {
+public func require<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @escaping @Sendable () async throws -> T?) -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression,
@@ -137,7 +137,7 @@ public func require<T>(file: FileString = #file, line: UInt = #line, customError
 /// `require` will return the result of the expression if the matcher passes, and throw an error if not.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func require<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (() async throws -> T)) -> AsyncRequirement<T> {
+public func require<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (@Sendable () async throws -> T)) -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression(),
@@ -151,7 +151,7 @@ public func require<T>(file: FileString = #file, line: UInt = #line, customError
 /// `require` will return the result of the expression if the matcher passes, and throw an error if not.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func require<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (() async throws -> T?)) -> AsyncRequirement<T> {
+public func require<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (@Sendable () async throws -> T?)) -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression(),
@@ -167,7 +167,7 @@ public func require<T>(file: FileString = #file, line: UInt = #line, customError
 ///
 /// This is provided to avoid  confusion between `require -> SyncRequirement` and `require -> AsyncRequirement`.
 @discardableResult
-public func requirea<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure @escaping () async throws -> T?) async -> AsyncRequirement<T> {
+public func requirea<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression,
@@ -183,7 +183,7 @@ public func requirea<T>(file: FileString = #file, line: UInt = #line, customErro
 ///
 /// This is provided to avoid  confusion between `require -> SyncRequirement`  and `require -> AsyncRequirement`
 @discardableResult
-public func requirea<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (() async throws -> T)) async -> AsyncRequirement<T> {
+public func requirea<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (@Sendable () async throws -> T)) async -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression(),
@@ -199,7 +199,7 @@ public func requirea<T>(file: FileString = #file, line: UInt = #line, customErro
 ///
 /// This is provided to avoid  confusion between `require -> SyncRequirement`  and `require -> AsyncRequirement`
 @discardableResult
-public func requirea<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async -> AsyncRequirement<T> {
+public func requirea<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (@Sendable () async throws -> T?)) async -> AsyncRequirement<T> {
     return AsyncRequirement(
         expression: AsyncExpression(
             expression: expression(),
@@ -256,7 +256,7 @@ public func unwraps<T>(file: FileString = #file, line: UInt = #line, customError
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @escaping () async throws -> T?) async throws -> T {
+public func unwrap<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @escaping @Sendable () async throws -> T?) async throws -> T {
     try await requirea(file: file, line: line, customError: customError, try await expression()).toNot(beNil())
 }
 
@@ -266,7 +266,7 @@ public func unwrap<T>(file: FileString = #file, line: UInt = #line, customError:
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (() async throws -> T?)) async throws -> T {
+public func unwrap<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: () -> (@Sendable () async throws -> T?)) async throws -> T {
     try await requirea(file: file, line: line, customError: customError, expression()).toNot(beNil())
 }
 
@@ -276,7 +276,7 @@ public func unwrap<T>(file: FileString = #file, line: UInt = #line, customError:
 /// `unwrapa` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrapa<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
+public func unwrapa<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async throws -> T {
     try await requirea(file: file, line: line, customError: customError, try await expression()).toNot(beNil())
 }
 
@@ -286,6 +286,6 @@ public func unwrapa<T>(file: FileString = #file, line: UInt = #line, customError
 /// `unwrapa` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrapa<T>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
+public func unwrapa<T: Sendable>(file: FileString = #file, line: UInt = #line, customError: Error? = nil, _ expression: @autoclosure () -> (@Sendable () async throws -> T?)) async throws -> T {
     try await requirea(file: file, line: line, customError: customError, expression()).toNot(beNil())
 }

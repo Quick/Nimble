@@ -13,7 +13,7 @@ import NimbleSharedTestHelpers
 
 // swiftlint:disable:next type_body_length
 final class PollingTest: XCTestCase {
-    class Error: Swift.Error {}
+    struct Error: Swift.Error, Sendable {}
     let errorToThrow = Error()
 
     private func doThrowError() throws -> Int {

@@ -12,7 +12,7 @@ private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 
 // Like PollResult, except it doesn't support objective-c exceptions.
 // Which is tolerable because Swift Concurrency doesn't support recording objective-c exceptions.
-internal enum AsyncPollResult<T> {
+internal enum AsyncPollResult<T: Sendable>: Sendable {
     /// Incomplete indicates None (aka - this value hasn't been fulfilled yet)
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
@@ -57,10 +57,10 @@ internal enum AsyncPollResult<T> {
 // Inspired by swift-async-algorithm's AsyncChannel, but massively simplified
 // especially given Nimble's usecase.
 // AsyncChannel: https://github.com/apple/swift-async-algorithms/blob/main/Sources/AsyncAlgorithms/Channels/AsyncChannel.swift
-internal actor AsyncPromise<T> {
+internal actor AsyncPromise<T: Sendable> {
     private let storage = Storage()
 
-    private final class Storage {
+    private final class Storage: @unchecked Sendable {
         private var continuations: [UnsafeContinuation<T, Never>] = []
         private var value: T?
         // Yes, this is not the fastest lock, but it's platform independent,
@@ -131,7 +131,7 @@ internal actor AsyncPromise<T> {
 /// checked.
 ///
 /// In addition, stopping the run loop is used to halt code executed on the main run loop.
-private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval) async -> AsyncPollResult<T> {
+private func timeout<T: Sendable>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval) async -> AsyncPollResult<T> {
     do {
         try await Task.sleep(nanoseconds: timeoutInterval.nanoseconds)
     } catch {}
@@ -165,7 +165,7 @@ private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTime
     return await promise.value
 }
 
-private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
+private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping @Sendable () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
     for try await _ in AsyncTimerSequence(interval: pollInterval) {
         do {
             if case .finished(let result) = try await expression() {
@@ -199,7 +199,7 @@ private func runPoller(
     pollInterval: NimbleTimeInterval,
     awaiter: Awaiter,
     fnName: String = #function, file: FileString = #file, line: UInt = #line,
-    expression: @escaping () async throws -> PollStatus
+    expression: @escaping @Sendable () async throws -> PollStatus
 ) async -> AsyncPollResult<Bool> {
     awaiter.waitLock.acquireWaitingLock(
         fnName,
@@ -258,7 +258,7 @@ private func runAwaitTrigger<T>(
     timeoutInterval: NimbleTimeInterval,
     leeway: NimbleTimeInterval,
     file: FileString, line: UInt,
-    _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
+    _ closure: @escaping @Sendable (@escaping @Sendable (T) -> Void) async throws -> Void
 ) async -> AsyncPollResult<T> {
     let timeoutQueue = awaiter.timeoutQueue
     let completionCount = Box(value: 0)
@@ -309,7 +309,7 @@ internal func performBlock<T>(
     timeoutInterval: NimbleTimeInterval,
     leeway: NimbleTimeInterval,
     file: FileString, line: UInt,
-    _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
+    _ closure: @escaping @Sendable (@escaping @Sendable (T) -> Void) async throws -> Void
 ) async -> AsyncPollResult<T> {
     await runAwaitTrigger(
         awaiter: NimbleEnvironment.activeInstance.awaiter,
@@ -324,7 +324,7 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
+    expression: @escaping @Sendable () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
         await runPoller(
             timeoutInterval: timeoutInterval,
             pollInterval: pollInterval,

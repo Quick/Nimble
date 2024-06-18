@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RequireError: Error, CustomNSError {
+public struct RequireError: Error, CustomNSError, Sendable {
     let message: String
     let location: SourceLocation
 
@@ -115,7 +115,9 @@ public struct SyncRequirement<Value> {
     public func notTo(_ matcher: Matcher<Value>, description: String? = nil) throws -> Value {
         try toNot(matcher, description: description)
     }
+}
 
+extension SyncRequirement where Value: Sendable {
     // MARK: - AsyncMatchers
     /// Tests the actual value using a matcher to match.
     @discardableResult
@@ -140,7 +142,7 @@ public struct SyncRequirement<Value> {
     }
 }
 
-public struct AsyncRequirement<Value> {
+public struct AsyncRequirement<Value: Sendable>: Sendable {
     public let expression: AsyncExpression<Value>
 
     /// A custom error to throw.

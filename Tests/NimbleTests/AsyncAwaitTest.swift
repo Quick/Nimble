@@ -8,7 +8,7 @@ import NimbleSharedTestHelpers
 
 final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testToPositiveMatches() async {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -119,7 +119,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     func testToEventuallyWithAsyncExpectationDoesNotNecessarilyExecutesExpressionOnMainActor() async {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         await expecta(isMainThread()).toEventually(beFalse())
         await expecta(isMainThread()).toEventuallyNot(beTrue())
@@ -131,7 +131,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     func testToEventuallyWithAsyncExpectationDoesExecuteExpressionOnMainActorWhenTestRunsOnMainActor() async {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         await expecta(isMainThread()).toEventually(beTrue())
         await expecta(isMainThread()).toEventuallyNot(beFalse())
