@@ -1,24 +1,63 @@
-private actor MemoizedClosure<T> {
-    var closure: () async throws -> sending T
-    var cache: T?
+/// Memoizes the given closure, only calling the passed closure once; even if repeat calls to the returned closure
+private final class MemoizedClosure<T>: Sendable {
+    enum State {
+        case notStarted
+        case inProgress
+        case finished(Result<T, Error>)
+    }
+
+    private let lock = NSRecursiveLock()
+    nonisolated(unsafe) private var _state = State.notStarted
+    nonisolated(unsafe) private var _continuations = [CheckedContinuation<T, Error>]()
+    nonisolated(unsafe) private var _task: Task<Void, Never>?
+
+    nonisolated(unsafe) let closure: () async throws -> sending T
 
     init(_ closure: @escaping () async throws -> sending T) {
         self.closure = closure
     }
 
-    func set(_ cache: T) -> T {
-        self.cache = cache
-        return cache
+    deinit {
+        _task?.cancel()
     }
 
-    func call(_ withoutCaching: Bool) async throws -> sending T {
+    @Sendable func callAsFunction(_ withoutCaching: Bool) async throws -> sending T {
         if withoutCaching {
-            return try await closure()
-        }
-        if let cache {
-            return cache
+            try await closure()
         } else {
-            return set(try await closure())
+            try await withCheckedThrowingContinuation { continuation in
+                lock.withLock {
+                    switch _state {
+                    case .notStarted:
+                        _state = .inProgress
+                        _task = Task { [weak self] in
+                            guard let self else { return }
+                            do {
+                                let value = try await self.closure()
+                                self.handle(.success(value))
+                            } catch {
+                                self.handle(.failure(error))
+                            }
+                        }
+                        _continuations.append(continuation)
+                    case .inProgress:
+                        _continuations.append(continuation)
+                    case .finished(let result):
+                        continuation.resume(with: result)
+                    }
+                }
+            }
+        }
+    }
+
+    private func handle(_ result: Result<T, Error>) {
+        lock.withLock {
+            _state = .finished(result)
+            for continuation in _continuations {
+                continuation.resume(with: result)
+            }
+            _continuations = []
+            _task = nil
         }
     }
 }
@@ -27,9 +66,7 @@ private actor MemoizedClosure<T> {
 // closure once; even if repeat calls to the returned closure
 private func memoizedClosure<T>(_ closure: sending @escaping () async throws -> sending T) -> @Sendable (Bool) async throws -> sending T {
     let memoized = MemoizedClosure(closure)
-    return { withoutCaching in
-        try await memoized.call(withoutCaching)
-    }
+    return memoized.callAsFunction(_:)
 }
 
 /// Expression represents the closure of the value inside expect(...).
