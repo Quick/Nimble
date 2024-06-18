@@ -22,7 +22,7 @@ private func memoizedClosure<T>(_ closure: @escaping () throws -> T) -> (Bool) t
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
 public struct Expression<Value> {
-    internal let _expression: (Bool) throws -> Value?
+    internal let _expression: (Bool) throws -> sending Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -38,7 +38,7 @@ public struct Expression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: @escaping () throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: @escaping () throws -> sending Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -59,7 +59,7 @@ public struct Expression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping (Bool) throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping (Bool) throws -> sending Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -74,7 +74,7 @@ public struct Expression<Value> {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping (Value?) throws -> U?) -> Expression<U> {
+    public func cast<U>(_ block: @escaping (Value?) throws -> sending U?) -> Expression<U> {
         Expression<U>(
             expression: ({ try block(self.evaluate()) }),
             location: self.location,
