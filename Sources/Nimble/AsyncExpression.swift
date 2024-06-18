@@ -97,7 +97,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: sending @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: sending @escaping @Sendable () async throws -> sending Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -118,7 +118,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> sending Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -157,7 +157,7 @@ public struct AsyncExpression<Value> {
         )
     }
 
-    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> sending U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
