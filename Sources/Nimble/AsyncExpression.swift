@@ -167,7 +167,7 @@ public struct AsyncExpression<Value> {
         )
     }
 
-    public func evaluate() async throws -> Value? {
+    public func evaluate() async throws -> sending Value? {
         try await self._expression(_withoutCaching)
     }
 
