@@ -95,8 +95,7 @@ internal func poll<T>(
         let result = pollBlock(
             pollInterval: poll,
             timeoutInterval: timeout,
-            file: actualExpression.location.file,
-            line: actualExpression.location.line,
+            sourceLocation: actualExpression.location,
             fnName: fnName) {
                 lastMatcherResult = try matcher.satisfies(uncachedExpression)
                 if lastMatcherResult!.toBoolean(expectation: style) {

@@ -38,8 +38,7 @@ internal actor Poller<T> {
         let result = await pollBlock(
             pollInterval: poll,
             timeoutInterval: timeout,
-            file: expression.location.file,
-            line: expression.location.line,
+            sourceLocation: expression.location,
             fnName: fnName) {
                 if self.updateMatcherResult(result: try await matcherRunner())
                     .toBoolean(expectation: style) {

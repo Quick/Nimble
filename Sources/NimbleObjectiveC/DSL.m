@@ -154,13 +154,22 @@ NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException(void) {
 
 NIMBLE_EXPORT NMBWaitUntilTimeoutBlock NMB_waitUntilTimeoutBuilder(NSString *file, NSUInteger line) {
     return ^(NSTimeInterval timeout, void (^ _Nonnull action)(void (^ _Nonnull)(void))) {
-        [NMBWait untilTimeout:timeout file:file line:line action:action];
+        [NMBWait untilTimeout:timeout
+                       fileID:[NSString stringWithFormat:@"Unknown/%@", file]
+                         file:file
+                         line:line
+                       column:0
+                       action:action];
     };
 }
 
 NIMBLE_EXPORT NMBWaitUntilBlock NMB_waitUntilBuilder(NSString *file, NSUInteger line) {
   return ^(void (^ _Nonnull action)(void (^ _Nonnull)(void))) {
-    [NMBWait untilFile:file line:line action:action];
+    [NMBWait untilFileID:[NSString stringWithFormat:@"Unknown/%@", file]
+                      file:file
+                      line:line
+                    column:0
+                    action:action];
   };
 }
 
