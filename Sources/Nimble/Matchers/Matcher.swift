@@ -18,7 +18,7 @@
 /// In the 2023 Apple Platform releases (macOS 14, iOS 17, watchOS 10, tvOS 17, visionOS 1), Apple
 /// renamed `NSMatcher` to `Matcher`. In response, we decided to rename `Matcher` to
 /// `Matcher`.
-public struct Matcher<T> {
+public struct Matcher<T>: Sendable {
     fileprivate let matcher: @Sendable (Expression<T>) throws -> MatcherResult
 
     /// Constructs a matcher that knows how take a given value
@@ -38,8 +38,6 @@ public struct Matcher<T> {
 /// Provides an easy upgrade path for custom Matchers to be renamed to Matchers
 @available(*, deprecated, renamed: "Matcher")
 public typealias Predicate = Matcher
-
-extension Matcher: Sendable where T: Sendable {}
 
 /// Provides convenience helpers to defining matchers
 extension Matcher {

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Memoizes the given closure, only calling the passed closure once; even if repeat calls to the returned closure
-private final class MemoizedClosure<T>: Sendable {
+private final class MemoizedClosure<T: Sendable>: Sendable {
     enum State {
         case notStarted
         case inProgress
@@ -13,9 +13,9 @@ private final class MemoizedClosure<T>: Sendable {
     nonisolated(unsafe) private var _continuations = [CheckedContinuation<T, Error>]()
     nonisolated(unsafe) private var _task: Task<Void, Never>?
 
-    nonisolated(unsafe) let closure: () async throws -> sending T
+    let closure: @Sendable () async throws -> T
 
-    init(_ closure: @escaping () async throws -> sending T) {
+    init(_ closure: @escaping @Sendable () async throws -> T) {
         self.closure = closure
     }
 
@@ -23,7 +23,7 @@ private final class MemoizedClosure<T>: Sendable {
         _task?.cancel()
     }
 
-    @Sendable func callAsFunction(_ withoutCaching: Bool) async throws -> sending T {
+    @Sendable func callAsFunction(_ withoutCaching: Bool) async throws -> T {
         if withoutCaching {
             try await closure()
         } else {
@@ -66,7 +66,9 @@ private final class MemoizedClosure<T>: Sendable {
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T>(_ closure: sending @escaping () async throws -> sending T) -> @Sendable (Bool) async throws -> sending T {
+private func memoizedClosure<T: Sendable>(
+    _ closure: sending @escaping @Sendable () async throws -> T
+) -> @Sendable (Bool) async throws -> T {
     let memoized = MemoizedClosure(closure)
     return memoized.callAsFunction(_:)
 }
@@ -82,7 +84,7 @@ private func memoizedClosure<T>(_ closure: sending @escaping () async throws -> 
 ///
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
-public struct AsyncExpression<Value> {
+public actor AsyncExpression<Value: Sendable> {
     internal let _expression: @Sendable (Bool) async throws -> sending Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation

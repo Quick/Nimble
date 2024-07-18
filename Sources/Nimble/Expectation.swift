@@ -150,7 +150,7 @@ extension Expectation {
     }
 }
 
-public struct SyncExpectation<Value>: Expectation {
+public struct SyncExpectation<Value>: Expectation, Sendable {
     public let expression: Expression<Value>
 
     /// The status of the test after matchers have been evaluated.
