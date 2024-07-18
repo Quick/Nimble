@@ -57,7 +57,7 @@ public func satisfyAllOf<T>(_ matchers: any AsyncableMatcher<T>...) -> AsyncMatc
 @available(macOS 13.0.0, iOS 16.0.0, tvOS 16.0.0, watchOS 9.0.0, *)
 public func satisfyAllOf<T>(_ matchers: [any AsyncableMatcher<T>]) -> AsyncMatcher<T> {
     return AsyncMatcher.define { actualExpression in
-        let cachedExpression = actualExpression.withCaching()
+        let cachedExpression = await actualExpression.withCaching()
         var postfixMessages = [String]()
         var status: MatcherStatus = .matches
         for matcher in matchers {

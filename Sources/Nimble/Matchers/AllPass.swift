@@ -1,5 +1,5 @@
 public func allPass<S: Sequence>(
-    _ passFunc: @escaping (S.Element) throws -> Bool
+    _ passFunc: @escaping @Sendable (S.Element) throws -> Bool
 ) -> Matcher<S> {
     let matcher = Matcher<S.Element>.define("pass a condition") { actualExpression, message in
         guard let actual = try actualExpression.evaluate() else {
@@ -12,7 +12,7 @@ public func allPass<S: Sequence>(
 
 public func allPass<S: Sequence>(
     _ passName: String,
-    _ passFunc: @escaping (S.Element) throws -> Bool
+    _ passFunc: @escaping @Sendable (S.Element) throws -> Bool
 ) -> Matcher<S> {
     let matcher = Matcher<S.Element>.define(passName) { actualExpression, message in
         guard let actual = try actualExpression.evaluate() else {

@@ -1,5 +1,5 @@
 /// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping () throws -> sending T?) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping @Sendable () throws -> sending T?) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression,
@@ -8,7 +8,7 @@ public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, li
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending T)) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending T)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
@@ -17,7 +17,7 @@ public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, li
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending T?)) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending T?)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
@@ -26,7 +26,7 @@ public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, li
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending Void)) -> SyncExpectation<Void> {
+public func expect(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending Void)) -> SyncExpectation<Void> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
@@ -36,7 +36,7 @@ public func expect(fileID: String = #fileID, file: FileString = #filePath, line:
 
 /// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping () throws -> sending T?) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping @Sendable () throws -> sending T?) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression,
@@ -46,7 +46,7 @@ public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending T)) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending T)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
@@ -56,7 +56,7 @@ public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending T?)) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending T?)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
@@ -66,7 +66,7 @@ public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> sending (() throws -> sending Void)) -> SyncExpectation<Void> {
+public func expects(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> Void)) -> SyncExpectation<Void> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),

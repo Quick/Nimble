@@ -13,18 +13,27 @@ private func from(objcMatcher: NMBMatcher) -> Matcher<NSObject> {
 }
 
 // Equivalent to Expectation, but for Nimble's Objective-C interface
-public class NMBExpectation: NSObject {
-    internal let _actualBlock: () -> NSObject?
-    internal var _negative: Bool
+public final class NMBExpectation: NSObject, Sendable {
+    internal let _actualBlock: @Sendable () -> NSObject?
+    internal let _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
-    internal var _timeout: NimbleTimeInterval = .seconds(1)
+    internal let _timeout: NimbleTimeInterval
 
-    @objc public init(actualBlock: @escaping () -> NSObject?, negative: Bool, file: FileString, line: UInt) {
+    @objc public init(actualBlock: @escaping @Sendable () -> sending NSObject?, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
         self._line = line
+        self._timeout = .seconds(1)
+    }
+
+    private init(actualBlock: @escaping @Sendable () -> sending NSObject?, negative: Bool, file: FileString, line: UInt, timeout: NimbleTimeInterval) {
+        self._actualBlock = actualBlock
+        self._negative = negative
+        self._file = file
+        self._line = line
+        self._timeout = timeout
     }
 
     private var expectValue: SyncExpectation<NSObject> {
@@ -32,8 +41,14 @@ public class NMBExpectation: NSObject {
     }
 
     @objc public var withTimeout: (TimeInterval) -> NMBExpectation {
-        return { timeout in self._timeout = timeout.nimbleInterval
-            return self
+        return { timeout in
+            NMBExpectation(
+                actualBlock: self._actualBlock,
+                negative: self._negative,
+                file: self._file,
+                line: self._line,
+                timeout: timeout.nimbleInterval
+            )
         }
     }
 

@@ -43,7 +43,7 @@ public func throwError<Out>() -> Matcher<Out> {
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = nil) -> Matcher<Out> {
+public func throwError<T: Error, Out>(_ error: T, closure: (@Sendable (Error) -> Void)? = nil) -> Matcher<Out> {
     return Matcher { actualExpression in
         var actualError: Error?
         do {
@@ -89,7 +89,7 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
 ///
 /// nil arguments indicates that the matcher should not attempt to match against
 /// that parameter.
-public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> Void)? = nil) -> Matcher<Out> {
+public func throwError<T: Error & Equatable, Out>(_ error: T, closure: (@Sendable (T) -> Void)? = nil) -> Matcher<Out> {
     return Matcher { actualExpression in
         var actualError: Error?
         do {
@@ -137,7 +137,7 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
 /// that parameter.
 public func throwError<T: Error, Out>(
     errorType: T.Type,
-    closure: ((T) -> Void)? = nil
+    closure: (@Sendable (T) -> Void)? = nil
 ) -> Matcher<Out> {
     return Matcher { actualExpression in
         var actualError: Error?
@@ -197,7 +197,7 @@ public func throwError<T: Error, Out>(
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Matcher<Out> {
+public func throwError<Out>(closure: @escaping (@Sendable (Error) -> Void)) -> Matcher<Out> {
     return Matcher { actualExpression in
         var actualError: Error?
         do {
@@ -232,7 +232,7 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Matcher<Out
 /// values of the existential type `Error` in the closure.
 ///
 /// The closure only gets called when an error was thrown.
-public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Matcher<Out> {
+public func throwError<T: Error, Out>(closure: @escaping (@Sendable (T) -> Void)) -> Matcher<Out> {
     return Matcher { actualExpression in
         var actualError: Error?
         do {

@@ -27,7 +27,7 @@ internal func execute<T>(
     }
 }
 
-internal actor Poller<T> {
+internal actor Poller<T: Sendable> {
     private var lastMatcherResult: MatcherResult?
 
     init() {}
@@ -41,7 +41,7 @@ internal actor Poller<T> {
               fnName: String,
               matcherRunner: @escaping @Sendable () async throws -> MatcherResult) async -> MatcherResult {
         let fnName = "expect(...).\(fnName)(...)"
-        let result = await pollBlock(
+        let result = await asyncPollBlock(
             pollInterval: poll,
             timeoutInterval: timeout,
             sourceLocation: expression.location,
@@ -91,7 +91,7 @@ internal func poll<T>(
     )
 }
 
-extension SyncExpectation {
+extension SyncExpectation where Value: Sendable {
     // MARK: - With Synchronous Matchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
@@ -256,7 +256,9 @@ extension SyncExpectation {
     ) async -> Self {
         return await toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
+}
 
+extension SyncExpectation where Value: Sendable {
     // MARK: - With AsyncMatchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.

@@ -71,7 +71,7 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     }
 }
 
-public struct SyncRequirement<Value> {
+public struct SyncRequirement<Value>: Sendable {
     public let expression: Expression<Value>
 
     /// A custom error to throw.

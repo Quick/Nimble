@@ -14,9 +14,10 @@ import class Foundation.NSString
 
 extension NMBMatcher {
     @objc public class func matchMatcher(_ expected: NSString) -> NMBMatcher {
+        let expected = String(expected)
         return NMBMatcher { actualExpression in
             let actual = actualExpression.cast { $0 as? String }
-            return try match(expected.description).satisfies(actual).toObjectiveC()
+            return try match(expected).satisfies(actual).toObjectiveC()
         }
     }
 }

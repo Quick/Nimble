@@ -1,6 +1,6 @@
 internal func equal<T>(
     _ expectedValue: T?,
-    by areEquivalent: @escaping (T, T) -> Bool
+    by areEquivalent: @escaping @Sendable (T, T) -> Bool
 ) -> Matcher<T> {
     Matcher.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
         let actualValue = try actualExpression.evaluate()
