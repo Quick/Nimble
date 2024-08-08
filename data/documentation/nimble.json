@@ -566,6 +566,8 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-4geex",
         "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-6jywp",
         "doc:\/\/Nimble\/documentation\/Nimble\/matchError(_:)-8o974",
+        "doc:\/\/Nimble\/documentation\/Nimble\/not(_:)-373ex",
+        "doc:\/\/Nimble\/documentation\/Nimble\/not(_:)-76gnj",
         "doc:\/\/Nimble\/documentation\/Nimble\/pollUnwrap(file:line:_:)-16s5w",
         "doc:\/\/Nimble\/documentation\/Nimble\/pollUnwrap(file:line:_:)-3fmx1",
         "doc:\/\/Nimble\/documentation\/Nimble\/pollUnwrap(file:line:_:)-3yd3y",
@@ -24021,6 +24023,154 @@
   "title" : "matchError(_:)",
   "type" : "topic",
   "url" : "\/documentation\/nimble\/matcherror(_:)-8o974"
+},
+"doc://Nimble/documentation/Nimble/not(_:)-373ex": {
+  "abstract" : [
+    {
+      "text" : "A matcher that negates the passed in matcher",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "not"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble12AsyncMatcherV",
+      "text" : "AsyncMatcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/not(_:)-373ex",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "not(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/not(_:)-373ex"
+},
+"doc://Nimble/documentation/Nimble/not(_:)-76gnj": {
+  "abstract" : [
+    {
+      "text" : "A matcher that negates the passed in matcher",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "not"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble7MatcherV",
+      "text" : "Matcher"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/not(_:)-76gnj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "not(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/not(_:)-76gnj"
 },
 "doc://Nimble/documentation/Nimble/pollUnwrap(file:line:_:)-16s5w": {
   "abstract" : [

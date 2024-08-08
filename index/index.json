@@ -2241,6 +2241,16 @@
             "type" : "func"
           },
           {
+            "path" : "\/documentation\/nimble\/not(_:)-373ex",
+            "title" : "func not<T>(AsyncMatcher<T>) -> AsyncMatcher<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/not(_:)-76gnj",
+            "title" : "func not<T>(Matcher<T>) -> Matcher<T>",
+            "type" : "func"
+          },
+          {
             "path" : "\/documentation\/nimble\/pollunwrap(file:line:_:)-16s5w",
             "title" : "func pollUnwrap<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) async throws -> T",
             "type" : "func"
