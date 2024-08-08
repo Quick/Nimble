@@ -140,6 +140,8 @@
 		898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
 		899441EF2902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */; };
 		899441F82902EF2500C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
+		89B8C60F2C6476A6001F12D3 /* Negation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B8C60E2C6476A6001F12D3 /* Negation.swift */; };
+		89B8C6112C6478F2001F12D3 /* NegationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B8C6102C6478F2001F12D3 /* NegationTest.swift */; };
 		89C297CC2A911CDA002A143F /* AsyncTimerSequenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */; };
 		89C297CE2A92AB34002A143F /* AsyncPromiseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */; };
 		89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */ = {isa = PBXBuildFile; productRef = 89D8AC842B3211C600410644 /* CwlCatchException */; };
@@ -327,6 +329,8 @@
 		898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailMatcher.swift; sourceTree = "<group>"; };
 		899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitTest.swift; sourceTree = "<group>"; };
 		899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+AsyncAwait.swift"; sourceTree = "<group>"; };
+		89B8C60E2C6476A6001F12D3 /* Negation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Negation.swift; sourceTree = "<group>"; };
+		89B8C6102C6478F2001F12D3 /* NegationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegationTest.swift; sourceTree = "<group>"; };
 		89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequenceTest.swift; sourceTree = "<group>"; };
 		89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPromiseTest.swift; sourceTree = "<group>"; };
 		89EEF5A42A03293100988224 /* AsyncMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMatcher.swift; sourceTree = "<group>"; };
@@ -536,6 +540,7 @@
 				8923E60E2B47D06E00F3961A /* MapTest.swift */,
 				AE7ADE481C80C00D00B94CD3 /* MatchErrorTest.swift */,
 				DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */,
+				89B8C6102C6478F2001F12D3 /* NegationTest.swift */,
 				1FCF914E1C61C85A00B15DCB /* PostNotificationTest.swift */,
 				1F925EEB195C12C800ED456B /* RaisesExceptionTest.swift */,
 				A8A3B6E920712FC100E25A08 /* SatisfyAllOfTest.swift */,
@@ -597,6 +602,7 @@
 				1FD8CD1D1968AB07008ED995 /* MatcherProtocols.swift */,
 				AE7ADE441C80BF8000B94CD3 /* MatchError.swift */,
 				1FA0C3FE1E30B14500623165 /* Matcher.swift */,
+				89B8C60E2C6476A6001F12D3 /* Negation.swift */,
 				1FCF91521C61C8A400B15DCB /* PostNotification.swift */,
 				1FD8CD1E1968AB07008ED995 /* RaisesException.swift */,
 				A8F6B5BC2070186D00FCB5ED /* SatisfyAllOf.swift */,
@@ -893,6 +899,7 @@
 				964CFEFE1C4FF48900513336 /* ThrowAssertion.swift in Sources */,
 				1FD8CD591968AB07008ED995 /* EndWith.swift in Sources */,
 				1FD8CD351968AB07008ED995 /* DSL.swift in Sources */,
+				89B8C60F2C6476A6001F12D3 /* Negation.swift in Sources */,
 				7B5358BF1C38479700A23FAA /* SatisfyAnyOf.swift in Sources */,
 				896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */,
 				891729D72B18431D005CC866 /* Requirement.swift in Sources */,
@@ -920,6 +927,7 @@
 				1F925F00195C187600ED456B /* EndWithTest.swift in Sources */,
 				1F1B5AD51963E13900CA8BF9 /* BeAKindOfTest.swift in Sources */,
 				1F925F0F195C18F500ED456B /* BeLessThanOrEqualToTest.swift in Sources */,
+				89B8C6112C6478F2001F12D3 /* NegationTest.swift in Sources */,
 				CDBC39B92462EA7D00069677 /* PredicateTest.swift in Sources */,
 				8969624A2A5FAD5F00A7929D /* AsyncAllPassTest.swift in Sources */,
 				1F4A56671A3B305F009E1637 /* ObjCAsyncTest.m in Sources */,
