@@ -1,5 +1,4 @@
 {
-  "originHash" : "f14c33ce48473aca15a7346134d7546c72ed4d7b9e9e62243a4682949138cbe2",
   "pins" : [
     {
       "identity" : "cwlcatchexception",
@@ -18,25 +17,7 @@
         "revision" : "dc9af4781f2afdd1e68e90f80b8603be73ea7abc",
         "version" : "2.2.0"
       }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
-      "state" : {
-        "revision" : "4c6cc0a3b9e8f14b3ae2307c5ccae4de6167ac2c",
-        "version" : "600.0.0-prerelease-2024-06-12"
-      }
-    },
-    {
-      "identity" : "swift-testing",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/younata/swift-testing",
-      "state" : {
-        "branch" : "public-issues-pitch",
-        "revision" : "e945bad553d3c0b66ca489e2d52ad26119ce818d"
-      }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

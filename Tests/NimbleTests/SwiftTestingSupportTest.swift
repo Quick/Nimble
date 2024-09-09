@@ -6,7 +6,7 @@ import XCTest
 @Suite struct SwiftTestingSupportSuite {
     @Test func reportsAssertionFailuresToSwiftTesting() {
         withKnownIssue {
-            fail()
+            expect(1).to(equal(2))
         }
     }
 

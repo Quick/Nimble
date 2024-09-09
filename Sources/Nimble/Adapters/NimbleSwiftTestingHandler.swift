@@ -36,18 +36,9 @@ public func recordTestingFailure(_ message: String, location: SourceLocation) {
         column: Int(location.column)
     )
 
-    let issue = Testing.Issue(
-        kind: .expectationFailed(
-            Testing.Expectation(
-                mismatchedErrorDescription: message,
-                differenceDescription: nil,
-                isPassing: false,
-                isRequired: false,
-                sourceLocation: testingLocation
-            )
-        ),
-        sourceContext: SourceContext(sourceLocation: testingLocation)
+    Testing.Issue.record(
+        "\(message)",
+        sourceLocation: testingLocation
     )
-    issue.record()
 #endif
 }
