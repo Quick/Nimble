@@ -78,17 +78,26 @@ public class NMBWait: NSObject {
             case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")
             case .blockedRunLoop:
                 fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
-                    file: file, line: line)
+                     fileID: fileID, file: file, line: line, column: column)
             case .timedOut:
-                fail("Waited more than \(timeout.description)", file: file, line: line)
+                fail("Waited more than \(timeout.description)",
+                     fileID: fileID, file: file, line: line, column: column)
             case let .raisedException(exception):
-                fail("Unexpected exception raised: \(exception)")
+                fail("Unexpected exception raised: \(exception)",
+                     fileID: fileID, file: file, line: line, column: column
+                )
             case let .errorThrown(error):
-                fail("Unexpected error thrown: \(error)")
+                fail("Unexpected error thrown: \(error)",
+                     fileID: fileID, file: file, line: line, column: column
+                )
             case .completed(.exception(let exception)):
-                fail("Unexpected exception raised: \(exception)")
+                fail("Unexpected exception raised: \(exception)",
+                     fileID: fileID, file: file, line: line, column: column
+                )
             case .completed(.error(let error)):
-                fail("Unexpected error thrown: \(error)")
+                fail("Unexpected error thrown: \(error)",
+                     fileID: fileID, file: file, line: line, column: column
+                )
             case .completed(.none): // success
                 break
             }

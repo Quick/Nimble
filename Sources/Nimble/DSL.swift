@@ -86,7 +86,7 @@ public func fail(_ message: String, fileID: String = #fileID, file: FileString =
 }
 
 /// Always fails the test.
-public func fail(_ fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column) {
+public func fail(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column) {
     fail("fail() always fails", location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column))
 }
 
