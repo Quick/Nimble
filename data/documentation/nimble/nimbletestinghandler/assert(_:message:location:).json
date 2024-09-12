@@ -17,17 +17,17 @@
     "paths" : [
       [
         "doc:\/\/Nimble\/documentation\/Nimble",
-        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler"
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler\/assert(_:message:location:)"
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler\/assert(_:message:location:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:6Nimble0A13XCTestHandlerC6assert_7message8locationySb_AA14FailureMessageCAA14SourceLocationCtF",
+    "externalID" : "s:6Nimble0A14TestingHandlerC6assert_7message8locationySb_AA14FailureMessageCAA14SourceLocationCtF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -204,7 +204,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)"
+        "\/documentation\/nimble\/nimbletestinghandler\/assert(_:message:location:)"
       ],
       "traits" : [
         {
@@ -272,10 +272,10 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/failuremessage"
 },
-"doc://Nimble/documentation/Nimble/NimbleXCTestHandler": {
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler": {
   "abstract" : [
     {
-      "text" : "This assertion handler passes failures along to XCTest.",
+      "text" : "Default handler for Nimble. This assertion handler passes on to Swift Testing or XCTest.",
       "type" : "text"
     }
   ],
@@ -290,23 +290,23 @@
     },
     {
       "kind" : "identifier",
-      "text" : "NimbleXCTestHandler"
+      "text" : "NimbleTestingHandler"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "NimbleXCTestHandler"
+      "text" : "NimbleTestingHandler"
     }
   ],
   "role" : "symbol",
-  "title" : "NimbleXCTestHandler",
+  "title" : "NimbleTestingHandler",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nimblexctesthandler"
+  "url" : "\/documentation\/nimble\/nimbletestinghandler"
 },
-"doc://Nimble/documentation/Nimble/NimbleXCTestHandler/assert(_:message:location:)": {
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler/assert(_:message:location:)": {
   "abstract" : [
 
   ],
@@ -371,12 +371,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler\/assert(_:message:location:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler\/assert(_:message:location:)",
   "kind" : "symbol",
   "role" : "symbol",
   "title" : "assert(_:message:location:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)"
+  "url" : "\/documentation\/nimble\/nimbletestinghandler\/assert(_:message:location:)"
 },
 "doc://Nimble/documentation/Nimble/SourceLocation": {
   "abstract" : [

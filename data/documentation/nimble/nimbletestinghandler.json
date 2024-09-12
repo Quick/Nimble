@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Global backing interface for assertions that Nimble creates.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Defaults to a private test handler that passes through to Swift Testing or XCTest.",
+      "text" : "Default handler for Nimble. This assertion handler passes on to Swift Testing or XCTest.",
       "type" : "text"
     }
   ],
@@ -22,15 +14,15 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleAssertionHandler"
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:6Nimble0A16AssertionHandlerAA0bC0_pvp",
+    "externalID" : "s:6Nimble0A14TestingHandlerC",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "var"
+        "text" : "class"
       },
       {
         "kind" : "text",
@@ -38,16 +30,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "NimbleAssertionHandler"
-      },
-      {
-        "kind" : "text",
-        "text" : ": any "
-      },
-      {
-        "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:6Nimble16AssertionHandlerP",
-        "text" : "AssertionHandler"
+        "text" : "NimbleTestingHandler"
       }
     ],
     "modules" : [
@@ -55,10 +38,16 @@
         "name" : "Nimble"
       }
     ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "NimbleTestingHandler"
+      }
+    ],
     "role" : "symbol",
-    "roleHeading" : "Global Variable",
-    "symbolKind" : "var",
-    "title" : "NimbleAssertionHandler"
+    "roleHeading" : "Class",
+    "symbolKind" : "class",
+    "title" : "NimbleTestingHandler"
   },
   "primaryContentSections" : [
     {
@@ -73,7 +62,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "class"
             },
             {
               "kind" : "text",
@@ -81,50 +70,22 @@
             },
             {
               "kind" : "identifier",
-              "text" : "NimbleAssertionHandler"
-            },
-            {
-              "kind" : "text",
-              "text" : ": any "
-            },
-            {
-              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AssertionHandler",
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:6Nimble16AssertionHandlerP",
-              "text" : "AssertionHandler"
+              "text" : "NimbleTestingHandler"
             }
           ]
         }
       ],
       "kind" : "declarations"
-    },
+    }
+  ],
+  "relationshipsSections" : [
     {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "If neither Swift Testing or XCTest is available, you must assign your own assertion handler",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "before using any matchers, otherwise Nimble will abort the program.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/AssertionHandler"
       ],
-      "kind" : "content"
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
     }
   ],
   "schemaVersion" : {
@@ -135,10 +96,18 @@
   "sections" : [
 
   ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler\/assert(_:message:location:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/nimble\/nimbleassertionhandler"
+        "\/documentation\/nimble\/nimbletestinghandler"
       ],
       "traits" : [
         {
@@ -206,25 +175,17 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/assertionhandler"
 },
-"doc://Nimble/documentation/Nimble/NimbleAssertionHandler": {
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler": {
   "abstract" : [
     {
-      "text" : "Global backing interface for assertions that Nimble creates.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "Defaults to a private test handler that passes through to Swift Testing or XCTest.",
+      "text" : "Default handler for Nimble. This assertion handler passes on to Swift Testing or XCTest.",
       "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "class"
     },
     {
       "kind" : "text",
@@ -232,24 +193,93 @@
     },
     {
       "kind" : "identifier",
-      "text" : "NimbleAssertionHandler"
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleTestingHandler",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletestinghandler"
+},
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler/assert(_:message:location:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
     },
     {
       "kind" : "text",
-      "text" : ": any "
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "assert"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AssertionHandlerP",
-      "text" : "AssertionHandler"
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "message"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble14FailureMessageC",
+      "text" : "FailureMessage"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "location"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble14SourceLocationC",
+      "text" : "SourceLocation"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleAssertionHandler",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler\/assert(_:message:location:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "NimbleAssertionHandler",
+  "title" : "assert(_:message:location:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nimbleassertionhandler"
+  "url" : "\/documentation\/nimble\/nimbletestinghandler\/assert(_:message:location:)"
 }
 }
 }

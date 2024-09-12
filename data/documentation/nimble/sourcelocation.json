@@ -95,7 +95,8 @@
         "doc:\/\/Nimble\/s28CustomDebugStringConvertibleP",
         "doc:\/\/Nimble\/s23CustomStringConvertibleP",
         "doc:\/\/Nimble\/SQ",
-        "doc:\/\/Nimble\/SH"
+        "doc:\/\/Nimble\/SH",
+        "doc:\/\/Nimble\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -113,8 +114,11 @@
   "topicSections" : [
     {
       "identifiers" : [
+        "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/column",
         "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/description",
         "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/file",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/fileID",
+        "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/filePath",
         "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/line"
       ],
       "title" : "Instance Properties"
@@ -208,6 +212,40 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/sourcelocation"
 },
+"doc://Nimble/documentation/Nimble/SourceLocation/column": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/column",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "column",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/sourcelocation\/column"
+},
 "doc://Nimble/documentation/Nimble/SourceLocation/description": {
   "abstract" : [
 
@@ -246,10 +284,11 @@
   "abstract" : [
 
   ],
+  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "let"
+      "text" : "var"
     },
     {
       "kind" : "text",
@@ -275,6 +314,74 @@
   "title" : "file",
   "type" : "topic",
   "url" : "\/documentation\/nimble\/sourcelocation\/file"
+},
+"doc://Nimble/documentation/Nimble/SourceLocation/fileID": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/fileID",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "fileID",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/sourcelocation\/fileid"
+},
+"doc://Nimble/documentation/Nimble/SourceLocation/filePath": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "filePath"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/filePath",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "filePath",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/sourcelocation\/filepath"
 },
 "doc://Nimble/documentation/Nimble/SourceLocation/line": {
   "abstract" : [
@@ -318,6 +425,11 @@
 "doc://Nimble/s28CustomDebugStringConvertibleP": {
   "identifier" : "doc:\/\/Nimble\/s28CustomDebugStringConvertibleP",
   "title" : "Swift.CustomDebugStringConvertible",
+  "type" : "unresolvable"
+},
+"doc://Nimble/s8SendableP": {
+  "identifier" : "doc:\/\/Nimble\/s8SendableP",
+  "title" : "Swift.Sendable",
   "type" : "unresolvable"
 }
 }

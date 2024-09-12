@@ -127,9 +127,9 @@
   "topicSections" : [
     {
       "identifiers" : [
-        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/throwableUntil(timeout:file:line:action:)",
-        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(_:line:action:)",
-        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(timeout:file:line:action:)"
+        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/throwableUntil(timeout:fileID:file:line:column:action:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(_:file:line:column:action:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(timeout:fileID:file:line:column:action:)"
       ],
       "title" : "Type Methods"
     }
@@ -241,7 +241,7 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/nmbwait"
 },
-"doc://Nimble/documentation/Nimble/NMBWait/throwableUntil(timeout:file:line:action:)": {
+"doc://Nimble/documentation/Nimble/NMBWait/throwableUntil(timeout:fileID:file:line:column:action:)": {
   "abstract" : [
 
   ],
@@ -289,6 +289,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -307,6 +324,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -356,14 +390,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/throwableUntil(timeout:file:line:action:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/throwableUntil(timeout:fileID:file:line:column:action:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "throwableUntil(timeout:file:line:action:)",
+  "title" : "throwableUntil(timeout:fileID:file:line:column:action:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nmbwait\/throwableuntil(timeout:file:line:action:)"
+  "url" : "\/documentation\/nimble\/nmbwait\/throwableuntil(timeout:fileid:file:line:column:action:)"
 },
-"doc://Nimble/documentation/Nimble/NMBWait/until(_:line:action:)": {
+"doc://Nimble/documentation/Nimble/NMBWait/until(_:file:line:column:action:)": {
   "abstract" : [
 
   ],
@@ -394,6 +428,23 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
       "preciseIdentifier" : "s:6Nimble10FileStringa",
       "text" : "FileString"
     },
@@ -404,6 +455,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -445,14 +513,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(_:line:action:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(_:file:line:column:action:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "until(_:line:action:)",
+  "title" : "until(_:file:line:column:action:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nmbwait\/until(_:line:action:)"
+  "url" : "\/documentation\/nimble\/nmbwait\/until(_:file:line:column:action:)"
 },
-"doc://Nimble/documentation/Nimble/NMBWait/until(timeout:file:line:action:)": {
+"doc://Nimble/documentation/Nimble/NMBWait/until(timeout:fileID:file:line:column:action:)": {
   "abstract" : [
 
   ],
@@ -500,6 +568,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -518,6 +603,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -559,12 +661,12 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(timeout:file:line:action:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait\/until(timeout:fileID:file:line:column:action:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "until(timeout:file:line:action:)",
+  "title" : "until(timeout:fileID:file:line:column:action:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nmbwait\/until(timeout:file:line:action:)"
+  "url" : "\/documentation\/nimble\/nmbwait\/until(timeout:fileid:file:line:column:action:)"
 },
 "doc://Nimble/s23CustomStringConvertibleP": {
   "identifier" : "doc:\/\/Nimble\/s23CustomStringConvertibleP",

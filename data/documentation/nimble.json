@@ -407,6 +407,8 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage",
         "doc:\/\/Nimble\/documentation\/Nimble\/NMBWait",
         "doc:\/\/Nimble\/documentation\/Nimble\/NimbleShortXCTestHandler",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleSwiftTestingHandler",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
         "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler",
         "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation"
       ],
@@ -535,25 +537,25 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/equal(_:)-9l2si",
         "doc:\/\/Nimble\/documentation\/Nimble\/equal(_:)-fpzg",
         "doc:\/\/Nimble\/documentation\/Nimble\/equal(_:)-t0mf",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-2mr8i",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-58u5j",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-59120",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-5cchd",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-6ye9t",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-748cc",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-7htau",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-7qpwy",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-41vom",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-8270k",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-8wfby",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-9mpn3",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-11ihr",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-4yogq",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-6mfun",
-        "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-6rmwa",
-        "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:file:line:)",
-        "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:line:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-2csqt",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-38guh",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-3g2l0",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-6jipk",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7mlr2",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7npqm",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7yk0h",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-kv1j",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-1uq4t",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-2qkcj",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-93s8c",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-vzn5",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-223fj",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-3mc9y",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-3v8dw",
+        "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-xhbq",
+        "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:fileID:file:line:column:)",
         "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:location:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/fail(fileID:file:line:column:)",
         "doc:\/\/Nimble\/documentation\/Nimble\/gatherExpectations(silently:closure:)-2po6t",
         "doc:\/\/Nimble\/documentation\/Nimble\/gatherExpectations(silently:closure:)-75ohy",
         "doc:\/\/Nimble\/documentation\/Nimble\/gatherFailingExpectations(silently:closure:)-2g14s",
@@ -580,20 +582,21 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/prettyCollectionType(_:)-3wxmq",
         "doc:\/\/Nimble\/documentation\/Nimble\/prettyCollectionType(_:)-8eo0q",
         "doc:\/\/Nimble\/documentation\/Nimble\/recordFailure(_:location:)",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-16zcr",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-2sg1s",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-4be0k",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-5w0op",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-7at88",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-7pbrd",
-        "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-or36",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-3a46w",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-u53z",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-xk2k",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-1vgwt",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-228v4",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-3s28q",
-        "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-5wq4u",
+        "doc:\/\/Nimble\/documentation\/Nimble\/recordTestingFailure(_:location:)",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-44yvd",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-570ic",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-5u5iq",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-9jsi5",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-9sdlg",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-thjs",
+        "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-zz76",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-16re8",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-7p1cv",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-jk6",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-2n16l",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-2vg8e",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-3rcmb",
+        "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-58jfw",
         "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAllOf(_:)-2npr5",
         "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAllOf(_:)-99ble",
         "doc:\/\/Nimble\/documentation\/Nimble\/satisfyAllOf(_:)-nprr",
@@ -611,19 +614,19 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/throwError(closure:)-2uav9",
         "doc:\/\/Nimble\/documentation\/Nimble\/throwError(closure:)-6lkaq",
         "doc:\/\/Nimble\/documentation\/Nimble\/throwError(errorType:closure:)",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-13k8e",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-3x8y7",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-3y0k8",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-7jnzo",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(file:line:customError:_:)-5avgm",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(file:line:customError:_:)-6y8i4",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(file:line:customError:_:)-12fhs",
-        "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(file:line:customError:_:)-5t0tc",
-        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-1sonl",
-        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-3locq",
-        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-5xt23",
-        "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:file:line:closure:)-6mpkx",
-        "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:file:line:closure:)-n9cw"
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-2pedm",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-3w5pp",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-7bq8w",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-94o04",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(fileID:file:line:column:customError:_:)-430og",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(fileID:file:line:column:customError:_:)-ncpb",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(fileID:file:line:column:customError:_:)-8qogi",
+        "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(fileID:file:line:column:customError:_:)-ayfw",
+        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-5ski",
+        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-6pzxs",
+        "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-8j9ew",
+        "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:fileID:file:line:column:closure:)-5m4st",
+        "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:fileID:file:line:column:closure:)-80yqc"
       ],
       "title" : "Functions"
     },
@@ -11150,7 +11153,7 @@
       "type" : "text"
     },
     {
-      "text" : "Defaults to a private test handler that passes through to XCTest.",
+      "text" : "Defaults to a private test handler that passes through to Swift Testing or XCTest.",
       "type" : "text"
     }
   ],
@@ -11226,6 +11229,71 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/nimbleshortxctesthandler"
 },
+"doc://Nimble/documentation/Nimble/NimbleSwiftTestingHandler": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleSwiftTestingHandler"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleSwiftTestingHandler",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleSwiftTestingHandler"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleSwiftTestingHandler",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbleswifttestinghandler"
+},
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler": {
+  "abstract" : [
+    {
+      "text" : "Default handler for Nimble. This assertion handler passes on to Swift Testing or XCTest.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleTestingHandler",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletestinghandler"
+},
 "doc://Nimble/documentation/Nimble/NimbleTimeInterval": {
   "abstract" : [
     {
@@ -11287,15 +11355,7 @@
 "doc://Nimble/documentation/Nimble/NimbleXCTestHandler": {
   "abstract" : [
     {
-      "text" : "Default handler for Nimble. This assertion handler passes failures along to",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "XCTest.",
+      "text" : "This assertion handler passes failures along to XCTest.",
       "type" : "text"
     }
   ],
@@ -20711,7 +20771,7 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/equal(_:)-t0mf"
 },
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-2mr8i": {
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-2csqt": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -20751,6 +20811,23 @@
     {
       "kind" : "text",
       "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -20784,110 +20861,11 @@
     },
     {
       "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
-      "text" : "SyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-2mr8i",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expect(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-2mr8i"
-},
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-58u5j": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expect"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
       "text" : ", "
     },
     {
       "kind" : "externalParam",
-      "text" : "line"
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -20936,14 +20914,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-58u5j",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-2csqt",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expect(file:line:_:)",
+  "title" : "expect(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-58u5j"
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-2csqt"
 },
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-59120": {
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-38guh": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -20986,7 +20964,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "file"
+      "text" : "fileID"
     },
     {
       "kind" : "text",
@@ -20994,119 +20972,12 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
       "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
-      "text" : "AsyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-59120",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expect(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-59120"
-},
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-5cchd": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The value given is lazily evaluated.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expect"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
     },
     {
       "kind" : "externalParam",
@@ -21140,344 +21011,11 @@
     },
     {
       "kind" : "text",
-      "text" : ", () "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
-      "text" : "SyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-5cchd",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expect(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-5cchd"
-},
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-6ye9t": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expect"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
       "text" : ", "
     },
     {
       "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
-      "text" : "SyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-6ye9t",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expect(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-6ye9t"
-},
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-748cc": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The value given is lazily evaluated.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expect"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
-      "text" : "AsyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-748cc",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expect(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-748cc"
-},
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-7htau": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expect"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -21534,14 +21072,172 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-7htau",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-38guh",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expect(file:line:_:)",
+  "title" : "expect(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-7htau"
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-38guh"
 },
-"doc://Nimble/documentation/Nimble/expect(file:line:_:)-7qpwy": {
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-3g2l0": {
+  "abstract" : [
+    {
+      "text" : "Make an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expect"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-3g2l0",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expect(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-3g2l0"
+},
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-6jipk": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -21576,6 +21272,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -21594,6 +21307,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -21652,14 +21382,616 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(file:line:_:)-7qpwy",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-6jipk",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expect(file:line:_:)",
+  "title" : "expect(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expect(file:line:_:)-7qpwy"
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-6jipk"
 },
-"doc://Nimble/documentation/Nimble/expecta(file:line:_:)-41vom": {
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-7mlr2": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The value given is lazily evaluated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expect"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
+      "text" : "SyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7mlr2",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expect(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7mlr2"
+},
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-7npqm": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expect"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
+      "text" : "SyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7npqm",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expect(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7npqm"
+},
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-7yk0h": {
+  "abstract" : [
+    {
+      "text" : "Make an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The value given is lazily evaluated.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expect"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-7yk0h",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expect(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7yk0h"
+},
+"doc://Nimble/documentation/Nimble/expect(fileID:file:line:column:_:)-kv1j": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expect"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
+      "text" : "SyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expect(fileID:file:line:column:_:)-kv1j",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expect(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-kv1j"
+},
+"doc://Nimble/documentation/Nimble/expecta(fileID:file:line:column:_:)-1uq4t": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -21726,6 +22058,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -21744,6 +22093,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -21808,14 +22174,194 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-41vom",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-1uq4t",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expecta(file:line:_:)",
+  "title" : "expecta(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expecta(file:line:_:)-41vom"
+  "url" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-1uq4t"
 },
-"doc://Nimble/documentation/Nimble/expecta(file:line:_:)-8270k": {
+"doc://Nimble/documentation/Nimble/expecta(fileID:file:line:column:_:)-2qkcj": {
+  "abstract" : [
+    {
+      "text" : "Make an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This is provided to avoid  confusion between ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect -> SyncExpectation",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "  and ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect -> AsyncExpectation",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expecta"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-2qkcj",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expecta(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-2qkcj"
+},
+"doc://Nimble/documentation/Nimble/expecta(fileID:file:line:column:_:)-93s8c": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -21878,6 +22424,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -21896,6 +22459,209 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
+      "text" : "AsyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-93s8c",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "expecta(fileID:file:line:column:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-93s8c"
+},
+"doc://Nimble/documentation/Nimble/expecta(fileID:file:line:column:_:)-vzn5": {
+  "abstract" : [
+    {
+      "text" : "Make an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This is provided to avoid  confusion between ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect -> SyncExpectation",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : "  and ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect -> AsyncExpectation",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "expecta"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -21960,312 +22726,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-8270k",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(fileID:file:line:column:_:)-vzn5",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expecta(file:line:_:)",
+  "title" : "expecta(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expecta(file:line:_:)-8270k"
+  "url" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-vzn5"
 },
-"doc://Nimble/documentation/Nimble/expecta(file:line:_:)-8wfby": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "This is provided to avoid  confusion between ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect -> SyncExpectation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "  and ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect -> AsyncExpectation",
-      "type" : "codeVoice"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expecta"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
-      "text" : "AsyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-8wfby",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expecta(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expecta(file:line:_:)-8wfby"
-},
-"doc://Nimble/documentation/Nimble/expecta(file:line:_:)-9mpn3": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "This is provided to avoid  confusion between ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect -> SyncExpectation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : "  and ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect -> AsyncExpectation",
-      "type" : "codeVoice"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expecta"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncExpectationV",
-      "text" : "AsyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expecta(file:line:_:)-9mpn3",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expecta(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expecta(file:line:_:)-9mpn3"
-},
-"doc://Nimble/documentation/Nimble/expects(file:line:_:)-11ihr": {
+"doc://Nimble/documentation/Nimble/expects(fileID:file:line:column:_:)-223fj": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -22332,6 +22800,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -22350,6 +22835,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -22398,14 +22900,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-11ihr",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-223fj",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expects(file:line:_:)",
+  "title" : "expects(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expects(file:line:_:)-11ihr"
+  "url" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-223fj"
 },
-"doc://Nimble/documentation/Nimble/expects(file:line:_:)-4yogq": {
+"doc://Nimble/documentation/Nimble/expects(fileID:file:line:column:_:)-3mc9y": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -22464,6 +22966,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -22482,6 +23001,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -22532,154 +23068,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-4yogq",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-3mc9y",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expects(file:line:_:)",
+  "title" : "expects(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expects(file:line:_:)-4yogq"
+  "url" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-3mc9y"
 },
-"doc://Nimble/documentation/Nimble/expects(file:line:_:)-6mfun": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "This is provided as an alternative to ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " which avoids overloading with ",
-      "type" : "text"
-    },
-    {
-      "code" : "expect -> AsyncExpectation",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "expects"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
-      "text" : "SyncExpectation"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-6mfun",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "expects(file:line:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/expects(file:line:_:)-6mfun"
-},
-"doc://Nimble/documentation/Nimble/expects(file:line:_:)-6rmwa": {
+"doc://Nimble/documentation/Nimble/expects(fileID:file:line:column:_:)-3v8dw": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -22746,6 +23142,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -22764,6 +23177,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -22812,17 +23242,50 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(file:line:_:)-6rmwa",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-3v8dw",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "expects(file:line:_:)",
+  "title" : "expects(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/expects(file:line:_:)-6rmwa"
+  "url" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-3v8dw"
 },
-"doc://Nimble/documentation/Nimble/fail(_:file:line:)": {
+"doc://Nimble/documentation/Nimble/expects(fileID:file:line:column:_:)-xhbq": {
   "abstract" : [
     {
-      "text" : "Always fails the test with a message.",
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncExpectation",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "This is provided as an alternative to ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " which avoids overloading with ",
+      "type" : "text"
+    },
+    {
+      "code" : "expect -> AsyncExpectation",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -22837,11 +23300,27 @@
     },
     {
       "kind" : "identifier",
-      "text" : "fail"
+      "text" : "expects"
     },
     {
       "kind" : "text",
-      "text" : "("
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
@@ -22884,20 +23363,70 @@
     },
     {
       "kind" : "text",
-      "text" : ")"
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncExpectationV",
+      "text" : "SyncExpectation"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:file:line:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/expects(fileID:file:line:column:_:)-xhbq",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "fail(_:file:line:)",
+  "title" : "expects(fileID:file:line:column:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/fail(_:file:line:)"
+  "url" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-xhbq"
 },
-"doc://Nimble/documentation/Nimble/fail(_:line:)": {
+"doc://Nimble/documentation/Nimble/fail(_:fileID:file:line:column:)": {
   "abstract" : [
     {
-      "text" : "Always fails the test.",
+      "text" : "Always fails the test with a message.",
       "type" : "text"
     }
   ],
@@ -22917,6 +23446,40 @@
     {
       "kind" : "text",
       "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
     },
     {
       "kind" : "typeIdentifier",
@@ -22942,15 +23505,32 @@
     },
     {
       "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:line:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:fileID:file:line:column:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "fail(_:line:)",
+  "title" : "fail(_:fileID:file:line:column:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/fail(_:line:)"
+  "url" : "\/documentation\/nimble\/fail(_:fileid:file:line:column:)"
 },
 "doc://Nimble/documentation/Nimble/fail(_:location:)": {
   "abstract" : [
@@ -23009,6 +23589,106 @@
   "title" : "fail(_:location:)",
   "type" : "topic",
   "url" : "\/documentation\/nimble\/fail(_:location:)"
+},
+"doc://Nimble/documentation/Nimble/fail(fileID:file:line:column:)": {
+  "abstract" : [
+    {
+      "text" : "Always fails the test.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "fail"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(fileID:file:line:column:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "fail(fileID:file:line:column:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/fail(fileid:file:line:column:)"
 },
 "doc://Nimble/documentation/Nimble/gatherExpectations(silently:closure:)-2po6t": {
   "abstract" : [
@@ -25462,7 +26142,62 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/recordfailure(_:location:)"
 },
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-16zcr": {
+"doc://Nimble/documentation/Nimble/recordTestingFailure(_:location:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "recordTestingFailure"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "location"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble14SourceLocationC",
+      "text" : "SourceLocation"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/recordTestingFailure(_:location:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "recordTestingFailure(_:location:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/recordtestingfailure(_:location:)"
+},
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-44yvd": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -25505,6 +26240,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -25523,6 +26275,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -25596,14 +26365,523 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-16zcr",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-44yvd",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
+  "title" : "require(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-16zcr"
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-44yvd"
 },
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-2sg1s": {
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-570ic": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "require"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
+      "text" : "SyncRequirement"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-570ic",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "require(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-570ic"
+},
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-5u5iq": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "require"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
+      "text" : "SyncRequirement"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-5u5iq",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "require(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-5u5iq"
+},
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-9jsi5": {
+  "abstract" : [
+    {
+      "text" : "Make an ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncRequirement",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "require"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ")) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AsyncRequirementV",
+      "text" : "AsyncRequirement"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-9jsi5",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "require(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-9jsi5"
+},
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-9sdlg": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -25646,6 +26924,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -25664,6 +26959,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -25737,14 +27049,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-2sg1s",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-9sdlg",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
+  "title" : "require(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-2sg1s"
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-9sdlg"
 },
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-4be0k": {
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-thjs": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -25779,6 +27091,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -25797,6 +27126,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -25864,14 +27210,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-4be0k",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-thjs",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
+  "title" : "require(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-4be0k"
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-thjs"
 },
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-5w0op": {
+"doc://Nimble/documentation/Nimble/require(fileID:file:line:column:customError:_:)-zz76": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -25914,6 +27260,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -25932,6 +27295,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -25997,421 +27377,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-5w0op",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(fileID:file:line:column:customError:_:)-zz76",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
+  "title" : "require(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-5w0op"
+  "url" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-zz76"
 },
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-7at88": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "require"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
-      "text" : "SyncRequirement"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-7at88",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7at88"
-},
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-7pbrd": {
-  "abstract" : [
-    {
-      "text" : "Make a ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "require"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
-      "text" : "SyncRequirement"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-7pbrd",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7pbrd"
-},
-"doc://Nimble/documentation/Nimble/require(file:line:customError:_:)-or36": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncRequirement",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "require"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ")) -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncRequirementV",
-      "text" : "AsyncRequirement"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/require(file:line:customError:_:)-or36",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "require(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/require(file:line:customerror:_:)-or36"
-},
-"doc://Nimble/documentation/Nimble/requirea(file:line:customError:_:)-3a46w": {
+"doc://Nimble/documentation/Nimble/requirea(fileID:file:line:column:customError:_:)-16re8": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -26454,6 +27427,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -26472,6 +27462,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -26553,14 +27560,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-3a46w",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-16re8",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requirea(file:line:customError:_:)",
+  "title" : "requirea(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-3a46w"
+  "url" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-16re8"
 },
-"doc://Nimble/documentation/Nimble/requirea(file:line:customError:_:)-u53z": {
+"doc://Nimble/documentation/Nimble/requirea(fileID:file:line:column:customError:_:)-7p1cv": {
   "abstract" : [
     {
       "text" : "Make an ",
@@ -26600,6 +27607,23 @@
     {
       "kind" : "text",
       "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -26637,139 +27661,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () -> (() "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?)) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AsyncRequirementV",
-      "text" : "AsyncRequirement"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-u53z",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "requirea(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-u53z"
-},
-"doc://Nimble/documentation/Nimble/requirea(file:line:customError:_:)-xk2k": {
-  "abstract" : [
-    {
-      "text" : "Make an ",
-      "type" : "text"
-    },
-    {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncRequirement",
-      "isActive" : true,
-      "type" : "reference"
-    },
-    {
-      "text" : " on a given actual value. The closure is lazily invoked.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "requirea"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -26851,21 +27743,21 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(file:line:customError:_:)-xk2k",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-7p1cv",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requirea(file:line:customError:_:)",
+  "title" : "requirea(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-xk2k"
+  "url" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-7p1cv"
 },
-"doc://Nimble/documentation/Nimble/requires(file:line:customError:_:)-1vgwt": {
+"doc://Nimble/documentation/Nimble/requirea(fileID:file:line:column:customError:_:)-jk6": {
   "abstract" : [
     {
-      "text" : "Make a ",
+      "text" : "Make an ",
       "type" : "text"
     },
     {
-      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/AsyncRequirement",
       "isActive" : true,
       "type" : "reference"
     },
@@ -26885,7 +27777,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "requires"
+      "text" : "requirea"
     },
     {
       "kind" : "text",
@@ -26898,6 +27790,23 @@
     {
       "kind" : "text",
       "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
     },
     {
       "kind" : "externalParam",
@@ -26935,6 +27844,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "customError"
     },
     {
@@ -26952,6 +27878,14 @@
     },
     {
       "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
       "text" : "throws"
     },
     {
@@ -26964,12 +27898,20 @@
     },
     {
       "kind" : "text",
-      "text" : "?)) -> "
+      "text" : "?)) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
-      "text" : "SyncRequirement"
+      "preciseIdentifier" : "s:6Nimble16AsyncRequirementV",
+      "text" : "AsyncRequirement"
     },
     {
       "kind" : "text",
@@ -26984,14 +27926,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-1vgwt",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requirea(fileID:file:line:column:customError:_:)-jk6",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requires(file:line:customError:_:)",
+  "title" : "requirea(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-1vgwt"
+  "url" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-jk6"
 },
-"doc://Nimble/documentation/Nimble/requires(file:line:customError:_:)-228v4": {
+"doc://Nimble/documentation/Nimble/requires(fileID:file:line:column:customError:_:)-2n16l": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -27034,6 +27976,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -27052,6 +28011,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -27117,14 +28093,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-228v4",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-2n16l",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requires(file:line:customError:_:)",
+  "title" : "requires(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-228v4"
+  "url" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-2n16l"
 },
-"doc://Nimble/documentation/Nimble/requires(file:line:customError:_:)-3s28q": {
+"doc://Nimble/documentation/Nimble/requires(fileID:file:line:column:customError:_:)-2vg8e": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -27159,6 +28135,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -27177,6 +28170,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -27244,14 +28254,14 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-3s28q",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-2vg8e",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requires(file:line:customError:_:)",
+  "title" : "requires(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-3s28q"
+  "url" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-2vg8e"
 },
-"doc://Nimble/documentation/Nimble/requires(file:line:customError:_:)-5wq4u": {
+"doc://Nimble/documentation/Nimble/requires(fileID:file:line:column:customError:_:)-3rcmb": {
   "abstract" : [
     {
       "text" : "Make a ",
@@ -27294,6 +28304,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -27312,6 +28339,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -27377,12 +28421,179 @@
       "text" : ">"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(file:line:customError:_:)-5wq4u",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-3rcmb",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "requires(file:line:customError:_:)",
+  "title" : "requires(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-5wq4u"
+  "url" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-3rcmb"
+},
+"doc://Nimble/documentation/Nimble/requires(fileID:file:line:column:customError:_:)-58jfw": {
+  "abstract" : [
+    {
+      "text" : "Make a ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SyncRequirement",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " on a given actual value. The closure is lazily invoked.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "requires"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)) -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble15SyncRequirementV",
+      "text" : "SyncRequirement"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/requires(fileID:file:line:column:customError:_:)-58jfw",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "requires(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-58jfw"
 },
 "doc://Nimble/documentation/Nimble/satisfyAllOf(_:)-2npr5": {
   "abstract" : [
@@ -28786,7 +29997,7 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/throwerror(errortype:closure:)"
 },
-"doc://Nimble/documentation/Nimble/unwrap(file:line:customError:_:)-13k8e": {
+"doc://Nimble/documentation/Nimble/unwrap(fileID:file:line:column:customError:_:)-2pedm": {
   "abstract" : [
     {
       "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
@@ -28836,6 +30047,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -28870,6 +30098,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "customError"
     },
     {
@@ -28883,7 +30128,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?, () -> (() "
+      "text" : ")?, () "
     },
     {
       "kind" : "keyword",
@@ -28899,7 +30144,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?)) "
+      "text" : "?) "
     },
     {
       "kind" : "keyword",
@@ -28914,14 +30159,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-13k8e",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-2pedm",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwrap(file:line:customError:_:)",
+  "title" : "unwrap(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-13k8e"
+  "url" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-2pedm"
 },
-"doc://Nimble/documentation/Nimble/unwrap(file:line:customError:_:)-3x8y7": {
+"doc://Nimble/documentation/Nimble/unwrap(fileID:file:line:column:customError:_:)-3w5pp": {
   "abstract" : [
     {
       "text" : "Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.",
@@ -28971,6 +30216,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -28989,6 +30251,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -29065,149 +30344,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-3x8y7",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-3w5pp",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwrap(file:line:customError:_:)",
+  "title" : "unwrap(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3x8y7"
+  "url" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-3w5pp"
 },
-"doc://Nimble/documentation/Nimble/unwrap(file:line:customError:_:)-3y0k8": {
-  "abstract" : [
-    {
-      "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "As you can tell, this is a much less verbose equivalent to ",
-      "type" : "text"
-    },
-    {
-      "code" : "require(expression).toNot(beNil())",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "unwrap"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-3y0k8",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "unwrap(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3y0k8"
-},
-"doc://Nimble/documentation/Nimble/unwrap(file:line:customError:_:)-7jnzo": {
+"doc://Nimble/documentation/Nimble/unwrap(fileID:file:line:column:customError:_:)-7bq8w": {
   "abstract" : [
     {
       "text" : "Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.",
@@ -29257,6 +30401,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -29275,6 +30436,23 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -29351,14 +30529,183 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(file:line:customError:_:)-7jnzo",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-7bq8w",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwrap(file:line:customError:_:)",
+  "title" : "unwrap(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-7jnzo"
+  "url" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-7bq8w"
 },
-"doc://Nimble/documentation/Nimble/unwrapa(file:line:customError:_:)-5avgm": {
+"doc://Nimble/documentation/Nimble/unwrap(fileID:file:line:column:customError:_:)-94o04": {
+  "abstract" : [
+    {
+      "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "As you can tell, this is a much less verbose equivalent to ",
+      "type" : "text"
+    },
+    {
+      "code" : "require(expression).toNot(beNil())",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unwrap"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () -> (() "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?)) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrap(fileID:file:line:column:customError:_:)-94o04",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "unwrap(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-94o04"
+},
+"doc://Nimble/documentation/Nimble/unwrapa(fileID:file:line:column:customError:_:)-430og": {
   "abstract" : [
     {
       "text" : "Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.",
@@ -29408,6 +30755,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -29442,6 +30806,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "customError"
     },
     {
@@ -29455,7 +30836,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?, () -> (() "
+      "text" : ")?, () "
     },
     {
       "kind" : "keyword",
@@ -29479,7 +30860,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?)) "
+      "text" : "?) "
     },
     {
       "kind" : "keyword",
@@ -29502,14 +30883,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(file:line:customError:_:)-5avgm",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(fileID:file:line:column:customError:_:)-430og",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwrapa(file:line:customError:_:)",
+  "title" : "unwrapa(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-5avgm"
+  "url" : "\/documentation\/nimble\/unwrapa(fileid:file:line:column:customerror:_:)-430og"
 },
-"doc://Nimble/documentation/Nimble/unwrapa(file:line:customError:_:)-6y8i4": {
+"doc://Nimble/documentation/Nimble/unwrapa(fileID:file:line:column:customError:_:)-ncpb": {
   "abstract" : [
     {
       "text" : "Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.",
@@ -29559,6 +30940,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -29593,6 +30991,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "customError"
     },
     {
@@ -29606,7 +31021,7 @@
     },
     {
       "kind" : "text",
-      "text" : ")?, () "
+      "text" : ")?, () -> (() "
     },
     {
       "kind" : "keyword",
@@ -29630,7 +31045,7 @@
     },
     {
       "kind" : "text",
-      "text" : "?) "
+      "text" : "?)) "
     },
     {
       "kind" : "keyword",
@@ -29653,14 +31068,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(file:line:customError:_:)-6y8i4",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwrapa(fileID:file:line:column:customError:_:)-ncpb",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwrapa(file:line:customError:_:)",
+  "title" : "unwrapa(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-6y8i4"
+  "url" : "\/documentation\/nimble\/unwrapa(fileid:file:line:column:customerror:_:)-ncpb"
 },
-"doc://Nimble/documentation/Nimble/unwraps(file:line:customError:_:)-12fhs": {
+"doc://Nimble/documentation/Nimble/unwraps(fileID:file:line:column:customError:_:)-8qogi": {
   "abstract" : [
     {
       "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
@@ -29710,6 +31125,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -29728,6 +31160,192 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "customError"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s5ErrorP",
+      "text" : "Error"
+    },
+    {
+      "kind" : "text",
+      "text" : ")?, () "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : "?) "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "T"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(fileID:file:line:column:customError:_:)-8qogi",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "unwraps(fileID:file:line:column:customError:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/unwraps(fileid:file:line:column:customerror:_:)-8qogi"
+},
+"doc://Nimble/documentation/Nimble/unwraps(fileID:file:line:column:customError:_:)-ayfw": {
+  "abstract" : [
+    {
+      "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "As you can tell, this is a much less verbose equivalent to ",
+      "type" : "text"
+    },
+    {
+      "code" : "require(expression).toNot(beNil())",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unwraps"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "genericParameter",
+      "text" : "T"
+    },
+    {
+      "kind" : "text",
+      "text" : ">("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -29788,149 +31406,14 @@
       "text" : "T"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(file:line:customError:_:)-12fhs",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(fileID:file:line:column:customError:_:)-ayfw",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "unwraps(file:line:customError:_:)",
+  "title" : "unwraps(fileID:file:line:column:customError:_:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-12fhs"
+  "url" : "\/documentation\/nimble\/unwraps(fileid:file:line:column:customerror:_:)-ayfw"
 },
-"doc://Nimble/documentation/Nimble/unwraps(file:line:customError:_:)-5t0tc": {
-  "abstract" : [
-    {
-      "text" : "Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "As you can tell, this is a much less verbose equivalent to ",
-      "type" : "text"
-    },
-    {
-      "code" : "require(expression).toNot(beNil())",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "unwraps"
-    },
-    {
-      "kind" : "text",
-      "text" : "<"
-    },
-    {
-      "kind" : "genericParameter",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : ">("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "customError"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s5ErrorP",
-      "text" : "Error"
-    },
-    {
-      "kind" : "text",
-      "text" : ")?, () "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    },
-    {
-      "kind" : "text",
-      "text" : "?) "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "text" : "T"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/unwraps(file:line:customError:_:)-5t0tc",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "unwraps(file:line:customError:_:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-5t0tc"
-},
-"doc://Nimble/documentation/Nimble/waitUntil(timeout:file:line:action:)-1sonl": {
+"doc://Nimble/documentation/Nimble/waitUntil(timeout:fileID:file:line:column:action:)-5ski": {
   "abstract" : [
     {
       "text" : "Wait asynchronously until the done closure is called or the timeout has been reached.",
@@ -29973,6 +31456,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -30007,103 +31507,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "action"
-    },
-    {
-      "kind" : "text",
-      "text" : ": (() -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ") "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "async"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-1sonl",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "waitUntil(timeout:file:line:action:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-1sonl"
-},
-"doc://Nimble/documentation/Nimble/waitUntil(timeout:file:line:action:)-3locq": {
-  "abstract" : [
-    {
-      "text" : "Wait asynchronously until the done closure is called or the timeout has been reached.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "waitUntil"
-    },
-    {
-      "kind" : "text",
-      "text" : "("
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "timeout"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
-      "text" : "NimbleTimeInterval"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -30145,14 +31549,14 @@
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-3locq",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-5ski",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "waitUntil(timeout:file:line:action:)",
+  "title" : "waitUntil(timeout:fileID:file:line:column:action:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-3locq"
+  "url" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-5ski"
 },
-"doc://Nimble/documentation/Nimble/waitUntil(timeout:file:line:action:)-5xt23": {
+"doc://Nimble/documentation/Nimble/waitUntil(timeout:fileID:file:line:column:action:)-6pzxs": {
   "abstract" : [
     {
       "text" : "Wait asynchronously until the done closure is called or the timeout has been reached.",
@@ -30195,6 +31599,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -30213,6 +31634,170 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "action"
+    },
+    {
+      "kind" : "text",
+      "text" : ": (() -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "async"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-6pzxs",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "waitUntil(timeout:fileID:file:line:column:action:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-6pzxs"
+},
+"doc://Nimble/documentation/Nimble/waitUntil(timeout:fileID:file:line:column:action:)-8j9ew": {
+  "abstract" : [
+    {
+      "text" : "Wait asynchronously until the done closure is called or the timeout has been reached.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "waitUntil"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "timeout"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble0A12TimeIntervalO",
+      "text" : "NimbleTimeInterval"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -30266,14 +31851,14 @@
       "text" : "async"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:file:line:action:)-5xt23",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/waitUntil(timeout:fileID:file:line:column:action:)-8j9ew",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "waitUntil(timeout:file:line:action:)",
+  "title" : "waitUntil(timeout:fileID:file:line:column:action:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-5xt23"
+  "url" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-8j9ew"
 },
-"doc://Nimble/documentation/Nimble/withAssertionHandler(_:file:line:closure:)-6mpkx": {
+"doc://Nimble/documentation/Nimble/withAssertionHandler(_:fileID:file:line:column:closure:)-5m4st": {
   "abstract" : [
     {
       "text" : "Allows you to temporarily replace the current Nimble assertion handler with",
@@ -30316,6 +31901,23 @@
     },
     {
       "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
       "text" : "file"
     },
     {
@@ -30334,6 +31936,165 @@
     {
       "kind" : "externalParam",
       "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "closure"
+    },
+    {
+      "kind" : "text",
+      "text" : ": () "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    },
+    {
+      "kind" : "text",
+      "text" : " -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s4Voida",
+      "text" : "Void"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:fileID:file:line:column:closure:)-5m4st",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "withAssertionHandler(_:fileID:file:line:column:closure:)",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/withassertionhandler(_:fileid:file:line:column:closure:)-5m4st"
+},
+"doc://Nimble/documentation/Nimble/withAssertionHandler(_:fileID:file:line:column:closure:)-80yqc": {
+  "abstract" : [
+    {
+      "text" : "Allows you to temporarily replace the current Nimble assertion handler with",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "the one provided for the scope of the closure.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "withAssertionHandler"
+    },
+    {
+      "kind" : "text",
+      "text" : "(any "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble16AssertionHandlerP",
+      "text" : "AssertionHandler"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "fileID"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "file"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
     },
     {
       "kind" : "text",
@@ -30386,120 +32147,12 @@
       "text" : "async"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:file:line:closure:)-6mpkx",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:fileID:file:line:column:closure:)-80yqc",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "withAssertionHandler(_:file:line:closure:)",
+  "title" : "withAssertionHandler(_:fileID:file:line:column:closure:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-6mpkx"
-},
-"doc://Nimble/documentation/Nimble/withAssertionHandler(_:file:line:closure:)-n9cw": {
-  "abstract" : [
-    {
-      "text" : "Allows you to temporarily replace the current Nimble assertion handler with",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "the one provided for the scope of the closure.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "func"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "withAssertionHandler"
-    },
-    {
-      "kind" : "text",
-      "text" : "(any "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble16AssertionHandlerP",
-      "text" : "AssertionHandler"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "file"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "line"
-    },
-    {
-      "kind" : "text",
-      "text" : ": "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Su",
-      "text" : "UInt"
-    },
-    {
-      "kind" : "text",
-      "text" : ", "
-    },
-    {
-      "kind" : "externalParam",
-      "text" : "closure"
-    },
-    {
-      "kind" : "text",
-      "text" : ": () "
-    },
-    {
-      "kind" : "keyword",
-      "text" : "throws"
-    },
-    {
-      "kind" : "text",
-      "text" : " -> "
-    },
-    {
-      "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:s4Voida",
-      "text" : "Void"
-    },
-    {
-      "kind" : "text",
-      "text" : ")"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/withAssertionHandler(_:file:line:closure:)-n9cw",
-  "kind" : "symbol",
-  "role" : "symbol",
-  "title" : "withAssertionHandler(_:file:line:closure:)",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-n9cw"
+  "url" : "\/documentation\/nimble\/withassertionhandler(_:fileid:file:line:column:closure:)-80yqc"
 }
 }
 }

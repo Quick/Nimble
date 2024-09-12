@@ -261,18 +261,18 @@
                 "type" : "groupMarker"
               },
               {
-                "path" : "\/documentation\/nimble\/nmbwait\/throwableuntil(timeout:file:line:action:)",
-                "title" : "class func throwableUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) throws -> Void)",
+                "path" : "\/documentation\/nimble\/nmbwait\/throwableuntil(timeout:fileid:file:line:column:action:)",
+                "title" : "class func throwableUntil(timeout: NimbleTimeInterval, fileID: String, file: FileString, line: UInt, column: UInt, action: (() -> Void) throws -> Void)",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/nimble\/nmbwait\/until(_:line:action:)",
-                "title" : "class func until(FileString, line: UInt, action: (() -> Void) -> Void)",
+                "path" : "\/documentation\/nimble\/nmbwait\/until(_:file:line:column:action:)",
+                "title" : "class func until(String, file: FileString, line: UInt, column: UInt, action: (() -> Void) -> Void)",
                 "type" : "method"
               },
               {
-                "path" : "\/documentation\/nimble\/nmbwait\/until(timeout:file:line:action:)",
-                "title" : "class func until(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void)",
+                "path" : "\/documentation\/nimble\/nmbwait\/until(timeout:fileid:file:line:column:action:)",
+                "title" : "class func until(timeout: NimbleTimeInterval, fileID: String, file: FileString, line: UInt, column: UInt, action: (() -> Void) -> Void)",
                 "type" : "method"
               }
             ],
@@ -303,6 +303,38 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/nimble\/nimbleswifttestinghandler\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nimbleswifttestinghandler",
+            "title" : "NimbleSwiftTestingHandler",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/nimble\/nimbletestinghandler\/assert(_:message:location:)",
+                "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
+                "type" : "method"
+              }
+            ],
+            "path" : "\/documentation\/nimble\/nimbletestinghandler",
+            "title" : "NimbleTestingHandler",
+            "type" : "class"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
+              },
+              {
                 "path" : "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)",
                 "title" : "func assert(Bool, message: FailureMessage, location: SourceLocation)",
                 "type" : "method"
@@ -319,13 +351,28 @@
                 "type" : "groupMarker"
               },
               {
+                "path" : "\/documentation\/nimble\/sourcelocation\/column",
+                "title" : "let column: UInt",
+                "type" : "property"
+              },
+              {
                 "path" : "\/documentation\/nimble\/sourcelocation\/description",
                 "title" : "var description: String",
                 "type" : "property"
               },
               {
                 "path" : "\/documentation\/nimble\/sourcelocation\/file",
-                "title" : "let file: FileString",
+                "title" : "var file: FileString",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/sourcelocation\/fileid",
+                "title" : "let fileID: String",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/nimble\/sourcelocation\/filepath",
+                "title" : "let filePath: FileString",
                 "type" : "property"
               },
               {
@@ -2086,98 +2133,98 @@
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-2mr8i",
-            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-2csqt",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-58u5j",
-            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-38guh",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> T?)) -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-59120",
-            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() async throws -> T)) -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-3g2l0",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> T)) -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-5cchd",
-            "title" : "func expect<T>(file: FileString, line: UInt, () throws -> T?) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-6jipk",
+            "title" : "func expect(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> Void)) -> AsyncExpectation<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-6ye9t",
-            "title" : "func expect(file: FileString, line: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7mlr2",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () throws -> T?) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-748cc",
-            "title" : "func expect<T>(file: FileString, line: UInt, () async throws -> T?) -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7npqm",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-7htau",
-            "title" : "func expect<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-7yk0h",
+            "title" : "func expect<T>(fileID: String, file: FileString, line: UInt, column: UInt, () async throws -> T?) -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expect(file:line:_:)-7qpwy",
-            "title" : "func expect(file: FileString, line: UInt, () -> (() async throws -> Void)) -> AsyncExpectation<Void>",
+            "path" : "\/documentation\/nimble\/expect(fileid:file:line:column:_:)-kv1j",
+            "title" : "func expect(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-41vom",
-            "title" : "func expecta<T>(file: FileString, line: UInt, () async throws -> T?) async -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-1uq4t",
+            "title" : "func expecta<T>(fileID: String, file: FileString, line: UInt, column: UInt, () async throws -> T?) async -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-8270k",
-            "title" : "func expecta<T>(file: FileString, line: UInt, () -> (() async throws -> T?)) async -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-2qkcj",
+            "title" : "func expecta(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> Void)) async -> AsyncExpectation<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-8wfby",
-            "title" : "func expecta<T>(file: FileString, line: UInt, () -> (() async throws -> T)) async -> AsyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-93s8c",
+            "title" : "func expecta<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> T)) async -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expecta(file:line:_:)-9mpn3",
-            "title" : "func expecta(file: FileString, line: UInt, () -> (() async throws -> Void)) async -> AsyncExpectation<Void>",
+            "path" : "\/documentation\/nimble\/expecta(fileid:file:line:column:_:)-vzn5",
+            "title" : "func expecta<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() async throws -> T?)) async -> AsyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expects(file:line:_:)-11ihr",
-            "title" : "func expects<T>(file: FileString, line: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-223fj",
+            "title" : "func expects<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> T?)) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expects(file:line:_:)-4yogq",
-            "title" : "func expects(file: FileString, line: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
+            "path" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-3mc9y",
+            "title" : "func expects(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> Void)) -> SyncExpectation<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expects(file:line:_:)-6mfun",
-            "title" : "func expects<T>(file: FileString, line: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-3v8dw",
+            "title" : "func expects<T>(fileID: String, file: FileString, line: UInt, column: UInt, () throws -> T?) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/expects(file:line:_:)-6rmwa",
-            "title" : "func expects<T>(file: FileString, line: UInt, () throws -> T?) -> SyncExpectation<T>",
+            "path" : "\/documentation\/nimble\/expects(fileid:file:line:column:_:)-xhbq",
+            "title" : "func expects<T>(fileID: String, file: FileString, line: UInt, column: UInt, () -> (() throws -> T)) -> SyncExpectation<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/fail(_:file:line:)",
-            "title" : "func fail(String, file: FileString, line: UInt)",
-            "type" : "func"
-          },
-          {
-            "path" : "\/documentation\/nimble\/fail(_:line:)",
-            "title" : "func fail(FileString, line: UInt)",
+            "path" : "\/documentation\/nimble\/fail(_:fileid:file:line:column:)",
+            "title" : "func fail(String, fileID: String, file: FileString, line: UInt, column: UInt)",
             "type" : "func"
           },
           {
             "path" : "\/documentation\/nimble\/fail(_:location:)",
             "title" : "func fail(String, location: SourceLocation)",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/fail(fileid:file:line:column:)",
+            "title" : "func fail(fileID: String, file: FileString, line: UInt, column: UInt)",
             "type" : "func"
           },
           {
@@ -2311,73 +2358,78 @@
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-16zcr",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/recordtestingfailure(_:location:)",
+            "title" : "func recordTestingFailure(String, location: SourceLocation)",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-2sg1s",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-44yvd",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T?)) -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-4be0k",
-            "title" : "func require(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-570ic",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-5w0op",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-5u5iq",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7at88",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-9jsi5",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T)) -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-7pbrd",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-9sdlg",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () async throws -> T?) -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/require(file:line:customerror:_:)-or36",
-            "title" : "func require<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T)) -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-thjs",
+            "title" : "func require(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-3a46w",
-            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/require(fileid:file:line:column:customerror:_:)-zz76",
+            "title" : "func require<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-u53z",
-            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-16re8",
+            "title" : "func requirea<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () async throws -> T?) async -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requirea(file:line:customerror:_:)-xk2k",
-            "title" : "func requirea<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T)) async -> AsyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-7p1cv",
+            "title" : "func requirea<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T)) async -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-1vgwt",
-            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/requirea(fileid:file:line:column:customerror:_:)-jk6",
+            "title" : "func requirea<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async -> AsyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-228v4",
-            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-2n16l",
+            "title" : "func requires<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () throws -> T?) -> SyncRequirement<T>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-3s28q",
-            "title" : "func requires(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
+            "path" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-2vg8e",
+            "title" : "func requires(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> Void)) -> SyncRequirement<Void>",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/requires(file:line:customerror:_:)-5wq4u",
-            "title" : "func requires<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
+            "path" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-3rcmb",
+            "title" : "func requires<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T)) -> SyncRequirement<T>",
+            "type" : "func"
+          },
+          {
+            "path" : "\/documentation\/nimble\/requires(fileid:file:line:column:customerror:_:)-58jfw",
+            "title" : "func requires<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T?)) -> SyncRequirement<T>",
             "type" : "func"
           },
           {
@@ -2466,68 +2518,68 @@
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-13k8e",
-            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
+            "path" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-2pedm",
+            "title" : "func unwrap<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3x8y7",
-            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
+            "path" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-3w5pp",
+            "title" : "func unwrap<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-3y0k8",
-            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
+            "path" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-7bq8w",
+            "title" : "func unwrap<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrap(file:line:customerror:_:)-7jnzo",
-            "title" : "func unwrap<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
+            "path" : "\/documentation\/nimble\/unwrap(fileid:file:line:column:customerror:_:)-94o04",
+            "title" : "func unwrap<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-5avgm",
-            "title" : "func unwrapa<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
+            "path" : "\/documentation\/nimble\/unwrapa(fileid:file:line:column:customerror:_:)-430og",
+            "title" : "func unwrapa<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwrapa(file:line:customerror:_:)-6y8i4",
-            "title" : "func unwrapa<T>(file: FileString, line: UInt, customError: (any Error)?, () async throws -> T?) async throws -> T",
+            "path" : "\/documentation\/nimble\/unwrapa(fileid:file:line:column:customerror:_:)-ncpb",
+            "title" : "func unwrapa<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() async throws -> T?)) async throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-12fhs",
-            "title" : "func unwraps<T>(file: FileString, line: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
+            "path" : "\/documentation\/nimble\/unwraps(fileid:file:line:column:customerror:_:)-8qogi",
+            "title" : "func unwraps<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/unwraps(file:line:customerror:_:)-5t0tc",
-            "title" : "func unwraps<T>(file: FileString, line: UInt, customError: (any Error)?, () throws -> T?) throws -> T",
+            "path" : "\/documentation\/nimble\/unwraps(fileid:file:line:column:customerror:_:)-ayfw",
+            "title" : "func unwraps<T>(fileID: String, file: FileString, line: UInt, column: UInt, customError: (any Error)?, () -> (() throws -> T?)) throws -> T",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-1sonl",
-            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void) async",
+            "path" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-5ski",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, fileID: String, file: FileString, line: UInt, column: UInt, action: (() -> Void) -> Void)",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-3locq",
-            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) -> Void)",
+            "path" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-6pzxs",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, fileID: String, file: FileString, line: UInt, column: UInt, action: (() -> Void) -> Void) async",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/waituntil(timeout:file:line:action:)-5xt23",
-            "title" : "func waitUntil(timeout: NimbleTimeInterval, file: FileString, line: UInt, action: (() -> Void) async -> Void) async",
+            "path" : "\/documentation\/nimble\/waituntil(timeout:fileid:file:line:column:action:)-8j9ew",
+            "title" : "func waitUntil(timeout: NimbleTimeInterval, fileID: String, file: FileString, line: UInt, column: UInt, action: (() -> Void) async -> Void) async",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-6mpkx",
-            "title" : "func withAssertionHandler(any AssertionHandler, file: FileString, line: UInt, closure: () async throws -> Void) async",
+            "path" : "\/documentation\/nimble\/withassertionhandler(_:fileid:file:line:column:closure:)-5m4st",
+            "title" : "func withAssertionHandler(any AssertionHandler, fileID: String, file: FileString, line: UInt, column: UInt, closure: () throws -> Void)",
             "type" : "func"
           },
           {
-            "path" : "\/documentation\/nimble\/withassertionhandler(_:file:line:closure:)-n9cw",
-            "title" : "func withAssertionHandler(any AssertionHandler, file: FileString, line: UInt, closure: () throws -> Void)",
+            "path" : "\/documentation\/nimble\/withassertionhandler(_:fileid:file:line:column:closure:)-80yqc",
+            "title" : "func withAssertionHandler(any AssertionHandler, fileID: String, file: FileString, line: UInt, column: UInt, closure: () async throws -> Void) async",
             "type" : "func"
           },
           {

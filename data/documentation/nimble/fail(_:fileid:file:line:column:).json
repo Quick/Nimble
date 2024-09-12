@@ -1,33 +1,24 @@
 {
   "abstract" : [
     {
-      "text" : "Inherited from ",
-      "type" : "text"
-    },
-    {
-      "code" : "AssertionHandler.assert(_:message:location:)",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Always fails the test with a message.",
       "type" : "text"
     }
   ],
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/Nimble\/documentation\/Nimble",
-        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler"
+        "doc:\/\/Nimble\/documentation\/Nimble"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler\/assert(_:message:location:)"
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:fileID:file:line:column:)"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:6Nimble0A13XCTestHandlerC6assert_7message8locationySb_AA14FailureMessageCAA14SourceLocationCtF",
+    "externalID" : "s:6Nimble4fail_6fileID0C04line6columnySS_SSs12StaticStringVS2utF",
     "fragments" : [
       {
         "kind" : "keyword",
@@ -39,7 +30,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "assert"
+        "text" : "fail"
       },
       {
         "kind" : "text",
@@ -47,8 +38,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:Sb",
-        "text" : "Bool"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       },
       {
         "kind" : "text",
@@ -56,7 +47,7 @@
       },
       {
         "kind" : "externalParam",
-        "text" : "message"
+        "text" : "fileID"
       },
       {
         "kind" : "text",
@@ -64,8 +55,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:6Nimble14FailureMessageC",
-        "text" : "FailureMessage"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       },
       {
         "kind" : "text",
@@ -73,7 +64,7 @@
       },
       {
         "kind" : "externalParam",
-        "text" : "location"
+        "text" : "file"
       },
       {
         "kind" : "text",
@@ -81,8 +72,42 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:6Nimble14SourceLocationC",
-        "text" : "SourceLocation"
+        "preciseIdentifier" : "s:6Nimble10FileStringa",
+        "text" : "FileString"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "line"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Su",
+        "text" : "UInt"
+      },
+      {
+        "kind" : "text",
+        "text" : ", "
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "column"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Su",
+        "text" : "UInt"
       },
       {
         "kind" : "text",
@@ -95,9 +120,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Instance Method",
-    "symbolKind" : "method",
-    "title" : "assert(_:message:location:)"
+    "roleHeading" : "Function",
+    "symbolKind" : "func",
+    "title" : "fail(_:fileID:file:line:column:)"
   },
   "primaryContentSections" : [
     {
@@ -120,7 +145,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "assert"
+              "text" : "fail"
             },
             {
               "kind" : "text",
@@ -136,23 +161,6 @@
             },
             {
               "kind" : "internalParam",
-              "text" : "assertion"
-            },
-            {
-              "kind" : "text",
-              "text" : ": "
-            },
-            {
-              "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:Sb",
-              "text" : "Bool"
-            },
-            {
-              "kind" : "text",
-              "text" : ", "
-            },
-            {
-              "kind" : "externalParam",
               "text" : "message"
             },
             {
@@ -160,10 +168,9 @@
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:6Nimble14FailureMessageC",
-              "text" : "FailureMessage"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             },
             {
               "kind" : "text",
@@ -171,17 +178,100 @@
             },
             {
               "kind" : "externalParam",
-              "text" : "location"
+              "text" : "fileID"
             },
             {
               "kind" : "text",
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:6Nimble14SourceLocationC",
-              "text" : "SourceLocation"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "#fileID"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "file"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FileString",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:6Nimble10FileStringa",
+              "text" : "FileString"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "#filePath"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "line"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Su",
+              "text" : "UInt"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "#line"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "column"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Su",
+              "text" : "UInt"
+            },
+            {
+              "kind" : "text",
+              "text" : " = "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "#column"
             },
             {
               "kind" : "text",
@@ -204,7 +294,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)"
+        "\/documentation\/nimble\/fail(_:fileid:file:line:column:)"
       ],
       "traits" : [
         {
@@ -238,77 +328,43 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble"
 },
-"doc://Nimble/documentation/Nimble/FailureMessage": {
-  "abstract" : [
-    {
-      "text" : "Encapsulates the failure message that matchers can report to the end user.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "FailureMessage"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FailureMessage",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "FailureMessage"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "FailureMessage",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/failuremessage"
-},
-"doc://Nimble/documentation/Nimble/NimbleXCTestHandler": {
-  "abstract" : [
-    {
-      "text" : "This assertion handler passes failures along to XCTest.",
-      "type" : "text"
-    }
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "NimbleXCTestHandler"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "NimbleXCTestHandler"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "NimbleXCTestHandler",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/nimblexctesthandler"
-},
-"doc://Nimble/documentation/Nimble/NimbleXCTestHandler/assert(_:message:location:)": {
+"doc://Nimble/documentation/Nimble/FileString": {
   "abstract" : [
 
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "typealias"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "FileString"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FileString",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "FileString"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "FileString",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/filestring"
+},
+"doc://Nimble/documentation/Nimble/fail(_:fileID:file:line:column:)": {
+  "abstract" : [
+    {
+      "text" : "Always fails the test with a message.",
+      "type" : "text"
+    }
   ],
   "fragments" : [
     {
@@ -321,7 +377,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "assert"
+      "text" : "fail"
     },
     {
       "kind" : "text",
@@ -329,8 +385,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sb",
-      "text" : "Bool"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
@@ -338,7 +394,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "message"
+      "text" : "fileID"
     },
     {
       "kind" : "text",
@@ -346,8 +402,8 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble14FailureMessageC",
-      "text" : "FailureMessage"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     },
     {
       "kind" : "text",
@@ -355,7 +411,7 @@
     },
     {
       "kind" : "externalParam",
-      "text" : "location"
+      "text" : "file"
     },
     {
       "kind" : "text",
@@ -363,51 +419,54 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble14SourceLocationC",
-      "text" : "SourceLocation"
+      "preciseIdentifier" : "s:6Nimble10FileStringa",
+      "text" : "FileString"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "line"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "column"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Su",
+      "text" : "UInt"
     },
     {
       "kind" : "text",
       "text" : ")"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler\/assert(_:message:location:)",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/fail(_:fileID:file:line:column:)",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "assert(_:message:location:)",
+  "title" : "fail(_:fileID:file:line:column:)",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/nimblexctesthandler\/assert(_:message:location:)"
-},
-"doc://Nimble/documentation/Nimble/SourceLocation": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "class"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "SourceLocation"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "SourceLocation"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "SourceLocation",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/sourcelocation"
+  "url" : "\/documentation\/nimble\/fail(_:fileid:file:line:column:)"
 }
 }
 }

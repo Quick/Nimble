@@ -84,6 +84,8 @@
         "doc:\/\/Nimble\/documentation\/Nimble\/AssertionDispatcher",
         "doc:\/\/Nimble\/documentation\/Nimble\/AssertionRecorder",
         "doc:\/\/Nimble\/documentation\/Nimble\/NimbleShortXCTestHandler",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleSwiftTestingHandler",
+        "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
         "doc:\/\/Nimble\/documentation\/Nimble\/NimbleXCTestHandler"
       ],
       "kind" : "relationships",
@@ -377,18 +379,75 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/nimbleshortxctesthandler"
 },
+"doc://Nimble/documentation/Nimble/NimbleSwiftTestingHandler": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleSwiftTestingHandler"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleSwiftTestingHandler",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleSwiftTestingHandler"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleSwiftTestingHandler",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbleswifttestinghandler"
+},
+"doc://Nimble/documentation/Nimble/NimbleTestingHandler": {
+  "abstract" : [
+    {
+      "text" : "Default handler for Nimble. This assertion handler passes on to Swift Testing or XCTest.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "class"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/NimbleTestingHandler",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "NimbleTestingHandler"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "NimbleTestingHandler",
+  "type" : "topic",
+  "url" : "\/documentation\/nimble\/nimbletestinghandler"
+},
 "doc://Nimble/documentation/Nimble/NimbleXCTestHandler": {
   "abstract" : [
     {
-      "text" : "Default handler for Nimble. This assertion handler passes failures along to",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "XCTest.",
+      "text" : "This assertion handler passes failures along to XCTest.",
       "type" : "text"
     }
   ],

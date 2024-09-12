@@ -9,15 +9,15 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/file"
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/fileID"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:6Nimble14SourceLocationC4files12StaticStringVvp",
+    "externalID" : "s:6Nimble14SourceLocationC6fileIDSSvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "var"
+        "text" : "let"
       },
       {
         "kind" : "text",
@@ -25,7 +25,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "file"
+        "text" : "fileID"
       },
       {
         "kind" : "text",
@@ -33,8 +33,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:6Nimble10FileStringa",
-        "text" : "FileString"
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
       }
     ],
     "modules" : [
@@ -42,13 +42,10 @@
         "name" : "Nimble"
       }
     ],
-    "platforms" : [
-
-    ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "file"
+    "title" : "fileID"
   },
   "primaryContentSections" : [
     {
@@ -63,7 +60,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "let"
             },
             {
               "kind" : "text",
@@ -71,29 +68,16 @@
             },
             {
               "kind" : "identifier",
-              "text" : "file"
+              "text" : "fileID"
             },
             {
               "kind" : "text",
               "text" : ": "
             },
             {
-              "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FileString",
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:6Nimble10FileStringa",
-              "text" : "FileString"
-            },
-            {
-              "kind" : "text",
-              "text" : " { "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "get"
-            },
-            {
-              "kind" : "text",
-              "text" : " }"
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
             }
           ]
         }
@@ -112,7 +96,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/nimble\/sourcelocation\/file"
+        "\/documentation\/nimble\/sourcelocation\/fileid"
       ],
       "traits" : [
         {
@@ -146,37 +130,6 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble"
 },
-"doc://Nimble/documentation/Nimble/FileString": {
-  "abstract" : [
-
-  ],
-  "fragments" : [
-    {
-      "kind" : "keyword",
-      "text" : "typealias"
-    },
-    {
-      "kind" : "text",
-      "text" : " "
-    },
-    {
-      "kind" : "identifier",
-      "text" : "FileString"
-    }
-  ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/FileString",
-  "kind" : "symbol",
-  "navigatorTitle" : [
-    {
-      "kind" : "identifier",
-      "text" : "FileString"
-    }
-  ],
-  "role" : "symbol",
-  "title" : "FileString",
-  "type" : "topic",
-  "url" : "\/documentation\/nimble\/filestring"
-},
 "doc://Nimble/documentation/Nimble/SourceLocation": {
   "abstract" : [
 
@@ -208,15 +161,14 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/sourcelocation"
 },
-"doc://Nimble/documentation/Nimble/SourceLocation/file": {
+"doc://Nimble/documentation/Nimble/SourceLocation/fileID": {
   "abstract" : [
 
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "let"
     },
     {
       "kind" : "text",
@@ -224,7 +176,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "file"
+      "text" : "fileID"
     },
     {
       "kind" : "text",
@@ -232,16 +184,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:6Nimble10FileStringa",
-      "text" : "FileString"
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/file",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/fileID",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "file",
+  "title" : "fileID",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/sourcelocation\/file"
+  "url" : "\/documentation\/nimble\/sourcelocation\/fileid"
 }
 }
 }

@@ -9,15 +9,15 @@
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/file"
+    "url" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/filePath"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:6Nimble14SourceLocationC4files12StaticStringVvp",
+    "externalID" : "s:6Nimble14SourceLocationC8filePaths12StaticStringVvp",
     "fragments" : [
       {
         "kind" : "keyword",
-        "text" : "var"
+        "text" : "let"
       },
       {
         "kind" : "text",
@@ -25,7 +25,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "file"
+        "text" : "filePath"
       },
       {
         "kind" : "text",
@@ -42,13 +42,10 @@
         "name" : "Nimble"
       }
     ],
-    "platforms" : [
-
-    ],
     "role" : "symbol",
     "roleHeading" : "Instance Property",
     "symbolKind" : "property",
-    "title" : "file"
+    "title" : "filePath"
   },
   "primaryContentSections" : [
     {
@@ -63,7 +60,7 @@
           "tokens" : [
             {
               "kind" : "keyword",
-              "text" : "var"
+              "text" : "let"
             },
             {
               "kind" : "text",
@@ -71,7 +68,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "file"
+              "text" : "filePath"
             },
             {
               "kind" : "text",
@@ -82,18 +79,6 @@
               "kind" : "typeIdentifier",
               "preciseIdentifier" : "s:6Nimble10FileStringa",
               "text" : "FileString"
-            },
-            {
-              "kind" : "text",
-              "text" : " { "
-            },
-            {
-              "kind" : "keyword",
-              "text" : "get"
-            },
-            {
-              "kind" : "text",
-              "text" : " }"
             }
           ]
         }
@@ -112,7 +97,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/nimble\/sourcelocation\/file"
+        "\/documentation\/nimble\/sourcelocation\/filepath"
       ],
       "traits" : [
         {
@@ -208,15 +193,14 @@
   "type" : "topic",
   "url" : "\/documentation\/nimble\/sourcelocation"
 },
-"doc://Nimble/documentation/Nimble/SourceLocation/file": {
+"doc://Nimble/documentation/Nimble/SourceLocation/filePath": {
   "abstract" : [
 
   ],
-  "deprecated" : true,
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "var"
+      "text" : "let"
     },
     {
       "kind" : "text",
@@ -224,7 +208,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "file"
+      "text" : "filePath"
     },
     {
       "kind" : "text",
@@ -236,12 +220,12 @@
       "text" : "FileString"
     }
   ],
-  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/file",
+  "identifier" : "doc:\/\/Nimble\/documentation\/Nimble\/SourceLocation\/filePath",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "file",
+  "title" : "filePath",
   "type" : "topic",
-  "url" : "\/documentation\/nimble\/sourcelocation\/file"
+  "url" : "\/documentation\/nimble\/sourcelocation\/filepath"
 }
 }
 }

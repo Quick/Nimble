@@ -1,15 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Default handler for Nimble. This assertion handler passes failures along to",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "XCTest.",
+      "text" : "This assertion handler passes failures along to XCTest.",
       "type" : "text"
     }
   ],
@@ -186,15 +178,7 @@
 "doc://Nimble/documentation/Nimble/NimbleXCTestHandler": {
   "abstract" : [
     {
-      "text" : "Default handler for Nimble. This assertion handler passes failures along to",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "XCTest.",
+      "text" : "This assertion handler passes failures along to XCTest.",
       "type" : "text"
     }
   ],
