@@ -1,76 +1,76 @@
 /// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression,
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
+public func expect(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The value given is lazily evaluated.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping () throws -> T?) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression,
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> T)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
+public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> T?)) -> SyncExpectation<T> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
+public func expects(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() throws -> Void)) -> SyncExpectation<Void> {
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
@@ -81,13 +81,13 @@ public func fail(_ message: String, location: SourceLocation) {
 }
 
 /// Always fails the test with a message.
-public func fail(_ message: String, file: FileString = #file, line: UInt = #line) {
-    fail(message, location: SourceLocation(file: file, line: line))
+public func fail(_ message: String, fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column) {
+    fail(message, location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column))
 }
 
 /// Always fails the test.
-public func fail(_ file: FileString = #file, line: UInt = #line) {
-    fail("fail() always fails", file: file, line: line)
+public func fail(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column) {
+    fail("fail() always fails", location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column))
 }
 
 /// Like Swift's precondition(), but raises NSExceptions instead of sigaborts
@@ -95,7 +95,7 @@ internal func nimblePrecondition(
     _ expr: @autoclosure () -> Bool,
     _ name: @autoclosure () -> String,
     _ message: @autoclosure () -> String,
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
 ) {
     let result = expr()
@@ -104,7 +104,7 @@ internal func nimblePrecondition(
     }
 }
 
-internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) -> Never {
+internal func internalError(_ msg: String, file: FileString = #filePath, line: UInt = #line) -> Never {
     fatalError(
         """
         Nimble Bug Found: \(msg) at \(file):\(line).

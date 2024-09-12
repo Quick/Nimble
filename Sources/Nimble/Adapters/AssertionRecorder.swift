@@ -63,8 +63,10 @@ extension NMBExceptionCapture {
 ///
 /// @see AssertionHandler
 public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
-                                 file: FileString = #file,
+                                 fileID: String = #fileID,
+                                 file: FileString = #filePath,
                                  line: UInt = #line,
+                                 column: UInt = #column,
                                  closure: () throws -> Void) {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
@@ -80,7 +82,11 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
     } catch {
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"
-        let location = SourceLocation(file: file, line: line)
+        let location = SourceLocation(
+            fileID: fileID,
+            filePath: file,
+            line: line, column: column
+        )
         tempAssertionHandler.assert(false, message: failureMessage, location: location)
     }
 }

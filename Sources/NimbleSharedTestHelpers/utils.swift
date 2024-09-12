@@ -8,12 +8,19 @@ import Foundation
 #endif
 import XCTest
 
-public func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
-    var filePath = file
-    var lineNumber = line
+public func failsWithErrorMessage(
+    _ messages: [String],
+    fileID: String = #fileID,
+    filePath: FileString = #filePath,
+    line: UInt = #line,
+    column: UInt = #column,
+    preferOriginalSourceLocation: Bool = false,
+    closure: () throws -> Void
+) {
+    var location = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
 
     let recorder = AssertionRecorder()
-    withAssertionHandler(recorder, file: file, line: line, closure: closure)
+    withAssertionHandler(recorder, fileID: fileID, file: filePath, line: line, column: column, closure: closure)
 
     for msg in messages {
         var lastFailure: AssertionRecord?
@@ -31,8 +38,7 @@ public func failsWithErrorMessage(_ messages: [String], file: FileString = #file
 
         if preferOriginalSourceLocation {
             if let failure = lastFailure {
-                filePath = failure.location.file
-                lineNumber = failure.location.line
+                location = failure.location
             }
         }
 
@@ -51,14 +57,21 @@ public func failsWithErrorMessage(_ messages: [String], file: FileString = #file
         }
         NimbleAssertionHandler.assert(false,
                                       message: FailureMessage(stringValue: message),
-                                      location: SourceLocation(file: filePath, line: lineNumber))
+                                      location: location)
     }
 }
 
 // Verifies that the error message matches the given regex.
-public func failsWithErrorRegex(_ regex: String, file: FileString = #file, line: UInt = #line, closure: () throws -> Void) {
+public func failsWithErrorRegex(
+    _ regex: String,
+    fileID: String = #fileID,
+    filePath: FileString = #filePath,
+    line: UInt = #line,
+    column: UInt = #column,
+    closure: () throws -> Void
+) {
     let recorder = AssertionRecorder()
-    withAssertionHandler(recorder, file: file, line: line, closure: closure)
+    withAssertionHandler(recorder, fileID: fileID, file: filePath, line: line, column: column, closure: closure)
 
     for assertion in recorder.assertions where assertion.message.stringValue.range(of: regex, options: .regularExpression) != nil && !assertion.success {
         return
@@ -74,35 +87,46 @@ public func failsWithErrorRegex(_ regex: String, file: FileString = #file, line:
                 """
     NimbleAssertionHandler.assert(false,
                                   message: FailureMessage(stringValue: message),
-                                  location: SourceLocation(file: file, line: line))
+                                  location: SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column))
 }
 
-public func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
+public func failsWithErrorMessage(
+    _ message: String,
+    fileID: String = #fileID,
+    filePath: FileString = #filePath,
+    line: UInt = #line,
+    column: UInt = #column,
+    preferOriginalSourceLocation: Bool = false,
+    closure: () throws -> Void
+) {
     failsWithErrorMessage(
         [message],
-        file: file,
+        fileID: fileID,
+        filePath: filePath,
         line: line,
+        column: column,
         preferOriginalSourceLocation: preferOriginalSourceLocation,
         closure: closure
     )
 }
 
-public func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
+public func failsWithErrorMessageForNil(_ message: String, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, preferOriginalSourceLocation: Bool = false, closure: () throws -> Void) {
     failsWithErrorMessage(
         "\(message) (use beNil() to match nils)",
-        file: file,
+        fileID: fileID,
+        filePath: filePath,
         line: line,
+        column: column,
         preferOriginalSourceLocation: preferOriginalSourceLocation,
         closure: closure
     )
 }
 
-public func failsWithErrorMessage(_ messages: [String], file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
-    var filePath = file
-    var lineNumber = line
+public func failsWithErrorMessage(_ messages: [String], fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
+    var sourceLocation = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
 
     let recorder = AssertionRecorder()
-    await withAssertionHandler(recorder, file: file, line: line, closure: closure)
+    await withAssertionHandler(recorder, fileID: fileID, file: filePath, line: line, column: column, closure: closure)
 
     for msg in messages {
         var lastFailure: AssertionRecord?
@@ -120,8 +144,7 @@ public func failsWithErrorMessage(_ messages: [String], file: FileString = #file
 
         if preferOriginalSourceLocation {
             if let failure = lastFailure {
-                filePath = failure.location.file
-                lineNumber = failure.location.line
+                sourceLocation = failure.location
             }
         }
 
@@ -140,25 +163,29 @@ public func failsWithErrorMessage(_ messages: [String], file: FileString = #file
         }
         NimbleAssertionHandler.assert(false,
                                       message: FailureMessage(stringValue: message),
-                                      location: SourceLocation(file: filePath, line: lineNumber))
+                                      location: sourceLocation)
     }
 }
 
-public func failsWithErrorMessage(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
+public func failsWithErrorMessage(_ message: String, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
     await failsWithErrorMessage(
         [message],
-        file: file,
+        fileID: fileID,
+        filePath: filePath,
         line: line,
+        column: column,
         preferOriginalSourceLocation: preferOriginalSourceLocation,
         closure: closure
     )
 }
 
-public func failsWithErrorMessageForNil(_ message: String, file: FileString = #file, line: UInt = #line, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
+public func failsWithErrorMessageForNil(_ message: String, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, preferOriginalSourceLocation: Bool = false, closure: () async throws -> Void) async {
     await failsWithErrorMessage(
         "\(message) (use beNil() to match nils)",
-        file: file,
+        fileID: fileID,
+        filePath: filePath,
         line: line,
+        column: column,
         preferOriginalSourceLocation: preferOriginalSourceLocation,
         closure: closure
     )
@@ -174,16 +201,16 @@ public func suppressErrors<T>(closure: () -> T) -> T {
     return output!
 }
 
-public func producesStatus<T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> SyncExpectation<T>) {
+public func producesStatus<T>(_ status: ExpectationStatus, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, closure: () -> SyncExpectation<T>) {
     let expectation = suppressErrors(closure: closure)
 
-    expect(file: file, line: line, expectation.status).to(equal(status))
+    expect(fileID: fileID, file: filePath, line: line, column: column, expectation.status).to(equal(status))
 }
 
-public func producesStatus<T>(_ status: ExpectationStatus, file: FileString = #file, line: UInt = #line, closure: () -> AsyncExpectation<T>) {
+public func producesStatus<T>(_ status: ExpectationStatus, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column, closure: () -> AsyncExpectation<T>) {
     let expectation = suppressErrors(closure: closure)
 
-    expect(file: file, line: line, expectation.status).to(equal(status))
+    expect(fileID: fileID, file: filePath, line: line, column: column, expectation.status).to(equal(status))
 }
 
 #if !os(WASI)
@@ -198,19 +225,50 @@ public func deferToMainQueue(action: @escaping () -> Void) {
 #if canImport(Darwin)
 public class NimbleHelper: NSObject {
     @objc public class func expectFailureMessage(_ message: NSString, block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(
+            String(describing: message),
+            fileID: "Unknown/\(file)",
+            filePath: file,
+            line: line,
+            column: 0,
+            preferOriginalSourceLocation: true,
+            closure: block
+        )
     }
 
     @objc public class func expectFailureMessages(_ messages: [NSString], block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessage(messages.map({String(describing: $0)}), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessage(
+            messages.map({String(describing: $0)}),
+            fileID: "Unknown/\(file)",
+            filePath: file,
+            line: line,
+            column: 0,
+            preferOriginalSourceLocation: true,
+            closure: block
+        )
     }
 
     @objc public class func expectFailureMessageForNil(_ message: NSString, block: () -> Void, file: FileString, line: UInt) {
-        failsWithErrorMessageForNil(String(describing: message), file: file, line: line, preferOriginalSourceLocation: true, closure: block)
+        failsWithErrorMessageForNil(
+            String(describing: message),
+            fileID: "Unknown/\(file)",
+            filePath: file,
+            line: line,
+            column: 0,
+            preferOriginalSourceLocation: true,
+            closure: block
+        )
     }
 
     @objc public class func expectFailureMessageRegex(_ regex: NSString, block: () -> Void, file: FileString, line: UInt) {
-
+        failsWithErrorRegex(
+            String(describing: regex),
+            fileID: "Unknown/\(file)",
+            filePath: file,
+            line: line,
+            column: 0,
+            closure: block
+        )
     }
 }
 #endif
