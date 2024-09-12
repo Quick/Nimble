@@ -261,7 +261,14 @@ public class NimbleHelper: NSObject {
     }
 
     @objc public class func expectFailureMessageRegex(_ regex: NSString, block: () -> Void, file: FileString, line: UInt) {
-        fail("erp!")
+        failsWithErrorRegex(
+            String(describing: regex),
+            fileID: "Unknown/\(file)",
+            filePath: file,
+            line: line,
+            column: 0,
+            closure: block
+        )
     }
 }
 #endif
