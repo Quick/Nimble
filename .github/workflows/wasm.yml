@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: swiftwasm/swiftwasm-action@v5.8
+      - uses: swiftwasm/swiftwasm-action@v5.9
