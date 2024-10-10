@@ -1,5 +1,8 @@
 import XCTest
 import Nimble
+#if SWIFT_PACKAGE
+import NimbleSharedTestHelpers
+#endif
 
 private func nonThrowingInt() -> Int {
     return 1
@@ -176,5 +179,44 @@ final class DSLTest: XCTestCase {
         expect(records).to(haveCount(2))
         expect(records.first?.success).to(beFalse())
         expect(records.last?.success).to(beTrue())
+    }
+
+    func testUnwrap() {
+        expect { try unwrap(Optional.some(1)) }.to(equal(1))
+
+        failsWithErrorMessage("expected to not be nil, got <nil>") {
+            try unwrap(nil as Int?)
+        }
+        failsWithErrorMessage("expected to not be nil, got <nil>") {
+            try unwraps(nil as Int?)
+        }
+        failsWithErrorMessage("Custom User Message\nexpected to not be nil, got <nil>") {
+            try unwrap(description: "Custom User Message", nil as Int?)
+        }
+        failsWithErrorMessage("Custom User Message 2\nexpected to not be nil, got <nil>") {
+            try unwraps(description: "Custom User Message 2", nil as Int?)
+        }
+    }
+
+    func testUnwrapAsync() async {
+        @Sendable func asyncOptional(_ value: Int?) async -> Int? {
+            value
+        }
+
+        await expect { try await unwrap { await asyncOptional(1) } }.to(equal(1))
+
+        await failsWithErrorMessage("expected to not be nil, got <nil>") {
+            try await unwrap { await asyncOptional(nil) }
+        }
+        await failsWithErrorMessage("expected to not be nil, got <nil>") {
+            try await unwrapa(await asyncOptional(nil))
+        }
+
+        await failsWithErrorMessage("Some Message\nexpected to not be nil, got <nil>") {
+            try await unwrap(description: "Some Message") { await asyncOptional(nil) }
+        }
+        await failsWithErrorMessage("Other Message\nexpected to not be nil, got <nil>") {
+            try await unwrapa(description: "Other Message", await asyncOptional(nil))
+        }
     }
 }

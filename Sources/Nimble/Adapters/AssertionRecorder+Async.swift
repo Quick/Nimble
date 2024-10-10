@@ -15,13 +15,15 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
                                  closure: () async throws -> Void) async {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
-    _ = NMBExceptionCapture(handler: nil, finally: ({
+    defer {
         environment.assertionHandler = oldRecorder
-    }))
+    }
     environment.assertionHandler = tempAssertionHandler
 
     do {
         try await closure()
+    } catch is RequireError {
+        // ignore this
     } catch {
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"

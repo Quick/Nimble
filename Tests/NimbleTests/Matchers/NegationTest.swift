@@ -36,7 +36,7 @@ final class NegationTest: XCTestCase {
     func testAsyncNonNil() async {
         await expect(1).to(not(asyncEqual(2)))
 
-        await failsWithErrorMessage("expected to not equal <2>, got <2>") {
+        await failsWithErrorMessage("expected to not equal 2, got <2>") {
             await expect(2).to(not(asyncEqual(2)))
         }
     }
