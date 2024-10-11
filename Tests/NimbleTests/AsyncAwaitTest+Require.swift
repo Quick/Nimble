@@ -59,7 +59,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testPollUnwrapNegativeCase() async {
-        await failsWithErrorMessage("expected to eventually not be nil, got nil") {
+        await failsWithErrorMessage("expected to eventually not be nil, got <nil>") {
             try await pollUnwrap { nil as Int? }
         }
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {

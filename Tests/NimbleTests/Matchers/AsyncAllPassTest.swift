@@ -26,9 +26,20 @@ private func asyncBeGreaterThan<T: Comparable>(_ expectedValue: T?) -> AsyncMatc
     }
 }
 
+private protocol _OptionalProtocol {
+    var isNil: Bool { get }
+}
+
+extension Optional: _OptionalProtocol {
+    var isNil: Bool { self == nil }
+}
+
 private func asyncBeNil<T>() -> AsyncMatcher<T> {
     return AsyncMatcher.simpleNilable("be nil") { actualExpression in
         let actualValue = try await actualExpression.evaluate()
+        if let actual = actualValue, let nestedOptionl = actual as? _OptionalProtocol {
+            return MatcherStatus(bool: nestedOptionl.isNil)
+        }
         return MatcherStatus(bool: actualValue == nil)
     }
 }

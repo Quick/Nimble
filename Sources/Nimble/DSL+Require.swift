@@ -216,8 +216,8 @@ public func requirea<T>(fileID: String = #fileID, file: FileString = #filePath, 
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
-    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
+public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
+    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
@@ -226,18 +226,8 @@ public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, li
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
-    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
-}
-
-/// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
-/// As you can tell, this is a much less verbose equivalent to `require(expression).toNot(beNil())`.
-///
-/// `unwraps` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
-/// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
-@discardableResult
-public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
-    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
+public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
+    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
@@ -246,8 +236,18 @@ public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, l
 /// `unwraps` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
-    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
+public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
+    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
+}
+
+/// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
+/// As you can tell, this is a much less verbose equivalent to `require(expression).toNot(beNil())`.
+///
+/// `unwraps` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
+/// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
+@discardableResult
+public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
+    try requires(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
@@ -256,8 +256,8 @@ public func unwraps<T>(fileID: String = #fileID, file: FileString = #filePath, l
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @escaping () async throws -> T?) async throws -> T {
-    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, try await expression()).toNot(beNil())
+public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @escaping () async throws -> T?) async throws -> T {
+    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, try await expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
@@ -266,8 +266,8 @@ public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, li
 /// `unwrap` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: () -> (() async throws -> T?)) async throws -> T {
-    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
+public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: () -> (() async throws -> T?)) async throws -> T {
+    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
@@ -276,8 +276,8 @@ public func unwrap<T>(fileID: String = #fileID, file: FileString = #filePath, li
 /// `unwrapa` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
-    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, try await expression()).toNot(beNil())
+public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
+    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, try await expression()).toNot(beNil(), description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
@@ -286,6 +286,6 @@ public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, l
 /// `unwrapa` will return the result of the expression if it is non-nil, and throw an error if the value is nil.
 /// if a `customError` is given, then that will be thrown. Otherwise, a ``RequireError`` will be thrown.
 @discardableResult
-public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
-    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil())
+public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
+    try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
