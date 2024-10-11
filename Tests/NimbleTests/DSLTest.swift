@@ -219,4 +219,32 @@ final class DSLTest: XCTestCase {
             try await unwrapa(description: "Other Message", await asyncOptional(nil))
         }
     }
+
+    func testRequireFail() throws {
+        struct MyCustomError: Error {}
+
+        failsWithErrorMessage("requireFail() always fails") {
+            do {
+                try requireFail()
+            } catch {
+                expect(error as? RequireError).toNot(beNil())
+            }
+        }
+
+        failsWithErrorMessage("Custom error message") {
+            do {
+                try requireFail("Custom error message")
+            } catch {
+                expect(error as? RequireError).toNot(beNil())
+            }
+        }
+
+        failsWithErrorMessage("Custom message with custom error") {
+            do {
+                try requireFail("Custom message with custom error", customError: MyCustomError())
+            } catch {
+                expect(error as? MyCustomError).toNot(beNil())
+            }
+        }
+    }
 }
