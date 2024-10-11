@@ -289,3 +289,17 @@ public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, l
 public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, customError: Error? = nil, description: String? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
     try await requirea(fileID: fileID, file: file, line: line, column: column, customError: customError, expression()).toNot(beNil(), description: description)
 }
+
+/// Always fails the test and throw an error to prevent further test execution.
+///
+/// - Parameter message: A custom message to use in place of the default one.
+/// - Parameter customError: A custom error to throw in place of a ``RequireError``.
+public func requireFail(_ message: String? = nil, customError: Error? = nil, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column) throws {
+    let location = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
+    let handler = NimbleEnvironment.activeInstance.assertionHandler
+
+    let msg = message ?? "requireFail() always fails"
+    handler.assert(false, message: FailureMessage(stringValue: msg), location: location)
+
+    throw customError ?? RequireError(message: msg, location: location)
+}
