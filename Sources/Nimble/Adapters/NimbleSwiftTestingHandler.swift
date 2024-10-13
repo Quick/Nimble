@@ -1,6 +1,10 @@
 import Foundation
 #if canImport(Testing)
-import Testing
+// See https://github.com/pointfreeco/swift-snapshot-testing/discussions/901#discussioncomment-10605497
+// tl;dr: Swift Testing is not available when using UI tests.
+// And apparently `private import` - the preferred way to do this - doesn't work.
+// So we use a deprecated approach that does work with this.
+@_implementationOnly import Testing
 #endif
 
 public class NimbleSwiftTestingHandler: AssertionHandler {
