@@ -100,7 +100,9 @@ extension NMBMatcher {
                 )
             }
 
-            let expr = Expression(expression: ({ nsObjects }), location: location)
+            let immutableCollection = nsObjects
+
+            let expr = Expression(expression: ({ immutableCollection }), location: location)
             let pred: Matcher<[NSObject]> = createMatcher(Matcher { expr in
                 return matcher.satisfies(({ try expr.evaluate() }), location: expr.location).toSwift()
             })

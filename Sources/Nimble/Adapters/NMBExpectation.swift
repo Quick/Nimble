@@ -14,7 +14,7 @@ private func from(objcMatcher: NMBMatcher) -> Matcher<NSObject> {
 
 // Equivalent to Expectation, but for Nimble's Objective-C interface
 public final class NMBExpectation: NSObject, Sendable {
-    internal let _actualBlock: @Sendable () -> NSObject?
+    internal let _actualBlock: @Sendable () -> sending NSObject?
     internal let _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
