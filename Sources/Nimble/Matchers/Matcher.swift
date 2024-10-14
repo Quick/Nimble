@@ -225,7 +225,7 @@ public class NMBMatcher: NSObject, @unchecked Sendable {
         self.init(matcher: predicate)
     }
 
-    func satisfies(_ expression: @escaping @Sendable () throws -> NSObject?, location: SourceLocation) -> NMBMatcherResult {
+    func satisfies(_ expression: @escaping @Sendable () throws -> sending NSObject?, location: SourceLocation) -> NMBMatcherResult {
         let expr = Expression(expression: expression, location: location)
         do {
             return try self.matcher(expr)
