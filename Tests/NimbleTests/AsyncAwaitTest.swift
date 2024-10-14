@@ -133,10 +133,10 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
         @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
-        await expecta(isMainThread()).toEventually(beTrue())
-        await expecta(isMainThread()).toEventuallyNot(beFalse())
-        await expecta(isMainThread()).toAlways(beTrue(), until: .seconds(1))
-        await expecta(isMainThread()).toNever(beFalse(), until: .seconds(1))
+        await expect(isMainThread).toEventually(beTrue())
+        await expect(isMainThread).toEventuallyNot(beFalse())
+        await expect(isMainThread).toAlways(beTrue(), until: .seconds(1))
+        await expect(isMainThread).toNever(beFalse(), until: .seconds(1))
     }
 
     func testToEventuallyWithCustomDefaultTimeout() async {
