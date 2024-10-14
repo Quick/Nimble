@@ -26,7 +26,7 @@ final class BeIdenticalToTest: XCTestCase {
     }
 
     func testBeIdenticalToNegativeMessage() {
-        let value1 = NSArray()
+        let value1 = 1 as NSNumber
         let value2 = value1
         let message = "expected to not be identical to \(identityAsString(value2)), got \(identityAsString(value1))"
         failsWithErrorMessage(message) {
@@ -46,7 +46,7 @@ final class BeIdenticalToTest: XCTestCase {
         expect(1 as NSNumber).toNot(be("turtles" as NSString))
         expect([1 as NSNumber] as NSArray).toNot(be([1 as NSNumber] as NSArray))
 
-        let value1 = NSArray()
+        let value1 = 1 as NSNumber
         let value2 = value1
         let message = "expected to not be identical to \(identityAsString(value1)), got \(identityAsString(value2))"
         failsWithErrorMessage(message) {
