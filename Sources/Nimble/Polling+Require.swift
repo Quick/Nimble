@@ -715,7 +715,7 @@ public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expres
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> sending T?)) throws -> T {
+public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> T?)) throws -> T {
     try require(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
@@ -729,7 +729,7 @@ public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, timeout
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> sending T?)) throws -> T {
+public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> T?)) throws -> T {
     try require(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
