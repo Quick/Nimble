@@ -9,9 +9,15 @@ private final class MemoizedClosure<T: Sendable>: Sendable {
     }
 
     private let lock = NSRecursiveLock()
+#if swift(>=5.10)
     nonisolated(unsafe) private var _state = State.notStarted
     nonisolated(unsafe) private var _continuations = [CheckedContinuation<T, Error>]()
     nonisolated(unsafe) private var _task: Task<Void, Never>?
+#else
+    private var _state = State.notStarted
+    private var _continuations = [CheckedContinuation<T, Error>]()
+    private var _task: Task<Void, Never>?
+#endif
 
     let closure: @Sendable () async throws -> T
 
@@ -25,9 +31,9 @@ private final class MemoizedClosure<T: Sendable>: Sendable {
 
     @Sendable func callAsFunction(_ withoutCaching: Bool) async throws -> T {
         if withoutCaching {
-            try await closure()
+            return try await closure()
         } else {
-            try await withCheckedThrowingContinuation { continuation in
+            return try await withCheckedThrowingContinuation { continuation in
                 lock.withLock {
                     switch _state {
                     case .notStarted:

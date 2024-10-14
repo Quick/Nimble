@@ -2,7 +2,11 @@ import Foundation
 
 private final class MemoizedValue<T>: Sendable {
     private let lock = NSRecursiveLock()
+#if swift(>=5.10)
     nonisolated(unsafe) private var cache: T? = nil
+#else
+    private var cache: T? = nil
+#endif
     private let closure: @Sendable () throws -> T
 
     init(_ closure: @escaping @Sendable () throws -> T) {

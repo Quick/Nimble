@@ -37,8 +37,13 @@ public struct AsyncDefaults {
 public struct PollingDefaults: @unchecked Sendable {
     private static let lock = NSRecursiveLock()
 
+#if swift(>=5.10)
     nonisolated(unsafe) private static var _timeout: NimbleTimeInterval = .seconds(1)
     nonisolated(unsafe) private static var _pollInterval: NimbleTimeInterval = .milliseconds(10)
+#else
+    private static var _timeout: NimbleTimeInterval = .seconds(1)
+    private static var _pollInterval: NimbleTimeInterval = .milliseconds(10)
+#endif
 
     public static var timeout: NimbleTimeInterval {
         get {
