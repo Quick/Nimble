@@ -8,7 +8,7 @@ import NimbleSharedTestHelpers
 final class ContainElementSatisfyingTest: XCTestCase {
     // MARK: - Matcher variant
     func testContainElementSatisfying() {
-        var orderIndifferentArray = [1, 2, 3]
+        let orderIndifferentArray = [1, 2, 3]
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
             return number == 1
         }))
@@ -18,8 +18,10 @@ final class ContainElementSatisfyingTest: XCTestCase {
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
             return number == 3
         }))
+    }
 
-        orderIndifferentArray = [3, 1, 2]
+    func testContainElementSatisfying2() {
+        let orderIndifferentArray = [3, 1, 2]
         expect(orderIndifferentArray).to(containElementSatisfying({ number in
             return number == 1
         }))
@@ -76,7 +78,7 @@ final class ContainElementSatisfyingTest: XCTestCase {
 
     // MARK: - AsyncMatcher variant
     func testAsyncContainElementSatisfying() async {
-        var orderIndifferentArray = [1, 2, 3]
+        let orderIndifferentArray = [1, 2, 3]
         await expect(orderIndifferentArray).to(containElementSatisfying({ number in
             await asyncEqualityCheck(number, 1)
         }))
@@ -86,8 +88,10 @@ final class ContainElementSatisfyingTest: XCTestCase {
         await expect(orderIndifferentArray).to(containElementSatisfying({ number in
             await asyncEqualityCheck(number, 3)
         }))
+    }
 
-        orderIndifferentArray = [3, 1, 2]
+    func testAsyncContainElementSatisfying2() async {
+        let orderIndifferentArray = [3, 1, 2]
         await expect(orderIndifferentArray).to(containElementSatisfying({ number in
             await asyncEqualityCheck(number, 1)
         }))

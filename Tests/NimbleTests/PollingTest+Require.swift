@@ -6,7 +6,7 @@ import CoreFoundation
 #endif
 import Foundation
 import XCTest
-import Nimble
+@testable import Nimble
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
 #endif
@@ -21,15 +21,15 @@ final class PollingRequireTest: XCTestCase {
     }
 
     func testToEventuallyPositiveMatches() {
-        var value = 0
-        deferToMainQueue { value = 1 }
+        let value = LockedContainer<Int>(0)
+        deferToMainQueue { value.set(1) }
         expect {
-            try require { value }.toEventually(equal(1))
+            try require { value.value }.toEventually(equal(1))
         }.to(equal(1))
 
-        deferToMainQueue { value = 0 }
+        deferToMainQueue { value.set(0) }
         expect {
-            try require { value }.toEventuallyNot(equal(1))
+            try require { value.value }.toEventuallyNot(equal(1))
         }.to(equal(0))
     }
 
@@ -50,12 +50,10 @@ final class PollingRequireTest: XCTestCase {
     }
 
     func testPollUnwrapPositiveCase() {
-        var value: Int? = nil
-        deferToMainQueue {
-            value = 1
-        }
+        let value = LockedContainer<Int?>(nil)
+        deferToMainQueue { value.set(1) }
         expect {
-            try pollUnwrap(value)
+            try pollUnwrap(value.value)
         }.to(equal(1))
     }
 
@@ -83,22 +81,22 @@ final class PollingRequireTest: XCTestCase {
             PollingDefaults.timeout = .seconds(1)
         }
 
-        var value = 0
+        let value = LockedContainer<Int>(0)
 
         let sleepThenSetValueTo: (Int) -> Void = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
-            value = newValue
+            value.set(newValue)
         }
 
         var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        try require { value }.toEventually(equal(1))
+        try require { value.value }.toEventually(equal(1))
 
         asyncOperation = { sleepThenSetValueTo(0) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        try require { value }.toEventuallyNot(equal(1))
+        try require { value.value }.toEventuallyNot(equal(1))
     }
 
     func testToEventuallyAllowsInBackgroundThread() {
@@ -120,53 +118,53 @@ final class PollingRequireTest: XCTestCase {
 #endif
     }
 
-    final class ClassUnderTest {
-        var deinitCalled: (() -> Void)?
-        var count = 0
-        deinit { deinitCalled?() }
+    final class ClassUnderTest: Sendable {
+        let deinitCalled = LockedContainer<(@Sendable () -> Void)?>(nil)
+        let count = LockedContainer(0)
+        deinit { deinitCalled.value?() }
     }
 
     func testSubjectUnderTestIsReleasedFromMemory() throws {
-        var subject: ClassUnderTest? = ClassUnderTest()
+        let subject = LockedContainer<ClassUnderTest?>(ClassUnderTest())
 
-        if let sub = subject {
-            try require(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
-            try require(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
+        if let sub = subject.value {
+            try require(sub.count.value).toEventually(equal(0), timeout: .milliseconds(100))
+            try require(sub.count.value).toEventuallyNot(equal(1), timeout: .milliseconds(100))
         }
 
         waitUntil(timeout: .milliseconds(500)) { done in
-            subject?.deinitCalled = {
+            subject.value?.deinitCalled.set({
                 done()
-            }
+            })
 
-            deferToMainQueue { subject = nil }
+            deferToMainQueue { subject.set(nil) }
         }
     }
 
     func testToNeverPositiveMatches() throws {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        try require { value }.toNever(beGreaterThan(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        try require { value.value }.toNever(beGreaterThan(1))
 
-        deferToMainQueue { value = 0 }
-        try require { value }.neverTo(beGreaterThan(1))
+        deferToMainQueue { value.set(0) }
+        try require { value.value }.neverTo(beGreaterThan(1))
     }
 
     func testToNeverNegativeMatches() {
-        var value = 0
+        let value = LockedContainer(0)
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            try require { value }.toNever(equal(0))
+            try require { value.value }.toNever(equal(0))
         }
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            try require { value }.neverTo(equal(0))
+            try require { value.value }.neverTo(equal(0))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            try require { value }.toNever(equal(1))
+            deferToMainQueue { value.set(1) }
+            try require { value.value }.toNever(equal(1))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            try require { value }.neverTo(equal(1))
+            deferToMainQueue { value.set(1) }
+            try require { value.value }.neverTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.toNever(equal(0))
@@ -180,29 +178,29 @@ final class PollingRequireTest: XCTestCase {
     }
 
     func testToAlwaysPositiveMatches() throws {
-        var value = 1
-        deferToMainQueue { value = 2 }
-        try require { value }.toAlways(beGreaterThan(0))
+        let value = LockedContainer(1)
+        deferToMainQueue { value.set(2) }
+        try require { value.value }.toAlways(beGreaterThan(0))
 
-        deferToMainQueue { value = 2 }
-        try require { value }.alwaysTo(beGreaterThan(1))
+        deferToMainQueue { value.set(2) }
+        try require { value.value }.alwaysTo(beGreaterThan(1))
     }
 
     func testToAlwaysNegativeMatches() {
-        var value = 1
+        let value = LockedContainer(1)
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            try require { value }.toAlways(equal(0))
+            try require { value.value }.toAlways(equal(0))
         }
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            try require { value }.alwaysTo(equal(0))
+            try require { value.value }.alwaysTo(equal(0))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            try require { value }.toAlways(equal(1))
+            deferToMainQueue { value.set(0) }
+            try require { value.value }.toAlways(equal(1))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            try require { value }.alwaysTo(equal(1))
+            deferToMainQueue { value.set(0) }
+            try require { value.value }.alwaysTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.toAlways(equal(0))
