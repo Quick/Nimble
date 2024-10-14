@@ -1,5 +1,5 @@
 import XCTest
-import Nimble
+@testable import Nimble
 import Foundation
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
@@ -55,10 +55,10 @@ final class SatisfyAnyOfTest: XCTestCase {
     func testSatisfyAllOfCachesExpressionBeforePassingToMatchers() {
         // This is not a great example of assertion writing - functions being asserted on in Expressions should not have side effects.
         // But we should still handle those cases anyway.
-        var value: Int = 0
-        func testFunction() -> Int {
-            value += 1
-            return value
+        let value = LockedContainer(0)
+        @Sendable func testFunction() -> Int {
+            value.operate { $0 + 1 }
+            return value.value
         }
 
         // This demonstrates caching because the first time this is evaluated, the function should return 1, which doesn't pass the `equal(0)`.

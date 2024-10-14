@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-import Nimble
+@testable import Nimble
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
 #endif
@@ -22,27 +22,27 @@ final class ThrowAssertionTest: XCTestCase {
 
     func testPostAssertionCodeNotRun() {
         #if (arch(x86_64) || arch(arm64)) && !os(Windows)
-        var reachedPoint1 = false
-        var reachedPoint2 = false
+        let reachedPoint1 = LockedContainer(false)
+        let reachedPoint2 = LockedContainer(false)
 
         expect {
-            reachedPoint1 = true
+            reachedPoint1.set(true)
             precondition(false, "condition message")
-            reachedPoint2 = true
+            reachedPoint2.set(true)
         }.to(throwAssertion())
 
-        expect(reachedPoint1) == true
-        expect(reachedPoint2) == false
+        expect(reachedPoint1.value) == true
+        expect(reachedPoint2.value) == false
         #endif
     }
 
     func testNegativeMatch() {
         #if (arch(x86_64) || arch(arm64)) && !os(Windows)
-        var reachedPoint1 = false
+        let reachedPoint1 = LockedContainer(false)
 
-        expect { reachedPoint1 = true }.toNot(throwAssertion())
+        expect { reachedPoint1.set(true) }.toNot(throwAssertion())
 
-        expect(reachedPoint1) == true
+        expect(reachedPoint1.value) == true
         #endif
     }
 

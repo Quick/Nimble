@@ -56,7 +56,7 @@ final class MapTest: XCTestCase {
     }
 
     func testMapWithAsyncFunction() async {
-        func someOperation(_ value: Int) async -> String {
+        @Sendable func someOperation(_ value: Int) async -> String {
             "\(value)"
         }
         await expect(1).to(map(someOperation, equal("1")))
@@ -76,8 +76,8 @@ final class MapTest: XCTestCase {
         let box = Box(int: 3, string: "world")
 
         expect(box).to(satisfyAllOf(
-            map(\.int, equal(3)),
-            map(\.string, equal("world"))
+            map( { $0.int }, equal(3)),
+            map( { $0.string }, equal("world"))
         ))
     }
 }
