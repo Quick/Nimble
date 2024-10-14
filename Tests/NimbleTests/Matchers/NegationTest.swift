@@ -22,7 +22,7 @@ final class NegationTest: XCTestCase {
     }
 
     func testAsyncNil() async {
-        @Sendable func nilFunc() async -> sending Int? {
+        @Sendable func nilFunc() async -> Int? {
             nil
         }
 

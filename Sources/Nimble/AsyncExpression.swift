@@ -67,7 +67,7 @@ private final class MemoizedClosure<T: Sendable>: Sendable {
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
 private func memoizedClosure<T: Sendable>(
-    _ closure: sending @escaping @Sendable () async throws -> T
+    _ closure: @escaping @Sendable () async throws -> T
 ) -> @Sendable (Bool) async throws -> T {
     let memoized = MemoizedClosure(closure)
     return memoized.callAsFunction(_:)
@@ -85,7 +85,7 @@ private func memoizedClosure<T: Sendable>(
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
 public actor AsyncExpression<Value: Sendable> {
-    internal let _expression: @Sendable (Bool) async throws -> sending Value?
+    internal let _expression: @Sendable (Bool) async throws -> Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -101,7 +101,7 @@ public actor AsyncExpression<Value: Sendable> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: sending @escaping @Sendable () async throws -> sending Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -122,7 +122,7 @@ public actor AsyncExpression<Value: Sendable> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> sending Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -153,7 +153,7 @@ public actor AsyncExpression<Value: Sendable> {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> sending U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
@@ -161,7 +161,7 @@ public actor AsyncExpression<Value: Sendable> {
         )
     }
 
-    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> sending U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
@@ -169,7 +169,7 @@ public actor AsyncExpression<Value: Sendable> {
         )
     }
 
-    public func evaluate() async throws -> sending Value? {
+    public func evaluate() async throws -> Value? {
         try await self._expression(_withoutCaching)
     }
 

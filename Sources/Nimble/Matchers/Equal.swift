@@ -44,7 +44,7 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> Matcher<[T?]> {
 ///
 /// @see beCloseTo if you want to match imprecise types (eg - floats, doubles).
 public func equal<T: Equatable>(_ expectedValue: T?) -> Matcher<T> {
-    equal(expectedValue, by: ==)
+    equal(expectedValue, by: { $0 == $1 })
 }
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.

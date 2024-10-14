@@ -316,7 +316,7 @@ internal class Awaiter {
     func performBlock<T: Sendable>(
         file: FileString,
         line: UInt,
-        _ closure: sending @escaping (@escaping @Sendable (T) -> Void) throws -> Void
+        _ closure: @escaping (@escaping @Sendable (T) -> Void) throws -> Void
         ) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
