@@ -1,7 +1,7 @@
 #if !os(WASI)
 
 import XCTest
-import Nimble
+@testable import Nimble
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
 #endif
@@ -24,12 +24,12 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testToEventuallyPositiveMatches() async throws {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        try await require { value }.toEventually(equal(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        try await require { value.value }.toEventually(equal(1))
 
-        deferToMainQueue { value = 0 }
-        try await require { value }.toEventuallyNot(equal(1))
+        deferToMainQueue { value.set(0) }
+        try await require { value.value }.toEventuallyNot(equal(1))
     }
 
     func testToEventuallyNegativeMatches() async {
@@ -194,52 +194,52 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     final class ClassUnderTest {
-        var deinitCalled: (() -> Void)?
-        var count = 0
-        deinit { deinitCalled?() }
+        let deinitCalled = LockedContainer<(() -> Void)?>(nil)
+        let count = LockedContainer(0)
+        deinit { deinitCalled.value?() }
     }
 
     func testSubjectUnderTestIsReleasedFromMemory() async throws {
-        var subject: ClassUnderTest? = ClassUnderTest()
+        let subject = LockedContainer<ClassUnderTest?>(ClassUnderTest())
 
-        if let sub = subject {
-            try await require(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
-            try await require(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
+        if let sub = subject.value {
+            try await require(sub.count.value).toEventually(equal(0), timeout: .milliseconds(100))
+            try await require(sub.count.value).toEventuallyNot(equal(1), timeout: .milliseconds(100))
         }
 
         await waitUntil(timeout: .milliseconds(500)) { done in
-            subject?.deinitCalled = {
+            subject.value?.deinitCalled.set({
                 done()
-            }
+            })
 
-            deferToMainQueue { subject = nil }
+            deferToMainQueue { subject.set(nil) }
         }
     }
 
     func testToNeverPositiveMatches() async throws {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        try await require { value }.toNever(beGreaterThan(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        try await require { value.value }.toNever(beGreaterThan(1))
 
-        deferToMainQueue { value = 0 }
-        try await require { value }.neverTo(beGreaterThan(1))
+        deferToMainQueue { value.set(0) }
+        try await require { value.value }.neverTo(beGreaterThan(1))
     }
 
     func testToNeverNegativeMatches() async {
-        var value = 0
+        let value = LockedContainer(0)
         await failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            try await require { value }.toNever(equal(0))
+            try await require { value.value }.toNever(equal(0))
         }
         await failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            try await require { value }.neverTo(equal(0))
+            try await require { value.value }.neverTo(equal(0))
         }
         await failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            try await require { value }.toNever(equal(1))
+            deferToMainQueue { value.set(1) }
+            try await require { value.value }.toNever(equal(1))
         }
         await failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            try await require { value }.neverTo(equal(1))
+            deferToMainQueue { value.set(1) }
+            try await require { value.value }.neverTo(equal(1))
         }
         await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
             try await require { try Self.doThrowError() }.toNever(equal(0))
@@ -253,29 +253,29 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testToAlwaysPositiveMatches() async throws {
-        var value = 1
-        deferToMainQueue { value = 2 }
-        try await require { value }.toAlways(beGreaterThan(0))
+        let value = LockedContainer(1)
+        deferToMainQueue { value.set(2) }
+        try await require { value.value }.toAlways(beGreaterThan(0))
 
-        deferToMainQueue { value = 2 }
-        try await require { value }.alwaysTo(beGreaterThan(1))
+        deferToMainQueue { value.set(2) }
+        try await require { value.value }.alwaysTo(beGreaterThan(1))
     }
 
     func testToAlwaysNegativeMatches() async {
-        var value = 1
+        let value = LockedContainer(1)
         await failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            try await require { value }.toAlways(equal(0))
+            try await require { value.value }.toAlways(equal(0))
         }
         await failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            try await require { value }.alwaysTo(equal(0))
+            try await require { value.value }.alwaysTo(equal(0))
         }
         await failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            try await require { value }.toAlways(equal(1))
+            deferToMainQueue { value.set(0) }
+            try await require { value.value }.toAlways(equal(1))
         }
         await failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            try await require { value }.alwaysTo(equal(1))
+            deferToMainQueue { value.set(0) }
+            try await require { value.value }.alwaysTo(equal(1))
         }
         await failsWithErrorMessage("unexpected error thrown: <\(Self.errorToThrow)>") {
             try await require { try Self.doThrowError() }.toAlways(equal(0))

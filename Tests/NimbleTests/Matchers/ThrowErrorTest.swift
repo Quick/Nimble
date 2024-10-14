@@ -128,7 +128,7 @@ final class ThrowErrorTest: XCTestCase {
     func testNegativeMatchesWithClosure() {
         let moduleName = "NimbleTests"
         let innerFailureMessage = "expected to equal <foo>, got <\(moduleName).NimbleError>"
-        let closure = { (error: Error) -> Void in
+        let closure = { @Sendable (error: Error) -> Void in
             expect(error._domain).to(equal("foo"))
         }
 

@@ -89,11 +89,10 @@ final class ContainTest: XCTestCase {
     }
 
     func testContainNSStringSubstring() {
-        let str = "foo" as NSString
-        expect(str).to(contain("o" as NSString))
-        expect(str).to(contain("oo" as NSString))
-        expect(str).toNot(contain("z" as NSString))
-        expect(str).toNot(contain("zz" as NSString))
+        expect("foo" as NSString).to(contain("o" as NSString))
+        expect("foo" as NSString).to(contain("oo" as NSString))
+        expect("foo" as NSString).toNot(contain("z" as NSString))
+        expect("foo" as NSString).toNot(contain("zz" as NSString))
     }
 
     func testVariadicArguments() {

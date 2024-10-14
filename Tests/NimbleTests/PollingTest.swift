@@ -6,7 +6,7 @@ import CoreFoundation
 #endif
 import Foundation
 import XCTest
-import Nimble
+@testable import Nimble
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
 #endif
@@ -21,12 +21,12 @@ final class PollingTest: XCTestCase {
     }
 
     func testToEventuallyPositiveMatches() {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        expect { value }.toEventually(equal(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        expect { value.value }.toEventually(equal(1))
 
-        deferToMainQueue { value = 0 }
-        expect { value }.toEventuallyNot(equal(1))
+        deferToMainQueue { value.set(0) }
+        expect { value.value }.toEventuallyNot(equal(1))
     }
 
     func testToEventuallyNegativeMatches() {
@@ -55,22 +55,22 @@ final class PollingTest: XCTestCase {
             PollingDefaults.timeout = .seconds(1)
         }
 
-        var value = 0
+        let value = LockedContainer(0)
 
         let sleepThenSetValueTo: (Int) -> Void = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
-            value = newValue
+            value.set(newValue)
         }
 
         var asyncOperation: () -> Void = { sleepThenSetValueTo(1) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        expect { value }.toEventually(equal(1))
+        expect { value.value }.toEventually(equal(1))
 
         asyncOperation = { sleepThenSetValueTo(0) }
 
         DispatchQueue.global().async(execute: asyncOperation)
-        expect { value }.toEventuallyNot(equal(1))
+        expect { value.value }.toEventuallyNot(equal(1))
     }
 
     func testWaitUntilWithCustomDefaultsTimeout() {
@@ -102,13 +102,13 @@ final class PollingTest: XCTestCase {
     }
 
     func testWaitUntilTimesOutWhenExceedingItsTime() {
-        var waiting = true
+        let waiting = LockedContainer(true)
         failsWithErrorMessage("Waited more than 0.01 seconds") {
             waitUntil(timeout: .milliseconds(10)) { done in
-                let asyncOperation: () -> Void = {
+                let asyncOperation: @Sendable () -> Void = {
                     Thread.sleep(forTimeInterval: 0.1)
                     done()
-                    waiting = false
+                    waiting.set(false)
                 }
                 DispatchQueue.global().async(execute: asyncOperation)
             }
@@ -117,7 +117,7 @@ final class PollingTest: XCTestCase {
         // "clear" runloop to ensure this test doesn't poison other tests
         repeat {
             RunLoop.main.run(until: Date().addingTimeInterval(0.2))
-        } while(waiting)
+        } while(waiting.value)
     }
 
     func testWaitUntilNegativeMatches() {
@@ -241,53 +241,53 @@ final class PollingTest: XCTestCase {
 #endif
     }
 
-    final class ClassUnderTest {
-        var deinitCalled: (() -> Void)?
-        var count = 0
-        deinit { deinitCalled?() }
+    final class ClassUnderTest: Sendable {
+        let deinitCalled = LockedContainer<(@Sendable () -> Void)?>(nil)
+        let count = 0
+        deinit { deinitCalled.value?() }
     }
 
     func testSubjectUnderTestIsReleasedFromMemory() {
-        var subject: ClassUnderTest? = ClassUnderTest()
+        let subject = LockedContainer<ClassUnderTest?>(ClassUnderTest())
 
-        if let sub = subject {
+        if let sub = subject.value {
             expect(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
             expect(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
         }
 
         waitUntil(timeout: .milliseconds(500)) { done in
-            subject?.deinitCalled = {
+            subject.value?.deinitCalled.set({
                 done()
-            }
+            })
 
-            deferToMainQueue { subject = nil }
+            deferToMainQueue { subject.set(nil) }
         }
     }
 
     func testToNeverPositiveMatches() {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        expect { value }.toNever(beGreaterThan(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        expect { value.value }.toNever(beGreaterThan(1))
 
-        deferToMainQueue { value = 0 }
-        expect { value }.neverTo(beGreaterThan(1))
+        deferToMainQueue { value.set(0) }
+        expect { value.value }.neverTo(beGreaterThan(1))
     }
 
     func testToNeverNegativeMatches() {
-        var value = 0
+        let value = LockedContainer(0)
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            expect { value }.toNever(equal(0))
+            expect { value.value }.toNever(equal(0))
         }
         failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            expect { value }.neverTo(equal(0))
+            expect { value.value }.neverTo(equal(0))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            expect { value }.toNever(equal(1))
+            deferToMainQueue { value.set(1) }
+            expect { value.value }.toNever(equal(1))
         }
         failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            expect { value }.neverTo(equal(1))
+            deferToMainQueue { value.set(1) }
+            expect { value.value }.neverTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toNever(equal(0))
@@ -301,29 +301,29 @@ final class PollingTest: XCTestCase {
     }
 
     func testToAlwaysPositiveMatches() {
-        var value = 1
-        deferToMainQueue { value = 2 }
-        expect { value }.toAlways(beGreaterThan(0))
+        let value = LockedContainer(1)
+        deferToMainQueue { value.set(2) }
+        expect { value.value }.toAlways(beGreaterThan(0))
 
-        deferToMainQueue { value = 2 }
-        expect { value }.alwaysTo(beGreaterThan(1))
+        deferToMainQueue { value.set(2) }
+        expect { value.value }.alwaysTo(beGreaterThan(1))
     }
 
     func testToAlwaysNegativeMatches() {
-        var value = 1
+        let value = LockedContainer(1)
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            expect { value }.toAlways(equal(0))
+            expect { value.value }.toAlways(equal(0))
         }
         failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            expect { value }.alwaysTo(equal(0))
+            expect { value.value }.alwaysTo(equal(0))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            expect { value }.toAlways(equal(1))
+            deferToMainQueue { value.set(0) }
+            expect { value.value }.toAlways(equal(1))
         }
         failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            expect { value }.alwaysTo(equal(1))
+            deferToMainQueue { value.set(0) }
+            expect { value.value }.alwaysTo(equal(1))
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             expect { try self.doThrowError() }.toAlways(equal(0))
