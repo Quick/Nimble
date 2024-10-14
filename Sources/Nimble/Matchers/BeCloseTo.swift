@@ -67,7 +67,7 @@ private func beCloseTo(
 }
 
 #if canImport(Darwin)
-public class NMBObjCBeCloseToMatcher: NMBMatcher {
+public final class NMBObjCBeCloseToMatcher: NMBMatcher, @unchecked Sendable {
     private let _expected: NSNumber
 
     fileprivate init(expected: NSNumber, within: CDouble) {
