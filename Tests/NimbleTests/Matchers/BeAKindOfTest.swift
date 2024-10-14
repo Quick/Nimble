@@ -5,9 +5,9 @@ import Nimble
 import NimbleSharedTestHelpers
 #endif
 
-private class TestNull: NSNull {}
+private final class TestNull: NSNull, @unchecked Sendable {}
 private protocol TestProtocol {}
-private class TestClassConformingToProtocol: TestProtocol {}
+private final class TestClassConformingToProtocol: TestProtocol {}
 private struct TestStructConformingToProtocol: TestProtocol {}
 
 final class BeAKindOfSwiftTest: XCTestCase {

@@ -1,72 +1,72 @@
 import Foundation
 
-extension Int8: Swift.ExpressibleByBooleanLiteral {
+extension Int8: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int8Value
     }
 }
 
-extension UInt8: Swift.ExpressibleByBooleanLiteral {
+extension UInt8: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint8Value
     }
 }
 
-extension Int16: Swift.ExpressibleByBooleanLiteral {
+extension Int16: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int16Value
     }
 }
 
-extension UInt16: Swift.ExpressibleByBooleanLiteral {
+extension UInt16: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint16Value
     }
 }
 
-extension Int32: Swift.ExpressibleByBooleanLiteral {
+extension Int32: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int32Value
     }
 }
 
-extension UInt32: Swift.ExpressibleByBooleanLiteral {
+extension UInt32: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint32Value
     }
 }
 
-extension Int64: Swift.ExpressibleByBooleanLiteral {
+extension Int64: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int64Value
     }
 }
 
-extension UInt64: ExpressibleByBooleanLiteral {
+extension UInt64: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint64Value
     }
 }
 
-extension Float: ExpressibleByBooleanLiteral {
+extension Float: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).floatValue
     }
 }
 
-extension Double: ExpressibleByBooleanLiteral {
+extension Double: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).doubleValue
     }
 }
 
-extension Int: ExpressibleByBooleanLiteral {
+extension Int: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).intValue
     }
 }
 
-extension UInt: ExpressibleByBooleanLiteral {
+extension UInt: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uintValue
     }
