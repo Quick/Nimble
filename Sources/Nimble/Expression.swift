@@ -3,13 +3,13 @@ import Foundation
 private final class MemoizedValue<T>: Sendable {
     private let lock = NSRecursiveLock()
     nonisolated(unsafe) private var cache: T? = nil
-    private let closure: @Sendable () throws -> sending T
+    private let closure: @Sendable () throws -> T
 
-    init(_ closure: @escaping @Sendable () throws -> sending T) {
+    init(_ closure: @escaping @Sendable () throws -> T) {
         self.closure = closure
     }
 
-    @Sendable func evaluate(withoutCaching: Bool) throws -> sending T {
+    @Sendable func evaluate(withoutCaching: Bool) throws -> T {
         try lock.withLock {
             if withoutCaching || cache == nil {
                 cache = try closure()
@@ -21,7 +21,7 @@ private final class MemoizedValue<T>: Sendable {
 
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T>(_ closure: @escaping @Sendable () throws -> sending T) -> @Sendable (Bool) throws -> sending T {
+private func memoizedClosure<T>(_ closure: @escaping @Sendable () throws -> T) -> @Sendable (Bool) throws -> T {
     MemoizedValue(closure).evaluate(withoutCaching:)
 }
 
@@ -37,7 +37,7 @@ private func memoizedClosure<T>(_ closure: @escaping @Sendable () throws -> send
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
 public struct Expression<Value>: Sendable {
-    internal let _expression: @Sendable (Bool) throws -> sending Value?
+    internal let _expression: @Sendable (Bool) throws -> Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -53,7 +53,7 @@ public struct Expression<Value>: Sendable {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: @escaping @Sendable () throws -> sending Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: @escaping @Sendable () throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -74,7 +74,7 @@ public struct Expression<Value>: Sendable {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping @Sendable (Bool) throws -> sending Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping @Sendable (Bool) throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -89,7 +89,7 @@ public struct Expression<Value>: Sendable {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> sending U?) -> Expression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> U?) -> Expression<U> {
         Expression<U>(
             expression: ({ try block(self.evaluate()) }),
             location: self.location,

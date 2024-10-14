@@ -14,13 +14,13 @@ private func from(objcMatcher: NMBMatcher) -> Matcher<NSObject> {
 
 // Equivalent to Expectation, but for Nimble's Objective-C interface
 public final class NMBExpectation: NSObject, Sendable {
-    internal let _actualBlock: @Sendable () -> sending NSObject?
+    internal let _actualBlock: @Sendable () -> NSObject?
     internal let _negative: Bool
     internal let _file: FileString
     internal let _line: UInt
     internal let _timeout: NimbleTimeInterval
 
-    @objc public init(actualBlock: @escaping @Sendable () -> sending NSObject?, negative: Bool, file: FileString, line: UInt) {
+    @objc public init(actualBlock: @escaping @Sendable () -> NSObject?, negative: Bool, file: FileString, line: UInt) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
@@ -28,7 +28,7 @@ public final class NMBExpectation: NSObject, Sendable {
         self._timeout = .seconds(1)
     }
 
-    private init(actualBlock: @escaping @Sendable () -> sending NSObject?, negative: Bool, file: FileString, line: UInt, timeout: NimbleTimeInterval) {
+    private init(actualBlock: @escaping @Sendable () -> NSObject?, negative: Bool, file: FileString, line: UInt, timeout: NimbleTimeInterval) {
         self._actualBlock = actualBlock
         self._negative = negative
         self._file = file
