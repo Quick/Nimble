@@ -66,7 +66,10 @@ public func expects<T>(fileID: String = #fileID, file: FileString = #filePath, l
 
 /// Make a ``SyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided as an alternative to `expect` which avoids overloading with `expect -> AsyncExpectation`.
-public func expects(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> Void)) -> SyncExpectation<Void> {
+public func expects(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (@Sendable () throws -> sending Void)) -> SyncExpectation<Void> {
+    // It would seem like `sending` isn't necessary for the `expression` argument
+    // because the closure returns void. However, this gets rid of a type
+    // conversion warning/error.
     return SyncExpectation(
         expression: Expression(
             expression: expression(),
