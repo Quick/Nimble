@@ -30,3 +30,14 @@ final class LockedContainer<T: Sendable>: @unchecked Sendable {
         _value = newValue
     }
 }
+
+extension NSLocking {
+    func withLock<R>(_ body: () throws -> R) rethrows -> R {
+        self.lock()
+        defer {
+            self.unlock()
+        }
+
+        return try body()
+    }
+}

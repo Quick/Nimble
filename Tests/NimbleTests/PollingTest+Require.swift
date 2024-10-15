@@ -101,8 +101,8 @@ final class PollingRequireTest: XCTestCase {
 
     func testToEventuallyAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
-        var executedAsyncBlock: Bool = false
-        let asyncOperation: () -> Void = {
+        let executedAsyncBlock = LockedContainer(false)
+        let asyncOperation: @Sendable () -> Void = {
             do {
                 try require {
                     expect(1).toEventually(equal(1))
@@ -111,10 +111,10 @@ final class PollingRequireTest: XCTestCase {
                 fail(error.localizedDescription)
                 return
             }
-            executedAsyncBlock = true
+            executedAsyncBlock.set(true)
         }
         DispatchQueue.global().async(execute: asyncOperation)
-        expect(executedAsyncBlock).toEventually(beTruthy())
+        expect(executedAsyncBlock.value).toEventually(beTruthy())
 #endif
     }
 

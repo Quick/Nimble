@@ -105,7 +105,11 @@ internal enum PollStatus {
 /// Holds the resulting value from an asynchronous expectation.
 /// This class is thread-safe at receiving a "response" to this promise.
 internal final class AwaitPromise<T: Sendable>: Sendable {
+#if swift(>=5.10)
     nonisolated(unsafe) private(set) internal var asyncResult: PollResult<T> = .incomplete
+#else
+    private(set) internal var asyncResult: PollResult<T> = .incomplete
+#endif
     private let signal: DispatchSemaphore
 
     init() {
@@ -320,13 +324,13 @@ internal class Awaiter {
         ) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
-            nonisolated(unsafe) var completionCount = 0
+            let completionCount = LockedContainer(0)
             let lock = NSRecursiveLock()
             let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure { result in
                     lock.withLock {
-                        completionCount += 1
-                        if completionCount < 2 {
+                        completionCount.operate { $0 + 1 }
+                        if completionCount.value < 2 {
                             @Sendable func completeBlock() {
                                 if promise.resolveResult(.completed(result)) {
 #if canImport(CoreFoundation)

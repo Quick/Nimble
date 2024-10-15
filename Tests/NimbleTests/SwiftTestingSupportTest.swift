@@ -17,6 +17,10 @@ import XCTest
     }
 }
 
+#if canImport(Darwin)
+// XCTExpectFailure is only available on the closed-source implementation
+// of XCTest.
+// https://github.com/swiftlang/swift-corelibs-xctest/issues/438
 class MixedSwiftTestingXCTestSupport: XCTestCase {
     func testAlsoRecordsErrorsToXCTest() {
         XCTExpectFailure("This should fail")
@@ -29,5 +33,6 @@ class MixedSwiftTestingXCTestSupport: XCTestCase {
         try require(false).to(beTrue())
     }
 }
+#endif
 
 #endif

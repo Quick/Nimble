@@ -155,12 +155,12 @@ final class PollingTest: XCTestCase {
             """
         failsWithErrorMessage(msg) { // reference line
             waitUntil(timeout: .seconds(2)) { done in
-                var protected: Int = 0
+                let protected = LockedContainer(0)
                 DispatchQueue.main.async {
-                    protected = 1
+                    protected.set(1)
                 }
 
-                expect(protected).toEventually(equal(1))
+                expect(protected.value).toEventually(equal(1))
                 done()
             }
         }
@@ -215,29 +215,29 @@ final class PollingTest: XCTestCase {
 
     func testWaitUntilAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
-        var executedAsyncBlock: Bool = false
+        let executedAsyncBlock = LockedContainer(false)
         let asyncOperation: () -> Void = {
             expect {
                 waitUntil { done in done() }
             }.toNot(raiseException(named: "InvalidNimbleAPIUsage"))
-            executedAsyncBlock = true
+            executedAsyncBlock.set(true)
         }
         DispatchQueue.global().async(execute: asyncOperation)
-        expect(executedAsyncBlock).toEventually(beTruthy())
+        expect(executedAsyncBlock.value).toEventually(beTruthy())
 #endif
     }
 
     func testToEventuallyAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
-        var executedAsyncBlock: Bool = false
+        let executedAsyncBlock = LockedContainer(false)
         let asyncOperation: () -> Void = {
             expect {
                 expect(1).toEventually(equal(1))
             }.toNot(raiseException(named: "InvalidNimbleAPIUsage"))
-            executedAsyncBlock = true
+            executedAsyncBlock.set(true)
         }
         DispatchQueue.global().async(execute: asyncOperation)
-        expect(executedAsyncBlock).toEventually(beTruthy())
+        expect(executedAsyncBlock.value).toEventually(beTruthy())
 #endif
     }
 

@@ -4,11 +4,17 @@
 import Foundation
 
 final class NotificationCollector: Sendable {
+#if swift(>=5.10)
     nonisolated(unsafe) private(set) var observedNotifications: [Notification]
     nonisolated(unsafe) private(set) var observedNotificationDescriptions: [String]
+    nonisolated(unsafe) private var tokens: [NSObjectProtocol]
+#else
+    private(set) var observedNotifications: [Notification]
+    private(set) var observedNotificationDescriptions: [String]
+    private var tokens: [NSObjectProtocol]
+#endif
     private let notificationCenter: NotificationCenter
     private let names: Set<Notification.Name>
-    nonisolated(unsafe) private var tokens: [NSObjectProtocol]
     private let lock = NSRecursiveLock()
 
     required init(notificationCenter: NotificationCenter, names: Set<Notification.Name> = []) {
@@ -55,13 +61,22 @@ final class NotificationCollector: Sendable {
 }
 
 #if !os(Windows)
+#if swift(>=5.10)
 nonisolated(unsafe) private let mainThread = pthread_self()
+#else
+private let mainThread = pthread_self()
+#endif
 #else
 private let mainThread = Thread.mainThread
 #endif
 
 private final class OnlyOnceChecker: Sendable {
+#if swift(>=5.10)
     nonisolated(unsafe) var hasRun = false
+#else
+    var hasRun = false
+#endif
+
     let lock = NSRecursiveLock()
 
     func runOnlyOnce(_ closure: @Sendable () throws -> Void) rethrows {

@@ -11,28 +11,12 @@ on:
       - "*"
 
 jobs:
-  xcode_monterey:
+  xcode_sonoma:
     name: Xcode ${{ matrix.xcode }} (Xcode Project)
-    runs-on: macos-12
+    runs-on: macos-14
     strategy:
       matrix:
-        xcode: ["14.0.1", "14.1", "14.2"]
-      fail-fast: false
-    env:
-      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
-    steps:
-      - uses: actions/checkout@v4
-      - run: ./test macos
-      - run: ./test ios
-      - run: ./test tvos
-      - run: ./test watchos
-
-  xcode_ventura:
-    name: Xcode ${{ matrix.xcode }} (Xcode Project)
-    runs-on: macos-13
-    strategy:
-      matrix:
-        xcode: ["14.3.1"]
+        xcode: ["15.0.1", "15.1", "15.2"]
       fail-fast: false
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
@@ -45,10 +29,10 @@ jobs:
 
   xcode_spm:
     name: Xcode ${{ matrix.xcode }} (Swift Package)
-    runs-on: macos-12
+    runs-on: macos-14
     strategy:
       matrix:
-        xcode: ["14.0.1"]
+        xcode: ["15.0.1", "15.1", "15.2"]
       fail-fast: false
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
