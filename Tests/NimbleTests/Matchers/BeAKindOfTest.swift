@@ -34,6 +34,12 @@ final class BeAKindOfSwiftTest: XCTestCase {
         expect(testProtocolStruct).toNot(beAKindOf(TestClassConformingToProtocol.self))
     }
 
+    func testNestedMatchers() {
+        // This test is successful if it even compiles.
+        let result: Result<Int, Error> = .success(1)
+        expect(result).to(beSuccess(beAKindOf(Int.self)))
+    }
+
     func testFailureMessages() {
         failsWithErrorMessage("expected to not be a kind of Int, got <Int instance>") {
             expect(1).toNot(beAKindOf(Int.self))
