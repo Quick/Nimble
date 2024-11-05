@@ -6,7 +6,7 @@ private func matcherMessage(forClass expectedClass: AnyClass) -> String {
 }
 
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
-public func beAKindOf<T>(_ expectedType: T.Type) -> Matcher<Any> {
+public func beAKindOf<T, U>(_ expectedType: T.Type) -> Matcher<U> {
     return Matcher.define { actualExpression in
         let message: ExpectationMessage
 

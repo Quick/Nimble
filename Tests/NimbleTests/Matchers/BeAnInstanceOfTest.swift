@@ -36,6 +36,12 @@ final class BeAnInstanceOfTest: XCTestCase {
         expect(testProtocolStruct).toNot(beAnInstanceOf(TestClassConformingToProtocol.self))
     }
 
+    func testNestedMatchers() {
+        // This test is successful if it even compiles.
+        let result: Result<Int, Error> = .success(1)
+        expect(result).to(beSuccess(beAnInstanceOf(Int.self)))
+    }
+
     func testFailureMessages() {
         failsWithErrorMessageForNil("expected to not be an instance of NSNull, got <nil>") {
             expect(nil as NSNull?).toNot(beAnInstanceOf(NSNull.self))
