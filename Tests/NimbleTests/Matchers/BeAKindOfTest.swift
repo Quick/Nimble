@@ -28,16 +28,25 @@ final class BeAKindOfSwiftTest: XCTestCase {
         expect(testProtocolClass).to(beAKindOf(TestProtocol.self))
         expect(testProtocolClass).toNot(beAKindOf(TestStructConformingToProtocol.self))
 
+        expect(testProtocolClass as TestProtocol).to(beAKindOf(TestClassConformingToProtocol.self))
+        expect(testProtocolClass as TestProtocol).to(beAKindOf(TestProtocol.self))
+        expect(testProtocolClass as TestProtocol).toNot(beAKindOf(TestStructConformingToProtocol.self))
+
         let testProtocolStruct = TestStructConformingToProtocol()
         expect(testProtocolStruct).to(beAKindOf(TestStructConformingToProtocol.self))
         expect(testProtocolStruct).to(beAKindOf(TestProtocol.self))
         expect(testProtocolStruct).toNot(beAKindOf(TestClassConformingToProtocol.self))
+
+        expect(testProtocolStruct as TestProtocol).to(beAKindOf(TestStructConformingToProtocol.self))
+        expect(testProtocolStruct as TestProtocol).to(beAKindOf(TestProtocol.self))
+        expect(testProtocolStruct as TestProtocol).toNot(beAKindOf(TestClassConformingToProtocol.self))
     }
 
     func testNestedMatchers() {
         // This test is successful if it even compiles.
-        let result: Result<Int, Error> = .success(1)
-        expect(result).to(beSuccess(beAKindOf(Int.self)))
+        expect(Result<Int, Error>.success(1)).to(beSuccess(beAKindOf(Int.self)))
+        expect(Result<TestProtocol, Error>.success(TestClassConformingToProtocol())).to(beSuccess(beAKindOf(TestClassConformingToProtocol.self)))
+        expect(Result<TestProtocol, Error>.success(TestClassConformingToProtocol())).to(beSuccess(beAKindOf(TestProtocol.self)))
     }
 
     func testFailureMessages() {
