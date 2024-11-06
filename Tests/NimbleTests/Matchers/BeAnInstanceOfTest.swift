@@ -30,16 +30,25 @@ final class BeAnInstanceOfTest: XCTestCase {
         expect(testProtocolClass).toNot(beAnInstanceOf(TestProtocol.self))
         expect(testProtocolClass).toNot(beAnInstanceOf(TestStructConformingToProtocol.self))
 
+        expect(testProtocolClass as TestProtocol).to(beAnInstanceOf(TestClassConformingToProtocol.self))
+        expect(testProtocolClass as TestProtocol).toNot(beAnInstanceOf(TestProtocol.self))
+        expect(testProtocolClass as TestProtocol).toNot(beAnInstanceOf(TestStructConformingToProtocol.self))
+
         let testProtocolStruct = TestStructConformingToProtocol()
         expect(testProtocolStruct).to(beAnInstanceOf(TestStructConformingToProtocol.self))
         expect(testProtocolStruct).toNot(beAnInstanceOf(TestProtocol.self))
         expect(testProtocolStruct).toNot(beAnInstanceOf(TestClassConformingToProtocol.self))
+
+        expect(testProtocolStruct as TestProtocol).to(beAnInstanceOf(TestStructConformingToProtocol.self))
+        expect(testProtocolStruct as TestProtocol).toNot(beAnInstanceOf(TestProtocol.self))
+        expect(testProtocolStruct as TestProtocol).toNot(beAnInstanceOf(TestClassConformingToProtocol.self))
     }
 
     func testNestedMatchers() {
         // This test is successful if it even compiles.
-        let result: Result<Int, Error> = .success(1)
-        expect(result).to(beSuccess(beAnInstanceOf(Int.self)))
+        expect(Result<Int, Error>.success(1)).to(beSuccess(beAnInstanceOf(Int.self)))
+        expect(Result<TestProtocol, Error>.success(TestClassConformingToProtocol())).to(beSuccess(beAnInstanceOf(TestClassConformingToProtocol.self)))
+        expect(Result<TestProtocol, Error>.success(TestClassConformingToProtocol())).toNot(beSuccess(beAnInstanceOf(TestProtocol.self)))
     }
 
     func testFailureMessages() {
