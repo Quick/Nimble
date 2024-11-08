@@ -1,11 +1,11 @@
 import Foundation
 
 /// A Nimble matcher that succeeds when the actual value is an _exact_ instance of the given class.
-public func beAnInstanceOf<T>(_ expectedType: T.Type) -> Matcher<Any> {
+public func beAnInstanceOf<T, U>(_ expectedType: T.Type) -> Matcher<U> {
     let errorMessage = "be an instance of \(String(describing: expectedType))"
     return Matcher.define { actualExpression in
         let instance = try actualExpression.evaluate()
-        guard let validInstance = instance else {
+        guard let validInstance: Any = instance else {
             return MatcherResult(
                 status: .doesNotMatch,
                 message: .expectedActualValueTo(errorMessage)
