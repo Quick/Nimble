@@ -1,6 +1,6 @@
 public func allPass<S: Sequence>(
-    _ passFunc: @escaping (S.Element) async throws -> Bool
-) -> AsyncMatcher<S> {
+    _ passFunc: @escaping @Sendable (S.Element) async throws -> Bool
+) -> AsyncMatcher<S> where S.Element: Sendable {
     let matcher = AsyncMatcher<S.Element>.define("pass a condition") { actualExpression, message in
         guard let actual = try await actualExpression.evaluate() else {
             return MatcherResult(status: .fail, message: message)
@@ -12,8 +12,8 @@ public func allPass<S: Sequence>(
 
 public func allPass<S: Sequence>(
     _ passName: String,
-    _ passFunc: @escaping (S.Element) async throws -> Bool
-) -> AsyncMatcher<S> {
+    _ passFunc: @escaping @Sendable (S.Element) async throws -> Bool
+) -> AsyncMatcher<S> where S.Element: Sendable {
     let matcher = AsyncMatcher<S.Element>.define(passName) { actualExpression, message in
         guard let actual = try await actualExpression.evaluate() else {
             return MatcherResult(status: .fail, message: message)

@@ -4,7 +4,7 @@
 /// @warning Does not fully dispatch if one of the handlers raises an exception.
 ///          This is possible with XCTest-based assertion handlers.
 ///
-public class AssertionDispatcher: AssertionHandler {
+public final class AssertionDispatcher: AssertionHandler {
     let handlers: [AssertionHandler]
 
     public init(handlers: [AssertionHandler]) {

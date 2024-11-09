@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RequireError: Error, CustomNSError {
+public struct RequireError: Error, CustomNSError, Sendable {
     let message: String
     let location: SourceLocation
 
@@ -57,7 +57,7 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     msg.userDescription = description
     msg.to = to
     do {
-        let cachedExpression = expression.withCaching()
+        let cachedExpression = await expression.withCaching()
         let result = try await matcher.satisfies(cachedExpression)
         let value = try await cachedExpression.evaluate()
         result.message.update(failureMessage: msg)
@@ -71,7 +71,7 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
     }
 }
 
-public struct SyncRequirement<Value> {
+public struct SyncRequirement<Value>: Sendable {
     public let expression: Expression<Value>
 
     /// A custom error to throw.
@@ -115,7 +115,9 @@ public struct SyncRequirement<Value> {
     public func notTo(_ matcher: Matcher<Value>, description: String? = nil) throws -> Value {
         try toNot(matcher, description: description)
     }
+}
 
+extension SyncRequirement where Value: Sendable {
     // MARK: - AsyncMatchers
     /// Tests the actual value using a matcher to match.
     @discardableResult
@@ -140,7 +142,7 @@ public struct SyncRequirement<Value> {
     }
 }
 
-public struct AsyncRequirement<Value> {
+public struct AsyncRequirement<Value: Sendable>: Sendable {
     public let expression: AsyncExpression<Value>
 
     /// A custom error to throw.

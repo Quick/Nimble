@@ -5,7 +5,7 @@ import Foundation
 /// You can pass a closure to do any arbitrary custom matching to the value inside result.
 /// The closure only gets called when the result is success.
 public func beSuccess<Success, Failure>(
-    test: ((Success) -> Void)? = nil
+    test: (@Sendable (Success) -> Void)? = nil
 ) -> Matcher<Result<Success, Failure>> {
     return Matcher.define { expression in
         var rawMessage = "be <success(\(Success.self))>"
@@ -92,7 +92,7 @@ public func beSuccess<Success, Failure>(
 /// You can pass a closure to do any arbitrary custom matching to the error inside result.
 /// The closure only gets called when the result is failure.
 public func beFailure<Success, Failure>(
-    test: ((Failure) -> Void)? = nil
+    test: (@Sendable (Failure) -> Void)? = nil
 ) -> Matcher<Result<Success, Failure>> {
     return Matcher.define { expression in
         var rawMessage = "be <failure(\(Failure.self))>"

@@ -77,10 +77,14 @@ public func contain(_ substrings: NSString...) -> Matcher<NSString> {
 }
 
 public func contain(_ substrings: [NSString]) -> Matcher<NSString> {
+    let stringSubstrings = substrings.map { String($0) }
     return Matcher.simple("contain <\(arrayAsString(substrings))>") { actualExpression in
         guard let actual = try actualExpression.evaluate() else { return .fail }
+        let actualString = String(actual)
 
-        let matches = substrings.allSatisfy { actual.range(of: $0.description).length != 0 }
+        let matches = stringSubstrings.allSatisfy { string in
+            actualString.contains(string)
+        }
         return MatcherStatus(bool: matches)
     }
 }
@@ -115,7 +119,8 @@ extension NMBMatcher {
                 let expectedOptionals: [Any?] = expected.map({ $0 as Any? })
                 return try contain(expectedOptionals).satisfies(expr).toObjectiveC()
             } else if let value = actualValue as? NSString {
-                let expr = Expression(expression: ({ value as String }), location: location)
+                let stringValue = String(value)
+                let expr = Expression(expression: ({ stringValue }), location: location)
                 // swiftlint:disable:next force_cast
                 return try contain(expected as! [String]).satisfies(expr).toObjectiveC()
             }
