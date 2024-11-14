@@ -189,6 +189,15 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         }
     }
 
+    func testWaitUntilUsingSendable() async {
+        await waitUntil { done in
+            let queue = OperationQueue()
+            let op = BlockOperation {}
+            op.completionBlock = done
+            queue.addOperation(op)
+        }
+    }
+
     func testWaitUntilTimesOutIfNotCalled() async {
         await failsWithErrorMessage("Waited more than 1.0 second") {
             await waitUntil(timeout: .seconds(1)) { _ in return }
