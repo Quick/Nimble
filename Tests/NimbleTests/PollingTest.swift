@@ -131,7 +131,7 @@ final class PollingTest: XCTestCase {
     }
 
     func testWaitUntilDetectsStalledMainThreadActivity() {
-        let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive (0.5 seconds is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
+        let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive. (0.5 seconds is allowed after the wait times out) Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped the run loop which may cause future failures in test runs."
         failsWithErrorMessage(msg) {
             waitUntil(timeout: .seconds(1)) { done in
                 Thread.sleep(forTimeInterval: 3.0)
