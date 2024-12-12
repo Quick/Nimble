@@ -127,7 +127,7 @@ public class NMBWait: NSObject {
 
 internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: NimbleTimeInterval) -> String {
     // swiftlint:disable:next line_length
-    return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive (\(leeway.description) is allow after the wait times out). Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped run loop which may cause future failures in test run."
+    return "\(fnName) timed out but was unable to run the timeout handler because the main thread is unresponsive. (\(leeway.description) is allowed after the wait times out) Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped the run loop which may cause future failures in test runs."
 }
 
 /// Wait asynchronously until the done closure is called or the timeout has been reached.

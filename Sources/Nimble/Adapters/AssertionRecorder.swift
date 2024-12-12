@@ -79,6 +79,8 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
         try capturer.tryBlockThrows {
             try closure()
         }
+    } catch is RequireError {
+        // specifically ignore RequireError, will be caught by the assertion handler.
     } catch {
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"

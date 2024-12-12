@@ -1,6 +1,6 @@
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
-public func beIdenticalTo(_ expected: AnyObject?) -> Matcher<AnyObject> {
+public func beIdenticalTo<T: AnyObject>(_ expected: T?) -> Matcher<T> {
     return Matcher.define { actualExpression in
         let actual = try actualExpression.evaluate()
 
@@ -35,7 +35,7 @@ public func !== (lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
 /// as the expected instance.
 ///
 /// Alias for "beIdenticalTo".
-public func be(_ expected: AnyObject?) -> Matcher<AnyObject> {
+public func be<T: AnyObject>(_ expected: T?) -> Matcher<T> {
     return beIdenticalTo(expected)
 }
 
