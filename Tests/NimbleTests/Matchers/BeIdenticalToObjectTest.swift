@@ -12,6 +12,8 @@ final class BeIdenticalToObjectTest: XCTestCase {
 
     func testBeIdenticalToPositive() {
         expect(self.testObjectA).to(beIdenticalTo(testObjectA))
+        // check that the typing works out when used as a submatcher.
+        expect(self.testObjectA).to(map({ $0 }, beIdenticalTo(testObjectA)))
     }
 
     func testBeIdenticalToNegative() {
