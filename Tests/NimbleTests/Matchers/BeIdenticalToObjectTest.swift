@@ -21,15 +21,10 @@ final class BeIdenticalToObjectTest: XCTestCase {
     }
 
     func testBeIdenticalToAnyObjectProtocol() {
-        protocol SomeObject: AnyObject {}
-        class ConcreteImpl: SomeObject {
-            init() {}
-        }
+        let object = AnObjectImplementation()
 
-        let object = ConcreteImpl()
-
-        expect(object as SomeObject).to(be(object))
-        expect(object as SomeObject).to(beIdenticalTo(object))
+        expect(object as AnObjectProtocol).to(be(object))
+        expect(object as AnObjectProtocol).to(beIdenticalTo(object))
     }
 
     func testBeIdenticalToNegative() {
@@ -70,5 +65,9 @@ final class BeIdenticalToObjectTest: XCTestCase {
         expect(self.testObjectA) === testObjectA
         expect(self.testObjectA) !== testObjectB
     }
+}
 
+private protocol AnObjectProtocol: AnyObject {}
+private final class AnObjectImplementation: AnObjectProtocol {
+    init() {}
 }
