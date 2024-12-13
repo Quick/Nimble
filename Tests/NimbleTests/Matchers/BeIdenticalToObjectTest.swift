@@ -12,8 +12,24 @@ final class BeIdenticalToObjectTest: XCTestCase {
 
     func testBeIdenticalToPositive() {
         expect(self.testObjectA).to(beIdenticalTo(testObjectA))
+    }
+
+    func testbeIdenticalToAsSubmatcher() {
         // check that the typing works out when used as a submatcher.
+        expect(self.testObjectA).to(map({ $0 }, be(testObjectA)))
         expect(self.testObjectA).to(map({ $0 }, beIdenticalTo(testObjectA)))
+    }
+
+    func testBeIdenticalToAnyObjectProtocol() {
+        protocol SomeObject: AnyObject {}
+        class ConcreteImpl: SomeObject {
+            init() {}
+        }
+
+        let object = ConcreteImpl()
+
+        expect(object as SomeObject).to(be(object))
+        expect(object as SomeObject).to(beIdenticalTo(object))
     }
 
     func testBeIdenticalToNegative() {
