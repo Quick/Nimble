@@ -11,24 +11,24 @@ on:
       - "*"
 
 jobs:
-  swiftpm_darwin_monterey:
-    name: SwiftPM, Darwin, Xcode ${{ matrix.xcode }}
-    runs-on: macos-12
-    strategy:
-      matrix:
-        xcode: ["14.0.1", "14.1", "14.2"]
-    env:
-      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
-    steps:
-      - uses: actions/checkout@v4
-      - run: ./test swiftpm
-
   swiftpm_darwin_ventura:
     name: SwiftPM, Darwin, Xcode ${{ matrix.xcode }}
     runs-on: macos-13
     strategy:
       matrix:
         xcode: ["14.3.1"]
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./test swiftpm
+
+  swiftpm_darwin_sonoma:
+    name: SwiftPM, Darwin, Xcode ${{ matrix.xcode }}
+    runs-on: macos-14
+    strategy:
+      matrix:
+        xcode: ["15.3", "16.1"]
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
@@ -43,6 +43,8 @@ jobs:
         container:
           - swift:5.7
           - swift:5.8
+          - swift:5.9
+          - swift:6.0
           # - swiftlang/swift:nightly
       fail-fast: false
     container: ${{ matrix.container }}

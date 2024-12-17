@@ -17,6 +17,8 @@ import XCTest
     }
 }
 
+#if canImport(Darwin)
+// the open source version of XCTest doesn't include `XCTExpectFailure`.
 class MixedSwiftTestingXCTestSupport: XCTestCase {
     func testAlsoRecordsErrorsToXCTest() {
         XCTExpectFailure("This should fail")
@@ -29,5 +31,6 @@ class MixedSwiftTestingXCTestSupport: XCTestCase {
         try require(false).to(beTrue())
     }
 }
+#endif
 
 #endif

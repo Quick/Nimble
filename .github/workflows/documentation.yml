@@ -15,6 +15,7 @@ permissions:
 jobs:
   build-documentation:
     runs-on: ubuntu-latest
+    container: swift:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
