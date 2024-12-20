@@ -37,7 +37,7 @@ public final class NMBExpectation: NSObject, Sendable {
     }
 
     private var expectValue: SyncExpectation<NSObject> {
-        return expect(file: _file, line: _line, self._actualBlock() as NSObject?)
+        return expect(location: SourceLocation(fileID: "unknown/\(_file)", filePath: _file, line: _line, column: 0), self._actualBlock() as NSObject?)
     }
 
     @objc public var withTimeout: (TimeInterval) -> NMBExpectation {

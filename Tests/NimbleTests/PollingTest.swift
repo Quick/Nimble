@@ -202,7 +202,7 @@ final class PollingTest: XCTestCase {
 
         for index in 0..<100 {
             if failed { break }
-            waitUntil(line: UInt(index)) { done in
+            waitUntil(location: SourceLocation(column: UInt(index))) { done in
                 DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
                     done()
                 }
