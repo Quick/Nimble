@@ -286,10 +286,7 @@ private func runAwaitTrigger<T>(
                     } else {
                         fail(
                             "waitUntil(..) expects its completion closure to be only called once",
-                            fileID: sourceLocation.fileID,
-                            file: sourceLocation.filePath,
-                            line: sourceLocation.line,
-                            column: sourceLocation.column
+                            location: sourceLocation
                         )
                     }
                 }

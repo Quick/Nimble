@@ -284,7 +284,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
 
         for index in 0..<100 {
             if failed { break }
-            await waitUntil(line: UInt(index)) { done in
+            await waitUntil(location: SourceLocation(column: UInt(index))) { done in
                 DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
                     done()
                 }

@@ -19,24 +19,18 @@ public class NMBWait: NSObject {
     @objc
     public class func until(
         timeout: TimeInterval,
-        fileID: String = #fileID,
-        file: FileString = #filePath,
-        line: UInt = #line,
-        column: UInt = #column,
+        location: SourceLocation = SourceLocation(),
         action: @escaping @Sendable (@escaping @Sendable () -> Void) -> Void) {
             // Convert TimeInterval to NimbleTimeInterval
-            until(timeout: timeout.nimbleInterval, file: file, line: line, action: action)
+            until(timeout: timeout.nimbleInterval, location: location, action: action)
     }
 #endif
 
     public class func until(
         timeout: NimbleTimeInterval,
-        fileID: String = #fileID,
-        file: FileString = #filePath,
-        line: UInt = #line,
-        column: UInt = #column,
+        location: SourceLocation = SourceLocation(),
         action: @escaping @Sendable (@escaping @Sendable () -> Void) -> Void) {
-            return throwableUntil(timeout: timeout, file: file, line: line) { done in
+            return throwableUntil(timeout: timeout, location: location) { done in
                 action(done)
             }
     }
@@ -44,15 +38,11 @@ public class NMBWait: NSObject {
     // Using a throwable closure makes this method not objc compatible.
     public class func throwableUntil(
         timeout: NimbleTimeInterval,
-        fileID: String = #fileID,
-        file: FileString = #filePath,
-        line: UInt = #line,
-        column: UInt = #column,
+        location: SourceLocation = SourceLocation(),
         action: @escaping @Sendable (@escaping @Sendable () -> Void) throws -> Void) {
             let awaiter = NimbleEnvironment.activeInstance.awaiter
             let leeway = timeout.divided
-            let location = SourceLocation(fileID: fileID, filePath: file, line: line, column: column)
-            let result = awaiter.performBlock(file: file, line: line) { (done: @escaping @Sendable (ErrorResult) -> Void) throws -> Void in
+            let result = awaiter.performBlock(location: location) { (done: @escaping @Sendable (ErrorResult) -> Void) throws -> Void in
                 DispatchQueue.main.async {
                     let capture = NMBExceptionCapture(
                         handler: ({ exception in
@@ -81,25 +71,25 @@ public class NMBWait: NSObject {
             case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")
             case .blockedRunLoop:
                 fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
-                     fileID: fileID, file: file, line: line, column: column)
+                     location: location)
             case .timedOut:
                 fail("Waited more than \(timeout.description)",
-                     fileID: fileID, file: file, line: line, column: column)
+                     location: location)
             case let .raisedException(exception):
                 fail("Unexpected exception raised: \(exception)",
-                     fileID: fileID, file: file, line: line, column: column
+                     location: location
                 )
             case let .errorThrown(error):
                 fail("Unexpected error thrown: \(error)",
-                     fileID: fileID, file: file, line: line, column: column
+                     location: location
                 )
             case .completed(.exception(let exception)):
                 fail("Unexpected exception raised: \(exception)",
-                     fileID: fileID, file: file, line: line, column: column
+                     location: location
                 )
             case .completed(.error(let error)):
                 fail("Unexpected error thrown: \(error)",
-                     fileID: fileID, file: file, line: line, column: column
+                     location: location
                 )
             case .completed(.none): // success
                 break
@@ -107,23 +97,17 @@ public class NMBWait: NSObject {
     }
 
 #if canImport(Darwin)
-    @objc(untilFileID:file:line:column:action:)
+    @objc(untilLocation:action:)
     public class func until(
-        _ fileID: String = #fileID,
-        file: FileString = #filePath,
-        line: UInt = #line,
-        column: UInt = #column,
+        _ location: SourceLocation = SourceLocation(),
         action: @escaping @Sendable (@escaping @Sendable () -> Void) -> Void) {
-        until(timeout: .seconds(1), fileID: fileID, file: file, line: line, column: column, action: action)
+            until(timeout: .seconds(1), location: location, action: action)
     }
 #else
     public class func until(
-        _ fileID: String = #fileID,
-        file: FileString = #filePath,
-        line: UInt = #line,
-        column: UInt = #column,
+        _ location: SourceLocation = SourceLocation(),
         action: @escaping (@escaping () -> Void) -> Void) {
-        until(timeout: .seconds(1), fileID: fileID, file: file, line: line, column: column, action: action)
+            until(timeout: .seconds(1), location: location, action: action)
     }
 #endif
 }
@@ -143,13 +127,10 @@ internal func blockedRunLoopErrorMessageFor(_ fnName: String, leeway: NimbleTime
 @available(*, noasync, message: "the sync variant of `waitUntil` does not work in async contexts. Use the async variant as a drop-in replacement")
 public func waitUntil(
     timeout: NimbleTimeInterval = PollingDefaults.timeout,
-    fileID: String = #fileID,
-    file: FileString = #filePath,
-    line: UInt = #line,
-    column: UInt = #column,
+    location: SourceLocation = SourceLocation(),
     action: @escaping @Sendable (@escaping @Sendable () -> Void) -> Void
 ) {
-    NMBWait.until(timeout: timeout, fileID: fileID, file: file, line: line, column: column, action: action)
+    NMBWait.until(timeout: timeout, location: location, action: action)
 }
 
 #endif // #if !os(WASI)

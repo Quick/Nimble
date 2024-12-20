@@ -314,8 +314,7 @@ internal class Awaiter {
     }
 
     func performBlock<T: Sendable>(
-        file: FileString,
-        line: UInt,
+        location: SourceLocation,
         _ closure: @escaping (@escaping @Sendable (T) -> Void) throws -> Void
         ) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
@@ -344,7 +343,7 @@ internal class Awaiter {
                             }
                         } else {
                             fail("waitUntil(..) expects its completion closure to be only called once",
-                                 file: file, line: line)
+                                 location: location)
                         }
                     }
                 }
