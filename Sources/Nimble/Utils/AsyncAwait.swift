@@ -60,7 +60,7 @@ internal enum AsyncPollResult<T> {
 internal actor AsyncPromise<T> {
     private let storage = Storage()
 
-    private final class Storage {
+    private final class Storage: @unchecked Sendable {
         private var continuations: [UnsafeContinuation<T, Never>] = []
         private var value: T?
         // Yes, this is not the fastest lock, but it's platform independent,
@@ -142,7 +142,8 @@ private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTime
     let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
     semTimedOutOrBlocked.signal()
 
-    DispatchQueue.main.async {
+    let timeoutQueue = DispatchQueue(label: "org.quick.nimble.timeoutQueue", qos: .userInteractive)
+    timeoutQueue.async {
         if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
             timedOutSem.signal()
             semTimedOutOrBlocked.signal()
@@ -202,14 +203,6 @@ private func runPoller(
     sourceLocation: SourceLocation,
     expression: @escaping () async throws -> PollStatus
 ) async -> AsyncPollResult<Bool> {
-    awaiter.waitLock.acquireWaitingLock(
-        fnName,
-        sourceLocation: sourceLocation
-    )
-
-    defer {
-        awaiter.waitLock.releaseWaitingLock()
-    }
     let timeoutQueue = awaiter.timeoutQueue
     return await withTaskGroup(of: AsyncPollResult<Bool>.self) { taskGroup in
         taskGroup.addTask {
