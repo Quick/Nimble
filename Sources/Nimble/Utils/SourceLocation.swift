@@ -11,6 +11,9 @@ public typealias FileString = StaticString
 public typealias FileString = String
 #endif
 
+#if canImport(Darwin)
+@objc
+#endif
 public final class SourceLocation: NSObject, Sendable {
     public let fileID: String
     @available(*, deprecated, renamed: "filePath")
@@ -19,14 +22,10 @@ public final class SourceLocation: NSObject, Sendable {
     public let line: UInt
     public let column: UInt
 
-    override init() {
-        fileID = "Unknown/File"
-        filePath = "Unknown File"
-        line = 0
-        column = 0
-    }
-
-    init(fileID: String, filePath: FileString, line: UInt, column: UInt) {
+#if canImport(Darwin)
+@objc
+#endif
+    public init(fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column) {
         self.fileID = fileID
         self.filePath = filePath
         self.line = line

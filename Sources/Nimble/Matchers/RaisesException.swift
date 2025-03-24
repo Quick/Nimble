@@ -141,7 +141,7 @@ internal func exceptionMatchesNonNilFieldsOrClosure(
         return matches
 }
 
-public class NMBObjCRaiseExceptionMatcher: NMBMatcher {
+public class NMBObjCRaiseExceptionMatcher: NMBMatcher, @unchecked Sendable {
     private let _name: String?
     private let _reason: String?
     private let _userInfo: NSDictionary?

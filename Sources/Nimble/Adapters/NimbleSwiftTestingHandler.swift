@@ -7,7 +7,7 @@ import Foundation
 @_implementationOnly import Testing
 #endif
 
-public class NimbleSwiftTestingHandler: AssertionHandler {
+public struct NimbleSwiftTestingHandler: AssertionHandler {
     public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
         if !assertion {
             recordTestingFailure("\(message.stringValue)\n", location: location)
