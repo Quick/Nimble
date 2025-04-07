@@ -139,6 +139,7 @@
 		895644DF2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895644DE2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift */; };
 		896962412A5FABD000A7929D /* AsyncAllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962402A5FABD000A7929D /* AsyncAllPass.swift */; };
 		8969624A2A5FAD5F00A7929D /* AsyncAllPassTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */; };
+		897F84F42BA922B500BF354B /* NSLocking+Nimble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F84F32BA922B500BF354B /* NSLocking+Nimble.swift */; };
 		898F28B025D9F4C30052B8D0 /* AlwaysFailMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */; };
 		899441EF2902EE4B00C1FAF9 /* AsyncAwaitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */; };
 		899441F82902EF2500C1FAF9 /* DSL+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */; };
@@ -149,6 +150,7 @@
 		89D8AC852B3211C600410644 /* CwlCatchException in Frameworks */ = {isa = PBXBuildFile; productRef = 89D8AC842B3211C600410644 /* CwlCatchException */; };
 		89D8AC872B3211EA00410644 /* CwlPosixPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (tvos, watchos, ); productRef = 89D8AC862B3211EA00410644 /* CwlPosixPreconditionTesting */; };
 		89D8AC892B3211EA00410644 /* CwlPreconditionTesting in Frameworks */ = {isa = PBXBuildFile; platformFilters = (driverkit, ios, maccatalyst, macos, xros, ); productRef = 89D8AC882B3211EA00410644 /* CwlPreconditionTesting */; };
+		89E5E1682BC78724002D54ED /* LockedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E5E1672BC78724002D54ED /* LockedContainer.swift */; };
 		89EEF5A52A03293100988224 /* AsyncMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5A42A03293100988224 /* AsyncMatcher.swift */; };
 		89EEF5B72A032C3200988224 /* AsyncPredicateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */; };
 		89EEF5C02A06211C00988224 /* AsyncHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */; };
@@ -330,6 +332,7 @@
 		895644DE2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTestingSupportTest.swift; sourceTree = "<group>"; };
 		896962402A5FABD000A7929D /* AsyncAllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPass.swift; sourceTree = "<group>"; };
 		896962452A5FAD4500A7929D /* AsyncAllPassTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAllPassTest.swift; sourceTree = "<group>"; };
+		897F84F32BA922B500BF354B /* NSLocking+Nimble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Nimble.swift"; sourceTree = "<group>"; };
 		898F28AF25D9F4C30052B8D0 /* AlwaysFailMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysFailMatcher.swift; sourceTree = "<group>"; };
 		899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitTest.swift; sourceTree = "<group>"; };
 		899441F32902EF0900C1FAF9 /* DSL+AsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+AsyncAwait.swift"; sourceTree = "<group>"; };
@@ -337,6 +340,7 @@
 		89B8C6102C6478F2001F12D3 /* NegationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NegationTest.swift; sourceTree = "<group>"; };
 		89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTimerSequenceTest.swift; sourceTree = "<group>"; };
 		89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPromiseTest.swift; sourceTree = "<group>"; };
+		89E5E1672BC78724002D54ED /* LockedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedContainer.swift; sourceTree = "<group>"; };
 		89EEF5A42A03293100988224 /* AsyncMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMatcher.swift; sourceTree = "<group>"; };
 		89EEF5B22A032C2500988224 /* AsyncPredicateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncPredicateTest.swift; sourceTree = "<group>"; };
 		89EEF5BB2A06210D00988224 /* AsyncHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelpers.swift; sourceTree = "<group>"; };
@@ -624,12 +628,14 @@
 			isa = PBXGroup;
 			children = (
 				1FD8CD261968AB07008ED995 /* PollAwait.swift */,
+				897F84F32BA922B500BF354B /* NSLocking+Nimble.swift */,
 				89F5E08B290B8D22001F9377 /* AsyncAwait.swift */,
 				891A04702AB0164500B46613 /* AsyncTimerSequence.swift */,
 				1FD8CD271968AB07008ED995 /* SourceLocation.swift */,
 				1FD8CD281968AB07008ED995 /* Stringers.swift */,
 				AE4BA9AC1C88DDB500B73906 /* Errors.swift */,
 				0477153423B740AD00402D4E /* NimbleTimeInterval.swift */,
+				89E5E1672BC78724002D54ED /* LockedContainer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -864,6 +870,7 @@
 				1F1871D91CA89EF100A34BF2 /* NMBExpectation.swift in Sources */,
 				DA9E8C831A414BB9002633C2 /* DSL+Wait.swift in Sources */,
 				DDB1BC7A1A92235600F743C3 /* AllPass.swift in Sources */,
+				89E5E1682BC78724002D54ED /* LockedContainer.swift in Sources */,
 				1FD8CD3F1968AB07008ED995 /* BeAKindOf.swift in Sources */,
 				1FD8CD2F1968AB07008ED995 /* AssertionRecorder.swift in Sources */,
 				7B13BA061DD360AA00C9098C /* ContainElementSatisfying.swift in Sources */,
@@ -892,6 +899,7 @@
 				1FD8CD571968AB07008ED995 /* Contain.swift in Sources */,
 				7A0A26231E7F52360092A34E /* ToSucceed.swift in Sources */,
 				89F5E0862908E655001F9377 /* Polling+AsyncAwait.swift in Sources */,
+				897F84F42BA922B500BF354B /* NSLocking+Nimble.swift in Sources */,
 				899441F82902EF2500C1FAF9 /* DSL+AsyncAwait.swift in Sources */,
 				1FD8CD491968AB07008ED995 /* BeGreaterThanOrEqualTo.swift in Sources */,
 				1FE661571E6574E30035F243 /* ExpectationMessage.swift in Sources */,

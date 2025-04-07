@@ -7,7 +7,7 @@
 public func equal<T1: Equatable, T2: Equatable>(
     _ expectedValue: [(T1, T2)]?
 ) -> Matcher<[(T1, T2)]> {
-    equalTupleArray(expectedValue, by: ==)
+    equalTupleArray(expectedValue, by: { $0 == $1 })
 }
 
 public func == <T1: Equatable, T2: Equatable>(
@@ -45,7 +45,7 @@ public func != <T1: Equatable, T2: Equatable>(
 public func equal<T1: Equatable, T2: Equatable, T3: Equatable>(
     _ expectedValue: [(T1, T2, T3)]?
 ) -> Matcher<[(T1, T2, T3)]> {
-    equalTupleArray(expectedValue, by: ==)
+    equalTupleArray(expectedValue, by: { $0 == $1 })
 }
 
 public func == <T1: Equatable, T2: Equatable, T3: Equatable>(
@@ -83,7 +83,7 @@ public func != <T1: Equatable, T2: Equatable, T3: Equatable>(
 public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
     _ expectedValue: [(T1, T2, T3, T4)]?
 ) -> Matcher<[(T1, T2, T3, T4)]> {
-    equalTupleArray(expectedValue, by: ==)
+    equalTupleArray(expectedValue, by: { $0 == $1 })
 }
 
 public func == <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
@@ -121,7 +121,7 @@ public func != <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable>(
 public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
     _ expectedValue: [(T1, T2, T3, T4, T5)]?
 ) -> Matcher<[(T1, T2, T3, T4, T5)]> {
-    equalTupleArray(expectedValue, by: ==)
+    equalTupleArray(expectedValue, by: { $0 == $1 })
 }
 
 public func == <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable>(
@@ -159,7 +159,7 @@ public func != <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: 
 public func equal<T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
     _ expectedValue: [(T1, T2, T3, T4, T5, T6)]?
 ) -> Matcher<[(T1, T2, T3, T4, T5, T6)]> {
-    equalTupleArray(expectedValue, by: ==)
+    equalTupleArray(expectedValue, by: { $0 == $1 })
 }
 
 public func == <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: Equatable, T6: Equatable>(
@@ -196,7 +196,7 @@ public func != <T1: Equatable, T2: Equatable, T3: Equatable, T4: Equatable, T5: 
 
 private func equalTupleArray<Tuple>(
     _ expectedValue: [(Tuple)]?,
-    by areTuplesEquivalent: @escaping (Tuple, Tuple) -> Bool
+    by areTuplesEquivalent: @escaping @Sendable (Tuple, Tuple) -> Bool
 ) -> Matcher<[Tuple]> {
     equal(expectedValue) {
         $0.elementsEqual($1, by: areTuplesEquivalent)

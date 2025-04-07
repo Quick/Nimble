@@ -1,13 +1,76 @@
+import Foundation
+
+/// Memoizes the given closure, only calling the passed closure once; even if repeat calls to the returned closure
+private final class MemoizedClosure<T: Sendable>: Sendable {
+    enum State {
+        case notStarted
+        case inProgress
+        case finished(Result<T, Error>)
+    }
+
+    private let lock = NSRecursiveLock()
+    nonisolated(unsafe) private var _state = State.notStarted
+    nonisolated(unsafe) private var _continuations = [CheckedContinuation<T, Error>]()
+    nonisolated(unsafe) private var _task: Task<Void, Never>?
+
+    let closure: @Sendable () async throws -> T
+
+    init(_ closure: @escaping @Sendable () async throws -> T) {
+        self.closure = closure
+    }
+
+    deinit {
+        _task?.cancel()
+    }
+
+    @Sendable func callAsFunction(_ withoutCaching: Bool) async throws -> T {
+        if withoutCaching {
+            try await closure()
+        } else {
+            try await withCheckedThrowingContinuation { continuation in
+                lock.withLock {
+                    switch _state {
+                    case .notStarted:
+                        _state = .inProgress
+                        _task = Task { [weak self] in
+                            guard let self else { return }
+                            do {
+                                let value = try await self.closure()
+                                self.handle(.success(value))
+                            } catch {
+                                self.handle(.failure(error))
+                            }
+                        }
+                        _continuations.append(continuation)
+                    case .inProgress:
+                        _continuations.append(continuation)
+                    case .finished(let result):
+                        continuation.resume(with: result)
+                    }
+                }
+            }
+        }
+    }
+
+    private func handle(_ result: Result<T, Error>) {
+        lock.withLock {
+            _state = .finished(result)
+            for continuation in _continuations {
+                continuation.resume(with: result)
+            }
+            _continuations = []
+            _task = nil
+        }
+    }
+}
+
 // Memoizes the given closure, only calling the passed
 // closure once; even if repeat calls to the returned closure
-private func memoizedClosure<T>(_ closure: @escaping () async throws -> T) -> (Bool) async throws -> T {
-    var cache: T?
-    return { withoutCaching in
-        if withoutCaching || cache == nil {
-            cache = try await closure()
-        }
-        return cache!
-    }
+private func memoizedClosure<T: Sendable>(
+    _ closure: @escaping @Sendable () async throws -> T
+) -> @Sendable (Bool) async throws -> T {
+    let memoized = MemoizedClosure(closure)
+    return memoized.callAsFunction(_:)
 }
 
 /// Expression represents the closure of the value inside expect(...).
@@ -21,8 +84,8 @@ private func memoizedClosure<T>(_ closure: @escaping () async throws -> T) -> (B
 ///
 /// This provides a common consumable API for matchers to utilize to allow
 /// Nimble to change internals to how the captured closure is managed.
-public struct AsyncExpression<Value> {
-    internal let _expression: (Bool) async throws -> Value?
+public actor AsyncExpression<Value: Sendable> {
+    internal let _expression: @Sendable (Bool) async throws -> Value?
     internal let _withoutCaching: Bool
     public let location: SourceLocation
     public let isClosure: Bool
@@ -38,7 +101,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(expression: @escaping () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
+    public init(expression: @escaping @Sendable () async throws -> Value?, location: SourceLocation, isClosure: Bool = true) {
         self._expression = memoizedClosure(expression)
         self.location = location
         self._withoutCaching = false
@@ -59,7 +122,7 @@ public struct AsyncExpression<Value> {
     ///                  requires an explicit closure. This gives Nimble
     ///                  flexibility if @autoclosure behavior changes between
     ///                  Swift versions. Nimble internals always sets this true.
-    public init(memoizedExpression: @escaping (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
+    public init(memoizedExpression: @escaping @Sendable (Bool) async throws -> Value?, location: SourceLocation, withoutCaching: Bool, isClosure: Bool = true) {
         self._expression = memoizedExpression
         self.location = location
         self._withoutCaching = withoutCaching
@@ -90,7 +153,7 @@ public struct AsyncExpression<Value> {
     ///
     /// - Parameter block: The block that can cast the current Expression value to a
     ///              new type.
-    public func cast<U>(_ block: @escaping (Value?) throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,
@@ -98,7 +161,7 @@ public struct AsyncExpression<Value> {
         )
     }
 
-    public func cast<U>(_ block: @escaping (Value?) async throws -> U?) -> AsyncExpression<U> {
+    public func cast<U>(_ block: @escaping @Sendable (Value?) async throws -> U?) -> AsyncExpression<U> {
         AsyncExpression<U>(
             expression: ({ try await block(self.evaluate()) }),
             location: self.location,

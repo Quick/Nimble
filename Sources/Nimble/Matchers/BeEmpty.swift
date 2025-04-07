@@ -85,10 +85,11 @@ extension NMBMatcher {
             let actualValue = try actualExpression.evaluate()
 
             if let value = actualValue as? NMBCollection {
-                let expr = Expression(expression: ({ value }), location: location)
+                let expr = Expression(expression: { value }, location: location)
                 return try beEmpty().satisfies(expr).toObjectiveC()
             } else if let value = actualValue as? NSString {
-                let expr = Expression(expression: ({ value }), location: location)
+                let stringValue = String(value)
+                let expr = Expression(expression: { stringValue }, location: location)
                 return try beEmpty().satisfies(expr).toObjectiveC()
             } else if let actualValue = actualValue {
                 let badTypeErrorMsg = "be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings)"

@@ -18,11 +18,11 @@
 /// In the 2023 Apple Platform releases (macOS 14, iOS 17, watchOS 10, tvOS 17, visionOS 1), Apple
 /// renamed `NSMatcher` to `Matcher`. In response, we decided to rename `Matcher` to
 /// `Matcher`.
-public struct Matcher<T> {
-    fileprivate var matcher: (Expression<T>) throws -> MatcherResult
+public struct Matcher<T>: Sendable {
+    fileprivate let matcher: @Sendable (Expression<T>) throws -> MatcherResult
 
     /// Constructs a matcher that knows how take a given value
-    public init(_ matcher: @escaping (Expression<T>) throws -> MatcherResult) {
+    public init(_ matcher: @escaping @Sendable (Expression<T>) throws -> MatcherResult) {
         self.matcher = matcher
     }
 
@@ -42,7 +42,7 @@ public typealias Predicate = Matcher
 /// Provides convenience helpers to defining matchers
 extension Matcher {
     /// Like Matcher() constructor, but automatically guard against nil (actual) values
-    public static func define(matcher: @escaping (Expression<T>) throws -> MatcherResult) -> Matcher<T> {
+    public static func define(matcher: @escaping @Sendable (Expression<T>) throws -> MatcherResult) -> Matcher<T> {
         return Matcher<T> { actual in
             return try matcher(actual)
         }.requireNonNil
@@ -50,7 +50,7 @@ extension Matcher {
 
     /// Defines a matcher with a default message that can be returned in the closure
     /// Also ensures the matcher's actual value cannot pass with `nil` given.
-    public static func define(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T> {
+    public static func define(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T> {
         return Matcher<T> { actual in
             return try matcher(actual, .expectedActualValueTo(message))
         }.requireNonNil
@@ -58,7 +58,7 @@ extension Matcher {
 
     /// Defines a matcher with a default message that can be returned in the closure
     /// Unlike `define`, this allows nil values to succeed if the given closure chooses to.
-    public static func defineNilable(_ message: String = "match", matcher: @escaping (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T> {
+    public static func defineNilable(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>, ExpectationMessage) throws -> MatcherResult) -> Matcher<T> {
         return Matcher<T> { actual in
             return try matcher(actual, .expectedActualValueTo(message))
         }
@@ -70,7 +70,7 @@ extension Matcher {
     /// error message.
     ///
     /// Also ensures the matcher's actual value cannot pass with `nil` given.
-    public static func simple(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
+    public static func simple(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
         return Matcher<T> { actual in
             return MatcherResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }.requireNonNil
@@ -80,7 +80,7 @@ extension Matcher {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
+    public static func simpleNilable(_ message: String = "match", matcher: @escaping @Sendable (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
         return Matcher<T> { actual in
             return MatcherResult(status: try matcher(actual), message: .expectedActualValueTo(message))
         }
@@ -88,13 +88,13 @@ extension Matcher {
 }
 
 /// The Expectation style intended for comparison to a MatcherStatus.
-public enum ExpectationStyle {
+public enum ExpectationStyle: Sendable {
     case toMatch, toNotMatch
 }
 
 /// The value that a Matcher returns to describe if the given (actual) value matches the
 /// matcher.
-public struct MatcherResult {
+public struct MatcherResult: Sendable {
     /// Status indicates if the matcher matches, does not match, or fails.
     public var status: MatcherStatus
     /// The error message that can be displayed if it does not match
@@ -123,7 +123,7 @@ public struct MatcherResult {
 public typealias PredicateResult = MatcherResult
 
 /// MatcherStatus is a trinary that indicates if a Matcher matches a given value or not
-public enum MatcherStatus {
+public enum MatcherStatus: Sendable {
     /// Matches indicates if the matcher / matcher passes with the given value
     ///
     /// For example, `equals(1)` returns `.matches` for `expect(1).to(equal(1))`.
@@ -181,7 +181,7 @@ public typealias PredicateStatus = MatcherStatus
 
 extension Matcher {
     // Someday, make this public? Needs documentation
-    internal func after(f: @escaping (Expression<T>, MatcherResult) throws -> MatcherResult) -> Matcher<T> {
+    internal func after(f: @escaping @Sendable (Expression<T>, MatcherResult) throws -> MatcherResult) -> Matcher<T> {
         // swiftlint:disable:previous identifier_name
         return Matcher { actual -> MatcherResult in
             let result = try self.satisfies(actual)
@@ -207,13 +207,13 @@ extension Matcher {
 #if canImport(Darwin)
 import class Foundation.NSObject
 
-public typealias MatcherBlock = (_ actualExpression: Expression<NSObject>) throws -> NMBMatcherResult
+public typealias MatcherBlock = @Sendable (_ actualExpression: Expression<NSObject>) throws -> NMBMatcherResult
 
 /// Provides an easy upgrade path for custom Matchers to be renamed to Matchers
 @available(*, deprecated, renamed: "MatcherBlock")
 public typealias PredicateBlock = MatcherBlock
 
-public class NMBMatcher: NSObject {
+public class NMBMatcher: NSObject, @unchecked Sendable {
     private let matcher: MatcherBlock
 
     public init(matcher: @escaping MatcherBlock) {
@@ -225,7 +225,7 @@ public class NMBMatcher: NSObject {
         self.init(matcher: predicate)
     }
 
-    func satisfies(_ expression: @escaping () throws -> NSObject?, location: SourceLocation) -> NMBMatcherResult {
+    func satisfies(_ expression: @escaping @Sendable () throws -> NSObject?, location: SourceLocation) -> NMBMatcherResult {
         let expr = Expression(expression: expression, location: location)
         do {
             return try self.matcher(expr)
@@ -269,7 +269,7 @@ extension MatcherResult {
     }
 }
 
-final public class NMBMatcherStatus: NSObject {
+final public class NMBMatcherStatus: NSObject, Sendable {
     private let status: Int
     private init(status: Int) {
         self.status = status

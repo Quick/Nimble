@@ -338,13 +338,24 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventually(equal(expectedArray))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal(expectedArray.reversed()))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal([]))
+        await expect { @Sendable () async in
+            originalArray
+        } == expectedArray
+        await expect { @Sendable () async in
+            originalArray
+        } != expectedArray.reversed()
+        await expect { @Sendable () async in
+            originalArray
+        } != []
     }
 
     func testTuple3Array() async {
@@ -371,13 +382,24 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventually(equal(expectedArray))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal(expectedArray.reversed()))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal([]))
+        await expect { @Sendable () async in
+            originalArray
+        } == expectedArray
+        await expect { @Sendable () async in
+            originalArray
+        } != expectedArray.reversed()
+        await expect { @Sendable () async in
+            originalArray
+        } != []
     }
 
     func testTuple4Array() async {
@@ -404,13 +426,24 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventually(equal(expectedArray))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal(expectedArray.reversed()))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal([]))
+        await expect { @Sendable () async in
+            originalArray
+        } == expectedArray
+        await expect { @Sendable () async in
+            originalArray
+        } != expectedArray.reversed()
+        await expect { @Sendable () async in
+            originalArray
+        } != []
     }
 
     func testTuple5Array() async {
@@ -437,13 +470,24 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventually(equal(expectedArray))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal(expectedArray.reversed()))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal([]))
+        await expect { @Sendable () async in
+            originalArray
+        } == expectedArray
+        await expect { @Sendable () async in
+            originalArray
+        } != expectedArray.reversed()
+        await expect { @Sendable () async in
+            originalArray
+        } != []
     }
 
     func testTuple6Array() async {
@@ -470,13 +514,24 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect(originalArray) != expectedArray.reversed()
         expect(originalArray) != []
 
-        let originalArrayAsync = { () async in originalArray }
-        await expect(originalArrayAsync).toEventually(equal(expectedArray))
-        await expect(originalArrayAsync).toEventuallyNot(equal(expectedArray.reversed()))
-        await expect(originalArrayAsync).toEventuallyNot(equal([]))
-        await expect(originalArrayAsync) == expectedArray
-        await expect(originalArrayAsync) != expectedArray.reversed()
-        await expect(originalArrayAsync) != []
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventually(equal(expectedArray))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal(expectedArray.reversed()))
+        await expect { @Sendable () async in
+            originalArray
+        }.toEventuallyNot(equal([]))
+        await expect { @Sendable () async in
+            originalArray
+        } == expectedArray
+        await expect { @Sendable () async in
+            originalArray
+        } != expectedArray.reversed()
+        await expect { @Sendable () async in
+            originalArray
+        } != []
     }
     // swiftlint:enable large_tuple
 

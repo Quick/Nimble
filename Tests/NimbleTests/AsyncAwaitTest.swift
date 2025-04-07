@@ -1,14 +1,14 @@
 #if !os(WASI)
 
 import XCTest
-import Nimble
+@testable import Nimble
 #if SWIFT_PACKAGE
 import NimbleSharedTestHelpers
 #endif
 
 final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_length
     func testToPositiveMatches() async {
-        func someAsyncFunction() async throws -> Int {
+        @Sendable func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
             return 1
         }
@@ -24,12 +24,12 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     }
 
     func testToEventuallyPositiveMatches() async {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        await expect { value }.toEventually(equal(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        await expect { value.value }.toEventually(equal(1))
 
-        deferToMainQueue { value = 0 }
-        await expect { value }.toEventuallyNot(equal(1))
+        deferToMainQueue { value.set(0) }
+        await expect { value.value }.toEventuallyNot(equal(1))
     }
 
     func testToEventuallyNegativeMatches() async {
@@ -119,7 +119,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     func testToEventuallyWithAsyncExpectationDoesNotNecessarilyExecutesExpressionOnMainActor() async {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         await expecta(isMainThread()).toEventually(beFalse())
         await expecta(isMainThread()).toEventuallyNot(beTrue())
@@ -131,7 +131,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     func testToEventuallyWithAsyncExpectationDoesExecuteExpressionOnMainActorWhenTestRunsOnMainActor() async {
         // This prevents a "Class property 'isMainThread' is unavailable from asynchronous contexts; Work intended for the main actor should be marked with @MainActor; this is an error in Swift 6" warning.
         // However, the functionality actually works as you'd expect it to, you're just expected to tag things to use the main actor.
-        func isMainThread() -> Bool { Thread.isMainThread }
+        @Sendable func isMainThread() -> Bool { Thread.isMainThread }
 
         await expecta(isMainThread()).toEventually(beTrue())
         await expecta(isMainThread()).toEventuallyNot(beFalse())
@@ -145,23 +145,23 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
             PollingDefaults.timeout = .seconds(1)
         }
 
-        var value = 0
+        let value = LockedContainer(0)
 
         let sleepThenSetValueTo: (Int) -> Void = { newValue in
             Thread.sleep(forTimeInterval: 1.1)
-            value = newValue
+            value.set(newValue)
         }
 
         let task = Task {
             sleepThenSetValueTo(1)
         }
-        await expect { value }.toEventually(equal(1))
+        await expect { value.value }.toEventually(equal(1))
 
         let secondTask = Task {
             sleepThenSetValueTo(0)
         }
 
-        await expect { value }.toEventuallyNot(equal(1))
+        await expect { value.value }.toEventuallyNot(equal(1))
 
         _ = await task.value
         _ = await secondTask.result
@@ -284,7 +284,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
 
         for index in 0..<100 {
             if failed { break }
-            await waitUntil(line: UInt(index)) { done in
+            await waitUntil(location: SourceLocation(column: UInt(index))) { done in
                 DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
                     done()
                 }
@@ -295,52 +295,52 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     }
 
     final class ClassUnderTest {
-        var deinitCalled: (() -> Void)?
-        var count = 0
-        deinit { deinitCalled?() }
+        let deinitCalled = LockedContainer<(() -> Void)?>(nil)
+        let count = LockedContainer(0)
+        deinit { deinitCalled.value?() }
     }
 
     func testSubjectUnderTestIsReleasedFromMemory() async {
-        var subject: ClassUnderTest? = ClassUnderTest()
+        let subject = LockedContainer<ClassUnderTest?>(ClassUnderTest())
 
-        if let sub = subject {
-            await expect(sub.count).toEventually(equal(0), timeout: .milliseconds(100))
-            await expect(sub.count).toEventuallyNot(equal(1), timeout: .milliseconds(100))
+        if let sub = subject.value {
+            await expect(sub.count.value).toEventually(equal(0), timeout: .milliseconds(100))
+            await expect(sub.count.value).toEventuallyNot(equal(1), timeout: .milliseconds(100))
         }
 
         await waitUntil(timeout: .milliseconds(500)) { done in
-            subject?.deinitCalled = {
+            subject.value?.deinitCalled.set({
                 done()
-            }
+            })
 
-            deferToMainQueue { subject = nil }
+            deferToMainQueue { subject.set(nil) }
         }
     }
 
     func testToNeverPositiveMatches() async {
-        var value = 0
-        deferToMainQueue { value = 1 }
-        await expect { value }.toNever(beGreaterThan(1))
+        let value = LockedContainer(0)
+        deferToMainQueue { value.set(1) }
+        await expect { value.value }.toNever(beGreaterThan(1))
 
-        deferToMainQueue { value = 0 }
-        await expect { value }.neverTo(beGreaterThan(1))
+        deferToMainQueue { value.set(0) }
+        await expect { value.value }.neverTo(beGreaterThan(1))
     }
 
     func testToNeverNegativeMatches() async {
-        var value = 0
+        let value = LockedContainer(0)
         await failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            await expect { value }.toNever(equal(0))
+            await expect { value.value }.toNever(equal(0))
         }
         await failsWithErrorMessage("expected to never equal <0>, got <0>") {
-            await expect { value }.neverTo(equal(0))
+            await expect { value.value }.neverTo(equal(0))
         }
         await failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            await expect { value }.toNever(equal(1))
+            deferToMainQueue { value.set(1) }
+            await expect { value.value }.toNever(equal(1))
         }
         await failsWithErrorMessage("expected to never equal <1>, got <1>") {
-            deferToMainQueue { value = 1 }
-            await expect { value }.neverTo(equal(1))
+            deferToMainQueue { value.set(1) }
+            await expect { value.value }.neverTo(equal(1))
         }
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             await expect { try self.doThrowError() }.toNever(equal(0))
@@ -351,29 +351,29 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     }
 
     func testToAlwaysPositiveMatches() async {
-        var value = 1
-        deferToMainQueue { value = 2 }
-        await expect { value }.toAlways(beGreaterThan(0))
+        let value = LockedContainer(1)
+        deferToMainQueue { value.set(2) }
+        await expect { value.value }.toAlways(beGreaterThan(0))
 
-        deferToMainQueue { value = 2 }
-        await expect { value }.alwaysTo(beGreaterThan(1))
+        deferToMainQueue { value.set(2) }
+        await expect { value.value }.alwaysTo(beGreaterThan(1))
     }
 
     func testToAlwaysNegativeMatches() async {
-        var value = 1
+        let value = LockedContainer(1)
         await failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            await expect { value }.toAlways(equal(0))
+            await expect { value.value }.toAlways(equal(0))
         }
         await failsWithErrorMessage("expected to always equal <0>, got <1>") {
-            await expect { value }.alwaysTo(equal(0))
+            await expect { value.value }.alwaysTo(equal(0))
         }
         await failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            await expect { value }.toAlways(equal(1))
+            deferToMainQueue { value.set(0) }
+            await expect { value.value }.toAlways(equal(1))
         }
         await failsWithErrorMessage("expected to always equal <1>, got <0>") {
-            deferToMainQueue { value = 0 }
-            await expect { value }.alwaysTo(equal(1))
+            deferToMainQueue { value.set(0) }
+            await expect { value.value }.alwaysTo(equal(1))
         }
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             await expect { try self.doThrowError() }.toAlways(equal(0))

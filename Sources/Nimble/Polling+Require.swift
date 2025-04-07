@@ -189,7 +189,9 @@ extension SyncRequirement {
     public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) throws -> Value {
         return try toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
+}
 
+extension SyncRequirement where Value: Sendable {
     // MARK: - Async Polling with Synchronous Matchers
     /// Tests the actual value using a matcher to match by checking continuously
     /// at each pollInterval until the timeout is reached.
@@ -706,57 +708,57 @@ extension AsyncRequirement {
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
-    try require(file: file, line: line, expression()).toEventuallyNot(beNil())
+public func pollUnwrap<T>(location: SourceLocation = SourceLocation(), _ expression: @autoclosure @escaping @Sendable () throws -> T?) throws -> T {
+    try require(location: location, expression()).toEventuallyNot(beNil())
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
-    try require(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwrap<T>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> T?)) throws -> T {
+    try require(location: location, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure @escaping () throws -> T?) throws -> T {
-    try require(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwraps<T>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure @escaping @Sendable () throws -> T?) throws -> T {
+    try require(location: location, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `require(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwraps<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (() throws -> T?)) throws -> T {
-    try require(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwraps<T>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () throws -> T?)) throws -> T {
+    try require(location: location, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @escaping () async throws -> T?) async throws -> T {
-    try await requirea(file: file, line: line, try await expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwrap<T: Sendable>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @escaping @Sendable () async throws -> T?) async throws -> T {
+    try await requirea(location: location, try await expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrap<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: () -> (() async throws -> T?)) async throws -> T {
-    try await requirea(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwrap<T: Sendable>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: () -> (@Sendable () async throws -> T?)) async throws -> T {
+    try await requirea(location: location, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrapa<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure @escaping () async throws -> T?) async throws -> T {
-    try await requirea(file: file, line: line, try await expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwrapa<T: Sendable>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure @escaping @Sendable () async throws -> T?) async throws -> T {
+    try await requirea(location: location, try await expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 /// Makes sure that the async expression evaluates to a non-nil value, otherwise throw an error.
 /// As you can tell, this is a much less verbose equivalent to `requirea(expression).toEventuallyNot(beNil())`
 @discardableResult
-public func pollUnwrapa<T>(file: FileString = #file, line: UInt = #line, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (() async throws -> T?)) async throws -> T {
-    try await requirea(file: file, line: line, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
+public func pollUnwrapa<T: Sendable>(location: SourceLocation = SourceLocation(), timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil, _ expression: @autoclosure () -> (@Sendable () async throws -> T?)) async throws -> T {
+    try await requirea(location: location, expression()).toEventuallyNot(beNil(), timeout: timeout, pollInterval: pollInterval, description: description)
 }
 
 #endif // #if !os(WASI)
