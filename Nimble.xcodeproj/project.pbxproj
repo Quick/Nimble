@@ -186,6 +186,8 @@
 		DDB4D5EE19FE43C200E9D9FE /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EC19FE43C200E9D9FE /* Match.swift */; };
 		DDB4D5F119FE442800E9D9FE /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
 		DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
+		E7E68C432DD2BEB300EE9280 /* AsyncPolling+SwiftTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E68C422DD2BEAA00EE9280 /* AsyncPolling+SwiftTesting.swift */; };
+		E7E68C452DD2BF3100EE9280 /* SimultaneousPolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E68C442DD2BF3100EE9280 /* SimultaneousPolling.swift */; };
 		F8A1BE301CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */; };
 /* End PBXBuildFile section */
 
@@ -369,6 +371,8 @@
 		DDB4D5EC19FE43C200E9D9FE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Match.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
 		DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCAllPassTest.m; sourceTree = "<group>"; };
+		E7E68C422DD2BEAA00EE9280 /* AsyncPolling+SwiftTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncPolling+SwiftTesting.swift"; sourceTree = "<group>"; };
+		E7E68C442DD2BF3100EE9280 /* SimultaneousPolling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimultaneousPolling.swift; sourceTree = "<group>"; };
 		F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -490,10 +494,12 @@
 				89F5E095290C37B8001F9377 /* StatusTest.swift */,
 				1F0648D31963AAB2001F9C46 /* SynchronousTest.swift */,
 				899441EE2902EE4B00C1FAF9 /* AsyncAwaitTest.swift */,
+				E7E68C422DD2BEAA00EE9280 /* AsyncPolling+SwiftTesting.swift */,
 				8922828E2B283956002DA355 /* AsyncAwaitTest+Require.swift */,
 				89C297CB2A911CDA002A143F /* AsyncTimerSequenceTest.swift */,
 				89C297CD2A92AB34002A143F /* AsyncPromiseTest.swift */,
 				965B0D0B1B62C06D0005AE66 /* UserDescriptionTest.swift */,
+				E7E68C442DD2BF3100EE9280 /* SimultaneousPolling.swift */,
 				895644DE2C1B71DE0006EC12 /* SwiftTestingSupportTest.swift */,
 				6CAEDD091CAEA86F003F1584 /* LinuxSupport.swift */,
 				1F14FB61194180A7009F2A08 /* Helpers */,
@@ -968,6 +974,7 @@
 				A8A3B706207368EF00E25A08 /* ObjCSatisfyAllOfTest.m in Sources */,
 				1F4A56711A3B319F009E1637 /* ObjCBeCloseToTest.m in Sources */,
 				1F4A56981A3B34AA009E1637 /* ObjCEndWithTest.m in Sources */,
+				E7E68C452DD2BF3100EE9280 /* SimultaneousPolling.swift in Sources */,
 				1F4A567D1A3B3311009E1637 /* ObjCBeIdenticalToTest.m in Sources */,
 				965B0D0D1B62C06D0005AE66 /* UserDescriptionTest.swift in Sources */,
 				1FCF91501C61C85A00B15DCB /* PostNotificationTest.swift in Sources */,
@@ -977,6 +984,7 @@
 				1F4A567A1A3B32E3009E1637 /* ObjCBeGreaterThanOrEqualToTest.m in Sources */,
 				52F5CD6527EE571C00B19809 /* BackgroundThreadObject.swift in Sources */,
 				A8A3B6F5207329DC00E25A08 /* SatisfyAllOfTest.swift in Sources */,
+				E7E68C432DD2BEB300EE9280 /* AsyncPolling+SwiftTesting.swift in Sources */,
 				AE7ADE4A1C80C00D00B94CD3 /* MatchErrorTest.swift in Sources */,
 				1F4A568C1A3B3407009E1637 /* ObjCBeTrueTest.m in Sources */,
 				DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */,
