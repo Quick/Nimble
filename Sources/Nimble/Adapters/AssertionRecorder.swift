@@ -22,16 +22,21 @@ public struct AssertionRecord: CustomStringConvertible {
 /// @see AssertionHandler
 public class AssertionRecorder: AssertionHandler {
     /// All the assertions that were captured by this recorder
-    public var assertions = [AssertionRecord]()
+    private var _assertions = Locked<[AssertionRecord]>([])
+    public var assertions: [AssertionRecord] { _assertions.value }
 
     public init() {}
 
     public func assert(_ assertion: Bool, message: FailureMessage, location: SourceLocation) {
-        assertions.append(
-            AssertionRecord(
-                success: assertion,
-                message: message,
-                location: location))
+        _assertions.operate { value in
+            value.append(
+                AssertionRecord(
+                    success: assertion,
+                    message: message,
+                    location: location
+                )
+            )
+        }
     }
 }
 

@@ -10,7 +10,25 @@ public protocol AssertionHandler {
 /// before using any matchers, otherwise Nimble will abort the program.
 ///
 /// @see AssertionHandler
-public var NimbleAssertionHandler: AssertionHandler = { () -> AssertionHandler in
+// make this a task local.
+public var NimbleAssertionHandler: AssertionHandler {
+    get {
+        _assertionHandlerLock.lock()
+        defer { _assertionHandlerLock.unlock() }
+
+        return _assertionHandler
+    }
+    set {
+        _assertionHandlerLock.lock()
+        defer { _assertionHandlerLock.unlock() }
+        _assertionHandler = newValue
+    }
+}
+
+import Foundation
+private let _assertionHandlerLock = NSRecursiveLock()
+
+private var _assertionHandler: AssertionHandler = { () -> AssertionHandler in
     // swiftlint:disable:previous identifier_name
     if isSwiftTestingAvailable() || isXCTestAvailable() {
         return NimbleTestingHandler()

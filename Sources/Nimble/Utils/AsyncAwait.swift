@@ -225,7 +225,7 @@ private func runPoller(
     }
 }
 
-private final class Box<T: Sendable>: @unchecked Sendable {
+final class Locked<T: Sendable>: @unchecked Sendable {
     private var _value: T
     var value: T {
         lock.lock()
@@ -235,7 +235,7 @@ private final class Box<T: Sendable>: @unchecked Sendable {
 
     private let lock = NSLock()
 
-    init(value: T) {
+    init(_ value: T) {
         _value = value
     }
 
@@ -243,6 +243,12 @@ private final class Box<T: Sendable>: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
         _value = closure(_value)
+    }
+
+    func operate(_ closure: @Sendable (inout T) -> Void) {
+        lock.lock()
+        defer { lock.unlock() }
+        closure(&_value)
     }
 }
 
@@ -255,7 +261,7 @@ private func runAwaitTrigger<T>(
     _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
 ) async -> AsyncPollResult<T> {
     let timeoutQueue = awaiter.timeoutQueue
-    let completionCount = Box(value: 0)
+    let completionCount = Locked(0)
     return await withTaskGroup(of: AsyncPollResult<T>.self) { taskGroup in
         let promise = AsyncPromise<T?>()
 
