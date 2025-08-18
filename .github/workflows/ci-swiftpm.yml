@@ -20,7 +20,7 @@ jobs:
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: ./test swiftpm
 
   swiftpm_darwin_sonoma:
@@ -32,7 +32,7 @@ jobs:
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: ./test swiftpm
 
   swiftpm_linux:
@@ -49,7 +49,7 @@ jobs:
       fail-fast: false
     container: ${{ matrix.container }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: swift build -Xswiftc -suppress-warnings
       - run: swift test -Xswiftc -suppress-warnings --enable-test-discovery
 
@@ -57,7 +57,7 @@ jobs:
     name: SwiftPM, Windows
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Swift
         uses: compnerd/gha-setup-swift@main
         with:
