@@ -69,7 +69,7 @@ public struct PollingDefaults: @unchecked Sendable {
 internal enum AsyncMatchStyle {
     case eventually, never, always
 
-    var isContinous: Bool {
+    var isContinuous: Bool {
         switch self {
         case .eventually:
             return false
@@ -97,15 +97,15 @@ internal func poll<T>(
             timeoutInterval: timeout,
             sourceLocation: actualExpression.location,
             fnName: fnName,
-            isContinuous: matchStyle.isContinous) {
+            isContinuous: matchStyle.isContinuous) {
                 lastMatcherResult = try matcher.satisfies(uncachedExpression)
                 if lastMatcherResult!.toBoolean(expectation: style) {
-                    if matchStyle.isContinous {
+                    if matchStyle.isContinuous {
                         return .incomplete
                     }
                     return .finished(true)
                 } else {
-                    if matchStyle.isContinous {
+                    if matchStyle.isContinuous {
                         return .finished(false)
                     } else {
                         return .incomplete
