@@ -96,7 +96,8 @@ internal func poll<T>(
             pollInterval: poll,
             timeoutInterval: timeout,
             sourceLocation: actualExpression.location,
-            fnName: fnName) {
+            fnName: fnName,
+            isContinuous: matchStyle.isContinous) {
                 lastMatcherResult = try matcher.satisfies(uncachedExpression)
                 if lastMatcherResult!.toBoolean(expectation: style) {
                     if matchStyle.isContinous {

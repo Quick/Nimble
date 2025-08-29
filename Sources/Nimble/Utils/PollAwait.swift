@@ -159,7 +159,7 @@ internal class AwaitPromiseBuilder<T> {
             self.trigger = trigger
     }
 
-    func timeout(_ timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval) -> Self {
+    func timeout(_ timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval, isContinuous: Bool) -> Self {
         /// = Discussion =
         ///
         /// There's a lot of technical decisions here that is useful to elaborate on. This is
@@ -234,7 +234,7 @@ internal class AwaitPromiseBuilder<T> {
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
             if didNotTimeOut && timeoutWasNotTriggered {
-                if self.promise.resolveResult(.blockedRunLoop) {
+                if self.promise.resolveResult(isContinuous ? .timedOut : .blockedRunLoop) {
                     #if canImport(CoreFoundation)
                     CFRunLoopStop(CFRunLoopGetMain())
                     #else
@@ -402,6 +402,7 @@ internal func pollBlock(
     timeoutInterval: NimbleTimeInterval,
     sourceLocation: SourceLocation,
     fnName: String = #function,
+    isContinuous: Bool,
     expression: @escaping () throws -> PollStatus) -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
@@ -410,7 +411,7 @@ internal func pollBlock(
             }
             return nil
         }
-            .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided)
+            .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided, isContinuous: isContinuous)
             .wait(fnName, sourceLocation: sourceLocation)
 
         return result
