@@ -218,7 +218,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         await failsWithErrorMessage("Waited more than 0.01 seconds") {
             await waitUntil(timeout: .milliseconds(10)) { done in
                 Task {
-                    _ = try? await Task.sleep(nanoseconds: 100_000_000)
+                    _ = try? await Task.sleep(nanoseconds: 100_000_000) // 100 milliseconds
                     done()
                     await waitState.stopWaiting()
                 }
@@ -252,7 +252,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() async {
-        await failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+        await failsWithErrorMessage("waitUntil(...) expects its completion closure to be only called once") {
             await waitUntil { done in
                 deferToMainQueue {
                     done()
@@ -282,9 +282,9 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         }
         timer.resume()
 
-        for index in 0..<100 {
+        for index in 0..<1000 {
             if failed { break }
-            await waitUntil(line: UInt(index)) { done in
+            await waitUntil() { done in
                 DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
                     done()
                 }

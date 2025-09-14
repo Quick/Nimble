@@ -134,31 +134,17 @@ private enum ErrorResult {
 private func throwableUntil(
     timeout: NimbleTimeInterval,
     sourceLocation: SourceLocation,
-    action: @escaping (@escaping @Sendable () -> Void) async throws -> Void) async {
+    action: @escaping @Sendable (@escaping @Sendable () -> Void) async throws -> Void) async {
         let leeway = timeout.divided
         let result = await performBlock(
-            timeoutInterval: timeout,
+            timeout: timeout,
             leeway: leeway,
-            sourceLocation: sourceLocation) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
-                do {
-                    try await action {
-                        done(.none)
-                    }
-                } catch let e {
-                    done(.error(e))
-                }
-            }
+            sourceLocation: sourceLocation,
+            closure: action
+        )
 
         switch result {
         case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")
-        case .blockedRunLoop:
-            fail(
-                blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
-                fileID: sourceLocation.fileID,
-                file: sourceLocation.filePath,
-                line: sourceLocation.line,
-                column: sourceLocation.column
-            )
         case .timedOut:
             fail(
                 "Waited more than \(timeout.description)",
@@ -175,15 +161,7 @@ private func throwableUntil(
                 line: sourceLocation.line,
                 column: sourceLocation.column
             )
-        case .completed(.error(let error)):
-            fail(
-                "Unexpected error thrown: \(error)",
-                fileID: sourceLocation.fileID,
-                file: sourceLocation.filePath,
-                line: sourceLocation.line,
-                column: sourceLocation.column
-            )
-        case .completed(.none): // success
+        case .completed: // success
             break
         }
 }

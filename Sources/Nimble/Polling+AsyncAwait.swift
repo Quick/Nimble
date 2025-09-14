@@ -38,8 +38,7 @@ internal actor Poller<T> {
         let result = await pollBlock(
             pollInterval: poll,
             timeoutInterval: timeout,
-            sourceLocation: expression.location,
-            fnName: fnName) {
+            sourceLocation: expression.location) {
                 if self.updateMatcherResult(result: try await matcherRunner())
                     .toBoolean(expectation: style) {
                     if matchStyle.isContinuous {
