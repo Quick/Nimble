@@ -11,22 +11,6 @@ on:
       - "*"
 
 jobs:
-  xcode_ventura:
-    name: Xcode ${{ matrix.xcode }} (Xcode Project)
-    runs-on: macos-13
-    strategy:
-      matrix:
-        xcode: ["14.3.1"]
-      fail-fast: false
-    env:
-      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
-    steps:
-      - uses: actions/checkout@v4
-      - run: ./test macos
-      - run: ./test ios
-      - run: ./test tvos
-      - run: ./test watchos
-
   xcode_sonoma:
     name: Xcode ${{ matrix.xcode }} (Xcode Project)
     runs-on: macos-14
@@ -43,12 +27,28 @@ jobs:
       - run: ./test tvos
       - run: ./test watchos
 
-  xcode_spm:
-    name: Xcode ${{ matrix.xcode }} (Swift Package)
-    runs-on: macos-14
+  xcode_sequoia:
+    name: Xcode ${{ matrix.xcode }} (Xcode Project)
+    runs-on: macos-15
     strategy:
       matrix:
-        xcode: ["16.1"]
+        xcode: ["16.3"]
+      fail-fast: false
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./test macos
+      - run: ./test ios
+      - run: ./test tvos
+      - run: ./test watchos
+
+  xcode_spm:
+    name: Xcode ${{ matrix.xcode }} (Swift Package)
+    runs-on: macos-15
+    strategy:
+      matrix:
+        xcode: ["16.3"]
       fail-fast: false
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"

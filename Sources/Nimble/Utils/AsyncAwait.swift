@@ -145,7 +145,7 @@ internal func performBlock(
 #endif
     #endif
 
-    return await withTaskGroup { taskGroup in
+    return await withTaskGroup(of: Void.self) { taskGroup in
         let blocker = BlockingTask(sourceLocation: sourceLocation)
         let tracker = ResultTracker<Void>()
 
