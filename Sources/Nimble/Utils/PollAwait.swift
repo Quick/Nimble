@@ -110,7 +110,7 @@ Please use Swift Testing's `confirmation(...)` APIs to accomplish (nearly) the s
                     return
                 }
 #if canImport(CoreFoundation)
-                CFRunLoopStop(runloop.getCFRunLoop())
+                CFRunLoopStop(CFRunLoopGetCurrent())
 #else
                 RunLoop.main._stop()
 #endif

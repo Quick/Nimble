@@ -140,7 +140,13 @@ internal func performBlock(
     Issue.record(
         "waitUntil(...) becomes less reliable the more tasks and processes your system is running. " +
         "This makes it unsuitable for use with Swift Testing. Please use Swift Testing's confirmation(...) API instead.",
-        severity: .warning
+        severity: .warning,
+        sourceLocation: SourceLocation(
+            fileID: sourceLocation.fileID,
+            filePath: sourceLocation.filePath,
+            line: sourceLocation.line,
+            column: sourceLocation.column
+        )
     )
 #endif
     #endif
