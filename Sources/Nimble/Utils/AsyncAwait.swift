@@ -203,7 +203,7 @@ internal func pollBlock(
     precondition(pollInterval > .seconds(0))
     let iterations = Int(exactly: (timeoutInterval / pollInterval).rounded(.up)) ?? Int.max
 
-    for i in 0..<iterations {
+    for iteration in 0..<iterations {
         do {
             if case .finished(let result) = try await expression() {
                 return .completed(result)
@@ -211,7 +211,7 @@ internal func pollBlock(
         } catch {
             return .errorThrown(error)
         }
-        if i == (iterations - 1) {
+        if iteration == (iterations - 1) {
             break
         }
         do {
