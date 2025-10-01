@@ -1,9 +1,7 @@
 #if !os(WASI)
 
-import Dispatch
-#if canImport(CoreFoundation)
 import CoreFoundation
-#endif
+import Dispatch
 import Foundation
 import XCTest
 import Nimble
@@ -138,6 +136,33 @@ final class PollingTest: XCTestCase {
                 done()
             }
         }
+    }
+    
+    func testToEventuallyDetectsStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        let msg = "expected to eventually be true, got <true> (timed out, but main run loop was unresponsive)."
+        failsWithErrorMessage(msg) {
+            expect(spinAndReturnTrue()).toEventually(beTrue())
+        }
+    }
+    
+    func testToNeverDoesNotFailStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        expect(spinAndReturnTrue()).toNever(beFalse())
+    }
+    
+    func testToAlwaysDetectsStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        expect(spinAndReturnTrue()).toAlways(beTrue())
     }
 
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
