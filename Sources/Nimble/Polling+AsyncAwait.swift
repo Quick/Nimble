@@ -42,12 +42,12 @@ internal actor Poller<T> {
             fnName: fnName) {
                 if self.updateMatcherResult(result: try await matcherRunner())
                     .toBoolean(expectation: style) {
-                    if matchStyle.isContinous {
+                    if matchStyle.isContinuous {
                         return .incomplete
                     }
                     return .finished(true)
                 } else {
-                    if matchStyle.isContinous {
+                    if matchStyle.isContinuous {
                         return .finished(false)
                     } else {
                         return .incomplete
