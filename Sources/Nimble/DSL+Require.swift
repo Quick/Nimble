@@ -294,7 +294,7 @@ public func unwrapa<T>(fileID: String = #fileID, file: FileString = #filePath, l
 ///
 /// - Parameter message: A custom message to use in place of the default one.
 /// - Parameter customError: A custom error to throw in place of a ``RequireError``.
-public func requireFail(_ message: String? = nil, customError: Error? = nil, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column) throws {
+public func requireFail(_ message: String? = nil, customError: Error? = nil, fileID: String = #fileID, filePath: FileString = #filePath, line: UInt = #line, column: UInt = #column) throws -> Never {
     let location = SourceLocation(fileID: fileID, filePath: filePath, line: line, column: column)
     let handler = NimbleEnvironment.activeInstance.assertionHandler
 
