@@ -69,7 +69,7 @@ public class NMBWait: NSObject {
                         }
                     }
                 }
-            }.timeout(timeout, forcefullyAbortTimeout: leeway).wait(
+            }.timeout(timeout, forcefullyAbortTimeout: leeway, isContinuous: false).wait(
                 "waitUntil(...)",
                 sourceLocation: SourceLocation(fileID: fileID, filePath: file, line: line, column: column)
             )

@@ -137,6 +137,33 @@ final class PollingTest: XCTestCase {
             }
         }
     }
+    
+    func testToEventuallyDetectsStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        let msg = "expected to eventually be true, got <true> (timed out, but main run loop was unresponsive)."
+        failsWithErrorMessage(msg) {
+            expect(spinAndReturnTrue()).toEventually(beTrue())
+        }
+    }
+    
+    func testToNeverDoesNotFailStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        expect(spinAndReturnTrue()).toNever(beFalse())
+    }
+    
+    func testToAlwaysDetectsStalledMainThreadActivity() {
+        func spinAndReturnTrue() -> Bool {
+            Thread.sleep(forTimeInterval: 0.5)
+            return true
+        }
+        expect(spinAndReturnTrue()).toAlways(beTrue())
+    }
 
     func testCombiningAsyncWaitUntilAndToEventuallyIsNotAllowed() {
         // Currently we are unable to catch Objective-C exceptions when built by the Swift Package Manager
