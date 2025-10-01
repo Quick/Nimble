@@ -1,9 +1,7 @@
 #if !os(WASI)
 
-import Dispatch
-#if canImport(CoreFoundation)
 import CoreFoundation
-#endif
+import Dispatch
 import Foundation
 import XCTest
 import Nimble
