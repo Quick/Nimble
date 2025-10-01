@@ -1,9 +1,6 @@
 #if !os(WASI)
 
 import Dispatch
-#if canImport(CoreFoundation)
-import CoreFoundation
-#endif
 import Foundation
 import XCTest
 import Nimble
@@ -174,6 +171,9 @@ final class PollingRequireTest: XCTestCase {
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.neverTo(equal(0))
         }
+        failsWithErrorMessage("expected to never equal <1>, got <1>") {
+            try require(1).toNever(equal(1))
+        }
     }
 
     func testToAlwaysPositiveMatches() throws {
@@ -206,6 +206,41 @@ final class PollingRequireTest: XCTestCase {
         }
         failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try require { try self.doThrowError() }.alwaysTo(equal(0))
+        }
+        failsWithErrorMessage("expected to always equal <1>, got <nil> (use beNil() to match nils)") {
+            try require(nil).toAlways(equal(1))
+        }
+    }
+
+    func testPollUnwrapMessage() {
+        failsWithErrorMessage("expected to eventually not be nil, got <nil>") {
+            try pollUnwrap(timeout: .milliseconds(100)) { nil as Int? }
+        }
+
+        failsWithErrorMessage("Custom Message\nexpected to eventually not be nil, got <nil>") {
+            try pollUnwrap(timeout: .milliseconds(100), description: "Custom Message") { nil as Int? }
+        }
+
+        failsWithErrorMessage("Custom Message 2\nexpected to eventually not be nil, got <nil>") {
+            try pollUnwraps(timeout: .milliseconds(100), description: "Custom Message 2") { nil as Int? }
+        }
+    }
+
+    func testPollUnwrapMessageAsync() async {
+        @Sendable func asyncOptional(_ value: Int?) async -> Int? {
+            value
+        }
+
+        await failsWithErrorMessage("expected to eventually not be nil, got <nil>") {
+            try await pollUnwrap(timeout: .milliseconds(100)) { await asyncOptional(nil) as Int? }
+        }
+
+        await failsWithErrorMessage("Custom Message\nexpected to eventually not be nil, got <nil>") {
+            try await pollUnwrap(timeout: .milliseconds(100), description: "Custom Message") { await asyncOptional(nil) as Int? }
+        }
+
+        await failsWithErrorMessage("Custom Message 2\nexpected to eventually not be nil, got <nil>") {
+            try await pollUnwrapa(timeout: .milliseconds(100), description: "Custom Message 2") { await asyncOptional(nil) as Int? }
         }
     }
 }

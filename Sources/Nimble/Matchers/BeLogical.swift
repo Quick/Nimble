@@ -1,42 +1,42 @@
 import Foundation
 
-extension Int8: ExpressibleByBooleanLiteral {
+extension Int8: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int8Value
     }
 }
 
-extension UInt8: ExpressibleByBooleanLiteral {
+extension UInt8: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint8Value
     }
 }
 
-extension Int16: ExpressibleByBooleanLiteral {
+extension Int16: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int16Value
     }
 }
 
-extension UInt16: ExpressibleByBooleanLiteral {
+extension UInt16: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint16Value
     }
 }
 
-extension Int32: ExpressibleByBooleanLiteral {
+extension Int32: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int32Value
     }
 }
 
-extension UInt32: ExpressibleByBooleanLiteral {
+extension UInt32: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint32Value
     }
 }
 
-extension Int64: ExpressibleByBooleanLiteral {
+extension Int64: Swift.ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).int64Value
     }

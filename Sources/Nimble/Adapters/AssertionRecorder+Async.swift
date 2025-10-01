@@ -8,22 +8,26 @@
 ///
 /// @see AssertionHandler
 public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
-                                 file: FileString = #file,
+                                 fileID: String = #fileID,
+                                 file: FileString = #filePath,
                                  line: UInt = #line,
+                                 column: UInt = #column,
                                  closure: () async throws -> Void) async {
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
-    _ = NMBExceptionCapture(handler: nil, finally: ({
+    defer {
         environment.assertionHandler = oldRecorder
-    }))
+    }
     environment.assertionHandler = tempAssertionHandler
 
     do {
         try await closure()
+    } catch is RequireError {
+        // ignore this
     } catch {
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"
-        let location = SourceLocation(file: file, line: line)
+        let location = SourceLocation(fileID: fileID, filePath: file, line: line, column: column)
         tempAssertionHandler.assert(false, message: failureMessage, location: location)
     }
 }

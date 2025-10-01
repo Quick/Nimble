@@ -182,6 +182,29 @@ final class EqualTest: XCTestCase { // swiftlint:disable:this type_body_length
         expect { 1 as NSNumber }.to(equal(1 as NSNumber))
     }
 
+    func testCustomNSObjectEquality() {
+        final class SomeObject: NSObject {
+            let id: Int
+
+            init(id: Int) {
+                self.id = id
+            }
+
+            override func isEqual(_ object: Any?) -> Bool {
+                guard let rhs = object as? SomeObject else {
+                    return false
+                }
+
+                return self.id == rhs.id
+            }
+        }
+
+        expect(SomeObject(id: 1)).to(equal(SomeObject(id: 1)))
+        let obj1 = SomeObject(id: 1)
+        expect(obj1).to(equal(obj1))
+        expect(SomeObject(id: 1)).toNot(equal(SomeObject(id: 2)))
+    }
+
     func testOperatorEquality() {
         expect("foo") == "foo"
         expect("foo") != "bar"

@@ -83,11 +83,11 @@ final class SatisfyAnyOfTest: XCTestCase {
         await expect(true).to(satisfyAnyOf(beTruthy(), beFalsy(), asyncEqual(false), asyncEqual(true)))
 
         await failsWithErrorMessage(
-            "expected to match one of: {equal <3>}, or {equal <4>}, or {equal <5>}, got 2") {
+            "expected to match one of: {equal 3}, or {equal 4}, or {equal 5}, got 2") {
                 await expect(2).to(satisfyAnyOf(asyncEqual(3), asyncEqual(4), asyncEqual(5)))
         }
         await failsWithErrorMessage(
-            "expected to match one of: {all be less than 4, but failed first at element <5> in <[5, 6, 7]>}, or {equal <[1, 2, 3, 4]>}, got [5, 6, 7]") {
+            "expected to match one of: {all be less than 4, but failed first at element <5> in <[5, 6, 7]>}, or {equal [1, 2, 3, 4]}, got [5, 6, 7]") {
                 await expect([5, 6, 7]).to(satisfyAnyOf(allPass("be less than 4", {$0 < 4}), asyncEqual([1, 2, 3, 4])))
         }
         await failsWithErrorMessage(

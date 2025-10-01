@@ -34,13 +34,49 @@ public struct AsyncDefaults {
 /// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 ///
 /// - Note: This used to be known as ``AsyncDefaults``.
-public struct PollingDefaults {
-    public static var timeout: NimbleTimeInterval = .seconds(1)
-    public static var pollInterval: NimbleTimeInterval = .milliseconds(10)
+public struct PollingDefaults: @unchecked Sendable {
+    private static let lock = NSRecursiveLock()
+
+    private static var _timeout: NimbleTimeInterval = .seconds(1)
+    private static var _pollInterval: NimbleTimeInterval = .milliseconds(10)
+
+    public static var timeout: NimbleTimeInterval {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _timeout
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            _timeout = newValue
+        }
+    }
+    public static var pollInterval: NimbleTimeInterval {
+        get {
+            lock.lock()
+            defer { lock.unlock() }
+            return _pollInterval
+        }
+        set {
+            lock.lock()
+            defer { lock.unlock() }
+            _pollInterval = newValue
+        }
+    }
 }
 
 internal enum AsyncMatchStyle {
     case eventually, never, always
+
+    var isContinous: Bool {
+        switch self {
+        case .eventually:
+            return false
+        case .never, .always:
+            return true
+        }
+    }
 }
 
 // swiftlint:disable:next function_parameter_count
@@ -59,11 +95,21 @@ internal func poll<T>(
         let result = pollBlock(
             pollInterval: poll,
             timeoutInterval: timeout,
-            file: actualExpression.location.file,
-            line: actualExpression.location.line,
+            sourceLocation: actualExpression.location,
             fnName: fnName) {
                 lastMatcherResult = try matcher.satisfies(uncachedExpression)
-                return lastMatcherResult!.toBoolean(expectation: style)
+                if lastMatcherResult!.toBoolean(expectation: style) {
+                    if matchStyle.isContinous {
+                        return .incomplete
+                    }
+                    return .finished(true)
+                } else {
+                    if matchStyle.isContinous {
+                        return .finished(false)
+                    } else {
+                        return .incomplete
+                    }
+                }
         }
         return processPollResult(result, matchStyle: matchStyle, lastMatcherResult: lastMatcherResult, fnName: fnName)
     }
@@ -220,7 +266,7 @@ extension SyncExpectation {
             expression,
             .toNotMatch,
             poll(
-                style: .toMatch,
+                style: .toNotMatch,
                 matchStyle: .never,
                 matcher: matcher,
                 timeout: until,
@@ -271,7 +317,7 @@ extension SyncExpectation {
             expression,
             .toMatch,
             poll(
-                style: .toNotMatch,
+                style: .toMatch,
                 matchStyle: .always,
                 matcher: matcher,
                 timeout: until,

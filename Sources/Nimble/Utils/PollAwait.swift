@@ -1,8 +1,5 @@
 #if !os(WASI)
 
-#if canImport(CoreFoundation)
-import CoreFoundation
-#endif
 import Dispatch
 import Foundation
 
@@ -12,16 +9,15 @@ private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 /// Stores debugging information about callers
 internal struct WaitingInfo: CustomStringConvertible, Sendable {
     let name: String
-    let file: FileString
-    let lineNumber: UInt
+    let sourceLocation: SourceLocation
 
     var description: String {
-        return "\(name) at \(file):\(lineNumber)"
+        return "\(name) at \(sourceLocation)"
     }
 }
 
 internal protocol WaitLock {
-    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt)
+    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation)
     func releaseWaitingLock()
     func isWaitingLocked() -> Bool
 }
@@ -32,10 +28,10 @@ internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
 
     init() { }
 
-    func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
+    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation) {
         lock.lock()
         defer { lock.unlock() }
-        let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
+        let info = WaitingInfo(name: fnName, sourceLocation: sourceLocation)
         nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
@@ -96,6 +92,11 @@ internal enum PollResult<T> {
         default: return false
         }
     }
+}
+
+internal enum PollStatus {
+    case finished(Bool)
+    case incomplete
 }
 
 /// Holds the resulting value from an asynchronous expectation.
@@ -194,48 +195,24 @@ internal class AwaitPromiseBuilder<T> {
             let timedOutSem = DispatchSemaphore(value: 0)
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
-            #if canImport(CoreFoundation)
-            let runLoop = CFRunLoopGetMain()
-            #if canImport(Darwin)
-                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
-            #else
-                let runLoopMode = kCFRunLoopDefaultMode
-            #endif
-            CFRunLoopPerformBlock(runLoop, runLoopMode) {
-                if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
-                    timedOutSem.signal()
-                    semTimedOutOrBlocked.signal()
-                    if self.promise.resolveResult(.timedOut) {
-                        CFRunLoopStop(CFRunLoopGetMain())
-                    }
-                }
-            }
-            // potentially interrupt blocking code on run loop to let timeout code run
-            CFRunLoopStop(runLoop)
-            #else
             let runLoop = RunLoop.main
             runLoop.perform(inModes: [.default], block: {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
                     if self.promise.resolveResult(.timedOut) {
-                        RunLoop.main._stop()
+                        RunLoop.main.stop()
                     }
                 }
             })
             // potentially interrupt blocking code on run loop to let timeout code run
-            runLoop._stop()
-            #endif
+            runLoop.stop()
             let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
             if didNotTimeOut && timeoutWasNotTriggered {
                 if self.promise.resolveResult(.blockedRunLoop) {
-                    #if canImport(CoreFoundation)
-                    CFRunLoopStop(CFRunLoopGetMain())
-                    #else
-                    RunLoop.main._stop()
-                    #endif
+                    runLoop.stop()
                 }
             }
         }
@@ -258,11 +235,11 @@ internal class AwaitPromiseBuilder<T> {
     /// - The async expectation raised an unexpected error (swift)
     ///
     /// The returned PollResult will NEVER be .incomplete.
-    func wait(_ fnName: String = #function, file: FileString = #file, line: UInt = #line) -> PollResult<T> {
+    func wait(_ fnName: String = #function, sourceLocation: SourceLocation) -> PollResult<T> {
         waitLock.acquireWaitingLock(
             fnName,
-            file: file,
-            line: line)
+            sourceLocation: sourceLocation
+        )
 
         let capture = NMBExceptionCapture(handler: ({ exception in
             _ = self.promise.resolveResult(.raisedException(exception))
@@ -323,11 +300,7 @@ internal class Awaiter {
                     if completionCount < 2 {
                         func completeBlock() {
                             if promise.resolveResult(.completed(result)) {
-                                #if canImport(CoreFoundation)
-                                CFRunLoopStop(CFRunLoopGetMain())
-                                #else
-                                RunLoop.main._stop()
-                                #endif
+                                RunLoop.main.stop()
                             }
                         }
 
@@ -365,20 +338,12 @@ internal class Awaiter {
                 do {
                     if let result = try closure() {
                         if promise.resolveResult(.completed(result)) {
-                            #if canImport(CoreFoundation)
-                            CFRunLoopStop(CFRunLoopGetCurrent())
-                            #else
-                            RunLoop.current._stop()
-                            #endif
+                            RunLoop.current.stop()
                         }
                     }
                 } catch let error {
                     if promise.resolveResult(.errorThrown(error)) {
-                        #if canImport(CoreFoundation)
-                        CFRunLoopStop(CFRunLoopGetCurrent())
-                        #else
-                        RunLoop.current._stop()
-                        #endif
+                        RunLoop.current.stop()
                     }
                 }
             }
@@ -396,21 +361,39 @@ internal class Awaiter {
 internal func pollBlock(
     pollInterval: NimbleTimeInterval,
     timeoutInterval: NimbleTimeInterval,
-    file: FileString,
-    line: UInt,
+    sourceLocation: SourceLocation,
     fnName: String = #function,
-    expression: @escaping () throws -> Bool) -> PollResult<Bool> {
+    expression: @escaping () throws -> PollStatus) -> PollResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
-            if try expression() {
-                return true
+            if case .finished(let result) = try expression() {
+                return result
             }
             return nil
         }
             .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided)
-            .wait(fnName, file: file, line: line)
+            .wait(fnName, sourceLocation: sourceLocation)
 
         return result
 }
+
+#if canImport(CoreFoundation)
+import CoreFoundation
+
+extension RunLoop {
+    func stop() {
+        CFRunLoopStop(getCFRunLoop())
+    }
+}
+
+#else
+
+extension RunLoop {
+    func stop() {
+        _stop()
+    }
+}
+
+#endif
 
 #endif // #if !os(WASI)

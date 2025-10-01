@@ -53,7 +53,7 @@ final class AsyncMatchersTest: XCTestCase {
         await expect(1).to(asyncEqual(1))
         await expect(2).toNot(asyncEqual(1))
 
-        await failsWithErrorMessage("expected to equal 1, got 2") {
+        await failsWithErrorMessage("expected to equal 1, got <2>") {
             await expect(2).to(asyncEqual(1))
         }
     }

@@ -1,9 +1,5 @@
 #if !os(WASI)
 
-#if canImport(CoreFoundation)
-import CoreFoundation
-#endif
-
 import Dispatch
 import Foundation
 
@@ -60,7 +56,7 @@ internal enum AsyncPollResult<T> {
 internal actor AsyncPromise<T> {
     private let storage = Storage()
 
-    private final class Storage {
+    private final class Storage: @unchecked Sendable {
         private var continuations: [UnsafeContinuation<T, Never>] = []
         private var value: T?
         // Yes, this is not the fastest lock, but it's platform independent,
@@ -142,7 +138,8 @@ private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTime
     let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
     semTimedOutOrBlocked.signal()
 
-    DispatchQueue.main.async {
+    let timeoutQueue = DispatchQueue(label: "org.quick.nimble.timeoutQueue", qos: .userInteractive)
+    timeoutQueue.async {
         if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
             timedOutSem.signal()
             semTimedOutOrBlocked.signal()
@@ -165,11 +162,11 @@ private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTime
     return await promise.value
 }
 
-private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> Bool) async -> AsyncPollResult<Bool> {
+private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
     for try await _ in AsyncTimerSequence(interval: pollInterval) {
         do {
-            if try await expression() {
-                return .completed(true)
+            if case .finished(let result) = try await expression() {
+                return .completed(result)
             }
         } catch {
             return .errorThrown(error)
@@ -198,17 +195,10 @@ private func runPoller(
     timeoutInterval: NimbleTimeInterval,
     pollInterval: NimbleTimeInterval,
     awaiter: Awaiter,
-    fnName: String = #function, file: FileString = #file, line: UInt = #line,
-    expression: @escaping () async throws -> Bool
+    fnName: String,
+    sourceLocation: SourceLocation,
+    expression: @escaping () async throws -> PollStatus
 ) async -> AsyncPollResult<Bool> {
-    awaiter.waitLock.acquireWaitingLock(
-        fnName,
-        file: file,
-        line: line)
-
-    defer {
-        awaiter.waitLock.releaseWaitingLock()
-    }
     let timeoutQueue = awaiter.timeoutQueue
     return await withTaskGroup(of: AsyncPollResult<Bool>.self) { taskGroup in
         taskGroup.addTask {
@@ -257,7 +247,7 @@ private func runAwaitTrigger<T>(
     awaiter: Awaiter,
     timeoutInterval: NimbleTimeInterval,
     leeway: NimbleTimeInterval,
-    file: FileString, line: UInt,
+    sourceLocation: SourceLocation,
     _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
 ) async -> AsyncPollResult<T> {
     let timeoutQueue = awaiter.timeoutQueue
@@ -283,8 +273,13 @@ private func runAwaitTrigger<T>(
                     if completionCount.value < 2 {
                         promise.send(result)
                     } else {
-                        fail("waitUntil(..) expects its completion closure to be only called once",
-                             file: file, line: line)
+                        fail(
+                            "waitUntil(..) expects its completion closure to be only called once",
+                            fileID: sourceLocation.fileID,
+                            file: sourceLocation.filePath,
+                            line: sourceLocation.line,
+                            column: sourceLocation.column
+                        )
                     }
                 }
                 if let value = await promise.value {
@@ -308,27 +303,29 @@ private func runAwaitTrigger<T>(
 internal func performBlock<T>(
     timeoutInterval: NimbleTimeInterval,
     leeway: NimbleTimeInterval,
-    file: FileString, line: UInt,
+    sourceLocation: SourceLocation,
     _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
 ) async -> AsyncPollResult<T> {
     await runAwaitTrigger(
         awaiter: NimbleEnvironment.activeInstance.awaiter,
         timeoutInterval: timeoutInterval,
         leeway: leeway,
-        file: file, line: line, closure)
+        sourceLocation: sourceLocation,
+        closure)
 }
 
 internal func pollBlock(
     pollInterval: NimbleTimeInterval,
     timeoutInterval: NimbleTimeInterval,
-    file: FileString,
-    line: UInt,
-    fnName: String = #function,
-    expression: @escaping () async throws -> Bool) async -> AsyncPollResult<Bool> {
+    sourceLocation: SourceLocation,
+    fnName: String,
+    expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
         await runPoller(
             timeoutInterval: timeoutInterval,
             pollInterval: pollInterval,
             awaiter: NimbleEnvironment.activeInstance.awaiter,
+            fnName: fnName,
+            sourceLocation: sourceLocation,
             expression: expression
         )
     }

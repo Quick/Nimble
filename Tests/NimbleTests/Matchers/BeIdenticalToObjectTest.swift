@@ -14,6 +14,19 @@ final class BeIdenticalToObjectTest: XCTestCase {
         expect(self.testObjectA).to(beIdenticalTo(testObjectA))
     }
 
+    func testbeIdenticalToAsSubmatcher() {
+        // check that the typing works out when used as a submatcher.
+        expect(self.testObjectA).to(map({ $0 }, be(testObjectA)))
+        expect(self.testObjectA).to(map({ $0 }, beIdenticalTo(testObjectA)))
+    }
+
+    func testBeIdenticalToAnyObjectProtocol() {
+        let object = AnObjectImplementation()
+
+        expect(object as AnObjectProtocol).to(be(object))
+        expect(object as AnObjectProtocol).to(beIdenticalTo(object))
+    }
+
     func testBeIdenticalToNegative() {
         expect(self.testObjectA).toNot(beIdenticalTo(testObjectB))
     }
@@ -52,5 +65,9 @@ final class BeIdenticalToObjectTest: XCTestCase {
         expect(self.testObjectA) === testObjectA
         expect(self.testObjectA) !== testObjectB
     }
+}
 
+private protocol AnObjectProtocol: AnyObject {}
+private final class AnObjectImplementation: AnObjectProtocol {
+    init() {}
 }

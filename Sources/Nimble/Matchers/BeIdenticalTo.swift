@@ -1,6 +1,16 @@
 /// A Nimble matcher that succeeds when the actual value is the same instance
 /// as the expected instance.
+public func beIdenticalTo<T: AnyObject>(_ expected: T?) -> Matcher<T> {
+    _beIdenticalTo(expected)
+}
+
+/// A Nimble matcher that succeeds when the actual value is the same instance
+/// as the expected instance.
 public func beIdenticalTo(_ expected: AnyObject?) -> Matcher<AnyObject> {
+    _beIdenticalTo(expected)
+}
+
+private func _beIdenticalTo<T: AnyObject>(_ expected: T?) -> Matcher<T> {
     return Matcher.define { actualExpression in
         let actual = try actualExpression.evaluate()
 
@@ -35,8 +45,16 @@ public func !== (lhs: AsyncExpectation<AnyObject>, rhs: AnyObject?) async {
 /// as the expected instance.
 ///
 /// Alias for "beIdenticalTo".
+public func be<T: AnyObject>(_ expected: T?) -> Matcher<T> {
+    return _beIdenticalTo(expected)
+}
+
+/// A Nimble matcher that succeeds when the actual value is the same instance
+/// as the expected instance.
+///
+/// Alias for "beIdenticalTo".
 public func be(_ expected: AnyObject?) -> Matcher<AnyObject> {
-    return beIdenticalTo(expected)
+    return _beIdenticalTo(expected)
 }
 
 #if canImport(Darwin)

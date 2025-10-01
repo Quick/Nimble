@@ -7,10 +7,10 @@ on:
 jobs:
   carthage_archive:
     name: Darwin, Xcode 14.0
-    runs-on: macos-12
+    runs-on: macos-14
     strategy:
       matrix:
-        xcode: ["14.0.1"]
+        xcode: ["16.1"]
     env:
       DEVELOPER_DIR: "/Applications/Xcode_${{ matrix.xcode }}.app"
     steps:
@@ -21,7 +21,7 @@ jobs:
           ./test carthage
           zip -r Nimble.xcframework.zip Carthage/Build/Nimble.xcframework
       - name: Upload Nimble.xcframework.zip
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             Nimble.xcframework.zip

@@ -174,7 +174,7 @@ public class NMBExpectation: NSObject {
     }
 
     @objc public class func failWithMessage(_ message: String, file: FileString, line: UInt) {
-        fail(message, location: SourceLocation(file: file, line: line))
+        fail(message, location: SourceLocation(fileID: "Unknown/\(file)", filePath: file, line: line, column: 0))
     }
 }
 

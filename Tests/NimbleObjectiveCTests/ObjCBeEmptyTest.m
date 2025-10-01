@@ -77,10 +77,10 @@
 }
 
 - (void)testItReportsTypesItMatchesAgainst {
-    expectFailureMessageRegex(@"expected to be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings), got [_a-zA-Z]+Number type", ^{
+    expectFailureMessageRegex(@"expected to be empty \\(only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings\\), got [_a-zA-Z]+Number type", ^{
         expect(@1).to(beEmpty());
     });
-    expectFailureMessageRegex(@"expected to not be empty (only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings), got [_a-zA-Z]+Number type", ^{
+    expectFailureMessageRegex(@"expected to not be empty \\(only works for NSArrays, NSSets, NSIndexSets, NSDictionaries, NSHashTables, and NSStrings\\), got [_a-zA-Z]+Number type", ^{
         expect(@1).toNot(beEmpty());
     });
 }

@@ -59,7 +59,7 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
     }
 
     func testPollUnwrapNegativeCase() async {
-        await failsWithErrorMessage("expected to eventually not be nil, got nil") {
+        await failsWithErrorMessage("expected to eventually not be nil, got <nil>") {
             try await pollUnwrap { nil as Int? }
         }
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
@@ -243,6 +243,9 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try await require { try self.doThrowError() }.neverTo(equal(0))
         }
+        await failsWithErrorMessage("expected to never equal <1>, got <1>") {
+            try await require(1).toNever(equal(1))
+        }
     }
 
     func testToAlwaysPositiveMatches() async throws {
@@ -275,6 +278,9 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
         }
         await failsWithErrorMessage("unexpected error thrown: <\(errorToThrow)>") {
             try await require { try self.doThrowError() }.alwaysTo(equal(0))
+        }
+        await failsWithErrorMessage("expected to always equal <0>, got <nil> (use beNil() to match nils)") {
+            try await require(nil).toAlways(equal(0))
         }
     }
 }

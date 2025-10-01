@@ -59,6 +59,56 @@ final class BeSuccessTest: XCTestCase {
     }
 }
 
+final class BeSuccessWithMatcherTest: XCTestCase {
+    func testPositiveMatch() {
+        let result: Result<Int, Error> = .success(1)
+        expect(result).to(beSuccess(equal(1)))
+    }
+
+    func testPositiveNegatedMatch() {
+        let result: Result<Int, Error> = .failure(StubError())
+        expect(result).toNot(beSuccess(equal(1)))
+
+        expect(Result<Int, Error>.success(2)).toNot(beSuccess(equal(1)))
+    }
+
+    func testNegativeMatches() {
+        failsWithErrorMessage("expected to be <success(Int)> that satisfies matcher, got <failure(StubError)>") {
+            let result: Result<Int, Error> = .failure(StubError())
+            expect(result).to(beSuccess(equal(1)))
+        }
+        failsWithErrorMessage("expected to be <success(Int)> that satisfies matcher, got <success(1)>\nexpected to equal <2>, got 1") {
+            let result: Result<Int, Error> = .success(1)
+            expect(result).to(beSuccess(equal(2)))
+        }
+    }
+}
+
+final class BeSuccessWithEquatableTest: XCTestCase {
+    func testPositiveMatch() {
+        let result: Result<Int, Error> = .success(1)
+        expect(result).to(beSuccess(1))
+    }
+
+    func testPositiveNegatedMatch() {
+        let result: Result<Int, Error> = .failure(StubError())
+        expect(result).toNot(beSuccess(1))
+
+        expect(Result<Int, Error>.success(2)).toNot(beSuccess(1))
+    }
+
+    func testNegativeMatches() {
+        failsWithErrorMessage("expected to be <success(Int)> that equals 1, got <failure(StubError)>") {
+            let result: Result<Int, Error> = .failure(StubError())
+            expect(result).to(beSuccess(1))
+        }
+        failsWithErrorMessage("expected to be <success(Int)> that equals 2, got <success(1)>") {
+            let result: Result<Int, Error> = .success(1)
+            expect(result).to(beSuccess(2))
+        }
+    }
+}
+
 final class BeFailureTest: XCTestCase {
     func testPositiveMatch() {
         let result: Result<Int, Error> = .failure(StubError())
@@ -102,6 +152,37 @@ final class BeFailureTest: XCTestCase {
             expect(result).to(beFailure { error in
                 expect(error).to(equal(.bar))
             })
+        }
+    }
+}
+
+final class BeFailureWithMatcherTest: XCTestCase {
+    func testPositiveMatch() {
+        let result: Result<Int, Error> = .failure(StubError())
+        expect(result).to(beFailure(matchError(StubError())))
+    }
+
+    func testPositiveNegatedMatch() {
+        let result: Result<Int, Error> = .success(1)
+        expect(result).toNot(beFailure(matchError(StubError())))
+
+        expect(
+            Result<Int, Error>.failure(TestError.foo)
+        ).toNot(beFailure(matchError(StubError())))
+    }
+
+    func testNegativeMatches() {
+        failsWithErrorMessage("expected to be <failure(Error)> that satisfies matcher, got <success(1)>") {
+            let result: Result<Int, Error> = .success(1)
+            expect(result).to(beFailure(matchError(StubError())))
+        }
+        failsWithErrorMessage("expected to be <failure(Error)> that satisfies matcher, got <failure(StubError)>\nexpected to match error <TestError.foo>, got <StubError>") {
+            let result: Result<Int, Error> = .failure(StubError())
+            expect(result).to(beFailure(matchError(TestError.foo)))
+        }
+        failsWithErrorMessage("expected to be <failure(TestError)> that satisfies matcher, got <failure(TestError.foo)>\nexpected to equal <TestError.bar>, got TestError.foo") {
+            let result: Result<Int, TestError> = .failure(.foo)
+            expect(result).to(beFailure(equal(TestError.bar)))
         }
     }
 }

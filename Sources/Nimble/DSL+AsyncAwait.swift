@@ -3,78 +3,78 @@ import Dispatch
 #endif
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: @escaping () async throws -> T?) -> AsyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @escaping () async throws -> T?) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T)) -> AsyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: () -> (() async throws -> T)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect<T>(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> T?)) -> AsyncExpectation<T> {
+public func expect<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: () -> (() async throws -> T?)) -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
-public func expect(file: FileString = #file, line: UInt = #line, _ expression: () -> (() async throws -> Void)) -> AsyncExpectation<Void> {
+public func expect(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: () -> (() async throws -> Void)) -> AsyncExpectation<Void> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The value given is lazily evaluated.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation` and `expect -> AsyncExpectation`.
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure @escaping () async throws -> T?) async -> AsyncExpectation<T> {
+public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure @escaping () async throws -> T?) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression,
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T)) async -> AsyncExpectation<T> {
+public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() async throws -> T)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta<T>(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> T?)) async -> AsyncExpectation<T> {
+public func expecta<T>(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() async throws -> T?)) async -> AsyncExpectation<T> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
 /// Make an ``AsyncExpectation`` on a given actual value. The closure is lazily invoked.
 /// This is provided to avoid  confusion between `expect -> SyncExpectation`  and `expect -> AsyncExpectation`
-public func expecta(file: FileString = #file, line: UInt = #line, _ expression: @autoclosure () -> (() async throws -> Void)) async -> AsyncExpectation<Void> {
+public func expecta(fileID: String = #fileID, file: FileString = #filePath, line: UInt = #line, column: UInt = #column, _ expression: @autoclosure () -> (() async throws -> Void)) async -> AsyncExpectation<Void> {
     return AsyncExpectation(
         expression: AsyncExpression(
             expression: expression(),
-            location: SourceLocation(file: file, line: line),
+            location: SourceLocation(fileID: fileID, filePath: file, line: line, column: column),
             isClosure: true))
 }
 
@@ -87,8 +87,18 @@ public func expecta(file: FileString = #file, line: UInt = #line, _ expression: 
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) async -> Void) async {
-    await throwableUntil(timeout: timeout) { done in
+public func waitUntil(
+    timeout: NimbleTimeInterval = PollingDefaults.timeout,
+    fileID: String = #fileID,
+    file: FileString = #filePath,
+    line: UInt = #line,
+    column: UInt = #column,
+    action: @escaping (@escaping @Sendable () -> Void) async -> Void
+) async {
+    await throwableUntil(
+        timeout: timeout,
+        sourceLocation: SourceLocation(fileID: fileID, filePath: file, line: line, column: column)
+    ) { done in
         await action(done)
     }
 }
@@ -100,8 +110,18 @@ public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, fil
 ///
 /// @warning
 /// Unlike the synchronous version of this call, this does not support catching Objective-C exceptions.
-public func waitUntil(timeout: NimbleTimeInterval = PollingDefaults.timeout, file: FileString = #file, line: UInt = #line, action: @escaping (@escaping () -> Void) -> Void) async {
-    await throwableUntil(timeout: timeout, file: file, line: line) { done in
+public func waitUntil(
+    timeout: NimbleTimeInterval = PollingDefaults.timeout,
+    fileID: String = #fileID,
+    file: FileString = #filePath,
+    line: UInt = #line,
+    column: UInt = #column,
+    action: @escaping (@escaping @Sendable () -> Void) -> Void
+) async {
+    await throwableUntil(
+        timeout: timeout,
+        sourceLocation: SourceLocation(fileID: fileID, filePath: file, line: line, column: column)
+    ) { done in
         action(done)
     }
 }
@@ -113,14 +133,13 @@ private enum ErrorResult {
 
 private func throwableUntil(
     timeout: NimbleTimeInterval,
-    file: FileString = #file,
-    line: UInt = #line,
-    action: @escaping (@escaping () -> Void) async throws -> Void) async {
+    sourceLocation: SourceLocation,
+    action: @escaping (@escaping @Sendable () -> Void) async throws -> Void) async {
         let leeway = timeout.divided
         let result = await performBlock(
             timeoutInterval: timeout,
             leeway: leeway,
-            file: file, line: line) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
+            sourceLocation: sourceLocation) { @MainActor (done: @escaping (ErrorResult) -> Void) async throws -> Void in
                 do {
                     try await action {
                         done(.none)
@@ -133,14 +152,37 @@ private func throwableUntil(
         switch result {
         case .incomplete: internalError("Reached .incomplete state for waitUntil(...).")
         case .blockedRunLoop:
-            fail(blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
-                 file: file, line: line)
+            fail(
+                blockedRunLoopErrorMessageFor("-waitUntil()", leeway: leeway),
+                fileID: sourceLocation.fileID,
+                file: sourceLocation.filePath,
+                line: sourceLocation.line,
+                column: sourceLocation.column
+            )
         case .timedOut:
-            fail("Waited more than \(timeout.description)", file: file, line: line)
+            fail(
+                "Waited more than \(timeout.description)",
+                fileID: sourceLocation.fileID,
+                file: sourceLocation.filePath,
+                line: sourceLocation.line,
+                column: sourceLocation.column
+            )
         case let .errorThrown(error):
-            fail("Unexpected error thrown: \(error)")
+            fail(
+                "Unexpected error thrown: \(error)",
+                fileID: sourceLocation.fileID,
+                file: sourceLocation.filePath,
+                line: sourceLocation.line,
+                column: sourceLocation.column
+            )
         case .completed(.error(let error)):
-            fail("Unexpected error thrown: \(error)")
+            fail(
+                "Unexpected error thrown: \(error)",
+                fileID: sourceLocation.fileID,
+                file: sourceLocation.filePath,
+                line: sourceLocation.line,
+                column: sourceLocation.column
+            )
         case .completed(.none): // success
             break
         }
