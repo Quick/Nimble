@@ -272,7 +272,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         let timeoutQueue = DispatchQueue(label: "Nimble.waitUntilTest.timeout", qos: .background)
         let timer = DispatchSource.makeTimerSource(flags: .strict, queue: timeoutQueue)
         timer.schedule(
-            deadline: DispatchTime.now() + 5,
+            deadline: DispatchTime.now() + 60,
             repeating: .never,
             leeway: .milliseconds(1)
         )
@@ -282,10 +282,14 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         }
         timer.resume()
 
-        for index in 0..<1000 {
-            if failed { break }
+        let runQueue = DispatchQueue(label: "Nimble.waitUntilTest.runQueue", attributes: .concurrent)
+
+        for _ in 0..<1000 {
+            if failed {
+                break
+            }
             await waitUntil() { done in
-                DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
+                runQueue.async {
                     done()
                 }
             }

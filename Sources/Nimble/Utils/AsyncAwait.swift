@@ -56,18 +56,30 @@ final class BlockingTask: Sendable {
     }
 
     func run() async {
-        if let continuation = lock.withLock({ self.continuation }) {
+        let continuation: CheckedContinuation<Void, Never>? = {
+            lock.lock()
+            let continuation = self.continuation
+            lock.unlock()
+            return continuation
+        }()
+
+        if let continuation {
             continuation.resume()
         }
         await withTaskCancellationHandler {
             await withCheckedContinuation {
                 lock.lock()
-                defer { lock.unlock() }
 
+                let shouldResume: Bool
                 if finished {
-                    $0.resume()
+                    shouldResume = true
                 } else {
                     self.continuation = $0
+                    shouldResume = false
+                }
+                lock.unlock()
+                if shouldResume {
+                    $0.resume()
                 }
             }
         } onCancel: {
@@ -78,15 +90,16 @@ final class BlockingTask: Sendable {
 
     func complete() {
         lock.lock()
-        defer { lock.unlock() }
+        let wasFinished = finished
+        finished = true
+        lock.unlock()
 
-        if finished {
+        if wasFinished {
             fail(
                 "waitUntil(...) expects its completion closure to be only called once",
                 location: sourceLocation
             )
         } else {
-            finished = true
             self.continuation?.resume()
             self.continuation = nil
         }
@@ -94,9 +107,10 @@ final class BlockingTask: Sendable {
 
     func handleCancellation() {
         lock.lock()
-        defer { lock.unlock() }
+        let wasFinished = finished
+        lock.unlock()
 
-        guard finished == false else {
+        guard wasFinished == false else {
             return
         }
         continuation?.resume()
@@ -151,7 +165,7 @@ internal func performBlock(
 #endif
     #endif
 
-    return await withTaskGroup(of: Void.self) { taskGroup in
+    return await withTaskGroup(of: Void.self, returning: AsyncPollResult<Void>.self) { taskGroup in
         let blocker = BlockingTask(sourceLocation: sourceLocation)
         let tracker = ResultTracker<Void>()
 
@@ -159,7 +173,7 @@ internal func performBlock(
             await blocker.run()
         }
 
-        taskGroup.addTask {
+        let task = Task {
             do {
                 try await closure {
                     blocker.complete()
@@ -174,9 +188,7 @@ internal func performBlock(
             do {
                 try await Task.sleep(nanoseconds: (timeout + leeway).nanoseconds)
                 tracker.finish(with: .timedOut)
-            } catch {
-
-            }
+            } catch {}
         }
 
         var result: AsyncPollResult<Void> = .incomplete
@@ -189,6 +201,7 @@ internal func performBlock(
             break
         }
         taskGroup.cancelAll()
+        task.cancel()
         return result
     }
 }
