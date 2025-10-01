@@ -1,5 +1,6 @@
 #if !os(WASI)
 
+import CoreFoundation
 import Dispatch
 import Foundation
 
@@ -195,24 +196,33 @@ internal class AwaitPromiseBuilder<T> {
             let timedOutSem = DispatchSemaphore(value: 0)
             let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
             semTimedOutOrBlocked.signal()
-            let runLoop = RunLoop.main
-            runLoop.perform(inModes: [.default], block: {
+            let runLoop = CFRunLoopGetMain()
+            #if canImport(Darwin)
+                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
+            #else
+                let runLoopMode = kCFRunLoopDefaultMode
+            #endif
+            CFRunLoopPerformBlock(runLoop, runLoopMode) {
                 if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
                     timedOutSem.signal()
                     semTimedOutOrBlocked.signal()
                     if self.promise.resolveResult(.timedOut) {
-                        RunLoop.main.stop()
+                        CFRunLoopStop(CFRunLoopGetMain())
                     }
                 }
-            })
+            }
             // potentially interrupt blocking code on run loop to let timeout code run
-            runLoop.stop()
+            CFRunLoopStop(runLoop)
             let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
             let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
             let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
             if didNotTimeOut && timeoutWasNotTriggered {
                 if self.promise.resolveResult(.blockedRunLoop) {
-                    runLoop.stop()
+                    #if canImport(CoreFoundation)
+                    CFRunLoopStop(CFRunLoopGetMain())
+                    #else
+                    RunLoop.main._stop()
+                    #endif
                 }
             }
         }
@@ -300,7 +310,11 @@ internal class Awaiter {
                     if completionCount < 2 {
                         func completeBlock() {
                             if promise.resolveResult(.completed(result)) {
-                                RunLoop.main.stop()
+                                #if canImport(CoreFoundation)
+                                CFRunLoopStop(CFRunLoopGetMain())
+                                #else
+                                RunLoop.main._stop()
+                                #endif
                             }
                         }
 
@@ -338,12 +352,20 @@ internal class Awaiter {
                 do {
                     if let result = try closure() {
                         if promise.resolveResult(.completed(result)) {
-                            RunLoop.current.stop()
+                            #if canImport(CoreFoundation)
+                            CFRunLoopStop(CFRunLoopGetCurrent())
+                            #else
+                            RunLoop.current._stop()
+                            #endif
                         }
                     }
                 } catch let error {
                     if promise.resolveResult(.errorThrown(error)) {
-                        RunLoop.current.stop()
+                        #if canImport(CoreFoundation)
+                        CFRunLoopStop(CFRunLoopGetCurrent())
+                        #else
+                        RunLoop.current._stop()
+                        #endif
                     }
                 }
             }
@@ -376,24 +398,5 @@ internal func pollBlock(
 
         return result
 }
-
-#if canImport(CoreFoundation)
-import CoreFoundation
-
-extension RunLoop {
-    func stop() {
-        CFRunLoopStop(getCFRunLoop())
-    }
-}
-
-#else
-
-extension RunLoop {
-    func stop() {
-        _stop()
-    }
-}
-
-#endif
 
 #endif // #if !os(WASI)
