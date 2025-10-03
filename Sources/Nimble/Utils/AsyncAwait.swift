@@ -1,5 +1,4 @@
 #if !os(WASI)
-import CoreFoundation
 import Dispatch
 import Foundation
 #if canImport(Testing)
