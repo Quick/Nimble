@@ -1,8 +1,9 @@
 #if !os(WASI)
-
-import CoreFoundation
 import Dispatch
 import Foundation
+#if canImport(Testing)
+@_implementationOnly import Testing
+#endif
 
 private let timeoutLeeway = NimbleTimeInterval.milliseconds(1)
 private let pollLeeway = NimbleTimeInterval.milliseconds(1)
@@ -14,12 +15,6 @@ internal enum AsyncPollResult<T> {
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
     case timedOut
-    /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
-    /// the timeout code.
-    ///
-    /// This may also mean the async code waiting upon may have never actually ran within the
-    /// required time because other timers & sources are running on the main run loop.
-    case blockedRunLoop
     /// The async block successfully executed and returned a given result
     case completed(T)
     /// When a Swift Error is thrown
@@ -43,128 +38,184 @@ internal enum AsyncPollResult<T> {
         switch self {
         case .incomplete: return .incomplete
         case .timedOut: return .timedOut
-        case .blockedRunLoop: return .blockedRunLoop
         case .completed(let value): return .completed(value)
         case .errorThrown(let error): return .errorThrown(error)
         }
     }
 }
 
-// A mechanism to send a single value between 2 tasks.
-// Inspired by swift-async-algorithm's AsyncChannel, but massively simplified
-// especially given Nimble's usecase.
-// AsyncChannel: https://github.com/apple/swift-async-algorithms/blob/main/Sources/AsyncAlgorithms/Channels/AsyncChannel.swift
-internal actor AsyncPromise<T> {
-    private let storage = Storage()
+final class BlockingTask: Sendable {
+    private nonisolated(unsafe) var finished = false
+    private nonisolated(unsafe) var continuation: CheckedContinuation<Void, Never>? = nil
+    let sourceLocation: SourceLocation
+    private let lock = NSLock()
 
-    private final class Storage: @unchecked Sendable {
-        private var continuations: [UnsafeContinuation<T, Never>] = []
-        private var value: T?
-        // Yes, this is not the fastest lock, but it's platform independent,
-        // which means we don't have to have a Lock protocol and separate Lock
-        // implementations for Linux & Darwin (and Windows if we ever add
-        // support for that).
-        private let lock = NSLock()
+    init(sourceLocation: SourceLocation) {
+        self.sourceLocation = sourceLocation
+    }
 
-        func await() async -> T {
-            await withUnsafeContinuation { continuation in
+    func run() async {
+        let continuation: CheckedContinuation<Void, Never>? = {
+            lock.lock()
+            let continuation = self.continuation
+            lock.unlock()
+            return continuation
+        }()
+
+        if let continuation {
+            continuation.resume()
+        }
+        await withTaskCancellationHandler {
+            await withCheckedContinuation {
                 lock.lock()
-                defer { lock.unlock() }
-                if let value {
-                    continuation.resume(returning: value)
+
+                let shouldResume: Bool
+                if finished {
+                    shouldResume = true
                 } else {
-                    continuations.append(continuation)
+                    self.continuation = $0
+                    shouldResume = false
+                }
+                lock.unlock()
+                if shouldResume {
+                    $0.resume()
                 }
             }
+        } onCancel: {
+            handleCancellation()
         }
 
-        func send(_ value: T) {
-            lock.lock()
-            defer { lock.unlock() }
-            if self.value != nil { return }
-            continuations.forEach { continuation in
-                continuation.resume(returning: value)
-            }
-            continuations = []
-            self.value = value
-        }
     }
 
-    nonisolated func send(_ value: T) {
-        self.storage.send(value)
-    }
+    func complete() {
+        lock.lock()
+        let wasFinished = finished
+        finished = true
+        lock.unlock()
 
-    var value: T {
-        get async {
-            await self.storage.await()
-        }
-    }
-}
-
-/// Wait until the timeout period, then checks why the matcher might have timed out
-///
-/// Why Dispatch?
-///
-/// Using Dispatch gives us mechanisms for detecting why the matcher timed out.
-/// If it timed out because the main thread was blocked, then we want to report that,
-/// as that's a performance concern. If it timed out otherwise, then we need to
-/// report that.
-/// This **could** be done using mechanisms like locks, but instead we use
-/// `DispatchSemaphore`. That's because `DispatchSemaphore` is fast and
-/// platform independent. However, while `DispatchSemaphore` itself is
-/// `Sendable`, the `wait` method is not safe to use in an async context.
-/// To get around that, we must ensure that all usages of
-/// `DispatchSemaphore.wait` are in synchronous contexts, which
-/// we can ensure by dispatching to a `DispatchQueue`. Unlike directly calling
-/// a synchronous closure, or using something ilke `MainActor.run`, using
-/// a `DispatchQueue` to run synchronous code will actually run it in a
-/// synchronous context.
-///
-///
-/// Run Loop Management
-///
-/// In order to properly interrupt the waiting behavior performed by this factory class,
-/// this timer stops the main run loop to tell the waiter code that the result should be
-/// checked.
-///
-/// In addition, stopping the run loop is used to halt code executed on the main run loop.
-private func timeout<T>(timeoutQueue: DispatchQueue, timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval) async -> AsyncPollResult<T> {
-    do {
-        try await Task.sleep(nanoseconds: timeoutInterval.nanoseconds)
-    } catch {}
-
-    let promise = AsyncPromise<AsyncPollResult<T>>()
-
-    let timedOutSem = DispatchSemaphore(value: 0)
-    let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
-    semTimedOutOrBlocked.signal()
-
-    let timeoutQueue = DispatchQueue(label: "org.quick.nimble.timeoutQueue", qos: .userInteractive)
-    timeoutQueue.async {
-        if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
-            timedOutSem.signal()
-            semTimedOutOrBlocked.signal()
-            promise.send(.timedOut)
-        }
-    }
-
-    // potentially interrupt blocking code on run loop to let timeout code run
-    timeoutQueue.async {
-        let abortTimeout = DispatchTime.now() + timeoutInterval.divided.dispatchTimeInterval
-        let didNotTimeOut = timedOutSem.wait(timeout: abortTimeout) != .success
-        let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
-        if didNotTimeOut && timeoutWasNotTriggered {
-            promise.send(.blockedRunLoop)
+        if wasFinished {
+            fail(
+                "waitUntil(...) expects its completion closure to be only called once",
+                location: sourceLocation
+            )
         } else {
-            promise.send(.timedOut)
+            self.continuation?.resume()
+            self.continuation = nil
         }
     }
 
-    return await promise.value
+    func handleCancellation() {
+        lock.lock()
+        let wasFinished = finished
+        lock.unlock()
+
+        guard wasFinished == false else {
+            return
+        }
+        continuation?.resume()
+        continuation = nil
+    }
 }
 
-private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
-    for try await _ in AsyncTimerSequence(interval: pollInterval) {
+final class ResultTracker<T: Sendable>: Sendable {
+    var result: AsyncPollResult<T> {
+        lock.lock()
+        defer { lock.unlock() }
+        return _result
+    }
+
+    private nonisolated(unsafe) var _result: AsyncPollResult<T> = .incomplete
+    private let lock = NSLock()
+
+
+    func finish(with result: AsyncPollResult<T>) {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
+        guard case .incomplete = _result else {
+            return
+        }
+        self._result = result
+    }
+}
+
+internal func performBlock(
+    timeout: NimbleTimeInterval,
+    leeway: NimbleTimeInterval,
+    sourceLocation: SourceLocation,
+    closure: @escaping @Sendable (@escaping @Sendable () -> Void) async throws -> Void
+) async -> AsyncPollResult<Void> {
+    precondition(timeout > .seconds(0))
+
+    #if canImport(Testing)
+#if swift(>=6.3)
+    Issue.record(
+        "waitUntil(...) becomes less reliable the more tasks and processes your system is running. " +
+        "This makes it unsuitable for use with Swift Testing. Please use Swift Testing's confirmation(...) API instead.",
+        severity: .warning,
+        sourceLocation: SourceLocation(
+            fileID: sourceLocation.fileID,
+            filePath: sourceLocation.filePath,
+            line: sourceLocation.line,
+            column: sourceLocation.column
+        )
+    )
+#endif
+    #endif
+
+    return await withTaskGroup(of: Void.self, returning: AsyncPollResult<Void>.self) { taskGroup in
+        let blocker = BlockingTask(sourceLocation: sourceLocation)
+        let tracker = ResultTracker<Void>()
+
+        taskGroup.addTask {
+            await blocker.run()
+        }
+
+        let task = Task {
+            do {
+                try await closure {
+                    blocker.complete()
+                    tracker.finish(with: .completed(()))
+                }
+            } catch {
+                tracker.finish(with: .errorThrown(error))
+            }
+        }
+
+        taskGroup.addTask {
+            do {
+                try await Task.sleep(nanoseconds: (timeout + leeway).nanoseconds)
+                tracker.finish(with: .timedOut)
+            } catch {}
+        }
+
+        var result: AsyncPollResult<Void> = .incomplete
+
+        for await _ in taskGroup {
+            result = tracker.result
+            if case .incomplete = result {
+                continue
+            }
+            break
+        }
+        taskGroup.cancelAll()
+        task.cancel()
+        return result
+    }
+}
+
+internal func pollBlock(
+    pollInterval: NimbleTimeInterval,
+    timeoutInterval: NimbleTimeInterval,
+    sourceLocation: SourceLocation,
+    expression: @escaping () async throws -> PollStatus
+) async -> AsyncPollResult<Bool> {
+    precondition(timeoutInterval > pollInterval)
+    precondition(pollInterval > .seconds(0))
+    let iterations = Int(exactly: (timeoutInterval / pollInterval).rounded(.up)) ?? Int.max
+
+    for iteration in 0..<iterations {
         do {
             if case .finished(let result) = try await expression() {
                 return .completed(result)
@@ -172,163 +223,16 @@ private func poll(_ pollInterval: NimbleTimeInterval, expression: @escaping () a
         } catch {
             return .errorThrown(error)
         }
+        if iteration == (iterations - 1) {
+            break
+        }
+        do {
+            try await Task.sleep(nanoseconds: pollInterval.nanoseconds)
+        } catch {
+            return .errorThrown(error)
+        }
     }
-    return .completed(false)
+    return .timedOut
 }
-
-/// Blocks for an asynchronous result.
-///
-/// @discussion
-/// This function cannot be nested. This is because this function (and it's related methods)
-/// coordinate through the main run loop. Tampering with the run loop can cause undesirable behavior.
-///
-/// This method will return an AwaitResult in the following cases:
-///
-/// - The main run loop is blocked by other operations and the async expectation cannot be
-///   be stopped.
-/// - The async expectation timed out
-/// - The async expectation succeeded
-/// - The async expectation raised an unexpected exception (objc)
-/// - The async expectation raised an unexpected error (swift)
-///
-/// The returned AsyncPollResult will NEVER be .incomplete.
-private func runPoller(
-    timeoutInterval: NimbleTimeInterval,
-    pollInterval: NimbleTimeInterval,
-    awaiter: Awaiter,
-    fnName: String,
-    sourceLocation: SourceLocation,
-    expression: @escaping () async throws -> PollStatus
-) async -> AsyncPollResult<Bool> {
-    let timeoutQueue = awaiter.timeoutQueue
-    return await withTaskGroup(of: AsyncPollResult<Bool>.self) { taskGroup in
-        taskGroup.addTask {
-            await timeout(
-                timeoutQueue: timeoutQueue,
-                timeoutInterval: timeoutInterval,
-                forcefullyAbortTimeout: timeoutInterval.divided
-            )
-        }
-
-        taskGroup.addTask {
-            await poll(pollInterval, expression: expression)
-        }
-
-        defer {
-            taskGroup.cancelAll()
-        }
-
-        return await taskGroup.next() ?? .timedOut
-    }
-}
-
-private final class Box<T: Sendable>: @unchecked Sendable {
-    private var _value: T
-    var value: T {
-        lock.lock()
-        defer { lock.unlock() }
-        return _value
-    }
-
-    private let lock = NSLock()
-
-    init(value: T) {
-        _value = value
-    }
-
-    func operate(_ closure: @Sendable (T) -> T) {
-        lock.lock()
-        defer { lock.unlock() }
-        _value = closure(_value)
-    }
-}
-
-// swiftlint:disable:next function_parameter_count
-private func runAwaitTrigger<T>(
-    awaiter: Awaiter,
-    timeoutInterval: NimbleTimeInterval,
-    leeway: NimbleTimeInterval,
-    sourceLocation: SourceLocation,
-    _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
-) async -> AsyncPollResult<T> {
-    let timeoutQueue = awaiter.timeoutQueue
-    let completionCount = Box(value: 0)
-    return await withTaskGroup(of: AsyncPollResult<T>.self) { taskGroup in
-        let promise = AsyncPromise<T?>()
-
-        taskGroup.addTask {
-            defer {
-                promise.send(nil)
-            }
-            return await timeout(
-                timeoutQueue: timeoutQueue,
-                timeoutInterval: timeoutInterval,
-                forcefullyAbortTimeout: leeway
-            )
-        }
-
-        taskGroup.addTask {
-            do {
-                try await closure { result in
-                    completionCount.operate { $0 + 1 }
-                    if completionCount.value < 2 {
-                        promise.send(result)
-                    } else {
-                        fail(
-                            "waitUntil(..) expects its completion closure to be only called once",
-                            fileID: sourceLocation.fileID,
-                            file: sourceLocation.filePath,
-                            line: sourceLocation.line,
-                            column: sourceLocation.column
-                        )
-                    }
-                }
-                if let value = await promise.value {
-                    return .completed(value)
-                } else {
-                    return .timedOut
-                }
-            } catch {
-                return .errorThrown(error)
-            }
-        }
-
-        defer {
-            taskGroup.cancelAll()
-        }
-
-        return await taskGroup.next() ?? .timedOut
-    }
-}
-
-internal func performBlock<T>(
-    timeoutInterval: NimbleTimeInterval,
-    leeway: NimbleTimeInterval,
-    sourceLocation: SourceLocation,
-    _ closure: @escaping (@escaping (T) -> Void) async throws -> Void
-) async -> AsyncPollResult<T> {
-    await runAwaitTrigger(
-        awaiter: NimbleEnvironment.activeInstance.awaiter,
-        timeoutInterval: timeoutInterval,
-        leeway: leeway,
-        sourceLocation: sourceLocation,
-        closure)
-}
-
-internal func pollBlock(
-    pollInterval: NimbleTimeInterval,
-    timeoutInterval: NimbleTimeInterval,
-    sourceLocation: SourceLocation,
-    fnName: String,
-    expression: @escaping () async throws -> PollStatus) async -> AsyncPollResult<Bool> {
-        await runPoller(
-            timeoutInterval: timeoutInterval,
-            pollInterval: pollInterval,
-            awaiter: NimbleEnvironment.activeInstance.awaiter,
-            fnName: fnName,
-            sourceLocation: sourceLocation,
-            expression: expression
-        )
-    }
 
 #endif // #if !os(WASI)

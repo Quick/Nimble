@@ -218,7 +218,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         await failsWithErrorMessage("Waited more than 0.01 seconds") {
             await waitUntil(timeout: .milliseconds(10)) { done in
                 Task {
-                    _ = try? await Task.sleep(nanoseconds: 100_000_000)
+                    _ = try? await Task.sleep(nanoseconds: 100_000_000) // 100 milliseconds
                     done()
                     await waitState.stopWaiting()
                 }
@@ -252,7 +252,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() async {
-        await failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+        await failsWithErrorMessage("waitUntil(...) expects its completion closure to be only called once") {
             await waitUntil { done in
                 deferToMainQueue {
                     done()
@@ -272,7 +272,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         let timeoutQueue = DispatchQueue(label: "Nimble.waitUntilTest.timeout", qos: .background)
         let timer = DispatchSource.makeTimerSource(flags: .strict, queue: timeoutQueue)
         timer.schedule(
-            deadline: DispatchTime.now() + 5,
+            deadline: DispatchTime.now() + 60,
             repeating: .never,
             leeway: .milliseconds(1)
         )
@@ -282,10 +282,14 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         }
         timer.resume()
 
-        for index in 0..<100 {
-            if failed { break }
-            await waitUntil(line: UInt(index)) { done in
-                DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
+        let runQueue = DispatchQueue(label: "Nimble.waitUntilTest.runQueue", attributes: .concurrent)
+
+        for _ in 0..<1000 {
+            if failed {
+                break
+            }
+            await waitUntil(timeout: .milliseconds(100)) { done in
+                runQueue.async {
                     done()
                 }
             }

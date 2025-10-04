@@ -36,20 +36,4 @@ internal class NimbleEnvironment: NSObject {
 
     var suppressTVOSAssertionWarning: Bool = false
     var suppressWatchOSAssertionWarning: Bool = false
-    #if !os(WASI)
-    var awaiter: Awaiter
-    #endif
-
-    override init() {
-        #if !os(WASI)
-        let timeoutQueue = DispatchQueue.global(qos: .userInitiated)
-        awaiter = Awaiter(
-            waitLock: AssertionWaitLock(),
-            asyncQueue: .main,
-            timeoutQueue: timeoutQueue
-        )
-        #endif
-
-        super.init()
-    }
 }

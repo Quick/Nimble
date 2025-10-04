@@ -1,6 +1,8 @@
 #if !os(WASI)
 
+#if canImport(CoreFoundation)
 import CoreFoundation
+#endif
 import Dispatch
 import Foundation
 import XCTest
@@ -127,31 +129,10 @@ final class PollingTest: XCTestCase {
             }
         }
     }
-
-    func testWaitUntilDetectsStalledMainThreadActivity() {
-        let msg = "-waitUntil() timed out but was unable to run the timeout handler because the main thread is unresponsive. (0.5 seconds is allowed after the wait times out) Conditions that may cause this include processing blocking IO on the main thread, calls to sleep(), deadlocks, and synchronous IPC. Nimble forcefully stopped the run loop which may cause future failures in test runs."
-        failsWithErrorMessage(msg) {
-            waitUntil(timeout: .seconds(1)) { done in
-                Thread.sleep(forTimeInterval: 3.0)
-                done()
-            }
-        }
-    }
-    
-    func testToEventuallyDetectsStalledMainThreadActivity() {
-        func spinAndReturnTrue() -> Bool {
-            Thread.sleep(forTimeInterval: 0.5)
-            return true
-        }
-        let msg = "expected to eventually be true, got <true> (timed out, but main run loop was unresponsive)."
-        failsWithErrorMessage(msg) {
-            expect(spinAndReturnTrue()).toEventually(beTrue())
-        }
-    }
     
     func testToNeverDoesNotFailStalledMainThreadActivity() {
         func spinAndReturnTrue() -> Bool {
-            Thread.sleep(forTimeInterval: 0.5)
+            Thread.sleep(forTimeInterval: 0.1)
             return true
         }
         expect(spinAndReturnTrue()).toNever(beFalse())
@@ -159,7 +140,7 @@ final class PollingTest: XCTestCase {
     
     func testToAlwaysDetectsStalledMainThreadActivity() {
         func spinAndReturnTrue() -> Bool {
-            Thread.sleep(forTimeInterval: 0.5)
+            Thread.sleep(forTimeInterval: 0.1)
             return true
         }
         expect(spinAndReturnTrue()).toAlways(beTrue())
@@ -193,7 +174,7 @@ final class PollingTest: XCTestCase {
     }
 
     func testWaitUntilErrorsIfDoneIsCalledMultipleTimes() {
-        failsWithErrorMessage("waitUntil(..) expects its completion closure to be only called once") {
+        failsWithErrorMessage("waitUntil(...) expects its completion closure to be only called once") {
             waitUntil { done in
                 deferToMainQueue {
                     done()
@@ -225,9 +206,9 @@ final class PollingTest: XCTestCase {
         }
         timer.resume()
 
-        for index in 0..<100 {
+        for index in 0..<1000 {
             if failed { break }
-            waitUntil(line: UInt(index)) { done in
+            waitUntil() { done in
                 DispatchQueue(label: "Nimble.waitUntilTest.\(index)").async {
                     done()
                 }

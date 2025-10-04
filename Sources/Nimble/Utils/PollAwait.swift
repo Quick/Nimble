@@ -1,14 +1,19 @@
 #if !os(WASI)
 
+#if canImport(CoreFoundation)
 import CoreFoundation
+#endif
 import Dispatch
 import Foundation
+#if canImport(Testing)
+@_implementationOnly import Testing
+#endif
 
 private let timeoutLeeway = NimbleTimeInterval.milliseconds(1)
 private let pollLeeway = NimbleTimeInterval.milliseconds(1)
 
 /// Stores debugging information about callers
-internal struct WaitingInfo: CustomStringConvertible, Sendable {
+private struct WaitingInfo: CustomStringConvertible, Sendable {
     let name: String
     let sourceLocation: SourceLocation
 
@@ -17,48 +22,30 @@ internal struct WaitingInfo: CustomStringConvertible, Sendable {
     }
 }
 
-internal protocol WaitLock {
-    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation)
-    func releaseWaitingLock()
-    func isWaitingLocked() -> Bool
-}
+@TaskLocal private var currentWaitingInfo: WaitingInfo? = nil
 
-internal final class AssertionWaitLock: WaitLock, @unchecked Sendable {
-    private var currentWaiter: WaitingInfo?
-    private let lock = NSRecursiveLock()
+private func guaranteeNotNested<T>(
+    fnName: String,
+    sourceLocation: SourceLocation,
+    closure: () -> T
+) -> T {
+    let info = WaitingInfo(name: fnName, sourceLocation: sourceLocation)
+    nimblePrecondition(
+        currentWaitingInfo == nil,
+        "InvalidNimbleAPIUsage",
+        """
+        Nested async expectations are not allowed to avoid creating flaky tests.
 
-    init() { }
+        The call to
+        \t\(info)
+        triggered this exception because
+        \t\(currentWaitingInfo!)
+        is currently managing the main run loop.
+        """
+    )
 
-    func acquireWaitingLock(_ fnName: String, sourceLocation: SourceLocation) {
-        lock.lock()
-        defer { lock.unlock() }
-        let info = WaitingInfo(name: fnName, sourceLocation: sourceLocation)
-        nimblePrecondition(
-            currentWaiter == nil,
-            "InvalidNimbleAPIUsage",
-            """
-            Nested async expectations are not allowed to avoid creating flaky tests.
-
-            The call to
-            \t\(info)
-            triggered this exception because
-            \t\(currentWaiter!)
-            is currently managing the main run loop.
-            """
-        )
-        currentWaiter = info
-    }
-
-    func isWaitingLocked() -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        return currentWaiter != nil
-    }
-
-    func releaseWaitingLock() {
-        lock.lock()
-        defer { lock.unlock() }
-        currentWaiter = nil
+    return $currentWaitingInfo.withValue(info) {
+        closure()
     }
 }
 
@@ -67,12 +54,6 @@ internal enum PollResult<T> {
     case incomplete
     /// TimedOut indicates the result reached its defined timeout limit before returning
     case timedOut
-    /// BlockedRunLoop indicates the main runloop is too busy processing other blocks to trigger
-    /// the timeout code.
-    ///
-    /// This may also mean the async code waiting upon may have never actually ran within the
-    /// required time because other timers & sources are running on the main run loop.
-    case blockedRunLoop
     /// The async block successfully executed and returned a given result
     case completed(T)
     /// When a Swift Error is thrown
@@ -100,283 +81,79 @@ internal enum PollStatus {
     case incomplete
 }
 
-/// Holds the resulting value from an asynchronous expectation.
-/// This class is thread-safe at receiving a "response" to this promise.
-internal final class AwaitPromise<T> {
-    private(set) internal var asyncResult: PollResult<T> = .incomplete
-    private var signal: DispatchSemaphore
-
-    init() {
-        signal = DispatchSemaphore(value: 1)
+func synchronousWaitUntil(
+    timeout: NimbleTimeInterval,
+    fnName: String,
+    sourceLocation: SourceLocation,
+    closure: @escaping (@escaping () -> Void) throws -> Void
+) -> PollResult<Void> {
+#if canImport(Testing)
+    if Test.current != nil {
+        fail("""
+The synchronous `waitUntil(...)` is known to not work in Swift Testing's parallel test execution environment.
+Please use Swift Testing's `confirmation(...)` APIs to accomplish (nearly) the same thing.
+""",
+             location: sourceLocation)
     }
+#endif
 
-    deinit {
-        signal.signal()
-    }
+    return guaranteeNotNested(fnName: fnName, sourceLocation: sourceLocation) {
+        let runloop = RunLoop.current
 
-    /// Resolves the promise with the given result if it has not been resolved. Repeated calls to
-    /// this method will resolve in a no-op.
-    ///
-    /// @returns a Bool that indicates if the async result was accepted or rejected because another
-    ///          value was received first.
-    @discardableResult
-    func resolveResult(_ result: PollResult<T>) -> Bool {
-        if signal.wait(timeout: .now()) == .success {
-            self.asyncResult = result
-            return true
-        } else {
-            return false
-        }
-    }
-}
+        nonisolated(unsafe) var result = PollResult<Void>.timedOut
+        let lock = NSLock()
 
-internal struct PollAwaitTrigger {
-    let timeoutSource: DispatchSourceTimer
-    let actionSource: DispatchSourceTimer?
-    let start: () throws -> Void
-}
-
-/// Factory for building fully configured AwaitPromises and waiting for their results.
-///
-/// This factory stores all the state for an async expectation so that Await doesn't
-/// doesn't have to manage it.
-internal class AwaitPromiseBuilder<T> {
-    let awaiter: Awaiter
-    let waitLock: WaitLock
-    let trigger: PollAwaitTrigger
-    let promise: AwaitPromise<T>
-
-    internal init(
-        awaiter: Awaiter,
-        waitLock: WaitLock,
-        promise: AwaitPromise<T>,
-        trigger: PollAwaitTrigger) {
-            self.awaiter = awaiter
-            self.waitLock = waitLock
-            self.promise = promise
-            self.trigger = trigger
-    }
-
-    func timeout(_ timeoutInterval: NimbleTimeInterval, forcefullyAbortTimeout: NimbleTimeInterval, isContinuous: Bool) -> Self {
-        /// = Discussion =
-        ///
-        /// There's a lot of technical decisions here that is useful to elaborate on. This is
-        /// definitely more lower-level than the previous NSRunLoop based implementation.
-        ///
-        ///
-        /// Why Dispatch Source?
-        ///
-        ///
-        /// We're using a dispatch source to have better control of the run loop behavior.
-        /// A timer source gives us deferred-timing control without having to rely as much on
-        /// a run loop's traditional dispatching machinery (eg - NSTimers, DefaultRunLoopMode, etc.)
-        /// which is ripe for getting corrupted by application code.
-        ///
-        /// And unlike `dispatch_async()`, we can control how likely our code gets prioritized to
-        /// executed (see leeway parameter) + DISPATCH_TIMER_STRICT.
-        ///
-        /// This timer is assumed to run on the HIGH priority queue to ensure it maintains the
-        /// highest priority over normal application / test code when possible.
-        ///
-        ///
-        /// Run Loop Management
-        ///
-        /// In order to properly interrupt the waiting behavior performed by this factory class,
-        /// this timer stops the main run loop to tell the waiter code that the result should be
-        /// checked.
-        ///
-        /// In addition, stopping the run loop is used to halt code executed on the main run loop.
-        trigger.timeoutSource.schedule(
-            deadline: DispatchTime.now() + timeoutInterval.dispatchTimeInterval,
-            repeating: .never,
-            leeway: timeoutLeeway.dispatchTimeInterval
-        )
-        trigger.timeoutSource.setEventHandler {
-            guard self.promise.asyncResult.isIncomplete() else { return }
-            let timedOutSem = DispatchSemaphore(value: 0)
-            let semTimedOutOrBlocked = DispatchSemaphore(value: 0)
-            semTimedOutOrBlocked.signal()
-            let runLoop = CFRunLoopGetMain()
-            #if canImport(Darwin)
-                let runLoopMode = CFRunLoopMode.defaultMode.rawValue
-            #else
-                let runLoopMode = kCFRunLoopDefaultMode
-            #endif
-            CFRunLoopPerformBlock(runLoop, runLoopMode) {
-                if semTimedOutOrBlocked.wait(timeout: .now()) == .success {
-                    timedOutSem.signal()
-                    semTimedOutOrBlocked.signal()
-                    if self.promise.resolveResult(.timedOut) {
-                        CFRunLoopStop(CFRunLoopGetMain())
-                    }
+        let doneBlock: () -> Void = {
+            let onFinish = {
+                lock.lock()
+                defer { lock.unlock() }
+                if case .completed = result {
+                    fail("waitUntil(...) expects its completion closure to be only called once", location: sourceLocation)
+                    return
                 }
+#if canImport(CoreFoundation)
+                CFRunLoopStop(CFRunLoopGetCurrent())
+#else
+                RunLoop.main._stop()
+#endif
+                result = .completed(())
             }
-            // potentially interrupt blocking code on run loop to let timeout code run
-            CFRunLoopStop(runLoop)
-            let now = DispatchTime.now() + forcefullyAbortTimeout.dispatchTimeInterval
-            let didNotTimeOut = timedOutSem.wait(timeout: now) != .success
-            let timeoutWasNotTriggered = semTimedOutOrBlocked.wait(timeout: .now()) == .success
-            if didNotTimeOut && timeoutWasNotTriggered {
-                if self.promise.resolveResult(isContinuous ? .timedOut : .blockedRunLoop) {
-                    #if canImport(CoreFoundation)
-                    CFRunLoopStop(CFRunLoopGetMain())
-                    #else
-                    RunLoop.main._stop()
-                    #endif
-                }
+            if Thread.isMainThread {
+                onFinish()
+            } else {
+                DispatchQueue.main.sync { onFinish() }
             }
         }
-        return self
-    }
 
-    /// Blocks for an asynchronous result.
-    ///
-    /// @discussion
-    /// This function cannot be nested. This is because this function (and it's related methods)
-    /// coordinate through the main run loop. Tampering with the run loop can cause undesirable behavior.
-    ///
-    /// This method will return an AwaitResult in the following cases:
-    ///
-    /// - The main run loop is blocked by other operations and the async expectation cannot be
-    ///   be stopped.
-    /// - The async expectation timed out
-    /// - The async expectation succeeded
-    /// - The async expectation raised an unexpected exception (objc)
-    /// - The async expectation raised an unexpected error (swift)
-    ///
-    /// The returned PollResult will NEVER be .incomplete.
-    func wait(_ fnName: String = #function, sourceLocation: SourceLocation) -> PollResult<T> {
-        waitLock.acquireWaitingLock(
-            fnName,
-            sourceLocation: sourceLocation
+        let capture = NMBExceptionCapture(
+            handler: ({ exception in
+                lock.lock()
+                defer { lock.unlock() }
+                result = .raisedException(exception)
+            }),
+            finally: ({ })
         )
-
-        let capture = NMBExceptionCapture(handler: ({ exception in
-            _ = self.promise.resolveResult(.raisedException(exception))
-        }), finally: ({
-            self.waitLock.releaseWaitingLock()
-        }))
         capture.tryBlock {
             do {
-                try self.trigger.start()
-            } catch let error {
-                _ = self.promise.resolveResult(.errorThrown(error))
-            }
-            self.trigger.timeoutSource.resume()
-            while self.promise.asyncResult.isIncomplete() {
-                // Stopping the run loop does not work unless we run only 1 mode
-                _ = RunLoop.current.run(mode: .default, before: .distantFuture)
-            }
-
-            self.trigger.timeoutSource.cancel()
-            if let asyncSource = self.trigger.actionSource {
-                asyncSource.cancel()
+                try closure(doneBlock)
+            } catch {
+                lock.lock()
+                defer { lock.unlock() }
+                result = .errorThrown(error)
             }
         }
 
-        return promise.asyncResult
-    }
-}
-
-internal class Awaiter {
-    let waitLock: WaitLock
-    let timeoutQueue: DispatchQueue
-    let asyncQueue: DispatchQueue
-
-    internal init(
-        waitLock: WaitLock,
-        asyncQueue: DispatchQueue,
-        timeoutQueue: DispatchQueue) {
-            self.waitLock = waitLock
-            self.asyncQueue = asyncQueue
-            self.timeoutQueue = timeoutQueue
-    }
-
-    internal func createTimerSource(_ queue: DispatchQueue) -> DispatchSourceTimer {
-        return DispatchSource.makeTimerSource(flags: .strict, queue: queue)
-    }
-
-    func performBlock<T>(
-        file: FileString,
-        line: UInt,
-        _ closure: @escaping (@escaping (T) -> Void) throws -> Void
-        ) -> AwaitPromiseBuilder<T> {
-            let promise = AwaitPromise<T>()
-            let timeoutSource = createTimerSource(timeoutQueue)
-            var completionCount = 0
-            let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
-                try closure { result in
-                    completionCount += 1
-                    if completionCount < 2 {
-                        func completeBlock() {
-                            if promise.resolveResult(.completed(result)) {
-                                #if canImport(CoreFoundation)
-                                CFRunLoopStop(CFRunLoopGetMain())
-                                #else
-                                RunLoop.main._stop()
-                                #endif
-                            }
-                        }
-
-                        if Thread.isMainThread {
-                            completeBlock()
-                        } else {
-                            DispatchQueue.main.async { completeBlock() }
-                        }
-                    } else {
-                        fail("waitUntil(..) expects its completion closure to be only called once",
-                             file: file, line: line)
-                    }
-                }
+        if Thread.isMainThread {
+            runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
+        } else {
+            DispatchQueue.main.sync {
+                _ = runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
             }
-
-            return AwaitPromiseBuilder(
-                awaiter: self,
-                waitLock: waitLock,
-                promise: promise,
-                trigger: trigger)
-    }
-
-    func poll<T>(_ pollInterval: NimbleTimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
-        let promise = AwaitPromise<T>()
-        let timeoutSource = createTimerSource(timeoutQueue)
-        let asyncSource = createTimerSource(asyncQueue)
-        let trigger = PollAwaitTrigger(timeoutSource: timeoutSource, actionSource: asyncSource) {
-            let interval = pollInterval
-            asyncSource.schedule(
-                deadline: .now(),
-                repeating: interval.dispatchTimeInterval,
-                leeway: pollLeeway.dispatchTimeInterval
-            )
-            asyncSource.setEventHandler {
-                do {
-                    if let result = try closure() {
-                        if promise.resolveResult(.completed(result)) {
-                            #if canImport(CoreFoundation)
-                            CFRunLoopStop(CFRunLoopGetCurrent())
-                            #else
-                            RunLoop.current._stop()
-                            #endif
-                        }
-                    }
-                } catch let error {
-                    if promise.resolveResult(.errorThrown(error)) {
-                        #if canImport(CoreFoundation)
-                        CFRunLoopStop(CFRunLoopGetCurrent())
-                        #else
-                        RunLoop.current._stop()
-                        #endif
-                    }
-                }
-            }
-            asyncSource.resume()
         }
 
-        return AwaitPromiseBuilder(
-            awaiter: self,
-            waitLock: waitLock,
-            promise: promise,
-            trigger: trigger)
+        lock.lock()
+        defer { lock.unlock() }
+        return result
     }
 }
 
@@ -384,20 +161,37 @@ internal func pollBlock(
     pollInterval: NimbleTimeInterval,
     timeoutInterval: NimbleTimeInterval,
     sourceLocation: SourceLocation,
-    fnName: String = #function,
+    fnName: String,
     isContinuous: Bool,
-    expression: @escaping () throws -> PollStatus) -> PollResult<Bool> {
-        let awaiter = NimbleEnvironment.activeInstance.awaiter
-        let result = awaiter.poll(pollInterval) { () throws -> Bool? in
-            if case .finished(let result) = try expression() {
-                return result
-            }
-            return nil
+    expression: @escaping () throws -> PollStatus
+) -> PollResult<Bool> {
+    guaranteeNotNested(fnName: fnName, sourceLocation: sourceLocation) {
+        if Test.current != nil {
+            fail("""
+    The synchronous `\(fnName)` is known to not work in Swift Testing's parallel test execution environment.
+    Please use the asynchronous `\(fnName)` to accomplish the same thing.
+    """,
+                 location: sourceLocation)
         }
-            .timeout(timeoutInterval, forcefullyAbortTimeout: timeoutInterval.divided, isContinuous: isContinuous)
-            .wait(fnName, sourceLocation: sourceLocation)
+        let interval = pollInterval > .nanoseconds(0) ? pollInterval : .nanoseconds(1)
+        precondition(timeoutInterval > interval)
+        let iterations = Int(exactly: (timeoutInterval / pollInterval).rounded(.up)) ?? Int.max
 
-        return result
+        for iteration in 0..<iterations {
+            do {
+                if case .finished(let result) = try expression() {
+                    return .completed(result)
+                }
+            } catch {
+                return .errorThrown(error)
+            }
+            if iteration == (iterations - 1) {
+                break
+            }
+            RunLoop.main.run(until: Date(timeIntervalSinceNow: pollInterval.timeInterval))
+        }
+        return .timedOut
+    }
 }
 
 #endif // #if !os(WASI)

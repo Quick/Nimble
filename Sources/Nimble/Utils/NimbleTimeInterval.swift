@@ -7,7 +7,7 @@ import CDispatch
 #endif
 
 /// A reimplementation of `DispatchTimeInterval` without the `never` case, and conforming to `Sendable`.
-public enum NimbleTimeInterval: Sendable, Equatable {
+public enum NimbleTimeInterval: Sendable, Equatable, Comparable {
     case seconds(Int)
     case milliseconds(Int)
     case microseconds(Int)
@@ -53,6 +53,30 @@ extension NimbleTimeInterval: CustomStringConvertible {
         case let .milliseconds(val): return "\(Float(val)/1_000) seconds"
         case let .microseconds(val): return "\(Float(val)/1_000_000) seconds"
         case let .nanoseconds(val): return "\(Float(val)/1_000_000_000) seconds"
+        }
+    }
+
+    static func / (lhs: NimbleTimeInterval, rhs: NimbleTimeInterval) -> Double {
+        switch (lhs, rhs) {
+        case let (.seconds(lhs), .seconds(rhs)): Double(lhs) / Double(rhs)
+        case let (.seconds(lhs), .milliseconds(rhs)): Double(lhs * 1_000) / Double(rhs)
+        case let (.seconds(lhs), .microseconds(rhs)): Double(lhs * 1_000_000) / Double(rhs)
+        case let (.seconds(lhs), .nanoseconds(rhs)): Double(lhs * 1_000_000_000) / Double(rhs)
+
+        case let (.milliseconds(lhs), .seconds(rhs)): Double(lhs) / Double(rhs * 1_000)
+        case let (.milliseconds(lhs), .milliseconds(rhs)): Double(lhs) / Double(rhs)
+        case let (.milliseconds(lhs), .microseconds(rhs)): Double(lhs * 1_000) / Double(rhs)
+        case let (.milliseconds(lhs), .nanoseconds(rhs)): Double(lhs * 1_000_000) / Double(rhs)
+
+        case let (.microseconds(lhs), .seconds(rhs)): Double(lhs) / Double(rhs * 1_000_000)
+        case let (.microseconds(lhs), .milliseconds(rhs)): Double(lhs) / Double(rhs * 1_000)
+        case let (.microseconds(lhs), .microseconds(rhs)): Double(lhs) / Double(rhs)
+        case let (.microseconds(lhs), .nanoseconds(rhs)): Double(lhs * 1_000) / Double(rhs)
+
+        case let (.nanoseconds(lhs), .seconds(rhs)): Double(lhs) / Double(rhs * 1_000_000_000)
+        case let (.nanoseconds(lhs), .milliseconds(rhs)): Double(lhs) / Double(rhs * 1_000_000)
+        case let (.nanoseconds(lhs), .microseconds(rhs)): Double(lhs) / Double(rhs * 1_000)
+        case let (.nanoseconds(lhs), .nanoseconds(rhs)): Double(lhs) / Double(rhs)
         }
     }
 }

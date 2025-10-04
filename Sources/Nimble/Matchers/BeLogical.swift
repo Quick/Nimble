@@ -42,31 +42,31 @@ extension Int64: Swift.ExpressibleByBooleanLiteral {
     }
 }
 
-extension UInt64: ExpressibleByBooleanLiteral {
+extension UInt64: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uint64Value
     }
 }
 
-extension Float: ExpressibleByBooleanLiteral {
+extension Float: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).floatValue
     }
 }
 
-extension Double: ExpressibleByBooleanLiteral {
+extension Double: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).doubleValue
     }
 }
 
-extension Int: ExpressibleByBooleanLiteral {
+extension Int: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).intValue
     }
 }
 
-extension UInt: ExpressibleByBooleanLiteral {
+extension UInt: @retroactive ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) {
         self = NSNumber(value: value).uintValue
     }

@@ -148,10 +148,6 @@ internal func processPollResult(_ result: PollResult<Bool>, matchStyle: AsyncMat
         return MatcherResult(status: .fail, message: .fail("unexpected error thrown: <\(error)>"))
     case let .raisedException(exception):
         return MatcherResult(status: .fail, message: .fail("unexpected exception raised: \(exception)"))
-    case .blockedRunLoop:
-        let message = lastMatcherResult?.message.appended(message: " (timed out, but main run loop was unresponsive).") ??
-            .fail("main run loop was unresponsive")
-        return MatcherResult(status: .fail, message: message)
     case .incomplete:
         internalError("Reached .incomplete state for \(fnName)(...).")
     }
@@ -176,6 +172,7 @@ extension SyncExpectation {
     /// This form of `toEventually` does not work in any kind of async context. Use the async form of `toEventually` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `toEventually` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `toEventually` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func toEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
@@ -209,6 +206,7 @@ extension SyncExpectation {
     /// Use the async form of `toEventuallyNot` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `toEventuallyNot` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `toEventuallyNot` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func toEventuallyNot(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
@@ -244,6 +242,7 @@ extension SyncExpectation {
     /// Use the async form of `toNotEventually` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `toNotEventually` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `toNotEventually` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func toNotEventually(_ matcher: Matcher<Value>, timeout: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
@@ -260,6 +259,7 @@ extension SyncExpectation {
     /// Use the async form of `toNever` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `toNever` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `toNever` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func toNever(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
@@ -295,6 +295,7 @@ extension SyncExpectation {
     /// Use the async form of `neverTo` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `neverTo` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `neverTo` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func neverTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         return toNever(matcher, until: until, pollInterval: pollInterval, description: description)
     }
@@ -311,6 +312,7 @@ extension SyncExpectation {
     /// Use the async form of `toAlways` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `toAlways` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `toAlways` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func toAlways(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         nimblePrecondition(expression.isClosure, "NimbleInternalError", toEventuallyRequiresClosureError.stringValue)
 
@@ -346,6 +348,7 @@ extension SyncExpectation {
     /// Use the async form of `alwaysTo` if you are running tests in an async context.
     @discardableResult
     @available(*, noasync, message: "the sync variant of `alwaysTo` does not work in async contexts. Use the async variant as a drop-in replacement")
+    @available(*, deprecated, message: "the synchronous variant of `alwaysTo` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
     public func alwaysTo(_ matcher: Matcher<Value>, until: NimbleTimeInterval = PollingDefaults.timeout, pollInterval: NimbleTimeInterval = PollingDefaults.pollInterval, description: String? = nil) -> Self {
         return toAlways(matcher, until: until, pollInterval: pollInterval, description: description)
     }
