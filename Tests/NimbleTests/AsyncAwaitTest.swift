@@ -288,7 +288,7 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
             if failed {
                 break
             }
-            await waitUntil() { done in
+            await waitUntil(timeout: .milliseconds(100)) { done in
                 runQueue.async {
                     done()
                 }
