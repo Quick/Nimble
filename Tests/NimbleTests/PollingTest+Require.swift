@@ -1,6 +1,5 @@
 #if !os(WASI)
 
-import CoreFoundation
 import Dispatch
 import Foundation
 import XCTest

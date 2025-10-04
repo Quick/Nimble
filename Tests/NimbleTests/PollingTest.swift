@@ -1,6 +1,8 @@
 #if !os(WASI)
 
+#if canImport(CoreFoundation)
 import CoreFoundation
+#endif
 import Dispatch
 import Foundation
 import XCTest
