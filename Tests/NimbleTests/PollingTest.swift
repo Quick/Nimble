@@ -219,6 +219,74 @@ final class PollingTest: XCTestCase {
 #endif // canImport(Darwin)
     }
 
+    func testWaitUntilNestedMainQueueAsyncCalls() {
+        waitUntil(timeout: .seconds(1)) { done in
+            DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        done()
+                    }
+                }
+            }
+        }
+    }
+
+    func testWaitUntilOperationQueueWithMainUnderlyingQueueAndBarrier() {
+        waitUntil(timeout: .seconds(1)) { done in
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = .main
+
+            let operation = BlockOperation {}
+
+            operationQueue.addOperation(operation)
+            operationQueue.addBarrierBlock {
+                done()
+            }
+        }
+    }
+
+    func testNestedMainAsyncWithOperationQueue() {
+        waitUntil(timeout: .seconds(1)) { done in
+            let indexingQueue = DispatchQueue.main
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = indexingQueue
+
+            indexingQueue.async {
+                indexingQueue.async {
+                    indexingQueue.async {
+                        let operation = BlockOperation {}
+
+                        operationQueue.addOperation(operation)
+                        operationQueue.addBarrierBlock {
+                            done()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func testNestedBackgroundAsyncWithOperationQueue() {
+        waitUntil(timeout: .seconds(1)) { done in
+            let indexingQueue = DispatchQueue(label: "test.queue")
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = indexingQueue
+
+            indexingQueue.async {
+                indexingQueue.async {
+                    indexingQueue.async {
+                        let operation = BlockOperation {}
+
+                        operationQueue.addOperation(operation)
+                        operationQueue.addBarrierBlock {
+                            done()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     func testWaitUntilAllowsInBackgroundThread() {
 #if !SWIFT_PACKAGE
         var executedAsyncBlock: Bool = false

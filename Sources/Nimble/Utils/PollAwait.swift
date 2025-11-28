@@ -81,6 +81,30 @@ internal enum PollStatus {
     case incomplete
 }
 
+private final class LockBox<T>: Sendable {
+    private nonisolated(unsafe) var value: T
+
+    private let lock = NSLock()
+
+    init(value: T) {
+        self.value = value
+    }
+
+    var currentValue: T {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
+        return value
+    }
+
+    func set(_ newValue: T) {
+        lock.lock()
+        value = newValue
+        lock.unlock()
+    }
+}
+
 func synchronousWaitUntil(
     timeout: NimbleTimeInterval,
     fnName: String,
@@ -100,23 +124,20 @@ Please use Swift Testing's `confirmation(...)` APIs to accomplish (nearly) the s
     return guaranteeNotNested(fnName: fnName, sourceLocation: sourceLocation) {
         let runloop = RunLoop.current
 
-        nonisolated(unsafe) var result = PollResult<Void>.timedOut
-        let lock = NSLock()
+        let resultBox = LockBox(value: PollResult<Void>.timedOut)
 
         let doneBlock: () -> Void = {
             let onFinish = {
-                lock.lock()
-                defer { lock.unlock() }
-                if case .completed = result {
+                if case .completed = resultBox.currentValue {
                     fail("waitUntil(...) expects its completion closure to be only called once", location: sourceLocation)
                     return
                 }
+                resultBox.set(.completed(()))
 #if canImport(CoreFoundation)
                 CFRunLoopStop(CFRunLoopGetCurrent())
 #else
                 RunLoop.main._stop()
 #endif
-                result = .completed(())
             }
             if Thread.isMainThread {
                 onFinish()
@@ -127,9 +148,7 @@ Please use Swift Testing's `confirmation(...)` APIs to accomplish (nearly) the s
 
         let capture = NMBExceptionCapture(
             handler: ({ exception in
-                lock.lock()
-                defer { lock.unlock() }
-                result = .raisedException(exception)
+                resultBox.set(.raisedException(exception))
             }),
             finally: ({ })
         )
@@ -137,23 +156,22 @@ Please use Swift Testing's `confirmation(...)` APIs to accomplish (nearly) the s
             do {
                 try closure(doneBlock)
             } catch {
-                lock.lock()
-                defer { lock.unlock() }
-                result = .errorThrown(error)
+                resultBox.set(.errorThrown(error))
             }
         }
 
-        if Thread.isMainThread {
-            runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
-        } else {
-            DispatchQueue.main.sync {
-                _ = runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
+        let start = Date()
+        while case .timedOut = resultBox.currentValue, abs(start.timeIntervalSinceNow) < timeout.timeInterval {
+            if Thread.isMainThread {
+                runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
+            } else {
+                DispatchQueue.main.sync {
+                    _ = runloop.run(mode: .default, before: Date(timeIntervalSinceNow: timeout.timeInterval))
+                }
             }
         }
 
-        lock.lock()
-        defer { lock.unlock() }
-        return result
+        return resultBox.currentValue
     }
 }
 
