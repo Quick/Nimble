@@ -298,6 +298,74 @@ final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_len
         timer.cancel()
     }
 
+    func testWaitUntilNestedMainQueueAsyncCalls() async {
+        await waitUntil(timeout: .seconds(1)) { done in
+            DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    DispatchQueue.main.async {
+                        done()
+                    }
+                }
+            }
+        }
+    }
+
+    func testWaitUntilOperationQueueWithMainUnderlyingQueueAndBarrier() async {
+        await waitUntil(timeout: .seconds(1)) { done in
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = .main
+
+            let operation = BlockOperation {}
+
+            operationQueue.addOperation(operation)
+            operationQueue.addBarrierBlock {
+                done()
+            }
+        }
+    }
+
+    func testNestedMainAsyncWithOperationQueue() async {
+        await waitUntil(timeout: .seconds(1)) { done in
+            let indexingQueue = DispatchQueue.main
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = indexingQueue
+
+            indexingQueue.async {
+                indexingQueue.async {
+                    indexingQueue.async {
+                        let operation = BlockOperation {}
+
+                        operationQueue.addOperation(operation)
+                        operationQueue.addBarrierBlock {
+                            done()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func testNestedBackgroundAsyncWithOperationQueue() async {
+        await waitUntil(timeout: .seconds(1)) { done in
+            let indexingQueue = DispatchQueue(label: "test.queue")
+            let operationQueue = OperationQueue()
+            operationQueue.underlyingQueue = indexingQueue
+
+            indexingQueue.async {
+                indexingQueue.async {
+                    indexingQueue.async {
+                        let operation = BlockOperation {}
+
+                        operationQueue.addOperation(operation)
+                        operationQueue.addBarrierBlock {
+                            done()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     final class ClassUnderTest {
         var deinitCalled: (() -> Void)?
         var count = 0

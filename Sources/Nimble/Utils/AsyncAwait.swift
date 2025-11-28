@@ -44,7 +44,7 @@ internal enum AsyncPollResult<T> {
     }
 }
 
-final class BlockingTask: Sendable {
+private final class BlockingTask: Sendable {
     private nonisolated(unsafe) var finished = false
     private nonisolated(unsafe) var continuation: CheckedContinuation<Void, Never>? = nil
     let sourceLocation: SourceLocation
