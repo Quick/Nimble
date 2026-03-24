@@ -62,5 +62,5 @@ let package = Package(
  #endif
         return targets
     }(),
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v5]
 )
