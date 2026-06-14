@@ -10,11 +10,14 @@ internal func execute<T>(_ expression: AsyncExpression<T>, style: ExpectationSty
     msg.to = to
     do {
         let result = try await matcherExecutor()
-        result.message.update(failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+        let pass = result.toBoolean(expectation: style)
+        if !pass {
+            result.message.update(failureMessage: msg)
+            if msg.actualValue == "" {
+                msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+            }
         }
-        return (result.toBoolean(expectation: style), msg)
+        return (pass, msg)
     } catch let error {
         msg.stringValue = "unexpected error thrown: <\(error)>"
         return (false, msg)

@@ -128,4 +128,77 @@ final class SynchronousTest: XCTestCase {
             expect(2).toNot(equal(1)).toNot(equal(2)).to(equal(3))
         }
     }
+
+    // MARK: Deffered error evaluation
+    func testSyncExpectationCallsStringifyOnlyWhenFails() {
+        let object1 = ObjectToDescribe(id: 1)
+        let object2 = ObjectToDescribe(id: 2)
+
+        expect(object1).to(equal(objectToDescribe: object1))
+        expect(object1.descriptionCallCount).to(equal(0))
+        expect(object2.descriptionCallCount).to(equal(0))
+
+        expect(object1).notTo(equal(objectToDescribe: object2))
+        expect(object1.descriptionCallCount).to(equal(0))
+        expect(object2.descriptionCallCount).to(equal(0))
+
+        failsWithErrorMessage("expected to match, got <id: 1>") {
+            expect(object1).to(equal(objectToDescribe: object2))
+        }
+        expect(object1.descriptionCallCount).to(equal(1))
+        expect(object2.descriptionCallCount).to(equal(0))
+    }
+
+    func testSyncRequirementCallsStringifyOnlyWhenFails() throws {
+        let object1 = ObjectToDescribe(id: 1)
+        let object2 = ObjectToDescribe(id: 2)
+
+        try require(object1).to(equal(objectToDescribe: object1))
+        expect(object1.descriptionCallCount).to(equal(0))
+        expect(object2.descriptionCallCount).to(equal(0))
+
+        try require(object1).notTo(equal(objectToDescribe: object2))
+        expect(object1.descriptionCallCount).to(equal(0))
+        expect(object2.descriptionCallCount).to(equal(0))
+
+        failsWithErrorMessage("expected to match, got <id: 1>") {
+            try require(object1).to(equal(objectToDescribe: object2))
+        }
+        expect(object1.descriptionCallCount).to(equal(1))
+        expect(object2.descriptionCallCount).to(equal(0))
+    }
+}
+
+final class ObjectToDescribe: CustomStringConvertible, Equatable, @unchecked Sendable {
+    let id: Int
+    private let lock: NSLock
+    private var descriptionCalls: Int = 0
+    var descriptionCallCount: Int {
+        lock.withLock {
+            descriptionCalls
+        }
+    }
+
+    init(id: Int) {
+        self.id = id
+        self.lock = NSLock()
+    }
+
+    var description: String {
+        lock.withLock {
+            descriptionCalls += 1
+        }
+        return "id: \(id)"
+    }
+
+    static func == (lhs: ObjectToDescribe, rhs: ObjectToDescribe) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+func equal(objectToDescribe expected: ObjectToDescribe) -> Matcher<ObjectToDescribe> {
+    Matcher.simple { expression in
+        guard let actual = try expression.evaluate() else { return .fail }
+        return actual == expected ? .matches : .doesNotMatch
+    }
 }

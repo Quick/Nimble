@@ -52,13 +52,6 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
             actualError = error
         }
 
-        let message = messageForError(
-            actualError: actualError,
-            error: error,
-            errorType: nil,
-            closure: closure
-        )
-
         var matches = false
         if let actualError = actualError, errorMatchesExpectedError(actualError, expectedError: error) {
             matches = true
@@ -74,7 +67,15 @@ public func throwError<T: Error, Out>(_ error: T, closure: ((Error) -> Void)? = 
             }
         }
 
-        return MatcherResult(bool: matches, message: message)
+        return MatcherResult(
+            bool: matches,
+            message: messageForError(
+                actualError: actualError,
+                error: error,
+                errorType: nil,
+                closure: closure
+            )
+        )
     }
 }
 
@@ -98,13 +99,6 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
             actualError = error
         }
 
-        let message = messageForError(
-            actualError: actualError,
-            error: error,
-            errorType: nil,
-            closure: closure
-        )
-
         var matches = false
         if let actualError = actualError as? T, error == actualError {
             matches = true
@@ -120,7 +114,15 @@ public func throwError<T: Error & Equatable, Out>(_ error: T, closure: ((T) -> V
             }
         }
 
-        return MatcherResult(bool: matches, message: message)
+        return MatcherResult(
+            bool: matches,
+            message: messageForError(
+                actualError: actualError,
+                error: error,
+                errorType: nil,
+                closure: closure
+            )
+        )
     }
 }
 
@@ -146,13 +148,6 @@ public func throwError<T: Error, Out>(
         } catch {
             actualError = error
         }
-
-        let message = messageForError(
-            actualError: actualError,
-            error: nil,
-            errorType: errorType,
-            closure: closure
-        )
 
         var matches = false
         if let actualError = actualError {
@@ -186,7 +181,15 @@ public func throwError<T: Error, Out>(
             }
         }
 
-        return MatcherResult(bool: matches, message: message)
+        return MatcherResult(
+            bool: matches,
+            message: messageForError(
+                actualError: actualError,
+                error: nil,
+                errorType: errorType,
+                closure: closure
+            )
+        )
     }
 }
 
@@ -206,8 +209,6 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Matcher<Out
             actualError = error
         }
 
-        let message = messageForError(actualError: actualError, closure: closure)
-
         var matches = false
         if let actualError = actualError {
             matches = true
@@ -221,7 +222,7 @@ public func throwError<Out>(closure: @escaping ((Error) -> Void)) -> Matcher<Out
             }
         }
 
-        return MatcherResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: messageForError(actualError: actualError, closure: closure))
     }
 }
 
@@ -241,8 +242,6 @@ public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Match
             actualError = error
         }
 
-        let message = messageForError(actualError: actualError, closure: closure)
-
         var matches = false
         if let actualError = actualError as? T {
             matches = true
@@ -256,6 +255,6 @@ public func throwError<T: Error, Out>(closure: @escaping ((T) -> Void)) -> Match
             }
         }
 
-        return MatcherResult(bool: matches, message: message)
+        return MatcherResult(bool: matches, message: messageForError(actualError: actualError, closure: closure))
     }
 }

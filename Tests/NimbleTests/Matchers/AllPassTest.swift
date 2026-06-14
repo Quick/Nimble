@@ -107,4 +107,25 @@ final class AllPassTest: XCTestCase {
             expect(nil as [Int]?).to(allPass(beLessThan(5)))
         }
     }
+
+    func testAllPassDefersErrorEvaluation() {
+        let objects = [ObjectToDescribe(id: 1), ObjectToDescribe(id: 2), ObjectToDescribe(id: 3)]
+        expect(objects).to(allPass { $0.id < 4 })
+        for object in objects {
+            expect(object.descriptionCallCount).to(equal(0))
+        }
+
+        expect(objects).toNot(allPass { $0.id > 2 })
+        for object in objects {
+            expect(object.descriptionCallCount).to(equal(0))
+        }
+
+        failsWithErrorMessage(
+            "expected to all pass a condition, but failed first at element <id: 3> in <[id: 1, id: 2, id: 3]>") {
+                expect(objects).to(allPass { $0.id < 3 })
+        }
+        expect(objects[0].descriptionCallCount).to(equal(1))
+        expect(objects[1].descriptionCallCount).to(equal(1))
+        expect(objects[2].descriptionCallCount).to(equal(2))
+    }
 }

@@ -8,15 +8,15 @@
 public func haveCount<T: Collection>(_ expectedValue: Int) -> Matcher<T> {
     return Matcher.define { actualExpression in
         if let actualValue = try actualExpression.evaluate() {
-            let message = ExpectationMessage
-                .expectedCustomValueTo(
+            let result = expectedValue == actualValue.count
+            return MatcherResult(
+                bool: result,
+                message: ExpectationMessage.expectedCustomValueTo(
                     "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))",
                     actual: "\(actualValue.count)"
                 )
                 .appended(details: "Actual Value: \(stringify(actualValue))")
-
-            let result = expectedValue == actualValue.count
-            return MatcherResult(bool: result, message: message)
+            )
         } else {
             return MatcherResult(status: .fail, message: .fail(""))
         }
@@ -28,14 +28,14 @@ public func haveCount<T: Collection>(_ expectedValue: Int) -> Matcher<T> {
 public func haveCount(_ expectedValue: Int) -> Matcher<NMBCollection> {
     return Matcher { actualExpression in
         if let actualValue = try actualExpression.evaluate() {
-            let message = ExpectationMessage
-                .expectedCustomValueTo(
+            let result = expectedValue == actualValue.count
+            return MatcherResult(
+                bool: result,
+                message: ExpectationMessage.expectedCustomValueTo(
                     "have \(prettyCollectionType(actualValue)) with count \(stringify(expectedValue))",
                     actual: "\(actualValue.count). Actual Value: \(stringify(actualValue))"
                 )
-
-            let result = expectedValue == actualValue.count
-            return MatcherResult(bool: result, message: message)
+            )
         } else {
             return MatcherResult(status: .fail, message: .fail(""))
         }

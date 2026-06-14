@@ -24,11 +24,14 @@ internal func executeRequire<T>(_ expression: Expression<T>, _ style: Expectatio
             let cachedExpression = expression.withCaching()
             let result = try matcher.satisfies(cachedExpression)
             let value = try cachedExpression.evaluate()
-            result.message.update(failureMessage: msg)
-            if msg.actualValue == "" {
-                msg.actualValue = "<\(stringify(value))>"
+            let pass = result.toBoolean(expectation: style)
+            if !pass {
+                result.message.update(failureMessage: msg)
+                if msg.actualValue == "" {
+                    msg.actualValue = "<\(stringify(value))>"
+                }
             }
-            return (result.toBoolean(expectation: style), msg, value)
+            return (pass, msg, value)
         } catch let error {
             msg.stringValue = "unexpected error thrown: <\(error)>"
             return (false, msg, nil)
@@ -60,11 +63,14 @@ internal func executeRequire<T>(_ expression: AsyncExpression<T>, _ style: Expec
         let cachedExpression = expression.withCaching()
         let result = try await matcher.satisfies(cachedExpression)
         let value = try await cachedExpression.evaluate()
-        result.message.update(failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(value))>"
+        let pass = result.toBoolean(expectation: style)
+        if !pass {
+            result.message.update(failureMessage: msg)
+            if msg.actualValue == "" {
+                msg.actualValue = "<\(stringify(value))>"
+            }
         }
-        return (result.toBoolean(expectation: style), msg, value)
+        return (pass, msg, value)
     } catch let error {
         msg.stringValue = "unexpected error thrown: <\(error)>"
         return (false, msg, nil)

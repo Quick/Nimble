@@ -10,11 +10,13 @@ internal func isCloseTo<Value: FloatingPoint>(
     expectedValue: Value,
     delta: Value
 ) -> MatcherResult {
-    let errorMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     return MatcherResult(
         bool: actualValue != nil &&
             abs(actualValue! - expectedValue) < delta,
-        message: .expectedCustomValueTo(errorMessage, actual: "<\(stringify(actualValue))>")
+        message: .expectedCustomValueTo(
+            "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))",
+            actual: "<\(stringify(actualValue))>"
+        )
     )
 }
 
@@ -23,11 +25,13 @@ internal func isCloseTo(
     expectedValue: NMBDoubleConvertible,
     delta: Double
 ) -> MatcherResult {
-    let errorMessage = "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))"
     return MatcherResult(
         bool: actualValue != nil &&
             abs(actualValue!.doubleValue - expectedValue.doubleValue) < delta,
-        message: .expectedCustomValueTo(errorMessage, actual: "<\(stringify(actualValue))>")
+        message: .expectedCustomValueTo(
+            "be close to <\(stringify(expectedValue))> (within \(stringify(delta)))",
+            actual: "<\(stringify(actualValue))>"
+        )
     )
 }
 
@@ -100,8 +104,7 @@ public func beCloseTo<Value: FloatingPoint, Values: Collection>(
     _ expectedValues: Values,
     within delta: Value = defaultDelta()
 ) -> Matcher<Values> where Values.Element == Value {
-    let errorMessage = "be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))"
-    return Matcher.simple(errorMessage) { actualExpression in
+    return Matcher.simple("be close to <\(stringify(expectedValues))> (each within \(stringify(delta)))") { actualExpression in
         guard let actualValues = try actualExpression.evaluate() else {
             return .doesNotMatch
         }

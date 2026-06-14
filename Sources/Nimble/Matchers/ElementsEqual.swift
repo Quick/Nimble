@@ -5,16 +5,26 @@
 public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(
     _ expectedValue: Seq2?
 ) -> Matcher<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element {
-    return Matcher.define("elementsEqual <\(stringify(expectedValue))>") { (actualExpression, msg) in
+    return Matcher.define { actualExpression in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
         case (nil, _?):
-            return MatcherResult(status: .fail, message: msg.appendedBeNilHint())
+            return MatcherResult(
+                status: .fail,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+                    .appendedBeNilHint()
+            )
         case (nil, nil), (_, nil):
-            return MatcherResult(status: .fail, message: msg)
+            return MatcherResult(
+                status: .fail,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+            )
         case (let expected?, let actual?):
             let matches = expected.elementsEqual(actual)
-            return MatcherResult(bool: matches, message: msg)
+            return MatcherResult(
+                bool: matches,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+            )
         }
     }
 }
@@ -27,16 +37,26 @@ public func elementsEqual<Seq1: Sequence, Seq2: Sequence>(
     _ expectedValue: Seq2?,
     by areEquivalent: @escaping (Seq1.Element, Seq2.Element) -> Bool
 ) -> Matcher<Seq1> {
-    return Matcher.define("elementsEqual <\(stringify(expectedValue))>") { (actualExpression, msg) in
+    return Matcher.define { actualExpression in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
         case (nil, _?):
-            return MatcherResult(status: .fail, message: msg.appendedBeNilHint())
+            return MatcherResult(
+                status: .fail,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+                    .appendedBeNilHint()
+            )
         case (nil, nil), (_, nil):
-            return MatcherResult(status: .fail, message: msg)
+            return MatcherResult(
+                status: .fail,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+            )
         case (let expected?, let actual?):
             let matches = actual.elementsEqual(expected, by: areEquivalent)
-            return MatcherResult(bool: matches, message: msg)
+            return MatcherResult(
+                bool: matches,
+                message: .expectedActualValueTo("elementsEqual <\(stringify(expectedValue))>")
+            )
         }
     }
 }

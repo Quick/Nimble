@@ -2,16 +2,16 @@ internal func equal<T>(
     _ expectedValue: T?,
     by areEquivalent: @escaping (T, T) -> Bool
 ) -> Matcher<T> {
-    Matcher.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    Matcher.define { actualExpression in
         let actualValue = try actualExpression.evaluate()
         switch (expectedValue, actualValue) {
         case (nil, _?):
-            return MatcherResult(status: .fail, message: msg.appendedBeNilHint())
+            return MatcherResult(status: .fail, message: .expectedActualValueTo("equal <\(stringify(expectedValue))>").appendedBeNilHint())
         case (_, nil):
-            return MatcherResult(status: .fail, message: msg)
+            return MatcherResult(status: .fail, message: .expectedActualValueTo("equal <\(stringify(expectedValue))>"))
         case (let expected?, let actual?):
             let matches = areEquivalent(expected, actual)
-            return MatcherResult(bool: matches, message: msg)
+            return MatcherResult(bool: matches, message: .expectedActualValueTo("equal <\(stringify(expectedValue))>"))
         }
     }
 }
@@ -26,16 +26,16 @@ public func equal<T: Equatable>(_ expectedValue: T) -> Matcher<T> {
 
 /// A Nimble matcher allowing comparison of collection with optional type
 public func equal<T: Equatable>(_ expectedValue: [T?]) -> Matcher<[T?]> {
-    Matcher.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    Matcher.define { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else {
             return MatcherResult(
                 status: .fail,
-                message: msg.appendedBeNilHint()
+                message: .expectedActualValueTo("equal <\(stringify(expectedValue))>").appendedBeNilHint()
             )
         }
 
         let matches = expectedValue == actualValue
-        return MatcherResult(bool: matches, message: msg)
+        return MatcherResult(bool: matches, message: .expectedActualValueTo("equal <\(stringify(expectedValue))>"))
     }
 }
 
@@ -118,16 +118,16 @@ private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -
 
 /// A Nimble matcher that succeeds when the actual dictionary is equal to the expected dictionary
 public func equal<K: Hashable, V: Equatable>(_ expectedValue: [K: V?]) -> Matcher<[K: V]> {
-    Matcher.define("equal <\(stringify(expectedValue))>") { actualExpression, msg in
+    Matcher.define { actualExpression in
         guard let actualValue = try actualExpression.evaluate() else {
             return MatcherResult(
                 status: .fail,
-                message: msg.appendedBeNilHint()
+                message: .expectedActualValueTo("equal <\(stringify(expectedValue))>").appendedBeNilHint()
             )
         }
 
         let matches = expectedValue == actualValue
-        return MatcherResult(bool: matches, message: msg)
+        return MatcherResult(bool: matches, message: .expectedActualValueTo("equal <\(stringify(expectedValue))>"))
     }
 }
 

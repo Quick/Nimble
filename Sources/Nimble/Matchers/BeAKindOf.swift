@@ -8,21 +8,20 @@ private func matcherMessage(forClass expectedClass: AnyClass) -> String {
 /// A Nimble matcher that succeeds when the actual value is an instance of the given class.
 public func beAKindOf<T, U>(_ expectedType: T.Type) -> Matcher<U> {
     return Matcher.define { actualExpression in
-        let message: ExpectationMessage
-
         let instance = try actualExpression.evaluate()
         guard let validInstance = instance else {
-            message = .expectedCustomValueTo(matcherMessage(forType: expectedType), actual: "<nil>")
-            return MatcherResult(status: .fail, message: message)
+            return MatcherResult(
+                status: .fail,
+                message: .expectedCustomValueTo(matcherMessage(forType: expectedType), actual: "<nil>")
+            )
         }
-        message = .expectedCustomValueTo(
-            "be a kind of \(String(describing: expectedType))",
-            actual: "<\(String(describing: type(of: validInstance))) instance>"
-        )
 
         return MatcherResult(
             bool: validInstance is T,
-            message: message
+            message: .expectedCustomValueTo(
+                "be a kind of \(String(describing: expectedType))",
+                actual: "<\(String(describing: type(of: validInstance))) instance>"
+            )
         )
     }
 }
@@ -34,25 +33,28 @@ import class Foundation.NSObject
 /// @see beAnInstanceOf if you want to match against the exact class
 public func beAKindOf(_ expectedClass: AnyClass) -> Matcher<NSObject> {
     return Matcher.define { actualExpression in
-        let message: ExpectationMessage
         let status: MatcherStatus
 
         let instance = try actualExpression.evaluate()
         if let validInstance = instance {
             status = MatcherStatus(bool: instance != nil && instance!.isKind(of: expectedClass))
-            message = .expectedCustomValueTo(
-                matcherMessage(forClass: expectedClass),
-                actual: "<\(String(describing: type(of: validInstance))) instance>"
+            return MatcherResult(
+                status: status,
+                message: .expectedCustomValueTo(
+                    matcherMessage(forClass: expectedClass),
+                    actual: "<\(String(describing: type(of: validInstance))) instance>"
+                )
             )
         } else {
             status = .fail
-            message = .expectedCustomValueTo(
-                matcherMessage(forClass: expectedClass),
-                actual: "<nil>"
+            return MatcherResult(
+                status: status,
+                message: .expectedCustomValueTo(
+                    matcherMessage(forClass: expectedClass),
+                    actual: "<nil>"
+                )
             )
         }
-
-        return MatcherResult(status: status, message: message)
     }
 }
 

@@ -36,7 +36,9 @@ private func createMatcher<S: Sequence>(_ elementMatcher: Matcher<S.Element>) ->
             )
         }
 
-        var failure: ExpectationMessage = .expectedTo("all pass")
+        var messageProvider: () -> ExpectationMessage = {
+            .expectedTo("all pass")
+        }
         for currentElement in actualValue {
             let exp = Expression(
                 expression: { currentElement },
@@ -44,22 +46,28 @@ private func createMatcher<S: Sequence>(_ elementMatcher: Matcher<S.Element>) ->
             )
             let matcherResult = try elementMatcher.satisfies(exp)
             if matcherResult.status == .matches {
-                failure = matcherResult.message.prepended(expectation: "all ")
+                messageProvider = {
+                    matcherResult.message.prepended(expectation: "all ")
+                }
             } else {
-                failure = matcherResult.message
-                    .replacedExpectation({ .expectedTo($0.expectedMessage) })
-                    .wrappedExpectation(
-                        before: "all ",
-                        after: ", but failed first at element <\(stringify(currentElement))>"
-                            + " in <\(stringify(actualValue))>"
+                return MatcherResult(
+                    status: .doesNotMatch,
+                    message: matcherResult.message
+                        .replacedExpectation({ .expectedTo($0.expectedMessage) })
+                        .wrappedExpectation(
+                            before: "all ",
+                            after: ", but failed first at element <\(stringify(currentElement))>"
+                                + " in <\(stringify(actualValue))>"
+                        )
                 )
-                return MatcherResult(status: .doesNotMatch, message: failure)
             }
         }
-        failure = failure.replacedExpectation({ expectation in
-            return .expectedTo(expectation.expectedMessage)
-        })
-        return MatcherResult(status: .matches, message: failure)
+        messageProvider = { [messageProvider] in
+            messageProvider().replacedExpectation({ expectation in
+                return .expectedTo(expectation.expectedMessage)
+            })
+        }
+        return MatcherResult(status: .matches, message: messageProvider())
     }
 }
 

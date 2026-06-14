@@ -5,11 +5,14 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
         msg.to = to
         do {
             let result = try matcher.satisfies(expression)
-            result.message.update(failureMessage: msg)
-            if msg.actualValue == "" {
-                msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+            let pass = result.toBoolean(expectation: style)
+            if !pass {
+                result.message.update(failureMessage: msg)
+                if msg.actualValue == "" {
+                    msg.actualValue = "<\(stringify(try expression.evaluate()))>"
+                }
             }
-            return (result.toBoolean(expectation: style), msg)
+            return (pass, msg)
         } catch let error {
             msg.stringValue = "unexpected error thrown: <\(error)>"
             return (false, msg)
@@ -39,11 +42,14 @@ internal func execute<T>(_ expression: AsyncExpression<T>, _ style: ExpectationS
     msg.to = to
     do {
         let result = try await matcher.satisfies(expression)
-        result.message.update(failureMessage: msg)
-        if msg.actualValue == "" {
-            msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+        let pass = result.toBoolean(expectation: style)
+        if !pass {
+            result.message.update(failureMessage: msg)
+            if msg.actualValue == "" {
+                msg.actualValue = "<\(stringify(try await expression.evaluate()))>"
+            }
         }
-        return (result.toBoolean(expectation: style), msg)
+        return (pass, msg)
     } catch let error {
         msg.stringValue = "unexpected error thrown: <\(error)>"
         return (false, msg)

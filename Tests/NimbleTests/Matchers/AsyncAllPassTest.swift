@@ -142,4 +142,33 @@ final class AsyncAllPassTest: XCTestCase {
             await expect(nil as [Int]?).to(allPass(asyncBeLessThan(5)))
         }
     }
+
+    func testAllPassDefersErrorEvaluation() async {
+        let objects = [ObjectToDescribe(id: 1), ObjectToDescribe(id: 2), ObjectToDescribe(id: 3)]
+        let objectsProvider: () async -> [ObjectToDescribe] = { objects }
+
+        await expect { await objectsProvider() }.to(allPass { value in
+            await asyncCheck { value.id < 4 }
+        })
+        for object in objects {
+            expect(object.descriptionCallCount).to(equal(0))
+        }
+
+        await expect { await objectsProvider() }.toNot(allPass { value in
+            await asyncCheck { value.id > 2 }
+        })
+        for object in objects {
+            expect(object.descriptionCallCount).to(equal(0))
+        }
+
+        await failsWithErrorMessage(
+            "expected to all pass a condition, but failed first at element <id: 3> in <[id: 1, id: 2, id: 3]>") {
+                await expect { await objectsProvider() }.to(allPass { value in
+                    await asyncCheck { value.id < 3 }
+                })
+        }
+        expect(objects[0].descriptionCallCount).to(equal(1))
+        expect(objects[1].descriptionCallCount).to(equal(1))
+        expect(objects[2].descriptionCallCount).to(equal(2))
+    }
 }

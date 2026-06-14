@@ -1,7 +1,6 @@
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan<T: Comparable>(_ expectedValue: T?) -> Matcher<T> {
-    let message = "be less than <\(stringify(expectedValue))>"
-    return Matcher.simple(message) { actualExpression in
+    return Matcher.simple("be less than <\(stringify(expectedValue))>") { actualExpression in
         guard let actual = try actualExpression.evaluate(), let expected = expectedValue else { return .fail }
 
         return MatcherStatus(bool: actual < expected)
@@ -21,8 +20,7 @@ import enum Foundation.ComparisonResult
 
 /// A Nimble matcher that succeeds when the actual value is less than the expected value.
 public func beLessThan<T: NMBComparable>(_ expectedValue: T?) -> Matcher<T> {
-    let message = "be less than <\(stringify(expectedValue))>"
-    return Matcher.simple(message) { actualExpression in
+    return Matcher.simple("be less than <\(stringify(expectedValue))>") { actualExpression in
         let actualValue = try actualExpression.evaluate()
         let matches = actualValue != nil && actualValue!.NMB_compare(expectedValue) == ComparisonResult.orderedAscending
         return MatcherStatus(bool: matches)

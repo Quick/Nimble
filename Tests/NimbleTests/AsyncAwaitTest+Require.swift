@@ -283,6 +283,27 @@ final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_b
             try await require(nil).toAlways(equal(0))
         }
     }
+
+    // MARK: Deffered error evaluation
+    func testAsyncRequireCallsStringifyOnlyWhenFails() async throws {
+        let object1 = ObjectToDescribe(id: 1)
+        let object2 = ObjectToDescribe(id: 2)
+        let object1Provider: () async -> ObjectToDescribe = { object1 }
+
+        try await require { await object1Provider() }.to(equal(objectToDescribe: object1))
+        await expect(object1.descriptionCallCount).toAlways(equal(0))
+        await expect(object2.descriptionCallCount).toAlways(equal(0))
+
+        try await require { await object1Provider() }.notTo(equal(objectToDescribe: object2))
+        await expect(object1.descriptionCallCount).toAlways(equal(0))
+        await expect(object2.descriptionCallCount).toAlways(equal(0))
+
+        await failsWithErrorMessage("expected to match, got <id: 1>") {
+            try await require { await object1Provider() }.to(equal(objectToDescribe: object2))
+        }
+        await expect(object1.descriptionCallCount).toEventually(equal(1))
+        await expect(object2.descriptionCallCount).toAlways(equal(0))
+    }
 }
 
 #endif

@@ -70,9 +70,15 @@ extension Matcher {
     /// error message.
     ///
     /// Also ensures the matcher's actual value cannot pass with `nil` given.
-    public static func simple(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
+    public static func simple(
+        _ messageProvider: @escaping @autoclosure () -> String = "match",
+        matcher: @escaping (Expression<T>) throws -> MatcherStatus
+    ) -> Matcher<T> {
         return Matcher<T> { actual in
-            return MatcherResult(status: try matcher(actual), message: .expectedActualValueTo(message))
+            return MatcherResult(
+                status: try matcher(actual),
+                message: .expectedActualValueTo(messageProvider())
+            )
         }.requireNonNil
     }
 
@@ -80,9 +86,15 @@ extension Matcher {
     /// error message.
     ///
     /// Unlike `simple`, this allows nil values to succeed if the given closure chooses to.
-    public static func simpleNilable(_ message: String = "match", matcher: @escaping (Expression<T>) throws -> MatcherStatus) -> Matcher<T> {
+    public static func simpleNilable(
+        _ messageProvider: @escaping @autoclosure () -> String = "match",
+        matcher: @escaping (Expression<T>) throws -> MatcherStatus
+    ) -> Matcher<T> {
         return Matcher<T> { actual in
-            return MatcherResult(status: try matcher(actual), message: .expectedActualValueTo(message))
+            return MatcherResult(
+                status: try matcher(actual),
+                message: .expectedActualValueTo(messageProvider())
+            )
         }
     }
 }
@@ -97,19 +109,26 @@ public enum ExpectationStyle {
 public struct MatcherResult {
     /// Status indicates if the matcher matches, does not match, or fails.
     public var status: MatcherStatus
-    /// The error message that can be displayed if it does not match
-    public var message: ExpectationMessage
+    var messageProvider: () -> ExpectationMessage
 
-    /// Constructs a new MatcherResult with a given status and error message
-    public init(status: MatcherStatus, message: ExpectationMessage) {
+    /// The error message that can be displayed if it does not match.
+    /// Evaluated lazily — only computed when accessed (i.e. when a failure is reported).
+    public var message: ExpectationMessage {
+        get { messageProvider() }
+        set { messageProvider = { newValue } }
+    }
+
+    /// Constructs a new MatcherResult with a given status and error message.
+    /// The message expression is wrapped in an autoclosure and evaluated lazily.
+    public init(status: MatcherStatus, message: @autoclosure @escaping () -> ExpectationMessage) {
         self.status = status
-        self.message = message
+        self.messageProvider = message
     }
 
     /// Shorthand to MatcherResult(status: MatcherStatus(bool: bool), message: message)
-    public init(bool: Bool, message: ExpectationMessage) {
+    public init(bool: Bool, message: @autoclosure @escaping () -> ExpectationMessage) {
         self.status = MatcherStatus(bool: bool)
-        self.message = message
+        self.messageProvider = message
     }
 
     /// Converts the result to a boolean based on what the expectation intended
@@ -254,8 +273,9 @@ final public class NMBMatcherResult: NSObject {
     }
 
     public func toSwift() -> MatcherResult {
+        let message = self.message.toSwift()
         return MatcherResult(status: status.toSwift(),
-                               message: message.toSwift())
+                             message: message)
     }
 }
 
