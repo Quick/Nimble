@@ -1,0 +1,12 @@
+// Copyright (c) 2024 Lightricks. All rights reserved.
+
+#include "Common.xcconfig"
+
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -O
+
+COPY_PHASE_STRIP = YES
+ENABLE_NS_ASSERTIONS = NO
+METAL_ENABLE_DEBUG_INFO = NO
+OTHER_SWIFT_FLAGS = $(inherited) -suppress-warnings
+VALIDATE_PRODUCT = YES
