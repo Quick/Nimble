@@ -105,7 +105,6 @@ public class NMBWait: NSObject {
 /// This function manages the main run loop (`NSRunLoop.mainRunLoop()`) while this function
 /// is executing. Any attempts to touch the run loop may cause non-deterministic behavior.
 @available(*, noasync, message: "the sync variant of `waitUntil` does not work in async contexts. Use the async variant as a drop-in replacement")
-@available(*, deprecated, message: "the synchronous variant of `waitUntil` will be unavailable from Swift in a future release of Nimble. Please use the asynchronous variant as a near drop-in replacement.")
 public func waitUntil(
     timeout: NimbleTimeInterval = PollingDefaults.timeout,
     fileID: String = #fileID,
