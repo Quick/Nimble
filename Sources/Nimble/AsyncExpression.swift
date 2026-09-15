@@ -48,7 +48,7 @@ public struct AsyncExpression<Value> {
     /// Creates a new expression struct. Normally, expect(...) will manage this
     /// creation process.
     ///
-    /// - Parameter expression: The closure that produces a given value.
+    /// - Parameter memoizedExpression: The closure that produces a given value.
     /// - Parameter location: The source location that this closure originates from.
     /// - Parameter withoutCaching: Indicates if the struct should memoize the given
     ///                       closure's result. Subsequent evaluate() calls will
