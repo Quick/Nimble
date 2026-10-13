@@ -7,6 +7,38 @@ import NimbleSharedTestHelpers
 #endif
 
 final class AsyncAwaitTest: XCTestCase { // swiftlint:disable:this type_body_length
+    @MainActor
+    func testSyncExpressionIsCachedWithinAsyncPollingAttempt() async {
+        var evaluations = 0
+        await expect {
+            evaluations += 1
+            return evaluations % 3 != 1
+        }.toEventually(beTrue(), timeout: .milliseconds(100), pollInterval: .milliseconds(1))
+        XCTAssertEqual(evaluations, 2)
+    }
+
+    func testAsyncMatcherCachesEachPollingAttempt() async {
+        actor Counter {
+            var evaluations = 0
+            func next() -> Int {
+                evaluations += 1
+                return evaluations
+            }
+        }
+        let counter = Counter()
+        let matcher = AsyncMatcher<Int> { expression in
+            let first = try await expression.evaluate()
+            let second = try await expression.evaluate()
+            XCTAssertEqual(first, second)
+            return MatcherResult(bool: first == 2, message: .expectedActualValueTo("equal 2"))
+        }
+        await expect { await counter.next() }.toEventually(
+            matcher, timeout: .milliseconds(100), pollInterval: .milliseconds(1)
+        )
+        let evaluations = await counter.evaluations
+        XCTAssertEqual(evaluations, 2)
+    }
+
     func testToPositiveMatches() async {
         func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond

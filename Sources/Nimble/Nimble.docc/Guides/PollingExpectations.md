@@ -4,6 +4,11 @@ In Nimble, it's easy to make expectations on values that are updated
 asynchronously. These are called Polling Expectations, because they work by
 continuously polling the Expectation.
 
+The expression is evaluated again for each polling attempt. Within an attempt,
+the matcher reuses the same evaluated value, including when it builds a failure
+message. This keeps the result and its diagnostic consistent without preventing
+later attempts from observing changes.
+
 ## Forms of Polling Expectations
 
 There are 4 forms of polling expectations: `toEventually`,
