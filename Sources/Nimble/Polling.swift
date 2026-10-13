@@ -98,7 +98,7 @@ internal func poll<T>(
             sourceLocation: actualExpression.location,
             fnName: fnName,
             isContinuous: matchStyle.isContinuous) {
-                lastMatcherResult = try matcher.satisfies(uncachedExpression)
+                lastMatcherResult = try matcher.satisfies(uncachedExpression.withCaching())
                 if lastMatcherResult!.toBoolean(expectation: style) {
                     if matchStyle.isContinuous {
                         return .incomplete

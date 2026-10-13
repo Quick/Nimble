@@ -29,6 +29,39 @@ final class PollingTest: XCTestCase {
         expect { value }.toEventuallyNot(equal(1))
     }
 
+    func testPollingMatcherEvaluatesExpressionOncePerAttempt() {
+        var evaluations = 0
+        expect {
+            evaluations += 1
+            return evaluations % 3 != 1
+        }.toEventually(
+            beTrue(), timeout: .milliseconds(100), pollInterval: .milliseconds(1)
+        )
+        XCTAssertEqual(evaluations, 2)
+    }
+
+    func testContinuousPollingCachesEachAttempt() {
+        let matcher = Matcher<Int> { expression in
+            let first = try expression.evaluate()
+            let second = try expression.evaluate()
+            XCTAssertEqual(first, second)
+            return MatcherResult(bool: true, message: .expectedActualValueTo("match"))
+        }
+        var evaluations = 0
+        expect {
+            evaluations += 1
+            return evaluations
+        }.toAlways(matcher, until: .milliseconds(20), pollInterval: .milliseconds(1))
+        XCTAssertGreaterThan(evaluations, 1)
+
+        evaluations = 0
+        expect {
+            evaluations += 1
+            return evaluations
+        }.toNever(not(matcher), until: .milliseconds(20), pollInterval: .milliseconds(1))
+        XCTAssertGreaterThan(evaluations, 1)
+    }
+
     func testToEventuallyNegativeMatches() {
         let value = 0
         failsWithErrorMessage("expected to eventually not equal <0>, got <0>") {

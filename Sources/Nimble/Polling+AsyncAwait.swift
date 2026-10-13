@@ -106,7 +106,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -132,7 +132,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -166,7 +166,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -200,7 +200,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -236,7 +236,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return verify(pass, msg)
@@ -262,7 +262,7 @@ extension SyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return verify(pass, msg)
@@ -296,7 +296,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return verify(pass, msg)
@@ -330,7 +330,7 @@ extension SyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return verify(pass, msg)
@@ -490,7 +490,7 @@ extension AsyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -514,7 +514,7 @@ extension AsyncExpectation {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -547,7 +547,7 @@ extension AsyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)
@@ -580,7 +580,7 @@ extension AsyncExpectation {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return verify(pass, msg)

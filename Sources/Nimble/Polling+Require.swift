@@ -211,7 +211,7 @@ extension SyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -237,7 +237,7 @@ extension SyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -271,7 +271,7 @@ extension SyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -305,7 +305,7 @@ extension SyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") { @MainActor in
-                        try matcher.satisfies(expression.withoutCaching())
+                        try matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -341,7 +341,7 @@ extension SyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -367,7 +367,7 @@ extension SyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -401,7 +401,7 @@ extension SyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -435,7 +435,7 @@ extension SyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") { @MainActor in
-                        try await matcher.satisfies(expression.withoutCaching().toAsyncExpression())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching().toAsyncExpression())
                     }
             }
         return try verify(pass, msg, try await asyncExpression.evaluate())
@@ -595,7 +595,7 @@ extension AsyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventually") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await expression.evaluate())
@@ -619,7 +619,7 @@ extension AsyncRequirement {
                     timeout: timeout,
                     poll: pollInterval,
                     fnName: "toEventuallyNot") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await expression.evaluate())
@@ -652,7 +652,7 @@ extension AsyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toNever") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await expression.evaluate())
@@ -685,7 +685,7 @@ extension AsyncRequirement {
                     timeout: until,
                     poll: pollInterval,
                     fnName: "toAlways") {
-                        try await matcher.satisfies(expression.withoutCaching())
+                        try await matcher.satisfies(expression.withoutCaching().withCaching())
                     }
             }
         return try verify(pass, msg, try await expression.evaluate())

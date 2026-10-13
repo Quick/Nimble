@@ -7,6 +7,17 @@ import NimbleSharedTestHelpers
 #endif
 
 final class AsyncAwaitRequireTest: XCTestCase { // swiftlint:disable:this type_body_length
+    @MainActor
+    func testRequireReturnsValueFromCachedPollingAttempt() async throws {
+        var evaluations = 0
+        let value = try await require {
+            evaluations += 1
+            return evaluations % 3 != 1
+        }.toEventually(beTrue(), timeout: .milliseconds(100), pollInterval: .milliseconds(1))
+        XCTAssertTrue(value)
+        XCTAssertEqual(evaluations, 2)
+    }
+
     func testToPositiveMatches() async throws {
         func someAsyncFunction() async throws -> Int {
             try await Task.sleep(nanoseconds: 1_000_000) // 1 millisecond
